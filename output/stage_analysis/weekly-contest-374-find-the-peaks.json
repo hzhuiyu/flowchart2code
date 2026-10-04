@@ -1,0 +1,75 @@
+{
+  "problem_id": "findPeaks",
+  "nodes": [
+    {
+      "id": 1,
+      "type": "start",
+      "label": "Start",
+      "next": 2
+    },
+    {
+      "id": 2,
+      "type": "process",
+      "label": "Input: mountain (List[int])",
+      "action": "ctx['mountain'] = ctx['arg0']; ctx['res'] = []",
+      "next": 3
+    },
+    {
+      "id": 3,
+      "type": "process",
+      "label": "Initialize res = []",
+      "action": "ctx['res'] = []",
+      "next": 4
+    },
+    {
+      "id": 4,
+      "type": "process",
+      "label": "For i from 1 to len(mountain) - 2",
+      "action": "ctx['i'] = 1; ctx['n'] = len(ctx['mountain']) - 2",
+      "next": 5
+    },
+    {
+      "id": 5,
+      "type": "decision",
+      "label": "Is mountain[i] > mountain[i-1]?",
+      "logic": "ctx['mountain'][ctx['i']] > ctx['mountain'][ctx['i'] - 1]",
+      "true_next": 7,
+      "false_next": 6
+    },
+    {
+      "id": 6,
+      "type": "decision",
+      "label": "Is mountain[i] > mountain[i+1]?",
+      "logic": "ctx['mountain'][ctx['i']] > ctx['mountain'][ctx['i'] + 1]",
+      "true_next": 8,
+      "false_next": 4
+    },
+    {
+      "id": 7,
+      "type": "process",
+      "label": "Append i to res",
+      "action": "ctx['res'].append(ctx['i'])",
+      "next": 8
+    },
+    {
+      "id": 8,
+      "type": "process",
+      "label": "Append i to res",
+      "action": "ctx['res'].append(ctx['i'])",
+      "next": 4
+    }
+  ],
+  "task_id": "weekly-contest-374-find-the-peaks",
+  "dataset": "Algorithm",
+  "result": "timed out",
+  "code": "class Solution:\n    def findPeaks(self, mountain: List[int]) -> List[int]:\n        res = []\n        i = 1\n        n = len(mountain) - 2\n        \n        while i <= n:\n            if mountain[i] > mountain[i - 1]:\n                if mountain[i] > mountain[i + 1]:\n                    res.append(i)\n                else:\n                    i += 1\n            else:\n                i += 1\n                \n        return res",
+  "verification": {
+    "md_verdict": "ILR Error",
+    "actual_error_source": "ilr",
+    "ilr_verdict": "incorrect",
+    "code_vs_ilr": "deviates",
+    "md_correct": "yes",
+    "note": "确认 ILR Error。ILR 完全没有 i 的递增（回边回到 node4 还会把 i 重置为 1），且 node7/node8 顺序连接导致满足任一条件就 append、同时满足会 append 两次：忠实实现必然死循环（与记录的 timed out 一致）。代码把逻辑重构成正确的“两条件同时满足才 append”并补了部分 i+=1，但在 append 路径上继承了 ILR 无递增的缺陷而超时，根因仍在 ILR。",
+    "evidence": "忠实 ILR：任何输入都无限循环（i 恒为1，res 无限增长）。生成代码 [2,4,4]→[] 正常，[1,4,3]（含峰）死循环超时，与 FAILURE RESULT 'timed out' 吻合"
+  }
+}

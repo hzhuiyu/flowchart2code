@@ -1,0 +1,1512 @@
+{
+ "task_id": "biweekly-contest-111-number-of-beautiful-integers-in-the-range",
+ "dataset": "Algorithm",
+ "title": "number-of-beautiful-integers-in-the-range",
+ "difficulty": "Hard",
+ "prompt": "\"\"\"\nYou are given positive integers low, high, and k.\n\nA number is beautiful if it meets both of the following conditions:\n\n * The count of even digits in the number is equal to the count of odd digits.\n * The number is divisible by k.\n\nReturn the number of beautiful integers in the range [low, high].\n\nExample 1:\n\nInput: low = 10, high = 20, k = 3\nOutput: 2\nExplanation: There are 2 beautiful integers in the given range: [12,18].\n- 12 is beautiful because it contains 1 odd digit and 1 even digit, and is divisible by k = 3.\n- 18 is beautiful because it contains 1 odd digit and 1 even digit, and is divisible by k = 3.\nAdditionally we can see that:\n- 16 is not beautiful because it is not divisible by k = 3.\n- 15 is not beautiful because it does not contain equal counts even and odd digits.\nIt can be shown that there are only 2 beautiful integers in the given range.\n\nExample 2:\n\nInput: low = 1, high = 10, k = 1\nOutput: 1\nExplanation: There is 1 beautiful integer in the given range: [10].\n- 10 is beautiful because it contains 1 odd digit and 1 even digit, and is divisible by k = 1.\nIt can be shown that there is only 1 beautiful integer in the given range.\n\nExample 3:\n\nInput: low = 5, high = 5, k = 2\nOutput: 0\nExplanation: There are 0 beautiful integers in the given range.\n- 5 is not beautiful because it is not divisible by k = 2 and it does not contain equal even and odd digits.\n\n\nConstraints:\n\n * 0 < low <= high <= 109\n * 0 < k <= 20\n\"\"\"\nclass Solution:\n    def numberOfBeautifulIntegers(self, low: int, high: int, k: int) -> int:\n        ",
+ "starter_code": "class Solution:\n    def numberOfBeautifulIntegers(self, low: int, high: int, k: int) -> int:\n        ",
+ "entry_point": "",
+ "test": "\nmy_solution = Solution()\n\ntest_input = { \"low\": 10, \"high\": 20, \"k\": 3 }\nassert my_solution.numberOfBeautifulIntegers(**test_input) == 2\n\ntest_input = { \"low\": 1, \"high\": 10, \"k\": 1 }\nassert my_solution.numberOfBeautifulIntegers(**test_input) == 1\n\ntest_input = { \"low\": 5, \"high\": 5, \"k\": 2 }\nassert my_solution.numberOfBeautifulIntegers(**test_input) == 0\n\ntest_input = { \"low\": 3, \"high\": 31, \"k\": 16 }\nassert my_solution.numberOfBeautifulIntegers(**test_input) == 1\n\ntest_input = { \"low\": 25, \"high\": 31, \"k\": 11 }\nassert my_solution.numberOfBeautifulIntegers(**test_input) == 0\n\ntest_input = { \"low\": 9, \"high\": 25, \"k\": 4 }\nassert my_solution.numberOfBeautifulIntegers(**test_input) == 2\n\ntest_input = { \"low\": 58, \"high\": 72, \"k\": 16 }\nassert my_solution.numberOfBeautifulIntegers(**test_input) == 0\n\ntest_input = { \"low\": 5, \"high\": 79, \"k\": 12 }\nassert my_solution.numberOfBeautifulIntegers(**test_input) == 3\n\ntest_input = { \"low\": 26, \"high\": 74, \"k\": 7 }\nassert my_solution.numberOfBeautifulIntegers(**test_input) == 4\n\ntest_input = { \"low\": 36, \"high\": 65, \"k\": 7 }\nassert my_solution.numberOfBeautifulIntegers(**test_input) == 3\n\ntest_input = { \"low\": 12, \"high\": 84, \"k\": 8 }\nassert my_solution.numberOfBeautifulIntegers(**test_input) == 4\n\ntest_input = { \"low\": 13, \"high\": 91, \"k\": 13 }\nassert my_solution.numberOfBeautifulIntegers(**test_input) == 3\n\ntest_input = { \"low\": 8, \"high\": 18, \"k\": 4 }\nassert my_solution.numberOfBeautifulIntegers(**test_input) == 2\n\ntest_input = { \"low\": 22, \"high\": 59, \"k\": 6 }\nassert my_solution.numberOfBeautifulIntegers(**test_input) == 3\n\ntest_input = { \"low\": 15, \"high\": 27, \"k\": 9 }\nassert my_solution.numberOfBeautifulIntegers(**test_input) == 2\n\ntest_input = { \"low\": 4, \"high\": 9, \"k\": 19 }\nassert my_solution.numberOfBeautifulIntegers(**test_input) == 0\n\ntest_input = { \"low\": 14, \"high\": 81, \"k\": 17 }\nassert my_solution.numberOfBeautifulIntegers(**test_input) == 1\n\ntest_input = { \"low\": 12, \"high\": 33, \"k\": 18 }\nassert my_solution.numberOfBeautifulIntegers(**test_input) == 1\n\ntest_input = { \"low\": 10, \"high\": 17, \"k\": 8 }\nassert my_solution.numberOfBeautifulIntegers(**test_input) == 1\n\ntest_input = { \"low\": 42, \"high\": 58, \"k\": 3 }\nassert my_solution.numberOfBeautifulIntegers(**test_input) == 2\n\ntest_input = { \"low\": 22, \"high\": 42, \"k\": 4 }\nassert my_solution.numberOfBeautifulIntegers(**test_input) == 2\n\ntest_input = { \"low\": 5, \"high\": 8, \"k\": 5 }\nassert my_solution.numberOfBeautifulIntegers(**test_input) == 0\n\ntest_input = { \"low\": 12, \"high\": 75, \"k\": 13 }\nassert my_solution.numberOfBeautifulIntegers(**test_input) == 2\n\ntest_input = { \"low\": 2, \"high\": 28, \"k\": 1 }\nassert my_solution.numberOfBeautifulIntegers(**test_input) == 9\n\ntest_input = { \"low\": 29, \"high\": 35, \"k\": 17 }\nassert my_solution.numberOfBeautifulIntegers(**test_input) == 1\n\ntest_input = { \"low\": 13, \"high\": 21, \"k\": 9 }\nassert my_solution.numberOfBeautifulIntegers(**test_input) == 1\n\ntest_input = { \"low\": 1, \"high\": 13, \"k\": 15 }\nassert my_solution.numberOfBeautifulIntegers(**test_input) == 0\n\ntest_input = { \"low\": 12, \"high\": 21, \"k\": 16 }\nassert my_solution.numberOfBeautifulIntegers(**test_input) == 1\n\ntest_input = { \"low\": 47, \"high\": 72, \"k\": 13 }\nassert my_solution.numberOfBeautifulIntegers(**test_input) == 2\n\ntest_input = { \"low\": 1, \"high\": 35, \"k\": 12 }\nassert my_solution.numberOfBeautifulIntegers(**test_input) == 1\n\ntest_input = { \"low\": 38, \"high\": 52, \"k\": 4 }\nassert my_solution.numberOfBeautifulIntegers(**test_input) == 1\n\ntest_input = { \"low\": 10, \"high\": 74, \"k\": 3 }\nassert my_solution.numberOfBeautifulIntegers(**test_input) == 11\n\ntest_input = { \"low\": 60, \"high\": 92, \"k\": 11 }\nassert my_solution.numberOfBeautifulIntegers(**test_input) == 0\n\ntest_input = { \"low\": 3, \"high\": 25, \"k\": 15 }\nassert my_solution.numberOfBeautifulIntegers(**test_input) == 0\n\ntest_input = { \"low\": 63, \"high\": 65, \"k\": 20 }\nassert my_solution.numberOfBeautifulIntegers(**test_input) == 0\n\ntest_input = { \"low\": 22, \"high\": 77, \"k\": 7 }\nassert my_solution.numberOfBeautifulIntegers(**test_input) == 4\n\ntest_input = { \"low\": 1, \"high\": 1, \"k\": 4 }\nassert my_solution.numberOfBeautifulIntegers(**test_input) == 0\n\ntest_input = { \"low\": 28, \"high\": 73, \"k\": 20 }\nassert my_solution.numberOfBeautifulIntegers(**test_input) == 0\n\ntest_input = { \"low\": 21, \"high\": 32, \"k\": 6 }\nassert my_solution.numberOfBeautifulIntegers(**test_input) == 1\n\ntest_input = { \"low\": 43, \"high\": 43, \"k\": 11 }\nassert my_solution.numberOfBeautifulIntegers(**test_input) == 0\n\ntest_input = { \"low\": 31, \"high\": 68, \"k\": 16 }\nassert my_solution.numberOfBeautifulIntegers(**test_input) == 1\n\ntest_input = { \"low\": 1, \"high\": 8, \"k\": 4 }\nassert my_solution.numberOfBeautifulIntegers(**test_input) == 0\n\ntest_input = { \"low\": 47, \"high\": 100, \"k\": 18 }\nassert my_solution.numberOfBeautifulIntegers(**test_input) == 3\n\ntest_input = { \"low\": 45, \"high\": 84, \"k\": 19 }\nassert my_solution.numberOfBeautifulIntegers(**test_input) == 1\n\ntest_input = { \"low\": 31, \"high\": 80, \"k\": 11 }\nassert my_solution.numberOfBeautifulIntegers(**test_input) == 0\n\ntest_input = { \"low\": 14, \"high\": 14, \"k\": 5 }\nassert my_solution.numberOfBeautifulIntegers(**test_input) == 0\n\ntest_input = { \"low\": 21, \"high\": 88, \"k\": 10 }\nassert my_solution.numberOfBeautifulIntegers(**test_input) == 3\n\ntest_input = { \"low\": 11, \"high\": 42, \"k\": 3 }\nassert my_solution.numberOfBeautifulIntegers(**test_input) == 6\n\ntest_input = { \"low\": 19, \"high\": 53, \"k\": 16 }\nassert my_solution.numberOfBeautifulIntegers(**test_input) == 1\n\ntest_input = { \"low\": 57, \"high\": 98, \"k\": 6 }\nassert my_solution.numberOfBeautifulIntegers(**test_input) == 4\n\ntest_input = { \"low\": 57, \"high\": 69, \"k\": 9 }\nassert my_solution.numberOfBeautifulIntegers(**test_input) == 1\n\ntest_input = { \"low\": 17, \"high\": 64, \"k\": 1 }\nassert my_solution.numberOfBeautifulIntegers(**test_input) == 23\n\ntest_input = { \"low\": 29, \"high\": 40, \"k\": 15 }\nassert my_solution.numberOfBeautifulIntegers(**test_input) == 1\n\ntest_input = { \"low\": 36, \"high\": 60, \"k\": 3 }\nassert my_solution.numberOfBeautifulIntegers(**test_input) == 3\n\ntest_input = { \"low\": 16, \"high\": 23, \"k\": 13 }\nassert my_solution.numberOfBeautifulIntegers(**test_input) == 0\n\ntest_input = { \"low\": 36, \"high\": 99, \"k\": 3 }\nassert my_solution.numberOfBeautifulIntegers(**test_input) == 11\n\ntest_input = { \"low\": 23, \"high\": 83, \"k\": 4 }\nassert my_solution.numberOfBeautifulIntegers(**test_input) == 6\n\ntest_input = { \"low\": 4, \"high\": 5, \"k\": 9 }\nassert my_solution.numberOfBeautifulIntegers(**test_input) == 0\n\ntest_input = { \"low\": 15, \"high\": 21, \"k\": 2 }\nassert my_solution.numberOfBeautifulIntegers(**test_input) == 2\n\ntest_input = { \"low\": 51, \"high\": 76, \"k\": 7 }\nassert my_solution.numberOfBeautifulIntegers(**test_input) == 3\n\ntest_input = { \"low\": 24, \"high\": 34, \"k\": 8 }\nassert my_solution.numberOfBeautifulIntegers(**test_input) == 1\n\ntest_input = { \"low\": 24, \"high\": 99, \"k\": 1 }\nassert my_solution.numberOfBeautifulIntegers(**test_input) == 38\n\ntest_input = { \"low\": 37, \"high\": 63, \"k\": 10 }\nassert my_solution.numberOfBeautifulIntegers(**test_input) == 1\n\ntest_input = { \"low\": 19, \"high\": 23, \"k\": 6 }\nassert my_solution.numberOfBeautifulIntegers(**test_input) == 0\n\ntest_input = { \"low\": 35, \"high\": 70, \"k\": 17 }\nassert my_solution.numberOfBeautifulIntegers(**test_input) == 0\n\ntest_input = { \"low\": 3, \"high\": 18, \"k\": 19 }\nassert my_solution.numberOfBeautifulIntegers(**test_input) == 0\n\ntest_input = { \"low\": 30, \"high\": 64, \"k\": 12 }\nassert my_solution.numberOfBeautifulIntegers(**test_input) == 1\n\ntest_input = { \"low\": 3, \"high\": 12, \"k\": 9 }\nassert my_solution.numberOfBeautifulIntegers(**test_input) == 0\n\ntest_input = { \"low\": 14, \"high\": 21, \"k\": 16 }\nassert my_solution.numberOfBeautifulIntegers(**test_input) == 1\n\ntest_input = { \"low\": 19, \"high\": 21, \"k\": 12 }\nassert my_solution.numberOfBeautifulIntegers(**test_input) == 0\n\ntest_input = { \"low\": 54, \"high\": 78, \"k\": 16 }\nassert my_solution.numberOfBeautifulIntegers(**test_input) == 0\n\ntest_input = { \"low\": 24, \"high\": 36, \"k\": 20 }\nassert my_solution.numberOfBeautifulIntegers(**test_input) == 0\n\ntest_input = { \"low\": 54, \"high\": 58, \"k\": 13 }\nassert my_solution.numberOfBeautifulIntegers(**test_input) == 0\n\ntest_input = { \"low\": 74, \"high\": 88, \"k\": 12 }\nassert my_solution.numberOfBeautifulIntegers(**test_input) == 0\n\ntest_input = { \"low\": 45, \"high\": 58, \"k\": 14 }\nassert my_solution.numberOfBeautifulIntegers(**test_input) == 1\n\ntest_input = { \"low\": 51, \"high\": 99, \"k\": 8 }\nassert my_solution.numberOfBeautifulIntegers(**test_input) == 3\n\ntest_input = { \"low\": 8, \"high\": 26, \"k\": 13 }\nassert my_solution.numberOfBeautifulIntegers(**test_input) == 0\n\ntest_input = { \"low\": 12, \"high\": 92, \"k\": 3 }\nassert my_solution.numberOfBeautifulIntegers(**test_input) == 15\n\ntest_input = { \"low\": 18, \"high\": 91, \"k\": 11 }\nassert my_solution.numberOfBeautifulIntegers(**test_input) == 0\n\ntest_input = { \"low\": 14, \"high\": 53, \"k\": 15 }\nassert my_solution.numberOfBeautifulIntegers(**test_input) == 2\n\ntest_input = { \"low\": 4, \"high\": 10, \"k\": 11 }\nassert my_solution.numberOfBeautifulIntegers(**test_input) == 0\n\ntest_input = { \"low\": 7, \"high\": 24, \"k\": 5 }\nassert my_solution.numberOfBeautifulIntegers(**test_input) == 1\n\ntest_input = { \"low\": 1, \"high\": 25, \"k\": 8 }\nassert my_solution.numberOfBeautifulIntegers(**test_input) == 1\n\ntest_input = { \"low\": 7, \"high\": 20, \"k\": 15 }\nassert my_solution.numberOfBeautifulIntegers(**test_input) == 0\n\ntest_input = { \"low\": 51, \"high\": 92, \"k\": 1 }\nassert my_solution.numberOfBeautifulIntegers(**test_input) == 21\n\ntest_input = { \"low\": 73, \"high\": 73, \"k\": 3 }\nassert my_solution.numberOfBeautifulIntegers(**test_input) == 0\n\ntest_input = { \"low\": 50, \"high\": 63, \"k\": 19 }\nassert my_solution.numberOfBeautifulIntegers(**test_input) == 0\n\ntest_input = { \"low\": 30, \"high\": 51, \"k\": 19 }\nassert my_solution.numberOfBeautifulIntegers(**test_input) == 1\n\ntest_input = { \"low\": 2, \"high\": 65, \"k\": 7 }\nassert my_solution.numberOfBeautifulIntegers(**test_input) == 5\n\ntest_input = { \"low\": 49, \"high\": 87, \"k\": 20 }\nassert my_solution.numberOfBeautifulIntegers(**test_input) == 0\n\ntest_input = { \"low\": 3, \"high\": 6, \"k\": 1 }\nassert my_solution.numberOfBeautifulIntegers(**test_input) == 0\n\ntest_input = { \"low\": 16, \"high\": 17, \"k\": 6 }\nassert my_solution.numberOfBeautifulIntegers(**test_input) == 0\n\ntest_input = { \"low\": 17, \"high\": 32, \"k\": 16 }\nassert my_solution.numberOfBeautifulIntegers(**test_input) == 1\n\ntest_input = { \"low\": 13, \"high\": 14, \"k\": 6 }\nassert my_solution.numberOfBeautifulIntegers(**test_input) == 0\n\ntest_input = { \"low\": 25, \"high\": 42, \"k\": 11 }\nassert my_solution.numberOfBeautifulIntegers(**test_input) == 0\n\ntest_input = { \"low\": 18, \"high\": 46, \"k\": 5 }\nassert my_solution.numberOfBeautifulIntegers(**test_input) == 3\n\ntest_input = { \"low\": 1, \"high\": 65, \"k\": 6 }\nassert my_solution.numberOfBeautifulIntegers(**test_input) == 5\n\ntest_input = { \"low\": 6, \"high\": 43, \"k\": 15 }\nassert my_solution.numberOfBeautifulIntegers(**test_input) == 1\n\ntest_input = { \"low\": 5, \"high\": 9, \"k\": 12 }\nassert my_solution.numberOfBeautifulIntegers(**test_input) == 0\n\ntest_input = { \"low\": 1, \"high\": 75, \"k\": 9 }\nassert my_solution.numberOfBeautifulIntegers(**test_input) == 7",
+ "test_cases": [
+  {
+   "input": {
+    "args": [
+     20,
+     3,
+     10
+    ]
+   },
+   "output": 2,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     10,
+     1,
+     1
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     5,
+     2,
+     5
+    ]
+   },
+   "output": 0,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     31,
+     16,
+     3
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     31,
+     11,
+     25
+    ]
+   },
+   "output": 0,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     25,
+     4,
+     9
+    ]
+   },
+   "output": 2,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     72,
+     16,
+     58
+    ]
+   },
+   "output": 0,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     79,
+     12,
+     5
+    ]
+   },
+   "output": 3,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     74,
+     7,
+     26
+    ]
+   },
+   "output": 4,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     65,
+     7,
+     36
+    ]
+   },
+   "output": 3,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     84,
+     8,
+     12
+    ]
+   },
+   "output": 4,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     91,
+     13,
+     13
+    ]
+   },
+   "output": 3,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     18,
+     4,
+     8
+    ]
+   },
+   "output": 2,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     59,
+     6,
+     22
+    ]
+   },
+   "output": 3,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     27,
+     9,
+     15
+    ]
+   },
+   "output": 2,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     9,
+     19,
+     4
+    ]
+   },
+   "output": 0,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     81,
+     17,
+     14
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     33,
+     18,
+     12
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     17,
+     8,
+     10
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     58,
+     3,
+     42
+    ]
+   },
+   "output": 2,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     42,
+     4,
+     22
+    ]
+   },
+   "output": 2,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     8,
+     5,
+     5
+    ]
+   },
+   "output": 0,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     75,
+     13,
+     12
+    ]
+   },
+   "output": 2,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     28,
+     1,
+     2
+    ]
+   },
+   "output": 9,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     35,
+     17,
+     29
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     21,
+     9,
+     13
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     13,
+     15,
+     1
+    ]
+   },
+   "output": 0,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     21,
+     16,
+     12
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     72,
+     13,
+     47
+    ]
+   },
+   "output": 2,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     35,
+     12,
+     1
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     52,
+     4,
+     38
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     74,
+     3,
+     10
+    ]
+   },
+   "output": 11,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     92,
+     11,
+     60
+    ]
+   },
+   "output": 0,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     25,
+     15,
+     3
+    ]
+   },
+   "output": 0,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     65,
+     20,
+     63
+    ]
+   },
+   "output": 0,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     77,
+     7,
+     22
+    ]
+   },
+   "output": 4,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     1,
+     4,
+     1
+    ]
+   },
+   "output": 0,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     73,
+     20,
+     28
+    ]
+   },
+   "output": 0,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     32,
+     6,
+     21
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     43,
+     11,
+     43
+    ]
+   },
+   "output": 0,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     68,
+     16,
+     31
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     8,
+     4,
+     1
+    ]
+   },
+   "output": 0,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     100,
+     18,
+     47
+    ]
+   },
+   "output": 3,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     84,
+     19,
+     45
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     80,
+     11,
+     31
+    ]
+   },
+   "output": 0,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     14,
+     5,
+     14
+    ]
+   },
+   "output": 0,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     88,
+     10,
+     21
+    ]
+   },
+   "output": 3,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     42,
+     3,
+     11
+    ]
+   },
+   "output": 6,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     53,
+     16,
+     19
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     98,
+     6,
+     57
+    ]
+   },
+   "output": 4,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     69,
+     9,
+     57
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     64,
+     1,
+     17
+    ]
+   },
+   "output": 23,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     40,
+     15,
+     29
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     60,
+     3,
+     36
+    ]
+   },
+   "output": 3,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     23,
+     13,
+     16
+    ]
+   },
+   "output": 0,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     99,
+     3,
+     36
+    ]
+   },
+   "output": 11,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     83,
+     4,
+     23
+    ]
+   },
+   "output": 6,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     5,
+     9,
+     4
+    ]
+   },
+   "output": 0,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     21,
+     2,
+     15
+    ]
+   },
+   "output": 2,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     76,
+     7,
+     51
+    ]
+   },
+   "output": 3,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     34,
+     8,
+     24
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     99,
+     1,
+     24
+    ]
+   },
+   "output": 38,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     63,
+     10,
+     37
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     23,
+     6,
+     19
+    ]
+   },
+   "output": 0,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     70,
+     17,
+     35
+    ]
+   },
+   "output": 0,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     18,
+     19,
+     3
+    ]
+   },
+   "output": 0,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     64,
+     12,
+     30
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     12,
+     9,
+     3
+    ]
+   },
+   "output": 0,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     21,
+     16,
+     14
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     21,
+     12,
+     19
+    ]
+   },
+   "output": 0,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     78,
+     16,
+     54
+    ]
+   },
+   "output": 0,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     36,
+     20,
+     24
+    ]
+   },
+   "output": 0,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     58,
+     13,
+     54
+    ]
+   },
+   "output": 0,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     88,
+     12,
+     74
+    ]
+   },
+   "output": 0,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     58,
+     14,
+     45
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     99,
+     8,
+     51
+    ]
+   },
+   "output": 3,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     26,
+     13,
+     8
+    ]
+   },
+   "output": 0,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     92,
+     3,
+     12
+    ]
+   },
+   "output": 15,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     91,
+     11,
+     18
+    ]
+   },
+   "output": 0,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     53,
+     15,
+     14
+    ]
+   },
+   "output": 2,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     10,
+     11,
+     4
+    ]
+   },
+   "output": 0,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     24,
+     5,
+     7
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     25,
+     8,
+     1
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     20,
+     15,
+     7
+    ]
+   },
+   "output": 0,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     92,
+     1,
+     51
+    ]
+   },
+   "output": 21,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     73,
+     3,
+     73
+    ]
+   },
+   "output": 0,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     63,
+     19,
+     50
+    ]
+   },
+   "output": 0,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     51,
+     19,
+     30
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     65,
+     7,
+     2
+    ]
+   },
+   "output": 5,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     87,
+     20,
+     49
+    ]
+   },
+   "output": 0,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     6,
+     1,
+     3
+    ]
+   },
+   "output": 0,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     17,
+     6,
+     16
+    ]
+   },
+   "output": 0,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     32,
+     16,
+     17
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     14,
+     6,
+     13
+    ]
+   },
+   "output": 0,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     42,
+     11,
+     25
+    ]
+   },
+   "output": 0,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     46,
+     5,
+     18
+    ]
+   },
+   "output": 3,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     65,
+     6,
+     1
+    ]
+   },
+   "output": 5,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     43,
+     15,
+     6
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     9,
+     12,
+     5
+    ]
+   },
+   "output": 0,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     75,
+     9,
+     1
+    ]
+   },
+   "output": 7,
+   "explanation": ""
+  }
+ ],
+ "original_ilr": "```json\n{\n  \"problem_id\": \"numberOfBeautifulIntegers\",\n  \"functions\": [\n    {\n      \"name\": \"helper\",\n      \"parameters\": [\"num\"],\n      \"entry_node\": 9,\n      \"nodes\": [\n        {\n          \"id\": 9,\n          \"type\": \"start\",\n          \"label\": \"Define helper(num: tuple)\",\n          \"next\": 10\n        },\n        {\n          \"id\": 10,\n          \"type\": \"process\",\n          \"label\": \"Define dp(pos: int, tight: bool, has_first: bool, even_num: int, cur_num: int)\",\n          \"action\": \"def dp(pos, tight, has_first, even_num, cur_num): return 0\",\n          \"next\": 11\n        },\n        {\n          \"id\": 11,\n          \"type\": \"decision\",\n          \"label\": \"Is pos == len(num)?\",\n          \"logic\": \"ctx['pos'] == len(ctx['num'])\",\n          \"true_next\": 12,\n          \"false_next\": 15\n        },\n        {\n          \"id\": 12,\n          \"type\": \"decision\",\n          \"label\": \"Is even_num == 0 and cur_num == 0?\",\n          \"logic\": \"ctx['even_num'] == 0 and ctx['cur_num'] == 0\",\n          \"true_next\": 13,\n          \"false_next\": 14\n        },\n        {\n          \"id\": 13,\n          \"type\": \"return\",\n          \"label\": \"Return 1\",\n          \"value\": \"1\"\n        },\n        {\n          \"id\": 14,\n          \"type\": \"return\",\n          \"label\": \"Return 0\",\n          \"value\": \"0\"\n        },\n        {\n          \"id\": 15,\n          \"type\": \"process\",\n          \"label\": \"Initialize res = 0\",\n          \"action\": \"ctx['res'] = 0\",\n          \"next\": 16\n        },\n        {\n          \"id\": 16,\n          \"type\": \"decision\",\n          \"label\": \"Is tight?\",\n          \"logic\": \"ctx['tight']\",\n          \"true_next\": 17,\n          \"false_next\": 18\n        },\n        {\n          \"id\": 17,\n          \"type\": \"process\",\n          \"label\": \"Set bound = 0\",\n          \"action\": \"ctx['bound'] = 0\",\n          \"next\": 19\n        },\n        {\n          \"id\": 18,\n          \"type\": \"process\",\n          \"label\": \"Set bound = 9\",\n          \"action\": \"ctx['bound'] = 9\",\n          \"next\": 19\n        },\n        {\n          \"id\": 19,\n          \"type\": \"process\",\n          \"label\": \"For i from 0 to bound\",\n          \"action\": \"for i in range(ctx['bound'] + 1):\",\n          \"next\": 20\n        },\n        {\n          \"id\": 20,\n          \"type\": \"decision\",\n          \"label\": \"Is i == 10?\",\n          \"logic\": \"ctx['i'] == 10\",\n          \"true_next\": 21,\n          \"false_next\": 22\n        },\n        {\n          \"id\": 21,\n          \"type\": \"process\",\n          \"label\": \"Continue\",\n          \"action\": \"continue\",\n          \"next\": 19\n        },\n        {\n          \"id\": 22,\n          \"type\": \"process\",\n          \"label\": \"Set new_tight = (i == bound)\",\n          \"action\": \"ctx['new_tight'] = (ctx['i'] == ctx['bound'])\",\n          \"next\": 23\n        },\n        {\n          \"id\": 23,\n          \"type\": \"process\",\n          \"label\": \"Set new_has_first = has_first\",\n          \"action\": \"ctx['new_has_first'] = ctx['has_first']\",\n          \"next\": 24\n        },\n        {\n          \"id\": 24,\n          \"type\": \"decision\",\n          \"label\": \"Is i == 0 and not has_first?\",\n          \"logic\": \"ctx['i'] == 0 and not ctx['has_first']\",\n          \"true_next\": 25,\n          \"false_next\": 26\n        },\n        {\n          \"id\": 25,\n          \"type\": \"process\",\n          \"label\": \"Set new_has_first = True\",\n          \"action\": \"ctx['new_has_first'] = True\",\n          \"next\": 26\n        },\n        {\n          \"id\": 26,\n          \"type\": \"decision\",\n          \"label\": \"Is i even?\",\n          \"logic\": \"ctx['i'] % 2 == 0\",\n          \"true_next\": 27,\n          \"false_next\": 28\n        },\n        {\n          \"id\": 27,\n          \"type\": \"process\",\n          \"label\": \"Set new_even_num = 0\",\n          \"action\": \"ctx['new_even_num'] = 0\",\n          \"next\": 29\n        },\n        {\n          \"id\": 28,\n          \"type\": \"process\",\n          \"label\": \"Set new_even_num = even_num + 1\",\n          \"action\": \"ctx['new_even_num'] = ctx['even_num'] + 1\",\n          \"next\": 29\n        },\n        {\n          \"id\": 29,\n          \"type\": \"process\",\n          \"label\": \"Set new_even_num = even_num - 1\",\n          \"action\": \"ctx['new_even_num'] = ctx['even_num'] - 1\",\n          \"next\": 30\n        },\n        {\n          \"id\": 30,\n          \"type\": \"process\",\n          \"label\": \"Call dp(pos + 1, new_tight, new_has_first, new_even_num, (cur_num * 10 + i) % k)\",\n          \"action\": \"ctx['res'] += dp(ctx['pos'] + 1, ctx['new_tight'], ctx['new_has_first'], ctx['new_even_num'], (ctx['cur_num'] * 10 + ctx['i']) % ctx['k'])\",\n          \"next\": 31\n        },\n        {\n          \"id\": 31,\n          \"type\": \"process\",\n          \"label\": \"Add result to res\",\n          \"action\": \"ctx['res'] += dp(ctx['pos'] + 1, ctx['new_tight'], ctx['new_has_first'], ctx['new_even_num'], (ctx['cur_num'] * 10 + ctx['i']) % ctx['k'])\",\n          \"next\": 19\n        },\n        {\n          \"id\": 32,\n          \"type\": \"process\",\n          \"label\": \"end loop\",\n          \"action\": \"pass\",\n          \"next\": 33\n        },\n        {\n          \"id\": 33,\n          \"type\": \"return\",\n          \"label\": \"Return res\",\n          \"value\": \"ctx['res']\"\n        }\n      ]\n    }\n  ],\n  \"nodes\": [\n    {\n      \"id\": 1,\n      \"type\": \"start\",\n      \"label\": \"Start\",\n      \"next\": 2\n    },\n    {\n      \"id\": 2,\n      \"type\": \"process\",\n      \"label\": \"Input: low (integer), high (integer), k (integer)\",\n      \"action\": \"ctx['low'] = ctx['arg0']; ctx['high'] = ctx['arg1']; ctx['k'] = ctx['arg2'];\",\n      \"next\": 3\n    },\n    {\n      \"id\": 3,\n      \"type\": \"process\",\n      \"label\": \"Convert high to tuple: num_high = tuple(map(int, str(high)))\",\n      \"action\": \"ctx['num_high'] = tuple(map(int, str(ctx['high'])))\",\n      \"next\": 4\n    },\n    {\n      \"id\": 4,\n      \"type\": \"process\",\n      \"label\": \"Convert low to tuple: num_low = tuple(map(int, str(low - 1)))\",\n      \"action\": \"ctx['num_low'] = tuple(map(int, str(ctx['low'] - 1)))\",\n      \"next\": 5\n    },\n    {\n      \"id\": 5,\n      \"type\": \"call\",\n      \"label\": \"Call helper(num_high)\",\n      \"function_name\": \"helper\",\n      \"arguments\": [\"ctx['num_high']\"],\n      \"return_var\": \"result_high\",\n      \"next\": 6\n    },\n    {\n      \"id\": 6,\n      \"type\": \"call\",\n      \"label\": \"Call helper(num_low)\",\n      \"function_name\": \"helper\",\n      \"arguments\": [\"ctx['num_low']\"],\n      \"return_var\": \"result_low\",\n      \"next\": 7\n    },\n    {\n      \"id\": 7,\n      \"type\": \"process\",\n      \"label\": \"Calculate result: result = helper(num_high) - helper(num_low)\",\n      \"action\": \"ctx['result'] = ctx['result_high'] - ctx['result_low']\",\n      \"next\": 8\n    },\n    {\n      \"id\": 8,\n      \"type\": \"end\",\n      \"label\": \"Output: result (number of beautiful integers)\",\n      \"output\": \"ctx['result']\"\n    }\n  ]\n}\n```",
+ "original_code": "class Solution:\n    def numberOfBeautifulIntegers(self, low: int, high: int, k: int) -> int:\n        def helper(num):\n            def dp(pos, tight, has_first, even_num, cur_num):\n                if pos == len(num):\n                    return 1 if even_num == 0 and cur_num == 0 else 0\n                res = 0\n                bound = 0 if tight else 9\n                for i in range(bound + 1):\n                    if i == 10:\n                        continue\n                    new_tight = i == bound\n                    new_has_first = has_first\n                    if i == 0 and not has_first:\n                        new_has_first = True\n                    if i % 2 == 0:\n                        new_even_num = 0\n                    else:\n                        new_even_num = even_num + 1\n                    res += dp(pos + 1, new_tight, new_has_first, new_even_num, (cur_num * 10 + i) % k)\n                return res\n            return dp(0, True, False, 0, 0)\n        \n        num_high = tuple(map(int, str(high)))\n        num_low = tuple(map(int, str(low - 1)))\n        result_high = helper(num_high)\n        result_low = helper(num_low)\n        return result_high - result_low",
+ "ocr_data": {
+  "nodes": [
+   {
+    "node_id": 1,
+    "shape_type": "rectangle",
+    "raw_text": "Start",
+    "position": "top"
+   },
+   {
+    "node_id": 2,
+    "shape_type": "rectangle",
+    "raw_text": "Input: low (integer), high (integer), k (integer)",
+    "position": "middle"
+   },
+   {
+    "node_id": 3,
+    "shape_type": "rectangle",
+    "raw_text": "Convert high to tuple: num_high = tuple(map(int, str(high)))",
+    "position": "middle"
+   },
+   {
+    "node_id": 4,
+    "shape_type": "rectangle",
+    "raw_text": "Convert low to tuple: num_low = tuple(map(int, str(low - 1)))",
+    "position": "middle"
+   },
+   {
+    "node_id": 5,
+    "shape_type": "rectangle",
+    "raw_text": "Call helper(num_high)",
+    "position": "middle"
+   },
+   {
+    "node_id": 6,
+    "shape_type": "rectangle",
+    "raw_text": "Call helper(num_low)",
+    "position": "middle"
+   },
+   {
+    "node_id": 7,
+    "shape_type": "rectangle",
+    "raw_text": "Calculate result: result = helper(num_high) - helper(num_low)",
+    "position": "middle"
+   },
+   {
+    "node_id": 8,
+    "shape_type": "rectangle",
+    "raw_text": "Output: result (number of beautiful integers)",
+    "position": "bottom"
+   },
+   {
+    "node_id": 9,
+    "shape_type": "rectangle",
+    "raw_text": "Define helper(num: tuple)",
+    "position": "top"
+   },
+   {
+    "node_id": 10,
+    "shape_type": "rectangle",
+    "raw_text": "Define dp(pos: int, tight: bool, has_first: bool, even_num: int, cur_num: int)",
+    "position": "middle"
+   },
+   {
+    "node_id": 11,
+    "shape_type": "diamond",
+    "raw_text": "Is pos == len(num)?",
+    "position": "middle"
+   },
+   {
+    "node_id": 12,
+    "shape_type": "diamond",
+    "raw_text": "Is even_num == 0 and cur_num == 0?",
+    "position": "middle"
+   },
+   {
+    "node_id": 13,
+    "shape_type": "rectangle",
+    "raw_text": "Return 1",
+    "position": "middle"
+   },
+   {
+    "node_id": 14,
+    "shape_type": "rectangle",
+    "raw_text": "Return 0",
+    "position": "middle"
+   },
+   {
+    "node_id": 15,
+    "shape_type": "rectangle",
+    "raw_text": "Initialize res = 0",
+    "position": "middle"
+   },
+   {
+    "node_id": 16,
+    "shape_type": "diamond",
+    "raw_text": "Is tight?",
+    "position": "middle"
+   },
+   {
+    "node_id": 17,
+    "shape_type": "rectangle",
+    "raw_text": "Set bound = 0",
+    "position": "middle"
+   },
+   {
+    "node_id": 18,
+    "shape_type": "rectangle",
+    "raw_text": "Set bound = 9",
+    "position": "middle"
+   },
+   {
+    "node_id": 19,
+    "shape_type": "rectangle",
+    "raw_text": "For i from 0 to bound",
+    "position": "middle"
+   },
+   {
+    "node_id": 20,
+    "shape_type": "diamond",
+    "raw_text": "Is i == 10?",
+    "position": "middle"
+   },
+   {
+    "node_id": 21,
+    "shape_type": "rectangle",
+    "raw_text": "Continue",
+    "position": "middle"
+   },
+   {
+    "node_id": 22,
+    "shape_type": "rectangle",
+    "raw_text": "Set new_tight = (i == bound)",
+    "position": "middle"
+   },
+   {
+    "node_id": 23,
+    "shape_type": "rectangle",
+    "raw_text": "Set new_has_first = has_first",
+    "position": "middle"
+   },
+   {
+    "node_id": 24,
+    "shape_type": "diamond",
+    "raw_text": "Is i == 0 and not has_first?",
+    "position": "middle"
+   },
+   {
+    "node_id": 25,
+    "shape_type": "rectangle",
+    "raw_text": "Set new_has_first = True",
+    "position": "middle"
+   },
+   {
+    "node_id": 26,
+    "shape_type": "diamond",
+    "raw_text": "Is i even?",
+    "position": "middle"
+   },
+   {
+    "node_id": 27,
+    "shape_type": "rectangle",
+    "raw_text": "Set new_even_num = 0",
+    "position": "middle"
+   },
+   {
+    "node_id": 28,
+    "shape_type": "rectangle",
+    "raw_text": "Set new_even_num = even_num + 1",
+    "position": "middle"
+   },
+   {
+    "node_id": 29,
+    "shape_type": "rectangle",
+    "raw_text": "Set new_even_num = even_num - 1",
+    "position": "middle"
+   },
+   {
+    "node_id": 30,
+    "shape_type": "rectangle",
+    "raw_text": "Call dp(pos + 1, new_tight, new_has_first, new_even_num, (cur_num * 10 + i) % k)",
+    "position": "middle"
+   },
+   {
+    "node_id": 31,
+    "shape_type": "rectangle",
+    "raw_text": "Add result to res",
+    "position": "middle"
+   },
+   {
+    "node_id": 32,
+    "shape_type": "rectangle",
+    "raw_text": "end loop",
+    "position": "middle"
+   },
+   {
+    "node_id": 33,
+    "shape_type": "rectangle",
+    "raw_text": "Return res",
+    "position": "middle"
+   }
+  ],
+  "edges": [
+   {
+    "from_node": 1,
+    "to_node": 2,
+    "label": ""
+   },
+   {
+    "from_node": 2,
+    "to_node": 3,
+    "label": ""
+   },
+   {
+    "from_node": 3,
+    "to_node": 4,
+    "label": ""
+   },
+   {
+    "from_node": 4,
+    "to_node": 5,
+    "label": ""
+   },
+   {
+    "from_node": 5,
+    "to_node": 6,
+    "label": ""
+   },
+   {
+    "from_node": 6,
+    "to_node": 7,
+    "label": ""
+   },
+   {
+    "from_node": 7,
+    "to_node": 8,
+    "label": ""
+   },
+   {
+    "from_node": 9,
+    "to_node": 10,
+    "label": ""
+   },
+   {
+    "from_node": 10,
+    "to_node": 11,
+    "label": ""
+   },
+   {
+    "from_node": 11,
+    "to_node": 12,
+    "label": ""
+   },
+   {
+    "from_node": 12,
+    "to_node": 13,
+    "label": "Yes"
+   },
+   {
+    "from_node": 12,
+    "to_node": 14,
+    "label": "No"
+   },
+   {
+    "from_node": 11,
+    "to_node": 15,
+    "label": "No"
+   },
+   {
+    "from_node": 15,
+    "to_node": 16,
+    "label": ""
+   },
+   {
+    "from_node": 16,
+    "to_node": 17,
+    "label": "Yes"
+   },
+   {
+    "from_node": 16,
+    "to_node": 18,
+    "label": "No"
+   },
+   {
+    "from_node": 17,
+    "to_node": 19,
+    "label": ""
+   },
+   {
+    "from_node": 18,
+    "to_node": 19,
+    "label": ""
+   },
+   {
+    "from_node": 19,
+    "to_node": 20,
+    "label": ""
+   },
+   {
+    "from_node": 20,
+    "to_node": 21,
+    "label": "Yes"
+   },
+   {
+    "from_node": 20,
+    "to_node": 22,
+    "label": "No"
+   },
+   {
+    "from_node": 22,
+    "to_node": 23,
+    "label": ""
+   },
+   {
+    "from_node": 23,
+    "to_node": 24,
+    "label": ""
+   },
+   {
+    "from_node": 24,
+    "to_node": 25,
+    "label": "Yes"
+   },
+   {
+    "from_node": 24,
+    "to_node": 26,
+    "label": "No"
+   },
+   {
+    "from_node": 25,
+    "to_node": 26,
+    "label": ""
+   },
+   {
+    "from_node": 26,
+    "to_node": 27,
+    "label": "Yes"
+   },
+   {
+    "from_node": 26,
+    "to_node": 28,
+    "label": "Yes"
+   },
+   {
+    "from_node": 26,
+    "to_node": 29,
+    "label": "No"
+   },
+   {
+    "from_node": 27,
+    "to_node": 30,
+    "label": ""
+   },
+   {
+    "from_node": 28,
+    "to_node": 30,
+    "label": ""
+   },
+   {
+    "from_node": 29,
+    "to_node": 30,
+    "label": ""
+   },
+   {
+    "from_node": 30,
+    "to_node": 31,
+    "label": ""
+   },
+   {
+    "from_node": 31,
+    "to_node": 19,
+    "label": ""
+   },
+   {
+    "from_node": 31,
+    "to_node": 32,
+    "label": ""
+   },
+   {
+    "from_node": 32,
+    "to_node": 33,
+    "label": ""
+   },
+   {
+    "from_node": 33,
+    "to_node": 15,
+    "label": ""
+   }
+  ],
+  "other_text": [
+   "helper_function"
+  ]
+ },
+ "test_result": {},
+ "status": "completed",
+ "fixed_ilr": null,
+ "modified_code": null,
+ "ilr_fix_log": "",
+ "bug_injected": ""
+}

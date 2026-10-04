@@ -1,0 +1,8 @@
+CodeVision Combined Results
+Experiment: gpt-5-nano_text_image
+
+Algorithm    : 128/149
+HumanEval-V  : 162/164
+MATH         : 44/125
+--------------------------------
+Total        : 334/438 = 0.7625570776

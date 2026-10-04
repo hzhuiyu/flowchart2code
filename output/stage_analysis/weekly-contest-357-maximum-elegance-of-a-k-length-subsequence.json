@@ -1,0 +1,189 @@
+{
+  "problem_id": "findMaximumElegance",
+  "nodes": [
+    {
+      "id": 1,
+      "type": "start",
+      "label": "Start",
+      "next": 2
+    },
+    {
+      "id": 2,
+      "type": "process",
+      "label": "Input: items (2D array), k (integer)",
+      "action": "ctx['items'] = ctx['arg0']; ctx['k'] = ctx['arg1']; ctx['sm'] = 0; ctx['seenCats'] = {}; ctx['dups'] = []",
+      "next": 3
+    },
+    {
+      "id": 3,
+      "type": "process",
+      "label": "Sort items in descending order of profit",
+      "action": "ctx['items'] = sorted(ctx['items'], key=lambda x: x[0], reverse=True)",
+      "next": 4
+    },
+    {
+      "id": 4,
+      "type": "process",
+      "label": "Loop through first k items",
+      "action": "ctx['i'] = 0",
+      "next": 5
+    },
+    {
+      "id": 5,
+      "type": "decision",
+      "label": "Is i < k?",
+      "logic": "ctx['i'] < ctx['k']",
+      "true_next": 6,
+      "false_next": 12
+    },
+    {
+      "id": 6,
+      "type": "process",
+      "label": "Extract headPrf, headCat from items[i]",
+      "action": "ctx['headPrf'] = ctx['items'][ctx['i']][0]; ctx['headCat'] = ctx['items'][ctx['i']][1]",
+      "next": 7
+    },
+    {
+      "id": 7,
+      "type": "process",
+      "label": "Update sm: sm += headPrf",
+      "action": "ctx['sm'] += ctx['headPrf']",
+      "next": 8
+    },
+    {
+      "id": 8,
+      "type": "decision",
+      "label": "Is headCat in seenCats?",
+      "logic": "ctx['headCat'] in ctx['seenCats']",
+      "true_next": 10,
+      "false_next": 9
+    },
+    {
+      "id": 9,
+      "type": "process",
+      "label": "Add headCat to seenCats",
+      "action": "ctx['seenCats'][ctx['headCat']] = True",
+      "next": 11
+    },
+    {
+      "id": 10,
+      "type": "process",
+      "label": "Append headPrf to dups",
+      "action": "ctx['dups'].append(ctx['headPrf'])",
+      "next": 11
+    },
+    {
+      "id": 11,
+      "type": "process",
+      "label": "Continue to next item",
+      "action": "ctx['i'] += 1",
+      "next": 5
+    },
+    {
+      "id": 12,
+      "type": "process",
+      "label": "Calculate numCats: numCats = length of seenCats",
+      "action": "ctx['numCats'] = len(ctx['seenCats'])",
+      "next": 13
+    },
+    {
+      "id": 13,
+      "type": "process",
+      "label": "Calculate ans,sm: ans = sm + numCats * numCats",
+      "action": "ctx['ans'] = ctx['sm'] + ctx['numCats'] * ctx['numCats']",
+      "next": 14
+    },
+    {
+      "id": 14,
+      "type": "process",
+      "label": "Loop through remaining items",
+      "action": "ctx['i'] = ctx['k']",
+      "next": 15
+    },
+    {
+      "id": 15,
+      "type": "decision",
+      "label": "Is i < len(items)?",
+      "logic": "ctx['i'] < len(ctx['items'])",
+      "true_next": 16,
+      "false_next": 17
+    },
+    {
+      "id": 16,
+      "type": "process",
+      "label": "Extract tailPrf, tailCat from items[i]",
+      "action": "ctx['tailPrf'] = ctx['items'][ctx['i']][0]; ctx['tailCat'] = ctx['items'][ctx['i']][1]",
+      "next": 18
+    },
+    {
+      "id": 18,
+      "type": "decision",
+      "label": "Is dups empty or tailCat in seenCats?",
+      "logic": "(len(ctx['dups']) == 0) or (ctx['tailCat'] in ctx['seenCats'])",
+      "true_next": 19,
+      "false_next": 20
+    },
+    {
+      "id": 19,
+      "type": "process",
+      "label": "Update numCats: numCats += 1",
+      "action": "ctx['numCats'] += 1",
+      "next": 20
+    },
+    {
+      "id": 20,
+      "type": "process",
+      "label": "Calculate diff: diff = tailPrf - dups.pop() + 2 * numCats - 1",
+      "action": "ctx['diff'] = ctx['tailPrf'] - ctx['dups'].pop() + 2 * ctx['numCats'] - 1",
+      "next": 21
+    },
+    {
+      "id": 21,
+      "type": "process",
+      "label": "Update sm: sm += diff",
+      "action": "ctx['sm'] += ctx['diff']",
+      "next": 22
+    },
+    {
+      "id": 22,
+      "type": "decision",
+      "label": "Is diff > 0?",
+      "logic": "ctx['diff'] > 0",
+      "true_next": 23,
+      "false_next": 24
+    },
+    {
+      "id": 23,
+      "type": "process",
+      "label": "Update ans: ans = sm",
+      "action": "ctx['ans'] = ctx['sm']",
+      "next": 24
+    },
+    {
+      "id": 24,
+      "type": "process",
+      "label": "Add tailCat to seenCats",
+      "action": "ctx['seenCats'][ctx['tailCat']] = True",
+      "next": 15
+    },
+    {
+      "id": 17,
+      "type": "return",
+      "label": "Return ans",
+      "value": "ctx['ans']"
+    }
+  ],
+  "task_id": "weekly-contest-357-maximum-elegance-of-a-k-length-subsequence",
+  "dataset": "Algorithm",
+  "result": "failed: ",
+  "code": "class Solution:\n    def findMaximumElegance(self, items: List[List[int]], k: int) -> int:\n        sm = 0\n        seenCats = {}\n        dups = []\n        \n        # Sort items in descending order of profit\n        items.sort(key=lambda x: x[0], reverse=True)\n        \n        # Loop through first k items\n        i = 0\n        while i < k:\n            headPrf = items[i][0]\n            headCat = items[i][1]\n            \n            sm += headPrf\n            \n            if headCat in seenCats:\n                dups.append(headPrf)\n            else:\n                seenCats[headCat] = True\n            \n            i += 1\n        \n        numCats = len(seenCats)\n        ans = sm + numCats * numCats\n        \n        # Loop through remaining items\n        i = k\n        while i < len(items):\n            tailPrf = items[i][0]\n            tailCat = items[i][1]\n            \n            if len(dups) == 0 or tailCat in seenCats:\n                numCats += 1\n                diff = tailPrf - dups.pop() + 2 * numCats - 1\n                sm += diff\n                if diff > 0:\n                    ans = sm\n                seenCats[tailCat] = True\n            i += 1\n        \n        return ans",
+  "verification": {
+    "md_verdict": "ILR Error",
+    "actual_error_source": "ilr",
+    "ilr_verdict": "incorrect",
+    "code_vs_ilr": "deviates",
+    "md_correct": "yes",
+    "note": "ILR 第二段循环的交换条件写反（'dups 为空或类别已见' 才 numCats+=1，正确应为 dups 非空且类别未见），且该循环没有 i 递增（node24→15 重复处理同一元素，dups 弹空后 IndexError）；代码加了 i+=1 修复死循环，但原样保留反了的条件，导致从不执行正确的交换。",
+    "evidence": "忠实执行 ILR：[[3,2],[5,1],[10,1]],k=2 → IndexError: pop from empty list。生成代码同输入返回 16（期望 17），例 2 返回 15（期望 19），100 测试 0 过。"
+  }
+}

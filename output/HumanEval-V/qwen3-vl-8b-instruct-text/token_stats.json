@@ -1,0 +1,17 @@
+{
+    "total_tasks": 164,
+    "by_difficulty": {
+        "easy": {
+            "count": 0,
+            "avg_tokens": 0
+        },
+        "medium": {
+            "count": 0,
+            "avg_tokens": 0
+        },
+        "hard": {
+            "count": 0,
+            "avg_tokens": 0
+        }
+    }
+}

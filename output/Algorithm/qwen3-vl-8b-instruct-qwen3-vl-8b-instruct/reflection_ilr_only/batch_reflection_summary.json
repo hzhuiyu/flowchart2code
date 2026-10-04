@@ -1,0 +1,76 @@
+{
+  "total": 51,
+  "processed": 51,
+  "success": 15,
+  "failed": 36,
+  "success_rate": 29.411764705882355,
+  "iteration_stats": {
+    "1": {
+      "count": 51,
+      "avg_duration": 36.55081742417578,
+      "avg_total_tokens": 15610.666666666666,
+      "avg_prompt_tokens": 13389.43137254902,
+      "avg_completion_tokens": 2221.235294117647
+    },
+    "2": {
+      "count": 44,
+      "avg_duration": 37.982456575740464,
+      "avg_total_tokens": 15899.227272727272,
+      "avg_prompt_tokens": 13570.727272727272,
+      "avg_completion_tokens": 2328.5
+    },
+    "3": {
+      "count": 37,
+      "avg_duration": 40.68324428635675,
+      "avg_total_tokens": 15909.675675675675,
+      "avg_prompt_tokens": 13383.351351351352,
+      "avg_completion_tokens": 2526.324324324324
+    }
+  },
+  "avg_duration_by_iteration": {
+    "1": 36.55081742417578,
+    "2": 37.982456575740464,
+    "3": 40.68324428635675
+  },
+  "reflection_mode": "ilr_only",
+  "final_merge_eval": {
+    "samples_file": "output/Algorithm/qwen3-vl-8b-instruct-qwen3-vl-8b-instruct/samples.jsonl",
+    "reflection_dir": "output/Algorithm/qwen3-vl-8b-instruct-qwen3-vl-8b-instruct/reflection_ilr_only",
+    "output_file": "output/Algorithm/qwen3-vl-8b-instruct-qwen3-vl-8b-instruct/reflection_ilr_only/samples_reflection_merged.jsonl",
+    "merged_results_file": "output/Algorithm/qwen3-vl-8b-instruct-qwen3-vl-8b-instruct/reflection_ilr_only/samples_reflection_merged.jsonl_results.jsonl",
+    "results_txt": "output/Algorithm/qwen3-vl-8b-instruct-qwen3-vl-8b-instruct/reflection_ilr_only/results.txt",
+    "problem_file": "data/Algorithm/Algorithm.jsonl",
+    "merge_summary": {
+      "total_rows": 149,
+      "replaced_rows": 51,
+      "replaced_by_first_passed": 15,
+      "replaced_by_last_failed": 36,
+      "missing_generated_code": 0,
+      "selection_stats": {
+        "keep_original": 98,
+        "iter_3_failed": 36,
+        "first_passed": 15
+      }
+    },
+    "eval_result": {
+      "pass@1": 0.7583892617449665
+    },
+    "difficulty_summary": {
+      "Easy": {
+        "passed": 36.0,
+        "total": 45.0,
+        "rate": 0.8
+      },
+      "Medium": {
+        "passed": 59.0,
+        "total": 75.0,
+        "rate": 0.7866666666666666
+      },
+      "Hard": {
+        "passed": 18.0,
+        "total": 29.0,
+        "rate": 0.6206896551724138
+      }
+    }
+  }
+}

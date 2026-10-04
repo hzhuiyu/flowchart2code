@@ -1,0 +1,193 @@
+{
+  "task_id": "weekly-contest-352-continuous-subarrays",
+  "dataset": "Algorithm",
+  "difficulty": "Medium",
+  "title": "continuous-subarrays",
+  "result": "failed: ",
+  "ilr": "{\n  \"problem_id\": \"continuous_subarrays\",\n  \"nodes\": [\n    {\"id\": 1, \"type\": \"start\", \"label\": \"Start\", \"next\": 2},\n    {\"id\": 2, \"type\": \"process\", \"label\": \"Input: nums (List[int])\", \"action\": \"ctx['nums']=ctx['arg0']; ctx['nums'].append(-5); ctx['start']=0; ctx['count']=0\", \"next\": 3},\n    {\"id\": 3, \"type\": \"process\", \"label\": \"Initialize sl = SortedList([])\", \"action\": \"ctx['sl'] = []\", \"next\": 4},\n    {\"id\": 4, \"type\": \"process\", \"label\": \"Add nums[start] to sl\", \"action\": \"ctx['sl'].append(ctx['nums'][ctx['start']])\", \"next\": 5},\n    {\"id\": 5, \"type\": \"decision\", \"label\": \"for i from 1 to len(nums) - 1\", \"logic\": \"range(1, len(ctx['nums']))\", \"true_next\": 6, \"false_next\": 14},\n    {\"id\": 6, \"type\": \"process\", \"label\": \"Add nums[i] to sl\", \"action\": \"ctx['sl'].append(ctx['nums'][ctx['i']])\", \"next\": 7},\n    {\"id\": 7, \"type\": \"decision\", \"label\": \"Is abs(nums[i] - sl[0]) > 2 OR abs(nums[i] - sl[-1]) > 2?\", \"logic\": \"abs(ctx['nums'][ctx['i']] - ctx['sl'][0]) > 2 or abs(ctx['nums'][ctx['i']] - ctx['sl'][-1]) > 2\", \"true_next\": 8, \"false_next\": 15},\n    {\"id\": 8, \"type\": \"process\", \"label\": \"Calculate subArrays = len(sl) - 1\", \"action\": \"ctx['subArrays'] = len(ctx['sl']) - 1\", \"next\": 9},\n    {\"id\": 9, \"type\": \"process\", \"label\": \"Increment count by subArrays\", \"action\": \"ctx['count'] += ctx['subArrays']\", \"next\": 10},\n    {\"id\": 10, \"type\": \"process\", \"label\": \"Remove nums[start] from sl\", \"action\": \"ctx['sl'].remove(ctx['nums'][ctx['start']])\", \"next\": 11},\n    {\"id\": 11, \"type\": \"process\", \"label\": \"Increment start by 1\", \"action\": \"ctx['start'] += 1\", \"next\": 5},\n    {\"id\": 12, \"type\": \"process\", \"label\": \"Continue to next iteration\", \"action\": \"\", \"next\": 5},\n    {\"id\": 14, \"type\": \"end\", \"label\": \"Output: count (total number of continuous subarrays)\", \"output\": \"ctx['count']\"}\n  ]\n}",
+  "code": "from typing import List\n\nclass Solution:\n    def continuousSubarrays(self, nums: List[int]) -> int:\n        nums.append(-5)\n        start = 0\n        count = 0\n        sl = []\n        sl.append(nums[start])\n        \n        for i in range(1, len(nums)):\n            sl.append(nums[i])\n            while abs(nums[i] - sl[0]) > 2 or abs(nums[i] - sl[-1]) > 2:\n                subArrays = len(sl) - 1\n                count += subArrays\n                sl.remove(nums[start])\n                start += 1\n        \n        return count",
+  "prompt": "\"\"\"\nYou are given a 0-indexed integer array nums. A subarray of nums is called continuous if:\n\n * Let i, i + 1, ..., j be the indices in the subarray. Then, for each pair of indices i <= i1, i2 <= j, 0 <= |nums[i1] - nums[i2]| <= 2.\n\nReturn the total number of continuous subarrays.\n\nA subarray is a contiguous non-empty sequence of elements within an array.\n\nExample 1:\n\nInput: nums = [5,4,2,4]\nOutput: 8\nExplanation:\nContinuous subarray of size 1: [5], [4], [2], [4].\nContinuous subarray of size 2: [5,4], [4,2], [2,4].\nContinuous subarray of size 3: [4,2,4].\nThereare no subarrys of size 4.\nTotal continuous subarrays = 4 + 3 + 1 = 8.\nIt can be shown that there are no more continuous subarrays.\n\n\nExample 2:\n\nInput: nums = [1,2,3]\nOutput: 6\nExplanation:\nContinuous subarray of size 1: [1], [2], [3].\nContinuous subarray of size 2: [1,2], [2,3].\nContinuous subarray of size 3: [1,2,3].\nTotal continuous subarrays = 3 + 2 + 1 = 6.\n\n\nConstraints:\n\n * 1 <= nums.length <= 105\n * 1 <= nums[i] <= 109\n\"\"\"\nclass Solution:\n    def continuousSubarrays(self, nums: List[int]) -> int:\n        ",
+  "test": "\nmy_solution = Solution()\n\ntest_input = { \"nums\": [5,4,2,4] }\nassert my_solution.continuousSubarrays(**test_input) == 8\n\ntest_input = { \"nums\": [1,2,3] }\nassert my_solution.continuousSubarrays(**test_input) == 6\n\ntest_input = { \"nums\": [31,30,31,32] }\nassert my_solution.continuousSubarrays(**test_input) == 10\n\ntest_input = { \"nums\": [65,66,67,66,66,65,64,65,65,64] }\nassert my_solution.continuousSubarrays(**test_input) == 43\n\ntest_input = { \"nums\": [42,41,42,41,41,40,39,38] }\nassert my_solution.continuousSubarrays(**test_input) == 28\n\ntest_input = { \"nums\": [35,35,36,37,36,37,38,37,38] }\nassert my_solution.continuousSubarrays(**test_input) == 39\n\ntest_input = { \"nums\": [43,44,43,44] }\nassert my_solution.continuousSubarrays(**test_input) == 10\n\ntest_input = { \"nums\": [14,15,15,15,16,16,16,16,15,16] }\nassert my_solution.continuousSubarrays(**test_input) == 55\n\ntest_input = { \"nums\": [21] }\nassert my_solution.continuousSubarrays(**test_input) == 1\n\ntest_input = { \"nums\": [34,34,33,34,33,33,32,31,30,31] }\nassert my_solution.continuousSubarrays(**test_input) == 39\n\ntest_input = { \"nums\": [58,59,59,58,59] }\nassert my_solution.continuousSubarrays(**test_input) == 15\n\ntest_input = { \"nums\": [10,9,8,7,8,9,9] }\nassert my_solution.continuousSubarrays(**test_input) == 24\n\ntest_input = { \"nums\": [65,66,65,64,63,62,62] }\nassert my_solution.continuousSubarrays(**test_input) == 20\n\ntest_input = { \"nums\": [65,65,64,65,66,65] }\nassert my_solution.continuousSubarrays(**test_input) == 21\n\ntest_input = { \"nums\": [85,84,83,84,83,82] }\nassert my_solution.continuousSubarrays(**test_input) == 20\n\ntest_input = { \"nums\": [60,59,60] }\nassert my_solution.continuousSubarrays(**test_input) == 6\n\ntest_input = { \"nums\": [96,97,98] }\nassert my_solution.continuousSubarrays(**test_input) == 6\n\ntest_input = { \"nums\": [21,22,23,22,23] }\nassert my_solution.continuousSubarrays(**test_input) == 15\n\ntest_input = { \"nums\": [76,77,77,78,77,78,78] }\nassert my_solution.continuousSubarrays(**test_input) == 28\n\ntest_input = { \"nums\": [27,27,27,26,26,27,27,27,27] }\nassert my_solution.continuousSubarrays(**test_input) == 45\n\ntest_input = { \"nums\": [17] }\nassert my_solution.continuousSubarrays(**test_input) == 1\n\ntest_input = { \"nums\": [95] }\nassert my_solution.continuousSubarrays(**test_input) == 1\n\ntest_input = { \"nums\": [62] }\nassert my_solution.continuousSubarrays(**test_input) == 1\n\ntest_input = { \"nums\": [10,10,9,8,9,9,9,8,8] }\nassert my_solution.continuousSubarrays(**test_input) == 45\n\ntest_input = { \"nums\": [21,22,22,23,24,24,23,24,23,24] }\nassert my_solution.continuousSubarrays(**test_input) == 49\n\ntest_input = { \"nums\": [94,94,94,94,94,93,94] }\nassert my_solution.continuousSubarrays(**test_input) == 28\n\ntest_input = { \"nums\": [66,65,64,64,64,65,64,63] }\nassert my_solution.continuousSubarrays(**test_input) == 35\n\ntest_input = { \"nums\": [35,35,36,36,35] }\nassert my_solution.continuousSubarrays(**test_input) == 15\n\ntest_input = { \"nums\": [35,34,33,34,35,35,34,35,34] }\nassert my_solution.continuousSubarrays(**test_input) == 45\n\ntest_input = { \"nums\": [70,69,70,71,70,70,71,71] }\nassert my_solution.continuousSubarrays(**test_input) == 36\n\ntest_input = { \"nums\": [49,49,49,50,50,49,50,51,51] }\nassert my_solution.continuousSubarrays(**test_input) == 45\n\ntest_input = { \"nums\": [70,71,72,72,72] }\nassert my_solution.continuousSubarrays(**test_input) == 15\n\ntest_input = { \"nums\": [73,73,74,75,76,76,75,76] }\nassert my_solution.continuousSubarrays(**test_input) == 28\n\ntest_input = { \"nums\": [74,74,74,75,76,75,75,76,77,77] }\nassert my_solution.continuousSubarrays(**test_input) == 49\n\ntest_input = { \"nums\": [21,21,20,19,20,20,21,21] }\nassert my_solution.continuousSubarrays(**test_input) == 36\n\ntest_input = { \"nums\": [86,85] }\nassert my_solution.continuousSubarrays(**test_input) == 3\n\ntest_input = { \"nums\": [94,95,96,96,97,98,99,100,100] }\nassert my_solution.continuousSubarrays(**test_input) == 28\n\ntest_input = { \"nums\": [16,17,16] }\nassert my_solution.continuousSubarrays(**test_input) == 6\n\ntest_input = { \"nums\": [25,26,26,27,28,27,28,28,27,27] }\nassert my_solution.continuousSubarrays(**test_input) == 49\n\ntest_input = { \"nums\": [54] }\nassert my_solution.continuousSubarrays(**test_input) == 1\n\ntest_input = { \"nums\": [94,95,96,95,94,93,92,91] }\nassert my_solution.continuousSubarrays(**test_input) == 24\n\ntest_input = { \"nums\": [84,84,83] }\nassert my_solution.continuousSubarrays(**test_input) == 6\n\ntest_input = { \"nums\": [26,26] }\nassert my_solution.continuousSubarrays(**test_input) == 3\n\ntest_input = { \"nums\": [53,54,54,55] }\nassert my_solution.continuousSubarrays(**test_input) == 10\n\ntest_input = { \"nums\": [67,67,66,67,68,69,70,71,71] }\nassert my_solution.continuousSubarrays(**test_input) == 28\n\ntest_input = { \"nums\": [43,42,42,42,43] }\nassert my_solution.continuousSubarrays(**test_input) == 15\n\ntest_input = { \"nums\": [93,94,93] }\nassert my_solution.continuousSubarrays(**test_input) == 6\n\ntest_input = { \"nums\": [80,80] }\nassert my_solution.continuousSubarrays(**test_input) == 3\n\ntest_input = { \"nums\": [54,54,53,54,55,56,57,58,59] }\nassert my_solution.continuousSubarrays(**test_input) == 27\n\ntest_input = { \"nums\": [52,51,50,49,48,49,48,47,46] }\nassert my_solution.continuousSubarrays(**test_input) == 29\n\ntest_input = { \"nums\": [93,92,91,92,92,92,92] }\nassert my_solution.continuousSubarrays(**test_input) == 28\n\ntest_input = { \"nums\": [91,91,90,90,90,91,91,90] }\nassert my_solution.continuousSubarrays(**test_input) == 36\n\ntest_input = { \"nums\": [37,37,37,36] }\nassert my_solution.continuousSubarrays(**test_input) == 10\n\ntest_input = { \"nums\": [40,39,39,39,39,40,40,41,40,39] }\nassert my_solution.continuousSubarrays(**test_input) == 55\n\ntest_input = { \"nums\": [82,83,83,83,83,84] }\nassert my_solution.continuousSubarrays(**test_input) == 21\n\ntest_input = { \"nums\": [35,36,36,37,37,37,36,37,36] }\nassert my_solution.continuousSubarrays(**test_input) == 45\n\ntest_input = { \"nums\": [50,49,50,51,50] }\nassert my_solution.continuousSubarrays(**test_input) == 15\n\ntest_input = { \"nums\": [86,86,86,86,87] }\nassert my_solution.continuousSubarrays(**test_input) == 15\n\ntest_input = { \"nums\": [52] }\nassert my_solution.continuousSubarrays(**test_input) == 1\n\ntest_input = { \"nums\": [96,95,94,93] }\nassert my_solution.continuousSubarrays(**test_input) == 9\n\ntest_input = { \"nums\": [56,56,55,55,54,55,54,54,53,52] }\nassert my_solution.continuousSubarrays(**test_input) == 47\n\ntest_input = { \"nums\": [91] }\nassert my_solution.continuousSubarrays(**test_input) == 1\n\ntest_input = { \"nums\": [91,90,91,91] }\nassert my_solution.continuousSubarrays(**test_input) == 10\n\ntest_input = { \"nums\": [56,55,55,55] }\nassert my_solution.continuousSubarrays(**test_input) == 10\n\ntest_input = { \"nums\": [1,2,2,2,1,2,3,4,4,5] }\nassert my_solution.continuousSubarrays(**test_input) == 39\n\ntest_input = { \"nums\": [84,85,84,84,85,85,85] }\nassert my_solution.continuousSubarrays(**test_input) == 28\n\ntest_input = { \"nums\": [71,71,71,71] }\nassert my_solution.continuousSubarrays(**test_input) == 10\n\ntest_input = { \"nums\": [47,47,46] }\nassert my_solution.continuousSubarrays(**test_input) == 6\n\ntest_input = { \"nums\": [65] }\nassert my_solution.continuousSubarrays(**test_input) == 1\n\ntest_input = { \"nums\": [20,20,19,18] }\nassert my_solution.continuousSubarrays(**test_input) == 10\n\ntest_input = { \"nums\": [22,23,23,22,22,22,22] }\nassert my_solution.continuousSubarrays(**test_input) == 28\n\ntest_input = { \"nums\": [92,92] }\nassert my_solution.continuousSubarrays(**test_input) == 3\n\ntest_input = { \"nums\": [93,92,92,91,90,90,89,88] }\nassert my_solution.continuousSubarrays(**test_input) == 27\n\ntest_input = { \"nums\": [13,13,12,11] }\nassert my_solution.continuousSubarrays(**test_input) == 10\n\ntest_input = { \"nums\": [22,22,22,21,22,21] }\nassert my_solution.continuousSubarrays(**test_input) == 21\n\ntest_input = { \"nums\": [24,25,26,26,25,26,25,25,26] }\nassert my_solution.continuousSubarrays(**test_input) == 45\n\ntest_input = { \"nums\": [37,36] }\nassert my_solution.continuousSubarrays(**test_input) == 3\n\ntest_input = { \"nums\": [52,51] }\nassert my_solution.continuousSubarrays(**test_input) == 3\n\ntest_input = { \"nums\": [58] }\nassert my_solution.continuousSubarrays(**test_input) == 1\n\ntest_input = { \"nums\": [88,88,88,87,87,87,87,88,88] }\nassert my_solution.continuousSubarrays(**test_input) == 45\n\ntest_input = { \"nums\": [84,83,83,84,83,82,81] }\nassert my_solution.continuousSubarrays(**test_input) == 24\n\ntest_input = { \"nums\": [87,88,88,87,87,88,88,89] }\nassert my_solution.continuousSubarrays(**test_input) == 36\n\ntest_input = { \"nums\": [28,28,27] }\nassert my_solution.continuousSubarrays(**test_input) == 6\n\ntest_input = { \"nums\": [82,83,83,82] }\nassert my_solution.continuousSubarrays(**test_input) == 10\n\ntest_input = { \"nums\": [97,96,96,95,96,95] }\nassert my_solution.continuousSubarrays(**test_input) == 21\n\ntest_input = { \"nums\": [72,73,73,74,73,73] }\nassert my_solution.continuousSubarrays(**test_input) == 21\n\ntest_input = { \"nums\": [21,21,20] }\nassert my_solution.continuousSubarrays(**test_input) == 6\n\ntest_input = { \"nums\": [38,38] }\nassert my_solution.continuousSubarrays(**test_input) == 3\n\ntest_input = { \"nums\": [24,24,24,23,22,22,22,23] }\nassert my_solution.continuousSubarrays(**test_input) == 36\n\ntest_input = { \"nums\": [62,62] }\nassert my_solution.continuousSubarrays(**test_input) == 3\n\ntest_input = { \"nums\": [11,10,9,10,11] }\nassert my_solution.continuousSubarrays(**test_input) == 15\n\ntest_input = { \"nums\": [34,34,35,34,35,36,36] }\nassert my_solution.continuousSubarrays(**test_input) == 28\n\ntest_input = { \"nums\": [73,74,75,75] }\nassert my_solution.continuousSubarrays(**test_input) == 10\n\ntest_input = { \"nums\": [24,23,24,24] }\nassert my_solution.continuousSubarrays(**test_input) == 10\n\ntest_input = { \"nums\": [21,22,22,23,22,23,22,23,23,22] }\nassert my_solution.continuousSubarrays(**test_input) == 55\n\ntest_input = { \"nums\": [53,53,54,54,54] }\nassert my_solution.continuousSubarrays(**test_input) == 15\n\ntest_input = { \"nums\": [94,95,96,96,97,97,98,99] }\nassert my_solution.continuousSubarrays(**test_input) == 28\n\ntest_input = { \"nums\": [89,89,89,88,87,87] }\nassert my_solution.continuousSubarrays(**test_input) == 21\n\ntest_input = { \"nums\": [89,90] }\nassert my_solution.continuousSubarrays(**test_input) == 3\n\ntest_input = { \"nums\": [18,18] }\nassert my_solution.continuousSubarrays(**test_input) == 3",
+  "ocr_data": {
+    "nodes": [
+      {
+        "node_id": 1,
+        "shape_type": "rectangle",
+        "raw_text": "Start",
+        "position": "top"
+      },
+      {
+        "node_id": 2,
+        "shape_type": "rectangle",
+        "raw_text": "Input: nums (List[int])",
+        "position": "middle"
+      },
+      {
+        "node_id": 3,
+        "shape_type": "rectangle",
+        "raw_text": "Append -5 to nums",
+        "position": "middle"
+      },
+      {
+        "node_id": 4,
+        "shape_type": "rectangle",
+        "raw_text": "Initialize start = 0, count = 0",
+        "position": "middle"
+      },
+      {
+        "node_id": 5,
+        "shape_type": "rectangle",
+        "raw_text": "Initialize sl = SortedList([])",
+        "position": "middle"
+      },
+      {
+        "node_id": 6,
+        "shape_type": "rectangle",
+        "raw_text": "Add nums[start] to sl",
+        "position": "middle"
+      },
+      {
+        "node_id": 7,
+        "shape_type": "diamond",
+        "raw_text": "for i from 1 to len(nums) - 1",
+        "position": "middle"
+      },
+      {
+        "node_id": 8,
+        "shape_type": "rectangle",
+        "raw_text": "Add nums[i] to sl",
+        "position": "middle"
+      },
+      {
+        "node_id": 9,
+        "shape_type": "diamond",
+        "raw_text": "Is abs(nums[i] - sl[0]) > 2 OR abs(nums[i] - sl[-1]) > 2?",
+        "position": "middle"
+      },
+      {
+        "node_id": 10,
+        "shape_type": "rectangle",
+        "raw_text": "Calculate subArrays = len(sl) - 1",
+        "position": "middle"
+      },
+      {
+        "node_id": 11,
+        "shape_type": "rectangle",
+        "raw_text": "Increment count by subArrays",
+        "position": "middle"
+      },
+      {
+        "node_id": 12,
+        "shape_type": "rectangle",
+        "raw_text": "Remove nums[start] from sl",
+        "position": "middle"
+      },
+      {
+        "node_id": 13,
+        "shape_type": "rectangle",
+        "raw_text": "Increment start by 1",
+        "position": "middle"
+      },
+      {
+        "node_id": 14,
+        "shape_type": "rectangle",
+        "raw_text": "Output: count (total number of continuous subarrays)",
+        "position": "bottom"
+      },
+      {
+        "node_id": 15,
+        "shape_type": "rectangle",
+        "raw_text": "Continue to next iteration",
+        "position": "bottom"
+      }
+    ],
+    "edges": [
+      {
+        "from_node": 1,
+        "to_node": 2,
+        "label": ""
+      },
+      {
+        "from_node": 2,
+        "to_node": 3,
+        "label": ""
+      },
+      {
+        "from_node": 3,
+        "to_node": 4,
+        "label": ""
+      },
+      {
+        "from_node": 4,
+        "to_node": 5,
+        "label": ""
+      },
+      {
+        "from_node": 5,
+        "to_node": 6,
+        "label": ""
+      },
+      {
+        "from_node": 6,
+        "to_node": 7,
+        "label": ""
+      },
+      {
+        "from_node": 7,
+        "to_node": 8,
+        "label": "Yes"
+      },
+      {
+        "from_node": 7,
+        "to_node": 14,
+        "label": "No"
+      },
+      {
+        "from_node": 8,
+        "to_node": 9,
+        "label": ""
+      },
+      {
+        "from_node": 9,
+        "to_node": 10,
+        "label": "Yes"
+      },
+      {
+        "from_node": 9,
+        "to_node": 15,
+        "label": "No"
+      },
+      {
+        "from_node": 10,
+        "to_node": 11,
+        "label": ""
+      },
+      {
+        "from_node": 11,
+        "to_node": 12,
+        "label": ""
+      },
+      {
+        "from_node": 12,
+        "to_node": 13,
+        "label": ""
+      },
+      {
+        "from_node": 13,
+        "to_node": 7,
+        "label": ""
+      }
+    ],
+    "other_text": []
+  },
+  "analysis": {
+    "ilr_verdict": "incorrect",
+    "ilr_issues": "两点错误：(1) 节点3标签为'SortedList'但action写的是普通list ctx['sl']=[]，导致节点7用sl[0]/sl[-1]判断窗口最小/最大值失效（sl[0]只是最旧元素）；(2) 控制流残缺：收缩链节点11回跳到节点5(for头)而不是回到节点7重新判断窗口有效性，且节点7的false_next=15指向不存在的节点（'继续迭代'节点实际id为12）。忠实执行ILR在示例1上输出5而非8。",
+    "code_vs_ilr": "deviates",
+    "code_issues": "代码把ILR破损的单步收缩控制流改写成了正确的while循环（修复性偏离），但原样继承了ILR的sl为普通list的缺陷：abs(nums[i]-sl[0])判断的是nums[i]与窗口最旧元素而非最小值的差，窗口如[1,4,2]会被误判为有效，导致多计。",
+    "error_source": "ilr",
+    "ocr_contribution": "no",
+    "root_cause": "ILR阶段出错：未把SortedList翻译成可执行语义（用了普通list），且控制流本身残缺（无while重判、悬挂节点引用）；代码虽然把控制流修复成while循环，但继承了普通list判断min/max的致命缺陷，答案错误。",
+    "evidence": "生成代码在100个测试中错11个，如nums=[65,66,67,66,66,65,64,65,65,64]期望43实得55，nums=[94,95,96,95,94,93,92,91]期望24实得31；忠实执行ILR（含节点11回跳for头）在示例1 [5,4,2,4]上输出5而非8。OCR文本/边完整（含13->7回跳边），流程图算法本身即缺while重判，OCR非主因。"
+  }
+}

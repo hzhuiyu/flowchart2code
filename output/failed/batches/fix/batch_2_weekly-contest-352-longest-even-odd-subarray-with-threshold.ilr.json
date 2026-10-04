@@ -1,0 +1,15 @@
+{
+  "problem_id": "longestAlternatingSubarray",
+  "nodes": [
+    {"id": 1, "type": "start", "label": "Start", "next": 2},
+    {"id": 2, "type": "process", "label": "Input: nums, threshold; init i=0, ans=0", "action": "ctx['nums'] = ctx['arg0']; ctx['threshold'] = ctx['arg1']; ctx['n'] = len(ctx['nums']); ctx['i'] = 0; ctx['ans'] = 0", "next": 3},
+    {"id": 3, "type": "decision", "label": "i < n?", "logic": "ctx['i'] < ctx['n']", "true_next": 4, "false_next": 9},
+    {"id": 4, "type": "decision", "label": "nums[i] even and <= threshold?", "logic": "ctx['nums'][ctx['i']] % 2 == 0 and ctx['nums'][ctx['i']] <= ctx['threshold']", "true_next": 5, "false_next": 8},
+    {"id": 5, "type": "process", "label": "Extend window: j = i + 1", "action": "ctx['j'] = ctx['i'] + 1", "next": 6},
+    {"id": 6, "type": "decision", "label": "j < n and nums[j] <= threshold and parity alternates?", "logic": "ctx['j'] < ctx['n'] and ctx['nums'][ctx['j']] <= ctx['threshold'] and ctx['nums'][ctx['j']] % 2 != ctx['nums'][ctx['j'] - 1] % 2", "true_next": 7, "false_next": 11},
+    {"id": 7, "type": "process", "label": "j += 1", "action": "ctx['j'] += 1", "next": 6},
+    {"id": 8, "type": "process", "label": "Skip invalid start: i += 1", "action": "ctx['i'] += 1", "next": 3},
+    {"id": 11, "type": "process", "label": "ans = max(ans, j - i); i = j", "action": "ctx['ans'] = max(ctx['ans'], ctx['j'] - ctx['i']); ctx['i'] = ctx['j']", "next": 3},
+    {"id": 9, "type": "end", "label": "Return ans", "output": "ctx['ans']"}
+  ]
+}

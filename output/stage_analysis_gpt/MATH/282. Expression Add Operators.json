@@ -1,0 +1,365 @@
+{
+  "task_id": "282. Expression Add Operators",
+  "dataset": "MATH",
+  "difficulty": "hard",
+  "title": null,
+  "result": "failed: ",
+  "ilr": "{\n  \"problem_id\": \"insert_operators\",\n  \"functions\": [{\n    \"name\": \"dfs\",\n    \"parameters\": [\"index\", \"prev_operand\", \"current_operand\", \"value\", \"expression\"],\n    \"entry_node\": 1,\n    \"nodes\": [\n      {\"id\": 1, \"type\": \"start\", \"label\": \"Start\", \"next\": 2},\n      {\"id\": 2, \"type\": \"decision\", \"label\": \"index == n?\", \"logic\": \"ctx['index'] == ctx['n']\", \"true_next\": 3, \"false_next\": 4},\n      {\"id\": 3, \"type\": \"decision\", \"label\": \"value == target and current_operand == 0?\", \"logic\": \"ctx['value'] == ctx['target'] and ctx['current_operand'] == 0\", \"true_next\": 5, \"false_next\": 6},\n      {\"id\": 4, \"type\": \"process\", \"label\": \"Update current_operand = current_operand * 10 + int(num[index])\", \"action\": \"ctx['current_operand'] = ctx['current_operand'] * 10 + int(ctx['num'][ctx['index']])\", \"next\": 7},\n      {\"id\": 5, \"type\": \"process\", \"label\": \"Append \\\".join(expression) to results\", \"action\": \"ctx['results'].append(''.join(ctx['expression']))\", \"next\": 6},\n      {\"id\": 6, \"type\": \"return\", \"label\": \"Return\", \"value\": \"None\"},\n      {\"id\": 7, \"type\": \"process\", \"label\": \"Convert current_operand to string: str_op = str(current_operand)\", \"action\": \"ctx['str_op'] = str(ctx['current_operand'])\", \"next\": 8},\n      {\"id\": 8, \"type\": \"decision\", \"label\": \"current_operand > 0?\", \"logic\": \"ctx['current_operand'] > 0\", \"true_next\": 9, \"false_next\": 10},\n      {\"id\": 9, \"type\": \"call\", \"label\": \"Call dfs(index + 1, prev_operand, current_operand, value, expression)\", \"function_name\": \"dfs\", \"arguments\": [\"ctx['index'] + 1\", \"ctx['prev_operand']\", \"ctx['current_operand']\", \"ctx['value']\", \"ctx['expression']\"], \"return_var\": \"result\", \"next\": 10},\n      {\"id\": 10, \"type\": \"process\", \"label\": \"Check if expression is not empty\", \"action\": \"if ctx['expression']: pass\", \"next\": 11},\n      {\"id\": 11, \"type\": \"decision\", \"label\": \"expression is not empty?\", \"logic\": \"ctx['expression']\", \"true_next\": 12, \"false_next\": 15},\n      {\"id\": 12, \"type\": \"process\", \"label\": \"Append '+' to expression\", \"action\": \"ctx['expression'].append('+')\", \"next\": 13},\n      {\"id\": 13, \"type\": \"process\", \"label\": \"Append str_op to expression\", \"action\": \"ctx['expression'].append(ctx['str_op'])\", \"next\": 14},\n      {\"id\": 14, \"type\": \"call\", \"label\": \"Call dfs(index + 1, current_operand, 0, value + current_operand, expression)\", \"function_name\": \"dfs\", \"arguments\": [\"ctx['index'] + 1\", \"ctx['current_operand']\", \"0\", \"ctx['value'] + ctx['current_operand']\", \"ctx['expression']\"], \"return_var\": \"result\", \"next\": 15},\n      {\"id\": 15, \"type\": \"process\", \"label\": \"Pop last two elements from expression\", \"action\": \"ctx['expression'].pop(); ctx['expression'].pop()\", \"next\": 16},\n      {\"id\": 16, \"type\": \"process\", \"label\": \"Append '-' to expression\", \"action\": \"ctx['expression'].append('-')\", \"next\": 17},\n      {\"id\": 17, \"type\": \"process\", \"label\": \"Append str_op to expression\", \"action\": \"ctx['expression'].append(ctx['str_op'])\", \"next\": 18},\n      {\"id\": 18, \"type\": \"call\", \"label\": \"Call dfs(index + 1, -current_operand, 0, value - current_operand, expression)\", \"function_name\": \"dfs\", \"arguments\": [\"ctx['index'] + 1\", \"-ctx['current_operand']\", \"0\", \"ctx['value'] - ctx['current_operand']\", \"ctx['expression']\"], \"return_var\": \"result\", \"next\": 19},\n      {\"id\": 19, \"type\": \"process\", \"label\": \"Pop last two elements from expression\", \"action\": \"ctx['expression'].pop(); ctx['expression'].pop()\", \"next\": 20},\n      {\"id\": 20, \"type\": \"process\", \"label\": \"Append '*' to expression\", \"action\": \"ctx['expression'].append('*')\", \"next\": 21},\n      {\"id\": 21, \"type\": \"process\", \"label\": \"Append str_op to expression\", \"action\": \"ctx['expression'].append(ctx['str_op'])\", \"next\": 22},\n      {\"id\": 22, \"type\": \"call\", \"label\": \"Call dfs(index + 1, current_operand * prev_operand, 0, value - prev_operand + (current_operand * prev_operand), expression)\", \"function_name\": \"dfs\", \"arguments\": [\"ctx['index'] + 1\", \"ctx['current_operand'] * ctx['prev_operand']\", \"0\", \"ctx['value'] - ctx['prev_operand'] + (ctx['current_operand'] * ctx['prev_operand'])\", \"ctx['expression']\"], \"return_var\": \"result\", \"next\": 23},\n      {\"id\": 23, \"type\": \"process\", \"label\": \"Pop last two elements from expression\", \"action\": \"ctx['expression'].pop(); ctx['expression'].pop()\", \"next\": 24}\n    ]\n  }],\n  \"nodes\": [\n    {\"id\": 1, \"type\": \"start\", \"label\": \"Start\", \"next\": 2},\n    {\"id\": 2, \"type\": \"process\", \"label\": \"Input: num (string), target (integer)\", \"action\": \"ctx['num'] = ctx['arg0']; ctx['target'] = ctx['arg1']; ctx['n'] = len(ctx['num']); ctx['results'] = []\", \"next\": 3},\n    {\"id\": 3, \"type\": \"process\", \"label\": \"Call dfs(0, 0, 0, 0, [])\", \"action\": \"dfs(0, 0, 0, 0, [])\", \"next\": 4},\n    {\"id\": 4, \"type\": \"return\", \"label\": \"Return results\", \"value\": \"ctx['results']\"},\n    {\"id\": 5, \"type\": \"end\", \"label\": \"Output: results (list of strings)\", \"output\": \"ctx['results']\"}\n  ]\n}",
+  "code": "from typing import List\n\ndef addOperators(num: str, target: int) -> List[str]:\n    results = []\n    n = len(num)\n\n    def dfs(index: int, prev_operand: int, current_operand: int, value: int, expression: List[str]):\n        if index == n:\n            if value == target and current_operand == 0:\n                results.append(''.join(expression))\n            return\n        \n        current_operand = current_operand * 10 + int(num[index])\n        \n        # Call dfs for the next index without adding an operator\n        if current_operand > 0:  # To avoid leading zeroes\n            dfs(index + 1, prev_operand, current_operand, value, expression)\n        \n        # If expression is not empty, we can add operators\n        if expression:\n            # Addition\n            expression.append('+')\n            expression.append(str(current_operand))\n            dfs(index + 1, current_operand, 0, value + current_operand, expression)\n            expression.pop()\n            expression.pop()\n            \n            # Subtraction\n            expression.append('-')\n            expression.append(str(current_operand))\n            dfs(index + 1, -current_operand, 0, value - current_operand, expression)\n            expression.pop()\n            expression.pop()\n            \n            # Multiplication\n            expression.append('*')\n            expression.append(str(current_operand))\n            dfs(index + 1, current_operand * prev_operand, 0, value - prev_operand + (current_operand * prev_operand), expression)\n            expression.pop()\n            expression.pop()\n        else:\n            # If expression is empty, we can only call dfs without adding operators\n            dfs(index + 1, prev_operand, current_operand, value, expression)\n\n    dfs(0, 0, 0, 0, [])\n    return results",
+  "prompt": "Given a string num that contains only digits and an integer target, return all possibilities to insert the binary operators '+', '-', and/or '*' between the digits of num so that the resultant expression evaluates to the target value.\n\nNote that operands in the returned expressions should not contain leading zeros.\n\n\n\nExample 1:\n\nInput: num = \"123\", target = 6\nOutput: [\"1*2*3\",\"1+2+3\"]\nExplanation: Both \"1*2*3\" and \"1+2+3\" evaluate to 6.\nExample 2:\n\nInput: num = \"232\", target = 8\nOutput: [\"2*3+2\",\"2+3*2\"]\nExplanation: Both \"2*3+2\" and \"2+3*2\" evaluate to 8.\nExample 3:\n\nInput: num = \"3456237490\", target = 9191\nOutput: []\nExplanation: There are no expressions that can be created from \"3456237490\" to evaluate to 9191.\n\n\nConstraints:\n\n1 <= num.length <= 10\nnum consists of only digits.\n-231 <= target <= 231 - 1",
+  "test": "assert addOperators(\"123\", 6) == ['1+2+3', '1*2*3']  # multiple valid expressions\nassert addOperators(\"232\", 8) == ['2+3*2', '2*3+2']  # multiple valid expressions\nassert addOperators(\"3456237490\", 9191) == []  # no valid expressions\n\n# Boundary test cases\nassert addOperators(\"1\", 1) == [\"1\"]  # single digit, matches target\nassert addOperators(\"105\", 5) == ['10-5', '1*0+5']  # leading zero handling\nassert addOperators(\"00\", 0) == [\"0+0\", \"0-0\", \"0*0\"]  # multiple zeros\n\n# Large number test cases\nassert addOperators(\"123456789\", 45) == ['12+34-5-6-7+8+9', '12+3-45+6+78-9', '12+3*45-6-7-89', '12+3+4-56-7+89', '12+3-4*5+67-8-9', '12+3*4+5+6-7+8+9', '12-3-45-6+78+9', '12-3+4+56-7-8-9', '12-3+4*5+6-7+8+9', '12-3-4-56+7+89', '12-3-4+5*6-7+8+9', '12-3*4-5+67-8-9', '12-3*4*5+6+78+9', '12*3+4+5+6-7-8+9', '12*3+4+5-6+7+8-9', '12*3-4-56+78-9', '12*3-4-5-6+7+8+9', '12*3*4-5*6-78+9', '1+23-45+67+8-9', '1+23+4+5+6+7+8-9', '1+23+4-5-67+89', '1+23+4-5*6+7*8-9', '1+23-4-5+6+7+8+9', '1+23-4-5-6*7+8*9', '1+23-4*5+6*7+8-9', '1+23-4*5-6+7*8-9', '1+23*4-56+7-8+9', '1+23*4+5-6-7*8+9', '1+23*4-5-6*7+8-9', '1-23+45-67+89', '1-23+4-5+67-8+9', '1-23+4*5-6*7+89', '1-23-4+5+67+8-9', '1-23-4-5-6-7+89', '1-23*4+5+6*7+89', '1*23+4*5-6+7-8+9', '1*23-4-56-7+89', '1+2-34+5+6+7*8+9', '1+2-34+5+6-7+8*9', '1+2-34-5-6+78+9', '1+2*34-5*6+7+8-9', '1+2+3-45+67+8+9', '1+2+3*45-6-78-9', '1+2+3+4+5+6+7+8+9', '1+2+3+4+5-6*7+8*9', '1+2+3+4-5*6+7*8+9', '1+2+3+4-5*6-7+8*9', '1+2+3-4*5+6*7+8+9', '1+2+3-4*5-6+7*8+9', '1+2+3-4*5-6-7+8*9', '1+2+3*4+5+6*7-8-9', '1+2+3*4*5+6-7-8-9', '1+2-3+45+6-7-8+9', '1+2-3+45-6+7+8-9', '1+2-3-45-6+7+89', '1+2-3+4*5+6*7-8-9', '1+2-3-4-5*6+7+8*9', '1+2-3*4+5*6+7+8+9', '1+2-3*4-5+6*7+8+9', '1+2-3*4-5-6+7*8+9', '1+2-3*4-5-6-7+8*9', '1+2-3*4*5+6+7+89', '1+2*3+4*5-6+7+8+9', '1+2*3+4*5*6+7-89', '1+2*3-4-5-6*7+89', '1+2*3*4+5*6+7-8-9', '1+2*3*4-5+6*7-8-9', '1+2*3*4*5+6+7-89', '1-2-34+56+7+8+9', '1-2-34+5+6+78-9', '1-2-34-5+6+7+8*9', '1-2*34+5*6-7+89', '1-2+3+45+6-7+8-9', '1-2+3-45+6-7+89', '1-2+3+4-5*6+78-9', '1-2+3-4*5-6+78-9', '1-2+3*4*5-6-7+8-9', '1-2-3+45-6-7+8+9', '1-2-3+4-5+67-8-9', '1-2-3*4+5+6+7*8-9', '1-2-3*4-5-6+78-9', '1-2*3+45-67+8*9', '1-2*3+4+56+7-8-9', '1-2*3+4+5+6*7+8-9', '1-2*3+4+5-6+7*8-9', '1-2*3+4*5+6+7+8+9', '1-2*3+4*5-6*7+8*9', '1-2*3-4+5*6+7+8+9', '1-2*3-4-5+6*7+8+9', '1-2*3-4-5-6+7*8+9', '1-2*3-4-5-6-7+8*9', '1-2*3*4+5-6+78-9', '1-2*3*4-5-6+7+8*9', '1*2+34+56-7*8+9', '1*2+34-56+7*8+9', '1*2+34-56-7+8*9', '1*2+34+5-6-7+8+9', '1*2+34-5+6+7-8+9', '1*2-34+5*6+7*8-9', '1*2*34+56-7-8*9', '1*2*34-5+6-7-8-9', '1*2+3+45+67-8*9', '1*2+3-45+6+7+8*9', '1*2+3+4+5*6+7+8-9', '1*2+3+4-5+6*7+8-9', '1*2+3+4-5-6+7*8-9', '1*2+3*4-56+78+9', '1*2-3+4-5-6*7+89', '1*2-3-4+56-7-8+9', '1*2-3-4*5+67+8-9', '1*2-3*4+5+67-8-9', '1*2*3-45+67+8+9', '1*2*3+4+5+6+7+8+9', '1*2*3+4+5-6*7+8*9', '1*2*3+4-5*6+7*8+9', '1*2*3+4-5*6-7+8*9', '1*2*3-4*5+6*7+8+9', '1*2*3-4*5-6+7*8+9', '1*2*3-4*5-6-7+8*9', '1*2*3*4+5+6-7+8+9', '1*2*3*4*5-6-78+9']  # large number with multiple valid expressions\nassert addOperators(\"123456789\", 100) == ['123+45-67+8-9', '123-45-67+89', '123+4-5+67-89', '123+4*5-6*7+8-9', '123-4-5-6-7+8-9', '12+34+5*6+7+8+9', '12+34-5+6*7+8+9', '12+34-5-6+7*8+9', '12+34-5-6-7+8*9', '12+3*45+6*7-89', '12+3+4+5-6-7+89', '12+3-4+5+67+8+9', '12+3*4+5+6+7*8+9', '12+3*4+5+6-7+8*9', '12+3*4-5-6+78+9', '12-3+4*5+6+7*8+9', '12-3+4*5+6-7+8*9', '12-3-4+5-6+7+89', '12-3-4+5*6+7*8+9', '12-3-4+5*6-7+8*9', '12*3-4+5-6+78-9', '12*3-4-5-6+7+8*9', '12*3-4*5+67+8+9', '1+234-56-7-8*9', '1*234+5-67-8*9', '1+23-4+56+7+8+9', '1+23-4+5+6+78-9', '1+23-4-5+6+7+8*9', '1+23*4+5-6+7-8+9', '1+23*4-5+6+7+8-9', '1-23+4*5+6+7+89', '1-23-4+5*6+7+89', '1-23-4-5+6*7+89', '1*23+4+5+67-8+9', '1*23-4+5-6-7+89', '1+2+34-5+67-8+9', '1+2+34*5+6-7-8*9', '1+2*34-56+78+9', '1+2+3-45+67+8*9', '1+2+3+4+5+6+7+8*9', '1+2+3-4+5+6+78+9', '1+2+3-4*5+6*7+8*9', '1+2+3*4-5-6+7+89', '1+2-3*4+5*6+7+8*9', '1+2-3*4-5+6*7+8*9', '1+2*3+4+5+67+8+9', '1+2*3+4*5-6+7+8*9', '1+2*3-4-5+6+7+89', '1-2-34+56+7+8*9', '1-2+3+45+6+7*8-9', '1-2+3*4+5+67+8+9', '1-2+3*4*5+6*7+8-9', '1-2+3*4*5-6+7*8-9', '1-2-3+45+6*7+8+9', '1-2-3+45-6+7*8+9', '1-2-3+45-6-7+8*9', '1-2-3+4*5+67+8+9', '1-2*3+4*5+6+7+8*9', '1-2*3-4+5*6+7+8*9', '1-2*3-4-5+6*7+8*9', '1*2+34+56+7-8+9', '1*2+34+5+6*7+8+9', '1*2+34+5-6+7*8+9', '1*2+34+5-6-7+8*9', '1*2*34+56-7-8-9', '1*2+3+45+67-8-9', '1*2+3+4*5+6+78-9', '1*2+3-4+5*6+78-9', '1*2+3*4+5-6+78+9', '1*2-3+4-5+6+7+89', '1*2-3+4*5-6+78+9', '1*2*3-45+67+8*9', '1*2*3+4+5+6+7+8*9', '1*2*3-4+5+6+78+9', '1*2*3-4*5+6*7+8*9', '1*2*3*4+5+6+7*8+9', '1*2*3*4+5+6-7+8*9', '1*2*3*4-5-6+78+9']  # large number with multiple valid expressions\n",
+  "ocr_data": {
+    "nodes": [
+      {
+        "node_id": 1,
+        "shape_type": "oval",
+        "raw_text": "Start",
+        "position": "top"
+      },
+      {
+        "node_id": 2,
+        "shape_type": "parallelogram",
+        "raw_text": "Input: num (string), target (integer)",
+        "position": "middle"
+      },
+      {
+        "node_id": 3,
+        "shape_type": "rectangle",
+        "raw_text": "Initialize n = len(num), results = []",
+        "position": "middle"
+      },
+      {
+        "node_id": 4,
+        "shape_type": "rectangle",
+        "raw_text": "Call dfs(0, 0, 0, 0, [])",
+        "position": "middle"
+      },
+      {
+        "node_id": 5,
+        "shape_type": "rectangle",
+        "raw_text": "Return results",
+        "position": "middle"
+      },
+      {
+        "node_id": 6,
+        "shape_type": "parallelogram",
+        "raw_text": "Output: results (list of strings)",
+        "position": "bottom"
+      },
+      {
+        "node_id": 7,
+        "shape_type": "diamond",
+        "raw_text": "index == n?",
+        "position": "top"
+      },
+      {
+        "node_id": 8,
+        "shape_type": "diamond",
+        "raw_text": "value == target and current_operand == 0?",
+        "position": "middle"
+      },
+      {
+        "node_id": 9,
+        "shape_type": "rectangle",
+        "raw_text": "Append \".join(expression) to results",
+        "position": "middle"
+      },
+      {
+        "node_id": 10,
+        "shape_type": "rectangle",
+        "raw_text": "Return",
+        "position": "bottom"
+      },
+      {
+        "node_id": 11,
+        "shape_type": "rectangle",
+        "raw_text": "Update current_operand = current_operand * 10 + int(num[index])",
+        "position": "middle"
+      },
+      {
+        "node_id": 12,
+        "shape_type": "rectangle",
+        "raw_text": "Convert current_operand to string: str_op = str(current_operand)",
+        "position": "middle"
+      },
+      {
+        "node_id": 13,
+        "shape_type": "diamond",
+        "raw_text": "current_operand > 0?",
+        "position": "middle"
+      },
+      {
+        "node_id": 14,
+        "shape_type": "rectangle",
+        "raw_text": "Call dfs(index + 1, prev_operand, current_operand, value, expression)",
+        "position": "middle"
+      },
+      {
+        "node_id": 15,
+        "shape_type": "rectangle",
+        "raw_text": "Check if expression is not empty",
+        "position": "middle"
+      },
+      {
+        "node_id": 16,
+        "shape_type": "diamond",
+        "raw_text": "expression is not empty?",
+        "position": "middle"
+      },
+      {
+        "node_id": 17,
+        "shape_type": "rectangle",
+        "raw_text": "Append '+' to expression",
+        "position": "middle"
+      },
+      {
+        "node_id": 18,
+        "shape_type": "rectangle",
+        "raw_text": "Append str_op to expression",
+        "position": "middle"
+      },
+      {
+        "node_id": 19,
+        "shape_type": "rectangle",
+        "raw_text": "Call dfs(index + 1, current_operand, 0, value + current_operand, expression)",
+        "position": "middle"
+      },
+      {
+        "node_id": 20,
+        "shape_type": "rectangle",
+        "raw_text": "Pop last two elements from expression",
+        "position": "middle"
+      },
+      {
+        "node_id": 21,
+        "shape_type": "rectangle",
+        "raw_text": "Append '-' to expression",
+        "position": "middle"
+      },
+      {
+        "node_id": 22,
+        "shape_type": "rectangle",
+        "raw_text": "Append str_op to expression",
+        "position": "middle"
+      },
+      {
+        "node_id": 23,
+        "shape_type": "rectangle",
+        "raw_text": "Call dfs(index + 1, -current_operand, 0, value - current_operand, expression)",
+        "position": "middle"
+      },
+      {
+        "node_id": 24,
+        "shape_type": "rectangle",
+        "raw_text": "Pop last two elements from expression",
+        "position": "middle"
+      },
+      {
+        "node_id": 25,
+        "shape_type": "rectangle",
+        "raw_text": "Append '*' to expression",
+        "position": "middle"
+      },
+      {
+        "node_id": 26,
+        "shape_type": "rectangle",
+        "raw_text": "Append str_op to expression",
+        "position": "middle"
+      },
+      {
+        "node_id": 27,
+        "shape_type": "rectangle",
+        "raw_text": "Call dfs(index + 1, current_operand * prev_operand, 0, value - prev_operand + (current_operand * prev_operand), expression)",
+        "position": "middle"
+      },
+      {
+        "node_id": 28,
+        "shape_type": "rectangle",
+        "raw_text": "Pop last two elements from expression",
+        "position": "bottom"
+      },
+      {
+        "node_id": 29,
+        "shape_type": "rectangle",
+        "raw_text": "Append str_op to expression",
+        "position": "middle"
+      },
+      {
+        "node_id": 30,
+        "shape_type": "rectangle",
+        "raw_text": "Call dfs(index + 1, prev_operand, current_operand, value, expression)",
+        "position": "middle"
+      }
+    ],
+    "edges": [
+      {
+        "from_node": 1,
+        "to_node": 2,
+        "label": ""
+      },
+      {
+        "from_node": 2,
+        "to_node": 3,
+        "label": ""
+      },
+      {
+        "from_node": 3,
+        "to_node": 4,
+        "label": ""
+      },
+      {
+        "from_node": 4,
+        "to_node": 5,
+        "label": ""
+      },
+      {
+        "from_node": 5,
+        "to_node": 6,
+        "label": ""
+      },
+      {
+        "from_node": 7,
+        "to_node": 8,
+        "label": "Yes"
+      },
+      {
+        "from_node": 7,
+        "to_node": 11,
+        "label": "No"
+      },
+      {
+        "from_node": 8,
+        "to_node": 9,
+        "label": "Yes"
+      },
+      {
+        "from_node": 8,
+        "to_node": 10,
+        "label": "No"
+      },
+      {
+        "from_node": 9,
+        "to_node": 10,
+        "label": ""
+      },
+      {
+        "from_node": 11,
+        "to_node": 12,
+        "label": ""
+      },
+      {
+        "from_node": 12,
+        "to_node": 13,
+        "label": ""
+      },
+      {
+        "from_node": 13,
+        "to_node": 14,
+        "label": "Yes"
+      },
+      {
+        "from_node": 13,
+        "to_node": 15,
+        "label": "No"
+      },
+      {
+        "from_node": 14,
+        "to_node": 15,
+        "label": ""
+      },
+      {
+        "from_node": 15,
+        "to_node": 16,
+        "label": ""
+      },
+      {
+        "from_node": 16,
+        "to_node": 17,
+        "label": "Yes"
+      },
+      {
+        "from_node": 16,
+        "to_node": 29,
+        "label": "No"
+      },
+      {
+        "from_node": 17,
+        "to_node": 18,
+        "label": ""
+      },
+      {
+        "from_node": 18,
+        "to_node": 19,
+        "label": ""
+      },
+      {
+        "from_node": 19,
+        "to_node": 20,
+        "label": ""
+      },
+      {
+        "from_node": 20,
+        "to_node": 21,
+        "label": ""
+      },
+      {
+        "from_node": 21,
+        "to_node": 22,
+        "label": ""
+      },
+      {
+        "from_node": 22,
+        "to_node": 23,
+        "label": ""
+      },
+      {
+        "from_node": 23,
+        "to_node": 24,
+        "label": ""
+      },
+      {
+        "from_node": 24,
+        "to_node": 25,
+        "label": ""
+      },
+      {
+        "from_node": 25,
+        "to_node": 26,
+        "label": ""
+      },
+      {
+        "from_node": 26,
+        "to_node": 27,
+        "label": ""
+      },
+      {
+        "from_node": 27,
+        "to_node": 28,
+        "label": ""
+      },
+      {
+        "from_node": 29,
+        "to_node": 30,
+        "label": ""
+      },
+      {
+        "from_node": 30,
+        "to_node": 15,
+        "label": ""
+      }
+    ],
+    "other_text": [
+      "DFS Function"
+    ]
+  },
+  "analysis": {
+    "ilr_verdict": "incorrect",
+    "ilr_issues": "节点11'expression非空?'为假（表达式为空）时被接到节点15'pop两次'上，对空列表pop直接IndexError；OCR流程图中节点29/30（空表达式时Append str_op并递归dfs）被整体丢弃，导致expression永远无法被写入，任何输入都产生不了表达式。",
+    "code_vs_ilr": "deviates",
+    "code_issues": "代码把ILR中'空表达式→pop两次'的路径改写成一次多余的dfs(index+1,prev_operand,current_operand,value,expression)重复调用（与前面current_operand>0分支完全相同），且全程没有任何向expression写入首个操作数的语句，if expression分支永远为假，函数恒返回[]。",
+    "error_source": "both",
+    "ocr_contribution": "no",
+    "root_cause": "OCR所见的流程图本身'expression为空'分支的种子逻辑就有缺陷（节点16-No→29 Append str_op→30 dfs前后value不变→30→15→16回环，数字被重复使用），ILR又错接false分支并丢弃节点29/30；生成代码未按ILR实现而是自行发明重复调用，expression恒为空。",
+    "evidence": "对\"123\",target=6：忠实执行ILR在第一次回溯处对空列表执行pop()抛IndexError: pop from empty list（实测复现）；生成代码实际运行返回[]，期望['1+2+3','1*2*3']。"
+  }
+}

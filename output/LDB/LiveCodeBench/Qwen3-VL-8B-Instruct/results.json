@@ -1,0 +1,1960 @@
+{
+  "pass@1": 0.35135135135135137,
+  "passed": 52,
+  "total": 148,
+  "results": [
+    {
+      "task_id": "v1_2757",
+      "passed": true,
+      "test_results": [
+        true,
+        true
+      ],
+      "metadata": {
+        "execution time": 0.024243831634521484
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v1_2784",
+      "passed": true,
+      "test_results": [
+        true,
+        true
+      ],
+      "metadata": {
+        "execution time": 0.01577138900756836
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v1_2808",
+      "passed": false,
+      "test_results": [
+        false
+      ],
+      "metadata": {
+        "output": "18",
+        "inputs": "[[1, 2, 3, 2], [1, 2, 3, 2]]",
+        "expected": "3",
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v1_2827",
+      "passed": true,
+      "test_results": [
+        true,
+        true,
+        true
+      ],
+      "metadata": {
+        "execution time": 0.02022576332092285
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v1_2839",
+      "passed": false,
+      "test_results": [
+        false
+      ],
+      "metadata": {
+        "output": "[3, 6, 0]",
+        "inputs": "[[1, 2, 3, 4], [2, 4, 5, 9], [[1, 3], [2, 5], [4, 1]]]",
+        "expected": "[6, 10, 7]",
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v1_2849",
+      "passed": true,
+      "test_results": [
+        true,
+        true
+      ],
+      "metadata": {
+        "execution time": 0.014723539352416992
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v1_2879",
+      "passed": false,
+      "test_results": [
+        -4
+      ],
+      "metadata": {
+        "error_code": -4,
+        "error_message": "Error during testing: unterminated string literal (detected at line 55) (<string>, line 55)"
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v1_2884",
+      "passed": true,
+      "test_results": [
+        true,
+        true
+      ],
+      "metadata": {
+        "execution time": 0.013390541076660156
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v1_2921",
+      "passed": true,
+      "test_results": [
+        true,
+        true
+      ],
+      "metadata": {
+        "execution time": 0.012342214584350586
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v1_2952",
+      "passed": false,
+      "test_results": [
+        false
+      ],
+      "metadata": {
+        "output": "4",
+        "inputs": "[[1, 2, 3], [1, 2, 3], 4]",
+        "expected": "3",
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v1_3017",
+      "passed": true,
+      "test_results": [
+        true,
+        true,
+        true
+      ],
+      "metadata": {
+        "execution time": 0.017775774002075195
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v1_3024",
+      "passed": false,
+      "test_results": [
+        true,
+        false
+      ],
+      "metadata": {
+        "output": "1",
+        "inputs": "['ababab', 'ababab', 1]",
+        "expected": "2",
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v1_3025",
+      "passed": true,
+      "test_results": [
+        true,
+        true,
+        true
+      ],
+      "metadata": {
+        "execution time": 0.02129840850830078
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v1_3032",
+      "passed": true,
+      "test_results": [
+        true,
+        true
+      ],
+      "metadata": {
+        "execution time": 0.012382030487060547
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v1_3091",
+      "passed": true,
+      "test_results": [
+        true,
+        true,
+        true
+      ],
+      "metadata": {
+        "execution time": 0.02017498016357422
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v1_3153",
+      "passed": false,
+      "test_results": [
+        -4
+      ],
+      "metadata": {
+        "error_code": -4,
+        "error_message": "Error during testing: "
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v1_3184",
+      "passed": true,
+      "test_results": [
+        true,
+        true,
+        true
+      ],
+      "metadata": {
+        "execution time": 0.017419099807739258
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v1_3196",
+      "passed": false,
+      "test_results": [
+        false
+      ],
+      "metadata": {
+        "output": "2",
+        "inputs": "[[1, 2, 4, 6], 3]",
+        "expected": "3",
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v1_3203",
+      "passed": false,
+      "test_results": [
+        false
+      ],
+      "metadata": {
+        "output": "[True, False]",
+        "inputs": "['abcabc', [[1, 1, 3, 5], [0, 2, 5, 5]]]",
+        "expected": "[True, True]",
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v1_3211",
+      "passed": false,
+      "test_results": [
+        false
+      ],
+      "metadata": {
+        "output": "0",
+        "inputs": "[[5, 2, 2]]",
+        "expected": "1",
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v1_3212",
+      "passed": false,
+      "test_results": [
+        -4
+      ],
+      "metadata": {
+        "error_code": -4,
+        "error_message": "Error during testing: unterminated string literal (detected at line 55) (<string>, line 55)"
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v1_3223",
+      "passed": true,
+      "test_results": [
+        true,
+        true
+      ],
+      "metadata": {
+        "execution time": 0.011829137802124023
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v1_3224",
+      "passed": false,
+      "test_results": [
+        -4
+      ],
+      "metadata": {
+        "error_code": -4,
+        "error_message": "Error during testing: unterminated string literal (detected at line 59) (<string>, line 59)"
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v1_3233",
+      "passed": false,
+      "test_results": [
+        false
+      ],
+      "metadata": {
+        "output": "None",
+        "inputs": "['accca', 2]",
+        "expected": "3",
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v1_3243",
+      "passed": false,
+      "test_results": [
+        -4
+      ],
+      "metadata": {
+        "error_code": -4,
+        "error_message": "Error during testing: name 'Solution' is not defined"
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v1_3298",
+      "passed": false,
+      "test_results": [
+        false
+      ],
+      "metadata": {
+        "output": "4",
+        "inputs": "[[2, 1, 5, 1, 1]]",
+        "expected": "3",
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v1_abc301_f",
+      "passed": false,
+      "test_results": [
+        -4
+      ],
+      "metadata": {
+        "error_code": -4,
+        "error_message": "Error during testing: invalid character '÷' (U+00F7) (<string>, line 60)"
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v1_abc307_e",
+      "passed": true,
+      "test_results": [
+        true,
+        true,
+        true
+      ],
+      "metadata": {
+        "execution time": 0.01853775978088379
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v1_abc308_e",
+      "passed": true,
+      "test_results": [
+        true,
+        true,
+        true
+      ],
+      "metadata": {
+        "execution time": 0.017461776733398438
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v1_abc308_f",
+      "passed": false,
+      "test_results": [
+        -4
+      ],
+      "metadata": {
+        "error_code": -4,
+        "error_message": "Error during testing: "
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v1_abc310_e",
+      "passed": false,
+      "test_results": [
+        -4
+      ],
+      "metadata": {
+        "error_code": -4,
+        "error_message": "Error during testing: invalid character '—' (U+2014) (<string>, line 53)"
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v1_abc310_f",
+      "passed": false,
+      "test_results": [
+        false
+      ],
+      "metadata": {
+        "output": "13",
+        "inputs": "[4, [1, 7, 2, 9]]",
+        "expected": "942786334",
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v1_abc318_e",
+      "passed": true,
+      "test_results": [
+        true,
+        true,
+        true
+      ],
+      "metadata": {
+        "execution time": 0.019735336303710938
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v1_abc323_e",
+      "passed": false,
+      "test_results": [
+        -4
+      ],
+      "metadata": {
+        "error_code": -4,
+        "error_message": "Error during testing: invalid decimal literal (<string>, line 59)"
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v1_abc324_d",
+      "passed": false,
+      "test_results": [
+        -4
+      ],
+      "metadata": {
+        "error": "TypeError(\"'int' object is not iterable\")",
+        "error_code": -4,
+        "error_message": "Runtime Error",
+        "inputs": "[4, 4320]",
+        "expected": "2"
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v1_abc325_f",
+      "passed": false,
+      "test_results": [
+        false
+      ],
+      "metadata": {
+        "output": "32",
+        "inputs": "[3, [3, 5, 10], [4, 3, 3], [0, 0, 0]]",
+        "expected": "17",
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v1_abc327_e",
+      "passed": false,
+      "test_results": [
+        false
+      ],
+      "metadata": {
+        "output": "1673.320053068151",
+        "inputs": "[3, [1000, 600, 1200]]",
+        "expected": "256.73502047087993",
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v1_abc328_d",
+      "passed": true,
+      "test_results": [
+        true,
+        true,
+        true
+      ],
+      "metadata": {
+        "execution time": 0.01931619644165039
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v1_abc329_e",
+      "passed": false,
+      "test_results": [
+        -4
+      ],
+      "metadata": {
+        "error_code": -4,
+        "error_message": "Error during testing: name 'solve' is not defined"
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v1_abc340_e",
+      "passed": false,
+      "test_results": [
+        -4
+      ],
+      "metadata": {
+        "error_code": -4,
+        "error_message": "Error during testing: name 'solve' is not defined"
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v1_abc343_e",
+      "passed": true,
+      "test_results": [
+        true,
+        true
+      ],
+      "metadata": {
+        "execution time": 0.011716127395629883
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v2_3313",
+      "passed": true,
+      "test_results": [
+        true,
+        true,
+        true
+      ],
+      "metadata": {
+        "execution time": 0.0202789306640625
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v2_3316",
+      "passed": true,
+      "test_results": [
+        true,
+        true,
+        true
+      ],
+      "metadata": {
+        "execution time": 0.015792369842529297
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v2_3327",
+      "passed": false,
+      "test_results": [
+        false
+      ],
+      "metadata": {
+        "output": "5",
+        "inputs": "[[0, 0, 0, 0, 0, 1, 1, 1, 1, 1], 3, 1]",
+        "expected": "3",
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v2_3344",
+      "passed": true,
+      "test_results": [
+        true,
+        true
+      ],
+      "metadata": {
+        "execution time": 0.014837503433227539
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v2_3345",
+      "passed": false,
+      "test_results": [
+        -4
+      ],
+      "metadata": {
+        "error_code": -4,
+        "error_message": "Error during testing: name 'Solution' is not defined"
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v2_3362",
+      "passed": false,
+      "test_results": [
+        -4
+      ],
+      "metadata": {
+        "error_code": -4,
+        "error_message": "Error during testing: unterminated string literal (detected at line 51) (<string>, line 51)"
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v2_3364",
+      "passed": true,
+      "test_results": [
+        true,
+        true,
+        true
+      ],
+      "metadata": {
+        "execution time": 0.018353700637817383
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v2_3375",
+      "passed": true,
+      "test_results": [
+        true,
+        true
+      ],
+      "metadata": {
+        "execution time": 0.01477360725402832
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v2_3376",
+      "passed": true,
+      "test_results": [
+        true,
+        true
+      ],
+      "metadata": {
+        "execution time": 0.013856649398803711
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v2_3382",
+      "passed": false,
+      "test_results": [
+        -4
+      ],
+      "metadata": {
+        "error_code": -4,
+        "error_message": "Error during testing: unterminated string literal (detected at line 55) (<string>, line 55)"
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v2_3402",
+      "passed": false,
+      "test_results": [
+        false
+      ],
+      "metadata": {
+        "output": "-1",
+        "inputs": "[[4, 1], 5, 2]",
+        "expected": "15",
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v2_3411",
+      "passed": true,
+      "test_results": [
+        true,
+        true
+      ],
+      "metadata": {
+        "execution time": 0.013905525207519531
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v2_3414",
+      "passed": true,
+      "test_results": [
+        true,
+        true
+      ],
+      "metadata": {
+        "execution time": 0.01380300521850586
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v2_3423",
+      "passed": true,
+      "test_results": [
+        true,
+        true
+      ],
+      "metadata": {
+        "execution time": 0.017754793167114258
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v2_abc347_e",
+      "passed": true,
+      "test_results": [
+        true,
+        true
+      ],
+      "metadata": {
+        "execution time": 0.015329122543334961
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v2_abc349_e",
+      "passed": false,
+      "test_results": [
+        false
+      ],
+      "metadata": {
+        "output": "Draw",
+        "inputs": "[[0, 0, 0], [0, 1, 0], [0, 0, 0]]",
+        "expected": "Takahashi",
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v2_abc350_e",
+      "passed": false,
+      "test_results": [
+        -4
+      ],
+      "metadata": {
+        "error_code": -4,
+        "error_message": "Error during testing: unterminated string literal (detected at line 56) (<string>, line 56)"
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v2_abc351_d",
+      "passed": false,
+      "test_results": [
+        -4
+      ],
+      "metadata": {
+        "error_code": -4,
+        "error_message": "Error during testing: "
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v2_abc351_f",
+      "passed": true,
+      "test_results": [
+        true,
+        true
+      ],
+      "metadata": {
+        "execution time": 0.013352394104003906
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v2_abc352_d",
+      "passed": true,
+      "test_results": [
+        true,
+        true,
+        true
+      ],
+      "metadata": {
+        "execution time": 0.01929306983947754
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v2_abc354_d",
+      "passed": false,
+      "test_results": [
+        false
+      ],
+      "metadata": {
+        "output": "18",
+        "inputs": "[[0, 0, 3, 3]]",
+        "expected": "10",
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v2_abc355_e",
+      "passed": false,
+      "test_results": [
+        -4
+      ],
+      "metadata": {
+        "error_code": -4,
+        "error_message": "Error during testing: "
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v3_3436",
+      "passed": true,
+      "test_results": [
+        true,
+        true,
+        true
+      ],
+      "metadata": {
+        "execution time": 0.020270109176635742
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v3_3438",
+      "passed": true,
+      "test_results": [
+        true,
+        true
+      ],
+      "metadata": {
+        "execution time": 0.011842489242553711
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v3_3439",
+      "passed": false,
+      "test_results": [
+        false
+      ],
+      "metadata": {
+        "output": "2",
+        "inputs": "[[[0, 1], [0, 2], [0, 3]], [[0, 1]]]",
+        "expected": "3",
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v3_3454",
+      "passed": false,
+      "test_results": [
+        -4
+      ],
+      "metadata": {
+        "error_code": -4,
+        "error_message": "Error during testing: "
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v3_3460",
+      "passed": false,
+      "test_results": [
+        false
+      ],
+      "metadata": {
+        "output": "None",
+        "inputs": "[3, [[2, 2], [0, 0]]]",
+        "expected": "2",
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v3_3466",
+      "passed": true,
+      "test_results": [
+        true,
+        true,
+        true
+      ],
+      "metadata": {
+        "execution time": 0.01928877830505371
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v3_3478",
+      "passed": false,
+      "test_results": [
+        false
+      ],
+      "metadata": {
+        "output": "None",
+        "inputs": "[3, 4, [[2, 1, 1]]]",
+        "expected": "True",
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v3_3482",
+      "passed": true,
+      "test_results": [
+        true,
+        true
+      ],
+      "metadata": {
+        "execution time": 0.014385461807250977
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v3_3532",
+      "passed": false,
+      "test_results": [
+        false
+      ],
+      "metadata": {
+        "output": "[0, 2, 2]",
+        "inputs": "[[[0, 1], [0, 2]]]",
+        "expected": "[2, 4, 3]",
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v3_3535",
+      "passed": true,
+      "test_results": [
+        true,
+        true
+      ],
+      "metadata": {
+        "execution time": 0.012613534927368164
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v3_abc357_e",
+      "passed": true,
+      "test_results": [
+        true,
+        true,
+        true
+      ],
+      "metadata": {
+        "execution time": 0.022678613662719727
+      },
+      "difficulty": ""
+    },
+    {
+      "task_id": "v3_abc359_d",
+      "passed": false,
+      "test_results": [
+        false
+      ],
+      "metadata": {
+        "output": "0",
+        "inputs": "[[7, 4], 'AB?A?BA']",
+        "expected": "1",
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      },
+      "difficulty": ""
+    },
+    {
+      "task_id": "v3_abc360_e",
+      "passed": true,
+      "test_results": [
+        true,
+        true,
+        true
+      ],
+      "metadata": {
+        "execution time": 0.015853404998779297
+      },
+      "difficulty": ""
+    },
+    {
+      "task_id": "v3_abc361_d",
+      "passed": true,
+      "test_results": [
+        true,
+        true,
+        true
+      ],
+      "metadata": {
+        "execution time": 1.0580377578735352
+      },
+      "difficulty": ""
+    },
+    {
+      "task_id": "v3_abc361_f",
+      "passed": false,
+      "test_results": [
+        true,
+        -3
+      ],
+      "metadata": {
+        "error": "TimeoutException()",
+        "error_code": -3,
+        "error_message": "Time Limit Exceeded",
+        "inputs": "[1000000000000000000]",
+        "expected": "1001003332"
+      },
+      "difficulty": ""
+    },
+    {
+      "task_id": "v3_abc362_e",
+      "passed": false,
+      "test_results": [
+        false
+      ],
+      "metadata": {
+        "output": "None",
+        "inputs": "[5, [1, 2, 3, 2, 3]]",
+        "expected": "[5, 10, 3, 0, 0]",
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      },
+      "difficulty": ""
+    },
+    {
+      "task_id": "v3_abc363_f",
+      "passed": false,
+      "test_results": [
+        -4
+      ],
+      "metadata": {
+        "error_code": -4,
+        "error_message": "Error during testing: unterminated string literal (detected at line 55) (<string>, line 55)"
+      },
+      "difficulty": ""
+    },
+    {
+      "task_id": "v3_abc365_e",
+      "passed": false,
+      "test_results": [
+        false
+      ],
+      "metadata": {
+        "output": "6",
+        "inputs": "[3, [1, 3, 2]]",
+        "expected": "3",
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      },
+      "difficulty": ""
+    },
+    {
+      "task_id": "v4_3531",
+      "passed": false,
+      "test_results": [
+        false
+      ],
+      "metadata": {
+        "output": "16",
+        "inputs": "[4, [1, 2, 3, 4], [4, 5, 6, 8]]",
+        "expected": "39",
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v4_3548",
+      "passed": false,
+      "test_results": [
+        -4
+      ],
+      "metadata": {
+        "error_code": -4,
+        "error_message": "Error during testing: cannot unpack non-iterable NoneType object"
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v4_3550",
+      "passed": false,
+      "test_results": [
+        -4
+      ],
+      "metadata": {
+        "error_code": -4,
+        "error_message": "Error during testing: invalid character '✓' (U+2713) (<string>, line 62)"
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v4_3551",
+      "passed": false,
+      "test_results": [
+        -4
+      ],
+      "metadata": {
+        "error_code": -4,
+        "error_message": "Error during testing: unterminated string literal (detected at line 56) (<string>, line 56)"
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v4_3552",
+      "passed": false,
+      "test_results": [
+        false
+      ],
+      "metadata": {
+        "output": "9",
+        "inputs": "[3, 5]",
+        "expected": "595",
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v4_3560",
+      "passed": false,
+      "test_results": [
+        -4
+      ],
+      "metadata": {
+        "error": "TypeError(\"Solution.maxMoves() missing 1 required positional argument: 'turn'\")",
+        "error_code": -4,
+        "error_message": "Runtime Error",
+        "inputs": "[1, 1, [[0, 0]]]",
+        "expected": "4"
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v4_3563",
+      "passed": true,
+      "test_results": [
+        true,
+        true
+      ],
+      "metadata": {
+        "execution time": 0.011815786361694336
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v4_3571",
+      "passed": false,
+      "test_results": [
+        -4
+      ],
+      "metadata": {
+        "error_code": -4,
+        "error_message": "Error during testing: unterminated string literal (detected at line 56) (<string>, line 56)"
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v4_3575",
+      "passed": false,
+      "test_results": [
+        -4
+      ],
+      "metadata": {
+        "error_code": -4,
+        "error_message": "Error during testing: "
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v4_3580",
+      "passed": true,
+      "test_results": [
+        true,
+        true,
+        true,
+        true
+      ],
+      "metadata": {
+        "execution time": 0.01743769645690918
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v4_3583",
+      "passed": true,
+      "test_results": [
+        true,
+        true,
+        true
+      ],
+      "metadata": {
+        "execution time": 0.015304327011108398
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v4_abc367_e",
+      "passed": false,
+      "test_results": [
+        false
+      ],
+      "metadata": {
+        "output": "[1, 2, 3, 9, 7, 5, 11]",
+        "inputs": "[[7, 3], [5, 2, 6, 3, 1, 4, 6], [1, 2, 3, 5, 7, 9, 11]]",
+        "expected": "[7, 2, 3, 5, 1, 9, 3]",
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      },
+      "difficulty": ""
+    },
+    {
+      "task_id": "v4_abc368_f",
+      "passed": true,
+      "test_results": [
+        true,
+        true
+      ],
+      "metadata": {
+        "execution time": 0.00890350341796875
+      },
+      "difficulty": ""
+    },
+    {
+      "task_id": "v4_abc370_e",
+      "passed": false,
+      "test_results": [
+        -4
+      ],
+      "metadata": {
+        "error_code": -4,
+        "error_message": "Error during testing: cannot unpack non-iterable NoneType object"
+      },
+      "difficulty": ""
+    },
+    {
+      "task_id": "v4_abc370_f",
+      "passed": false,
+      "test_results": [
+        false
+      ],
+      "metadata": {
+        "output": "[-1, None]",
+        "inputs": "[[5, 2], [3, 6, 8, 6, 4]]",
+        "expected": "[13, 1]",
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      },
+      "difficulty": ""
+    },
+    {
+      "task_id": "v4_abc370_g",
+      "passed": false,
+      "test_results": [
+        -4
+      ],
+      "metadata": {
+        "error_code": -4,
+        "error_message": "Error during testing: invalid character '×' (U+00D7) (<string>, line 54)"
+      },
+      "difficulty": ""
+    },
+    {
+      "task_id": "v4_abc371_e",
+      "passed": false,
+      "test_results": [
+        false
+      ],
+      "metadata": {
+        "output": "9",
+        "inputs": "[3, [1, 2, 2]]",
+        "expected": "8",
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      },
+      "difficulty": ""
+    },
+    {
+      "task_id": "v4_abc373_e",
+      "passed": false,
+      "test_results": [
+        -4
+      ],
+      "metadata": {
+        "error_code": -4,
+        "error_message": "Error during testing: name 'solve' is not defined"
+      },
+      "difficulty": ""
+    },
+    {
+      "task_id": "v4_arc182_c",
+      "passed": false,
+      "test_results": [
+        -4
+      ],
+      "metadata": {
+        "error_code": -4,
+        "error_message": "Error during testing: expected an indented block after 'if' statement on line 51 (<string>, line 51)"
+      },
+      "difficulty": ""
+    },
+    {
+      "task_id": "v4_arc182_e",
+      "passed": false,
+      "test_results": [
+        false
+      ],
+      "metadata": {
+        "output": "6",
+        "inputs": "[[2, 5, 3, 3], [1, 3]]",
+        "expected": "4",
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      },
+      "difficulty": ""
+    },
+    {
+      "task_id": "v5_3588",
+      "passed": false,
+      "test_results": [
+        false
+      ],
+      "metadata": {
+        "output": "0",
+        "inputs": "['FFF']",
+        "expected": "3",
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v5_3603",
+      "passed": true,
+      "test_results": [
+        true,
+        true
+      ],
+      "metadata": {
+        "execution time": 0.006896257400512695
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v5_3604",
+      "passed": false,
+      "test_results": [
+        false
+      ],
+      "metadata": {
+        "output": "0",
+        "inputs": "[1, 2, 3]",
+        "expected": "6",
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v5_3608",
+      "passed": false,
+      "test_results": [
+        -4
+      ],
+      "metadata": {
+        "error_code": -4,
+        "error_message": "Error during testing: "
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v5_3631",
+      "passed": true,
+      "test_results": [
+        true,
+        true,
+        true
+      ],
+      "metadata": {
+        "execution time": 0.011333942413330078
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v5_3637",
+      "passed": false,
+      "test_results": [
+        -4
+      ],
+      "metadata": {
+        "error_code": -4,
+        "error_message": "Error during testing: unterminated string literal (detected at line 55) (<string>, line 55)"
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v5_3646",
+      "passed": false,
+      "test_results": [
+        -4
+      ],
+      "metadata": {
+        "error_code": -4,
+        "error_message": "Error during testing: unterminated string literal (detected at line 55) (<string>, line 55)"
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v5_3648",
+      "passed": false,
+      "test_results": [
+        -4
+      ],
+      "metadata": {
+        "error_code": -4,
+        "error_message": "Error during testing: unterminated string literal (detected at line 84) (<string>, line 84)"
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v5_3658",
+      "passed": false,
+      "test_results": [
+        false
+      ],
+      "metadata": {
+        "output": "0",
+        "inputs": "[[1, 2, -1, 10, 8]]",
+        "expected": "4",
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v5_3675",
+      "passed": false,
+      "test_results": [
+        -4
+      ],
+      "metadata": {
+        "error_code": -4,
+        "error_message": "Error during testing: "
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v5_3680",
+      "passed": true,
+      "test_results": [
+        true,
+        true
+      ],
+      "metadata": {
+        "execution time": 0.011885643005371094
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v5_abc378_e",
+      "passed": false,
+      "test_results": [
+        -4
+      ],
+      "metadata": {
+        "error_code": -4,
+        "error_message": "Error during testing: "
+      },
+      "difficulty": ""
+    },
+    {
+      "task_id": "v5_abc378_g",
+      "passed": true,
+      "test_results": [
+        true,
+        true
+      ],
+      "metadata": {
+        "execution time": 0.008846282958984375
+      },
+      "difficulty": ""
+    },
+    {
+      "task_id": "v5_abc379_e",
+      "passed": false,
+      "test_results": [
+        -4
+      ],
+      "metadata": {
+        "error_code": -4,
+        "error_message": "Error during testing: "
+      },
+      "difficulty": ""
+    },
+    {
+      "task_id": "v5_abc380_f",
+      "passed": false,
+      "test_results": [
+        -4
+      ],
+      "metadata": {
+        "error_code": -4,
+        "error_message": "Error during testing: name 'solve' is not defined"
+      },
+      "difficulty": ""
+    },
+    {
+      "task_id": "v5_abc380_g",
+      "passed": false,
+      "test_results": [
+        -4
+      ],
+      "metadata": {
+        "error_code": -4,
+        "error_message": "Error during testing: "
+      },
+      "difficulty": ""
+    },
+    {
+      "task_id": "v5_abc381_d",
+      "passed": false,
+      "test_results": [
+        true,
+        true,
+        -4
+      ],
+      "metadata": {
+        "error": "TypeError(\"'int' object is not subscriptable\")",
+        "error_code": -4,
+        "error_message": "Runtime Error",
+        "inputs": "[1, 1]",
+        "expected": "0"
+      },
+      "difficulty": ""
+    },
+    {
+      "task_id": "v5_abc386_f",
+      "passed": true,
+      "test_results": [
+        true,
+        true,
+        true
+      ],
+      "metadata": {
+        "execution time": 0.011952638626098633
+      },
+      "difficulty": ""
+    },
+    {
+      "task_id": "v5_arc184_c",
+      "passed": false,
+      "test_results": [
+        -4
+      ],
+      "metadata": {
+        "error_code": -4,
+        "error_message": "Error during testing: unterminated string literal (detected at line 56) (<string>, line 56)"
+      },
+      "difficulty": ""
+    },
+    {
+      "task_id": "v5_arc185_d",
+      "passed": false,
+      "test_results": [
+        -4
+      ],
+      "metadata": {
+        "error_code": -4,
+        "error_message": "Error during testing: invalid character '×' (U+00D7) (<string>, line 51)"
+      },
+      "difficulty": ""
+    },
+    {
+      "task_id": "v5_arc186_e",
+      "passed": false,
+      "test_results": [
+        -4
+      ],
+      "metadata": {
+        "error": "IndexError('list index out of range')",
+        "error_code": -4,
+        "error_message": "Runtime Error",
+        "inputs": "[[5, 2, 3], [1, 1]]",
+        "expected": "4"
+      },
+      "difficulty": ""
+    },
+    {
+      "task_id": "v5_arc187_b",
+      "passed": false,
+      "test_results": [
+        false
+      ],
+      "metadata": {
+        "output": "3",
+        "inputs": "[[3, 3], [2, -1, 1]]",
+        "expected": "6",
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      },
+      "difficulty": ""
+    },
+    {
+      "task_id": "v5_arc189_b",
+      "passed": false,
+      "test_results": [
+        -4
+      ],
+      "metadata": {
+        "error_code": -4,
+        "error_message": "Error during testing: "
+      },
+      "difficulty": ""
+    },
+    {
+      "task_id": "v5_arc189_c",
+      "passed": false,
+      "test_results": [
+        false
+      ],
+      "metadata": {
+        "output": "None",
+        "inputs": "[[5, 3], [0, 1, 0, 1, 0], [0, 0, 1, 0, 1], [4, 1, 2, 3, 5], [3, 4, 5, 2, 1]]",
+        "expected": "4",
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      },
+      "difficulty": ""
+    },
+    {
+      "task_id": "v5_arc189_d",
+      "passed": false,
+      "test_results": [
+        -4
+      ],
+      "metadata": {
+        "error_code": -4,
+        "error_message": "Error during testing: unterminated string literal (detected at line 51) (<string>, line 51)"
+      },
+      "difficulty": ""
+    },
+    {
+      "task_id": "v6_abc387_f",
+      "passed": false,
+      "test_results": [
+        false
+      ],
+      "metadata": {
+        "output": "inf",
+        "inputs": "[[3, 3], [2, 1, 1]]",
+        "expected": "6",
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      },
+      "difficulty": ""
+    },
+    {
+      "task_id": "v6_abc389_e",
+      "passed": false,
+      "test_results": [
+        -4
+      ],
+      "metadata": {
+        "error_code": -4,
+        "error_message": "Error during testing: "
+      },
+      "difficulty": ""
+    },
+    {
+      "task_id": "v6_abc389_g",
+      "passed": false,
+      "test_results": [
+        false
+      ],
+      "metadata": {
+        "output": "[12, 9, 4, 0]",
+        "inputs": "[[4, 998244353]]",
+        "expected": "[12, 9, 3, 0]",
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      },
+      "difficulty": ""
+    },
+    {
+      "task_id": "v6_abc390_f",
+      "passed": false,
+      "test_results": [
+        -4
+      ],
+      "metadata": {
+        "error_code": -4,
+        "error_message": "Error during testing: "
+      },
+      "difficulty": ""
+    },
+    {
+      "task_id": "v6_abc390_g",
+      "passed": false,
+      "test_results": [
+        true,
+        false
+      ],
+      "metadata": {
+        "output": "753142040",
+        "inputs": "[390]",
+        "expected": "727611652",
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      },
+      "difficulty": ""
+    },
+    {
+      "task_id": "v6_abc391_e",
+      "passed": false,
+      "test_results": [
+        false
+      ],
+      "metadata": {
+        "output": "10",
+        "inputs": "[2, '010011101']",
+        "expected": "1",
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      },
+      "difficulty": ""
+    },
+    {
+      "task_id": "v6_abc391_g",
+      "passed": false,
+      "test_results": [
+        -4
+      ],
+      "metadata": {
+        "error_code": -4,
+        "error_message": "Error during testing: "
+      },
+      "difficulty": ""
+    },
+    {
+      "task_id": "v6_abc392_f",
+      "passed": true,
+      "test_results": [
+        true,
+        true
+      ],
+      "metadata": {
+        "execution time": 0.008877754211425781
+      },
+      "difficulty": ""
+    },
+    {
+      "task_id": "v6_abc393_d",
+      "passed": false,
+      "test_results": [
+        true,
+        -4
+      ],
+      "metadata": {
+        "error": "AttributeError(\"'int' object has no attribute 'count'\")",
+        "error_code": -4,
+        "error_message": "Runtime Error",
+        "inputs": "[3, 100]",
+        "expected": "0"
+      },
+      "difficulty": ""
+    },
+    {
+      "task_id": "v6_abc397_d",
+      "passed": false,
+      "test_results": [
+        -4
+      ],
+      "metadata": {
+        "error_code": -4,
+        "error_message": "Error during testing: "
+      },
+      "difficulty": ""
+    },
+    {
+      "task_id": "v6_abc397_f",
+      "passed": true,
+      "test_results": [
+        true,
+        true
+      ],
+      "metadata": {
+        "execution time": 0.007899999618530273
+      },
+      "difficulty": ""
+    },
+    {
+      "task_id": "v6_abc398_d",
+      "passed": false,
+      "test_results": [
+        false
+      ],
+      "metadata": {
+        "output": "None",
+        "inputs": "[[6, -2, 1], 'NNEEWS']",
+        "expected": "1010",
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      },
+      "difficulty": ""
+    },
+    {
+      "task_id": "v6_abc398_f",
+      "passed": true,
+      "test_results": [
+        true,
+        true,
+        true
+      ],
+      "metadata": {
+        "execution time": 0.016367197036743164
+      },
+      "difficulty": ""
+    },
+    {
+      "task_id": "v6_abc399_e",
+      "passed": false,
+      "test_results": [
+        -4
+      ],
+      "metadata": {
+        "error_code": -4,
+        "error_message": "Error during testing: unterminated string literal (detected at line 61) (<string>, line 61)"
+      },
+      "difficulty": ""
+    },
+    {
+      "task_id": "v6_abc399_f",
+      "passed": false,
+      "test_results": [
+        false
+      ],
+      "metadata": {
+        "output": "None",
+        "inputs": "[[3, 2], [3, 1, 2]]",
+        "expected": "75",
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      },
+      "difficulty": ""
+    },
+    {
+      "task_id": "v6_arc192_b",
+      "passed": false,
+      "test_results": [
+        true,
+        false
+      ],
+      "metadata": {
+        "output": "Fennec",
+        "inputs": "[2, [29, 25]]",
+        "expected": "Snuke",
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      },
+      "difficulty": ""
+    },
+    {
+      "task_id": "v6_arc192_e",
+      "passed": false,
+      "test_results": [
+        -4
+      ],
+      "metadata": {
+        "error_code": -4,
+        "error_message": "Error during testing: "
+      },
+      "difficulty": ""
+    },
+    {
+      "task_id": "v6_arc193_b",
+      "passed": false,
+      "test_results": [
+        -4
+      ],
+      "metadata": {
+        "error_code": -4,
+        "error_message": "Error during testing: unterminated string literal (detected at line 55) (<string>, line 55)"
+      },
+      "difficulty": ""
+    },
+    {
+      "task_id": "v6_arc194_b",
+      "passed": false,
+      "test_results": [
+        false
+      ],
+      "metadata": {
+        "output": "-3",
+        "inputs": "[3, [3, 2, 1]]",
+        "expected": "4",
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      },
+      "difficulty": ""
+    },
+    {
+      "task_id": "v6_arc194_d",
+      "passed": true,
+      "test_results": [
+        true,
+        true
+      ],
+      "metadata": {
+        "execution time": 0.00874948501586914
+      },
+      "difficulty": ""
+    },
+    {
+      "task_id": "v6_arc195_b",
+      "passed": true,
+      "test_results": [
+        true,
+        true,
+        true
+      ],
+      "metadata": {
+        "execution time": 0.011957406997680664
+      },
+      "difficulty": ""
+    },
+    {
+      "task_id": "v6_arc196_a",
+      "passed": true,
+      "test_results": [
+        true,
+        true,
+        true
+      ],
+      "metadata": {
+        "execution time": 0.013321161270141602
+      },
+      "difficulty": ""
+    }
+  ]
+}

@@ -1,0 +1,76 @@
+{
+  "total": 12,
+  "processed": 12,
+  "success": 9,
+  "failed": 3,
+  "success_rate": 75.0,
+  "iteration_stats": {
+    "1": {
+      "count": 12,
+      "avg_duration": 171.31849853197733,
+      "avg_total_tokens": 37680.333333333336,
+      "avg_prompt_tokens": 14459.083333333334,
+      "avg_completion_tokens": 23221.25
+    },
+    "2": {
+      "count": 6,
+      "avg_duration": 59.1424917380015,
+      "avg_total_tokens": 12568.666666666666,
+      "avg_prompt_tokens": 5203.5,
+      "avg_completion_tokens": 7365.166666666667
+    },
+    "3": {
+      "count": 5,
+      "avg_duration": 55.923171520233154,
+      "avg_total_tokens": 12801.8,
+      "avg_prompt_tokens": 4883.6,
+      "avg_completion_tokens": 7918.2
+    }
+  },
+  "avg_duration_by_iteration": {
+    "1": 171.31849853197733,
+    "2": 59.1424917380015,
+    "3": 55.923171520233154
+  },
+  "reflection_mode": "full",
+  "final_merge_eval": {
+    "samples_file": "output/MATH/gpt-5-nano-gpt-5-nano/samples.jsonl",
+    "reflection_dir": "output/MATH/gpt-5-nano-gpt-5-nano/reflection",
+    "output_file": "output/MATH/gpt-5-nano-gpt-5-nano/reflection/samples_reflection_merged.jsonl",
+    "merged_results_file": "output/MATH/gpt-5-nano-gpt-5-nano/reflection/samples_reflection_merged.jsonl_results.jsonl",
+    "results_txt": "output/MATH/gpt-5-nano-gpt-5-nano/reflection/results.txt",
+    "problem_file": "data/MATH/MATH.jsonl",
+    "merge_summary": {
+      "total_rows": 125,
+      "replaced_rows": 12,
+      "replaced_by_first_passed": 9,
+      "replaced_by_last_failed": 3,
+      "missing_generated_code": 0,
+      "selection_stats": {
+        "keep_original": 113,
+        "first_passed": 9,
+        "iter_3_failed": 3
+      }
+    },
+    "eval_result": {
+      "pass@1": 0.976
+    },
+    "difficulty_summary": {
+      "Easy": {
+        "passed": 45.0,
+        "total": 45.0,
+        "rate": 1.0
+      },
+      "Medium": {
+        "passed": 40.0,
+        "total": 40.0,
+        "rate": 1.0
+      },
+      "Hard": {
+        "passed": 37.0,
+        "total": 40.0,
+        "rate": 0.925
+      }
+    }
+  }
+}

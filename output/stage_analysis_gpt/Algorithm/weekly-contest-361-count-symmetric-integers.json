@@ -1,0 +1,247 @@
+{
+  "task_id": "weekly-contest-361-count-symmetric-integers",
+  "dataset": "Algorithm",
+  "difficulty": "Easy",
+  "title": "count-symmetric-integers",
+  "result": "failed: ",
+  "ilr": "{\n  \"problem_id\": \"symmetric_integers\",\n  \"nodes\": [\n    {\"id\": 1, \"type\": \"start\", \"label\": \"Start\", \"next\": 2},\n    {\"id\": 2, \"type\": \"process\", \"label\": \"Input: low (integer), high (integer)\", \"action\": \"ctx['low']=ctx['arg0']; ctx['high']=ctx['arg1']; ctx['ans']=0\", \"next\": 3},\n    {\"id\": 3, \"type\": \"process\", \"label\": \"For i in range(low, high + 1)\", \"action\": \"for ctx['i'] in range(ctx['low'], ctx['high'] + 1):\", \"next\": 4},\n    {\"id\": 4, \"type\": \"process\", \"label\": \"Convert i to string: s = str(i)\", \"action\": \"ctx['s'] = str(ctx['i'])\", \"next\": 5},\n    {\"id\": 5, \"type\": \"decision\", \"label\": \"Is len(s) % 2 == 0?\", \"logic\": \"len(ctx['s']) % 2 == 0\", \"true_next\": 6, \"false_next\": 19},\n    {\"id\": 6, \"type\": \"process\", \"label\": \"Calculate n: n = len(s) // 2\", \"action\": \"ctx['n'] = len(ctx['s']) // 2\", \"next\": 7},\n    {\"id\": 7, \"type\": \"process\", \"label\": \"Extract first half: a = int(s[:n])\", \"action\": \"ctx['a'] = int(ctx['s'][:ctx['n']])\", \"next\": 8},\n    {\"id\": 8, \"type\": \"process\", \"label\": \"Extract second half: b = int(s[n:])\", \"action\": \"ctx['b'] = int(ctx['s'][ctx['n']:])\", \"next\": 9},\n    {\"id\": 9, \"type\": \"process\", \"label\": \"Initialize s1 = 0, s2 = 0\", \"action\": \"ctx['s1'] = 0; ctx['s2'] = 0\", \"next\": 10},\n    {\"id\": 10, \"type\": \"decision\", \"label\": \"Is a != 0?\", \"logic\": \"ctx['a'] != 0\", \"true_next\": 11, \"false_next\": 14},\n    {\"id\": 11, \"type\": \"process\", \"label\": \"Update s1: s1 += a % 10\", \"action\": \"ctx['s1'] += ctx['a'] % 10\", \"next\": 12},\n    {\"id\": 12, \"type\": \"process\", \"label\": \"Update a: a //= 10\", \"action\": \"ctx['a'] //= 10\", \"next\": 10},\n    {\"id\": 13, \"type\": \"decision\", \"label\": \"Is b != 0?\", \"logic\": \"ctx['b'] != 0\", \"true_next\": 15, \"false_next\": 17},\n    {\"id\": 14, \"type\": \"process\", \"label\": \"Update s2: s2 += b % 10\", \"action\": \"ctx['s2'] += ctx['b'] % 10\", \"next\": 16},\n    {\"id\": 15, \"type\": \"process\", \"label\": \"Update b: b //= 10\", \"action\": \"ctx['b'] //= 10\", \"next\": 13},\n    {\"id\": 16, \"type\": \"decision\", \"label\": \"Is s1 == s2?\", \"logic\": \"ctx['s1'] == ctx['s2']\", \"true_next\": 18, \"false_next\": 4},\n    {\"id\": 17, \"type\": \"process\", \"label\": \"Increment ans: ans += 1\", \"action\": \"ctx['ans'] += 1\", \"next\": 4},\n    {\"id\": 18, \"type\": \"end\", \"label\": \"Output: ans (number of symmetric integers)\", \"output\": \"ctx['ans']\"},\n    {\"id\": 19, \"type\": \"end\", \"label\": \"Output: ans (number of symmetric integers)\", \"output\": \"ctx['ans']\"}\n  ]\n}",
+  "code": "class Solution:\n    def countSymmetricIntegers(self, low: int, high: int) -> int:\n        ans = 0\n        for i in range(low, high + 1):\n            s = str(i)\n            if len(s) % 2 == 0:\n                n = len(s) // 2\n                a = int(s[:n])\n                b = int(s[n:])\n                s1 = 0\n                s2 = 0\n                \n                while a != 0:\n                    s1 += a % 10\n                    a //= 10\n                \n                while b != 0:\n                    s2 += b % 10\n                    b //= 10\n                \n                if s1 == s2:\n                    ans += 1\n            else:\n                ans += 1\n        \n        return ans",
+  "prompt": "\"\"\"\nYou are given two positive integers low and high.\n\nAn integer x consisting of 2 * n digits is symmetric if the sum of the first n digits of x is equal to the sum of the last n digits of x. Numbers with an odd number of digits are never symmetric.\n\nReturn the number of symmetric integers in the range [low, high].\n\nExample 1:\n\nInput: low = 1, high = 100\nOutput: 9\nExplanation: There are 9 symmetric integers between 1 and 100: 11, 22, 33, 44, 55, 66, 77, 88, and 99.\n\nExample 2:\n\nInput: low = 1200, high = 1230\nOutput: 4\nExplanation: There are 4 symmetric integers between 1200 and 1230: 1203, 1212, 1221, and 1230.\n\n\nConstraints:\n\n * 1 <= low <= high <= 104\n\"\"\"\nclass Solution:\n    def countSymmetricIntegers(self, low: int, high: int) -> int:\n        ",
+  "test": "\nmy_solution = Solution()\n\ntest_input = { \"low\": 1, \"high\": 100 }\nassert my_solution.countSymmetricIntegers(**test_input) == 9\n\ntest_input = { \"low\": 1200, \"high\": 1230 }\nassert my_solution.countSymmetricIntegers(**test_input) == 4\n\ntest_input = { \"low\": 1, \"high\": 1 }\nassert my_solution.countSymmetricIntegers(**test_input) == 0\n\ntest_input = { \"low\": 1, \"high\": 2 }\nassert my_solution.countSymmetricIntegers(**test_input) == 0\n\ntest_input = { \"low\": 1, \"high\": 3 }\nassert my_solution.countSymmetricIntegers(**test_input) == 0\n\ntest_input = { \"low\": 1, \"high\": 4 }\nassert my_solution.countSymmetricIntegers(**test_input) == 0\n\ntest_input = { \"low\": 1, \"high\": 5 }\nassert my_solution.countSymmetricIntegers(**test_input) == 0\n\ntest_input = { \"low\": 1, \"high\": 6 }\nassert my_solution.countSymmetricIntegers(**test_input) == 0\n\ntest_input = { \"low\": 1, \"high\": 7 }\nassert my_solution.countSymmetricIntegers(**test_input) == 0\n\ntest_input = { \"low\": 1, \"high\": 8 }\nassert my_solution.countSymmetricIntegers(**test_input) == 0\n\ntest_input = { \"low\": 1, \"high\": 9 }\nassert my_solution.countSymmetricIntegers(**test_input) == 0\n\ntest_input = { \"low\": 1, \"high\": 10 }\nassert my_solution.countSymmetricIntegers(**test_input) == 0\n\ntest_input = { \"low\": 1, \"high\": 11 }\nassert my_solution.countSymmetricIntegers(**test_input) == 1\n\ntest_input = { \"low\": 1, \"high\": 12 }\nassert my_solution.countSymmetricIntegers(**test_input) == 1\n\ntest_input = { \"low\": 1, \"high\": 13 }\nassert my_solution.countSymmetricIntegers(**test_input) == 1\n\ntest_input = { \"low\": 1, \"high\": 14 }\nassert my_solution.countSymmetricIntegers(**test_input) == 1\n\ntest_input = { \"low\": 1, \"high\": 15 }\nassert my_solution.countSymmetricIntegers(**test_input) == 1\n\ntest_input = { \"low\": 1, \"high\": 16 }\nassert my_solution.countSymmetricIntegers(**test_input) == 1\n\ntest_input = { \"low\": 1, \"high\": 17 }\nassert my_solution.countSymmetricIntegers(**test_input) == 1\n\ntest_input = { \"low\": 1, \"high\": 18 }\nassert my_solution.countSymmetricIntegers(**test_input) == 1\n\ntest_input = { \"low\": 1, \"high\": 19 }\nassert my_solution.countSymmetricIntegers(**test_input) == 1\n\ntest_input = { \"low\": 1, \"high\": 20 }\nassert my_solution.countSymmetricIntegers(**test_input) == 1\n\ntest_input = { \"low\": 1, \"high\": 21 }\nassert my_solution.countSymmetricIntegers(**test_input) == 1\n\ntest_input = { \"low\": 1, \"high\": 22 }\nassert my_solution.countSymmetricIntegers(**test_input) == 2\n\ntest_input = { \"low\": 1, \"high\": 23 }\nassert my_solution.countSymmetricIntegers(**test_input) == 2\n\ntest_input = { \"low\": 1, \"high\": 24 }\nassert my_solution.countSymmetricIntegers(**test_input) == 2\n\ntest_input = { \"low\": 1, \"high\": 25 }\nassert my_solution.countSymmetricIntegers(**test_input) == 2\n\ntest_input = { \"low\": 1, \"high\": 26 }\nassert my_solution.countSymmetricIntegers(**test_input) == 2\n\ntest_input = { \"low\": 1, \"high\": 27 }\nassert my_solution.countSymmetricIntegers(**test_input) == 2\n\ntest_input = { \"low\": 1, \"high\": 28 }\nassert my_solution.countSymmetricIntegers(**test_input) == 2\n\ntest_input = { \"low\": 1, \"high\": 29 }\nassert my_solution.countSymmetricIntegers(**test_input) == 2\n\ntest_input = { \"low\": 1, \"high\": 30 }\nassert my_solution.countSymmetricIntegers(**test_input) == 2\n\ntest_input = { \"low\": 1, \"high\": 31 }\nassert my_solution.countSymmetricIntegers(**test_input) == 2\n\ntest_input = { \"low\": 1, \"high\": 32 }\nassert my_solution.countSymmetricIntegers(**test_input) == 2\n\ntest_input = { \"low\": 1, \"high\": 33 }\nassert my_solution.countSymmetricIntegers(**test_input) == 3\n\ntest_input = { \"low\": 1, \"high\": 34 }\nassert my_solution.countSymmetricIntegers(**test_input) == 3\n\ntest_input = { \"low\": 1, \"high\": 35 }\nassert my_solution.countSymmetricIntegers(**test_input) == 3\n\ntest_input = { \"low\": 1, \"high\": 36 }\nassert my_solution.countSymmetricIntegers(**test_input) == 3\n\ntest_input = { \"low\": 1, \"high\": 37 }\nassert my_solution.countSymmetricIntegers(**test_input) == 3\n\ntest_input = { \"low\": 1, \"high\": 38 }\nassert my_solution.countSymmetricIntegers(**test_input) == 3\n\ntest_input = { \"low\": 1, \"high\": 39 }\nassert my_solution.countSymmetricIntegers(**test_input) == 3\n\ntest_input = { \"low\": 1, \"high\": 40 }\nassert my_solution.countSymmetricIntegers(**test_input) == 3\n\ntest_input = { \"low\": 1, \"high\": 41 }\nassert my_solution.countSymmetricIntegers(**test_input) == 3\n\ntest_input = { \"low\": 1, \"high\": 42 }\nassert my_solution.countSymmetricIntegers(**test_input) == 3\n\ntest_input = { \"low\": 1, \"high\": 43 }\nassert my_solution.countSymmetricIntegers(**test_input) == 3\n\ntest_input = { \"low\": 1, \"high\": 44 }\nassert my_solution.countSymmetricIntegers(**test_input) == 4\n\ntest_input = { \"low\": 1, \"high\": 45 }\nassert my_solution.countSymmetricIntegers(**test_input) == 4\n\ntest_input = { \"low\": 1, \"high\": 46 }\nassert my_solution.countSymmetricIntegers(**test_input) == 4\n\ntest_input = { \"low\": 1, \"high\": 47 }\nassert my_solution.countSymmetricIntegers(**test_input) == 4\n\ntest_input = { \"low\": 1, \"high\": 48 }\nassert my_solution.countSymmetricIntegers(**test_input) == 4\n\ntest_input = { \"low\": 100, \"high\": 1782 }\nassert my_solution.countSymmetricIntegers(**test_input) == 44\n\ntest_input = { \"low\": 1, \"high\": 49 }\nassert my_solution.countSymmetricIntegers(**test_input) == 4\n\ntest_input = { \"low\": 1, \"high\": 50 }\nassert my_solution.countSymmetricIntegers(**test_input) == 4\n\ntest_input = { \"low\": 1, \"high\": 51 }\nassert my_solution.countSymmetricIntegers(**test_input) == 4\n\ntest_input = { \"low\": 1, \"high\": 52 }\nassert my_solution.countSymmetricIntegers(**test_input) == 4\n\ntest_input = { \"low\": 1, \"high\": 53 }\nassert my_solution.countSymmetricIntegers(**test_input) == 4\n\ntest_input = { \"low\": 1, \"high\": 54 }\nassert my_solution.countSymmetricIntegers(**test_input) == 4\n\ntest_input = { \"low\": 1, \"high\": 55 }\nassert my_solution.countSymmetricIntegers(**test_input) == 5\n\ntest_input = { \"low\": 1, \"high\": 56 }\nassert my_solution.countSymmetricIntegers(**test_input) == 5\n\ntest_input = { \"low\": 1, \"high\": 57 }\nassert my_solution.countSymmetricIntegers(**test_input) == 5\n\ntest_input = { \"low\": 1, \"high\": 58 }\nassert my_solution.countSymmetricIntegers(**test_input) == 5\n\ntest_input = { \"low\": 1, \"high\": 59 }\nassert my_solution.countSymmetricIntegers(**test_input) == 5\n\ntest_input = { \"low\": 1, \"high\": 60 }\nassert my_solution.countSymmetricIntegers(**test_input) == 5\n\ntest_input = { \"low\": 2, \"high\": 2 }\nassert my_solution.countSymmetricIntegers(**test_input) == 0\n\ntest_input = { \"low\": 2, \"high\": 3 }\nassert my_solution.countSymmetricIntegers(**test_input) == 0\n\ntest_input = { \"low\": 2, \"high\": 4 }\nassert my_solution.countSymmetricIntegers(**test_input) == 0\n\ntest_input = { \"low\": 2, \"high\": 5 }\nassert my_solution.countSymmetricIntegers(**test_input) == 0\n\ntest_input = { \"low\": 2, \"high\": 6 }\nassert my_solution.countSymmetricIntegers(**test_input) == 0\n\ntest_input = { \"low\": 2, \"high\": 7 }\nassert my_solution.countSymmetricIntegers(**test_input) == 0\n\ntest_input = { \"low\": 2, \"high\": 8 }\nassert my_solution.countSymmetricIntegers(**test_input) == 0\n\ntest_input = { \"low\": 2, \"high\": 9 }\nassert my_solution.countSymmetricIntegers(**test_input) == 0\n\ntest_input = { \"low\": 2, \"high\": 10 }\nassert my_solution.countSymmetricIntegers(**test_input) == 0\n\ntest_input = { \"low\": 2, \"high\": 11 }\nassert my_solution.countSymmetricIntegers(**test_input) == 1\n\ntest_input = { \"low\": 2, \"high\": 12 }\nassert my_solution.countSymmetricIntegers(**test_input) == 1\n\ntest_input = { \"low\": 2, \"high\": 13 }\nassert my_solution.countSymmetricIntegers(**test_input) == 1\n\ntest_input = { \"low\": 2, \"high\": 14 }\nassert my_solution.countSymmetricIntegers(**test_input) == 1\n\ntest_input = { \"low\": 2, \"high\": 15 }\nassert my_solution.countSymmetricIntegers(**test_input) == 1\n\ntest_input = { \"low\": 2, \"high\": 16 }\nassert my_solution.countSymmetricIntegers(**test_input) == 1\n\ntest_input = { \"low\": 2, \"high\": 17 }\nassert my_solution.countSymmetricIntegers(**test_input) == 1\n\ntest_input = { \"low\": 2, \"high\": 18 }\nassert my_solution.countSymmetricIntegers(**test_input) == 1\n\ntest_input = { \"low\": 2, \"high\": 19 }\nassert my_solution.countSymmetricIntegers(**test_input) == 1\n\ntest_input = { \"low\": 2, \"high\": 20 }\nassert my_solution.countSymmetricIntegers(**test_input) == 1\n\ntest_input = { \"low\": 2, \"high\": 21 }\nassert my_solution.countSymmetricIntegers(**test_input) == 1\n\ntest_input = { \"low\": 2, \"high\": 22 }\nassert my_solution.countSymmetricIntegers(**test_input) == 2\n\ntest_input = { \"low\": 2, \"high\": 23 }\nassert my_solution.countSymmetricIntegers(**test_input) == 2\n\ntest_input = { \"low\": 2, \"high\": 24 }\nassert my_solution.countSymmetricIntegers(**test_input) == 2\n\ntest_input = { \"low\": 2, \"high\": 25 }\nassert my_solution.countSymmetricIntegers(**test_input) == 2\n\ntest_input = { \"low\": 2, \"high\": 26 }\nassert my_solution.countSymmetricIntegers(**test_input) == 2\n\ntest_input = { \"low\": 2, \"high\": 27 }\nassert my_solution.countSymmetricIntegers(**test_input) == 2\n\ntest_input = { \"low\": 2, \"high\": 28 }\nassert my_solution.countSymmetricIntegers(**test_input) == 2\n\ntest_input = { \"low\": 2, \"high\": 29 }\nassert my_solution.countSymmetricIntegers(**test_input) == 2\n\ntest_input = { \"low\": 2, \"high\": 30 }\nassert my_solution.countSymmetricIntegers(**test_input) == 2\n\ntest_input = { \"low\": 2, \"high\": 31 }\nassert my_solution.countSymmetricIntegers(**test_input) == 2\n\ntest_input = { \"low\": 2, \"high\": 32 }\nassert my_solution.countSymmetricIntegers(**test_input) == 2\n\ntest_input = { \"low\": 2, \"high\": 33 }\nassert my_solution.countSymmetricIntegers(**test_input) == 3\n\ntest_input = { \"low\": 2, \"high\": 34 }\nassert my_solution.countSymmetricIntegers(**test_input) == 3\n\ntest_input = { \"low\": 2, \"high\": 35 }\nassert my_solution.countSymmetricIntegers(**test_input) == 3\n\ntest_input = { \"low\": 2, \"high\": 36 }\nassert my_solution.countSymmetricIntegers(**test_input) == 3\n\ntest_input = { \"low\": 2, \"high\": 37 }\nassert my_solution.countSymmetricIntegers(**test_input) == 3\n\ntest_input = { \"low\": 2, \"high\": 38 }\nassert my_solution.countSymmetricIntegers(**test_input) == 3",
+  "ocr_data": {
+    "nodes": [
+      {
+        "node_id": 1,
+        "shape_type": "rectangle",
+        "raw_text": "Start",
+        "position": "top"
+      },
+      {
+        "node_id": 2,
+        "shape_type": "rectangle",
+        "raw_text": "Input: low (integer), high (integer)",
+        "position": "top"
+      },
+      {
+        "node_id": 3,
+        "shape_type": "rectangle",
+        "raw_text": "Initialize ans = 0",
+        "position": "middle"
+      },
+      {
+        "node_id": 4,
+        "shape_type": "rectangle",
+        "raw_text": "For i in range(low, high + 1)",
+        "position": "middle"
+      },
+      {
+        "node_id": 5,
+        "shape_type": "rectangle",
+        "raw_text": "Convert i to string: s = str(i)",
+        "position": "middle"
+      },
+      {
+        "node_id": 6,
+        "shape_type": "diamond",
+        "raw_text": "Is len(s) % 2 == 0?",
+        "position": "middle"
+      },
+      {
+        "node_id": 7,
+        "shape_type": "rectangle",
+        "raw_text": "Calculate n: n = len(s) // 2",
+        "position": "middle"
+      },
+      {
+        "node_id": 8,
+        "shape_type": "rectangle",
+        "raw_text": "Extract first half: a = int(s[:n])",
+        "position": "middle"
+      },
+      {
+        "node_id": 9,
+        "shape_type": "rectangle",
+        "raw_text": "Extract second half: b = int(s[n:])",
+        "position": "middle"
+      },
+      {
+        "node_id": 10,
+        "shape_type": "rectangle",
+        "raw_text": "Initialize s1 = 0, s2 = 0",
+        "position": "middle"
+      },
+      {
+        "node_id": 11,
+        "shape_type": "diamond",
+        "raw_text": "Is a != 0?",
+        "position": "middle"
+      },
+      {
+        "node_id": 12,
+        "shape_type": "rectangle",
+        "raw_text": "Update s1: s1 += a % 10",
+        "position": "middle"
+      },
+      {
+        "node_id": 13,
+        "shape_type": "rectangle",
+        "raw_text": "Update a: a //= 10",
+        "position": "middle"
+      },
+      {
+        "node_id": 14,
+        "shape_type": "diamond",
+        "raw_text": "Is b != 0?",
+        "position": "middle"
+      },
+      {
+        "node_id": 15,
+        "shape_type": "rectangle",
+        "raw_text": "Update s2: s2 += b % 10",
+        "position": "middle"
+      },
+      {
+        "node_id": 16,
+        "shape_type": "rectangle",
+        "raw_text": "Update b: b //= 10",
+        "position": "middle"
+      },
+      {
+        "node_id": 17,
+        "shape_type": "diamond",
+        "raw_text": "Is s1 == s2?",
+        "position": "middle"
+      },
+      {
+        "node_id": 18,
+        "shape_type": "rectangle",
+        "raw_text": "Increment ans: ans += 1",
+        "position": "bottom"
+      },
+      {
+        "node_id": 19,
+        "shape_type": "rectangle",
+        "raw_text": "Output: ans (number of symmetric integers)",
+        "position": "bottom"
+      }
+    ],
+    "edges": [
+      {
+        "from_node": 1,
+        "to_node": 2,
+        "label": ""
+      },
+      {
+        "from_node": 2,
+        "to_node": 3,
+        "label": ""
+      },
+      {
+        "from_node": 3,
+        "to_node": 4,
+        "label": ""
+      },
+      {
+        "from_node": 4,
+        "to_node": 5,
+        "label": ""
+      },
+      {
+        "from_node": 5,
+        "to_node": 6,
+        "label": ""
+      },
+      {
+        "from_node": 6,
+        "to_node": 7,
+        "label": "Yes"
+      },
+      {
+        "from_node": 6,
+        "to_node": 19,
+        "label": "No"
+      },
+      {
+        "from_node": 7,
+        "to_node": 8,
+        "label": ""
+      },
+      {
+        "from_node": 8,
+        "to_node": 9,
+        "label": ""
+      },
+      {
+        "from_node": 9,
+        "to_node": 10,
+        "label": ""
+      },
+      {
+        "from_node": 10,
+        "to_node": 11,
+        "label": ""
+      },
+      {
+        "from_node": 11,
+        "to_node": 12,
+        "label": "Yes"
+      },
+      {
+        "from_node": 12,
+        "to_node": 13,
+        "label": ""
+      },
+      {
+        "from_node": 13,
+        "to_node": 11,
+        "label": ""
+      },
+      {
+        "from_node": 11,
+        "to_node": 14,
+        "label": "No"
+      },
+      {
+        "from_node": 14,
+        "to_node": 15,
+        "label": "Yes"
+      },
+      {
+        "from_node": 15,
+        "to_node": 16,
+        "label": ""
+      },
+      {
+        "from_node": 16,
+        "to_node": 14,
+        "label": ""
+      },
+      {
+        "from_node": 17,
+        "to_node": 18,
+        "label": "Yes"
+      },
+      {
+        "from_node": 18,
+        "to_node": 4,
+        "label": ""
+      },
+      {
+        "from_node": 19,
+        "to_node": 4,
+        "label": ""
+      }
+    ],
+    "other_text": []
+  },
+  "analysis": {
+    "ilr_verdict": "incorrect",
+    "ilr_issues": "控制流严重错乱：OCR#18'Increment ans: ans += 1'被ILR改成了终点节点18(output ans)，节点16判断s1==s2为真时直接返回当前ans而不自增；真正的自增节点17只被孤儿组件13/15指向，不可达，ans永远是0；节点19(奇数长度)也被设为终点导致遇奇数立即返回；节点10的false分支直达节点14跳过了b循环头（b的各位和只累加一次）。",
+    "code_vs_ilr": "deviates",
+    "code_issues": "代码没有按ILR执行：偶数长度路径实现了正确的数位和比较并在相等时ans+=1（ILR中该路径是直接返回），但给奇数长度分支凭空加了ans+=1——ILR和OCR流程图的奇数分支都没有自增，这与题意（奇数位必不对称）正好相反；偶数路径的修复性改写也偏离了ILR字面控制流。",
+    "error_source": "both",
+    "ocr_contribution": "unclear",
+    "root_cause": "两级独立出错：ILR把自增节点改成终点、自增不可达，忠实执行结果恒为0；代码又大幅偏离ILR，给奇数长度数凭空计数，几乎全部测试错误。OCR边本身混乱缺失（6-No->19->4、14-No/17-No缺失），难以判定其误导程度。",
+    "evidence": "忠实执行ILR：low=1,high=100时i=1为奇数长度走节点19直接返回0（期望9）。生成代码99/100测试错误：low=1,high=100得19（1..9九个奇数各+1，加上11..99九个对称数）；low=1,high=1得1（期望0）。OCR边显示6-No->19且19->4回环、14-No与17-No出边缺失，原图无法自洽执行。"
+  }
+}

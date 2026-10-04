@@ -1,0 +1,108 @@
+{
+  "problem_id": "can_sort_array",
+  "nodes": [
+    {
+      "id": 1,
+      "type": "start",
+      "label": "Start",
+      "next": 2
+    },
+    {
+      "id": 2,
+      "type": "process",
+      "label": "Input: nums (List[int])",
+      "action": "ctx['nums'] = ctx['arg0']; ctx['a'] = []; ctx['s'] = []; ctx['t'] = []; ctx['cu'] = None; ctx['i'] = 0",
+      "next": 3
+    },
+    {
+      "id": 3,
+      "type": "process",
+      "label": "For each i in nums",
+      "action": "for i in ctx['nums']: ctx['a'].append(bin(i).count('1'))",
+      "next": 4
+    },
+    {
+      "id": 4,
+      "type": "process",
+      "label": "Initialize s = [], t = []",
+      "action": "ctx['s'] = []; ctx['t'] = []",
+      "next": 5
+    },
+    {
+      "id": 5,
+      "type": "process",
+      "label": "Set cu = a[0]",
+      "action": "ctx['cu'] = ctx['a'][0]",
+      "next": 6
+    },
+    {
+      "id": 6,
+      "type": "decision",
+      "label": "Is a[i] == cu?",
+      "logic": "ctx['a'][ctx['i']] == ctx['cu']",
+      "true_next": 7,
+      "false_next": 8
+    },
+    {
+      "id": 7,
+      "type": "process",
+      "label": "Insert nums[i] into t: bisect.insort(t, nums[i])",
+      "action": "import bisect; bisect.insort(ctx['t'], ctx['nums'][ctx['i']])",
+      "next": 9
+    },
+    {
+      "id": 8,
+      "type": "process",
+      "label": "Update cu = a[i]",
+      "action": "ctx['cu'] = ctx['a'][ctx['i']]",
+      "next": 10
+    },
+    {
+      "id": 9,
+      "type": "process",
+      "label": "Append t to s: s += t",
+      "action": "ctx['s'] += ctx['t']; ctx['t'] = []",
+      "next": 11
+    },
+    {
+      "id": 10,
+      "type": "process",
+      "label": "Append t to s: s += t",
+      "action": "ctx['s'] += ctx['t']; ctx['t'] = []",
+      "next": 11
+    },
+    {
+      "id": 11,
+      "type": "decision",
+      "label": "Is s == sorted(nums)?",
+      "logic": "ctx['s'] == sorted(ctx['nums'])",
+      "true_next": 12,
+      "false_next": 13
+    },
+    {
+      "id": 12,
+      "type": "end",
+      "label": "Output: True (array can be sorted)",
+      "output": "True"
+    },
+    {
+      "id": 13,
+      "type": "end",
+      "label": "Output: False (array cannot be sorted)",
+      "output": "False"
+    }
+  ],
+  "task_id": "biweekly-contest-122-find-if-array-can-be-sorted",
+  "dataset": "Algorithm",
+  "result": "failed: ",
+  "code": "class Solution:\n    def canSortArray(self, nums: List[int]) -> bool:\n        a = []\n        s = []\n        t = []\n        cu = None\n        i = 0\n        \n        for num in nums:\n            a.append(bin(num).count('1'))\n        \n        s = []\n        t = []\n        \n        if len(nums) > 0:\n            cu = a[0]\n            i = 0\n            \n            while i < len(nums):\n                if a[i] == cu:\n                    import bisect\n                    bisect.insort(t, nums[i])\n                else:\n                    cu = a[i]\n                    s += t\n                    t = []\n                i += 1\n            \n            s += t\n        \n        return s == sorted(nums)",
+  "verification": {
+    "md_verdict": "ILR Error",
+    "actual_error_source": "ilr",
+    "ilr_verdict": "incorrect",
+    "code_vs_ilr": "faithful",
+    "md_correct": "yes",
+    "note": "确认 ILR 错误：图中完全没有主循环（OCR 流程图的 For i 节点被丢失，无任何边指回节点6），忠实执行只处理 i=0 一次即到 s==sorted 判断；且换组分支（节点8→10）丢失了流程图节点16 的 t=[nums[i]] 重置动作。生成代码重构出了 while 循环（被迫的必要修复）但忠实保留了'换组时丢弃新组首元素'这一来自 ILR 的缺陷，未引入新错误。",
+    "evidence": "ILR 忠实转写：[8,4,2,30,15] 与 [1,2,3,4,5] 均返回 False（期望 True），仅 n=1 返回 True；生成代码同样 [8,4,2,30,15]→False、[1,2,3,4,5]→False（s 因换组丢元素只攒到 [2,4,8,15]）；补上 t=[nums[i]] 重置的算法 6 组用例全对。"
+  }
+}

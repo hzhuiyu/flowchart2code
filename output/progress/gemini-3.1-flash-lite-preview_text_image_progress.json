@@ -1,0 +1,18 @@
+{
+  "model_name": "gemini-3.1-flash-lite-preview_text_image",
+  "datasets": {
+    "HumanEval-V": {
+      "hash": "7cdeab6a7a90dd09c3f0c648d0a8a698:b38c08d6086415d8c33617f6f72dbf31",
+      "status": "samples_completed",
+      "completed": false,
+      "messages": [
+        {
+          "time": "2026-09-07 16:27:35",
+          "message": "Code generation completed"
+        }
+      ],
+      "last_update": "2026-09-07 16:27:35"
+    }
+  },
+  "last_update": "2026-09-07 16:27:35"
+}

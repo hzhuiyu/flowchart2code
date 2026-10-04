@@ -1,0 +1,141 @@
+{
+  "problem_id": "evaluate_expression",
+  "nodes": [
+    {
+      "id": 1,
+      "type": "start",
+      "label": "Start",
+      "next": 2
+    },
+    {
+      "id": 2,
+      "type": "process",
+      "label": "Input: s (string)",
+      "action": "ctx['s'] = ctx['arg0']; ctx['num'] = 0; ctx['ope'] = '+'; ctx['stack'] = []",
+      "next": 3
+    },
+    {
+      "id": 3,
+      "type": "process",
+      "label": "For each character i in s",
+      "action": "ctx['i'] = ctx['s'][0]; ctx['idx'] = 0",
+      "next": 4
+    },
+    {
+      "id": 4,
+      "type": "decision",
+      "label": "Is i numeric?",
+      "logic": "ctx['i'].isdigit()",
+      "true_next": 5,
+      "false_next": 7
+    },
+    {
+      "id": 5,
+      "type": "process",
+      "label": "Update num: num = num * 10 + int(i)",
+      "action": "ctx['num'] = ctx['num'] * 10 + int(ctx['i'])",
+      "next": 7
+    },
+    {
+      "id": 7,
+      "type": "decision",
+      "label": "Is i in '+-*/' or end of string?",
+      "logic": "ctx['i'] in '+-*/' or ctx['idx'] >= len(ctx['s']) - 1",
+      "true_next": 8,
+      "false_next": 16
+    },
+    {
+      "id": 8,
+      "type": "decision",
+      "label": "Is ope == '+'?",
+      "logic": "ctx['ope'] == '+'",
+      "true_next": 12,
+      "false_next": 9
+    },
+    {
+      "id": 9,
+      "type": "decision",
+      "label": "Is ope == '-'?",
+      "logic": "ctx['ope'] == '-'",
+      "true_next": 13,
+      "false_next": 10
+    },
+    {
+      "id": 10,
+      "type": "decision",
+      "label": "Is ope == '*'?",
+      "logic": "ctx['ope'] == '*'",
+      "true_next": 14,
+      "false_next": 11
+    },
+    {
+      "id": 11,
+      "type": "decision",
+      "label": "Is ope == '/'?",
+      "logic": "ctx['ope'] == '/'",
+      "true_next": 15,
+      "false_next": 16
+    },
+    {
+      "id": 12,
+      "type": "process",
+      "label": "Append num to stack",
+      "action": "ctx['stack'].append(ctx['num']); ctx['num'] = 0",
+      "next": 16
+    },
+    {
+      "id": 13,
+      "type": "process",
+      "label": "Append -num to stack",
+      "action": "ctx['stack'].append(-ctx['num']); ctx['num'] = 0",
+      "next": 16
+    },
+    {
+      "id": 14,
+      "type": "process",
+      "label": "Pop from stack, multiply with num, append result to stack",
+      "action": "ctx['a'] = ctx['stack'].pop(); ctx['stack'].append(ctx['a'] * ctx['num']); ctx['num'] = 0",
+      "next": 16
+    },
+    {
+      "id": 15,
+      "type": "process",
+      "label": "Pop from stack, divide by num, truncate, append result to stack",
+      "action": "ctx['a'] = ctx['stack'].pop(); ctx['stack'].append(int(ctx['a'] / ctx['num'])); ctx['num'] = 0",
+      "next": 16
+    },
+    {
+      "id": 16,
+      "type": "process",
+      "label": "Update ope = i, num = 0",
+      "action": "ctx['ope'] = ctx['i']; ctx['num'] = 0",
+      "next": 3
+    },
+    {
+      "id": 17,
+      "type": "process",
+      "label": "Sum all elements in stack",
+      "action": "ctx['result'] = sum(ctx['stack'])",
+      "next": 18
+    },
+    {
+      "id": 18,
+      "type": "end",
+      "label": "Output: sum(stack)",
+      "output": "ctx['result']"
+    }
+  ],
+  "task_id": "227. Basic Calculator II",
+  "dataset": "MATH",
+  "result": "failed: ",
+  "code": "def calculate(s: str) -> int:\n    s = s.strip()\n    num = 0\n    ope = '+'\n    stack = []\n    i = s[0]\n    idx = 0\n    \n    while idx < len(s):\n        i = s[idx]\n        \n        if i.isdigit():\n            num = num * 10 + int(i)\n            idx += 1\n            continue\n            \n        if i in '+-*/' or idx >= len(s) - 1:\n            if ope == '+':\n                stack.append(num)\n                num = 0\n            elif ope == '-':\n                stack.append(-num)\n                num = 0\n            elif ope == '*':\n                a = stack.pop()\n                stack.append(a * num)\n                num = 0\n            elif ope == '/':\n                a = stack.pop()\n                stack.append(int(a / num))\n                num = 0\n            ope = i\n            num = 0\n            idx += 1\n        else:\n            idx += 1\n    \n    result = sum(stack)\n    return result",
+  "verification": {
+    "md_verdict": "ILR Error",
+    "actual_error_source": "both",
+    "ilr_verdict": "incorrect",
+    "code_vs_ilr": "deviates",
+    "md_correct": "partial",
+    "note": "ILR 确实不可执行：节点3 每次循环都重置 i=s[0]、idx=0，全程无 idx 自增，也没有任何边能跳出循环到达求和节点17/18，字面执行死循环。但生成代码还额外偏离 ILR：ILR 中数字分支节点5 的 next 是节点7（末字符数字仍能触发入栈），代码却让数字分支 continue 跳过运算符/末尾判断，导致表达式最后一个数永远不入栈，故 both。",
+    "evidence": "ILR 字面执行 '3+2*2'：50000 步后仍停在 i='3', idx=0 的死循环；生成代码实跑：calculate('3+2*2')=5（期望7）、' 3/2 '=3（期望1）、'1+1'=1（期望2）、'10-5'=10（期望5）。"
+  }
+}

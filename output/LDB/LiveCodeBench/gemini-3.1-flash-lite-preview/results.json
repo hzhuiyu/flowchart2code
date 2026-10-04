@@ -1,0 +1,1943 @@
+{
+  "pass@1": 0.7567567567567568,
+  "passed": 112,
+  "total": 148,
+  "results": [
+    {
+      "task_id": "v1_2757",
+      "passed": true,
+      "test_results": [
+        true,
+        true
+      ],
+      "metadata": {
+        "execution time": 0.015128374099731445
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v1_2784",
+      "passed": true,
+      "test_results": [
+        true,
+        true
+      ],
+      "metadata": {
+        "execution time": 0.008986711502075195
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v1_2808",
+      "passed": true,
+      "test_results": [
+        true,
+        true
+      ],
+      "metadata": {
+        "execution time": 0.009098291397094727
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v1_2827",
+      "passed": true,
+      "test_results": [
+        true,
+        true,
+        true
+      ],
+      "metadata": {
+        "execution time": 0.01073312759399414
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v1_2839",
+      "passed": true,
+      "test_results": [
+        true,
+        true,
+        true
+      ],
+      "metadata": {
+        "execution time": 0.02742290496826172
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v1_2849",
+      "passed": true,
+      "test_results": [
+        true,
+        true
+      ],
+      "metadata": {
+        "execution time": 0.006989240646362305
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v1_2879",
+      "passed": true,
+      "test_results": [
+        true,
+        true,
+        true
+      ],
+      "metadata": {
+        "execution time": 0.013105392456054688
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v1_2884",
+      "passed": true,
+      "test_results": [
+        true,
+        true
+      ],
+      "metadata": {
+        "execution time": 0.009289264678955078
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v1_2921",
+      "passed": true,
+      "test_results": [
+        true,
+        true
+      ],
+      "metadata": {
+        "execution time": 0.010148763656616211
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v1_2952",
+      "passed": true,
+      "test_results": [
+        true,
+        true
+      ],
+      "metadata": {
+        "execution time": 0.011331319808959961
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v1_3017",
+      "passed": true,
+      "test_results": [
+        true,
+        true,
+        true
+      ],
+      "metadata": {
+        "execution time": 0.01107478141784668
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v1_3024",
+      "passed": false,
+      "test_results": [
+        false
+      ],
+      "metadata": {
+        "output": "3",
+        "inputs": "['abcd', 'cdab', 2]",
+        "expected": "2",
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v1_3025",
+      "passed": true,
+      "test_results": [
+        true,
+        true,
+        true
+      ],
+      "metadata": {
+        "execution time": 0.012666702270507812
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v1_3032",
+      "passed": true,
+      "test_results": [
+        true,
+        true
+      ],
+      "metadata": {
+        "execution time": 0.010107278823852539
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v1_3091",
+      "passed": true,
+      "test_results": [
+        true,
+        true,
+        true
+      ],
+      "metadata": {
+        "execution time": 0.01209259033203125
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v1_3153",
+      "passed": true,
+      "test_results": [
+        true,
+        true
+      ],
+      "metadata": {
+        "execution time": 0.006994962692260742
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v1_3184",
+      "passed": true,
+      "test_results": [
+        true,
+        true,
+        true
+      ],
+      "metadata": {
+        "execution time": 0.012362957000732422
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v1_3196",
+      "passed": true,
+      "test_results": [
+        true,
+        true
+      ],
+      "metadata": {
+        "execution time": 0.009999990463256836
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v1_3203",
+      "passed": false,
+      "test_results": [
+        false
+      ],
+      "metadata": {
+        "output": "[False, False]",
+        "inputs": "['abcabc', [[1, 1, 3, 5], [0, 2, 5, 5]]]",
+        "expected": "[True, True]",
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v1_3211",
+      "passed": true,
+      "test_results": [
+        true,
+        true,
+        true
+      ],
+      "metadata": {
+        "execution time": 0.011675596237182617
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v1_3212",
+      "passed": true,
+      "test_results": [
+        true,
+        true,
+        true
+      ],
+      "metadata": {
+        "execution time": 0.014703035354614258
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v1_3223",
+      "passed": true,
+      "test_results": [
+        true,
+        true
+      ],
+      "metadata": {
+        "execution time": 0.007711887359619141
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v1_3224",
+      "passed": true,
+      "test_results": [
+        true,
+        true
+      ],
+      "metadata": {
+        "execution time": 0.008000612258911133
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v1_3233",
+      "passed": true,
+      "test_results": [
+        true,
+        true,
+        true
+      ],
+      "metadata": {
+        "execution time": 0.017095088958740234
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v1_3243",
+      "passed": true,
+      "test_results": [
+        true,
+        true,
+        true
+      ],
+      "metadata": {
+        "execution time": 0.013663768768310547
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v1_3298",
+      "passed": true,
+      "test_results": [
+        true,
+        true
+      ],
+      "metadata": {
+        "execution time": 0.009465217590332031
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v1_abc301_f",
+      "passed": false,
+      "test_results": [
+        false
+      ],
+      "metadata": {
+        "output": "193",
+        "inputs": "['DD??S']",
+        "expected": "676",
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v1_abc307_e",
+      "passed": true,
+      "test_results": [
+        true,
+        true,
+        true
+      ],
+      "metadata": {
+        "execution time": 0.012969732284545898
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v1_abc308_e",
+      "passed": true,
+      "test_results": [
+        true,
+        true,
+        true
+      ],
+      "metadata": {
+        "execution time": 0.015086889266967773
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v1_abc308_f",
+      "passed": false,
+      "test_results": [
+        false
+      ],
+      "metadata": {
+        "output": "0",
+        "inputs": "[[3, 3], [4, 3, 1], [4, 4, 2], [2, 3, 1]]",
+        "expected": "4",
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v1_abc310_e",
+      "passed": true,
+      "test_results": [
+        true,
+        true
+      ],
+      "metadata": {
+        "execution time": 0.008353471755981445
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v1_abc310_f",
+      "passed": true,
+      "test_results": [
+        true,
+        true
+      ],
+      "metadata": {
+        "execution time": 0.012113094329833984
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v1_abc318_e",
+      "passed": true,
+      "test_results": [
+        true,
+        true,
+        true
+      ],
+      "metadata": {
+        "execution time": 0.012131452560424805
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v1_abc323_e",
+      "passed": true,
+      "test_results": [
+        true,
+        true,
+        true
+      ],
+      "metadata": {
+        "execution time": 0.04664802551269531
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v1_abc324_d",
+      "passed": false,
+      "test_results": [
+        true,
+        true,
+        -3
+      ],
+      "metadata": {
+        "error": "TimeoutException()",
+        "error_code": -3,
+        "error_message": "Time Limit Exceeded",
+        "inputs": "[13, 8694027811503]",
+        "expected": "840"
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v1_abc325_f",
+      "passed": true,
+      "test_results": [
+        true,
+        true,
+        true
+      ],
+      "metadata": {
+        "execution time": 0.38257288932800293
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v1_abc327_e",
+      "passed": true,
+      "test_results": [
+        true,
+        true,
+        true
+      ],
+      "metadata": {
+        "execution time": 0.014009237289428711
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v1_abc328_d",
+      "passed": true,
+      "test_results": [
+        true,
+        true,
+        true
+      ],
+      "metadata": {
+        "execution time": 0.011660575866699219
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v1_abc329_e",
+      "passed": true,
+      "test_results": [
+        true,
+        true,
+        true
+      ],
+      "metadata": {
+        "execution time": 0.010616302490234375
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v1_abc340_e",
+      "passed": false,
+      "test_results": [
+        true,
+        true,
+        false
+      ],
+      "metadata": {
+        "output": "[1]",
+        "inputs": "[[1, 4], [1], [0, 0, 0, 0]]",
+        "expected": "1",
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v1_abc343_e",
+      "passed": false,
+      "test_results": [
+        false
+      ],
+      "metadata": {
+        "output": "['No', []]",
+        "inputs": "[[840, 84, 7]]",
+        "expected": "[['Yes'], [0, 0, 0, 0, 6, 0, 6, 0, 0]]",
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v2_3313",
+      "passed": true,
+      "test_results": [
+        true,
+        true,
+        true
+      ],
+      "metadata": {
+        "execution time": 0.01308441162109375
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v2_3316",
+      "passed": false,
+      "test_results": [
+        true,
+        false
+      ],
+      "metadata": {
+        "output": "4",
+        "inputs": "[[2, 2], 2]",
+        "expected": "0",
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v2_3327",
+      "passed": true,
+      "test_results": [
+        true,
+        true
+      ],
+      "metadata": {
+        "execution time": 0.009078741073608398
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v2_3344",
+      "passed": true,
+      "test_results": [
+        true,
+        true
+      ],
+      "metadata": {
+        "execution time": 0.007006406784057617
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v2_3345",
+      "passed": true,
+      "test_results": [
+        true,
+        true,
+        true
+      ],
+      "metadata": {
+        "execution time": 0.012707233428955078
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v2_3362",
+      "passed": true,
+      "test_results": [
+        true,
+        true,
+        true
+      ],
+      "metadata": {
+        "execution time": 0.012091875076293945
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v2_3364",
+      "passed": true,
+      "test_results": [
+        true,
+        true,
+        true
+      ],
+      "metadata": {
+        "execution time": 0.014786005020141602
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v2_3375",
+      "passed": true,
+      "test_results": [
+        true,
+        true
+      ],
+      "metadata": {
+        "execution time": 0.00839686393737793
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v2_3376",
+      "passed": true,
+      "test_results": [
+        true,
+        true
+      ],
+      "metadata": {
+        "execution time": 0.009075641632080078
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v2_3382",
+      "passed": true,
+      "test_results": [
+        true,
+        true,
+        true
+      ],
+      "metadata": {
+        "execution time": 0.012682437896728516
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v2_3402",
+      "passed": true,
+      "test_results": [
+        true,
+        true,
+        true
+      ],
+      "metadata": {
+        "execution time": 0.012073516845703125
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v2_3411",
+      "passed": true,
+      "test_results": [
+        true,
+        true
+      ],
+      "metadata": {
+        "execution time": 0.03037738800048828
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v2_3414",
+      "passed": true,
+      "test_results": [
+        true,
+        true
+      ],
+      "metadata": {
+        "execution time": 0.009093761444091797
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v2_3423",
+      "passed": true,
+      "test_results": [
+        true,
+        true
+      ],
+      "metadata": {
+        "execution time": 0.006699800491333008
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v2_abc347_e",
+      "passed": true,
+      "test_results": [
+        true,
+        true
+      ],
+      "metadata": {
+        "execution time": 0.00999760627746582
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v2_abc349_e",
+      "passed": true,
+      "test_results": [
+        true,
+        true
+      ],
+      "metadata": {
+        "execution time": 0.10045337677001953
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v2_abc350_e",
+      "passed": true,
+      "test_results": [
+        true,
+        true,
+        true
+      ],
+      "metadata": {
+        "execution time": 0.0421600341796875
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v2_abc351_d",
+      "passed": false,
+      "test_results": [
+        -4
+      ],
+      "metadata": {
+        "error_code": -4,
+        "error_message": "Error during testing: "
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v2_abc351_f",
+      "passed": true,
+      "test_results": [
+        true,
+        true
+      ],
+      "metadata": {
+        "execution time": 0.00809168815612793
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v2_abc352_d",
+      "passed": true,
+      "test_results": [
+        true,
+        true,
+        true
+      ],
+      "metadata": {
+        "execution time": 0.012051582336425781
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v2_abc354_d",
+      "passed": false,
+      "test_results": [
+        false
+      ],
+      "metadata": {
+        "output": "11",
+        "inputs": "[[0, 0, 3, 3]]",
+        "expected": "10",
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v2_abc355_e",
+      "passed": true,
+      "test_results": [
+        true
+      ],
+      "metadata": {
+        "execution time": 0.003971576690673828
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v3_3436",
+      "passed": true,
+      "test_results": [
+        true,
+        true,
+        true
+      ],
+      "metadata": {
+        "execution time": 0.011254072189331055
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v3_3438",
+      "passed": true,
+      "test_results": [
+        true,
+        true
+      ],
+      "metadata": {
+        "execution time": 0.010637044906616211
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v3_3439",
+      "passed": true,
+      "test_results": [
+        true,
+        true
+      ],
+      "metadata": {
+        "execution time": 0.008102655410766602
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v3_3454",
+      "passed": true,
+      "test_results": [
+        true,
+        true
+      ],
+      "metadata": {
+        "execution time": 0.0070705413818359375
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v3_3460",
+      "passed": true,
+      "test_results": [
+        true,
+        true,
+        true
+      ],
+      "metadata": {
+        "execution time": 0.016789674758911133
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v3_3466",
+      "passed": true,
+      "test_results": [
+        true,
+        true,
+        true
+      ],
+      "metadata": {
+        "execution time": 0.012768030166625977
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v3_3478",
+      "passed": false,
+      "test_results": [
+        true,
+        true,
+        true,
+        false
+      ],
+      "metadata": {
+        "output": "False",
+        "inputs": "[4, 4, [[5, 5, 1]]]",
+        "expected": "True",
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v3_3482",
+      "passed": true,
+      "test_results": [
+        true,
+        true
+      ],
+      "metadata": {
+        "execution time": 0.006582021713256836
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v3_3532",
+      "passed": false,
+      "test_results": [
+        false
+      ],
+      "metadata": {
+        "output": "[1, 2]",
+        "inputs": "[[[0, 1], [0, 2]]]",
+        "expected": "[2, 4, 3]",
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v3_3535",
+      "passed": true,
+      "test_results": [
+        true,
+        true
+      ],
+      "metadata": {
+        "execution time": 0.008667945861816406
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v3_abc357_e",
+      "passed": true,
+      "test_results": [
+        true,
+        true,
+        true
+      ],
+      "metadata": {
+        "execution time": 0.012035369873046875
+      },
+      "difficulty": ""
+    },
+    {
+      "task_id": "v3_abc359_d",
+      "passed": true,
+      "test_results": [
+        true,
+        true,
+        true,
+        true
+      ],
+      "metadata": {
+        "execution time": 0.026279926300048828
+      },
+      "difficulty": ""
+    },
+    {
+      "task_id": "v3_abc360_e",
+      "passed": true,
+      "test_results": [
+        true,
+        true,
+        true
+      ],
+      "metadata": {
+        "execution time": 0.015099525451660156
+      },
+      "difficulty": ""
+    },
+    {
+      "task_id": "v3_abc361_d",
+      "passed": true,
+      "test_results": [
+        true,
+        true,
+        true
+      ],
+      "metadata": {
+        "execution time": 0.8710229396820068
+      },
+      "difficulty": ""
+    },
+    {
+      "task_id": "v3_abc361_f",
+      "passed": true,
+      "test_results": [
+        true,
+        true
+      ],
+      "metadata": {
+        "execution time": 1.2680320739746094
+      },
+      "difficulty": ""
+    },
+    {
+      "task_id": "v3_abc362_e",
+      "passed": true,
+      "test_results": [
+        true,
+        true,
+        true
+      ],
+      "metadata": {
+        "execution time": 0.0169827938079834
+      },
+      "difficulty": ""
+    },
+    {
+      "task_id": "v3_abc363_f",
+      "passed": false,
+      "test_results": [
+        true,
+        false
+      ],
+      "metadata": {
+        "output": "101",
+        "inputs": "[101]",
+        "expected": "-1",
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      },
+      "difficulty": ""
+    },
+    {
+      "task_id": "v3_abc365_e",
+      "passed": false,
+      "test_results": [
+        false
+      ],
+      "metadata": {
+        "output": "9",
+        "inputs": "[3, [1, 3, 2]]",
+        "expected": "3",
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      },
+      "difficulty": ""
+    },
+    {
+      "task_id": "v4_3531",
+      "passed": true,
+      "test_results": [
+        true,
+        true,
+        true
+      ],
+      "metadata": {
+        "execution time": 0.011811256408691406
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v4_3548",
+      "passed": true,
+      "test_results": [
+        true,
+        true,
+        true
+      ],
+      "metadata": {
+        "execution time": 0.030959367752075195
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v4_3550",
+      "passed": true,
+      "test_results": [
+        true,
+        true,
+        true
+      ],
+      "metadata": {
+        "execution time": 0.013109683990478516
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v4_3551",
+      "passed": true,
+      "test_results": [
+        true,
+        true
+      ],
+      "metadata": {
+        "execution time": 0.00870823860168457
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v4_3552",
+      "passed": true,
+      "test_results": [
+        true,
+        true,
+        true
+      ],
+      "metadata": {
+        "execution time": 0.014087677001953125
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v4_3560",
+      "passed": true,
+      "test_results": [
+        true,
+        true,
+        true
+      ],
+      "metadata": {
+        "execution time": 0.0970144271850586
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v4_3563",
+      "passed": true,
+      "test_results": [
+        true,
+        true
+      ],
+      "metadata": {
+        "execution time": 0.009010076522827148
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v4_3571",
+      "passed": true,
+      "test_results": [
+        true,
+        true
+      ],
+      "metadata": {
+        "execution time": 0.00799870491027832
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v4_3575",
+      "passed": false,
+      "test_results": [
+        -4
+      ],
+      "metadata": {
+        "error_code": -4,
+        "error_message": "Error during testing: cannot unpack non-iterable NoneType object"
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v4_3580",
+      "passed": true,
+      "test_results": [
+        true,
+        true,
+        true,
+        true
+      ],
+      "metadata": {
+        "execution time": 0.018051624298095703
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v4_3583",
+      "passed": true,
+      "test_results": [
+        true,
+        true,
+        true
+      ],
+      "metadata": {
+        "execution time": 0.01097869873046875
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v4_abc367_e",
+      "passed": true,
+      "test_results": [
+        true,
+        true,
+        true
+      ],
+      "metadata": {
+        "execution time": 0.015603780746459961
+      },
+      "difficulty": ""
+    },
+    {
+      "task_id": "v4_abc368_f",
+      "passed": true,
+      "test_results": [
+        true,
+        true
+      ],
+      "metadata": {
+        "execution time": 1.001143217086792
+      },
+      "difficulty": ""
+    },
+    {
+      "task_id": "v4_abc370_e",
+      "passed": true,
+      "test_results": [
+        true,
+        true,
+        true
+      ],
+      "metadata": {
+        "execution time": 0.013078689575195312
+      },
+      "difficulty": ""
+    },
+    {
+      "task_id": "v4_abc370_f",
+      "passed": false,
+      "test_results": [
+        false
+      ],
+      "metadata": {
+        "output": "[11, 1]",
+        "inputs": "[[5, 2], [3, 6, 8, 6, 4]]",
+        "expected": "[13, 1]",
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      },
+      "difficulty": ""
+    },
+    {
+      "task_id": "v4_abc370_g",
+      "passed": true,
+      "test_results": [
+        true,
+        true,
+        true,
+        true
+      ],
+      "metadata": {
+        "execution time": 0.01787567138671875
+      },
+      "difficulty": ""
+    },
+    {
+      "task_id": "v4_abc371_e",
+      "passed": true,
+      "test_results": [
+        true,
+        true
+      ],
+      "metadata": {
+        "execution time": 0.007703542709350586
+      },
+      "difficulty": ""
+    },
+    {
+      "task_id": "v4_abc373_e",
+      "passed": false,
+      "test_results": [
+        false
+      ],
+      "metadata": {
+        "output": "[1, 28, 98, 113, 117]",
+        "inputs": "[[5, 2, 16], [3, 1, 4, 1, 5]]",
+        "expected": "[2, -1, 1, -1, 0]",
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      },
+      "difficulty": ""
+    },
+    {
+      "task_id": "v4_arc182_c",
+      "passed": true,
+      "test_results": [
+        true,
+        true,
+        true
+      ],
+      "metadata": {
+        "execution time": 0.013103008270263672
+      },
+      "difficulty": ""
+    },
+    {
+      "task_id": "v4_arc182_e",
+      "passed": true,
+      "test_results": [
+        true,
+        true,
+        true
+      ],
+      "metadata": {
+        "execution time": 0.13488459587097168
+      },
+      "difficulty": ""
+    },
+    {
+      "task_id": "v5_3588",
+      "passed": true,
+      "test_results": [
+        true,
+        true
+      ],
+      "metadata": {
+        "execution time": 0.010102033615112305
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v5_3603",
+      "passed": true,
+      "test_results": [
+        true,
+        true
+      ],
+      "metadata": {
+        "execution time": 0.008797645568847656
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v5_3604",
+      "passed": true,
+      "test_results": [
+        true,
+        true,
+        true
+      ],
+      "metadata": {
+        "execution time": 0.011194467544555664
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v5_3608",
+      "passed": false,
+      "test_results": [
+        false
+      ],
+      "metadata": {
+        "output": "50",
+        "inputs": "[[1, 2, 3, 4]]",
+        "expected": "10",
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v5_3631",
+      "passed": true,
+      "test_results": [
+        true,
+        true,
+        true
+      ],
+      "metadata": {
+        "execution time": 0.01099252700805664
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v5_3637",
+      "passed": true,
+      "test_results": [
+        true,
+        true,
+        true
+      ],
+      "metadata": {
+        "execution time": 0.023988008499145508
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v5_3646",
+      "passed": true,
+      "test_results": [
+        true,
+        true
+      ],
+      "metadata": {
+        "execution time": 0.012042999267578125
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v5_3648",
+      "passed": false,
+      "test_results": [
+        -4
+      ],
+      "metadata": {
+        "error_code": -4,
+        "error_message": "Error during testing: unterminated string literal (detected at line 59) (<string>, line 59)"
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v5_3658",
+      "passed": true,
+      "test_results": [
+        true,
+        true,
+        true
+      ],
+      "metadata": {
+        "execution time": 0.010998249053955078
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v5_3675",
+      "passed": true,
+      "test_results": [
+        true,
+        true
+      ],
+      "metadata": {
+        "execution time": 0.010277271270751953
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v5_3680",
+      "passed": false,
+      "test_results": [
+        -4
+      ],
+      "metadata": {
+        "error_code": -4,
+        "error_message": "Error during testing: invalid character '，' (U+FF0C) (<string>, line 51)"
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v5_abc378_e",
+      "passed": true,
+      "test_results": [
+        true,
+        true
+      ],
+      "metadata": {
+        "execution time": 0.00799703598022461
+      },
+      "difficulty": ""
+    },
+    {
+      "task_id": "v5_abc378_g",
+      "passed": false,
+      "test_results": [
+        false
+      ],
+      "metadata": {
+        "output": "0",
+        "inputs": "[[3, 2, 998244353]]",
+        "expected": "10",
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      },
+      "difficulty": ""
+    },
+    {
+      "task_id": "v5_abc379_e",
+      "passed": true,
+      "test_results": [
+        true,
+        true
+      ],
+      "metadata": {
+        "execution time": 0.009670734405517578
+      },
+      "difficulty": ""
+    },
+    {
+      "task_id": "v5_abc380_f",
+      "passed": false,
+      "test_results": [
+        -4
+      ],
+      "metadata": {
+        "error": "TypeError(\"'int' object is not subscriptable\")",
+        "error_code": -4,
+        "error_message": "Runtime Error",
+        "inputs": "[[1, 1, 2], 2, 4, [1, 3]]",
+        "expected": "Aoki"
+      },
+      "difficulty": ""
+    },
+    {
+      "task_id": "v5_abc380_g",
+      "passed": false,
+      "test_results": [
+        -4
+      ],
+      "metadata": {
+        "error_code": -4,
+        "error_message": "Error during testing: "
+      },
+      "difficulty": ""
+    },
+    {
+      "task_id": "v5_abc381_d",
+      "passed": true,
+      "test_results": [
+        true,
+        true,
+        true
+      ],
+      "metadata": {
+        "execution time": 0.01301264762878418
+      },
+      "difficulty": ""
+    },
+    {
+      "task_id": "v5_abc386_f",
+      "passed": true,
+      "test_results": [
+        true,
+        true,
+        true
+      ],
+      "metadata": {
+        "execution time": 0.013104438781738281
+      },
+      "difficulty": ""
+    },
+    {
+      "task_id": "v5_arc184_c",
+      "passed": false,
+      "test_results": [
+        true,
+        false
+      ],
+      "metadata": {
+        "output": "5",
+        "inputs": "[6, [0, 2, 3, 5, 7, 8]]",
+        "expected": "4",
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      },
+      "difficulty": ""
+    },
+    {
+      "task_id": "v5_arc185_d",
+      "passed": false,
+      "test_results": [
+        true,
+        false
+      ],
+      "metadata": {
+        "output": "582035307",
+        "inputs": "[[123456, 185185]]",
+        "expected": "69292914",
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      },
+      "difficulty": ""
+    },
+    {
+      "task_id": "v5_arc186_e",
+      "passed": false,
+      "test_results": [
+        -4
+      ],
+      "metadata": {
+        "error_code": -4,
+        "error_message": "Error during testing: unterminated string literal (detected at line 51) (<string>, line 51)"
+      },
+      "difficulty": ""
+    },
+    {
+      "task_id": "v5_arc187_b",
+      "passed": false,
+      "test_results": [
+        -4
+      ],
+      "metadata": {
+        "error_code": -4,
+        "error_message": "Error during testing: list index out of range"
+      },
+      "difficulty": ""
+    },
+    {
+      "task_id": "v5_arc189_b",
+      "passed": false,
+      "test_results": [
+        -4
+      ],
+      "metadata": {
+        "error_code": -4,
+        "error_message": "Error during testing: "
+      },
+      "difficulty": ""
+    },
+    {
+      "task_id": "v5_arc189_c",
+      "passed": false,
+      "test_results": [
+        true,
+        false
+      ],
+      "metadata": {
+        "output": "4",
+        "inputs": "[[5, 3], [0, 0, 0, 0, 0], [0, 0, 0, 0, 0], [4, 1, 2, 3, 5], [3, 4, 5, 2, 1]]",
+        "expected": "0",
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      },
+      "difficulty": ""
+    },
+    {
+      "task_id": "v5_arc189_d",
+      "passed": false,
+      "test_results": [
+        -3
+      ],
+      "metadata": {
+        "error": "TimeoutException()",
+        "error_code": -3,
+        "error_message": "Time Limit Exceeded",
+        "inputs": "[6, [4, 13, 2, 3, 2, 6]]",
+        "expected": "[4, 30, 2, 13, 2, 13]"
+      },
+      "difficulty": ""
+    },
+    {
+      "task_id": "v6_abc387_f",
+      "passed": false,
+      "test_results": [
+        false
+      ],
+      "metadata": {
+        "output": "10",
+        "inputs": "[[3, 3], [2, 1, 1]]",
+        "expected": "6",
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      },
+      "difficulty": ""
+    },
+    {
+      "task_id": "v6_abc389_e",
+      "passed": true,
+      "test_results": [
+        true,
+        true
+      ],
+      "metadata": {
+        "execution time": 0.00908660888671875
+      },
+      "difficulty": ""
+    },
+    {
+      "task_id": "v6_abc389_g",
+      "passed": false,
+      "test_results": [
+        false
+      ],
+      "metadata": {
+        "output": "[810, 2100, 3060, 3030, 2230, 1210, 450, 100, 10, 0, 0]",
+        "inputs": "[[4, 998244353]]",
+        "expected": "[12, 9, 3, 0]",
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      },
+      "difficulty": ""
+    },
+    {
+      "task_id": "v6_abc390_f",
+      "passed": true,
+      "test_results": [
+        true,
+        true,
+        true
+      ],
+      "metadata": {
+        "execution time": 0.014716625213623047
+      },
+      "difficulty": ""
+    },
+    {
+      "task_id": "v6_abc390_g",
+      "passed": false,
+      "test_results": [
+        -4
+      ],
+      "metadata": {
+        "error_code": -4,
+        "error_message": "Error during testing: "
+      },
+      "difficulty": ""
+    },
+    {
+      "task_id": "v6_abc391_e",
+      "passed": true,
+      "test_results": [
+        true,
+        true
+      ],
+      "metadata": {
+        "execution time": 0.008688926696777344
+      },
+      "difficulty": ""
+    },
+    {
+      "task_id": "v6_abc391_g",
+      "passed": true,
+      "test_results": [
+        true,
+        true,
+        true
+      ],
+      "metadata": {
+        "execution time": 0.7095863819122314
+      },
+      "difficulty": ""
+    },
+    {
+      "task_id": "v6_abc392_f",
+      "passed": true,
+      "test_results": [
+        true,
+        true
+      ],
+      "metadata": {
+        "execution time": 0.008096456527709961
+      },
+      "difficulty": ""
+    },
+    {
+      "task_id": "v6_abc393_d",
+      "passed": true,
+      "test_results": [
+        true,
+        true,
+        true
+      ],
+      "metadata": {
+        "execution time": 0.013477325439453125
+      },
+      "difficulty": ""
+    },
+    {
+      "task_id": "v6_abc397_d",
+      "passed": true,
+      "test_results": [
+        true,
+        true,
+        true
+      ],
+      "metadata": {
+        "execution time": 0.4162306785583496
+      },
+      "difficulty": ""
+    },
+    {
+      "task_id": "v6_abc397_f",
+      "passed": true,
+      "test_results": [
+        true,
+        true
+      ],
+      "metadata": {
+        "execution time": 0.008111000061035156
+      },
+      "difficulty": ""
+    },
+    {
+      "task_id": "v6_abc398_d",
+      "passed": true,
+      "test_results": [
+        true,
+        true,
+        true
+      ],
+      "metadata": {
+        "execution time": 0.013931989669799805
+      },
+      "difficulty": ""
+    },
+    {
+      "task_id": "v6_abc398_f",
+      "passed": true,
+      "test_results": [
+        true,
+        true,
+        true
+      ],
+      "metadata": {
+        "execution time": 0.012679815292358398
+      },
+      "difficulty": ""
+    },
+    {
+      "task_id": "v6_abc399_e",
+      "passed": true,
+      "test_results": [
+        true,
+        true,
+        true,
+        true
+      ],
+      "metadata": {
+        "execution time": 0.019880056381225586
+      },
+      "difficulty": ""
+    },
+    {
+      "task_id": "v6_abc399_f",
+      "passed": true,
+      "test_results": [
+        true,
+        true,
+        true
+      ],
+      "metadata": {
+        "execution time": 0.013069868087768555
+      },
+      "difficulty": ""
+    },
+    {
+      "task_id": "v6_arc192_b",
+      "passed": true,
+      "test_results": [
+        true,
+        true,
+        true
+      ],
+      "metadata": {
+        "execution time": 0.0115814208984375
+      },
+      "difficulty": ""
+    },
+    {
+      "task_id": "v6_arc192_e",
+      "passed": false,
+      "test_results": [
+        false
+      ],
+      "metadata": {
+        "output": "13",
+        "inputs": "[[4, 3, 1, 2, 2, 3]]",
+        "expected": "192",
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      },
+      "difficulty": ""
+    },
+    {
+      "task_id": "v6_arc193_b",
+      "passed": false,
+      "test_results": [
+        false
+      ],
+      "metadata": {
+        "output": "6",
+        "inputs": "[3, '010']",
+        "expected": "14",
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      },
+      "difficulty": ""
+    },
+    {
+      "task_id": "v6_arc194_b",
+      "passed": false,
+      "test_results": [
+        false
+      ],
+      "metadata": {
+        "output": "3",
+        "inputs": "[3, [3, 2, 1]]",
+        "expected": "4",
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      },
+      "difficulty": ""
+    },
+    {
+      "task_id": "v6_arc194_d",
+      "passed": true,
+      "test_results": [
+        true,
+        true
+      ],
+      "metadata": {
+        "execution time": 0.023102283477783203
+      },
+      "difficulty": ""
+    },
+    {
+      "task_id": "v6_arc195_b",
+      "passed": true,
+      "test_results": [
+        true,
+        true,
+        true
+      ],
+      "metadata": {
+        "execution time": 0.013591766357421875
+      },
+      "difficulty": ""
+    },
+    {
+      "task_id": "v6_arc196_a",
+      "passed": true,
+      "test_results": [
+        true,
+        true,
+        true
+      ],
+      "metadata": {
+        "execution time": 0.014689207077026367
+      },
+      "difficulty": ""
+    }
+  ]
+}

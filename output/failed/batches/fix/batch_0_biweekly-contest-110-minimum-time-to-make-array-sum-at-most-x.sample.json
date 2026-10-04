@@ -1,0 +1,2675 @@
+{
+ "task_id": "biweekly-contest-110-minimum-time-to-make-array-sum-at-most-x",
+ "dataset": "Algorithm",
+ "title": "minimum-time-to-make-array-sum-at-most-x",
+ "difficulty": "Hard",
+ "prompt": "\"\"\"\nYou are given two 0-indexed integer arrays nums1 and nums2 of equal length. Every second, for all indices 0 <= i < nums1.length, value of nums1[i] is incremented by nums2[i]. After this is done, you can do the following operation:\n\n * Choose an index 0 <= i < nums1.length and make nums1[i] = 0.\n\nYou are also given an integer x.\n\nReturn the minimum time in which you can make the sum of all elements of nums1 to be less than or equal to x, or -1 if this is not possible.\n\nExample 1:\n\nInput: nums1 = [1,2,3], nums2 = [1,2,3], x = 4\nOutput: 3\nExplanation:\nFor the 1st second, we apply the operation on i = 0. Therefore nums1 = [0,2+2,3+3] = [0,4,6].\nFor the 2nd second, we apply the operation on i = 1. Therefore nums1 = [0+1,0,6+3] = [1,0,9].\nFor the 3rd second, we apply the operation on i = 2. Therefore nums1 = [1+1,0+2,0] = [2,2,0].\nNow sum of nums1 = 4. It can be shown that these operations are optimal, so we return 3.\n\nExample 2:\n\nInput: nums1 = [1,2,3], nums2 = [3,3,3], x = 4\nOutput: -1\nExplanation: It can be shown that the sum of nums1 will always be greater than x, no matter which operations are performed.\n\n\nConstraints:\n\n * 1 <= nums1.length <= 103\n * 1 <= nums1[i] <= 103\n * 0 <= nums2[i] <= 103\n * nums1.length == nums2.length\n * 0 <= x <= 106\n\"\"\"\nclass Solution:\n    def minimumTime(self, nums1: List[int], nums2: List[int], x: int) -> int:\n        ",
+ "starter_code": "class Solution:\n    def minimumTime(self, nums1: List[int], nums2: List[int], x: int) -> int:\n        ",
+ "entry_point": "",
+ "test": "\nmy_solution = Solution()\n\ntest_input = { \"nums1\": [1,2,3], \"nums2\": [1,2,3], \"x\": 4 }\nassert my_solution.minimumTime(**test_input) == 3\n\ntest_input = { \"nums1\": [1,2,3], \"nums2\": [3,3,3], \"x\": 4 }\nassert my_solution.minimumTime(**test_input) == -1\n\ntest_input = { \"nums1\": [4,4,9,10], \"nums2\": [4,4,1,3], \"x\": 16 }\nassert my_solution.minimumTime(**test_input) == 4\n\ntest_input = { \"nums1\": [5,3], \"nums2\": [3,2], \"x\": 4 }\nassert my_solution.minimumTime(**test_input) == 2\n\ntest_input = { \"nums1\": [4,5,3,2,3,9,5,7,10,4], \"nums2\": [4,4,0,4,1,2,4,0,4,0], \"x\": 47 }\nassert my_solution.minimumTime(**test_input) == -1\n\ntest_input = { \"nums1\": [7,9,8,5,8,3], \"nums2\": [0,1,4,2,3,1], \"x\": 37 }\nassert my_solution.minimumTime(**test_input) == 2\n\ntest_input = { \"nums1\": [8,2,3], \"nums2\": [1,4,2], \"x\": 13 }\nassert my_solution.minimumTime(**test_input) == 0\n\ntest_input = { \"nums1\": [4,7,2,3,4,3,10,8], \"nums2\": [3,4,0,1,1,0,2,2], \"x\": 36 }\nassert my_solution.minimumTime(**test_input) == 4\n\ntest_input = { \"nums1\": [2,10,10,4,6,3], \"nums2\": [1,0,0,1,3,1], \"x\": 35 }\nassert my_solution.minimumTime(**test_input) == 0\n\ntest_input = { \"nums1\": [9,5,3], \"nums2\": [4,1,3], \"x\": 17 }\nassert my_solution.minimumTime(**test_input) == 0\n\ntest_input = { \"nums1\": [1,7,9,4,8,8,1], \"nums2\": [2,2,3,2,0,1,0], \"x\": 20 }\nassert my_solution.minimumTime(**test_input) == 6\n\ntest_input = { \"nums1\": [9,2,8,3,1,9,7,6], \"nums2\": [0,3,4,1,3,4,2,1], \"x\": 40 }\nassert my_solution.minimumTime(**test_input) == 8\n\ntest_input = { \"nums1\": [10], \"nums2\": [3], \"x\": 10 }\nassert my_solution.minimumTime(**test_input) == 0\n\ntest_input = { \"nums1\": [7,6,8,2,8,9,3,3], \"nums2\": [2,2,4,0,0,2,2,3], \"x\": 45 }\nassert my_solution.minimumTime(**test_input) == 5\n\ntest_input = { \"nums1\": [4,9,5,2,3], \"nums2\": [4,2,0,4,0], \"x\": 18 }\nassert my_solution.minimumTime(**test_input) == 3\n\ntest_input = { \"nums1\": [2,10,2,7,8,9,7,6,6], \"nums2\": [4,2,1,4,3,2,4,4,4], \"x\": 55 }\nassert my_solution.minimumTime(**test_input) == -1\n\ntest_input = { \"nums1\": [6,8,10,7,10,9], \"nums2\": [4,2,0,4,4,2], \"x\": 38 }\nassert my_solution.minimumTime(**test_input) == 5\n\ntest_input = { \"nums1\": [9,2,8,5,8,3,5,2,2], \"nums2\": [4,3,4,2,0,1,4,4,2], \"x\": 41 }\nassert my_solution.minimumTime(**test_input) == -1\n\ntest_input = { \"nums1\": [5,3,2,3,10,4,7,9,1,10], \"nums2\": [2,0,2,0,3,3,4,4,0,1], \"x\": 30 }\nassert my_solution.minimumTime(**test_input) == -1\n\ntest_input = { \"nums1\": [2,3,5], \"nums2\": [0,0,1], \"x\": 8 }\nassert my_solution.minimumTime(**test_input) == 1\n\ntest_input = { \"nums1\": [7,9,7,9], \"nums2\": [4,2,0,4], \"x\": 32 }\nassert my_solution.minimumTime(**test_input) == 0\n\ntest_input = { \"nums1\": [8,5,6,4,7,6,3,9,4], \"nums2\": [0,4,2,4,3,3,1,4,4], \"x\": 38 }\nassert my_solution.minimumTime(**test_input) == -1\n\ntest_input = { \"nums1\": [3,1,1,1], \"nums2\": [0,0,3,0], \"x\": 3 }\nassert my_solution.minimumTime(**test_input) == 2\n\ntest_input = { \"nums1\": [6,6,8,7,1,7], \"nums2\": [2,2,1,1,2,3], \"x\": 27 }\nassert my_solution.minimumTime(**test_input) == 5\n\ntest_input = { \"nums1\": [10,5], \"nums2\": [1,3], \"x\": 14 }\nassert my_solution.minimumTime(**test_input) == 1\n\ntest_input = { \"nums1\": [10,7,1,2,6], \"nums2\": [4,3,2,2,4], \"x\": 17 }\nassert my_solution.minimumTime(**test_input) == -1\n\ntest_input = { \"nums1\": [9,5,6,1,9,4,5,7], \"nums2\": [0,4,0,2,2,3,2,4], \"x\": 24 }\nassert my_solution.minimumTime(**test_input) == -1\n\ntest_input = { \"nums1\": [4,1,2,4,10,7,8], \"nums2\": [0,2,0,4,0,2,1], \"x\": 18 }\nassert my_solution.minimumTime(**test_input) == 5\n\ntest_input = { \"nums1\": [4], \"nums2\": [0], \"x\": 4 }\nassert my_solution.minimumTime(**test_input) == 0\n\ntest_input = { \"nums1\": [4,7,1,7,5,10], \"nums2\": [0,4,3,2,3,1], \"x\": 29 }\nassert my_solution.minimumTime(**test_input) == 4\n\ntest_input = { \"nums1\": [9,8,9,7,4,6,8,6,4], \"nums2\": [4,3,3,3,1,2,2,1,0], \"x\": 42 }\nassert my_solution.minimumTime(**test_input) == -1\n\ntest_input = { \"nums1\": [8,3,2], \"nums2\": [3,1,3], \"x\": 7 }\nassert my_solution.minimumTime(**test_input) == 3\n\ntest_input = { \"nums1\": [6,5,2,8,8,1,6,4], \"nums2\": [1,2,1,0,1,0,3,1], \"x\": 23 }\nassert my_solution.minimumTime(**test_input) == 6\n\ntest_input = { \"nums1\": [3,8,5,4,10,2], \"nums2\": [4,1,4,2,1,0], \"x\": 26 }\nassert my_solution.minimumTime(**test_input) == 4\n\ntest_input = { \"nums1\": [5,3], \"nums2\": [0,3], \"x\": 4 }\nassert my_solution.minimumTime(**test_input) == 2\n\ntest_input = { \"nums1\": [8], \"nums2\": [4], \"x\": 7 }\nassert my_solution.minimumTime(**test_input) == 1\n\ntest_input = { \"nums1\": [1,8,6,8,6], \"nums2\": [3,0,2,4,0], \"x\": 16 }\nassert my_solution.minimumTime(**test_input) == 4\n\ntest_input = { \"nums1\": [8,6], \"nums2\": [0,3], \"x\": 14 }\nassert my_solution.minimumTime(**test_input) == 0\n\ntest_input = { \"nums1\": [3,4,5,2,4,10,6,3,6,4], \"nums2\": [3,0,0,2,4,2,4,1,2,1], \"x\": 28 }\nassert my_solution.minimumTime(**test_input) == -1\n\ntest_input = { \"nums1\": [3,2,5,8,8], \"nums2\": [1,3,2,1,0], \"x\": 20 }\nassert my_solution.minimumTime(**test_input) == 3\n\ntest_input = { \"nums1\": [9,2,8,7,5,2,3,2], \"nums2\": [3,2,3,0,4,3,1,4], \"x\": 37 }\nassert my_solution.minimumTime(**test_input) == -1\n\ntest_input = { \"nums1\": [6,4,3,1,10,5,10,3,5,9], \"nums2\": [0,4,1,2,1,2,3,3,4,2], \"x\": 41 }\nassert my_solution.minimumTime(**test_input) == -1\n\ntest_input = { \"nums1\": [6,10,7,10,6,7,7,4], \"nums2\": [1,3,0,0,1,2,1,3], \"x\": 55 }\nassert my_solution.minimumTime(**test_input) == 1\n\ntest_input = { \"nums1\": [6,4,3,1], \"nums2\": [1,1,3,3], \"x\": 7 }\nassert my_solution.minimumTime(**test_input) == -1\n\ntest_input = { \"nums1\": [2,10,8,10,1,4,7,10,5,1], \"nums2\": [4,3,1,2,3,1,3,2,2,1], \"x\": 29 }\nassert my_solution.minimumTime(**test_input) == -1\n\ntest_input = { \"nums1\": [2,8,5], \"nums2\": [2,0,2], \"x\": 14 }\nassert my_solution.minimumTime(**test_input) == 1\n\ntest_input = { \"nums1\": [7,10,1,3,7,3,2], \"nums2\": [1,1,3,0,2,2,3], \"x\": 22 }\nassert my_solution.minimumTime(**test_input) == 7\n\ntest_input = { \"nums1\": [6,4,2,3,8,6,6,8,10], \"nums2\": [2,1,4,1,2,1,0,1,4], \"x\": 39 }\nassert my_solution.minimumTime(**test_input) == 9\n\ntest_input = { \"nums1\": [4,4,8,10,2,7,9,8,1,8], \"nums2\": [1,0,4,0,3,3,1,2,2,1], \"x\": 44 }\nassert my_solution.minimumTime(**test_input) == 10\n\ntest_input = { \"nums1\": [2,4,1,8,3,9], \"nums2\": [0,2,0,0,0,4], \"x\": 21 }\nassert my_solution.minimumTime(**test_input) == 1\n\ntest_input = { \"nums1\": [6,10], \"nums2\": [2,1], \"x\": 8 }\nassert my_solution.minimumTime(**test_input) == 1\n\ntest_input = { \"nums1\": [8,6], \"nums2\": [3,0], \"x\": 10 }\nassert my_solution.minimumTime(**test_input) == 1\n\ntest_input = { \"nums1\": [5,5,5,10], \"nums2\": [0,1,0,3], \"x\": 21 }\nassert my_solution.minimumTime(**test_input) == 1\n\ntest_input = { \"nums1\": [7,1,1,2,9,3,3,2,2], \"nums2\": [0,1,4,3,4,1,2,1,2], \"x\": 15 }\nassert my_solution.minimumTime(**test_input) == -1\n\ntest_input = { \"nums1\": [10,4,1,10,7,5,6,3,2,10], \"nums2\": [4,0,4,0,3,4,3,0,0,3], \"x\": 50 }\nassert my_solution.minimumTime(**test_input) == 9\n\ntest_input = { \"nums1\": [9,4,6,2], \"nums2\": [3,4,0,4], \"x\": 15 }\nassert my_solution.minimumTime(**test_input) == 4\n\ntest_input = { \"nums1\": [7,3,9,2,9,10,7,10,10,4], \"nums2\": [1,4,2,1,4,1,1,0,3,4], \"x\": 69 }\nassert my_solution.minimumTime(**test_input) == 8\n\ntest_input = { \"nums1\": [4,5,6], \"nums2\": [4,4,0], \"x\": 13 }\nassert my_solution.minimumTime(**test_input) == 2\n\ntest_input = { \"nums1\": [2,3,3,4,4], \"nums2\": [2,2,1,1,1], \"x\": 12 }\nassert my_solution.minimumTime(**test_input) == 5\n\ntest_input = { \"nums1\": [4,5,5,3,7], \"nums2\": [3,3,2,0,4], \"x\": 21 }\nassert my_solution.minimumTime(**test_input) == 4\n\ntest_input = { \"nums1\": [1,3,3,4], \"nums2\": [1,3,2,3], \"x\": 6 }\nassert my_solution.minimumTime(**test_input) == -1\n\ntest_input = { \"nums1\": [9,1,8,9,7,2], \"nums2\": [3,3,0,2,3,4], \"x\": 26 }\nassert my_solution.minimumTime(**test_input) == 6\n\ntest_input = { \"nums1\": [5,5,6,8,6,1,5,7,8], \"nums2\": [2,1,0,3,2,2,2,2,4], \"x\": 33 }\nassert my_solution.minimumTime(**test_input) == -1\n\ntest_input = { \"nums1\": [2,9,5,5,6,7,7,9], \"nums2\": [1,3,0,3,3,3,4,2], \"x\": 47 }\nassert my_solution.minimumTime(**test_input) == 8\n\ntest_input = { \"nums1\": [3], \"nums2\": [0], \"x\": 2 }\nassert my_solution.minimumTime(**test_input) == 1\n\ntest_input = { \"nums1\": [3,6,4,8,7,9,3,3,9], \"nums2\": [4,3,2,0,0,3,3,1,4], \"x\": 34 }\nassert my_solution.minimumTime(**test_input) == -1\n\ntest_input = { \"nums1\": [8], \"nums2\": [1], \"x\": 6 }\nassert my_solution.minimumTime(**test_input) == 1\n\ntest_input = { \"nums1\": [1,7,6,2,9], \"nums2\": [4,2,3,3,0], \"x\": 23 }\nassert my_solution.minimumTime(**test_input) == 4\n\ntest_input = { \"nums1\": [9,10,10,5,2,4], \"nums2\": [2,4,0,3,3,4], \"x\": 40 }\nassert my_solution.minimumTime(**test_input) == 0\n\ntest_input = { \"nums1\": [9,10,9,4,8,9,10,7,5], \"nums2\": [2,0,3,0,2,4,3,2,4], \"x\": 69 }\nassert my_solution.minimumTime(**test_input) == 7\n\ntest_input = { \"nums1\": [1,7,2,7], \"nums2\": [1,0,2,3], \"x\": 10 }\nassert my_solution.minimumTime(**test_input) == 2\n\ntest_input = { \"nums1\": [10,4], \"nums2\": [2,4], \"x\": 10 }\nassert my_solution.minimumTime(**test_input) == 1\n\ntest_input = { \"nums1\": [2,10,3,6,2,10,4], \"nums2\": [4,1,4,4,4,0,0], \"x\": 30 }\nassert my_solution.minimumTime(**test_input) == 7\n\ntest_input = { \"nums1\": [5,9,6], \"nums2\": [1,3,2], \"x\": 20 }\nassert my_solution.minimumTime(**test_input) == 0\n\ntest_input = { \"nums1\": [4,5,2,4,2,7], \"nums2\": [0,0,0,0,3,0], \"x\": 23 }\nassert my_solution.minimumTime(**test_input) == 1\n\ntest_input = { \"nums1\": [8], \"nums2\": [0], \"x\": 7 }\nassert my_solution.minimumTime(**test_input) == 1\n\ntest_input = { \"nums1\": [3], \"nums2\": [3], \"x\": 3 }\nassert my_solution.minimumTime(**test_input) == 0\n\ntest_input = { \"nums1\": [6,1,10,10], \"nums2\": [3,2,4,0], \"x\": 13 }\nassert my_solution.minimumTime(**test_input) == 3\n\ntest_input = { \"nums1\": [8,9,2,10,10,1,5], \"nums2\": [4,3,3,0,2,1,2], \"x\": 38 }\nassert my_solution.minimumTime(**test_input) == 5\n\ntest_input = { \"nums1\": [10,2], \"nums2\": [3,4], \"x\": 10 }\nassert my_solution.minimumTime(**test_input) == 1\n\ntest_input = { \"nums1\": [8,9,2], \"nums2\": [2,4,1], \"x\": 16 }\nassert my_solution.minimumTime(**test_input) == 1\n\ntest_input = { \"nums1\": [4,2,3], \"nums2\": [4,2,2], \"x\": 4 }\nassert my_solution.minimumTime(**test_input) == -1\n\ntest_input = { \"nums1\": [9,8,7,6,5,1,4], \"nums2\": [2,4,1,2,3,3,0], \"x\": 28 }\nassert my_solution.minimumTime(**test_input) == 7\n\ntest_input = { \"nums1\": [3,4,10,1,2,4,10,3,7,2], \"nums2\": [4,0,0,1,1,4,4,4,2,1], \"x\": 44 }\nassert my_solution.minimumTime(**test_input) == -1\n\ntest_input = { \"nums1\": [3,5,5,1,6,4,3], \"nums2\": [1,3,4,3,3,1,4], \"x\": 23 }\nassert my_solution.minimumTime(**test_input) == -1\n\ntest_input = { \"nums1\": [3,8,10,2,5,10], \"nums2\": [4,0,3,2,4,3], \"x\": 37 }\nassert my_solution.minimumTime(**test_input) == 4\n\ntest_input = { \"nums1\": [8,8,10,8,9,6,1,8], \"nums2\": [2,0,0,1,2,1,0,4], \"x\": 38 }\nassert my_solution.minimumTime(**test_input) == 4\n\ntest_input = { \"nums1\": [10,7,3,10,7,6,6,10], \"nums2\": [1,2,4,0,3,4,0,3], \"x\": 41 }\nassert my_solution.minimumTime(**test_input) == 7\n\ntest_input = { \"nums1\": [6,7,4,1,9,6], \"nums2\": [3,3,3,0,0,1], \"x\": 32 }\nassert my_solution.minimumTime(**test_input) == 2\n\ntest_input = { \"nums1\": [2], \"nums2\": [2], \"x\": 1 }\nassert my_solution.minimumTime(**test_input) == 1\n\ntest_input = { \"nums1\": [8,9,4,5,6,7], \"nums2\": [0,3,4,3,3,1], \"x\": 27 }\nassert my_solution.minimumTime(**test_input) == 6\n\ntest_input = { \"nums1\": [7], \"nums2\": [1], \"x\": 3 }\nassert my_solution.minimumTime(**test_input) == 1\n\ntest_input = { \"nums1\": [9], \"nums2\": [0], \"x\": 5 }\nassert my_solution.minimumTime(**test_input) == 1\n\ntest_input = { \"nums1\": [7,2,2,2,7,4,2,10,8], \"nums2\": [4,3,2,4,4,0,1,1,2], \"x\": 31 }\nassert my_solution.minimumTime(**test_input) == -1\n\ntest_input = { \"nums1\": [7,2,6,4,9,9,1,9,6,7], \"nums2\": [0,1,3,2,3,3,4,2,2,1], \"x\": 58 }\nassert my_solution.minimumTime(**test_input) == -1\n\ntest_input = { \"nums1\": [6,8,2,3,9,8,10,9,9], \"nums2\": [1,4,2,3,2,0,1,1,3], \"x\": 40 }\nassert my_solution.minimumTime(**test_input) == -1\n\ntest_input = { \"nums1\": [1,1,5], \"nums2\": [4,4,2], \"x\": 3 }\nassert my_solution.minimumTime(**test_input) == -1\n\ntest_input = { \"nums1\": [7,5,8,3,10,2,4,8,7], \"nums2\": [4,4,2,4,2,3,1,1,1], \"x\": 49 }\nassert my_solution.minimumTime(**test_input) == -1\n\ntest_input = { \"nums1\": [4,7,2,6,9,2], \"nums2\": [1,2,1,4,1,3], \"x\": 28 }\nassert my_solution.minimumTime(**test_input) == 3\n\ntest_input = { \"nums1\": [3,6,3,9,5], \"nums2\": [0,4,0,3,1], \"x\": 23 }\nassert my_solution.minimumTime(**test_input) == 1",
+ "test_cases": [
+  {
+   "input": {
+    "args": [
+     [
+      1,
+      2,
+      3
+     ],
+     [
+      1,
+      2,
+      3
+     ],
+     4
+    ]
+   },
+   "output": 3,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      1,
+      2,
+      3
+     ],
+     [
+      3,
+      3,
+      3
+     ],
+     4
+    ]
+   },
+   "output": -1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      4,
+      4,
+      9,
+      10
+     ],
+     [
+      4,
+      4,
+      1,
+      3
+     ],
+     16
+    ]
+   },
+   "output": 4,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      5,
+      3
+     ],
+     [
+      3,
+      2
+     ],
+     4
+    ]
+   },
+   "output": 2,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      4,
+      5,
+      3,
+      2,
+      3,
+      9,
+      5,
+      7,
+      10,
+      4
+     ],
+     [
+      4,
+      4,
+      0,
+      4,
+      1,
+      2,
+      4,
+      0,
+      4,
+      0
+     ],
+     47
+    ]
+   },
+   "output": -1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      7,
+      9,
+      8,
+      5,
+      8,
+      3
+     ],
+     [
+      0,
+      1,
+      4,
+      2,
+      3,
+      1
+     ],
+     37
+    ]
+   },
+   "output": 2,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      8,
+      2,
+      3
+     ],
+     [
+      1,
+      4,
+      2
+     ],
+     13
+    ]
+   },
+   "output": 0,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      4,
+      7,
+      2,
+      3,
+      4,
+      3,
+      10,
+      8
+     ],
+     [
+      3,
+      4,
+      0,
+      1,
+      1,
+      0,
+      2,
+      2
+     ],
+     36
+    ]
+   },
+   "output": 4,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      2,
+      10,
+      10,
+      4,
+      6,
+      3
+     ],
+     [
+      1,
+      0,
+      0,
+      1,
+      3,
+      1
+     ],
+     35
+    ]
+   },
+   "output": 0,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      9,
+      5,
+      3
+     ],
+     [
+      4,
+      1,
+      3
+     ],
+     17
+    ]
+   },
+   "output": 0,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      1,
+      7,
+      9,
+      4,
+      8,
+      8,
+      1
+     ],
+     [
+      2,
+      2,
+      3,
+      2,
+      0,
+      1,
+      0
+     ],
+     20
+    ]
+   },
+   "output": 6,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      9,
+      2,
+      8,
+      3,
+      1,
+      9,
+      7,
+      6
+     ],
+     [
+      0,
+      3,
+      4,
+      1,
+      3,
+      4,
+      2,
+      1
+     ],
+     40
+    ]
+   },
+   "output": 8,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      10
+     ],
+     [
+      3
+     ],
+     10
+    ]
+   },
+   "output": 0,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      7,
+      6,
+      8,
+      2,
+      8,
+      9,
+      3,
+      3
+     ],
+     [
+      2,
+      2,
+      4,
+      0,
+      0,
+      2,
+      2,
+      3
+     ],
+     45
+    ]
+   },
+   "output": 5,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      4,
+      9,
+      5,
+      2,
+      3
+     ],
+     [
+      4,
+      2,
+      0,
+      4,
+      0
+     ],
+     18
+    ]
+   },
+   "output": 3,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      2,
+      10,
+      2,
+      7,
+      8,
+      9,
+      7,
+      6,
+      6
+     ],
+     [
+      4,
+      2,
+      1,
+      4,
+      3,
+      2,
+      4,
+      4,
+      4
+     ],
+     55
+    ]
+   },
+   "output": -1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      6,
+      8,
+      10,
+      7,
+      10,
+      9
+     ],
+     [
+      4,
+      2,
+      0,
+      4,
+      4,
+      2
+     ],
+     38
+    ]
+   },
+   "output": 5,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      9,
+      2,
+      8,
+      5,
+      8,
+      3,
+      5,
+      2,
+      2
+     ],
+     [
+      4,
+      3,
+      4,
+      2,
+      0,
+      1,
+      4,
+      4,
+      2
+     ],
+     41
+    ]
+   },
+   "output": -1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      5,
+      3,
+      2,
+      3,
+      10,
+      4,
+      7,
+      9,
+      1,
+      10
+     ],
+     [
+      2,
+      0,
+      2,
+      0,
+      3,
+      3,
+      4,
+      4,
+      0,
+      1
+     ],
+     30
+    ]
+   },
+   "output": -1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      2,
+      3,
+      5
+     ],
+     [
+      0,
+      0,
+      1
+     ],
+     8
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      7,
+      9,
+      7,
+      9
+     ],
+     [
+      4,
+      2,
+      0,
+      4
+     ],
+     32
+    ]
+   },
+   "output": 0,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      8,
+      5,
+      6,
+      4,
+      7,
+      6,
+      3,
+      9,
+      4
+     ],
+     [
+      0,
+      4,
+      2,
+      4,
+      3,
+      3,
+      1,
+      4,
+      4
+     ],
+     38
+    ]
+   },
+   "output": -1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      3,
+      1,
+      1,
+      1
+     ],
+     [
+      0,
+      0,
+      3,
+      0
+     ],
+     3
+    ]
+   },
+   "output": 2,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      6,
+      6,
+      8,
+      7,
+      1,
+      7
+     ],
+     [
+      2,
+      2,
+      1,
+      1,
+      2,
+      3
+     ],
+     27
+    ]
+   },
+   "output": 5,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      10,
+      5
+     ],
+     [
+      1,
+      3
+     ],
+     14
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      10,
+      7,
+      1,
+      2,
+      6
+     ],
+     [
+      4,
+      3,
+      2,
+      2,
+      4
+     ],
+     17
+    ]
+   },
+   "output": -1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      9,
+      5,
+      6,
+      1,
+      9,
+      4,
+      5,
+      7
+     ],
+     [
+      0,
+      4,
+      0,
+      2,
+      2,
+      3,
+      2,
+      4
+     ],
+     24
+    ]
+   },
+   "output": -1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      4,
+      1,
+      2,
+      4,
+      10,
+      7,
+      8
+     ],
+     [
+      0,
+      2,
+      0,
+      4,
+      0,
+      2,
+      1
+     ],
+     18
+    ]
+   },
+   "output": 5,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      4
+     ],
+     [
+      0
+     ],
+     4
+    ]
+   },
+   "output": 0,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      4,
+      7,
+      1,
+      7,
+      5,
+      10
+     ],
+     [
+      0,
+      4,
+      3,
+      2,
+      3,
+      1
+     ],
+     29
+    ]
+   },
+   "output": 4,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      9,
+      8,
+      9,
+      7,
+      4,
+      6,
+      8,
+      6,
+      4
+     ],
+     [
+      4,
+      3,
+      3,
+      3,
+      1,
+      2,
+      2,
+      1,
+      0
+     ],
+     42
+    ]
+   },
+   "output": -1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      8,
+      3,
+      2
+     ],
+     [
+      3,
+      1,
+      3
+     ],
+     7
+    ]
+   },
+   "output": 3,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      6,
+      5,
+      2,
+      8,
+      8,
+      1,
+      6,
+      4
+     ],
+     [
+      1,
+      2,
+      1,
+      0,
+      1,
+      0,
+      3,
+      1
+     ],
+     23
+    ]
+   },
+   "output": 6,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      3,
+      8,
+      5,
+      4,
+      10,
+      2
+     ],
+     [
+      4,
+      1,
+      4,
+      2,
+      1,
+      0
+     ],
+     26
+    ]
+   },
+   "output": 4,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      5,
+      3
+     ],
+     [
+      0,
+      3
+     ],
+     4
+    ]
+   },
+   "output": 2,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      8
+     ],
+     [
+      4
+     ],
+     7
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      1,
+      8,
+      6,
+      8,
+      6
+     ],
+     [
+      3,
+      0,
+      2,
+      4,
+      0
+     ],
+     16
+    ]
+   },
+   "output": 4,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      8,
+      6
+     ],
+     [
+      0,
+      3
+     ],
+     14
+    ]
+   },
+   "output": 0,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      3,
+      4,
+      5,
+      2,
+      4,
+      10,
+      6,
+      3,
+      6,
+      4
+     ],
+     [
+      3,
+      0,
+      0,
+      2,
+      4,
+      2,
+      4,
+      1,
+      2,
+      1
+     ],
+     28
+    ]
+   },
+   "output": -1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      3,
+      2,
+      5,
+      8,
+      8
+     ],
+     [
+      1,
+      3,
+      2,
+      1,
+      0
+     ],
+     20
+    ]
+   },
+   "output": 3,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      9,
+      2,
+      8,
+      7,
+      5,
+      2,
+      3,
+      2
+     ],
+     [
+      3,
+      2,
+      3,
+      0,
+      4,
+      3,
+      1,
+      4
+     ],
+     37
+    ]
+   },
+   "output": -1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      6,
+      4,
+      3,
+      1,
+      10,
+      5,
+      10,
+      3,
+      5,
+      9
+     ],
+     [
+      0,
+      4,
+      1,
+      2,
+      1,
+      2,
+      3,
+      3,
+      4,
+      2
+     ],
+     41
+    ]
+   },
+   "output": -1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      6,
+      10,
+      7,
+      10,
+      6,
+      7,
+      7,
+      4
+     ],
+     [
+      1,
+      3,
+      0,
+      0,
+      1,
+      2,
+      1,
+      3
+     ],
+     55
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      6,
+      4,
+      3,
+      1
+     ],
+     [
+      1,
+      1,
+      3,
+      3
+     ],
+     7
+    ]
+   },
+   "output": -1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      2,
+      10,
+      8,
+      10,
+      1,
+      4,
+      7,
+      10,
+      5,
+      1
+     ],
+     [
+      4,
+      3,
+      1,
+      2,
+      3,
+      1,
+      3,
+      2,
+      2,
+      1
+     ],
+     29
+    ]
+   },
+   "output": -1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      2,
+      8,
+      5
+     ],
+     [
+      2,
+      0,
+      2
+     ],
+     14
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      7,
+      10,
+      1,
+      3,
+      7,
+      3,
+      2
+     ],
+     [
+      1,
+      1,
+      3,
+      0,
+      2,
+      2,
+      3
+     ],
+     22
+    ]
+   },
+   "output": 7,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      6,
+      4,
+      2,
+      3,
+      8,
+      6,
+      6,
+      8,
+      10
+     ],
+     [
+      2,
+      1,
+      4,
+      1,
+      2,
+      1,
+      0,
+      1,
+      4
+     ],
+     39
+    ]
+   },
+   "output": 9,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      4,
+      4,
+      8,
+      10,
+      2,
+      7,
+      9,
+      8,
+      1,
+      8
+     ],
+     [
+      1,
+      0,
+      4,
+      0,
+      3,
+      3,
+      1,
+      2,
+      2,
+      1
+     ],
+     44
+    ]
+   },
+   "output": 10,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      2,
+      4,
+      1,
+      8,
+      3,
+      9
+     ],
+     [
+      0,
+      2,
+      0,
+      0,
+      0,
+      4
+     ],
+     21
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      6,
+      10
+     ],
+     [
+      2,
+      1
+     ],
+     8
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      8,
+      6
+     ],
+     [
+      3,
+      0
+     ],
+     10
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      5,
+      5,
+      5,
+      10
+     ],
+     [
+      0,
+      1,
+      0,
+      3
+     ],
+     21
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      7,
+      1,
+      1,
+      2,
+      9,
+      3,
+      3,
+      2,
+      2
+     ],
+     [
+      0,
+      1,
+      4,
+      3,
+      4,
+      1,
+      2,
+      1,
+      2
+     ],
+     15
+    ]
+   },
+   "output": -1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      10,
+      4,
+      1,
+      10,
+      7,
+      5,
+      6,
+      3,
+      2,
+      10
+     ],
+     [
+      4,
+      0,
+      4,
+      0,
+      3,
+      4,
+      3,
+      0,
+      0,
+      3
+     ],
+     50
+    ]
+   },
+   "output": 9,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      9,
+      4,
+      6,
+      2
+     ],
+     [
+      3,
+      4,
+      0,
+      4
+     ],
+     15
+    ]
+   },
+   "output": 4,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      7,
+      3,
+      9,
+      2,
+      9,
+      10,
+      7,
+      10,
+      10,
+      4
+     ],
+     [
+      1,
+      4,
+      2,
+      1,
+      4,
+      1,
+      1,
+      0,
+      3,
+      4
+     ],
+     69
+    ]
+   },
+   "output": 8,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      4,
+      5,
+      6
+     ],
+     [
+      4,
+      4,
+      0
+     ],
+     13
+    ]
+   },
+   "output": 2,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      2,
+      3,
+      3,
+      4,
+      4
+     ],
+     [
+      2,
+      2,
+      1,
+      1,
+      1
+     ],
+     12
+    ]
+   },
+   "output": 5,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      4,
+      5,
+      5,
+      3,
+      7
+     ],
+     [
+      3,
+      3,
+      2,
+      0,
+      4
+     ],
+     21
+    ]
+   },
+   "output": 4,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      1,
+      3,
+      3,
+      4
+     ],
+     [
+      1,
+      3,
+      2,
+      3
+     ],
+     6
+    ]
+   },
+   "output": -1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      9,
+      1,
+      8,
+      9,
+      7,
+      2
+     ],
+     [
+      3,
+      3,
+      0,
+      2,
+      3,
+      4
+     ],
+     26
+    ]
+   },
+   "output": 6,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      5,
+      5,
+      6,
+      8,
+      6,
+      1,
+      5,
+      7,
+      8
+     ],
+     [
+      2,
+      1,
+      0,
+      3,
+      2,
+      2,
+      2,
+      2,
+      4
+     ],
+     33
+    ]
+   },
+   "output": -1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      2,
+      9,
+      5,
+      5,
+      6,
+      7,
+      7,
+      9
+     ],
+     [
+      1,
+      3,
+      0,
+      3,
+      3,
+      3,
+      4,
+      2
+     ],
+     47
+    ]
+   },
+   "output": 8,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      3
+     ],
+     [
+      0
+     ],
+     2
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      3,
+      6,
+      4,
+      8,
+      7,
+      9,
+      3,
+      3,
+      9
+     ],
+     [
+      4,
+      3,
+      2,
+      0,
+      0,
+      3,
+      3,
+      1,
+      4
+     ],
+     34
+    ]
+   },
+   "output": -1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      8
+     ],
+     [
+      1
+     ],
+     6
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      1,
+      7,
+      6,
+      2,
+      9
+     ],
+     [
+      4,
+      2,
+      3,
+      3,
+      0
+     ],
+     23
+    ]
+   },
+   "output": 4,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      9,
+      10,
+      10,
+      5,
+      2,
+      4
+     ],
+     [
+      2,
+      4,
+      0,
+      3,
+      3,
+      4
+     ],
+     40
+    ]
+   },
+   "output": 0,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      9,
+      10,
+      9,
+      4,
+      8,
+      9,
+      10,
+      7,
+      5
+     ],
+     [
+      2,
+      0,
+      3,
+      0,
+      2,
+      4,
+      3,
+      2,
+      4
+     ],
+     69
+    ]
+   },
+   "output": 7,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      1,
+      7,
+      2,
+      7
+     ],
+     [
+      1,
+      0,
+      2,
+      3
+     ],
+     10
+    ]
+   },
+   "output": 2,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      10,
+      4
+     ],
+     [
+      2,
+      4
+     ],
+     10
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      2,
+      10,
+      3,
+      6,
+      2,
+      10,
+      4
+     ],
+     [
+      4,
+      1,
+      4,
+      4,
+      4,
+      0,
+      0
+     ],
+     30
+    ]
+   },
+   "output": 7,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      5,
+      9,
+      6
+     ],
+     [
+      1,
+      3,
+      2
+     ],
+     20
+    ]
+   },
+   "output": 0,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      4,
+      5,
+      2,
+      4,
+      2,
+      7
+     ],
+     [
+      0,
+      0,
+      0,
+      0,
+      3,
+      0
+     ],
+     23
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      8
+     ],
+     [
+      0
+     ],
+     7
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      3
+     ],
+     [
+      3
+     ],
+     3
+    ]
+   },
+   "output": 0,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      6,
+      1,
+      10,
+      10
+     ],
+     [
+      3,
+      2,
+      4,
+      0
+     ],
+     13
+    ]
+   },
+   "output": 3,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      8,
+      9,
+      2,
+      10,
+      10,
+      1,
+      5
+     ],
+     [
+      4,
+      3,
+      3,
+      0,
+      2,
+      1,
+      2
+     ],
+     38
+    ]
+   },
+   "output": 5,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      10,
+      2
+     ],
+     [
+      3,
+      4
+     ],
+     10
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      8,
+      9,
+      2
+     ],
+     [
+      2,
+      4,
+      1
+     ],
+     16
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      4,
+      2,
+      3
+     ],
+     [
+      4,
+      2,
+      2
+     ],
+     4
+    ]
+   },
+   "output": -1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      9,
+      8,
+      7,
+      6,
+      5,
+      1,
+      4
+     ],
+     [
+      2,
+      4,
+      1,
+      2,
+      3,
+      3,
+      0
+     ],
+     28
+    ]
+   },
+   "output": 7,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      3,
+      4,
+      10,
+      1,
+      2,
+      4,
+      10,
+      3,
+      7,
+      2
+     ],
+     [
+      4,
+      0,
+      0,
+      1,
+      1,
+      4,
+      4,
+      4,
+      2,
+      1
+     ],
+     44
+    ]
+   },
+   "output": -1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      3,
+      5,
+      5,
+      1,
+      6,
+      4,
+      3
+     ],
+     [
+      1,
+      3,
+      4,
+      3,
+      3,
+      1,
+      4
+     ],
+     23
+    ]
+   },
+   "output": -1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      3,
+      8,
+      10,
+      2,
+      5,
+      10
+     ],
+     [
+      4,
+      0,
+      3,
+      2,
+      4,
+      3
+     ],
+     37
+    ]
+   },
+   "output": 4,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      8,
+      8,
+      10,
+      8,
+      9,
+      6,
+      1,
+      8
+     ],
+     [
+      2,
+      0,
+      0,
+      1,
+      2,
+      1,
+      0,
+      4
+     ],
+     38
+    ]
+   },
+   "output": 4,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      10,
+      7,
+      3,
+      10,
+      7,
+      6,
+      6,
+      10
+     ],
+     [
+      1,
+      2,
+      4,
+      0,
+      3,
+      4,
+      0,
+      3
+     ],
+     41
+    ]
+   },
+   "output": 7,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      6,
+      7,
+      4,
+      1,
+      9,
+      6
+     ],
+     [
+      3,
+      3,
+      3,
+      0,
+      0,
+      1
+     ],
+     32
+    ]
+   },
+   "output": 2,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      2
+     ],
+     [
+      2
+     ],
+     1
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      8,
+      9,
+      4,
+      5,
+      6,
+      7
+     ],
+     [
+      0,
+      3,
+      4,
+      3,
+      3,
+      1
+     ],
+     27
+    ]
+   },
+   "output": 6,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      7
+     ],
+     [
+      1
+     ],
+     3
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      9
+     ],
+     [
+      0
+     ],
+     5
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      7,
+      2,
+      2,
+      2,
+      7,
+      4,
+      2,
+      10,
+      8
+     ],
+     [
+      4,
+      3,
+      2,
+      4,
+      4,
+      0,
+      1,
+      1,
+      2
+     ],
+     31
+    ]
+   },
+   "output": -1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      7,
+      2,
+      6,
+      4,
+      9,
+      9,
+      1,
+      9,
+      6,
+      7
+     ],
+     [
+      0,
+      1,
+      3,
+      2,
+      3,
+      3,
+      4,
+      2,
+      2,
+      1
+     ],
+     58
+    ]
+   },
+   "output": -1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      6,
+      8,
+      2,
+      3,
+      9,
+      8,
+      10,
+      9,
+      9
+     ],
+     [
+      1,
+      4,
+      2,
+      3,
+      2,
+      0,
+      1,
+      1,
+      3
+     ],
+     40
+    ]
+   },
+   "output": -1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      1,
+      1,
+      5
+     ],
+     [
+      4,
+      4,
+      2
+     ],
+     3
+    ]
+   },
+   "output": -1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      7,
+      5,
+      8,
+      3,
+      10,
+      2,
+      4,
+      8,
+      7
+     ],
+     [
+      4,
+      4,
+      2,
+      4,
+      2,
+      3,
+      1,
+      1,
+      1
+     ],
+     49
+    ]
+   },
+   "output": -1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      4,
+      7,
+      2,
+      6,
+      9,
+      2
+     ],
+     [
+      1,
+      2,
+      1,
+      4,
+      1,
+      3
+     ],
+     28
+    ]
+   },
+   "output": 3,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      3,
+      6,
+      3,
+      9,
+      5
+     ],
+     [
+      0,
+      4,
+      0,
+      3,
+      1
+     ],
+     23
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  }
+ ],
+ "original_ilr": "```json\n{\n  \"problem_id\": \"minimumTime\",\n  \"nodes\": [\n    {\n      \"id\": 1,\n      \"type\": \"start\",\n      \"label\": \"Start\",\n      \"next\": 2\n    },\n    {\n      \"id\": 2,\n      \"type\": \"process\",\n      \"label\": \"Input: nums1 (list of integers), nums2 (list of integers), x (integer)\",\n      \"action\": \"ctx['nums1'] = ctx['arg0']; ctx['nums2'] = ctx['arg1']; ctx['x'] = ctx['arg2']; ctx['n'] = len(ctx['nums1']); ctx['s'] = 0; ctx['d'] = 0; ctx['ind'] = list(range(ctx['n']))\",\n      \"next\": 3\n    },\n    {\n      \"id\": 3,\n      \"type\": \"decision\",\n      \"label\": \"Loop through i from 0 to n-1\",\n      \"logic\": \"ctx['i'] < ctx['n']\",\n      \"true_next\": 4,\n      \"false_next\": 8\n    },\n    {\n      \"id\": 4,\n      \"type\": \"process\",\n      \"label\": \"Update s: s += nums1[i]\",\n      \"action\": \"ctx['s'] += ctx['nums1'][ctx['i']]\",\n      \"next\": 5\n    },\n    {\n      \"id\": 5,\n      \"type\": \"process\",\n      \"label\": \"Update d: d += nums2[i]\",\n      \"action\": \"ctx['d'] += ctx['nums2'][ctx['i']]\",\n      \"next\": 3\n    },\n    {\n      \"id\": 8,\n      \"type\": \"decision\",\n      \"label\": \"Is s <= x?\",\n      \"logic\": \"ctx['s'] <= ctx['x']\",\n      \"true_next\": 9,\n      \"false_next\": 10\n    },\n    {\n      \"id\": 9,\n      \"type\": \"return\",\n      \"label\": \"Output: 0 (initial sum is already <= x)\",\n      \"value\": 0\n    },\n    {\n      \"id\": 10,\n      \"type\": \"process\",\n      \"label\": \"Sort ind based on nums2 values: ind.sort(key=lambda i: nums2[i])\",\n      \"action\": \"ctx['ind'].sort(key=lambda i: ctx['nums2'][i])\",\n      \"next\": 11\n    },\n    {\n      \"id\": 11,\n      \"type\": \"process\",\n      \"label\": \"Initialize dp = [0] * (n + 1), r = n + 1\",\n      \"action\": \"ctx['dp'] = [0] * (ctx['n'] + 1); ctx['r'] = ctx['n'] + 1\",\n      \"next\": 12\n    },\n    {\n      \"id\": 12,\n      \"type\": \"decision\",\n      \"label\": \"Loop through i from 1 to n\",\n      \"logic\": \"ctx['i'] <= ctx['n']\",\n      \"true_next\": 13,\n      \"false_next\": 17\n    },\n    {\n      \"id\": 13,\n      \"type\": \"process\",\n      \"label\": \"Loop through j from min(i, r - 1) to 1\",\n      \"action\": \"for ctx['j'] in range(min(ctx['i'], ctx['r'] - 1), 0, -1):\",\n      \"next\": 14\n    },\n    {\n      \"id\": 14,\n      \"type\": \"process\",\n      \"label\": \"Update dp[j]: dp[j] = max(dp[j], dp[j - 1] + nums2[ind[j - 1]] * j + nums1[ind[j - 1]])\",\n      \"action\": \"ctx['dp'][ctx['j']] = max(ctx['dp'][ctx['j']], ctx['dp'][ctx['j'] - 1] + ctx['nums2'][ctx['ind'][ctx['j'] - 1]] * ctx['j'] + ctx['nums1'][ctx['ind'][ctx['j'] - 1]])\",\n      \"next\": 15\n    },\n    {\n      \"id\": 15,\n      \"type\": \"decision\",\n      \"label\": \"Is s + j * d - dp[j] <= x?\",\n      \"logic\": \"ctx['s'] + ctx['j'] * ctx['d'] - ctx['dp'][ctx['j']] <= ctx['x']\",\n      \"true_next\": 16,\n      \"false_next\": 20\n    },\n    {\n      \"id\": 16,\n      \"type\": \"process\",\n      \"label\": \"Update r: r = j\",\n      \"action\": \"ctx['r'] = ctx['j']\",\n      \"next\": 13\n    },\n    {\n      \"id\": 20,\n      \"type\": \"process\",\n      \"label\": \"next j\",\n      \"action\": \"continue\",\n      \"next\": 12\n    },\n    {\n      \"id\": 17,\n      \"type\": \"decision\",\n      \"label\": \"Is r <= n?\",\n      \"logic\": \"ctx['r'] <= ctx['n']\",\n      \"true_next\": 18,\n      \"false_next\": 19\n    },\n    {\n      \"id\": 18,\n      \"type\": \"return\",\n      \"label\": \"Output: r (minimum time)\",\n      \"value\": \"ctx['r']\"\n    },\n    {\n      \"id\": 19,\n      \"type\": \"return\",\n      \"label\": \"Output: -1 (not possible)\",\n      \"value\": -1\n    }\n  ]\n}\n```",
+ "original_code": "class Solution:\n    def minimumTime(self, nums1: List[int], nums2: List[int], x: int) -> int:\n        n = len(nums1)\n        s = 0\n        d = 0\n        ind = list(range(n))\n        \n        # Calculate initial sum and total increment per second\n        for i in range(n):\n            s += nums1[i]\n            d += nums2[i]\n        \n        # If initial sum is already <= x, return 0\n        if s <= x:\n            return 0\n        \n        # Sort indices by nums2 values in ascending order\n        ind.sort(key=lambda i: nums2[i])\n        \n        # dp[j] represents the maximum sum we can reduce by choosing j elements\n        dp = [0] * (n + 1)\n        r = n + 1\n        \n        # For each possible number of elements to reset (from 1 to n)\n        for i in range(1, n + 1):\n            # Update dp array from right to left\n            for j in range(min(i, r - 1), 0, -1):\n                # Calculate the benefit of resetting j elements\n                # We add nums2[ind[j-1]] * j because each reset contributes nums2[ind[j-1]] per second\n                # and we reset j times, plus the initial value at that index\n                dp[j] = max(dp[j], dp[j - 1] + nums2[ind[j - 1]] * j + nums1[ind[j - 1]])\n            \n            # Check if we can achieve sum <= x with j resets\n            # Total sum after t seconds = s + t*d - (sum of chosen elements' contributions)\n            # We want s + t*d - dp[j] <= x, so t <= (x - s + dp[j]) / d\n            # But since we're iterating j, we find the minimum j such that condition holds\n            if s + i * d - dp[i] <= x:\n                r = i\n                # Continue to next iteration (continue keyword in ILR node 20)\n                continue\n        \n        # Return the minimum number of resets needed or -1 if not possible\n        return r if r <= n else -1",
+ "ocr_data": {
+  "nodes": [
+   {
+    "node_id": 1,
+    "shape_type": "rectangle",
+    "raw_text": "Start",
+    "position": "top"
+   },
+   {
+    "node_id": 2,
+    "shape_type": "rectangle",
+    "raw_text": "Input: nums1 (list of integers), nums2 (list of integers), x (integer)",
+    "position": "middle"
+   },
+   {
+    "node_id": 3,
+    "shape_type": "rectangle",
+    "raw_text": "Calculate n = length of nums1",
+    "position": "middle"
+   },
+   {
+    "node_id": 4,
+    "shape_type": "rectangle",
+    "raw_text": "Initialize ind = range(n), s = 0, d = 0",
+    "position": "middle"
+   },
+   {
+    "node_id": 5,
+    "shape_type": "diamond",
+    "raw_text": "Loop through i from 0 to n-1",
+    "position": "middle"
+   },
+   {
+    "node_id": 6,
+    "shape_type": "rectangle",
+    "raw_text": "Update s: s += nums1[i]",
+    "position": "middle"
+   },
+   {
+    "node_id": 7,
+    "shape_type": "rectangle",
+    "raw_text": "Update d: d += nums2[i]",
+    "position": "middle"
+   },
+   {
+    "node_id": 8,
+    "shape_type": "diamond",
+    "raw_text": "Is s <= x?",
+    "position": "middle"
+   },
+   {
+    "node_id": 9,
+    "shape_type": "rectangle",
+    "raw_text": "Output: 0 (initial sum is already <= x)",
+    "position": "middle"
+   },
+   {
+    "node_id": 10,
+    "shape_type": "rectangle",
+    "raw_text": "Sort ind based on nums2 values: ind.sort(key=lambda i: nums2[i])",
+    "position": "middle"
+   },
+   {
+    "node_id": 11,
+    "shape_type": "rectangle",
+    "raw_text": "Initialize dp = [0] * (n + 1), r = n + 1",
+    "position": "middle"
+   },
+   {
+    "node_id": 12,
+    "shape_type": "diamond",
+    "raw_text": "Loop through i from 1 to n",
+    "position": "middle"
+   },
+   {
+    "node_id": 13,
+    "shape_type": "rectangle",
+    "raw_text": "Loop through j from min(i, r - 1) to 1",
+    "position": "middle"
+   },
+   {
+    "node_id": 14,
+    "shape_type": "rectangle",
+    "raw_text": "Update dp[j]: dp[j] = max(dp[j], dp[j - 1] + nums2[ind[j - 1]] * j + nums1[ind[j - 1]])",
+    "position": "middle"
+   },
+   {
+    "node_id": 15,
+    "shape_type": "diamond",
+    "raw_text": "Is s + j * d - dp[j] <= x?",
+    "position": "middle"
+   },
+   {
+    "node_id": 16,
+    "shape_type": "rectangle",
+    "raw_text": "Update r: r = j",
+    "position": "middle"
+   },
+   {
+    "node_id": 17,
+    "shape_type": "diamond",
+    "raw_text": "Is r <= n?",
+    "position": "middle"
+   },
+   {
+    "node_id": 18,
+    "shape_type": "rectangle",
+    "raw_text": "Output: r (minimum time)",
+    "position": "middle"
+   },
+   {
+    "node_id": 19,
+    "shape_type": "rectangle",
+    "raw_text": "Output: -1 (not possible)",
+    "position": "middle"
+   },
+   {
+    "node_id": 20,
+    "shape_type": "rectangle",
+    "raw_text": "next j",
+    "position": "bottom"
+   }
+  ],
+  "edges": [
+   {
+    "from_node": 1,
+    "to_node": 2,
+    "label": ""
+   },
+   {
+    "from_node": 2,
+    "to_node": 3,
+    "label": ""
+   },
+   {
+    "from_node": 3,
+    "to_node": 4,
+    "label": ""
+   },
+   {
+    "from_node": 4,
+    "to_node": 5,
+    "label": ""
+   },
+   {
+    "from_node": 5,
+    "to_node": 6,
+    "label": "Yes"
+   },
+   {
+    "from_node": 6,
+    "to_node": 7,
+    "label": ""
+   },
+   {
+    "from_node": 7,
+    "to_node": 5,
+    "label": ""
+   },
+   {
+    "from_node": 5,
+    "to_node": 8,
+    "label": "No"
+   },
+   {
+    "from_node": 8,
+    "to_node": 9,
+    "label": "Yes"
+   },
+   {
+    "from_node": 8,
+    "to_node": 10,
+    "label": "No"
+   },
+   {
+    "from_node": 10,
+    "to_node": 11,
+    "label": ""
+   },
+   {
+    "from_node": 11,
+    "to_node": 12,
+    "label": ""
+   },
+   {
+    "from_node": 12,
+    "to_node": 13,
+    "label": "Yes"
+   },
+   {
+    "from_node": 13,
+    "to_node": 14,
+    "label": "Yes"
+   },
+   {
+    "from_node": 14,
+    "to_node": 15,
+    "label": ""
+   },
+   {
+    "from_node": 15,
+    "to_node": 16,
+    "label": "Yes"
+   },
+   {
+    "from_node": 16,
+    "to_node": 13,
+    "label": ""
+   },
+   {
+    "from_node": 13,
+    "to_node": 20,
+    "label": ""
+   },
+   {
+    "from_node": 15,
+    "to_node": 20,
+    "label": "No"
+   },
+   {
+    "from_node": 12,
+    "to_node": 17,
+    "label": "No"
+   },
+   {
+    "from_node": 17,
+    "to_node": 18,
+    "label": "Yes"
+   },
+   {
+    "from_node": 17,
+    "to_node": 19,
+    "label": "No"
+   }
+  ],
+  "other_text": []
+ },
+ "test_result": {},
+ "status": "completed",
+ "fixed_ilr": null,
+ "modified_code": null,
+ "ilr_fix_log": "",
+ "bug_injected": ""
+}

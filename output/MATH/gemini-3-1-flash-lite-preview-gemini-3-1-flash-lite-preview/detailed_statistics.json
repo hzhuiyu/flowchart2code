@@ -1,0 +1,47 @@
+{
+  "dataset": "MATH",
+  "model": "gemini-3-1-flash-lite-preview-gemini-3-1-flash-lite-preview",
+  "total_samples": 125,
+  "use_reflection": false,
+  "max_iterations": 0,
+  "pass_rate": {
+    "iteration_0": {
+      "passed": 119,
+      "total": 125,
+      "rate": 0.952
+    }
+  },
+  "tokens": {
+    "total": {
+      "prompt_tokens": 803792,
+      "completion_tokens": 125130,
+      "total_tokens": 928922
+    },
+    "average_per_sample": {
+      "prompt_tokens": 6430.34,
+      "completion_tokens": 1001.04,
+      "total_tokens": 7431.38
+    }
+  },
+  "time": {
+    "total_time": 1225.71,
+    "average_per_sample": 9.81
+  },
+  "pass_rate_by_difficulty": {
+    "medium": {
+      "total": 40,
+      "passed": 40,
+      "rate": 1.0
+    },
+    "easy": {
+      "total": 45,
+      "passed": 43,
+      "rate": 0.9556
+    },
+    "hard": {
+      "total": 40,
+      "passed": 36,
+      "rate": 0.9
+    }
+  }
+}

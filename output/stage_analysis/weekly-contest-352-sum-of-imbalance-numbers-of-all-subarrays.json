@@ -1,0 +1,103 @@
+{
+  "problem_id": "sumImbalanceNumbers",
+  "nodes": [
+    {
+      "id": 1,
+      "type": "start",
+      "label": "Start",
+      "next": 2
+    },
+    {
+      "id": 2,
+      "type": "process",
+      "label": "Input: nums (List[int])",
+      "action": "ctx['nums'] = ctx['arg0']; ctx['n'] = len(ctx['nums']); ctx['r'] = 0; ctx['i'] = 0",
+      "next": 3
+    },
+    {
+      "id": 3,
+      "type": "decision",
+      "label": "Is i < n?",
+      "logic": "ctx['i'] < ctx['n']",
+      "true_next": 4,
+      "false_next": 13
+    },
+    {
+      "id": 4,
+      "type": "process",
+      "label": "Initialize s = empty set",
+      "action": "ctx['s'] = set(); ctx['temp'] = -1",
+      "next": 5
+    },
+    {
+      "id": 5,
+      "type": "decision",
+      "label": "Is j < n?",
+      "logic": "ctx['j'] < ctx['n']",
+      "true_next": 6,
+      "false_next": 12
+    },
+    {
+      "id": 6,
+      "type": "decision",
+      "label": "Is nums[j] not in s?",
+      "logic": "ctx['nums'][ctx['j']] not in ctx['s']",
+      "true_next": 7,
+      "false_next": 11
+    },
+    {
+      "id": 7,
+      "type": "process",
+      "label": "Add nums[j] to s",
+      "action": "ctx['s'].add(ctx['nums'][ctx['j']])",
+      "next": 8
+    },
+    {
+      "id": 8,
+      "type": "process",
+      "label": "Update temp: temp += 1 - (nums[j] + 1 in s) - (nums[j] - 1 in s)",
+      "action": "ctx['temp'] += 1 - (ctx['nums'][ctx['j']] + 1 in ctx['s']) - (ctx['nums'][ctx['j']] - 1 in ctx['s'])",
+      "next": 9
+    },
+    {
+      "id": 9,
+      "type": "process",
+      "label": "Update r: r += temp",
+      "action": "ctx['r'] += ctx['temp']",
+      "next": 5
+    },
+    {
+      "id": 11,
+      "type": "process",
+      "label": "Update r: r += temp",
+      "action": "ctx['r'] += ctx['temp']",
+      "next": 5
+    },
+    {
+      "id": 12,
+      "type": "process",
+      "label": "Increment i",
+      "action": "ctx['i'] += 1",
+      "next": 3
+    },
+    {
+      "id": 13,
+      "type": "end",
+      "label": "Output: r (sum of imbalance numbers)",
+      "output": "ctx['r']"
+    }
+  ],
+  "task_id": "weekly-contest-352-sum-of-imbalance-numbers-of-all-subarrays",
+  "dataset": "Algorithm",
+  "result": "failed: ",
+  "code": "class Solution:\n    def sumImbalanceNumbers(self, nums: List[int]) -> int:\n        n = len(nums)\n        r = 0\n        i = 0\n        \n        while i < n:\n            s = set()\n            temp = -1\n            \n            j = 0\n            while j < n:\n                if nums[j] not in s:\n                    s.add(nums[j])\n                    temp += 1 - (nums[j] + 1 in s) - (nums[j] - 1 in s)\n                else:\n                    temp += 0  # This branch doesn't change temp, but we still need to update it as per logic\n                \n                j += 1\n            \n            r += temp\n            i += 1\n        \n        return r",
+  "verification": {
+    "md_verdict": "ILR Error",
+    "actual_error_source": "both",
+    "ilr_verdict": "incorrect",
+    "code_vs_ilr": "deviates",
+    "md_correct": "partial",
+    "note": "MD 只说对一半。ILR 的错误：内层循环变量 j 在全图无任何初始化和递增节点（忠实执行死循环），且 OCR 流程图的 'For j from i to n-1' 被丢成 'Is j < n?'，起点 i 丢失。代码额外偏离：节点9/11 的 r += temp 原本在 j 循环内每个 j 累加一次，代码把它挪到 j 循环结束后每个 i 只加一次，导致结果完全错误。",
+    "evidence": "生成代码实跑：[2,3,1,4] 得 0（期望 3）、[1,3,3,3,5] 得 10（期望 8）；补上 j 机制后按 ILR 忠实执行（j 从 0 起）得 0 和 25，均不对；改为 j 从 i 起、每个 j 累加 r 的标准解法两个示例全对（3、8）。"
+  }
+}

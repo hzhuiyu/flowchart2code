@@ -1,0 +1,882 @@
+{
+  "pass@1": 0.84,
+  "passed": 105,
+  "total": 125,
+  "results": [
+    {
+      "task_id": "9. Palindrome Number",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "509. Fibonacci Number",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "1037. Valid Boomerang",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "268. Missing Number",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "405. Convert a Number to Hexadecimal",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "1030. Matrix Cells in Distance Order",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "1523. Count Odd Numbers in an Interval Range",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "1837. Sum of Digits in Base K",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "1175. Prime Arrangements",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "1399. Count Largest Group",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "67. Add Binary",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "69. Sqrt(x)",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "1103. Distribute Candies to People",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "1512. Number of Good Pairs",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "412. Fizz Buzz",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "326. Power of Three",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "66. Plus One",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "728. Self Dividing Numbers",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "1716. Calculate Money in Leetcode Bank",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "1137. N-th Tribonacci Number",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "914. X of a Kind in a Deck of Cards",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "908. Smallest Range I",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "1588. Sum of All Odd Length Subarrays",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "292. Nim Game",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "258. Add Digits",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "1185. Day of the Week",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "1295. Find Numbers with Even Number of Digits",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "367. Valid Perfect Square",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "492. Construct the Rectangle",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "1323. Maximum 69 Number",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "507. Perfect Number",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "1486. XOR Operation in an Array",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "1071. Greatest Common Divisor of Strings",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "976. Largest Perimeter Triangle",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "2269. Find the K-Beauty of a Number",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "1025. Divisor Game",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "1742. Maximum Number of Balls in a Box",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "1154. Day of the Year",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "263. Ugly Number",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "1317. Convert Integer to the Sum of Two No-Zero Integers",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "342. Power of Four",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "628. Maximum Product of Three Numbers",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "231. Power of Two",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "1304. Find N Unique Integers Sum up to Zero",
+      "passed": false,
+      "test_results": "failed: name 'sumZero' is not defined",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "1360. Number of Days Between Two Dates",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "357. Count Numbers with Unique Digits",
+      "passed": false,
+      "test_results": "failed: ",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "486. Predict the Winner",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "672. Bulb Switcher II",
+      "passed": false,
+      "test_results": "failed: ",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "12. Integer to Roman",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "537. Complex Number Multiplication",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "396. Rotate Function",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "227. Basic Calculator II",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "667. Beautiful Arrangement II",
+      "passed": false,
+      "test_results": "failed: ",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "869. Reordered Power of 2",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "670. Maximum Swap",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "371. Sum of Two Integers",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "368. Largest Divisible Subset",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "477. Total Hamming Distance",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "1017. Convert to Base -2",
+      "passed": false,
+      "test_results": "failed: ",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "264. Ugly Number II",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "553. Optimal Division",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "775. Global and Local Inversions",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "650. 2 Keys Keyboard",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "789. Escape The Ghosts",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "462. Minimum Moves to Equal Array Elements II",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "372. Super Pow",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "7. Reverse Integer",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "754. Reach a Number",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "50. Pow(x, n)",
+      "passed": false,
+      "test_results": "failed: ",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "447. Number of Boomerangs",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "343. Integer Break",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "313. Super Ugly Number",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "788. Rotated Digits",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "1015. Smallest Integer Divisible by K",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "523. Continuous Subarray Sum",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "390. Elimination Game",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "62. Unique Paths",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "633. Sum of Square Numbers",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "204. Count Primes",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "593. Valid Square",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "453. Minimum Moves to Equal Array Elements",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "991. Broken Calculator",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "365. Water and Jug Problem",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "29. Divide Two Integers",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "400. Nth Digit",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "2709. Greatest Common Divisor Traversal",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "3312. Sorted GCD Pair Queries",
+      "passed": false,
+      "test_results": "timed out",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "1835. Find XOR Sum of All Pairs Bitwise AND",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "458. Poor Pigs",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "1250. Check If It Is a Good Array",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "793. Preimage Size of Factorial Zeroes Function",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "899. Orderly Queue",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "1862. Sum of Floored Pairs",
+      "passed": false,
+      "test_results": "failed: ",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "2183. Count Array Pairs Divisible by K",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "2197. Replace Non-Coprime Numbers in Array",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "2949. Count Beautiful Substrings II",
+      "passed": false,
+      "test_results": "failed: ",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "3251. Find the Count of Monotonic Pairs II",
+      "passed": false,
+      "test_results": "failed: ",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "1994. The Number of Good Subsets",
+      "passed": false,
+      "test_results": "failed: ",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "2376. Count Special Integers",
+      "passed": false,
+      "test_results": "failed: ",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "479. Largest Palindrome Product",
+      "passed": false,
+      "test_results": "timed out",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "805. Split Array With Same Average",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "282. Expression Add Operators",
+      "passed": false,
+      "test_results": "failed: name 'addOperators' is not defined",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "972. Equal Rational Numbers",
+      "passed": false,
+      "test_results": "failed: ",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "60. Permutation Sequence",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "878. Nth Magical Number",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "2366. Minimum Replacements to Sort the Array",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "2862. Maximum Element-Sum of a Complete Subset of Indices",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "3116. Kth Smallest Amount With Single Denomination Combination",
+      "passed": false,
+      "test_results": "failed: ",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "3154. Find Number of Ways to Reach the K-th Stair",
+      "passed": false,
+      "test_results": "failed: ",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "780. Reaching Points",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "564. Find the Closest Palindrome",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "3307. Find the K-th Character in String Game II",
+      "passed": false,
+      "test_results": "failed: ",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "224. Basic Calculator",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "1830. Minimum Number of Operations to Make String Sorted",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "233. Number of Digit One",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "2514. Count Anagrams",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "829. Consecutive Numbers Sum",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "2818. Apply Operations to Maximize Score",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "810. Chalkboard XOR Game",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "1330. Reverse Subarray To Maximize Array Value",
+      "passed": false,
+      "test_results": "timed out",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "2790. Maximum Number of Groups With Increasing Length",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "3250. Find the Count of Monotonic Pairs I",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "2081. Sum of k-Mirror Numbers",
+      "passed": false,
+      "test_results": "timed out",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "2117. Abbreviating the Product of a Range",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "3102. Minimize Manhattan Distances",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    }
+  ]
+}

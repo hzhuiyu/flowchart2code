@@ -1,0 +1,121 @@
+{
+  "task_id": "weekly-contest-375-count-tested-devices-after-test-operations",
+  "dataset": "Algorithm",
+  "difficulty": "Easy",
+  "title": "count-tested-devices-after-test-operations",
+  "result": "failed: ",
+  "ilr": "{\n  \"problem_id\": \"count_tested_devices\",\n  \"nodes\": [\n    {\"id\": 1, \"type\": \"start\", \"label\": \"Start\", \"next\": 2},\n    {\"id\": 2, \"type\": \"process\", \"label\": \"Input: batteryPercentages (List[int])\", \"action\": \"ctx['batteryPercentages']=ctx['arg0']; ctx['ans']=0; ctx['n']=len(ctx['batteryPercentages']); ctx['i']=0\", \"next\": 3},\n    {\"id\": 3, \"type\": \"decision\", \"label\": \"For i in range(len(batteryPercentages))\", \"logic\": \"ctx['i'] < ctx['n']\", \"true_next\": 4, \"false_next\": 6},\n    {\"id\": 4, \"type\": \"decision\", \"label\": \"Is batteryPercentages[i] - ans <= 0?\", \"logic\": \"ctx['batteryPercentages'][ctx['i']] - ctx['ans'] <= 0\", \"true_next\": 5, \"false_next\": 8},\n    {\"id\": 5, \"type\": \"process\", \"label\": \"Continue to next iteration\", \"action\": \"ctx['i'] += 1\", \"next\": 3},\n    {\"id\": 6, \"type\": \"return\", \"label\": \"Return ans\", \"value\": \"ctx['ans']\"},\n    {\"id\": 8, \"type\": \"process\", \"label\": \"Increment ans: ans += 1\", \"action\": \"ctx['ans'] += 1; for j in range(ctx['i'] + 1, ctx['n']): ctx['batteryPercentages'][j] = max(0, ctx['batteryPercentages'][j] - 1)\", \"next\": 3}\n  ]\n}",
+  "code": "from typing import List\n\nclass Solution:\n    def countTestedDevices(self, batteryPercentages: List[int]) -> int:\n        ans = 0\n        n = len(batteryPercentages)\n        i = 0\n        \n        while i < n:\n            if batteryPercentages[i] - ans <= 0:\n                i += 1\n                continue\n            \n            ans += 1\n            for j in range(i + 1, n):\n                batteryPercentages[j] = max(0, batteryPercentages[j] - 1)\n            i += 1\n        \n        return ans",
+  "prompt": "\"\"\"\nYou are given a 0-indexed integer array batteryPercentages having length n, denoting the battery percentages of n 0-indexed devices.\nYour task is to test each device i in order from 0 to n - 1, by performing the following test operations:\n\nIf batteryPercentages[i] is greater than 0:\n\n\t\nIncrement the count of tested devices.\nDecrease the battery percentage of all devices with indices j in the range [i + 1, n - 1] by 1, ensuring their battery percentage never goes below 0, i.e, batteryPercentages[j] = max(0, batteryPercentages[j] - 1).\nMove to the next device.\n\n\nOtherwise, move to the next device without performing any test.\n\nReturn an integer denoting the number of devices that will be tested after performing the test operations in order.\n\nExample 1:\n\nInput: batteryPercentages = [1,1,2,1,3]\nOutput: 3\nExplanation: Performing the test operations in order starting from device 0:\nAt device 0, batteryPercentages[0] > 0, so there is now 1 tested device, and batteryPercentages becomes [1,0,1,0,2].\nAt device 1, batteryPercentages[1] == 0, so we move to the next device without testing.\nAt device 2, batteryPercentages[2] > 0, so there are now 2 tested devices, and batteryPercentages becomes [1,0,1,0,1].\nAt device 3, batteryPercentages[3] == 0, so we move to the next device without testing.\nAt device 4, batteryPercentages[4] > 0, so there are now 3 tested devices, and batteryPercentages stays the same.\nSo, the answer is 3.\n\nExample 2:\n\nInput: batteryPercentages = [0,1,2]\nOutput: 2\nExplanation: Performing the test operations in order starting from device 0:\nAt device 0, batteryPercentages[0] == 0, so we move to the next device without testing.\nAt device 1, batteryPercentages[1] > 0, so there is now 1 tested device, and batteryPercentages becomes [0,1,1].\nAt device 2, batteryPercentages[2] > 0, so there are now 2 tested devices, and batteryPercentages stays the same.\nSo, the answer is 2.\n\n\nConstraints:\n\n1 <= n == batteryPercentages.length <= 100 \n0 <= batteryPercentages[i] <= 100\n\"\"\"\nclass Solution:\n    def countTestedDevices(self, batteryPercentages: List[int]) -> int:\n        ",
+  "test": "\nmy_solution = Solution()\n\ntest_input = { \"batteryPercentages\": [1,1,2,1,3] }\nassert my_solution.countTestedDevices(**test_input) == 3\n\ntest_input = { \"batteryPercentages\": [0,1,2] }\nassert my_solution.countTestedDevices(**test_input) == 2\n\ntest_input = { \"batteryPercentages\": [0] }\nassert my_solution.countTestedDevices(**test_input) == 0\n\ntest_input = { \"batteryPercentages\": [1] }\nassert my_solution.countTestedDevices(**test_input) == 1\n\ntest_input = { \"batteryPercentages\": [0,0] }\nassert my_solution.countTestedDevices(**test_input) == 0\n\ntest_input = { \"batteryPercentages\": [0,1] }\nassert my_solution.countTestedDevices(**test_input) == 1\n\ntest_input = { \"batteryPercentages\": [0,2] }\nassert my_solution.countTestedDevices(**test_input) == 1\n\ntest_input = { \"batteryPercentages\": [1,0] }\nassert my_solution.countTestedDevices(**test_input) == 1\n\ntest_input = { \"batteryPercentages\": [1,2] }\nassert my_solution.countTestedDevices(**test_input) == 2\n\ntest_input = { \"batteryPercentages\": [2,1] }\nassert my_solution.countTestedDevices(**test_input) == 1\n\ntest_input = { \"batteryPercentages\": [2,2] }\nassert my_solution.countTestedDevices(**test_input) == 2\n\ntest_input = { \"batteryPercentages\": [0,0,1] }\nassert my_solution.countTestedDevices(**test_input) == 1\n\ntest_input = { \"batteryPercentages\": [0,0,2] }\nassert my_solution.countTestedDevices(**test_input) == 1\n\ntest_input = { \"batteryPercentages\": [1,1,0] }\nassert my_solution.countTestedDevices(**test_input) == 1\n\ntest_input = { \"batteryPercentages\": [1,2,0] }\nassert my_solution.countTestedDevices(**test_input) == 2\n\ntest_input = { \"batteryPercentages\": [1,3,1] }\nassert my_solution.countTestedDevices(**test_input) == 2\n\ntest_input = { \"batteryPercentages\": [2,0,1] }\nassert my_solution.countTestedDevices(**test_input) == 1\n\ntest_input = { \"batteryPercentages\": [2,2,0] }\nassert my_solution.countTestedDevices(**test_input) == 2\n\ntest_input = { \"batteryPercentages\": [2,2,2] }\nassert my_solution.countTestedDevices(**test_input) == 2\n\ntest_input = { \"batteryPercentages\": [3,0,3] }\nassert my_solution.countTestedDevices(**test_input) == 2\n\ntest_input = { \"batteryPercentages\": [3,3,1] }\nassert my_solution.countTestedDevices(**test_input) == 2\n\ntest_input = { \"batteryPercentages\": [3,3,3] }\nassert my_solution.countTestedDevices(**test_input) == 3\n\ntest_input = { \"batteryPercentages\": [0,2,1,4] }\nassert my_solution.countTestedDevices(**test_input) == 2\n\ntest_input = { \"batteryPercentages\": [1,4,4,1] }\nassert my_solution.countTestedDevices(**test_input) == 3\n\ntest_input = { \"batteryPercentages\": [3,1,2,0] }\nassert my_solution.countTestedDevices(**test_input) == 2\n\ntest_input = { \"batteryPercentages\": [3,2,1,1] }\nassert my_solution.countTestedDevices(**test_input) == 2\n\ntest_input = { \"batteryPercentages\": [3,2,1,3] }\nassert my_solution.countTestedDevices(**test_input) == 3\n\ntest_input = { \"batteryPercentages\": [4,1,4,4] }\nassert my_solution.countTestedDevices(**test_input) == 3\n\ntest_input = { \"batteryPercentages\": [4,2,0,1] }\nassert my_solution.countTestedDevices(**test_input) == 2\n\ntest_input = { \"batteryPercentages\": [4,2,1,3] }\nassert my_solution.countTestedDevices(**test_input) == 3\n\ntest_input = { \"batteryPercentages\": [4,4,4,2] }\nassert my_solution.countTestedDevices(**test_input) == 3\n\ntest_input = { \"batteryPercentages\": [0,3,1,3,5] }\nassert my_solution.countTestedDevices(**test_input) == 3\n\ntest_input = { \"batteryPercentages\": [0,4,2,5,3] }\nassert my_solution.countTestedDevices(**test_input) == 3\n\ntest_input = { \"batteryPercentages\": [0,5,4,2,0] }\nassert my_solution.countTestedDevices(**test_input) == 2\n\ntest_input = { \"batteryPercentages\": [2,2,3,0,2] }\nassert my_solution.countTestedDevices(**test_input) == 3\n\ntest_input = { \"batteryPercentages\": [2,3,5,0,1] }\nassert my_solution.countTestedDevices(**test_input) == 3\n\ntest_input = { \"batteryPercentages\": [2,4,5,2,0] }\nassert my_solution.countTestedDevices(**test_input) == 3\n\ntest_input = { \"batteryPercentages\": [4,3,3,5,4] }\nassert my_solution.countTestedDevices(**test_input) == 4\n\ntest_input = { \"batteryPercentages\": [5,4,1,0,3] }\nassert my_solution.countTestedDevices(**test_input) == 3\n\ntest_input = { \"batteryPercentages\": [5,5,5,2,0] }\nassert my_solution.countTestedDevices(**test_input) == 3\n\ntest_input = { \"batteryPercentages\": [0,2,4,3,0,2] }\nassert my_solution.countTestedDevices(**test_input) == 3\n\ntest_input = { \"batteryPercentages\": [0,4,5,3,3,2] }\nassert my_solution.countTestedDevices(**test_input) == 3\n\ntest_input = { \"batteryPercentages\": [1,3,1,5,4,5] }\nassert my_solution.countTestedDevices(**test_input) == 5\n\ntest_input = { \"batteryPercentages\": [1,6,0,3,3,6] }\nassert my_solution.countTestedDevices(**test_input) == 4\n\ntest_input = { \"batteryPercentages\": [3,1,3,5,2,0] }\nassert my_solution.countTestedDevices(**test_input) == 3\n\ntest_input = { \"batteryPercentages\": [3,2,6,2,6,0] }\nassert my_solution.countTestedDevices(**test_input) == 4\n\ntest_input = { \"batteryPercentages\": [4,1,5,3,5,2] }\nassert my_solution.countTestedDevices(**test_input) == 4\n\ntest_input = { \"batteryPercentages\": [4,3,3,2,4,3] }\nassert my_solution.countTestedDevices(**test_input) == 4\n\ntest_input = { \"batteryPercentages\": [4,5,2,3,6,2] }\nassert my_solution.countTestedDevices(**test_input) == 4\n\ntest_input = { \"batteryPercentages\": [5,1,1,2,1,4] }\nassert my_solution.countTestedDevices(**test_input) == 3\n\ntest_input = { \"batteryPercentages\": [5,1,6,6,3,6] }\nassert my_solution.countTestedDevices(**test_input) == 4\n\ntest_input = { \"batteryPercentages\": [6,1,5,1,4,5] }\nassert my_solution.countTestedDevices(**test_input) == 4\n\ntest_input = { \"batteryPercentages\": [6,2,2,3,4,6] }\nassert my_solution.countTestedDevices(**test_input) == 5\n\ntest_input = { \"batteryPercentages\": [6,2,3,0,2,0] }\nassert my_solution.countTestedDevices(**test_input) == 3\n\ntest_input = { \"batteryPercentages\": [1,0,6,3,6,3,1] }\nassert my_solution.countTestedDevices(**test_input) == 4\n\ntest_input = { \"batteryPercentages\": [2,1,7,3,0,3,3] }\nassert my_solution.countTestedDevices(**test_input) == 3\n\ntest_input = { \"batteryPercentages\": [2,3,7,0,6,4,4] }\nassert my_solution.countTestedDevices(**test_input) == 4\n\ntest_input = { \"batteryPercentages\": [2,5,2,4,2,1,3] }\nassert my_solution.countTestedDevices(**test_input) == 3\n\ntest_input = { \"batteryPercentages\": [2,5,2,7,6,5,5] }\nassert my_solution.countTestedDevices(**test_input) == 5\n\ntest_input = { \"batteryPercentages\": [4,2,6,4,7,6,7] }\nassert my_solution.countTestedDevices(**test_input) == 7\n\ntest_input = { \"batteryPercentages\": [4,2,6,6,3,3,7] }\nassert my_solution.countTestedDevices(**test_input) == 5\n\ntest_input = { \"batteryPercentages\": [4,4,3,0,2,6,6] }\nassert my_solution.countTestedDevices(**test_input) == 5\n\ntest_input = { \"batteryPercentages\": [5,2,2,3,4,6,6] }\nassert my_solution.countTestedDevices(**test_input) == 6\n\ntest_input = { \"batteryPercentages\": [5,4,6,0,7,2,2] }\nassert my_solution.countTestedDevices(**test_input) == 4\n\ntest_input = { \"batteryPercentages\": [6,6,7,0,1,7,2] }\nassert my_solution.countTestedDevices(**test_input) == 4\n\ntest_input = { \"batteryPercentages\": [0,5,1,4,5,0,4,8] }\nassert my_solution.countTestedDevices(**test_input) == 5\n\ntest_input = { \"batteryPercentages\": [1,0,7,0,7,4,5,7] }\nassert my_solution.countTestedDevices(**test_input) == 6\n\ntest_input = { \"batteryPercentages\": [2,5,3,4,4,8,6,5] }\nassert my_solution.countTestedDevices(**test_input) == 6\n\ntest_input = { \"batteryPercentages\": [2,6,3,4,5,6,2,6] }\nassert my_solution.countTestedDevices(**test_input) == 6\n\ntest_input = { \"batteryPercentages\": [4,5,2,1,3,7,3,5] }\nassert my_solution.countTestedDevices(**test_input) == 5\n\ntest_input = { \"batteryPercentages\": [6,5,4,8,6,8,3,6] }\nassert my_solution.countTestedDevices(**test_input) == 6\n\ntest_input = { \"batteryPercentages\": [7,4,0,8,5,5,2,0] }\nassert my_solution.countTestedDevices(**test_input) == 5\n\ntest_input = { \"batteryPercentages\": [7,5,3,2,3,5,8,6] }\nassert my_solution.countTestedDevices(**test_input) == 6\n\ntest_input = { \"batteryPercentages\": [8,0,4,3,2,6,6,1] }\nassert my_solution.countTestedDevices(**test_input) == 5\n\ntest_input = { \"batteryPercentages\": [8,3,0,1,0,8,6,8] }\nassert my_solution.countTestedDevices(**test_input) == 5\n\ntest_input = { \"batteryPercentages\": [8,6,7,1,0,1,3,7] }\nassert my_solution.countTestedDevices(**test_input) == 4\n\ntest_input = { \"batteryPercentages\": [0,6,8,8,0,1,2,3,4] }\nassert my_solution.countTestedDevices(**test_input) == 4\n\ntest_input = { \"batteryPercentages\": [2,7,9,7,2,9,0,3,9] }\nassert my_solution.countTestedDevices(**test_input) == 6\n\ntest_input = { \"batteryPercentages\": [8,1,9,8,5,3,4,4,1] }\nassert my_solution.countTestedDevices(**test_input) == 4\n\ntest_input = { \"batteryPercentages\": [8,4,0,1,1,6,5,3,5] }\nassert my_solution.countTestedDevices(**test_input) == 5\n\ntest_input = { \"batteryPercentages\": [8,4,1,5,8,5,8,7,9] }\nassert my_solution.countTestedDevices(**test_input) == 8\n\ntest_input = { \"batteryPercentages\": [8,4,9,8,9,0,0,4,9] }\nassert my_solution.countTestedDevices(**test_input) == 6\n\ntest_input = { \"batteryPercentages\": [8,9,4,4,1,9,8,9,1] }\nassert my_solution.countTestedDevices(**test_input) == 7\n\ntest_input = { \"batteryPercentages\": [2,5,8,9,1,5,10,9,6,3] }\nassert my_solution.countTestedDevices(**test_input) == 7\n\ntest_input = { \"batteryPercentages\": [2,6,5,4,1,5,3,3,3,9] }\nassert my_solution.countTestedDevices(**test_input) == 6\n\ntest_input = { \"batteryPercentages\": [7,7,7,3,6,6,4,3,5,10] }\nassert my_solution.countTestedDevices(**test_input) == 6\n\ntest_input = { \"batteryPercentages\": [9,3,10,1,8,2,4,3,3,0] }\nassert my_solution.countTestedDevices(**test_input) == 4\n\ntest_input = { \"batteryPercentages\": [10,10,2,0,2,7,6,7,10,4] }\nassert my_solution.countTestedDevices(**test_input) == 6\n\ntest_input = { \"batteryPercentages\": [0,8,7,9,4,10,4,3,7,11,7] }\nassert my_solution.countTestedDevices(**test_input) == 7\n\ntest_input = { \"batteryPercentages\": [1,2,3,5,6,11,3,2,11,0,8] }\nassert my_solution.countTestedDevices(**test_input) == 8\n\ntest_input = { \"batteryPercentages\": [5,10,4,10,10,6,8,1,8,10,3] }\nassert my_solution.countTestedDevices(**test_input) == 9\n\ntest_input = { \"batteryPercentages\": [7,10,2,7,11,8,11,4,1,4,5] }\nassert my_solution.countTestedDevices(**test_input) == 6\n\ntest_input = { \"batteryPercentages\": [7,11,0,4,1,10,5,3,2,0,2] }\nassert my_solution.countTestedDevices(**test_input) == 5\n\ntest_input = { \"batteryPercentages\": [8,8,1,8,6,2,5,2,8,5,6] }\nassert my_solution.countTestedDevices(**test_input) == 6\n\ntest_input = { \"batteryPercentages\": [8,9,10,10,1,5,4,6,7,2,4] }\nassert my_solution.countTestedDevices(**test_input) == 7\n\ntest_input = { \"batteryPercentages\": [9,9,2,3,2,2,9,6,11,1,10] }\nassert my_solution.countTestedDevices(**test_input) == 7\n\ntest_input = { \"batteryPercentages\": [10,0,6,2,6,6,11,1,8,10,5] }\nassert my_solution.countTestedDevices(**test_input) == 7\n\ntest_input = { \"batteryPercentages\": [1,4,7,2,12,8,1,11,5,10,2,3] }\nassert my_solution.countTestedDevices(**test_input) == 7\n\ntest_input = { \"batteryPercentages\": [2,5,4,4,9,6,10,0,11,8,2,10] }\nassert my_solution.countTestedDevices(**test_input) == 9\n\ntest_input = { \"batteryPercentages\": [4,11,9,8,9,11,11,5,11,6,12,11] }\nassert my_solution.countTestedDevices(**test_input) == 10",
+  "ocr_data": {
+    "nodes": [
+      {
+        "node_id": 1,
+        "shape_type": "rectangle",
+        "raw_text": "Start",
+        "position": "top"
+      },
+      {
+        "node_id": 2,
+        "shape_type": "rectangle",
+        "raw_text": "Input: batteryPercentages (List[int])",
+        "position": "middle"
+      },
+      {
+        "node_id": 3,
+        "shape_type": "rectangle",
+        "raw_text": "Initialize ans = 0",
+        "position": "middle"
+      },
+      {
+        "node_id": 4,
+        "shape_type": "rectangle",
+        "raw_text": "For i in range(len(batteryPercentages))",
+        "position": "middle"
+      },
+      {
+        "node_id": 5,
+        "shape_type": "diamond",
+        "raw_text": "Is batteryPercentages[i] - ans <= 0?",
+        "position": "bottom"
+      },
+      {
+        "node_id": 6,
+        "shape_type": "rectangle",
+        "raw_text": "Return ans",
+        "position": "bottom"
+      },
+      {
+        "node_id": 7,
+        "shape_type": "rectangle",
+        "raw_text": "Continue to next iteration",
+        "position": "bottom"
+      },
+      {
+        "node_id": 8,
+        "shape_type": "rectangle",
+        "raw_text": "Increment ans: ans += 1",
+        "position": "bottom"
+      }
+    ],
+    "edges": [
+      {
+        "from_node": 1,
+        "to_node": 2,
+        "label": ""
+      },
+      {
+        "from_node": 2,
+        "to_node": 3,
+        "label": ""
+      },
+      {
+        "from_node": 3,
+        "to_node": 4,
+        "label": ""
+      },
+      {
+        "from_node": 4,
+        "to_node": 5,
+        "label": ""
+      },
+      {
+        "from_node": 5,
+        "to_node": 7,
+        "label": "Yes"
+      },
+      {
+        "from_node": 5,
+        "to_node": 8,
+        "label": "No"
+      },
+      {
+        "from_node": 8,
+        "to_node": 4,
+        "label": ""
+      },
+      {
+        "from_node": 7,
+        "to_node": 4,
+        "label": ""
+      },
+      {
+        "from_node": 4,
+        "to_node": 6,
+        "label": ""
+      }
+    ],
+    "other_text": []
+  },
+  "analysis": {
+    "ilr_verdict": "incorrect",
+    "ilr_issues": "ILR 在节点8的 action 里自行添加了 OCR 文本中不存在的数组递减循环（for j in range(i+1,n): bp[j]=max(0,bp[j]-1)）。OCR 节点8文本仅为 'Increment ans: ans += 1'，且边结构（4→5、5-Yes→7→4、5-No→8→4、4→6）显示流程图是不修改数组、仅用 bp[i]-ans 判定的正确写法。既递减数组又减 ans 造成双重扣减，导致后续设备被误判为已耗尽。",
+    "code_vs_ilr": "faithful",
+    "code_issues": "代码逐句忠实实现了 ILR（同样的 bp[i]-ans<=0 判定 + 同样的递减循环），忠实实现了错误的 ILR，无额外偏离。",
+    "error_source": "ilr",
+    "ocr_contribution": "no",
+    "root_cause": "ILR 生成环节凭空给节点8加了数组递减操作，与 '-ans' 判定形成双重扣减，忠实实现必错；OCR 文本与边均完整清晰，未误导 ILR。",
+    "evidence": "示例1 [1,1,2,1,3]：生成代码实际输出 2（期望 3）——i=2 时数组已被前次测试递减为 bp[2]=1，再减 ans=1 得 0 而被跳过；若按 OCR 流程图（不修改数组）执行则 ans 依次 1→2→3 正确。"
+  }
+}

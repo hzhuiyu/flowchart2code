@@ -1,0 +1,39 @@
+============================================================
+Evaluation Results Summary
+============================================================
+Total Samples: 164
+Passed: 143
+Failed: 21
+Pass Rate: 87.20%
+
+Pass@k Results:
+  pass@1: 0.8720
+
+By Difficulty:
+  Easy:   0/0 = 0.00%
+  Medium: 0/0 = 0.00%
+  Hard:   0/0 = 0.00%
+
+Token Statistics (Overall):
+  Valid Samples: 164
+  Total Prompt Tokens: 6913419
+  Total Completion Tokens: 99530
+  Total Tokens: 7012949
+  Avg Prompt Tokens/Sample: 42154.99
+  Avg Completion Tokens/Sample: 606.89
+  Avg Total Tokens/Sample: 42761.88
+
+Token Statistics (By Difficulty):
+  Easy:   Avg 0.00 tokens/sample (0 samples)
+  Medium: Avg 0.00 tokens/sample (0 samples)
+  Hard:   Avg 0.00 tokens/sample (0 samples)
+
+Token Statistics (By Stage):
+  ILR Generation: Total 6786247 tokens, Avg 41379.55 tokens/sample (164 samples)
+    - Prompt: 6702903 tokens
+    - Completion: 83344 tokens
+  Code Generation: Total 226702 tokens, Avg 1382.33 tokens/sample (164 samples)
+    - Prompt: 210516 tokens
+    - Completion: 16186 tokens
+
+============================================================

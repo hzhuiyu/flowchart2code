@@ -1,0 +1,132 @@
+{
+  "problem_id": "checkArray",
+  "nodes": [
+    {
+      "id": 1,
+      "type": "start",
+      "label": "Start",
+      "next": 2
+    },
+    {
+      "id": 2,
+      "type": "process",
+      "label": "Input: nums (List[int]), k (integer)",
+      "action": "ctx['nums'] = ctx['arg0']; ctx['k'] = ctx['arg1']; ctx['arr'] = [0] * (len(ctx['nums']) + 1); ctx['h'] = 0; ctx['i'] = 0",
+      "next": 3
+    },
+    {
+      "id": 3,
+      "type": "decision",
+      "label": "Is i < len(nums)?",
+      "logic": "ctx['i'] < len(ctx['nums'])",
+      "true_next": 4,
+      "false_next": 16
+    },
+    {
+      "id": 4,
+      "type": "process",
+      "label": "Extract current element: n = nums[i]",
+      "action": "ctx['n'] = ctx['nums'][ctx['i']]",
+      "next": 5
+    },
+    {
+      "id": 5,
+      "type": "process",
+      "label": "Update h: h -= arr[i]",
+      "action": "ctx['h'] -= ctx['arr'][ctx['i']]",
+      "next": 6
+    },
+    {
+      "id": 6,
+      "type": "decision",
+      "label": "Is n > h?",
+      "logic": "ctx['n'] > ctx['h']",
+      "true_next": 7,
+      "false_next": 8
+    },
+    {
+      "id": 7,
+      "type": "decision",
+      "label": "Is i + k > len(nums)?",
+      "logic": "ctx['i'] + ctx['k'] > len(ctx['nums'])",
+      "true_next": 9,
+      "false_next": 11
+    },
+    {
+      "id": 8,
+      "type": "decision",
+      "label": "Is n < h?",
+      "logic": "ctx['n'] < ctx['h']",
+      "true_next": 10,
+      "false_next": 12
+    },
+    {
+      "id": 9,
+      "type": "process",
+      "label": "Output: False (cannot apply operation)",
+      "action": "ctx['result'] = False",
+      "next": 16
+    },
+    {
+      "id": 10,
+      "type": "process",
+      "label": "Output: False (current element is less than h)",
+      "action": "ctx['result'] = False",
+      "next": 16
+    },
+    {
+      "id": 11,
+      "type": "process",
+      "label": "Update arr[i + k]: arr[i + k] = n - h",
+      "action": "ctx['arr'][ctx['i'] + ctx['k']] = ctx['n'] - ctx['h']",
+      "next": 13
+    },
+    {
+      "id": 12,
+      "type": "process",
+      "label": "Continue to next iteration",
+      "action": "ctx['i'] += 1",
+      "next": 3
+    },
+    {
+      "id": 13,
+      "type": "process",
+      "label": "Update h: h = n",
+      "action": "ctx['h'] = ctx['n']",
+      "next": 12
+    },
+    {
+      "id": 14,
+      "type": "process",
+      "label": "Output: True (all elements can be made zero)",
+      "action": "ctx['result'] = True",
+      "next": 16
+    },
+    {
+      "id": 15,
+      "type": "process",
+      "label": "Update h: h = n",
+      "action": "ctx['h'] = ctx['n']",
+      "next": 12
+    },
+    {
+      "id": 16,
+      "type": "end",
+      "label": "Return result",
+      "output": "ctx['result']"
+    }
+  ],
+  "task_id": "weekly-contest-353-apply-operations-to-make-all-array-elements-equal-to-zero",
+  "dataset": "Algorithm",
+  "result": "failed: ",
+  "code": "class Solution:\n    def checkArray(self, nums: List[int], k: int) -> bool:\n        arr = [0] * (len(nums) + 1)\n        h = 0\n        i = 0\n        \n        while i < len(nums):\n            n = nums[i]\n            h -= arr[i]\n            \n            if n > h:\n                if i + k > len(nums):\n                    return False\n                else:\n                    arr[i + k] = n - h\n            elif n < h:\n                return False\n            else:\n                h = n\n            i += 1\n        \n        return True",
+  "verification": {
+    "md_verdict": "ILR Error",
+    "actual_error_source": "both",
+    "ilr_verdict": "incorrect",
+    "code_vs_ilr": "deviates",
+    "md_correct": "partial",
+    "note": "MD 只说对一半。ILR 的错误：节点14（result=True）在图中没有任何入边、成为孤点，循环正常走完到节点16 时 ctx['result'] 从未被赋值，忠实执行会 KeyError，即 ILR 永远无法返回 True。代码额外偏离：ILR 节点13（11→13→12）要求在 n>h 分支设置 h=n 后再继续，代码却把 h=n 挪到 n==h 的 else 分支（在该分支是无效操作），n>h 分支漏掉了这一关键更新，导致 h 持续偏低、大量本应成功的用例误判 False。",
+    "evidence": "ILR 忠实执行 [2,2,3,1,1,0],k=3 循环正常结束但 result 从未赋值（图中无任何节点可达 result=True）；生成代码实跑 100 条测试失败 37 条，如 [2,2,3,1,1,0],k=3 得 False（期望 True，i=3 时 h=-2 而非 2）；补上 h=nums[i] 的标准贪心两示例均正确。"
+  }
+}

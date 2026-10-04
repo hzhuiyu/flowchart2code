@@ -1,0 +1,46 @@
+{
+    "total_tasks": 149,
+    "total_prompt_tokens": 6455853,
+    "total_completion_tokens": 124729,
+    "total_tokens": 6580582,
+    "avg_prompt_tokens": 43327.87248322148,
+    "avg_completion_tokens": 837.1073825503356,
+    "avg_total_tokens": 44164.97986577181,
+    "max_completion_tokens_stats": {
+        "max_completion_tokens": 0,
+        "avg_max_completion_tokens": 0
+    },
+    "by_difficulty": {
+        "easy": {
+            "count": 45,
+            "total_tokens": 1992356,
+            "avg_tokens": 44274.57777777778
+        },
+        "medium": {
+            "count": 75,
+            "total_tokens": 3231010,
+            "avg_tokens": 43080.13333333333
+        },
+        "hard": {
+            "count": 29,
+            "total_tokens": 1357216,
+            "avg_tokens": 46800.55172413793
+        }
+    },
+    "by_stage": {
+        "ilr_generation": {
+            "count": 149,
+            "prompt_tokens": 6187718,
+            "completion_tokens": 102908,
+            "total_tokens": 6290626,
+            "avg_tokens": 42218.96644295302
+        },
+        "code_generation": {
+            "count": 149,
+            "prompt_tokens": 268135,
+            "completion_tokens": 21821,
+            "total_tokens": 289956,
+            "avg_tokens": 1946.013422818792
+        }
+    }
+}

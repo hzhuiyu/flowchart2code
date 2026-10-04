@@ -1,0 +1,1138 @@
+{
+ "task_id": "weekly-contest-360-furthest-point-from-origin",
+ "dataset": "Algorithm",
+ "title": "furthest-point-from-origin",
+ "difficulty": "Easy",
+ "prompt": "\"\"\"\nYou are given a string moves of length n consisting only of characters 'L', 'R', and '_'. The string represents your movement on a number line starting from the origin 0.\n\nIn the ith move, you can choose one of the following directions:\n\n * move to the left if moves[i] = 'L' or moves[i] = '_'\n * move to the right if moves[i] = 'R' or moves[i] = '_'\n\nReturn the distance from the origin of the furthest point you can get to after n moves.\n\nExample 1:\n\nInput: moves = \"L_RL__R\"\nOutput: 3\nExplanation: The furthest point we can reach from the origin 0 is point -3 through the following sequence of moves \"LLRLLLR\".\n\nExample 2:\n\nInput: moves = \"_R__LL_\"\nOutput: 5\nExplanation: The furthest point we can reach from the origin 0 is point -5 through the following sequence of moves \"LRLLLLL\".\n\nExample 3:\n\nInput: moves = \"_______\"\nOutput: 7\nExplanation: The furthest point we can reach from the origin 0 is point 7 through the following sequence of moves \"RRRRRRR\".\n\n\nConstraints:\n\n * 1 <= moves.length == n <= 50\n * moves consists only of characters 'L', 'R' and '_'.\n\"\"\"\nclass Solution:\n    def furthestDistanceFromOrigin(self, moves: str) -> int:\n        ",
+ "starter_code": "class Solution:\n    def furthestDistanceFromOrigin(self, moves: str) -> int:\n        ",
+ "entry_point": "",
+ "test": "\nmy_solution = Solution()\n\ntest_input = { \"moves\": \"L_RL__R\" }\nassert my_solution.furthestDistanceFromOrigin(**test_input) == 3\n\ntest_input = { \"moves\": \"_R__LL_\" }\nassert my_solution.furthestDistanceFromOrigin(**test_input) == 5\n\ntest_input = { \"moves\": \"_______\" }\nassert my_solution.furthestDistanceFromOrigin(**test_input) == 7\n\ntest_input = { \"moves\": \"L\" }\nassert my_solution.furthestDistanceFromOrigin(**test_input) == 1\n\ntest_input = { \"moves\": \"R\" }\nassert my_solution.furthestDistanceFromOrigin(**test_input) == 1\n\ntest_input = { \"moves\": \"_\" }\nassert my_solution.furthestDistanceFromOrigin(**test_input) == 1\n\ntest_input = { \"moves\": \"LL\" }\nassert my_solution.furthestDistanceFromOrigin(**test_input) == 2\n\ntest_input = { \"moves\": \"LR\" }\nassert my_solution.furthestDistanceFromOrigin(**test_input) == 0\n\ntest_input = { \"moves\": \"L_\" }\nassert my_solution.furthestDistanceFromOrigin(**test_input) == 2\n\ntest_input = { \"moves\": \"RL\" }\nassert my_solution.furthestDistanceFromOrigin(**test_input) == 0\n\ntest_input = { \"moves\": \"RR\" }\nassert my_solution.furthestDistanceFromOrigin(**test_input) == 2\n\ntest_input = { \"moves\": \"R_\" }\nassert my_solution.furthestDistanceFromOrigin(**test_input) == 2\n\ntest_input = { \"moves\": \"_L\" }\nassert my_solution.furthestDistanceFromOrigin(**test_input) == 2\n\ntest_input = { \"moves\": \"_R\" }\nassert my_solution.furthestDistanceFromOrigin(**test_input) == 2\n\ntest_input = { \"moves\": \"__\" }\nassert my_solution.furthestDistanceFromOrigin(**test_input) == 2\n\ntest_input = { \"moves\": \"LLL\" }\nassert my_solution.furthestDistanceFromOrigin(**test_input) == 3\n\ntest_input = { \"moves\": \"LLR\" }\nassert my_solution.furthestDistanceFromOrigin(**test_input) == 1\n\ntest_input = { \"moves\": \"LL_\" }\nassert my_solution.furthestDistanceFromOrigin(**test_input) == 3\n\ntest_input = { \"moves\": \"LRL\" }\nassert my_solution.furthestDistanceFromOrigin(**test_input) == 1\n\ntest_input = { \"moves\": \"LRR\" }\nassert my_solution.furthestDistanceFromOrigin(**test_input) == 1\n\ntest_input = { \"moves\": \"LR_\" }\nassert my_solution.furthestDistanceFromOrigin(**test_input) == 1\n\ntest_input = { \"moves\": \"L_L\" }\nassert my_solution.furthestDistanceFromOrigin(**test_input) == 3\n\ntest_input = { \"moves\": \"L_R\" }\nassert my_solution.furthestDistanceFromOrigin(**test_input) == 1\n\ntest_input = { \"moves\": \"L__\" }\nassert my_solution.furthestDistanceFromOrigin(**test_input) == 3\n\ntest_input = { \"moves\": \"RLL\" }\nassert my_solution.furthestDistanceFromOrigin(**test_input) == 1\n\ntest_input = { \"moves\": \"RLR\" }\nassert my_solution.furthestDistanceFromOrigin(**test_input) == 1\n\ntest_input = { \"moves\": \"RL_\" }\nassert my_solution.furthestDistanceFromOrigin(**test_input) == 1\n\ntest_input = { \"moves\": \"RRL\" }\nassert my_solution.furthestDistanceFromOrigin(**test_input) == 1\n\ntest_input = { \"moves\": \"RRR\" }\nassert my_solution.furthestDistanceFromOrigin(**test_input) == 3\n\ntest_input = { \"moves\": \"RR_\" }\nassert my_solution.furthestDistanceFromOrigin(**test_input) == 3\n\ntest_input = { \"moves\": \"R_L\" }\nassert my_solution.furthestDistanceFromOrigin(**test_input) == 1\n\ntest_input = { \"moves\": \"R_R\" }\nassert my_solution.furthestDistanceFromOrigin(**test_input) == 3\n\ntest_input = { \"moves\": \"R__\" }\nassert my_solution.furthestDistanceFromOrigin(**test_input) == 3\n\ntest_input = { \"moves\": \"_LL\" }\nassert my_solution.furthestDistanceFromOrigin(**test_input) == 3\n\ntest_input = { \"moves\": \"_LR\" }\nassert my_solution.furthestDistanceFromOrigin(**test_input) == 1\n\ntest_input = { \"moves\": \"_L_\" }\nassert my_solution.furthestDistanceFromOrigin(**test_input) == 3\n\ntest_input = { \"moves\": \"_RL\" }\nassert my_solution.furthestDistanceFromOrigin(**test_input) == 1\n\ntest_input = { \"moves\": \"_RR\" }\nassert my_solution.furthestDistanceFromOrigin(**test_input) == 3\n\ntest_input = { \"moves\": \"_R_\" }\nassert my_solution.furthestDistanceFromOrigin(**test_input) == 3\n\ntest_input = { \"moves\": \"__L\" }\nassert my_solution.furthestDistanceFromOrigin(**test_input) == 3\n\ntest_input = { \"moves\": \"__R\" }\nassert my_solution.furthestDistanceFromOrigin(**test_input) == 3\n\ntest_input = { \"moves\": \"___\" }\nassert my_solution.furthestDistanceFromOrigin(**test_input) == 3\n\ntest_input = { \"moves\": \"LLLL\" }\nassert my_solution.furthestDistanceFromOrigin(**test_input) == 4\n\ntest_input = { \"moves\": \"LLLR\" }\nassert my_solution.furthestDistanceFromOrigin(**test_input) == 2\n\ntest_input = { \"moves\": \"LLL_\" }\nassert my_solution.furthestDistanceFromOrigin(**test_input) == 4\n\ntest_input = { \"moves\": \"LLRL\" }\nassert my_solution.furthestDistanceFromOrigin(**test_input) == 2\n\ntest_input = { \"moves\": \"LLRR\" }\nassert my_solution.furthestDistanceFromOrigin(**test_input) == 0\n\ntest_input = { \"moves\": \"LLR_\" }\nassert my_solution.furthestDistanceFromOrigin(**test_input) == 2\n\ntest_input = { \"moves\": \"LL_L\" }\nassert my_solution.furthestDistanceFromOrigin(**test_input) == 4\n\ntest_input = { \"moves\": \"LL_R\" }\nassert my_solution.furthestDistanceFromOrigin(**test_input) == 2\n\ntest_input = { \"moves\": \"LL__\" }\nassert my_solution.furthestDistanceFromOrigin(**test_input) == 4\n\ntest_input = { \"moves\": \"LRLL\" }\nassert my_solution.furthestDistanceFromOrigin(**test_input) == 2\n\ntest_input = { \"moves\": \"LRLR\" }\nassert my_solution.furthestDistanceFromOrigin(**test_input) == 0\n\ntest_input = { \"moves\": \"LRL_\" }\nassert my_solution.furthestDistanceFromOrigin(**test_input) == 2\n\ntest_input = { \"moves\": \"LRRL\" }\nassert my_solution.furthestDistanceFromOrigin(**test_input) == 0\n\ntest_input = { \"moves\": \"LRRR\" }\nassert my_solution.furthestDistanceFromOrigin(**test_input) == 2\n\ntest_input = { \"moves\": \"LRR_\" }\nassert my_solution.furthestDistanceFromOrigin(**test_input) == 2\n\ntest_input = { \"moves\": \"LR_L\" }\nassert my_solution.furthestDistanceFromOrigin(**test_input) == 2\n\ntest_input = { \"moves\": \"LR_R\" }\nassert my_solution.furthestDistanceFromOrigin(**test_input) == 2\n\ntest_input = { \"moves\": \"LR__\" }\nassert my_solution.furthestDistanceFromOrigin(**test_input) == 2\n\ntest_input = { \"moves\": \"L_LL\" }\nassert my_solution.furthestDistanceFromOrigin(**test_input) == 4\n\ntest_input = { \"moves\": \"L_LR\" }\nassert my_solution.furthestDistanceFromOrigin(**test_input) == 2\n\ntest_input = { \"moves\": \"L_L_\" }\nassert my_solution.furthestDistanceFromOrigin(**test_input) == 4\n\ntest_input = { \"moves\": \"L_RL\" }\nassert my_solution.furthestDistanceFromOrigin(**test_input) == 2\n\ntest_input = { \"moves\": \"L_RR\" }\nassert my_solution.furthestDistanceFromOrigin(**test_input) == 2\n\ntest_input = { \"moves\": \"L_R_\" }\nassert my_solution.furthestDistanceFromOrigin(**test_input) == 2\n\ntest_input = { \"moves\": \"L__L\" }\nassert my_solution.furthestDistanceFromOrigin(**test_input) == 4\n\ntest_input = { \"moves\": \"L__R\" }\nassert my_solution.furthestDistanceFromOrigin(**test_input) == 2\n\ntest_input = { \"moves\": \"L___\" }\nassert my_solution.furthestDistanceFromOrigin(**test_input) == 4\n\ntest_input = { \"moves\": \"RLLL\" }\nassert my_solution.furthestDistanceFromOrigin(**test_input) == 2\n\ntest_input = { \"moves\": \"RLLR\" }\nassert my_solution.furthestDistanceFromOrigin(**test_input) == 0\n\ntest_input = { \"moves\": \"RLL_\" }\nassert my_solution.furthestDistanceFromOrigin(**test_input) == 2\n\ntest_input = { \"moves\": \"RLRL\" }\nassert my_solution.furthestDistanceFromOrigin(**test_input) == 0\n\ntest_input = { \"moves\": \"RLRR\" }\nassert my_solution.furthestDistanceFromOrigin(**test_input) == 2\n\ntest_input = { \"moves\": \"RLR_\" }\nassert my_solution.furthestDistanceFromOrigin(**test_input) == 2\n\ntest_input = { \"moves\": \"RL_L\" }\nassert my_solution.furthestDistanceFromOrigin(**test_input) == 2\n\ntest_input = { \"moves\": \"RL_R\" }\nassert my_solution.furthestDistanceFromOrigin(**test_input) == 2\n\ntest_input = { \"moves\": \"RL__\" }\nassert my_solution.furthestDistanceFromOrigin(**test_input) == 2\n\ntest_input = { \"moves\": \"RRLL\" }\nassert my_solution.furthestDistanceFromOrigin(**test_input) == 0\n\ntest_input = { \"moves\": \"RRLR\" }\nassert my_solution.furthestDistanceFromOrigin(**test_input) == 2\n\ntest_input = { \"moves\": \"RRL_\" }\nassert my_solution.furthestDistanceFromOrigin(**test_input) == 2\n\ntest_input = { \"moves\": \"RRRL\" }\nassert my_solution.furthestDistanceFromOrigin(**test_input) == 2\n\ntest_input = { \"moves\": \"RRRR\" }\nassert my_solution.furthestDistanceFromOrigin(**test_input) == 4\n\ntest_input = { \"moves\": \"RRR_\" }\nassert my_solution.furthestDistanceFromOrigin(**test_input) == 4\n\ntest_input = { \"moves\": \"RR_L\" }\nassert my_solution.furthestDistanceFromOrigin(**test_input) == 2\n\ntest_input = { \"moves\": \"RR_R\" }\nassert my_solution.furthestDistanceFromOrigin(**test_input) == 4\n\ntest_input = { \"moves\": \"RR__\" }\nassert my_solution.furthestDistanceFromOrigin(**test_input) == 4\n\ntest_input = { \"moves\": \"R_LL\" }\nassert my_solution.furthestDistanceFromOrigin(**test_input) == 2\n\ntest_input = { \"moves\": \"R_LR\" }\nassert my_solution.furthestDistanceFromOrigin(**test_input) == 2\n\ntest_input = { \"moves\": \"R_L_\" }\nassert my_solution.furthestDistanceFromOrigin(**test_input) == 2\n\ntest_input = { \"moves\": \"R_RL\" }\nassert my_solution.furthestDistanceFromOrigin(**test_input) == 2\n\ntest_input = { \"moves\": \"R_RR\" }\nassert my_solution.furthestDistanceFromOrigin(**test_input) == 4\n\ntest_input = { \"moves\": \"R_R_\" }\nassert my_solution.furthestDistanceFromOrigin(**test_input) == 4\n\ntest_input = { \"moves\": \"R__L\" }\nassert my_solution.furthestDistanceFromOrigin(**test_input) == 2\n\ntest_input = { \"moves\": \"R__R\" }\nassert my_solution.furthestDistanceFromOrigin(**test_input) == 4\n\ntest_input = { \"moves\": \"R___\" }\nassert my_solution.furthestDistanceFromOrigin(**test_input) == 4\n\ntest_input = { \"moves\": \"_LLL\" }\nassert my_solution.furthestDistanceFromOrigin(**test_input) == 4\n\ntest_input = { \"moves\": \"_LLR\" }\nassert my_solution.furthestDistanceFromOrigin(**test_input) == 2\n\ntest_input = { \"moves\": \"_LL_\" }\nassert my_solution.furthestDistanceFromOrigin(**test_input) == 4\n\ntest_input = { \"moves\": \"_LRL\" }\nassert my_solution.furthestDistanceFromOrigin(**test_input) == 2",
+ "test_cases": [
+  {
+   "input": {
+    "args": [
+     "L_RL__R"
+    ]
+   },
+   "output": 3,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "_R__LL_"
+    ]
+   },
+   "output": 5,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "_______"
+    ]
+   },
+   "output": 7,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "L"
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "R"
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "_"
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "LL"
+    ]
+   },
+   "output": 2,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "LR"
+    ]
+   },
+   "output": 0,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "L_"
+    ]
+   },
+   "output": 2,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "RL"
+    ]
+   },
+   "output": 0,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "RR"
+    ]
+   },
+   "output": 2,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "R_"
+    ]
+   },
+   "output": 2,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "_L"
+    ]
+   },
+   "output": 2,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "_R"
+    ]
+   },
+   "output": 2,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "__"
+    ]
+   },
+   "output": 2,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "LLL"
+    ]
+   },
+   "output": 3,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "LLR"
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "LL_"
+    ]
+   },
+   "output": 3,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "LRL"
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "LRR"
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "LR_"
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "L_L"
+    ]
+   },
+   "output": 3,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "L_R"
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "L__"
+    ]
+   },
+   "output": 3,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "RLL"
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "RLR"
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "RL_"
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "RRL"
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "RRR"
+    ]
+   },
+   "output": 3,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "RR_"
+    ]
+   },
+   "output": 3,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "R_L"
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "R_R"
+    ]
+   },
+   "output": 3,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "R__"
+    ]
+   },
+   "output": 3,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "_LL"
+    ]
+   },
+   "output": 3,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "_LR"
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "_L_"
+    ]
+   },
+   "output": 3,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "_RL"
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "_RR"
+    ]
+   },
+   "output": 3,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "_R_"
+    ]
+   },
+   "output": 3,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "__L"
+    ]
+   },
+   "output": 3,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "__R"
+    ]
+   },
+   "output": 3,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "___"
+    ]
+   },
+   "output": 3,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "LLLL"
+    ]
+   },
+   "output": 4,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "LLLR"
+    ]
+   },
+   "output": 2,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "LLL_"
+    ]
+   },
+   "output": 4,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "LLRL"
+    ]
+   },
+   "output": 2,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "LLRR"
+    ]
+   },
+   "output": 0,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "LLR_"
+    ]
+   },
+   "output": 2,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "LL_L"
+    ]
+   },
+   "output": 4,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "LL_R"
+    ]
+   },
+   "output": 2,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "LL__"
+    ]
+   },
+   "output": 4,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "LRLL"
+    ]
+   },
+   "output": 2,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "LRLR"
+    ]
+   },
+   "output": 0,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "LRL_"
+    ]
+   },
+   "output": 2,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "LRRL"
+    ]
+   },
+   "output": 0,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "LRRR"
+    ]
+   },
+   "output": 2,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "LRR_"
+    ]
+   },
+   "output": 2,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "LR_L"
+    ]
+   },
+   "output": 2,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "LR_R"
+    ]
+   },
+   "output": 2,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "LR__"
+    ]
+   },
+   "output": 2,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "L_LL"
+    ]
+   },
+   "output": 4,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "L_LR"
+    ]
+   },
+   "output": 2,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "L_L_"
+    ]
+   },
+   "output": 4,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "L_RL"
+    ]
+   },
+   "output": 2,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "L_RR"
+    ]
+   },
+   "output": 2,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "L_R_"
+    ]
+   },
+   "output": 2,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "L__L"
+    ]
+   },
+   "output": 4,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "L__R"
+    ]
+   },
+   "output": 2,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "L___"
+    ]
+   },
+   "output": 4,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "RLLL"
+    ]
+   },
+   "output": 2,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "RLLR"
+    ]
+   },
+   "output": 0,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "RLL_"
+    ]
+   },
+   "output": 2,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "RLRL"
+    ]
+   },
+   "output": 0,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "RLRR"
+    ]
+   },
+   "output": 2,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "RLR_"
+    ]
+   },
+   "output": 2,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "RL_L"
+    ]
+   },
+   "output": 2,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "RL_R"
+    ]
+   },
+   "output": 2,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "RL__"
+    ]
+   },
+   "output": 2,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "RRLL"
+    ]
+   },
+   "output": 0,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "RRLR"
+    ]
+   },
+   "output": 2,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "RRL_"
+    ]
+   },
+   "output": 2,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "RRRL"
+    ]
+   },
+   "output": 2,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "RRRR"
+    ]
+   },
+   "output": 4,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "RRR_"
+    ]
+   },
+   "output": 4,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "RR_L"
+    ]
+   },
+   "output": 2,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "RR_R"
+    ]
+   },
+   "output": 4,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "RR__"
+    ]
+   },
+   "output": 4,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "R_LL"
+    ]
+   },
+   "output": 2,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "R_LR"
+    ]
+   },
+   "output": 2,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "R_L_"
+    ]
+   },
+   "output": 2,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "R_RL"
+    ]
+   },
+   "output": 2,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "R_RR"
+    ]
+   },
+   "output": 4,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "R_R_"
+    ]
+   },
+   "output": 4,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "R__L"
+    ]
+   },
+   "output": 2,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "R__R"
+    ]
+   },
+   "output": 4,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "R___"
+    ]
+   },
+   "output": 4,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "_LLL"
+    ]
+   },
+   "output": 4,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "_LLR"
+    ]
+   },
+   "output": 2,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "_LL_"
+    ]
+   },
+   "output": 4,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "_LRL"
+    ]
+   },
+   "output": 2,
+   "explanation": ""
+  }
+ ],
+ "original_ilr": "```json\n{\n  \"problem_id\": \"furthestDistanceFromOrigin\",\n  \"nodes\": [\n    {\n      \"id\": 1,\n      \"type\": \"start\",\n      \"label\": \"Start\",\n      \"next\": 2\n    },\n    {\n      \"id\": 2,\n      \"type\": \"process\",\n      \"label\": \"Input: moves (string)\",\n      \"action\": \"ctx['moves'] = ctx['arg0']; ctx['s'] = 0; ctx['t'] = 0; ctx['distance'] = 0\",\n      \"next\": 3\n    },\n    {\n      \"id\": 3,\n      \"type\": \"process\",\n      \"label\": \"Count L's: s = moves.count('L')\",\n      \"action\": \"ctx['s'] = ctx['moves'].count('L')\",\n      \"next\": 4\n    },\n    {\n      \"id\": 4,\n      \"type\": \"process\",\n      \"label\": \"Count R's: t = moves.count('R')\",\n      \"action\": \"ctx['t'] = ctx['moves'].count('R')\",\n      \"next\": 5\n    },\n    {\n      \"id\": 5,\n      \"type\": \"process\",\n      \"label\": \"Initialize distance = 0\",\n      \"action\": \"ctx['distance'] = 0\",\n      \"next\": 6\n    },\n    {\n      \"id\": 6,\n      \"type\": \"decision\",\n      \"label\": \"Loop through each character in moves\",\n      \"logic\": \"len(ctx['moves']) > 0\",\n      \"true_next\": 7,\n      \"false_next\": 11\n    },\n    {\n      \"id\": 7,\n      \"type\": \"decision\",\n      \"label\": \"Is character 'L'?\",\n      \"logic\": \"ctx['char'] == 'L'\",\n      \"true_next\": 8,\n      \"false_next\": 9\n    },\n    {\n      \"id\": 8,\n      \"type\": \"process\",\n      \"label\": \"Update distance: distance -= 1\",\n      \"action\": \"ctx['distance'] -= 1\",\n      \"next\": 6\n    },\n    {\n      \"id\": 9,\n      \"type\": \"decision\",\n      \"label\": \"Is character 'R'?\",\n      \"logic\": \"ctx['char'] == 'R'\",\n      \"true_next\": 10,\n      \"false_next\": 6\n    },\n    {\n      \"id\": 10,\n      \"type\": \"process\",\n      \"label\": \"Update distance: distance += 1\",\n      \"action\": \"ctx['distance'] += 1\",\n      \"next\": 6\n    },\n    {\n      \"id\": 11,\n      \"type\": \"return\",\n      \"label\": \"Return abs(distance)\",\n      \"value\": \"abs(ctx['distance'])\"\n    }\n  ]\n}\n```",
+ "original_code": "class Solution:\n    def furthestDistanceFromOrigin(self, moves: str) -> int:\n        s = moves.count('L')\n        t = moves.count('R')\n        distance = 0\n        \n        for char in moves:\n            if char == 'L':\n                distance -= 1\n            elif char == 'R':\n                distance += 1\n        \n        return abs(distance)",
+ "ocr_data": {
+  "nodes": [
+   {
+    "node_id": 1,
+    "shape_type": "rectangle",
+    "raw_text": "Start",
+    "position": "top"
+   },
+   {
+    "node_id": 2,
+    "shape_type": "rectangle",
+    "raw_text": "Input: moves (string)",
+    "position": "middle"
+   },
+   {
+    "node_id": 3,
+    "shape_type": "rectangle",
+    "raw_text": "Count L's: s = moves.count('L')",
+    "position": "middle"
+   },
+   {
+    "node_id": 4,
+    "shape_type": "rectangle",
+    "raw_text": "Count R's: t = moves.count('R')",
+    "position": "middle"
+   },
+   {
+    "node_id": 5,
+    "shape_type": "rectangle",
+    "raw_text": "Initialize distance = 0",
+    "position": "middle"
+   },
+   {
+    "node_id": 6,
+    "shape_type": "rectangle",
+    "raw_text": "Loop through each character in moves",
+    "position": "middle"
+   },
+   {
+    "node_id": 7,
+    "shape_type": "diamond",
+    "raw_text": "Is character 'L'?",
+    "position": "middle"
+   },
+   {
+    "node_id": 8,
+    "shape_type": "rectangle",
+    "raw_text": "Update distance: distance -= 1",
+    "position": "middle"
+   },
+   {
+    "node_id": 9,
+    "shape_type": "diamond",
+    "raw_text": "Is character 'R'?",
+    "position": "middle"
+   },
+   {
+    "node_id": 10,
+    "shape_type": "rectangle",
+    "raw_text": "Update distance: distance += 1",
+    "position": "middle"
+   },
+   {
+    "node_id": 11,
+    "shape_type": "rectangle",
+    "raw_text": "Return abs(distance)",
+    "position": "middle"
+   },
+   {
+    "node_id": 12,
+    "shape_type": "rectangle",
+    "raw_text": "Output: furthest distance from origin",
+    "position": "middle"
+   },
+   {
+    "node_id": 13,
+    "shape_type": "diamond",
+    "raw_text": "Is s > t?",
+    "position": "bottom"
+   },
+   {
+    "node_id": 14,
+    "shape_type": "rectangle",
+    "raw_text": "Update distance: distance -= 1",
+    "position": "bottom"
+   },
+   {
+    "node_id": 15,
+    "shape_type": "diamond",
+    "raw_text": "Is t > s?",
+    "position": "bottom"
+   },
+   {
+    "node_id": 16,
+    "shape_type": "rectangle",
+    "raw_text": "Update distance: distance += 1",
+    "position": "bottom"
+   }
+  ],
+  "edges": [
+   {
+    "from_node": 1,
+    "to_node": 2,
+    "label": ""
+   },
+   {
+    "from_node": 2,
+    "to_node": 3,
+    "label": ""
+   },
+   {
+    "from_node": 3,
+    "to_node": 4,
+    "label": ""
+   },
+   {
+    "from_node": 4,
+    "to_node": 5,
+    "label": ""
+   },
+   {
+    "from_node": 5,
+    "to_node": 6,
+    "label": ""
+   },
+   {
+    "from_node": 6,
+    "to_node": 7,
+    "label": ""
+   },
+   {
+    "from_node": 7,
+    "to_node": 8,
+    "label": "Yes"
+   },
+   {
+    "from_node": 7,
+    "to_node": 9,
+    "label": "No"
+   },
+   {
+    "from_node": 9,
+    "to_node": 10,
+    "label": "Yes"
+   },
+   {
+    "from_node": 9,
+    "to_node": 6,
+    "label": "No"
+   },
+   {
+    "from_node": 8,
+    "to_node": 6,
+    "label": ""
+   },
+   {
+    "from_node": 10,
+    "to_node": 6,
+    "label": ""
+   },
+   {
+    "from_node": 6,
+    "to_node": 11,
+    "label": ""
+   },
+   {
+    "from_node": 11,
+    "to_node": 12,
+    "label": ""
+   },
+   {
+    "from_node": 12,
+    "to_node": 6,
+    "label": ""
+   },
+   {
+    "from_node": 6,
+    "to_node": 13,
+    "label": ""
+   },
+   {
+    "from_node": 13,
+    "to_node": 14,
+    "label": "Yes"
+   },
+   {
+    "from_node": 13,
+    "to_node": 6,
+    "label": "No"
+   },
+   {
+    "from_node": 14,
+    "to_node": 6,
+    "label": ""
+   },
+   {
+    "from_node": 6,
+    "to_node": 15,
+    "label": ""
+   },
+   {
+    "from_node": 15,
+    "to_node": 16,
+    "label": "Yes"
+   },
+   {
+    "from_node": 15,
+    "to_node": 6,
+    "label": "No"
+   },
+   {
+    "from_node": 16,
+    "to_node": 6,
+    "label": ""
+   }
+  ],
+  "other_text": []
+ },
+ "test_result": {},
+ "status": "completed",
+ "fixed_ilr": null,
+ "modified_code": null,
+ "ilr_fix_log": "",
+ "bug_injected": ""
+}

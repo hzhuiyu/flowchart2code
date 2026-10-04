@@ -1,0 +1,84 @@
+{
+  "task_id": "HumanEval-91",
+  "dataset": "HumanEval-V",
+  "difficulty": null,
+  "title": null,
+  "result": "failed: Test 5",
+  "ilr": "{\n  \"problem_id\": \"is_bored_example\",\n  \"nodes\": [\n    {\"id\": 1, \"type\": \"start\", \"label\": \"Start\", \"next\": 2},\n    {\"id\": 2, \"type\": \"process\", \"label\": \"Input: S (string)\", \"action\": \"ctx['S']=ctx['arg0']; ctx['count']=0\", \"next\": 3},\n    {\"id\": 3, \"type\": \"process\", \"label\": \"Import regular expression module\", \"action\": \"\", \"next\": 4},\n    {\"id\": 4, \"type\": \"process\", \"label\": \"Split S into sentences using regex: sentences = re.split(r'[.?!]\\\\s*', S)\", \"action\": \"import re; ctx['sentences'] = re.split(r'[.?!]\\\\s*', ctx['S'])\", \"next\": 5},\n    {\"id\": 5, \"type\": \"process\", \"label\": \"Count sentences starting with 'I': count = sum(sentence[0:2] == 'I ' for sentence in sentences)\", \"action\": \"ctx['count'] = sum(sentence.startswith('I ') for sentence in ctx['sentences'])\", \"next\": 6},\n    {\"id\": 6, \"type\": \"end\", \"label\": \"Output: count (number of boredoms)\", \"output\": \"ctx['count']\"}\n  ]\n}",
+  "code": "import re\n\ndef is_bored(S):\n    count = 0\n    sentences = re.split(r'[.?!]\\\\s*', S)\n    count = sum(sentence.startswith('I ') for sentence in sentences)\n    return count",
+  "prompt": "\ndef is_bored(S):\n    \"\"\"\n    You'll be given a string of words, and your task is to count the number\n    of boredoms. A boredom is a sentence that starts with the word \"I\".\n    Sentences are delimited by '.', '?' or '!'.\n   \n    For example:\n    >>> is_bored(\"Hello world\")\n    0\n    >>> is_bored(\"The sky is blue. The sun is shining. I love this weather\")\n    1\n    \"\"\"\n",
+  "test": "def check(candidate):\n\n    # Check some simple cases\n    assert candidate(\"Hello world\") == 0, \"Test 1\"\n    assert candidate(\"Is the sky blue?\") == 0, \"Test 2\"\n    assert candidate(\"I love It !\") == 1, \"Test 3\"\n    assert candidate(\"bIt\") == 0, \"Test 4\"\n    assert candidate(\"I feel good today. I will be productive. will kill It\") == 2, \"Test 5\"\n    assert candidate(\"You and I are going for a walk\") == 0, \"Test 6\"\n\n    # Check some edge cases that are easy to work out by hand.\n    assert True, \"This prints if this assert fails 2 (also good for debugging!)\"\n\n",
+  "ocr_data": {
+    "nodes": [
+      {
+        "node_id": 1,
+        "shape_type": "rectangle",
+        "raw_text": "Start",
+        "position": "top"
+      },
+      {
+        "node_id": 2,
+        "shape_type": "rectangle",
+        "raw_text": "Input: S (string)",
+        "position": "middle"
+      },
+      {
+        "node_id": 3,
+        "shape_type": "rectangle",
+        "raw_text": "Import regular expression module",
+        "position": "middle"
+      },
+      {
+        "node_id": 4,
+        "shape_type": "rectangle",
+        "raw_text": "Split S into sentences using regex: sentences = re.split(r'[.?!]\\s*', S)",
+        "position": "middle"
+      },
+      {
+        "node_id": 5,
+        "shape_type": "rectangle",
+        "raw_text": "Count sentences starting with 'I': count = sum(sentence[0:2] == 'I ' for sentence in sentences)",
+        "position": "middle"
+      },
+      {
+        "node_id": 6,
+        "shape_type": "rectangle",
+        "raw_text": "Output: count (number of boredoms)",
+        "position": "bottom"
+      }
+    ],
+    "edges": [
+      {
+        "from_node": 1,
+        "to_node": 2
+      },
+      {
+        "from_node": 2,
+        "to_node": 3
+      },
+      {
+        "from_node": 3,
+        "to_node": 4
+      },
+      {
+        "from_node": 4,
+        "to_node": 5
+      },
+      {
+        "from_node": 5,
+        "to_node": 6
+      }
+    ],
+    "other_text": []
+  },
+  "analysis": {
+    "ilr_verdict": "correct",
+    "ilr_issues": "",
+    "code_vs_ilr": "deviates",
+    "code_issues": "代码把ILR中的正则 r'[.?!]\\s*'（单反斜杠）误写成 r'[.?!]\\\\s*'（双反斜杠），正则含义变成'标点后跟一个字面反斜杠'，永远无法切分句子；多句文本被当成一整句处理。",
+    "error_source": "code",
+    "ocr_contribution": "no",
+    "root_cause": "ILR正确（re.split(r'[.?!]\\s*', S) 配合 startswith('I ') 可通过全部测试），代码生成阶段转写正则时多转义了一层反斜杠导致切分失效，仅Test 5失败。",
+    "evidence": "is_bored(\"I feel good today. I will be productive. will kill It\")按ILR逻辑返回2（正确），按生成代码返回1（正则未切分），与FAILURE RESULT(Test 5)一致。"
+  }
+}

@@ -1,0 +1,2222 @@
+{
+ "task_id": "biweekly-contest-114-split-array-into-maximum-number-of-subarrays",
+ "dataset": "Algorithm",
+ "title": "split-array-into-maximum-number-of-subarrays",
+ "difficulty": "Medium",
+ "prompt": "\"\"\"\nYou are given an array nums consisting of non-negative integers.\n\nWe define the score of subarray nums[l..r] such that l <= r as nums[l] AND nums[l + 1] AND ... AND nums[r] where AND is the bitwise AND operation.\n\nConsider splitting the array into one or more subarrays such that the following conditions are satisfied:\n\n * Each element of the array belongs to exactly one subarray.\n * The sum of scores of the subarrays is the minimum possible.\n\nReturn the maximum number of subarrays in a split that satisfies the conditions above.\n\nA subarray is a contiguous part of an array.\n\nExample 1:\n\nInput: nums = [1,0,2,0,1,2]\nOutput: 3\nExplanation: We can split the array into the following subarrays:\n- [1,0]. The score of this subarray is 1 AND 0 = 0.\n- [2,0]. The score of this subarray is 2 AND 0 = 0.\n- [1,2]. The score of this subarray is 1 AND 2 = 0.\nThe sum of scores is 0 + 0 + 0 = 0, which is the minimum possible score that we can obtain.\nIt can be shown that we cannot split the array into more than 3 subarrays with a total score of 0. So we return 3.\n\nExample 2:\n\nInput: nums = [5,7,1,3]\nOutput: 1\nExplanation: We can split the array into one subarray: [5,7,1,3] with a score of 1, which is the minimum possible score that we can obtain.\nIt can be shown that we cannot split the array into more than 1 subarray with a total score of 1. So we return 1.\n\n\nConstraints:\n\n * 1 <= nums.length <= 105\n * 0 <= nums[i] <= 106\n\"\"\"\nclass Solution:\n    def maxSubarrays(self, nums: List[int]) -> int:\n        ",
+ "starter_code": "class Solution:\n    def maxSubarrays(self, nums: List[int]) -> int:\n        ",
+ "entry_point": "",
+ "test": "\nmy_solution = Solution()\n\ntest_input = { \"nums\": [1,0,2,0,1,2] }\nassert my_solution.maxSubarrays(**test_input) == 3\n\ntest_input = { \"nums\": [5,7,1,3] }\nassert my_solution.maxSubarrays(**test_input) == 1\n\ntest_input = { \"nums\": [1,0,2,1] }\nassert my_solution.maxSubarrays(**test_input) == 2\n\ntest_input = { \"nums\": [0] }\nassert my_solution.maxSubarrays(**test_input) == 1\n\ntest_input = { \"nums\": [0,0] }\nassert my_solution.maxSubarrays(**test_input) == 2\n\ntest_input = { \"nums\": [100000] }\nassert my_solution.maxSubarrays(**test_input) == 1\n\ntest_input = { \"nums\": [1,2,2,1] }\nassert my_solution.maxSubarrays(**test_input) == 2\n\ntest_input = { \"nums\": [30,18,19,20,11,21,12,22,26] }\nassert my_solution.maxSubarrays(**test_input) == 2\n\ntest_input = { \"nums\": [0,8,0,0,0,23] }\nassert my_solution.maxSubarrays(**test_input) == 4\n\ntest_input = { \"nums\": [8,10,23,26,21,28,21,14,21,14,9,16,24,29,7,26] }\nassert my_solution.maxSubarrays(**test_input) == 4\n\ntest_input = { \"nums\": [18,12,16,28,7,15,24,7,8,26,22,6,23,7,17,1,16] }\nassert my_solution.maxSubarrays(**test_input) == 6\n\ntest_input = { \"nums\": [22] }\nassert my_solution.maxSubarrays(**test_input) == 1\n\ntest_input = { \"nums\": [15,24,20,28,11,16,0,0,0,22,7,18] }\nassert my_solution.maxSubarrays(**test_input) == 5\n\ntest_input = { \"nums\": [0,0,27] }\nassert my_solution.maxSubarrays(**test_input) == 2\n\ntest_input = { \"nums\": [18,7,20,10,0,14,0,28,7,0,0,9,12,0] }\nassert my_solution.maxSubarrays(**test_input) == 6\n\ntest_input = { \"nums\": [0,29,16,0,6,17] }\nassert my_solution.maxSubarrays(**test_input) == 3\n\ntest_input = { \"nums\": [4,7,13,0,23,6,4] }\nassert my_solution.maxSubarrays(**test_input) == 1\n\ntest_input = { \"nums\": [4,27] }\nassert my_solution.maxSubarrays(**test_input) == 1\n\ntest_input = { \"nums\": [29,5,0,25,0,15,19,24,20,0,23] }\nassert my_solution.maxSubarrays(**test_input) == 4\n\ntest_input = { \"nums\": [24,6] }\nassert my_solution.maxSubarrays(**test_input) == 1\n\ntest_input = { \"nums\": [13,20,16,16,27,0,7,18,3,0,23,16,25,0,5,1,4] }\nassert my_solution.maxSubarrays(**test_input) == 5\n\ntest_input = { \"nums\": [0,0,30,20,6,13] }\nassert my_solution.maxSubarrays(**test_input) == 2\n\ntest_input = { \"nums\": [21,24,8,8,20,12,24,28,17,9,17] }\nassert my_solution.maxSubarrays(**test_input) == 3\n\ntest_input = { \"nums\": [0,0,18,0,0,4,5,25,0,0,0,30,0,18,0,0,12,21,21,18] }\nassert my_solution.maxSubarrays(**test_input) == 12\n\ntest_input = { \"nums\": [12,3,0,27,23,0,29,18,0,0,0,20,29,0,2,0,17,10,0,0] }\nassert my_solution.maxSubarrays(**test_input) == 11\n\ntest_input = { \"nums\": [26,28,7,14,24,15,1,16,5,24,4,10,24] }\nassert my_solution.maxSubarrays(**test_input) == 4\n\ntest_input = { \"nums\": [30,11,0,9,15,0,0,0] }\nassert my_solution.maxSubarrays(**test_input) == 4\n\ntest_input = { \"nums\": [16,18,14,6,25,30,7,0,22,0,15,0] }\nassert my_solution.maxSubarrays(**test_input) == 5\n\ntest_input = { \"nums\": [16,12,6,21,26,25,2,0,6,0,13] }\nassert my_solution.maxSubarrays(**test_input) == 5\n\ntest_input = { \"nums\": [13,1,13,18,2,15,15,27,3,3,14,12,23,8,29,10,29,15,10] }\nassert my_solution.maxSubarrays(**test_input) == 3\n\ntest_input = { \"nums\": [0,29,0,28,20,0,21,8,0,0,26,8,0,0,8,12] }\nassert my_solution.maxSubarrays(**test_input) == 8\n\ntest_input = { \"nums\": [0,18,0,0,0,22,0,15] }\nassert my_solution.maxSubarrays(**test_input) == 5\n\ntest_input = { \"nums\": [0,30,26] }\nassert my_solution.maxSubarrays(**test_input) == 1\n\ntest_input = { \"nums\": [0,1,3,29,16,0,0,0,11] }\nassert my_solution.maxSubarrays(**test_input) == 5\n\ntest_input = { \"nums\": [0,10,11,14,0,19,1,0,28,10,27,27,25,17,0,25,19] }\nassert my_solution.maxSubarrays(**test_input) == 5\n\ntest_input = { \"nums\": [18,4,0,6,0,10,23,3,26,0] }\nassert my_solution.maxSubarrays(**test_input) == 4\n\ntest_input = { \"nums\": [11,22,22,22,18,15,8,8,19,12,20,11] }\nassert my_solution.maxSubarrays(**test_input) == 3\n\ntest_input = { \"nums\": [0,23,0,0,0,17,0,0] }\nassert my_solution.maxSubarrays(**test_input) == 6\n\ntest_input = { \"nums\": [0,23,0,14,4,5,23,23,8,8,15,0,0,13,6,26,0] }\nassert my_solution.maxSubarrays(**test_input) == 7\n\ntest_input = { \"nums\": [0,3,0,16,15,0,1,0,24,16,27,0,23,15,0,13,0,0] }\nassert my_solution.maxSubarrays(**test_input) == 9\n\ntest_input = { \"nums\": [12,0,16,0,0,0,29,18] }\nassert my_solution.maxSubarrays(**test_input) == 4\n\ntest_input = { \"nums\": [0,27,15,13] }\nassert my_solution.maxSubarrays(**test_input) == 1\n\ntest_input = { \"nums\": [15,10,0,2,0,3,8,0,0,26,25,27,0,0,0,28,0,10,27,3] }\nassert my_solution.maxSubarrays(**test_input) == 9\n\ntest_input = { \"nums\": [11,10,12,6,15,25,17,21,22] }\nassert my_solution.maxSubarrays(**test_input) == 2\n\ntest_input = { \"nums\": [2,19,13] }\nassert my_solution.maxSubarrays(**test_input) == 1\n\ntest_input = { \"nums\": [27,4] }\nassert my_solution.maxSubarrays(**test_input) == 1\n\ntest_input = { \"nums\": [0,0,12,0,7,0,18,26,9,29,0,4,30,21,0,1] }\nassert my_solution.maxSubarrays(**test_input) == 7\n\ntest_input = { \"nums\": [6,8,0,0,25,0,30,18,18,0] }\nassert my_solution.maxSubarrays(**test_input) == 5\n\ntest_input = { \"nums\": [21,5,18,18,18,0,0,17,0] }\nassert my_solution.maxSubarrays(**test_input) == 4\n\ntest_input = { \"nums\": [25,29,23,27] }\nassert my_solution.maxSubarrays(**test_input) == 1\n\ntest_input = { \"nums\": [28,28,0,16,21,27,12,3,10,0,19,0,0] }\nassert my_solution.maxSubarrays(**test_input) == 5\n\ntest_input = { \"nums\": [9,2,22,14,17,3,21,1,29,3,30,13,16,17,25,26,17] }\nassert my_solution.maxSubarrays(**test_input) == 4\n\ntest_input = { \"nums\": [0,9,4,25,21,0,25,11,13,9,0,0,19,0,16,8,17,26,0,0] }\nassert my_solution.maxSubarrays(**test_input) == 9\n\ntest_input = { \"nums\": [11,0,0,2,3,0,9,26,0,0,25,7,1,12,16,14] }\nassert my_solution.maxSubarrays(**test_input) == 7\n\ntest_input = { \"nums\": [7,11,27,13,23,16,13,5,27,5,16] }\nassert my_solution.maxSubarrays(**test_input) == 2\n\ntest_input = { \"nums\": [18] }\nassert my_solution.maxSubarrays(**test_input) == 1\n\ntest_input = { \"nums\": [20,19,2,20,26,1,17,6,23,25,7,14,16,8] }\nassert my_solution.maxSubarrays(**test_input) == 5\n\ntest_input = { \"nums\": [28,0,29,9,0,11,13,22,10,16,21,30,18,19,0,0,0] }\nassert my_solution.maxSubarrays(**test_input) == 7\n\ntest_input = { \"nums\": [20,26,0,0,0,11,30] }\nassert my_solution.maxSubarrays(**test_input) == 3\n\ntest_input = { \"nums\": [16,12,0,2,15,30,0,16,7,25] }\nassert my_solution.maxSubarrays(**test_input) == 4\n\ntest_input = { \"nums\": [0,7,16,17,29,0,18,0,14,21,17,2,28,7,26,0,14] }\nassert my_solution.maxSubarrays(**test_input) == 7\n\ntest_input = { \"nums\": [29,0,19,23,13] }\nassert my_solution.maxSubarrays(**test_input) == 1\n\ntest_input = { \"nums\": [0,13,1,12,18,24,11,26,7] }\nassert my_solution.maxSubarrays(**test_input) == 3\n\ntest_input = { \"nums\": [7,26,28,12,24,10,11,26,19,29,1,26] }\nassert my_solution.maxSubarrays(**test_input) == 3\n\ntest_input = { \"nums\": [28,15,24,9,0] }\nassert my_solution.maxSubarrays(**test_input) == 1\n\ntest_input = { \"nums\": [22,6,21,16,24,7,18,25,25,26,15,10,26,22,23,15] }\nassert my_solution.maxSubarrays(**test_input) == 3\n\ntest_input = { \"nums\": [0,23,0,1,26,5,18,12,25,23,5,19] }\nassert my_solution.maxSubarrays(**test_input) == 5\n\ntest_input = { \"nums\": [16,19,0,0] }\nassert my_solution.maxSubarrays(**test_input) == 2\n\ntest_input = { \"nums\": [13] }\nassert my_solution.maxSubarrays(**test_input) == 1\n\ntest_input = { \"nums\": [8,9] }\nassert my_solution.maxSubarrays(**test_input) == 1\n\ntest_input = { \"nums\": [0,0,0,11,0,24,8,0,0,17,21,7,0,25,25] }\nassert my_solution.maxSubarrays(**test_input) == 7\n\ntest_input = { \"nums\": [0,0,10,0,0,30,5,0] }\nassert my_solution.maxSubarrays(**test_input) == 5\n\ntest_input = { \"nums\": [29,22,30,22,19,26] }\nassert my_solution.maxSubarrays(**test_input) == 1\n\ntest_input = { \"nums\": [17,15,14,24,30,14,25,28,10,11] }\nassert my_solution.maxSubarrays(**test_input) == 1\n\ntest_input = { \"nums\": [0,0,13,2,12,2,27] }\nassert my_solution.maxSubarrays(**test_input) == 4\n\ntest_input = { \"nums\": [0,18,9,0,20,0,30,22,0] }\nassert my_solution.maxSubarrays(**test_input) == 5\n\ntest_input = { \"nums\": [2,6,23,0,0,6,12,22,0,19,18,0,0,14,19,3,11,28,0,17] }\nassert my_solution.maxSubarrays(**test_input) == 7\n\ntest_input = { \"nums\": [16,12,7] }\nassert my_solution.maxSubarrays(**test_input) == 1\n\ntest_input = { \"nums\": [0,22,0,0,0,26,7] }\nassert my_solution.maxSubarrays(**test_input) == 4\n\ntest_input = { \"nums\": [0,19,5,25,0,0,4,0,0,1,0,10,25,2,3] }\nassert my_solution.maxSubarrays(**test_input) == 7\n\ntest_input = { \"nums\": [7,8,18,14,4,6,22,22,7] }\nassert my_solution.maxSubarrays(**test_input) == 2\n\ntest_input = { \"nums\": [8,9,13,0,0,20] }\nassert my_solution.maxSubarrays(**test_input) == 2\n\ntest_input = { \"nums\": [29,20,13,11,19,27,20,4,24,20,10,21,18,26,3,23,15,18,23,25] }\nassert my_solution.maxSubarrays(**test_input) == 5\n\ntest_input = { \"nums\": [25,0,18,13,22,5,0,0] }\nassert my_solution.maxSubarrays(**test_input) == 4\n\ntest_input = { \"nums\": [9,3,0,2,18,11,15,1,10,0,0,16,0,11] }\nassert my_solution.maxSubarrays(**test_input) == 5\n\ntest_input = { \"nums\": [9,0,0,11,14,0,23,0] }\nassert my_solution.maxSubarrays(**test_input) == 4\n\ntest_input = { \"nums\": [6,3,22,28,0,0,25,2,23,0,0,23,15,0] }\nassert my_solution.maxSubarrays(**test_input) == 7\n\ntest_input = { \"nums\": [0,10,11,25,14] }\nassert my_solution.maxSubarrays(**test_input) == 1\n\ntest_input = { \"nums\": [26,9,27,25,30,25,10,3,14,29,2,6,5,7,8,18] }\nassert my_solution.maxSubarrays(**test_input) == 3\n\ntest_input = { \"nums\": [5,9,0,28,23,11,1,3] }\nassert my_solution.maxSubarrays(**test_input) == 2\n\ntest_input = { \"nums\": [0,22,3,0,15,0,11,3,20,23,0,7,13,20,11,6,19] }\nassert my_solution.maxSubarrays(**test_input) == 6\n\ntest_input = { \"nums\": [0,16,6] }\nassert my_solution.maxSubarrays(**test_input) == 2\n\ntest_input = { \"nums\": [26,9,20,26,22,12,18,21,23,30,3,9,12,19,16] }\nassert my_solution.maxSubarrays(**test_input) == 4\n\ntest_input = { \"nums\": [14,10,8] }\nassert my_solution.maxSubarrays(**test_input) == 1\n\ntest_input = { \"nums\": [0,0,0,19,0] }\nassert my_solution.maxSubarrays(**test_input) == 4\n\ntest_input = { \"nums\": [3,27] }\nassert my_solution.maxSubarrays(**test_input) == 1\n\ntest_input = { \"nums\": [7,14,27] }\nassert my_solution.maxSubarrays(**test_input) == 1\n\ntest_input = { \"nums\": [16,4,29,17,0,0,13,22,1,6,0,29,1,3,0,7] }\nassert my_solution.maxSubarrays(**test_input) == 6\n\ntest_input = { \"nums\": [5,0,0,9,0,0,19,0,0,0,0,7,19,14,3,0,10,29] }\nassert my_solution.maxSubarrays(**test_input) == 9\n\ntest_input = { \"nums\": [16,22,0,0,0,0,27,0,0,0,24,22,0,0] }\nassert my_solution.maxSubarrays(**test_input) == 9",
+ "test_cases": [
+  {
+   "input": {
+    "args": [
+     [
+      1,
+      0,
+      2,
+      0,
+      1,
+      2
+     ]
+    ]
+   },
+   "output": 3,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      5,
+      7,
+      1,
+      3
+     ]
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      1,
+      0,
+      2,
+      1
+     ]
+    ]
+   },
+   "output": 2,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      0
+     ]
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      0,
+      0
+     ]
+    ]
+   },
+   "output": 2,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      100000
+     ]
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      1,
+      2,
+      2,
+      1
+     ]
+    ]
+   },
+   "output": 2,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      30,
+      18,
+      19,
+      20,
+      11,
+      21,
+      12,
+      22,
+      26
+     ]
+    ]
+   },
+   "output": 2,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      0,
+      8,
+      0,
+      0,
+      0,
+      23
+     ]
+    ]
+   },
+   "output": 4,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      8,
+      10,
+      23,
+      26,
+      21,
+      28,
+      21,
+      14,
+      21,
+      14,
+      9,
+      16,
+      24,
+      29,
+      7,
+      26
+     ]
+    ]
+   },
+   "output": 4,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      18,
+      12,
+      16,
+      28,
+      7,
+      15,
+      24,
+      7,
+      8,
+      26,
+      22,
+      6,
+      23,
+      7,
+      17,
+      1,
+      16
+     ]
+    ]
+   },
+   "output": 6,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      22
+     ]
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      15,
+      24,
+      20,
+      28,
+      11,
+      16,
+      0,
+      0,
+      0,
+      22,
+      7,
+      18
+     ]
+    ]
+   },
+   "output": 5,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      0,
+      0,
+      27
+     ]
+    ]
+   },
+   "output": 2,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      18,
+      7,
+      20,
+      10,
+      0,
+      14,
+      0,
+      28,
+      7,
+      0,
+      0,
+      9,
+      12,
+      0
+     ]
+    ]
+   },
+   "output": 6,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      0,
+      29,
+      16,
+      0,
+      6,
+      17
+     ]
+    ]
+   },
+   "output": 3,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      4,
+      7,
+      13,
+      0,
+      23,
+      6,
+      4
+     ]
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      4,
+      27
+     ]
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      29,
+      5,
+      0,
+      25,
+      0,
+      15,
+      19,
+      24,
+      20,
+      0,
+      23
+     ]
+    ]
+   },
+   "output": 4,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      24,
+      6
+     ]
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      13,
+      20,
+      16,
+      16,
+      27,
+      0,
+      7,
+      18,
+      3,
+      0,
+      23,
+      16,
+      25,
+      0,
+      5,
+      1,
+      4
+     ]
+    ]
+   },
+   "output": 5,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      0,
+      0,
+      30,
+      20,
+      6,
+      13
+     ]
+    ]
+   },
+   "output": 2,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      21,
+      24,
+      8,
+      8,
+      20,
+      12,
+      24,
+      28,
+      17,
+      9,
+      17
+     ]
+    ]
+   },
+   "output": 3,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      0,
+      0,
+      18,
+      0,
+      0,
+      4,
+      5,
+      25,
+      0,
+      0,
+      0,
+      30,
+      0,
+      18,
+      0,
+      0,
+      12,
+      21,
+      21,
+      18
+     ]
+    ]
+   },
+   "output": 12,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      12,
+      3,
+      0,
+      27,
+      23,
+      0,
+      29,
+      18,
+      0,
+      0,
+      0,
+      20,
+      29,
+      0,
+      2,
+      0,
+      17,
+      10,
+      0,
+      0
+     ]
+    ]
+   },
+   "output": 11,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      26,
+      28,
+      7,
+      14,
+      24,
+      15,
+      1,
+      16,
+      5,
+      24,
+      4,
+      10,
+      24
+     ]
+    ]
+   },
+   "output": 4,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      30,
+      11,
+      0,
+      9,
+      15,
+      0,
+      0,
+      0
+     ]
+    ]
+   },
+   "output": 4,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      16,
+      18,
+      14,
+      6,
+      25,
+      30,
+      7,
+      0,
+      22,
+      0,
+      15,
+      0
+     ]
+    ]
+   },
+   "output": 5,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      16,
+      12,
+      6,
+      21,
+      26,
+      25,
+      2,
+      0,
+      6,
+      0,
+      13
+     ]
+    ]
+   },
+   "output": 5,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      13,
+      1,
+      13,
+      18,
+      2,
+      15,
+      15,
+      27,
+      3,
+      3,
+      14,
+      12,
+      23,
+      8,
+      29,
+      10,
+      29,
+      15,
+      10
+     ]
+    ]
+   },
+   "output": 3,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      0,
+      29,
+      0,
+      28,
+      20,
+      0,
+      21,
+      8,
+      0,
+      0,
+      26,
+      8,
+      0,
+      0,
+      8,
+      12
+     ]
+    ]
+   },
+   "output": 8,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      0,
+      18,
+      0,
+      0,
+      0,
+      22,
+      0,
+      15
+     ]
+    ]
+   },
+   "output": 5,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      0,
+      30,
+      26
+     ]
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      0,
+      1,
+      3,
+      29,
+      16,
+      0,
+      0,
+      0,
+      11
+     ]
+    ]
+   },
+   "output": 5,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      0,
+      10,
+      11,
+      14,
+      0,
+      19,
+      1,
+      0,
+      28,
+      10,
+      27,
+      27,
+      25,
+      17,
+      0,
+      25,
+      19
+     ]
+    ]
+   },
+   "output": 5,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      18,
+      4,
+      0,
+      6,
+      0,
+      10,
+      23,
+      3,
+      26,
+      0
+     ]
+    ]
+   },
+   "output": 4,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      11,
+      22,
+      22,
+      22,
+      18,
+      15,
+      8,
+      8,
+      19,
+      12,
+      20,
+      11
+     ]
+    ]
+   },
+   "output": 3,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      0,
+      23,
+      0,
+      0,
+      0,
+      17,
+      0,
+      0
+     ]
+    ]
+   },
+   "output": 6,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      0,
+      23,
+      0,
+      14,
+      4,
+      5,
+      23,
+      23,
+      8,
+      8,
+      15,
+      0,
+      0,
+      13,
+      6,
+      26,
+      0
+     ]
+    ]
+   },
+   "output": 7,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      0,
+      3,
+      0,
+      16,
+      15,
+      0,
+      1,
+      0,
+      24,
+      16,
+      27,
+      0,
+      23,
+      15,
+      0,
+      13,
+      0,
+      0
+     ]
+    ]
+   },
+   "output": 9,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      12,
+      0,
+      16,
+      0,
+      0,
+      0,
+      29,
+      18
+     ]
+    ]
+   },
+   "output": 4,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      0,
+      27,
+      15,
+      13
+     ]
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      15,
+      10,
+      0,
+      2,
+      0,
+      3,
+      8,
+      0,
+      0,
+      26,
+      25,
+      27,
+      0,
+      0,
+      0,
+      28,
+      0,
+      10,
+      27,
+      3
+     ]
+    ]
+   },
+   "output": 9,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      11,
+      10,
+      12,
+      6,
+      15,
+      25,
+      17,
+      21,
+      22
+     ]
+    ]
+   },
+   "output": 2,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      2,
+      19,
+      13
+     ]
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      27,
+      4
+     ]
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      0,
+      0,
+      12,
+      0,
+      7,
+      0,
+      18,
+      26,
+      9,
+      29,
+      0,
+      4,
+      30,
+      21,
+      0,
+      1
+     ]
+    ]
+   },
+   "output": 7,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      6,
+      8,
+      0,
+      0,
+      25,
+      0,
+      30,
+      18,
+      18,
+      0
+     ]
+    ]
+   },
+   "output": 5,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      21,
+      5,
+      18,
+      18,
+      18,
+      0,
+      0,
+      17,
+      0
+     ]
+    ]
+   },
+   "output": 4,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      25,
+      29,
+      23,
+      27
+     ]
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      28,
+      28,
+      0,
+      16,
+      21,
+      27,
+      12,
+      3,
+      10,
+      0,
+      19,
+      0,
+      0
+     ]
+    ]
+   },
+   "output": 5,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      9,
+      2,
+      22,
+      14,
+      17,
+      3,
+      21,
+      1,
+      29,
+      3,
+      30,
+      13,
+      16,
+      17,
+      25,
+      26,
+      17
+     ]
+    ]
+   },
+   "output": 4,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      0,
+      9,
+      4,
+      25,
+      21,
+      0,
+      25,
+      11,
+      13,
+      9,
+      0,
+      0,
+      19,
+      0,
+      16,
+      8,
+      17,
+      26,
+      0,
+      0
+     ]
+    ]
+   },
+   "output": 9,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      11,
+      0,
+      0,
+      2,
+      3,
+      0,
+      9,
+      26,
+      0,
+      0,
+      25,
+      7,
+      1,
+      12,
+      16,
+      14
+     ]
+    ]
+   },
+   "output": 7,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      7,
+      11,
+      27,
+      13,
+      23,
+      16,
+      13,
+      5,
+      27,
+      5,
+      16
+     ]
+    ]
+   },
+   "output": 2,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      18
+     ]
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      20,
+      19,
+      2,
+      20,
+      26,
+      1,
+      17,
+      6,
+      23,
+      25,
+      7,
+      14,
+      16,
+      8
+     ]
+    ]
+   },
+   "output": 5,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      28,
+      0,
+      29,
+      9,
+      0,
+      11,
+      13,
+      22,
+      10,
+      16,
+      21,
+      30,
+      18,
+      19,
+      0,
+      0,
+      0
+     ]
+    ]
+   },
+   "output": 7,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      20,
+      26,
+      0,
+      0,
+      0,
+      11,
+      30
+     ]
+    ]
+   },
+   "output": 3,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      16,
+      12,
+      0,
+      2,
+      15,
+      30,
+      0,
+      16,
+      7,
+      25
+     ]
+    ]
+   },
+   "output": 4,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      0,
+      7,
+      16,
+      17,
+      29,
+      0,
+      18,
+      0,
+      14,
+      21,
+      17,
+      2,
+      28,
+      7,
+      26,
+      0,
+      14
+     ]
+    ]
+   },
+   "output": 7,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      29,
+      0,
+      19,
+      23,
+      13
+     ]
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      0,
+      13,
+      1,
+      12,
+      18,
+      24,
+      11,
+      26,
+      7
+     ]
+    ]
+   },
+   "output": 3,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      7,
+      26,
+      28,
+      12,
+      24,
+      10,
+      11,
+      26,
+      19,
+      29,
+      1,
+      26
+     ]
+    ]
+   },
+   "output": 3,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      28,
+      15,
+      24,
+      9,
+      0
+     ]
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      22,
+      6,
+      21,
+      16,
+      24,
+      7,
+      18,
+      25,
+      25,
+      26,
+      15,
+      10,
+      26,
+      22,
+      23,
+      15
+     ]
+    ]
+   },
+   "output": 3,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      0,
+      23,
+      0,
+      1,
+      26,
+      5,
+      18,
+      12,
+      25,
+      23,
+      5,
+      19
+     ]
+    ]
+   },
+   "output": 5,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      16,
+      19,
+      0,
+      0
+     ]
+    ]
+   },
+   "output": 2,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      13
+     ]
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      8,
+      9
+     ]
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      0,
+      0,
+      0,
+      11,
+      0,
+      24,
+      8,
+      0,
+      0,
+      17,
+      21,
+      7,
+      0,
+      25,
+      25
+     ]
+    ]
+   },
+   "output": 7,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      0,
+      0,
+      10,
+      0,
+      0,
+      30,
+      5,
+      0
+     ]
+    ]
+   },
+   "output": 5,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      29,
+      22,
+      30,
+      22,
+      19,
+      26
+     ]
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      17,
+      15,
+      14,
+      24,
+      30,
+      14,
+      25,
+      28,
+      10,
+      11
+     ]
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      0,
+      0,
+      13,
+      2,
+      12,
+      2,
+      27
+     ]
+    ]
+   },
+   "output": 4,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      0,
+      18,
+      9,
+      0,
+      20,
+      0,
+      30,
+      22,
+      0
+     ]
+    ]
+   },
+   "output": 5,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      2,
+      6,
+      23,
+      0,
+      0,
+      6,
+      12,
+      22,
+      0,
+      19,
+      18,
+      0,
+      0,
+      14,
+      19,
+      3,
+      11,
+      28,
+      0,
+      17
+     ]
+    ]
+   },
+   "output": 7,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      16,
+      12,
+      7
+     ]
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      0,
+      22,
+      0,
+      0,
+      0,
+      26,
+      7
+     ]
+    ]
+   },
+   "output": 4,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      0,
+      19,
+      5,
+      25,
+      0,
+      0,
+      4,
+      0,
+      0,
+      1,
+      0,
+      10,
+      25,
+      2,
+      3
+     ]
+    ]
+   },
+   "output": 7,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      7,
+      8,
+      18,
+      14,
+      4,
+      6,
+      22,
+      22,
+      7
+     ]
+    ]
+   },
+   "output": 2,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      8,
+      9,
+      13,
+      0,
+      0,
+      20
+     ]
+    ]
+   },
+   "output": 2,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      29,
+      20,
+      13,
+      11,
+      19,
+      27,
+      20,
+      4,
+      24,
+      20,
+      10,
+      21,
+      18,
+      26,
+      3,
+      23,
+      15,
+      18,
+      23,
+      25
+     ]
+    ]
+   },
+   "output": 5,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      25,
+      0,
+      18,
+      13,
+      22,
+      5,
+      0,
+      0
+     ]
+    ]
+   },
+   "output": 4,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      9,
+      3,
+      0,
+      2,
+      18,
+      11,
+      15,
+      1,
+      10,
+      0,
+      0,
+      16,
+      0,
+      11
+     ]
+    ]
+   },
+   "output": 5,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      9,
+      0,
+      0,
+      11,
+      14,
+      0,
+      23,
+      0
+     ]
+    ]
+   },
+   "output": 4,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      6,
+      3,
+      22,
+      28,
+      0,
+      0,
+      25,
+      2,
+      23,
+      0,
+      0,
+      23,
+      15,
+      0
+     ]
+    ]
+   },
+   "output": 7,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      0,
+      10,
+      11,
+      25,
+      14
+     ]
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      26,
+      9,
+      27,
+      25,
+      30,
+      25,
+      10,
+      3,
+      14,
+      29,
+      2,
+      6,
+      5,
+      7,
+      8,
+      18
+     ]
+    ]
+   },
+   "output": 3,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      5,
+      9,
+      0,
+      28,
+      23,
+      11,
+      1,
+      3
+     ]
+    ]
+   },
+   "output": 2,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      0,
+      22,
+      3,
+      0,
+      15,
+      0,
+      11,
+      3,
+      20,
+      23,
+      0,
+      7,
+      13,
+      20,
+      11,
+      6,
+      19
+     ]
+    ]
+   },
+   "output": 6,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      0,
+      16,
+      6
+     ]
+    ]
+   },
+   "output": 2,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      26,
+      9,
+      20,
+      26,
+      22,
+      12,
+      18,
+      21,
+      23,
+      30,
+      3,
+      9,
+      12,
+      19,
+      16
+     ]
+    ]
+   },
+   "output": 4,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      14,
+      10,
+      8
+     ]
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      0,
+      0,
+      0,
+      19,
+      0
+     ]
+    ]
+   },
+   "output": 4,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      3,
+      27
+     ]
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      7,
+      14,
+      27
+     ]
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      16,
+      4,
+      29,
+      17,
+      0,
+      0,
+      13,
+      22,
+      1,
+      6,
+      0,
+      29,
+      1,
+      3,
+      0,
+      7
+     ]
+    ]
+   },
+   "output": 6,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      5,
+      0,
+      0,
+      9,
+      0,
+      0,
+      19,
+      0,
+      0,
+      0,
+      0,
+      7,
+      19,
+      14,
+      3,
+      0,
+      10,
+      29
+     ]
+    ]
+   },
+   "output": 9,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      16,
+      22,
+      0,
+      0,
+      0,
+      0,
+      27,
+      0,
+      0,
+      0,
+      24,
+      22,
+      0,
+      0
+     ]
+    ]
+   },
+   "output": 9,
+   "explanation": ""
+  }
+ ],
+ "original_ilr": "{\n  \"problem_id\": \"maxSubarrays\",\n  \"nodes\": [\n    {\n      \"id\": 1,\n      \"type\": \"start\",\n      \"label\": \"Start\",\n      \"next\": 2\n    },\n    {\n      \"id\": 2,\n      \"type\": \"process\",\n      \"label\": \"Input: nums (List[int])\",\n      \"action\": \"ctx['nums'] = ctx['arg0']; ctx['m'] = 33554431; ctx['n'] = len(ctx['nums']); ctx['i'] = 0; ctx['s'] = 33554431; ctx['c'] = 0\",\n      \"next\": 3\n    },\n    {\n      \"id\": 3,\n      \"type\": \"decision\",\n      \"label\": \"Is m == 0?\",\n      \"logic\": \"ctx['m'] == 0\",\n      \"true_next\": 4,\n      \"false_next\": 19\n    },\n    {\n      \"id\": 4,\n      \"type\": \"process\",\n      \"label\": \"For i from 0 to n-1\",\n      \"action\": \"ctx['i'] = 0\",\n      \"next\": 5\n    },\n    {\n      \"id\": 5,\n      \"type\": \"process\",\n      \"label\": \"Update s: s = s & nums[i]\",\n      \"action\": \"ctx['s'] = ctx['s'] & ctx['nums'][ctx['i']]\",\n      \"next\": 6\n    },\n    {\n      \"id\": 6,\n      \"type\": \"decision\",\n      \"label\": \"Is i == n - 1?\",\n      \"logic\": \"ctx['i'] == ctx['n'] - 1\",\n      \"true_next\": 7,\n      \"false_next\": 8\n    },\n    {\n      \"id\": 7,\n      \"type\": \"decision\",\n      \"label\": \"Is s != m?\",\n      \"logic\": \"ctx['s'] != ctx['m']\",\n      \"true_next\": 15,\n      \"false_next\": 16\n    },\n    {\n      \"id\": 8,\n      \"type\": \"decision\",\n      \"label\": \"Is s == m?\",\n      \"logic\": \"ctx['s'] == ctx['m']\",\n      \"true_next\": 17,\n      \"false_next\": 16\n    },\n    {\n      \"id\": 9,\n      \"type\": \"process\",\n      \"label\": \"Reset s: s = 33554431\",\n      \"action\": \"ctx['s'] = 33554431\",\n      \"next\": 10\n    },\n    {\n      \"id\": 10,\n      \"type\": \"process\",\n      \"label\": \"Increment c: c += 1\",\n      \"action\": \"ctx['c'] += 1\",\n      \"next\": 4\n    },\n    {\n      \"id\": 11,\n      \"type\": \"return\",\n      \"label\": \"Return c\",\n      \"value\": \"ctx['c']\"\n    },\n    {\n      \"id\": 12,\n      \"type\": \"end\",\n      \"label\": \"Return 1\",\n      \"output\": \"1\"\n    },\n    {\n      \"id\": 13,\n      \"type\": \"process\",\n      \"label\": \"For i from 0 to n-1\",\n      \"action\": \"ctx['i'] = 0\",\n      \"next\": 14\n    },\n    {\n      \"id\": 14,\n      \"type\": \"process\",\n      \"label\": \"Update s: s = s & nums[i]\",\n      \"action\": \"ctx['s'] = ctx['s'] & ctx['nums'][ctx['i']]\",\n      \"next\": 15\n    },\n    {\n      \"id\": 15,\n      \"type\": \"return\",\n      \"label\": \"Return c\",\n      \"value\": \"ctx['c']\"\n    },\n    {\n      \"id\": 16,\n      \"type\": \"process\",\n      \"label\": \"Reset s: s = 33554431\",\n      \"action\": \"ctx['s'] = 33554431\",\n      \"next\": 17\n    },\n    {\n      \"id\": 17,\n      \"type\": \"process\",\n      \"label\": \"Increment c: c += 1\",\n      \"action\": \"ctx['c'] += 1\",\n      \"next\": 13\n    }\n  ]\n}",
+ "original_code": "class Solution:\n    def maxSubarrays(self, nums: List[int]) -> int:\n        m = 33554431\n        n = len(nums)\n        i = 0\n        s = 33554431\n        c = 0\n        \n        if m == 0:\n            i = 0\n            while i < n:\n                s = s & nums[i]\n                if i == n - 1:\n                    if s != m:\n                        return c\n                    else:\n                        s = 33554431\n                        c += 1\n                        i = 0\n                else:\n                    if s == m:\n                        s = 33554431\n                        c += 1\n                        i = 0\n                    else:\n                        i += 1\n        else:\n            i = 0\n            while i < n:\n                s = s & nums[i]\n                if i == n - 1:\n                    if s != m:\n                        return c\n                    else:\n                        s = 33554431\n                        c += 1\n                        i = 0\n                else:\n                    if s == m:\n                        s = 33554431\n                        c += 1\n                        i = 0\n                    else:\n                        i += 1\n        \n        return c",
+ "ocr_data": {
+  "nodes": [
+   {
+    "node_id": 1,
+    "shape_type": "rectangle",
+    "raw_text": "Start",
+    "position": "top"
+   },
+   {
+    "node_id": 2,
+    "shape_type": "rectangle",
+    "raw_text": "Input: nums (List[int])",
+    "position": "middle"
+   },
+   {
+    "node_id": 3,
+    "shape_type": "rectangle",
+    "raw_text": "Initialize m = 33554431",
+    "position": "middle"
+   },
+   {
+    "node_id": 4,
+    "shape_type": "rectangle",
+    "raw_text": "Initialize n = length of nums",
+    "position": "middle"
+   },
+   {
+    "node_id": 5,
+    "shape_type": "rectangle",
+    "raw_text": "For i from 0 to n-1",
+    "position": "middle"
+   },
+   {
+    "node_id": 6,
+    "shape_type": "rectangle",
+    "raw_text": "Update m: m = m & nums[i]",
+    "position": "middle"
+   },
+   {
+    "node_id": 7,
+    "shape_type": "rectangle",
+    "raw_text": "Initialize s = 33554431",
+    "position": "middle"
+   },
+   {
+    "node_id": 8,
+    "shape_type": "rectangle",
+    "raw_text": "Initialize c = 0",
+    "position": "middle"
+   },
+   {
+    "node_id": 9,
+    "shape_type": "diamond",
+    "raw_text": "Is m == 0?",
+    "position": "middle"
+   },
+   {
+    "node_id": 10,
+    "shape_type": "rectangle",
+    "raw_text": "For i from 0 to n-1",
+    "position": "middle"
+   },
+   {
+    "node_id": 11,
+    "shape_type": "rectangle",
+    "raw_text": "Update s: s = s & nums[i]",
+    "position": "middle"
+   },
+   {
+    "node_id": 12,
+    "shape_type": "rectangle",
+    "raw_text": "Return c",
+    "position": "middle"
+   },
+   {
+    "node_id": 13,
+    "shape_type": "diamond",
+    "raw_text": "Is i == n - 1?",
+    "position": "middle"
+   },
+   {
+    "node_id": 14,
+    "shape_type": "diamond",
+    "raw_text": "Is s != m?",
+    "position": "middle"
+   },
+   {
+    "node_id": 15,
+    "shape_type": "rectangle",
+    "raw_text": "Return c",
+    "position": "middle"
+   },
+   {
+    "node_id": 16,
+    "shape_type": "diamond",
+    "raw_text": "Is s == m?",
+    "position": "middle"
+   },
+   {
+    "node_id": 17,
+    "shape_type": "rectangle",
+    "raw_text": "Reset s: s = 33554431",
+    "position": "middle"
+   },
+   {
+    "node_id": 18,
+    "shape_type": "rectangle",
+    "raw_text": "Increment c: c += 1",
+    "position": "middle"
+   },
+   {
+    "node_id": 19,
+    "shape_type": "rectangle",
+    "raw_text": "Return 1",
+    "position": "bottom"
+   }
+  ],
+  "edges": [
+   {
+    "from_node": 1,
+    "to_node": 2,
+    "label": ""
+   },
+   {
+    "from_node": 2,
+    "to_node": 3,
+    "label": ""
+   },
+   {
+    "from_node": 3,
+    "to_node": 4,
+    "label": ""
+   },
+   {
+    "from_node": 4,
+    "to_node": 5,
+    "label": ""
+   },
+   {
+    "from_node": 5,
+    "to_node": 6,
+    "label": "Yes"
+   },
+   {
+    "from_node": 5,
+    "to_node": 7,
+    "label": "No"
+   },
+   {
+    "from_node": 7,
+    "to_node": 8,
+    "label": ""
+   },
+   {
+    "from_node": 8,
+    "to_node": 9,
+    "label": ""
+   },
+   {
+    "from_node": 9,
+    "to_node": 10,
+    "label": "Yes"
+   },
+   {
+    "from_node": 9,
+    "to_node": 19,
+    "label": "No"
+   },
+   {
+    "from_node": 10,
+    "to_node": 11,
+    "label": ""
+   },
+   {
+    "from_node": 11,
+    "to_node": 13,
+    "label": ""
+   },
+   {
+    "from_node": 13,
+    "to_node": 14,
+    "label": "Yes"
+   },
+   {
+    "from_node": 13,
+    "to_node": 16,
+    "label": "No"
+   },
+   {
+    "from_node": 14,
+    "to_node": 15,
+    "label": "Yes"
+   },
+   {
+    "from_node": 14,
+    "to_node": 16,
+    "label": "No"
+   },
+   {
+    "from_node": 16,
+    "to_node": 17,
+    "label": "Yes"
+   },
+   {
+    "from_node": 17,
+    "to_node": 18,
+    "label": ""
+   },
+   {
+    "from_node": 18,
+    "to_node": 10,
+    "label": ""
+   },
+   {
+    "from_node": 6,
+    "to_node": 5,
+    "label": ""
+   }
+  ],
+  "other_text": []
+ },
+ "test_result": {},
+ "status": "completed",
+ "fixed_ilr": null,
+ "modified_code": null,
+ "ilr_fix_log": "",
+ "bug_injected": ""
+}

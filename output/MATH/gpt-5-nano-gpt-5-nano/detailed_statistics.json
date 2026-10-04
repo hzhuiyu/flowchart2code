@@ -1,0 +1,47 @@
+{
+  "dataset": "MATH",
+  "model": "gpt-5-nano-gpt-5-nano",
+  "total_samples": 125,
+  "use_reflection": false,
+  "max_iterations": 0,
+  "pass_rate": {
+    "iteration_0": {
+      "passed": 113,
+      "total": 125,
+      "rate": 0.904
+    }
+  },
+  "tokens": {
+    "total": {
+      "prompt_tokens": 809161,
+      "completion_tokens": 1551004,
+      "total_tokens": 2360165
+    },
+    "average_per_sample": {
+      "prompt_tokens": 6473.29,
+      "completion_tokens": 12408.03,
+      "total_tokens": 18881.32
+    }
+  },
+  "time": {
+    "total_time": 8730.28,
+    "average_per_sample": 69.84
+  },
+  "pass_rate_by_difficulty": {
+    "medium": {
+      "total": 40,
+      "passed": 38,
+      "rate": 0.95
+    },
+    "easy": {
+      "total": 45,
+      "passed": 45,
+      "rate": 1.0
+    },
+    "hard": {
+      "total": 40,
+      "passed": 30,
+      "rate": 0.75
+    }
+  }
+}

@@ -1,0 +1,66 @@
+{
+  "problem_id": "rotation_function_max",
+  "nodes": [
+    {
+      "id": 1,
+      "type": "start",
+      "label": "Start",
+      "next": 2
+    },
+    {
+      "id": 2,
+      "type": "process",
+      "label": "Input: nums (List of integers)",
+      "action": "ctx['nums'] = ctx['arg0']; ctx['n'] = len(ctx['nums']); ctx['F'] = 0; ctx['total_sum'] = sum(ctx['nums']); ctx['maxF'] = ctx['F']; ctx['k'] = 1",
+      "next": 3
+    },
+    {
+      "id": 3,
+      "type": "decision",
+      "label": "Is k < n?",
+      "logic": "ctx['k'] < ctx['n']",
+      "true_next": 4,
+      "false_next": 7
+    },
+    {
+      "id": 4,
+      "type": "process",
+      "label": "Update F: F = F + total_sum - n * nums[n - k]",
+      "action": "ctx['F'] = ctx['F'] + ctx['total_sum'] - ctx['n'] * ctx['nums'][ctx['n'] - ctx['k']]",
+      "next": 5
+    },
+    {
+      "id": 5,
+      "type": "process",
+      "label": "Update maxF: maxF = max(maxF, F)",
+      "action": "ctx['maxF'] = max(ctx['maxF'], ctx['F'])",
+      "next": 6
+    },
+    {
+      "id": 6,
+      "type": "process",
+      "label": "Increment k by 1",
+      "action": "ctx['k'] += 1",
+      "next": 3
+    },
+    {
+      "id": 7,
+      "type": "end",
+      "label": "Output: maxF",
+      "output": "ctx['maxF']"
+    }
+  ],
+  "task_id": "396. Rotate Function",
+  "dataset": "MATH",
+  "result": "failed: ",
+  "code": "def maxRotateFunction( nums: List[int]) -> int:\n    n = len(nums)\n    F = 0\n    total_sum = sum(nums)\n    maxF = F\n    k = 1\n    \n    while k < n:\n        F = F + total_sum - n * nums[n - k]\n        maxF = max(maxF, F)\n        k += 1\n    \n    return maxF",
+  "verification": {
+    "md_verdict": "ILR Error",
+    "actual_error_source": "ilr",
+    "ilr_verdict": "incorrect",
+    "code_vs_ilr": "faithful",
+    "md_correct": "yes",
+    "note": "ILR漏掉了OCR流程图中'Calculate initial F = sum(i*nums[i])'节点，F和maxF都从0开始，递推式本身没错但缺F(0)初值，任何非常平凡输入都错。生成代码忠实复刻了ILR，同样错。",
+    "evidence": "ILR忠实转写与生成代码一致：maxRotateFunction([4,3,2,6])=1(期望26)、([1,2,3,4,5])=0(期望40)、([-1,-2,-3,-4,-5])=15(期望-25)。"
+  }
+}

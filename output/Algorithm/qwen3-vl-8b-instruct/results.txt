@@ -1,0 +1,9 @@
+{'pass@1': np.float64(0.6375838926174496)}
+
+Easy: 36/47 = 0.7659574468085106
+Medium: 51/75 = 0.68
+Hard: 9/29 = 0.3103448275862069
+
+Easy Token Stats: Avg 2946.68 tokens/question
+Medium Token Stats: Avg 3380.79 tokens/question
+Hard Token Stats: Avg 3803.10 tokens/question

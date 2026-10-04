@@ -1,0 +1,10 @@
+{'pass@1': 0.9261744966442953}
+Average Duration: 8.9009s
+
+Easy: 44/45 = 0.9777777777777777
+Medium: 70/75 = 0.9333333333333333
+Hard: 24/29 = 0.8275862068965517
+
+Easy Token Stats: Avg 1785.42 tokens/question
+Medium Token Stats: Avg 2009.21 tokens/question
+Hard Token Stats: Avg 2247.14 tokens/question

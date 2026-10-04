@@ -1,0 +1,89 @@
+{
+  "problem_id": "prime_fib",
+  "nodes": [
+    {
+      "id": 1,
+      "type": "start",
+      "label": "Start",
+      "next": 2
+    },
+    {
+      "id": 2,
+      "type": "process",
+      "label": "Input: n (integer)",
+      "action": "ctx['n'] = ctx['arg0']; ctx['f'] = [0, 1]",
+      "next": 3
+    },
+    {
+      "id": 3,
+      "type": "process",
+      "label": "Start infinite loop",
+      "action": "",
+      "next": 4
+    },
+    {
+      "id": 4,
+      "type": "process",
+      "label": "Calculate next Fibonacci number: f.append(f[-1] + f[-2])",
+      "action": "ctx['f'].append(ctx['f'][-1] + ctx['f'][-2])",
+      "next": 5
+    },
+    {
+      "id": 5,
+      "type": "process",
+      "label": "Check if f[-1] is prime",
+      "action": "",
+      "next": 6
+    },
+    {
+      "id": 6,
+      "type": "decision",
+      "label": "Is f[-1] prime?",
+      "logic": "is_prime(ctx['f'][-1])",
+      "true_next": 7,
+      "false_next": 9
+    },
+    {
+      "id": 7,
+      "type": "process",
+      "label": "Decrement n: n -= 1",
+      "action": "ctx['n'] -= 1",
+      "next": 8
+    },
+    {
+      "id": 8,
+      "type": "decision",
+      "label": "Is n == 0?",
+      "logic": "ctx['n'] == 0",
+      "true_next": 10,
+      "false_next": 3
+    },
+    {
+      "id": 9,
+      "type": "decision",
+      "label": "Is n == 0?",
+      "logic": "ctx['n'] == 0",
+      "true_next": 10,
+      "false_next": 3
+    },
+    {
+      "id": 10,
+      "type": "end",
+      "label": "Output: f[-1] (n-th prime Fibonacci number)",
+      "output": "ctx['f'][-1]"
+    }
+  ],
+  "task_id": "HumanEval-39",
+  "dataset": "HumanEval-V",
+  "result": "failed: name 'is_prime' is not defined",
+  "code": "def prime_fib(n: int):\n    f = [0, 1]\n    while n > 0:\n        f.append(f[-1] + f[-2])\n        if is_prime(f[-1]):\n            n -= 1\n        else:\n            continue\n    return f[-1]",
+  "verification": {
+    "md_verdict": "ILR Error",
+    "actual_error_source": "code",
+    "ilr_verdict": "correct",
+    "code_vs_ilr": "faithful",
+    "md_correct": "no",
+    "note": "MD 判错：ILR 算法本身正确（斐波那契递推、遇质数减 n、n 归零输出，补上标准 is_prime 后 10 条断言全过），真实失败原因是代码生成阶段原样保留未定义的 is_prime 调用而未实现它，NameError 崩溃——这是代码生成错误而非 ILR 错误。",
+    "evidence": "ILR+标准 is_prime: prime_fib(1..10)=2,3,5,13,89,233,1597,28657,514229,433494437，10/10 断言通过；生成代码 prime_fib(1) → NameError: name 'is_prime' is not defined（与 FAILURE RESULT 一致）"
+  }
+}

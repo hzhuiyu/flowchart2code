@@ -1,0 +1,76 @@
+{
+  "total": 28,
+  "processed": 28,
+  "success": 23,
+  "failed": 5,
+  "success_rate": 82.14285714285714,
+  "iteration_stats": {
+    "1": {
+      "count": 28,
+      "avg_duration": 30.684500873088837,
+      "avg_total_tokens": 0.0,
+      "avg_prompt_tokens": 0.0,
+      "avg_completion_tokens": 0.0
+    },
+    "2": {
+      "count": 18,
+      "avg_duration": 5.650555398729113,
+      "avg_total_tokens": 0.0,
+      "avg_prompt_tokens": 0.0,
+      "avg_completion_tokens": 0.0
+    },
+    "3": {
+      "count": 8,
+      "avg_duration": 6.093126147985458,
+      "avg_total_tokens": 0.0,
+      "avg_prompt_tokens": 0.0,
+      "avg_completion_tokens": 0.0
+    }
+  },
+  "avg_duration_by_iteration": {
+    "1": 30.684500873088837,
+    "2": 5.650555398729113,
+    "3": 6.093126147985458
+  },
+  "reflection_mode": "full",
+  "final_merge_eval": {
+    "samples_file": "../output/HumanEval-V/Qwen3-VL-8B-Instruct-Qwen3-VL-8B-Instruct/samples.jsonl",
+    "reflection_dir": "../output/HumanEval-V/Qwen3-VL-8B-Instruct-Qwen3-VL-8B-Instruct/reflection",
+    "output_file": "../output/HumanEval-V/Qwen3-VL-8B-Instruct-Qwen3-VL-8B-Instruct/reflection/samples_reflection_merged.jsonl",
+    "merged_results_file": "../output/HumanEval-V/Qwen3-VL-8B-Instruct-Qwen3-VL-8B-Instruct/reflection/samples_reflection_merged.jsonl_results.jsonl",
+    "results_txt": "../output/HumanEval-V/Qwen3-VL-8B-Instruct-Qwen3-VL-8B-Instruct/reflection/results.txt",
+    "problem_file": "../data/HumanEval-V/HumanEval.jsonl",
+    "merge_summary": {
+      "total_rows": 164,
+      "replaced_rows": 28,
+      "replaced_by_first_passed": 23,
+      "replaced_by_last_failed": 5,
+      "missing_generated_code": 0,
+      "selection_stats": {
+        "keep_original": 136,
+        "first_passed": 23,
+        "iter_3_failed": 5
+      }
+    },
+    "eval_result": {
+      "pass@1": 0.9695121951219512
+    },
+    "difficulty_summary": {
+      "Easy": {
+        "passed": 0.0,
+        "total": 0.0,
+        "rate": 0.0
+      },
+      "Medium": {
+        "passed": 0.0,
+        "total": 0.0,
+        "rate": 0.0
+      },
+      "Hard": {
+        "passed": 0.0,
+        "total": 0.0,
+        "rate": 0.0
+      }
+    }
+  }
+}

@@ -1,0 +1,60 @@
+{
+  "problem_id": "day_number_of_year",
+  "nodes": [
+    {
+      "id": 1,
+      "type": "start",
+      "label": "Start",
+      "next": 2
+    },
+    {
+      "id": 2,
+      "type": "process",
+      "label": "Input: date (string in format YYYY-MM-DD)",
+      "action": "ctx['date'] = ctx['arg0']; ctx['y'] = int(ctx['date'][:4]); ctx['m'] = int(ctx['date'][5:7]); ctx['d'] = int(ctx['date'][8:]); ctx['days'] = [0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]",
+      "next": 3
+    },
+    {
+      "id": 3,
+      "type": "decision",
+      "label": "Is it a leap year?",
+      "logic": "ctx['y'] % 4 == 0 and ctx['y'] % 100 != 0 or ctx['y'] % 400 == 0",
+      "true_next": 6,
+      "false_next": 7
+    },
+    {
+      "id": 6,
+      "type": "process",
+      "label": "Set days[1] = 29",
+      "action": "ctx['days'][1] = 29",
+      "next": 7
+    },
+    {
+      "id": 7,
+      "type": "process",
+      "label": "Calculate day number: d + sum(days[:m-1])",
+      "action": "ctx['result'] = ctx['d'] + sum(ctx['days'][:ctx['m'] - 1])",
+      "next": 8
+    },
+    {
+      "id": 8,
+      "type": "end",
+      "label": "Output: day number of the year",
+      "output": "ctx['result']"
+    }
+  ],
+  "task_id": "1154. Day of the Year",
+  "dataset": "MATH",
+  "result": "failed: ",
+  "code": "def dayOfYear(date: str) -> int:\n    y = int(date[:4])\n    m = int(date[5:7])\n    d = int(date[8:])\n    days = [0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]\n    \n    if y % 4 == 0 and y % 100 != 0 or y % 400 == 0:\n        days[1] = 29\n    \n    result = d + sum(days[:m - 1])\n    \n    return result",
+  "failed_test": true,
+  "verification": {
+    "md_verdict": "ILR Error",
+    "actual_error_source": "ilr",
+    "ilr_verdict": "incorrect",
+    "code_vs_ilr": "faithful",
+    "md_correct": "yes",
+    "note": "确认 ILR Error：节点2初始化 days 带了下标0的占位 0（[0,31,28,...]），而节点6 days[1]=29 与节点7 sum(days[:m-1]) 是按无占位数组设计的（days[1] 应为二月），ILR 内部自相矛盾，导致每个非一月日期都少算一个月。生成代码忠实复刻 ILR。",
+    "evidence": "按 ILR 转写运行：dayOfYear('2019-02-10')=10（期望 41）、dayOfYear('2020-03-01')=30（期望 61）；去掉占位0或改为 days[2]=29/sum(days[:m]) 后全部测试通过。生成代码同样失败于第一条 2019-02-10。"
+  }
+}

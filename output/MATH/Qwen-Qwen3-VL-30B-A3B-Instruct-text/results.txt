@@ -1,0 +1,9 @@
+{'pass@1': 0.676}
+
+Easy: 51/61 = 0.8360655737704918
+Medium: 60/80 = 0.75
+Hard: 28/68 = 0.4117647058823529
+
+Easy Token Stats: Avg 1031.38 tokens/question
+Medium Token Stats: Avg 1637.85 tokens/question
+Hard Token Stats: Avg 2485.62 tokens/question

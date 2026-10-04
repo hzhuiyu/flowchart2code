@@ -1,0 +1,65 @@
+{
+  "problem_id": "x_or_y",
+  "nodes": [
+    {
+      "id": 1,
+      "type": "start",
+      "label": "Start",
+      "next": 2
+    },
+    {
+      "id": 2,
+      "type": "process",
+      "label": "Input: n (integer), x (value), y (value)",
+      "action": "ctx['n']=ctx['arg0']; ctx['x']=ctx['arg1']; ctx['y']=ctx['arg2'];",
+      "next": 3
+    },
+    {
+      "id": 3,
+      "type": "decision",
+      "label": "Is n == 1?",
+      "logic": "ctx['n'] == 1",
+      "true_next": 4,
+      "false_next": 5
+    },
+    {
+      "id": 4,
+      "type": "end",
+      "label": "Output: y (1 is not a prime number)",
+      "output": "ctx['y']"
+    },
+    {
+      "id": 5,
+      "type": "decision",
+      "label": "Is n prime?",
+      "logic": "is_prime(ctx['n'])",
+      "true_next": 6,
+      "false_next": 7
+    },
+    {
+      "id": 6,
+      "type": "end",
+      "label": "Output: x (n is a prime number)",
+      "output": "ctx['x']"
+    },
+    {
+      "id": 7,
+      "type": "end",
+      "label": "Output: y (n is not a prime number)",
+      "output": "ctx['y']"
+    }
+  ],
+  "task_id": "HumanEval-150",
+  "dataset": "HumanEval-V",
+  "result": "failed: name 'is_prime' is not defined",
+  "code": "def x_or_y(n, x, y):\n    if n == 1:\n        return y\n    if is_prime(n):\n        return x\n    else:\n        return y",
+  "verification": {
+    "md_verdict": "ILR Error",
+    "actual_error_source": "ilr",
+    "ilr_verdict": "incorrect",
+    "code_vs_ilr": "faithful",
+    "md_correct": "yes",
+    "note": "确认 ILR 错：ILR 无 'functions' 键却引用未定义的 is_prime（node5 logic 即 is_prime(ctx['n'])），按可执行语句忠实转写必然 NameError，无法通过任何测试。其决策语义本身（n==1→y、素数→x、否则→y）是对的，补上素数实现即可全过，但 ILR 作为自包含规范缺失该定义。生成代码照抄 is_prime 调用未实现，属忠实转换。",
+    "evidence": "生成代码 x_or_y(7,34,12) 抛 NameError: name 'is_prime' is not defined（与 FAILURE RESULT 一致）；ILR 决策结构在补实现 is_prime 后 10 个断言全部通过，说明缺陷仅在 ILR 缺失辅助函数定义。"
+  }
+}

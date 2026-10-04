@@ -1,0 +1,141 @@
+{
+  "problem_id": "maximumStrongPairXor",
+  "nodes": [
+    {
+      "id": 1,
+      "type": "start",
+      "label": "Start",
+      "next": 2
+    },
+    {
+      "id": 2,
+      "type": "process",
+      "label": "Input: nums (List[int])",
+      "action": "ctx['nums'] = ctx['arg0']; ctx['res'] = 0; ctx['pref'] = {}; ctx['pref2'] = {}",
+      "next": 3
+    },
+    {
+      "id": 3,
+      "type": "decision",
+      "label": "For i from 20 to 0",
+      "logic": "ctx['i'] >= 0",
+      "true_next": 4,
+      "false_next": 17
+    },
+    {
+      "id": 4,
+      "type": "process",
+      "label": "Shift res left: res <<= 1",
+      "action": "ctx['res'] <<= 1",
+      "next": 5
+    },
+    {
+      "id": 5,
+      "type": "process",
+      "label": "Initialize pref = {}, pref2 = {}",
+      "action": "ctx['pref'] = {}; ctx['pref2'] = {}",
+      "next": 6
+    },
+    {
+      "id": 6,
+      "type": "decision",
+      "label": "For a in nums",
+      "logic": "True",
+      "true_next": 7,
+      "false_next": 12
+    },
+    {
+      "id": 7,
+      "type": "process",
+      "label": "Calculate p: p = a >> i",
+      "action": "ctx['p'] = ctx['a'] >> ctx['i']",
+      "next": 8
+    },
+    {
+      "id": 8,
+      "type": "decision",
+      "label": "Is p in pref?",
+      "logic": "ctx['p'] in ctx['pref']",
+      "true_next": 9,
+      "false_next": 10
+    },
+    {
+      "id": 9,
+      "type": "process",
+      "label": "Set pref[p] = pref2[p] = a",
+      "action": "ctx['pref'][ctx['p']] = ctx['pref2'][ctx['p']] = ctx['a']",
+      "next": 11
+    },
+    {
+      "id": 10,
+      "type": "process",
+      "label": "Update pref2[p]: pref2[p] = max(pref2[p], a), pref[p]: pref[p] = min(pref[p], a)",
+      "action": "ctx['pref2'][ctx['p']] = max(ctx['pref2'][ctx['p']], ctx['a']); ctx['pref'][ctx['p']] = min(ctx['pref'][ctx['p']], ctx['a'])",
+      "next": 11
+    },
+    {
+      "id": 11,
+      "type": "process",
+      "label": "Update pref2[p]: pref2[p] = max(pref2[p], a), pref[p]: pref[p] = min(pref[p], a)",
+      "action": "ctx['pref2'][ctx['p']] = max(ctx['pref2'][ctx['p']], ctx['a']); ctx['pref'][ctx['p']] = min(ctx['pref'][ctx['p']], ctx['a'])",
+      "next": 6
+    },
+    {
+      "id": 12,
+      "type": "decision",
+      "label": "For x in pref",
+      "logic": "True",
+      "true_next": 13,
+      "false_next": 14
+    },
+    {
+      "id": 13,
+      "type": "process",
+      "label": "Calculate y: y = res ^ 1 ^ x",
+      "action": "ctx['y'] = ctx['res'] ^ 1 ^ ctx['x']",
+      "next": 14
+    },
+    {
+      "id": 14,
+      "type": "decision",
+      "label": "Is x >= y and y in pref?",
+      "logic": "ctx['x'] >= ctx['y'] and ctx['y'] in ctx['pref']",
+      "true_next": 15,
+      "false_next": 12
+    },
+    {
+      "id": 15,
+      "type": "decision",
+      "label": "Is pref[x] <= pref2[y] * 2?",
+      "logic": "ctx['pref'][ctx['x']] <= ctx['pref2'][ctx['y']] * 2",
+      "true_next": 16,
+      "false_next": 12
+    },
+    {
+      "id": 16,
+      "type": "process",
+      "label": "Update res: res |= 1",
+      "action": "ctx['res'] |= 1",
+      "next": 12
+    },
+    {
+      "id": 17,
+      "type": "return",
+      "label": "Return res",
+      "value": "ctx['res']"
+    }
+  ],
+  "task_id": "weekly-contest-371-maximum-strong-pair-xor-ii",
+  "dataset": "Algorithm",
+  "result": "failed: ",
+  "code": "class Solution:\n    def maximumStrongPairXor(self, nums: List[int]) -> int:\n        res = 0\n        pref = {}\n        pref2 = {}\n        \n        for i in range(20, -1, -1):\n            pref.clear()\n            pref2.clear()\n            \n            for a in nums:\n                p = a >> i\n                if p in pref:\n                    pref2[p] = max(pref2[p], a)\n                    pref[p] = min(pref[p], a)\n                else:\n                    pref[p] = a\n                    pref2[p] = a\n            \n            for x in pref:\n                y = res ^ 1 ^ x\n                if x >= y and y in pref:\n                    if pref[x] <= pref2[y] * 2:\n                        res |= 1\n        \n        return res",
+  "verification": {
+    "md_verdict": "ILR Error",
+    "actual_error_source": "both",
+    "ilr_verdict": "incorrect",
+    "code_vs_ilr": "deviates",
+    "md_correct": "partial",
+    "note": "MD 根因(ILR错)正确但不完整。ILR 把 node8 的真假分支接反（p in pref 时反而执行覆盖式 Set，p 不在时执行对普通 dict 的 max(pref2[p],a) → KeyError），node11 还是 node10 的重复；忠实实现必然 KeyError，即使宽容用 defaultdict 也在 [10,100] 上得 110(期望0)。代码偏离 ILR 修正了分支，但漏掉了 ILR node4 的 res <<= 1，导致只置最低位。",
+    "evidence": "忠实 ILR：所有用例 KeyError: 0（pref2[p] 无键）；宽容 defaultdict 版 [10,100]→110≠0。生成代码无 res<<=1，[1,2,3,4,5]→1(期望7)、[500,520,2500,3000]→1(期望1020)，66 个断言失败"
+  }
+}

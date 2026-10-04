@@ -1,0 +1,154 @@
+{
+  "problem_id": "staircase_ways",
+  "nodes": [
+    {
+      "id": 1,
+      "type": "start",
+      "label": "Start",
+      "next": 2
+    },
+    {
+      "id": 2,
+      "type": "process",
+      "label": "Input: target (integer)",
+      "action": "ctx['target'] = ctx['arg0']; ctx['current_sum'] = 1; ctx['ways'] = 0",
+      "next": 3
+    },
+    {
+      "id": 3,
+      "type": "decision",
+      "label": "Is target == 0 or target == 1?",
+      "logic": "ctx['target'] == 0 or ctx['target'] == 1",
+      "true_next": 5,
+      "false_next": 6
+    },
+    {
+      "id": 5,
+      "type": "process",
+      "label": "Increment ways by 1",
+      "action": "ctx['ways'] += 1",
+      "next": 6
+    },
+    {
+      "id": 6,
+      "type": "process",
+      "label": "Initialize Pascal's triangle pas[50][50] with zeros",
+      "action": "ctx['pas'] = [[0 for _ in range(50)] for _ in range(50)]",
+      "next": 7
+    },
+    {
+      "id": 7,
+      "type": "process",
+      "label": "Set pas[0][0] = 1",
+      "action": "ctx['pas'][0][0] = 1",
+      "next": 8
+    },
+    {
+      "id": 8,
+      "type": "decision",
+      "label": "Loop: row from 1 to 49",
+      "logic": "ctx['row'] < 50",
+      "true_next": 9,
+      "false_next": 13
+    },
+    {
+      "id": 9,
+      "type": "process",
+      "label": "Set pas[row][0] = 1",
+      "action": "ctx['pas'][ctx['row']][0] = 1",
+      "next": 10
+    },
+    {
+      "id": 10,
+      "type": "decision",
+      "label": "Loop: col from 1 to row",
+      "logic": "ctx['col'] <= ctx['row']",
+      "true_next": 11,
+      "false_next": 12
+    },
+    {
+      "id": 11,
+      "type": "process",
+      "label": "Set pas[row][col] = pas[row-1][col] + pas[row-1][col-1]",
+      "action": "ctx['pas'][ctx['row']][ctx['col']] = ctx['pas'][ctx['row'] - 1][ctx['col']] + ctx['pas'][ctx['row'] - 1][ctx['col'] - 1]",
+      "next": 12
+    },
+    {
+      "id": 12,
+      "type": "process",
+      "label": "End of inner loop",
+      "action": "ctx['col'] += 1",
+      "next": 10
+    },
+    {
+      "id": 13,
+      "type": "process",
+      "label": "End of outer loop",
+      "action": "ctx['row'] += 1",
+      "next": 14
+    },
+    {
+      "id": 14,
+      "type": "decision",
+      "label": "Loop: i from 0 to 29",
+      "logic": "ctx['i'] <= 29",
+      "true_next": 15,
+      "false_next": 16
+    },
+    {
+      "id": 15,
+      "type": "process",
+      "label": "Increment current_sum by 1 << i",
+      "action": "ctx['current_sum'] += 1 << ctx['i']",
+      "next": 17
+    },
+    {
+      "id": 16,
+      "type": "process",
+      "label": "End of loop",
+      "action": "ctx['i'] += 1",
+      "next": 14
+    },
+    {
+      "id": 17,
+      "type": "decision",
+      "label": "Is current_sum >= target and current_sum - target <= i + 2?",
+      "logic": "ctx['current_sum'] >= ctx['target'] and ctx['current_sum'] - ctx['target'] <= ctx['i'] + 2",
+      "true_next": 18,
+      "false_next": 16
+    },
+    {
+      "id": 18,
+      "type": "process",
+      "label": "Set n = i + 2, r = current_sum - target",
+      "action": "ctx['n'] = ctx['i'] + 2; ctx['r'] = ctx['current_sum'] - ctx['target']",
+      "next": 19
+    },
+    {
+      "id": 19,
+      "type": "process",
+      "label": "Increment ways by pas[n][r]",
+      "action": "ctx['ways'] += ctx['pas'][ctx['n']][ctx['r']]",
+      "next": 20
+    },
+    {
+      "id": 20,
+      "type": "end",
+      "label": "Output: ways",
+      "output": "ctx['ways']"
+    }
+  ],
+  "task_id": "3154. Find Number of Ways to Reach the K-th Stair",
+  "dataset": "MATH",
+  "result": "failed: ",
+  "code": "def waysToReachStair(target: int) -> int:\n    if target == 0 or target == 1:\n        return 1\n    \n    pas = [[0 for _ in range(50)] for _ in range(50)]\n    pas[0][0] = 1\n    \n    row = 1\n    while row < 50:\n        pas[row][0] = 1\n        col = 1\n        while col <= row:\n            pas[row][col] = pas[row - 1][col] + pas[row - 1][col - 1]\n            col += 1\n        row += 1\n    \n    current_sum = 1\n    i = 0\n    while i <= 29:\n        current_sum += 1 << i\n        i += 1\n    \n    if current_sum >= target and current_sum - target <= i + 2:\n        n = i + 2\n        r = current_sum - target\n        return 1 + pas[n][r]\n    else:\n        return 0",
+  "verification": {
+    "md_verdict": "ILR Error",
+    "actual_error_source": "both",
+    "ilr_verdict": "incorrect",
+    "code_vs_ilr": "deviates",
+    "md_correct": "partial",
+    "note": "ILR确实错：外层循环变量row从未初始化（node8求ctx['row']即KeyError），col/i同样未初始化，node12(next=10)在col>row后死循环，且node19直接到node20只累加一项二项式系数（k=1只能得3，期望4）。但代码也大幅偏离ILR：自行补齐循环、target为0/1时提前return 1、只在循环结束后判定一次，结果(0)->1(期望2)、(1)->1(期望4)、(2)->0(期望4)全错。",
+    "evidence": "ILR忠实执行node8即KeyError 'row'；生成代码 waysToReachStair(2)=0(期望4)、waysToReachStair(1)=1(期望4)。"
+  }
+}

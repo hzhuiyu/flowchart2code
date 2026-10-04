@@ -1,0 +1,88 @@
+{
+  "problem_id": "super_ugly_number",
+  "nodes": [
+    {
+      "id": 1,
+      "type": "start",
+      "label": "Start",
+      "next": 2
+    },
+    {
+      "id": 2,
+      "type": "process",
+      "label": "Input: n (integer), primes (list of integers)",
+      "action": "ctx['n'] = ctx['arg0']; ctx['primes'] = ctx['arg1']; ctx['minPQ'] = []; ctx['output'] = [1]",
+      "next": 3
+    },
+    {
+      "id": 3,
+      "type": "process",
+      "label": "For each prime in primes, push (prime, 0, prime) into minPQ",
+      "action": "for p in ctx['primes']: ctx['minPQ'].append((p, 0, p))",
+      "next": 4
+    },
+    {
+      "id": 4,
+      "type": "decision",
+      "label": "Is length of output < n?",
+      "logic": "len(ctx['output']) < ctx['n']",
+      "true_next": 5,
+      "false_next": 11
+    },
+    {
+      "id": 5,
+      "type": "process",
+      "label": "Pop (value, idx, prime) from minPQ",
+      "action": "ctx['value'], ctx['idx'], ctx['prime'] = ctx['minPQ'].pop(0)",
+      "next": 6
+    },
+    {
+      "id": 6,
+      "type": "decision",
+      "label": "Is value != output[-1]?",
+      "logic": "ctx['value'] != ctx['output'][-1]",
+      "true_next": 7,
+      "false_next": 8
+    },
+    {
+      "id": 7,
+      "type": "process",
+      "label": "Append value to output",
+      "action": "ctx['output'].append(ctx['value'])",
+      "next": 9
+    },
+    {
+      "id": 8,
+      "type": "process",
+      "label": "Do nothing",
+      "action": "",
+      "next": 9
+    },
+    {
+      "id": 9,
+      "type": "process",
+      "label": "Push (output[idx + 1] * prime, idx + 1, prime) into minPQ",
+      "action": "ctx['minPQ'].append((ctx['output'][ctx['idx'] + 1] * ctx['prime'], ctx['idx'] + 1, ctx['prime']))",
+      "next": 4
+    },
+    {
+      "id": 11,
+      "type": "end",
+      "label": "Output: output[n - 1]",
+      "output": "ctx['output'][ctx['n'] - 1]"
+    }
+  ],
+  "task_id": "313. Super Ugly Number",
+  "dataset": "MATH",
+  "result": "failed: ",
+  "code": "def nthSuperUglyNumber( n: int, primes: list[int]) -> int:\n    output = [1]\n    minPQ = []\n    \n    for p in primes:\n        minPQ.append((p, 0, p))\n    \n    while len(output) < n:\n        value, idx, prime = minPQ.pop(0)\n        if value != output[-1]:\n            output.append(value)\n            minPQ.append((output[idx + 1] * prime, idx + 1, prime))\n    \n    return output[n - 1]",
+  "verification": {
+    "md_verdict": "ILR Error",
+    "actual_error_source": "ilr",
+    "ilr_verdict": "incorrect",
+    "code_vs_ilr": "deviates",
+    "md_correct": "yes",
+    "note": "ILR把minPQ实现成普通FIFO列表（node5为minPQ.pop(0)），而minPQ应按最小值出堆，导致序列错乱：n=12,[2,7,13,19]输出91而非32。代码基本照搬ILR（仅把入堆挪进了追加分支这一小偏离，不影响本例结果），失败根因在ILR。",
+    "evidence": "ILR忠实转写 nthSuperUglyNumber(12,[2,7,13,19])=91(期望32)、(5,[2,3,5])=4(期望5)；生成代码同样=91，首个断言即失败。"
+  }
+}

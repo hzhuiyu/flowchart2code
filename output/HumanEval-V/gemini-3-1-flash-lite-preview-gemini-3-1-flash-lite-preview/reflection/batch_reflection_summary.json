@@ -1,0 +1,76 @@
+{
+  "total": 6,
+  "processed": 6,
+  "success": 5,
+  "failed": 1,
+  "success_rate": 83.33333333333334,
+  "iteration_stats": {
+    "1": {
+      "count": 6,
+      "avg_duration": 20.672966798146565,
+      "avg_total_tokens": 11142.5,
+      "avg_prompt_tokens": 9502.166666666666,
+      "avg_completion_tokens": 1640.3333333333333
+    },
+    "2": {
+      "count": 5,
+      "avg_duration": 11.63019528388977,
+      "avg_total_tokens": 5745.4,
+      "avg_prompt_tokens": 5099.2,
+      "avg_completion_tokens": 646.2
+    },
+    "3": {
+      "count": 3,
+      "avg_duration": 4.7850288550059,
+      "avg_total_tokens": 5383.0,
+      "avg_prompt_tokens": 4667.666666666667,
+      "avg_completion_tokens": 715.3333333333334
+    }
+  },
+  "avg_duration_by_iteration": {
+    "1": 20.672966798146565,
+    "2": 11.63019528388977,
+    "3": 4.7850288550059
+  },
+  "reflection_mode": "full",
+  "final_merge_eval": {
+    "samples_file": "../output/HumanEval-V/gemini-3-1-flash-lite-preview-gemini-3-1-flash-lite-preview/samples.jsonl",
+    "reflection_dir": "../output/HumanEval-V/gemini-3-1-flash-lite-preview-gemini-3-1-flash-lite-preview/reflection",
+    "output_file": "../output/HumanEval-V/gemini-3-1-flash-lite-preview-gemini-3-1-flash-lite-preview/reflection/samples_reflection_merged.jsonl",
+    "merged_results_file": "../output/HumanEval-V/gemini-3-1-flash-lite-preview-gemini-3-1-flash-lite-preview/reflection/samples_reflection_merged.jsonl_results.jsonl",
+    "results_txt": "../output/HumanEval-V/gemini-3-1-flash-lite-preview-gemini-3-1-flash-lite-preview/reflection/results.txt",
+    "problem_file": "../data/HumanEval-V/HumanEval.jsonl",
+    "merge_summary": {
+      "total_rows": 164,
+      "replaced_rows": 6,
+      "replaced_by_first_passed": 4,
+      "replaced_by_last_failed": 2,
+      "missing_generated_code": 0,
+      "selection_stats": {
+        "keep_original": 158,
+        "first_passed": 4,
+        "iter_3_failed": 2
+      }
+    },
+    "eval_result": {
+      "pass@1": 0.9878048780487805
+    },
+    "difficulty_summary": {
+      "Easy": {
+        "passed": 0.0,
+        "total": 0.0,
+        "rate": 0.0
+      },
+      "Medium": {
+        "passed": 0.0,
+        "total": 0.0,
+        "rate": 0.0
+      },
+      "Hard": {
+        "passed": 0.0,
+        "total": 0.0,
+        "rate": 0.0
+      }
+    }
+  }
+}

@@ -1,0 +1,149 @@
+{
+  "problem_id": "maximumStrongPairXor",
+  "nodes": [
+    {
+      "id": 1,
+      "type": "start",
+      "label": "Start",
+      "next": 2
+    },
+    {
+      "id": 2,
+      "type": "process",
+      "label": "Input: nums (List[int]); res = 0; i = 20",
+      "action": "ctx['nums'] = ctx['arg0']; ctx['res'] = 0; ctx['i'] = 20",
+      "next": 3
+    },
+    {
+      "id": 3,
+      "type": "decision",
+      "label": "For i from 20 to 0",
+      "logic": "ctx['i'] >= 0",
+      "true_next": 4,
+      "false_next": 17
+    },
+    {
+      "id": 4,
+      "type": "process",
+      "label": "Shift res left: res <<= 1",
+      "action": "ctx['res'] <<= 1",
+      "next": 5
+    },
+    {
+      "id": 5,
+      "type": "process",
+      "label": "Initialize pref = {}, pref2 = {}, j = 0",
+      "action": "ctx['pref'] = {}; ctx['pref2'] = {}; ctx['j'] = 0",
+      "next": 6
+    },
+    {
+      "id": 6,
+      "type": "decision",
+      "label": "For a in nums (more?)",
+      "logic": "ctx['j'] < len(ctx['nums'])",
+      "true_next": 7,
+      "false_next": 12
+    },
+    {
+      "id": 7,
+      "type": "process",
+      "label": "a = nums[j]; p = a >> i",
+      "action": "ctx['a'] = ctx['nums'][ctx['j']]; ctx['p'] = ctx['a'] >> ctx['i']",
+      "next": 8
+    },
+    {
+      "id": 8,
+      "type": "decision",
+      "label": "Is p in pref?",
+      "logic": "ctx['p'] in ctx['pref']",
+      "true_next": 10,
+      "false_next": 9
+    },
+    {
+      "id": 9,
+      "type": "process",
+      "label": "Set pref[p] = pref2[p] = a",
+      "action": "ctx['pref'][ctx['p']] = ctx['a']; ctx['pref2'][ctx['p']] = ctx['a']",
+      "next": 11
+    },
+    {
+      "id": 10,
+      "type": "process",
+      "label": "Update pref2[p] = max(pref2[p], a), pref[p] = min(pref[p], a)",
+      "action": "ctx['pref2'][ctx['p']] = max(ctx['pref2'][ctx['p']], ctx['a']); ctx['pref'][ctx['p']] = min(ctx['pref'][ctx['p']], ctx['a'])",
+      "next": 11
+    },
+    {
+      "id": 11,
+      "type": "process",
+      "label": "Advance nums index: j += 1",
+      "action": "ctx['j'] += 1",
+      "next": 6
+    },
+    {
+      "id": 12,
+      "type": "process",
+      "label": "Initialize prefix key list ks = list(pref.keys()), kx = 0",
+      "action": "ctx['ks'] = list(ctx['pref'].keys()); ctx['kx'] = 0",
+      "next": 18
+    },
+    {
+      "id": 18,
+      "type": "decision",
+      "label": "For x in pref (more?)",
+      "logic": "ctx['kx'] < len(ctx['ks'])",
+      "true_next": 13,
+      "false_next": 19
+    },
+    {
+      "id": 13,
+      "type": "process",
+      "label": "x = ks[kx]; y = res ^ 1 ^ x",
+      "action": "ctx['x'] = ctx['ks'][ctx['kx']]; ctx['y'] = ctx['res'] ^ 1 ^ ctx['x']",
+      "next": 14
+    },
+    {
+      "id": 14,
+      "type": "decision",
+      "label": "Is x >= y and y in pref?",
+      "logic": "ctx['x'] >= ctx['y'] and ctx['y'] in ctx['pref']",
+      "true_next": 15,
+      "false_next": 20
+    },
+    {
+      "id": 15,
+      "type": "decision",
+      "label": "Is pref[x] <= pref2[y] * 2?",
+      "logic": "ctx['pref'][ctx['x']] <= ctx['pref2'][ctx['y']] * 2",
+      "true_next": 16,
+      "false_next": 20
+    },
+    {
+      "id": 16,
+      "type": "process",
+      "label": "Update res: res |= 1",
+      "action": "ctx['res'] |= 1",
+      "next": 20
+    },
+    {
+      "id": 20,
+      "type": "process",
+      "label": "Advance prefix key index: kx += 1",
+      "action": "ctx['kx'] += 1",
+      "next": 18
+    },
+    {
+      "id": 19,
+      "type": "process",
+      "label": "Decrement bit index: i -= 1",
+      "action": "ctx['i'] -= 1",
+      "next": 3
+    },
+    {
+      "id": 17,
+      "type": "return",
+      "label": "Return res",
+      "value": "ctx['res']"
+    }
+  ]
+}

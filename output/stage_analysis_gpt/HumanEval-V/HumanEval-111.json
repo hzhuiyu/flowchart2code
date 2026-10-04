@@ -1,0 +1,176 @@
+{
+  "task_id": "HumanEval-111",
+  "dataset": "HumanEval-V",
+  "difficulty": null,
+  "title": null,
+  "result": "failed: This prints if this assert fails 1 (good for debugging!)",
+  "ilr": "{\n  \"problem_id\": \"histogram_example\",\n  \"nodes\": [\n    {\"id\": 1, \"type\": \"start\", \"label\": \"Start\", \"next\": 2},\n    {\"id\": 2, \"type\": \"process\", \"label\": \"Initialize dict1 as empty dictionary\", \"action\": \"ctx['dict1'] = {}\", \"next\": 3},\n    {\"id\": 3, \"type\": \"process\", \"label\": \"Split input string into list1\", \"action\": \"ctx['list1'] = ctx['arg0'].split()\", \"next\": 4},\n    {\"id\": 4, \"type\": \"process\", \"label\": \"Initialize t to 0\", \"action\": \"ctx['t'] = 0\", \"next\": 5},\n    {\"id\": 5, \"type\": \"decision\", \"label\": \"Loop through each letter in list1\", \"logic\": \"ctx['i'] < len(ctx['list1'])\", \"true_next\": 6, \"false_next\": 8},\n    {\"id\": 6, \"type\": \"decision\", \"label\": \"Check if count of letter > t and letter is not empty\", \"logic\": \"ctx['list1'][ctx['i']].count(ctx['list1'][ctx['i']]) > ctx['t'] and ctx['list1'][ctx['i']] != ''\", \"true_next\": 7, \"false_next\": 5},\n    {\"id\": 7, \"type\": \"process\", \"label\": \"Update t to count of letter\", \"action\": \"ctx['t'] = ctx['list1'][ctx['i']].count(ctx['list1'][ctx['i']])\", \"next\": 5},\n    {\"id\": 8, \"type\": \"decision\", \"label\": \"Check if t > 0\", \"logic\": \"ctx['t'] > 0\", \"true_next\": 9, \"false_next\": 12},\n    {\"id\": 9, \"type\": \"decision\", \"label\": \"Loop through each letter in list1\", \"logic\": \"ctx['j'] < len(ctx['list1'])\", \"true_next\": 10, \"false_next\": 12},\n    {\"id\": 10, \"type\": \"decision\", \"label\": \"Check if count of letter == t\", \"logic\": \"ctx['list1'][ctx['j']].count(ctx['list1'][ctx['j']]) == ctx['t']\", \"true_next\": 11, \"false_next\": 9},\n    {\"id\": 11, \"type\": \"process\", \"label\": \"Add letter and t to dict1\", \"action\": \"ctx['dict1'][ctx['list1'][ctx['j']]] = ctx['t']\", \"next\": 9},\n    {\"id\": 12, \"type\": \"return\", \"label\": \"Return dict1\", \"value\": \"ctx['dict1']\"},\n    {\"id\": 13, \"type\": \"end\", \"label\": \"End\"}\n  ]\n}",
+  "code": "def histogram(test):\n    dict1 = {}\n    list1 = test.split()\n    t = 0\n    i = 0\n    \n    while i < len(list1):\n        if list1[i].count(list1[i]) > t and list1[i] != '':\n            t = list1[i].count(list1[i])\n        i += 1\n    \n    if t > 0:\n        j = 0\n        while j < len(list1):\n            if list1[j].count(list1[j]) == t:\n                dict1[list1[j]] = t\n            j += 1\n    \n    return dict1",
+  "prompt": "\ndef histogram(test):\n    \"\"\"Given a string representing a space separated lowercase letters, return a dictionary\n    of the letter with the most repetition and containing the corresponding count.\n    If several letters have the same occurrence, return all of them.\n    \n    Example:\n    histogram('a b c') == {'a': 1, 'b': 1, 'c': 1}\n    histogram('a b b a') == {'a': 2, 'b': 2}\n    histogram('a b c a b') == {'a': 2, 'b': 2}\n    histogram('b b b b a') == {'b': 4}\n    histogram('') == {}\n\n    \"\"\"\n",
+  "test": "def check(candidate):\n\n    # Check some simple cases\n    assert candidate('a b b a') == {'a':2,'b': 2}, \"This prints if this assert fails 1 (good for debugging!)\"\n    assert candidate('a b c a b') == {'a': 2, 'b': 2}, \"This prints if this assert fails 2 (good for debugging!)\"\n    assert candidate('a b c d g') == {'a': 1, 'b': 1, 'c': 1, 'd': 1, 'g': 1}, \"This prints if this assert fails 3 (good for debugging!)\"\n    assert candidate('r t g') == {'r': 1,'t': 1,'g': 1}, \"This prints if this assert fails 4 (good for debugging!)\"\n    assert candidate('b b b b a') == {'b': 4}, \"This prints if this assert fails 5 (good for debugging!)\"\n    assert candidate('r t g') == {'r': 1,'t': 1,'g': 1}, \"This prints if this assert fails 6 (good for debugging!)\"\n    \n    \n    # Check some edge cases that are easy to work out by hand.\n    assert candidate('') == {}, \"This prints if this assert fails 7 (also good for debugging!)\"\n    assert candidate('a') == {'a': 1}, \"This prints if this assert fails 8 (also good for debugging!)\"\n\n",
+  "ocr_data": {
+    "nodes": [
+      {
+        "node_id": 1,
+        "shape_type": "rectangle",
+        "raw_text": "Start",
+        "position": "top"
+      },
+      {
+        "node_id": 2,
+        "shape_type": "rectangle",
+        "raw_text": "Initialize dict1 as empty dictionary",
+        "position": "middle"
+      },
+      {
+        "node_id": 3,
+        "shape_type": "rectangle",
+        "raw_text": "Split input string into list1",
+        "position": "middle"
+      },
+      {
+        "node_id": 4,
+        "shape_type": "rectangle",
+        "raw_text": "Initialize t to 0",
+        "position": "middle"
+      },
+      {
+        "node_id": 5,
+        "shape_type": "diamond",
+        "raw_text": "Loop through each letter in list1",
+        "position": "middle"
+      },
+      {
+        "node_id": 6,
+        "shape_type": "diamond",
+        "raw_text": "Check if count of letter > t and letter is not empty",
+        "position": "middle"
+      },
+      {
+        "node_id": 7,
+        "shape_type": "rectangle",
+        "raw_text": "Update t to count of letter",
+        "position": "middle"
+      },
+      {
+        "node_id": 8,
+        "shape_type": "diamond",
+        "raw_text": "Check if t > 0",
+        "position": "middle"
+      },
+      {
+        "node_id": 9,
+        "shape_type": "diamond",
+        "raw_text": "Loop through each letter in list1",
+        "position": "middle"
+      },
+      {
+        "node_id": 10,
+        "shape_type": "diamond",
+        "raw_text": "Check if count of letter == t",
+        "position": "middle"
+      },
+      {
+        "node_id": 11,
+        "shape_type": "rectangle",
+        "raw_text": "Add letter and t to dict1",
+        "position": "middle"
+      },
+      {
+        "node_id": 12,
+        "shape_type": "rectangle",
+        "raw_text": "Return dict1",
+        "position": "bottom"
+      },
+      {
+        "node_id": 13,
+        "shape_type": "rectangle",
+        "raw_text": "End",
+        "position": "bottom"
+      }
+    ],
+    "edges": [
+      {
+        "from_node": 1,
+        "to_node": 2,
+        "label": ""
+      },
+      {
+        "from_node": 2,
+        "to_node": 3,
+        "label": ""
+      },
+      {
+        "from_node": 3,
+        "to_node": 4,
+        "label": ""
+      },
+      {
+        "from_node": 4,
+        "to_node": 5,
+        "label": ""
+      },
+      {
+        "from_node": 5,
+        "to_node": 6,
+        "label": ""
+      },
+      {
+        "from_node": 6,
+        "to_node": 7,
+        "label": "Yes"
+      },
+      {
+        "from_node": 7,
+        "to_node": 5,
+        "label": "No"
+      },
+      {
+        "from_node": 5,
+        "to_node": 8,
+        "label": "No"
+      },
+      {
+        "from_node": 8,
+        "to_node": 9,
+        "label": "Yes"
+      },
+      {
+        "from_node": 9,
+        "to_node": 10,
+        "label": ""
+      },
+      {
+        "from_node": 10,
+        "to_node": 11,
+        "label": "Yes"
+      },
+      {
+        "from_node": 11,
+        "to_node": 9,
+        "label": "No"
+      },
+      {
+        "from_node": 9,
+        "to_node": 12,
+        "label": "No"
+      },
+      {
+        "from_node": 12,
+        "to_node": 13,
+        "label": ""
+      }
+    ],
+    "other_text": []
+  },
+  "analysis": {
+    "ilr_verdict": "incorrect",
+    "ilr_issues": "节点6/7/10/11的计数表达式写错：ctx['list1'][i].count(ctx['list1'][i]) 是字符串在自身内计数（单个字母恒为1），应为 list1.count(list1[i])（统计该字母在整个列表中的出现次数）。另外ILR从未初始化和递增 i、j（节点5/9的while条件直接引用未定义变量且回边无增量），忠实执行会NameError或死循环。",
+    "code_vs_ilr": "faithful",
+    "code_issues": "代码逐节点忠实复刻了ILR（包括错误的 word.count(word) 表达式），仅补上了ILR遗漏的 i/j 初始化与自增循环簿记，核心错误逻辑原样保留，属于忠实执行错误的ILR。",
+    "error_source": "ilr",
+    "ocr_contribution": "no",
+    "root_cause": "ILR 生成环节把'字母的出现次数'错误翻译成 word.count(word)，导致 t 恒为1、输出所有字母计1，代码忠实实现该错误逻辑；OCR 原文只是自然语言'count of letter'，未误导。",
+    "evidence": "histogram('a b b a') 实际输出 {'a': 1, 'b': 1}，期望 {'a': 2, 'b': 2}；histogram('b b b b a') 输出 {'b': 1, 'a': 1}，期望 {'b': 4}。list1.count('a')=2 而 'a'.count('a')=1，证明计数对象写错。"
+  }
+}

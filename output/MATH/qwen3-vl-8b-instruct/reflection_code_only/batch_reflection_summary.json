@@ -1,0 +1,76 @@
+{
+  "total": 32,
+  "processed": 15,
+  "success": 5,
+  "failed": 10,
+  "success_rate": 33.33333333333333,
+  "iteration_stats": {
+    "1": {
+      "count": 15,
+      "avg_duration": 39.46224735577901,
+      "avg_total_tokens": 9105.0,
+      "avg_prompt_tokens": 7949.466666666666,
+      "avg_completion_tokens": 1155.5333333333333
+    },
+    "2": {
+      "count": 11,
+      "avg_duration": 96.15723965384744,
+      "avg_total_tokens": 13267.363636363636,
+      "avg_prompt_tokens": 10280.727272727272,
+      "avg_completion_tokens": 2986.6363636363635
+    },
+    "3": {
+      "count": 11,
+      "avg_duration": 49.711936235427856,
+      "avg_total_tokens": 10350.636363636364,
+      "avg_prompt_tokens": 8800.181818181818,
+      "avg_completion_tokens": 1550.4545454545455
+    }
+  },
+  "avg_duration_by_iteration": {
+    "1": 39.46224735577901,
+    "2": 96.15723965384744,
+    "3": 49.711936235427856
+  },
+  "reflection_mode": "code_only",
+  "final_merge_eval": {
+    "samples_file": "/home/zhangxu/flowchart/CodeVision/output/MATH/Qwen-Qwen3-VL-8B-Instruct/samples.jsonl",
+    "reflection_dir": "/home/zhangxu/flowchart/CodeVision/output/MATH/Qwen-Qwen3-VL-8B-Instruct/reflection_code_only",
+    "output_file": "/home/zhangxu/flowchart/CodeVision/output/MATH/Qwen-Qwen3-VL-8B-Instruct/reflection_code_only/samples_reflection_merged.jsonl",
+    "merged_results_file": "/home/zhangxu/flowchart/CodeVision/output/MATH/Qwen-Qwen3-VL-8B-Instruct/reflection_code_only/samples_reflection_merged.jsonl_results.jsonl",
+    "results_txt": "/home/zhangxu/flowchart/CodeVision/output/MATH/Qwen-Qwen3-VL-8B-Instruct/reflection_code_only/results.txt",
+    "problem_file": "/home/zhangxu/flowchart/CodeVision/data/MATH/MATH.jsonl",
+    "merge_summary": {
+      "total_rows": 125,
+      "replaced_rows": 32,
+      "replaced_by_first_passed": 13,
+      "replaced_by_last_failed": 19,
+      "missing_generated_code": 0,
+      "selection_stats": {
+        "keep_original": 93,
+        "first_passed": 13,
+        "iter_3_failed": 19
+      }
+    },
+    "eval_result": {
+      "pass@1": 0.848
+    },
+    "difficulty_summary": {
+      "Easy": {
+        "passed": 45.0,
+        "total": 45.0,
+        "rate": 1.0
+      },
+      "Medium": {
+        "passed": 38.0,
+        "total": 40.0,
+        "rate": 0.95
+      },
+      "Hard": {
+        "passed": 23.0,
+        "total": 40.0,
+        "rate": 0.575
+      }
+    }
+  }
+}

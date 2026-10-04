@@ -1,0 +1,61 @@
+{
+  "problem_id": "minimumAddedCoins",
+  "nodes": [
+    {
+      "id": 1,
+      "type": "start",
+      "label": "Start",
+      "next": 2
+    },
+    {
+      "id": 2,
+      "type": "process",
+      "label": "Input: coins (List[int]), target (int); max_sofar = 0, ans = 0, i = 0",
+      "action": "ctx['coins'] = ctx['arg0']; ctx['target'] = ctx['arg1']; ctx['max_sofar'] = 0; ctx['ans'] = 0; ctx['i'] = 0",
+      "next": 3
+    },
+    {
+      "id": 3,
+      "type": "process",
+      "label": "Sort coins",
+      "action": "ctx['coins'] = sorted(ctx['coins'])",
+      "next": 4
+    },
+    {
+      "id": 4,
+      "type": "decision",
+      "label": "Range [1, target] not fully covered? (max_sofar < target)",
+      "logic": "ctx['max_sofar'] < ctx['target']",
+      "true_next": 5,
+      "false_next": 13
+    },
+    {
+      "id": 5,
+      "type": "decision",
+      "label": "Next coin usable? (i < len(coins) and coins[i] <= max_sofar + 1)",
+      "logic": "ctx['i'] < len(ctx['coins']) and ctx['coins'][ctx['i']] <= ctx['max_sofar'] + 1",
+      "true_next": 6,
+      "false_next": 7
+    },
+    {
+      "id": 6,
+      "type": "process",
+      "label": "Take coin: max_sofar += coins[i]; i += 1",
+      "action": "ctx['max_sofar'] += ctx['coins'][ctx['i']]; ctx['i'] += 1",
+      "next": 4
+    },
+    {
+      "id": 7,
+      "type": "process",
+      "label": "Add coin with value max_sofar + 1: ans += 1; max_sofar += max_sofar + 1",
+      "action": "ctx['ans'] += 1; ctx['max_sofar'] += ctx['max_sofar'] + 1",
+      "next": 4
+    },
+    {
+      "id": 13,
+      "type": "end",
+      "label": "Output: ans (minimum number of coins added)",
+      "output": "ctx['ans']"
+    }
+  ]
+}

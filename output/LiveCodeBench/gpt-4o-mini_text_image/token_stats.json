@@ -1,0 +1,27 @@
+{
+    "total_tasks": 148,
+    "total_prompt_tokens": 5222199,
+    "total_completion_tokens": 40146,
+    "total_tokens": 5262345,
+    "avg_prompt_tokens": 35285.12837837838,
+    "avg_completion_tokens": 271.2567567567568,
+    "avg_total_tokens": 35556.38513513513,
+    "avg_duration": 10.050791500387964,
+    "by_difficulty": {
+        "easy": {
+            "count": 0,
+            "total_tokens": 0,
+            "avg_tokens": 0
+        },
+        "medium": {
+            "count": 0,
+            "total_tokens": 0,
+            "avg_tokens": 0
+        },
+        "hard": {
+            "count": 95,
+            "total_tokens": 3443510,
+            "avg_tokens": 36247.47368421053
+        }
+    }
+}

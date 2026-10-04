@@ -1,0 +1,35 @@
+{
+  "total": 15,
+  "processed": 15,
+  "success": 10,
+  "failed": 5,
+  "success_rate": 66.66666666666666,
+  "iteration_stats": {
+    "1": {
+      "count": 15,
+      "avg_duration": 22.19821112950643,
+      "avg_total_tokens": 15393.466666666667,
+      "avg_prompt_tokens": 13822.333333333334,
+      "avg_completion_tokens": 1571.1333333333334
+    },
+    "2": {
+      "count": 7,
+      "avg_duration": 11.418583154678345,
+      "avg_total_tokens": 4772.142857142857,
+      "avg_prompt_tokens": 3917.5714285714284,
+      "avg_completion_tokens": 854.5714285714286
+    },
+    "3": {
+      "count": 5,
+      "avg_duration": 11.677374792098998,
+      "avg_total_tokens": 4870.0,
+      "avg_prompt_tokens": 4031.0,
+      "avg_completion_tokens": 839.0
+    }
+  },
+  "avg_duration_by_iteration": {
+    "1": 22.19821112950643,
+    "2": 11.418583154678345,
+    "3": 11.677374792098998
+  }
+}

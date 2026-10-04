@@ -1,0 +1,40 @@
+{
+  "samples_file": "output/MATH/Qwen-Qwen3-VL-8B-Instruct-Qwen-Qwen3-VL-8B-Instruct/samples.jsonl",
+  "reflection_dir": "output/MATH/Qwen-Qwen3-VL-8B-Instruct-Qwen-Qwen3-VL-8B-Instruct/reflection",
+  "output_file": "output/MATH/Qwen-Qwen3-VL-8B-Instruct-Qwen-Qwen3-VL-8B-Instruct/reflection/samples_reflection_merged.jsonl",
+  "merged_results_file": "output/MATH/Qwen-Qwen3-VL-8B-Instruct-Qwen-Qwen3-VL-8B-Instruct/reflection/samples_reflection_merged.jsonl_results.jsonl",
+  "results_txt": "output/MATH/Qwen-Qwen3-VL-8B-Instruct-Qwen-Qwen3-VL-8B-Instruct/reflection/results.txt",
+  "problem_file": "data/MATH/MATH.jsonl",
+  "merge_summary": {
+    "total_rows": 125,
+    "replaced_rows": 32,
+    "replaced_by_first_passed": 23,
+    "replaced_by_last_failed": 9,
+    "missing_generated_code": 0,
+    "selection_stats": {
+      "keep_original": 93,
+      "first_passed": 23,
+      "iter_3_failed": 9
+    }
+  },
+  "eval_result": {
+    "pass@1": 0.928
+  },
+  "difficulty_summary": {
+    "Easy": {
+      "passed": 44.0,
+      "total": 45.0,
+      "rate": 0.9777777777777777
+    },
+    "Medium": {
+      "passed": 40.0,
+      "total": 40.0,
+      "rate": 1.0
+    },
+    "Hard": {
+      "passed": 32.0,
+      "total": 40.0,
+      "rate": 0.8
+    }
+  }
+}

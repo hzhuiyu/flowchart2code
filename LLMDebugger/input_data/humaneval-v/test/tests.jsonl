@@ -1,0 +1,164 @@
+{"task_id": "HumanEval-V/HumanEval-0", "given_tests": ["assert has_close_elements([1.0, 2.0, 3.0], 0.5) == False", "assert has_close_elements([1.0, 2.8, 3.0, 4.0, 5.0, 2.0], 0.3) == True"]}
+{"task_id": "HumanEval-V/HumanEval-1", "given_tests": ["assert separate_paren_groups('( ) (( )) (( )( ))') == ['()', '(())', '(()())']"]}
+{"task_id": "HumanEval-V/HumanEval-2", "given_tests": ["assert truncate_number(3.5) == 0.5"]}
+{"task_id": "HumanEval-V/HumanEval-3", "given_tests": ["assert below_zero([1, 2, 3]) == False", "assert below_zero([1, 2, -4, 5]) == True"]}
+{"task_id": "HumanEval-V/HumanEval-4", "given_tests": ["assert mean_absolute_deviation([1.0, 2.0, 3.0, 4.0]) == 1.0"]}
+{"task_id": "HumanEval-V/HumanEval-5", "given_tests": ["assert intersperse([], 4) == []", "assert intersperse([1, 2, 3], 4) == [1, 4, 2, 4, 3]"]}
+{"task_id": "HumanEval-V/HumanEval-6", "given_tests": ["assert parse_nested_parens('(()()) ((())) () ((())()())') == [2, 3, 1, 3]"]}
+{"task_id": "HumanEval-V/HumanEval-7", "given_tests": ["assert filter_by_substring([], 'a') == []", "assert filter_by_substring(['abc', 'bacd', 'cde', 'array'], 'a') == ['abc', 'bacd', 'array']"]}
+{"task_id": "HumanEval-V/HumanEval-8", "given_tests": ["assert sum_product([]) == (0, 1)", "assert sum_product([1, 2, 3, 4]) == (10, 24)"]}
+{"task_id": "HumanEval-V/HumanEval-9", "given_tests": ["assert rolling_max([1, 2, 3, 2, 3, 4, 2]) == [1, 2, 3, 3, 3, 4, 4]"]}
+{"task_id": "HumanEval-V/HumanEval-10", "given_tests": ["assert make_palindrome('') == ''", "assert make_palindrome('cat') == 'catac'", "assert make_palindrome('cata') == 'catac'"]}
+{"task_id": "HumanEval-V/HumanEval-11", "given_tests": ["assert string_xor('010', '110') == '100'"]}
+{"task_id": "HumanEval-V/HumanEval-12", "given_tests": ["assert longest(['a', 'bb', 'ccc']) == 'ccc'"]}
+{"task_id": "HumanEval-V/HumanEval-13", "given_tests": ["assert greatest_common_divisor(3, 5) == 1", "assert greatest_common_divisor(25, 15) == 5"]}
+{"task_id": "HumanEval-V/HumanEval-14", "given_tests": ["assert all_prefixes('abc') == ['a', 'ab', 'abc']"]}
+{"task_id": "HumanEval-V/HumanEval-15", "given_tests": ["assert string_sequence(0) == '0'", "assert string_sequence(5) == '0 1 2 3 4 5'"]}
+{"task_id": "HumanEval-V/HumanEval-16", "given_tests": ["assert count_distinct_characters('xyzXYZ') == 3", "assert count_distinct_characters('Jerry') == 4"]}
+{"task_id": "HumanEval-V/HumanEval-17", "given_tests": ["assert parse_music('o o| .| o| o| .| .| .| .| o o') == [4, 2, 1, 2, 2, 1, 1, 1, 1, 4, 4]"]}
+{"task_id": "HumanEval-V/HumanEval-18", "given_tests": ["assert how_many_times('', 'a') == 0", "assert how_many_times('aaa', 'a') == 3", "assert how_many_times('aaaa', 'aa') == 3"]}
+{"task_id": "HumanEval-V/HumanEval-19", "given_tests": ["assert sort_numbers('three one five') == 'one three five'"]}
+{"task_id": "HumanEval-V/HumanEval-20", "given_tests": ["assert find_closest_elements([1.0, 2.0, 3.0, 4.0, 5.0, 2.2]) == (2.0, 2.2)", "assert find_closest_elements([1.0, 2.0, 3.0, 4.0, 5.0, 2.0]) == (2.0, 2.0)"]}
+{"task_id": "HumanEval-V/HumanEval-21", "given_tests": ["assert rescale_to_unit([1.0, 2.0, 3.0, 4.0, 5.0]) == [0.0, 0.25, 0.5, 0.75, 1.0]"]}
+{"task_id": "HumanEval-V/HumanEval-22", "given_tests": ["assert filter_integers(['a', 3.14, 5]) == [5]", "assert filter_integers([1, 2, 3, 'abc', {}, []]) == [1, 2, 3]"]}
+{"task_id": "HumanEval-V/HumanEval-23", "given_tests": ["assert strlen('') == 0", "assert strlen('abc') == 3"]}
+{"task_id": "HumanEval-V/HumanEval-24", "given_tests": ["assert largest_divisor(15) == 5"]}
+{"task_id": "HumanEval-V/HumanEval-25", "given_tests": ["assert factorize(8) == [2, 2, 2]", "assert factorize(25) == [5, 5]", "assert factorize(70) == [2, 5, 7]"]}
+{"task_id": "HumanEval-V/HumanEval-26", "given_tests": ["assert remove_duplicates([1, 2, 3, 2, 4]) == [1, 3, 4]"]}
+{"task_id": "HumanEval-V/HumanEval-27", "given_tests": ["assert flip_case('Hello') == 'hELLO'"]}
+{"task_id": "HumanEval-V/HumanEval-28", "given_tests": ["assert concatenate([]) == ''", "assert concatenate(['a', 'b', 'c']) == 'abc'"]}
+{"task_id": "HumanEval-V/HumanEval-29", "given_tests": ["assert filter_by_prefix([], 'a') == []", "assert filter_by_prefix(['abc', 'bcd', 'cde', 'array'], 'a') == ['abc', 'array']"]}
+{"task_id": "HumanEval-V/HumanEval-30", "given_tests": ["assert get_positive([-1, 2, -4, 5, 6]) == [2, 5, 6]", "assert get_positive([5, 3, -5, 2, -3, 3, 9, 0, 123, 1, -10]) == [5, 3, 2, 3, 9, 123, 1]"]}
+{"task_id": "HumanEval-V/HumanEval-31", "given_tests": ["assert is_prime(6) == False", "assert is_prime(101) == True", "assert is_prime(11) == True", "assert is_prime(13441) == True", "assert is_prime(61) == True", "assert is_prime(4) == False", "assert is_prime(1) == False"]}
+{"task_id": "HumanEval-V/HumanEval-32", "given_tests": ["assert round(find_zero([1, 2]), 2) # f(x) = 1 + 2x == -0.5", "assert round(find_zero([-6, 11, -6, 1]), 2) # (x - 1) * (x - 2) * (x - 3) = -6 + 11x - 6x^2 + x^3 == 1.0"]}
+{"task_id": "HumanEval-V/HumanEval-33", "given_tests": ["assert sort_third([1, 2, 3]) == [1, 2, 3]", "assert sort_third([5, 6, 3, 4, 8, 9, 2]) == [2, 6, 3, 4, 8, 9, 5]"]}
+{"task_id": "HumanEval-V/HumanEval-34", "given_tests": ["assert unique([5, 3, 5, 2, 3, 3, 9, 0, 123]) == [0, 2, 3, 5, 9, 123]"]}
+{"task_id": "HumanEval-V/HumanEval-35", "given_tests": ["assert max_element([1, 2, 3]) == 3", "assert max_element([5, 3, -5, 2, -3, 3, 9, 0, 123, 1, -10]) == 123"]}
+{"task_id": "HumanEval-V/HumanEval-36", "given_tests": ["assert fizz_buzz(50) == 0", "assert fizz_buzz(78) == 2", "assert fizz_buzz(79) == 3"]}
+{"task_id": "HumanEval-V/HumanEval-37", "given_tests": ["assert sort_even([1, 2, 3]) == [1, 2, 3]", "assert sort_even([5, 6, 3, 4]) == [3, 6, 5, 4]"]}
+{"task_id": "HumanEval-V/HumanEval-38", "given_tests": []}
+{"task_id": "HumanEval-V/HumanEval-39", "given_tests": ["assert prime_fib(1) == 2", "assert prime_fib(2) == 3", "assert prime_fib(3) == 5", "assert prime_fib(4) == 13", "assert prime_fib(5) == 89"]}
+{"task_id": "HumanEval-V/HumanEval-40", "given_tests": ["assert triples_sum_to_zero([1, 3, 5, 0]) == False", "assert triples_sum_to_zero([1, 3, -2, 1]) == True", "assert triples_sum_to_zero([1, 2, 3, 7]) == False", "assert triples_sum_to_zero([2, 4, -5, 3, 9, 7]) == True", "assert triples_sum_to_zero([1]) == False"]}
+{"task_id": "HumanEval-V/HumanEval-41", "given_tests": []}
+{"task_id": "HumanEval-V/HumanEval-42", "given_tests": ["assert incr_list([1, 2, 3]) == [2, 3, 4]", "assert incr_list([5, 3, 5, 2, 3, 3, 9, 0, 123]) == [6, 4, 6, 3, 4, 4, 10, 1, 124]"]}
+{"task_id": "HumanEval-V/HumanEval-43", "given_tests": ["assert pairs_sum_to_zero([1, 3, 5, 0]) == False", "assert pairs_sum_to_zero([1, 3, -2, 1]) == False", "assert pairs_sum_to_zero([1, 2, 3, 7]) == False", "assert pairs_sum_to_zero([2, 4, -5, 3, 5, 7]) == True", "assert pairs_sum_to_zero([1]) == False"]}
+{"task_id": "HumanEval-V/HumanEval-44", "given_tests": ["assert change_base(8, 3) == '22'", "assert change_base(8, 2) == '1000'", "assert change_base(7, 2) == '111'"]}
+{"task_id": "HumanEval-V/HumanEval-45", "given_tests": ["assert triangle_area(5, 3) == 7.5"]}
+{"task_id": "HumanEval-V/HumanEval-46", "given_tests": ["assert fib4(5) == 4", "assert fib4(6) == 8", "assert fib4(7) == 14"]}
+{"task_id": "HumanEval-V/HumanEval-47", "given_tests": ["assert median([3, 1, 2, 4, 5]) == 3", "assert median([-10, 4, 6, 1000, 10, 20]) == 15.0"]}
+{"task_id": "HumanEval-V/HumanEval-48", "given_tests": ["assert is_palindrome('') == True", "assert is_palindrome('aba') == True", "assert is_palindrome('aaaaa') == True", "assert is_palindrome('zbcd') == False"]}
+{"task_id": "HumanEval-V/HumanEval-49", "given_tests": ["assert modp(3, 5) == 3", "assert modp(1101, 101) == 2", "assert modp(0, 101) == 1", "assert modp(3, 11) == 8", "assert modp(100, 101) == 1"]}
+{"task_id": "HumanEval-V/HumanEval-50", "given_tests": []}
+{"task_id": "HumanEval-V/HumanEval-51", "given_tests": ["assert remove_vowels('') == ''", "assert remove_vowels(\"abcdef\\nghijklm\") == 'bcdf\\nghjklm'", "assert remove_vowels('abcdef') == 'bcdf'", "assert remove_vowels('aaaaa') == ''", "assert remove_vowels('aaBAA') == 'B'", "assert remove_vowels('zbcd') == 'zbcd'"]}
+{"task_id": "HumanEval-V/HumanEval-52", "given_tests": ["assert below_threshold([1, 2, 4, 10], 100) == True", "assert below_threshold([1, 20, 4, 10], 5) == False"]}
+{"task_id": "HumanEval-V/HumanEval-53", "given_tests": ["assert add(2, 3) == 5", "assert add(5, 7) == 12"]}
+{"task_id": "HumanEval-V/HumanEval-54", "given_tests": ["assert same_chars('eabcdzzzz', 'dddzzzzzzzddeddabc') == True", "assert same_chars('abcd', 'dddddddabc') == True", "assert same_chars('dddddddabc', 'abcd') == True", "assert same_chars('eabcd', 'dddddddabc') == False", "assert same_chars('abcd', 'dddddddabce') == False", "assert same_chars('eabcdzzzz', 'dddzzzzzzzddddabc') == False"]}
+{"task_id": "HumanEval-V/HumanEval-55", "given_tests": ["assert fib(10) == 55", "assert fib(1) == 1", "assert fib(8) == 21"]}
+{"task_id": "HumanEval-V/HumanEval-56", "given_tests": ["assert correct_bracketing(\"<\") == False", "assert correct_bracketing(\"<>\") == True", "assert correct_bracketing(\"<<><>>\") == True", "assert correct_bracketing(\"><<>\") == False"]}
+{"task_id": "HumanEval-V/HumanEval-57", "given_tests": ["assert monotonic([1, 2, 4, 20]) == True", "assert monotonic([1, 20, 4, 10]) == False", "assert monotonic([4, 1, 0, -10]) == True"]}
+{"task_id": "HumanEval-V/HumanEval-58", "given_tests": ["assert common([1, 4, 3, 34, 653, 2, 5], [5, 7, 1, 5, 9, 653, 121]) == [1, 5, 653]", "assert common([5, 3, 2, 8], [3, 2]) == [2, 3]"]}
+{"task_id": "HumanEval-V/HumanEval-59", "given_tests": ["assert largest_prime_factor(13195) == 29", "assert largest_prime_factor(2048) == 2"]}
+{"task_id": "HumanEval-V/HumanEval-60", "given_tests": ["assert sum_to_n(30) == 465", "assert sum_to_n(100) == 5050", "assert sum_to_n(5) == 15", "assert sum_to_n(10) == 55", "assert sum_to_n(1) == 1"]}
+{"task_id": "HumanEval-V/HumanEval-61", "given_tests": ["assert correct_bracketing(\"(\") == False", "assert correct_bracketing(\"()\") == True", "assert correct_bracketing(\"(()())\") == True", "assert correct_bracketing(\")(()\") == False"]}
+{"task_id": "HumanEval-V/HumanEval-62", "given_tests": ["assert derivative([3, 1, 2, 4, 5]) == [1, 4, 12, 20]", "assert derivative([1, 2, 3]) == [2, 6]"]}
+{"task_id": "HumanEval-V/HumanEval-63", "given_tests": ["assert fibfib(1) == 0", "assert fibfib(5) == 4", "assert fibfib(8) == 24"]}
+{"task_id": "HumanEval-V/HumanEval-64", "given_tests": ["assert vowels_count(\"abcde\") == 2", "assert vowels_count(\"ACEDY\") == 3"]}
+{"task_id": "HumanEval-V/HumanEval-65", "given_tests": ["assert circular_shift(12, 1) == \"21\"", "assert circular_shift(12, 2) == \"12\""]}
+{"task_id": "HumanEval-V/HumanEval-66", "given_tests": []}
+{"task_id": "HumanEval-V/HumanEval-67", "given_tests": []}
+{"task_id": "HumanEval-V/HumanEval-68", "given_tests": []}
+{"task_id": "HumanEval-V/HumanEval-69", "given_tests": []}
+{"task_id": "HumanEval-V/HumanEval-70", "given_tests": []}
+{"task_id": "HumanEval-V/HumanEval-71", "given_tests": []}
+{"task_id": "HumanEval-V/HumanEval-72", "given_tests": []}
+{"task_id": "HumanEval-V/HumanEval-73", "given_tests": []}
+{"task_id": "HumanEval-V/HumanEval-74", "given_tests": []}
+{"task_id": "HumanEval-V/HumanEval-75", "given_tests": []}
+{"task_id": "HumanEval-V/HumanEval-76", "given_tests": []}
+{"task_id": "HumanEval-V/HumanEval-77", "given_tests": []}
+{"task_id": "HumanEval-V/HumanEval-78", "given_tests": []}
+{"task_id": "HumanEval-V/HumanEval-79", "given_tests": []}
+{"task_id": "HumanEval-V/HumanEval-80", "given_tests": []}
+{"task_id": "HumanEval-V/HumanEval-81", "given_tests": []}
+{"task_id": "HumanEval-V/HumanEval-82", "given_tests": []}
+{"task_id": "HumanEval-V/HumanEval-83", "given_tests": []}
+{"task_id": "HumanEval-V/HumanEval-84", "given_tests": []}
+{"task_id": "HumanEval-V/HumanEval-85", "given_tests": []}
+{"task_id": "HumanEval-V/HumanEval-86", "given_tests": []}
+{"task_id": "HumanEval-V/HumanEval-87", "given_tests": []}
+{"task_id": "HumanEval-V/HumanEval-88", "given_tests": []}
+{"task_id": "HumanEval-V/HumanEval-89", "given_tests": []}
+{"task_id": "HumanEval-V/HumanEval-90", "given_tests": []}
+{"task_id": "HumanEval-V/HumanEval-91", "given_tests": ["assert is_bored(\"Hello world\") == 0", "assert is_bored(\"The sky is blue. The sun is shining. I love this weather\") == 1"]}
+{"task_id": "HumanEval-V/HumanEval-92", "given_tests": []}
+{"task_id": "HumanEval-V/HumanEval-93", "given_tests": ["assert encode('test') == 'TGST'", "assert encode('This is a message') == 'tHKS KS C MGSSCGG'"]}
+{"task_id": "HumanEval-V/HumanEval-94", "given_tests": []}
+{"task_id": "HumanEval-V/HumanEval-95", "given_tests": []}
+{"task_id": "HumanEval-V/HumanEval-96", "given_tests": []}
+{"task_id": "HumanEval-V/HumanEval-97", "given_tests": []}
+{"task_id": "HumanEval-V/HumanEval-98", "given_tests": []}
+{"task_id": "HumanEval-V/HumanEval-99", "given_tests": ["assert closest_integer(\"10\") == 10", "assert closest_integer(\"15.3\") == 15"]}
+{"task_id": "HumanEval-V/HumanEval-100", "given_tests": ["assert make_a_pile(3) == [3, 5, 7]"]}
+{"task_id": "HumanEval-V/HumanEval-101", "given_tests": []}
+{"task_id": "HumanEval-V/HumanEval-102", "given_tests": []}
+{"task_id": "HumanEval-V/HumanEval-103", "given_tests": []}
+{"task_id": "HumanEval-V/HumanEval-104", "given_tests": ["assert unique_digits([15, 33, 1422, 1]) == [1, 15, 33]", "assert unique_digits([152, 323, 1422, 10]) == []"]}
+{"task_id": "HumanEval-V/HumanEval-105", "given_tests": []}
+{"task_id": "HumanEval-V/HumanEval-106", "given_tests": []}
+{"task_id": "HumanEval-V/HumanEval-107", "given_tests": []}
+{"task_id": "HumanEval-V/HumanEval-108", "given_tests": []}
+{"task_id": "HumanEval-V/HumanEval-109", "given_tests": []}
+{"task_id": "HumanEval-V/HumanEval-110", "given_tests": []}
+{"task_id": "HumanEval-V/HumanEval-111", "given_tests": []}
+{"task_id": "HumanEval-V/HumanEval-112", "given_tests": []}
+{"task_id": "HumanEval-V/HumanEval-113", "given_tests": ["assert odd_count(['1234567']) == [\"the number of odd elements 4n the str4ng 4 of the 4nput.\"]", "assert odd_count(['3',\"11111111\"]) == [\"the number of odd elements 1n the str1ng 1 of the 1nput.\","]}
+{"task_id": "HumanEval-V/HumanEval-114", "given_tests": []}
+{"task_id": "HumanEval-V/HumanEval-115", "given_tests": []}
+{"task_id": "HumanEval-V/HumanEval-116", "given_tests": []}
+{"task_id": "HumanEval-V/HumanEval-117", "given_tests": []}
+{"task_id": "HumanEval-V/HumanEval-118", "given_tests": []}
+{"task_id": "HumanEval-V/HumanEval-119", "given_tests": []}
+{"task_id": "HumanEval-V/HumanEval-120", "given_tests": []}
+{"task_id": "HumanEval-V/HumanEval-121", "given_tests": []}
+{"task_id": "HumanEval-V/HumanEval-122", "given_tests": []}
+{"task_id": "HumanEval-V/HumanEval-123", "given_tests": []}
+{"task_id": "HumanEval-V/HumanEval-124", "given_tests": []}
+{"task_id": "HumanEval-V/HumanEval-125", "given_tests": []}
+{"task_id": "HumanEval-V/HumanEval-126", "given_tests": []}
+{"task_id": "HumanEval-V/HumanEval-127", "given_tests": []}
+{"task_id": "HumanEval-V/HumanEval-128", "given_tests": []}
+{"task_id": "HumanEval-V/HumanEval-129", "given_tests": []}
+{"task_id": "HumanEval-V/HumanEval-130", "given_tests": []}
+{"task_id": "HumanEval-V/HumanEval-131", "given_tests": []}
+{"task_id": "HumanEval-V/HumanEval-132", "given_tests": []}
+{"task_id": "HumanEval-V/HumanEval-133", "given_tests": []}
+{"task_id": "HumanEval-V/HumanEval-134", "given_tests": []}
+{"task_id": "HumanEval-V/HumanEval-135", "given_tests": []}
+{"task_id": "HumanEval-V/HumanEval-136", "given_tests": []}
+{"task_id": "HumanEval-V/HumanEval-137", "given_tests": []}
+{"task_id": "HumanEval-V/HumanEval-138", "given_tests": []}
+{"task_id": "HumanEval-V/HumanEval-139", "given_tests": ["assert special_factorial(4) == 288"]}
+{"task_id": "HumanEval-V/HumanEval-140", "given_tests": []}
+{"task_id": "HumanEval-V/HumanEval-141", "given_tests": []}
+{"task_id": "HumanEval-V/HumanEval-142", "given_tests": []}
+{"task_id": "HumanEval-V/HumanEval-143", "given_tests": []}
+{"task_id": "HumanEval-V/HumanEval-144", "given_tests": []}
+{"task_id": "HumanEval-V/HumanEval-145", "given_tests": []}
+{"task_id": "HumanEval-V/HumanEval-146", "given_tests": []}
+{"task_id": "HumanEval-V/HumanEval-147", "given_tests": []}
+{"task_id": "HumanEval-V/HumanEval-148", "given_tests": []}
+{"task_id": "HumanEval-V/HumanEval-149", "given_tests": []}
+{"task_id": "HumanEval-V/HumanEval-150", "given_tests": []}
+{"task_id": "HumanEval-V/HumanEval-151", "given_tests": []}
+{"task_id": "HumanEval-V/HumanEval-152", "given_tests": []}
+{"task_id": "HumanEval-V/HumanEval-153", "given_tests": []}
+{"task_id": "HumanEval-V/HumanEval-154", "given_tests": []}
+{"task_id": "HumanEval-V/HumanEval-155", "given_tests": []}
+{"task_id": "HumanEval-V/HumanEval-156", "given_tests": []}
+{"task_id": "HumanEval-V/HumanEval-157", "given_tests": []}
+{"task_id": "HumanEval-V/HumanEval-158", "given_tests": []}
+{"task_id": "HumanEval-V/HumanEval-159", "given_tests": []}
+{"task_id": "HumanEval-V/HumanEval-160", "given_tests": []}
+{"task_id": "HumanEval-V/HumanEval-161", "given_tests": []}
+{"task_id": "HumanEval-V/HumanEval-162", "given_tests": []}
+{"task_id": "HumanEval-V/HumanEval-163", "given_tests": []}

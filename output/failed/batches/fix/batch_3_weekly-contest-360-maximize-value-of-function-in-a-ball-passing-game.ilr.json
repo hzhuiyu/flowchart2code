@@ -1,0 +1,240 @@
+{
+  "problem_id": "getMaxFunctionValue",
+  "nodes": [
+    {
+      "id": 1,
+      "type": "start",
+      "label": "Start",
+      "next": 2
+    },
+    {
+      "id": 2,
+      "type": "process",
+      "label": "Input: k (integer), receiver (list of integers)",
+      "action": "ctx['k'] = ctx['arg0']; ctx['receiver'] = ctx['arg1']; ctx['n'] = len(ctx['receiver'])",
+      "next": 3
+    },
+    {
+      "id": 3,
+      "type": "process",
+      "label": "Initialize n = length of receiver",
+      "action": "ctx['n'] = len(ctx['receiver'])",
+      "next": 4
+    },
+    {
+      "id": 4,
+      "type": "process",
+      "label": "Initialize up as a 2D list of size n x 40 with 0",
+      "action": "ctx['up'] = [[0] * 40 for _ in range(ctx['n'])]",
+      "next": 5
+    },
+    {
+      "id": 5,
+      "type": "process",
+      "label": "Initialize dp as a 2D list of size n x 40 with 0",
+      "action": "ctx['dp'] = [[0] * 40 for _ in range(ctx['n'])]",
+      "next": 26
+    },
+    {
+      "id": 26,
+      "type": "process",
+      "label": "Init i = 0 for level-0 loop",
+      "action": "ctx['i'] = 0",
+      "next": 6
+    },
+    {
+      "id": 6,
+      "type": "decision",
+      "label": "For i from 0 to n-1",
+      "logic": "ctx['i'] < ctx['n']",
+      "true_next": 7,
+      "false_next": 27
+    },
+    {
+      "id": 7,
+      "type": "process",
+      "label": "Set j = receiver[i]",
+      "action": "ctx['j'] = ctx['receiver'][ctx['i']]",
+      "next": 8
+    },
+    {
+      "id": 8,
+      "type": "process",
+      "label": "Set up[i][0] = j",
+      "action": "ctx['up'][ctx['i']][0] = ctx['j']",
+      "next": 9
+    },
+    {
+      "id": 9,
+      "type": "process",
+      "label": "Set dp[i][0] = j, i += 1",
+      "action": "ctx['dp'][ctx['i']][0] = ctx['j']; ctx['i'] += 1",
+      "next": 6
+    },
+    {
+      "id": 27,
+      "type": "process",
+      "label": "Init j = 1 for level loop",
+      "action": "ctx['j'] = 1",
+      "next": 10
+    },
+    {
+      "id": 10,
+      "type": "decision",
+      "label": "For j from 1 to 39",
+      "logic": "ctx['j'] <= 39",
+      "true_next": 28,
+      "false_next": 16
+    },
+    {
+      "id": 28,
+      "type": "process",
+      "label": "Init i = 0 for inner level loop",
+      "action": "ctx['i'] = 0",
+      "next": 11
+    },
+    {
+      "id": 11,
+      "type": "decision",
+      "label": "For i from 0 to n-1",
+      "logic": "ctx['i'] < ctx['n']",
+      "true_next": 12,
+      "false_next": 30
+    },
+    {
+      "id": 12,
+      "type": "process",
+      "label": "Set j1 = up[i][j - 1]",
+      "action": "ctx['j1'] = ctx['up'][ctx['i']][ctx['j'] - 1]",
+      "next": 13
+    },
+    {
+      "id": 13,
+      "type": "process",
+      "label": "Set j2 = up[i][j - 1]",
+      "action": "ctx['j2'] = ctx['up'][ctx['i']][ctx['j'] - 1]",
+      "next": 14
+    },
+    {
+      "id": 14,
+      "type": "process",
+      "label": "Set up[i][j] = up[j2][j - 1]",
+      "action": "ctx['up'][ctx['i']][ctx['j']] = ctx['up'][ctx['j2']][ctx['j'] - 1]",
+      "next": 15
+    },
+    {
+      "id": 15,
+      "type": "process",
+      "label": "Set dp[i][j] = dp[i][j - 1] + dp[j2][j - 1]",
+      "action": "ctx['dp'][ctx['i']][ctx['j']] = ctx['dp'][ctx['i']][ctx['j'] - 1] + ctx['dp'][ctx['j2']][ctx['j'] - 1]",
+      "next": 29
+    },
+    {
+      "id": 29,
+      "type": "process",
+      "label": "i += 1",
+      "action": "ctx['i'] += 1",
+      "next": 11
+    },
+    {
+      "id": 30,
+      "type": "process",
+      "label": "j += 1",
+      "action": "ctx['j'] += 1",
+      "next": 10
+    },
+    {
+      "id": 16,
+      "type": "process",
+      "label": "Initialize ans = 0",
+      "action": "ctx['ans'] = 0",
+      "next": 31
+    },
+    {
+      "id": 31,
+      "type": "process",
+      "label": "Init i = 0 for query loop",
+      "action": "ctx['i'] = 0",
+      "next": 17
+    },
+    {
+      "id": 17,
+      "type": "decision",
+      "label": "For i from 0 to n-1",
+      "logic": "ctx['i'] < ctx['n']",
+      "true_next": 18,
+      "false_next": 25
+    },
+    {
+      "id": 18,
+      "type": "process",
+      "label": "Set tot = i",
+      "action": "ctx['tot'] = ctx['i']",
+      "next": 19
+    },
+    {
+      "id": 19,
+      "type": "process",
+      "label": "Set u = i",
+      "action": "ctx['u'] = ctx['i']",
+      "next": 32
+    },
+    {
+      "id": 32,
+      "type": "process",
+      "label": "Init j = 0 for bit loop",
+      "action": "ctx['j'] = 0",
+      "next": 20
+    },
+    {
+      "id": 20,
+      "type": "decision",
+      "label": "For j from 0 to 39",
+      "logic": "ctx['j'] <= 39",
+      "true_next": 21,
+      "false_next": 24
+    },
+    {
+      "id": 21,
+      "type": "decision",
+      "label": "Is (k & (1 << j)) != 0?",
+      "logic": "(ctx['k'] & (1 << ctx['j'])) != 0",
+      "true_next": 22,
+      "false_next": 33
+    },
+    {
+      "id": 22,
+      "type": "process",
+      "label": "Set tot += dp[u][j]",
+      "action": "ctx['tot'] += ctx['dp'][ctx['u']][ctx['j']]",
+      "next": 23
+    },
+    {
+      "id": 23,
+      "type": "process",
+      "label": "Set u = up[u][j]",
+      "action": "ctx['u'] = ctx['up'][ctx['u']][ctx['j']]",
+      "next": 33
+    },
+    {
+      "id": 33,
+      "type": "process",
+      "label": "j += 1",
+      "action": "ctx['j'] += 1",
+      "next": 20
+    },
+    {
+      "id": 24,
+      "type": "process",
+      "label": "End Loop: ans = max(ans, tot), i += 1",
+      "action": "ctx['ans'] = max(ctx['ans'], ctx['tot']); ctx['i'] += 1",
+      "next": 17
+    },
+    {
+      "id": 25,
+      "type": "end",
+      "label": "Output: ans (maximum value of the function)",
+      "output": "ctx['ans']"
+    }
+  ]
+}

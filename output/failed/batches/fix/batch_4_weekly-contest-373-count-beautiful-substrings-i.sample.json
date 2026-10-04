@@ -1,0 +1,1257 @@
+{
+ "task_id": "weekly-contest-373-count-beautiful-substrings-i",
+ "dataset": "Algorithm",
+ "title": "count-beautiful-substrings-i",
+ "difficulty": "Medium",
+ "prompt": "\"\"\"\nYou are given a string s and a positive integer k.\nLet vowels and consonants be the number of vowels and consonants in a string.\nA string is beautiful if:\n\nvowels == consonants.\n(vowels * consonants) % k == 0, in other terms the multiplication of vowels and consonants is divisible by k.\n\nReturn the number of non-empty beautiful substrings in the given string s.\nA substring is a contiguous sequence of characters in a string.\nVowel letters in English are 'a', 'e', 'i', 'o', and 'u'.\nConsonant letters in English are every letter except vowels.\n\nExample 1:\n\nInput: s = \"baeyh\", k = 2\nOutput: 2\nExplanation: There are 2 beautiful substrings in the given string.\n- Substring \"baeyh\", vowels = 2 ([\"a\",e\"]), consonants = 2 ([\"y\",\"h\"]).\nYou can see that string \"aeyh\" is beautiful as vowels == consonants and vowels * consonants % k == 0.\n- Substring \"baeyh\", vowels = 2 ([\"a\",e\"]), consonants = 2 ([\"b\",\"y\"]). \nYou can see that string \"baey\" is beautiful as vowels == consonants and vowels * consonants % k == 0.\nIt can be shown that there are only 2 beautiful substrings in the given string.\n\nExample 2:\n\nInput: s = \"abba\", k = 1\nOutput: 3\nExplanation: There are 3 beautiful substrings in the given string.\n- Substring \"abba\", vowels = 1 ([\"a\"]), consonants = 1 ([\"b\"]). \n- Substring \"abba\", vowels = 1 ([\"a\"]), consonants = 1 ([\"b\"]).\n- Substring \"abba\", vowels = 2 ([\"a\",\"a\"]), consonants = 2 ([\"b\",\"b\"]).\nIt can be shown that there are only 3 beautiful substrings in the given string.\n\nExample 3:\n\nInput: s = \"bcdf\", k = 1\nOutput: 0\nExplanation: There are no beautiful substrings in the given string.\n\n\nConstraints:\n\n1 <= s.length <= 1000\n1 <= k <= 1000\ns consists of only English lowercase letters.\n\"\"\"\nclass Solution:\n    def beautifulSubstrings(self, s: str, k: int) -> int:\n        ",
+ "starter_code": "class Solution:\n    def beautifulSubstrings(self, s: str, k: int) -> int:\n        ",
+ "entry_point": "",
+ "test": "\nmy_solution = Solution()\n\ntest_input = { \"s\": \"baeyh\", \"k\": 2 }\nassert my_solution.beautifulSubstrings(**test_input) == 2\n\ntest_input = { \"s\": \"abba\", \"k\": 1 }\nassert my_solution.beautifulSubstrings(**test_input) == 3\n\ntest_input = { \"s\": \"bcdf\", \"k\": 1 }\nassert my_solution.beautifulSubstrings(**test_input) == 0\n\ntest_input = { \"s\": \"ihroyeeb\", \"k\": 5 }\nassert my_solution.beautifulSubstrings(**test_input) == 0\n\ntest_input = { \"s\": \"uzuxpzou\", \"k\": 3 }\nassert my_solution.beautifulSubstrings(**test_input) == 1\n\ntest_input = { \"s\": \"ouuoeqd\", \"k\": 2 }\nassert my_solution.beautifulSubstrings(**test_input) == 1\n\ntest_input = { \"s\": \"eeebjoxxujuaeoqibd\", \"k\": 8 }\nassert my_solution.beautifulSubstrings(**test_input) == 4\n\ntest_input = { \"s\": \"ilougekqlovegioemdvu\", \"k\": 4 }\nassert my_solution.beautifulSubstrings(**test_input) == 21\n\ntest_input = { \"s\": \"tqaewreikaztwpfwnef\", \"k\": 8 }\nassert my_solution.beautifulSubstrings(**test_input) == 3\n\ntest_input = { \"s\": \"oykiuhsafgfjumnzb\", \"k\": 7 }\nassert my_solution.beautifulSubstrings(**test_input) == 0\n\ntest_input = { \"s\": \"ifvsa\", \"k\": 3 }\nassert my_solution.beautifulSubstrings(**test_input) == 0\n\ntest_input = { \"s\": \"svzauyuevujektj\", \"k\": 5 }\nassert my_solution.beautifulSubstrings(**test_input) == 3\n\ntest_input = { \"s\": \"urahjig\", \"k\": 2 }\nassert my_solution.beautifulSubstrings(**test_input) == 2\n\ntest_input = { \"s\": \"ime\", \"k\": 2 }\nassert my_solution.beautifulSubstrings(**test_input) == 0\n\ntest_input = { \"s\": \"oacghieut\", \"k\": 5 }\nassert my_solution.beautifulSubstrings(**test_input) == 0\n\ntest_input = { \"s\": \"aoluu\", \"k\": 3 }\nassert my_solution.beautifulSubstrings(**test_input) == 0\n\ntest_input = { \"s\": \"ioaoiciiuoziout\", \"k\": 1 }\nassert my_solution.beautifulSubstrings(**test_input) == 5\n\ntest_input = { \"s\": \"ouafupsuhid\", \"k\": 6 }\nassert my_solution.beautifulSubstrings(**test_input) == 0\n\ntest_input = { \"s\": \"ox\", \"k\": 2 }\nassert my_solution.beautifulSubstrings(**test_input) == 0\n\ntest_input = { \"s\": \"tlaiwoauazutusiaaui\", \"k\": 10 }\nassert my_solution.beautifulSubstrings(**test_input) == 0\n\ntest_input = { \"s\": \"caepeym\", \"k\": 2 }\nassert my_solution.beautifulSubstrings(**test_input) == 2\n\ntest_input = { \"s\": \"apyxvceue\", \"k\": 4 }\nassert my_solution.beautifulSubstrings(**test_input) == 1\n\ntest_input = { \"s\": \"imkqbb\", \"k\": 4 }\nassert my_solution.beautifulSubstrings(**test_input) == 0\n\ntest_input = { \"s\": \"caaz\", \"k\": 2 }\nassert my_solution.beautifulSubstrings(**test_input) == 1\n\ntest_input = { \"s\": \"pyicoy\", \"k\": 1 }\nassert my_solution.beautifulSubstrings(**test_input) == 6\n\ntest_input = { \"s\": \"uopmyrsntjhiroikup\", \"k\": 8 }\nassert my_solution.beautifulSubstrings(**test_input) == 2\n\ntest_input = { \"s\": \"aujfxqxcj\", \"k\": 5 }\nassert my_solution.beautifulSubstrings(**test_input) == 0\n\ntest_input = { \"s\": \"eeizejuoxeumz\", \"k\": 4 }\nassert my_solution.beautifulSubstrings(**test_input) == 6\n\ntest_input = { \"s\": \"uuouuaifnboeiulttio\", \"k\": 4 }\nassert my_solution.beautifulSubstrings(**test_input) == 10\n\ntest_input = { \"s\": \"woozzxd\", \"k\": 3 }\nassert my_solution.beautifulSubstrings(**test_input) == 0\n\ntest_input = { \"s\": \"pulorolqcvhafexui\", \"k\": 9 }\nassert my_solution.beautifulSubstrings(**test_input) == 3\n\ntest_input = { \"s\": \"hmuaewojioizoguvoaje\", \"k\": 3 }\nassert my_solution.beautifulSubstrings(**test_input) == 4\n\ntest_input = { \"s\": \"b\", \"k\": 1 }\nassert my_solution.beautifulSubstrings(**test_input) == 0\n\ntest_input = { \"s\": \"aiejouohnqnketinvat\", \"k\": 3 }\nassert my_solution.beautifulSubstrings(**test_input) == 6\n\ntest_input = { \"s\": \"mjiogpri\", \"k\": 2 }\nassert my_solution.beautifulSubstrings(**test_input) == 3\n\ntest_input = { \"s\": \"movbyaeouil\", \"k\": 3 }\nassert my_solution.beautifulSubstrings(**test_input) == 2\n\ntest_input = { \"s\": \"puureouausxmitvav\", \"k\": 6 }\nassert my_solution.beautifulSubstrings(**test_input) == 2\n\ntest_input = { \"s\": \"op\", \"k\": 1 }\nassert my_solution.beautifulSubstrings(**test_input) == 1\n\ntest_input = { \"s\": \"iuhoezpooxcohtlapolo\", \"k\": 1 }\nassert my_solution.beautifulSubstrings(**test_input) == 39\n\ntest_input = { \"s\": \"cioi\", \"k\": 2 }\nassert my_solution.beautifulSubstrings(**test_input) == 0\n\ntest_input = { \"s\": \"pueutaoyaxk\", \"k\": 6 }\nassert my_solution.beautifulSubstrings(**test_input) == 0\n\ntest_input = { \"s\": \"iiuresacruaaan\", \"k\": 3 }\nassert my_solution.beautifulSubstrings(**test_input) == 3\n\ntest_input = { \"s\": \"agntyaazvpejidwaph\", \"k\": 8 }\nassert my_solution.beautifulSubstrings(**test_input) == 1\n\ntest_input = { \"s\": \"wiybolyniexiibou\", \"k\": 6 }\nassert my_solution.beautifulSubstrings(**test_input) == 2\n\ntest_input = { \"s\": \"coiyakadxi\", \"k\": 2 }\nassert my_solution.beautifulSubstrings(**test_input) == 8\n\ntest_input = { \"s\": \"oraajoeruiakixj\", \"k\": 3 }\nassert my_solution.beautifulSubstrings(**test_input) == 1\n\ntest_input = { \"s\": \"jeayap\", \"k\": 1 }\nassert my_solution.beautifulSubstrings(**test_input) == 7\n\ntest_input = { \"s\": \"iu\", \"k\": 1 }\nassert my_solution.beautifulSubstrings(**test_input) == 0\n\ntest_input = { \"s\": \"awozoy\", \"k\": 2 }\nassert my_solution.beautifulSubstrings(**test_input) == 3\n\ntest_input = { \"s\": \"fheabmlsyeeeuoeogyz\", \"k\": 9 }\nassert my_solution.beautifulSubstrings(**test_input) == 5\n\ntest_input = { \"s\": \"eaizneuxi\", \"k\": 1 }\nassert my_solution.beautifulSubstrings(**test_input) == 10\n\ntest_input = { \"s\": \"uurqufaucsuoqljh\", \"k\": 4 }\nassert my_solution.beautifulSubstrings(**test_input) == 14\n\ntest_input = { \"s\": \"jrtept\", \"k\": 4 }\nassert my_solution.beautifulSubstrings(**test_input) == 0\n\ntest_input = { \"s\": \"olgioxooiejooosaed\", \"k\": 5 }\nassert my_solution.beautifulSubstrings(**test_input) == 0\n\ntest_input = { \"s\": \"uizoy\", \"k\": 2 }\nassert my_solution.beautifulSubstrings(**test_input) == 1\n\ntest_input = { \"s\": \"lswabfiujjhexzos\", \"k\": 4 }\nassert my_solution.beautifulSubstrings(**test_input) == 5\n\ntest_input = { \"s\": \"iuu\", \"k\": 1 }\nassert my_solution.beautifulSubstrings(**test_input) == 0\n\ntest_input = { \"s\": \"qeaxut\", \"k\": 1 }\nassert my_solution.beautifulSubstrings(**test_input) == 7\n\ntest_input = { \"s\": \"aojiau\", \"k\": 2 }\nassert my_solution.beautifulSubstrings(**test_input) == 0\n\ntest_input = { \"s\": \"oaiaaaargkonlcsoaygf\", \"k\": 5 }\nassert my_solution.beautifulSubstrings(**test_input) == 2\n\ntest_input = { \"s\": \"zoowrawkm\", \"k\": 4 }\nassert my_solution.beautifulSubstrings(**test_input) == 3\n\ntest_input = { \"s\": \"uqiwuoevkfhkkua\", \"k\": 4 }\nassert my_solution.beautifulSubstrings(**test_input) == 6\n\ntest_input = { \"s\": \"kavuaaeodvaxicm\", \"k\": 6 }\nassert my_solution.beautifulSubstrings(**test_input) == 0\n\ntest_input = { \"s\": \"qpxeceq\", \"k\": 1 }\nassert my_solution.beautifulSubstrings(**test_input) == 6\n\ntest_input = { \"s\": \"iaabaofuodcbek\", \"k\": 5 }\nassert my_solution.beautifulSubstrings(**test_input) == 3\n\ntest_input = { \"s\": \"eel\", \"k\": 1 }\nassert my_solution.beautifulSubstrings(**test_input) == 1\n\ntest_input = { \"s\": \"ikeuhe\", \"k\": 1 }\nassert my_solution.beautifulSubstrings(**test_input) == 5\n\ntest_input = { \"s\": \"lueikvo\", \"k\": 2 }\nassert my_solution.beautifulSubstrings(**test_input) == 2\n\ntest_input = { \"s\": \"oauau\", \"k\": 2 }\nassert my_solution.beautifulSubstrings(**test_input) == 0\n\ntest_input = { \"s\": \"qzoieeotieeakqraeao\", \"k\": 4 }\nassert my_solution.beautifulSubstrings(**test_input) == 4\n\ntest_input = { \"s\": \"ehaascocsdmgekni\", \"k\": 9 }\nassert my_solution.beautifulSubstrings(**test_input) == 3\n\ntest_input = { \"s\": \"euqeklniykiji\", \"k\": 5 }\nassert my_solution.beautifulSubstrings(**test_input) == 0\n\ntest_input = { \"s\": \"vaeiiioidiioxhduu\", \"k\": 7 }\nassert my_solution.beautifulSubstrings(**test_input) == 0\n\ntest_input = { \"s\": \"aa\", \"k\": 1 }\nassert my_solution.beautifulSubstrings(**test_input) == 0\n\ntest_input = { \"s\": \"chaua\", \"k\": 3 }\nassert my_solution.beautifulSubstrings(**test_input) == 0\n\ntest_input = { \"s\": \"edfrglfr\", \"k\": 3 }\nassert my_solution.beautifulSubstrings(**test_input) == 0\n\ntest_input = { \"s\": \"dqbe\", \"k\": 1 }\nassert my_solution.beautifulSubstrings(**test_input) == 1\n\ntest_input = { \"s\": \"ghooirorxge\", \"k\": 4 }\nassert my_solution.beautifulSubstrings(**test_input) == 6\n\ntest_input = { \"s\": \"fodartekaonq\", \"k\": 4 }\nassert my_solution.beautifulSubstrings(**test_input) == 9\n\ntest_input = { \"s\": \"feeanzkjpfehzeuni\", \"k\": 6 }\nassert my_solution.beautifulSubstrings(**test_input) == 0\n\ntest_input = { \"s\": \"ignoouesduu\", \"k\": 2 }\nassert my_solution.beautifulSubstrings(**test_input) == 6\n\ntest_input = { \"s\": \"yif\", \"k\": 2 }\nassert my_solution.beautifulSubstrings(**test_input) == 0\n\ntest_input = { \"s\": \"gondfjaeeuhbuuasgip\", \"k\": 10 }\nassert my_solution.beautifulSubstrings(**test_input) == 0\n\ntest_input = { \"s\": \"djooomsffoonelyeode\", \"k\": 3 }\nassert my_solution.beautifulSubstrings(**test_input) == 14\n\ntest_input = { \"s\": \"pgaimei\", \"k\": 4 }\nassert my_solution.beautifulSubstrings(**test_input) == 2\n\ntest_input = { \"s\": \"naipqentonee\", \"k\": 4 }\nassert my_solution.beautifulSubstrings(**test_input) == 8\n\ntest_input = { \"s\": \"bouov\", \"k\": 2 }\nassert my_solution.beautifulSubstrings(**test_input) == 0\n\ntest_input = { \"s\": \"lcuhoypz\", \"k\": 5 }\nassert my_solution.beautifulSubstrings(**test_input) == 0\n\ntest_input = { \"s\": \"g\", \"k\": 1 }\nassert my_solution.beautifulSubstrings(**test_input) == 0\n\ntest_input = { \"s\": \"qc\", \"k\": 2 }\nassert my_solution.beautifulSubstrings(**test_input) == 0\n\ntest_input = { \"s\": \"mhznea\", \"k\": 2 }\nassert my_solution.beautifulSubstrings(**test_input) == 1\n\ntest_input = { \"s\": \"uxvjixdujgyfauo\", \"k\": 8 }\nassert my_solution.beautifulSubstrings(**test_input) == 1\n\ntest_input = { \"s\": \"iyjkuox\", \"k\": 3 }\nassert my_solution.beautifulSubstrings(**test_input) == 1\n\ntest_input = { \"s\": \"xbjfoayfpafatnuyord\", \"k\": 3 }\nassert my_solution.beautifulSubstrings(**test_input) == 3\n\ntest_input = { \"s\": \"nvoede\", \"k\": 3 }\nassert my_solution.beautifulSubstrings(**test_input) == 1\n\ntest_input = { \"s\": \"usnuaxpaktrweatruu\", \"k\": 5 }\nassert my_solution.beautifulSubstrings(**test_input) == 0\n\ntest_input = { \"s\": \"euojmsora\", \"k\": 1 }\nassert my_solution.beautifulSubstrings(**test_input) == 10\n\ntest_input = { \"s\": \"iapgoi\", \"k\": 3 }\nassert my_solution.beautifulSubstrings(**test_input) == 0\n\ntest_input = { \"s\": \"uafuimcpxyeoixgbyeio\", \"k\": 5 }\nassert my_solution.beautifulSubstrings(**test_input) == 3\n\ntest_input = { \"s\": \"weuaatpu\", \"k\": 5 }\nassert my_solution.beautifulSubstrings(**test_input) == 0",
+ "test_cases": [
+  {
+   "input": {
+    "args": [
+     2,
+     "baeyh"
+    ]
+   },
+   "output": 2,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     1,
+     "abba"
+    ]
+   },
+   "output": 3,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     1,
+     "bcdf"
+    ]
+   },
+   "output": 0,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     5,
+     "ihroyeeb"
+    ]
+   },
+   "output": 0,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     3,
+     "uzuxpzou"
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     2,
+     "ouuoeqd"
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     8,
+     "eeebjoxxujuaeoqibd"
+    ]
+   },
+   "output": 4,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     4,
+     "ilougekqlovegioemdvu"
+    ]
+   },
+   "output": 21,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     8,
+     "tqaewreikaztwpfwnef"
+    ]
+   },
+   "output": 3,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     7,
+     "oykiuhsafgfjumnzb"
+    ]
+   },
+   "output": 0,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     3,
+     "ifvsa"
+    ]
+   },
+   "output": 0,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     5,
+     "svzauyuevujektj"
+    ]
+   },
+   "output": 3,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     2,
+     "urahjig"
+    ]
+   },
+   "output": 2,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     2,
+     "ime"
+    ]
+   },
+   "output": 0,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     5,
+     "oacghieut"
+    ]
+   },
+   "output": 0,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     3,
+     "aoluu"
+    ]
+   },
+   "output": 0,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     1,
+     "ioaoiciiuoziout"
+    ]
+   },
+   "output": 5,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     6,
+     "ouafupsuhid"
+    ]
+   },
+   "output": 0,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     2,
+     "ox"
+    ]
+   },
+   "output": 0,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     10,
+     "tlaiwoauazutusiaaui"
+    ]
+   },
+   "output": 0,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     2,
+     "caepeym"
+    ]
+   },
+   "output": 2,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     4,
+     "apyxvceue"
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     4,
+     "imkqbb"
+    ]
+   },
+   "output": 0,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     2,
+     "caaz"
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     1,
+     "pyicoy"
+    ]
+   },
+   "output": 6,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     8,
+     "uopmyrsntjhiroikup"
+    ]
+   },
+   "output": 2,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     5,
+     "aujfxqxcj"
+    ]
+   },
+   "output": 0,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     4,
+     "eeizejuoxeumz"
+    ]
+   },
+   "output": 6,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     4,
+     "uuouuaifnboeiulttio"
+    ]
+   },
+   "output": 10,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     3,
+     "woozzxd"
+    ]
+   },
+   "output": 0,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     9,
+     "pulorolqcvhafexui"
+    ]
+   },
+   "output": 3,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     3,
+     "hmuaewojioizoguvoaje"
+    ]
+   },
+   "output": 4,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     1,
+     "b"
+    ]
+   },
+   "output": 0,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     3,
+     "aiejouohnqnketinvat"
+    ]
+   },
+   "output": 6,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     2,
+     "mjiogpri"
+    ]
+   },
+   "output": 3,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     3,
+     "movbyaeouil"
+    ]
+   },
+   "output": 2,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     6,
+     "puureouausxmitvav"
+    ]
+   },
+   "output": 2,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     1,
+     "op"
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     1,
+     "iuhoezpooxcohtlapolo"
+    ]
+   },
+   "output": 39,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     2,
+     "cioi"
+    ]
+   },
+   "output": 0,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     6,
+     "pueutaoyaxk"
+    ]
+   },
+   "output": 0,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     3,
+     "iiuresacruaaan"
+    ]
+   },
+   "output": 3,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     8,
+     "agntyaazvpejidwaph"
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     6,
+     "wiybolyniexiibou"
+    ]
+   },
+   "output": 2,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     2,
+     "coiyakadxi"
+    ]
+   },
+   "output": 8,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     3,
+     "oraajoeruiakixj"
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     1,
+     "jeayap"
+    ]
+   },
+   "output": 7,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     1,
+     "iu"
+    ]
+   },
+   "output": 0,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     2,
+     "awozoy"
+    ]
+   },
+   "output": 3,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     9,
+     "fheabmlsyeeeuoeogyz"
+    ]
+   },
+   "output": 5,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     1,
+     "eaizneuxi"
+    ]
+   },
+   "output": 10,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     4,
+     "uurqufaucsuoqljh"
+    ]
+   },
+   "output": 14,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     4,
+     "jrtept"
+    ]
+   },
+   "output": 0,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     5,
+     "olgioxooiejooosaed"
+    ]
+   },
+   "output": 0,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     2,
+     "uizoy"
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     4,
+     "lswabfiujjhexzos"
+    ]
+   },
+   "output": 5,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     1,
+     "iuu"
+    ]
+   },
+   "output": 0,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     1,
+     "qeaxut"
+    ]
+   },
+   "output": 7,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     2,
+     "aojiau"
+    ]
+   },
+   "output": 0,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     5,
+     "oaiaaaargkonlcsoaygf"
+    ]
+   },
+   "output": 2,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     4,
+     "zoowrawkm"
+    ]
+   },
+   "output": 3,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     4,
+     "uqiwuoevkfhkkua"
+    ]
+   },
+   "output": 6,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     6,
+     "kavuaaeodvaxicm"
+    ]
+   },
+   "output": 0,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     1,
+     "qpxeceq"
+    ]
+   },
+   "output": 6,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     5,
+     "iaabaofuodcbek"
+    ]
+   },
+   "output": 3,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     1,
+     "eel"
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     1,
+     "ikeuhe"
+    ]
+   },
+   "output": 5,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     2,
+     "lueikvo"
+    ]
+   },
+   "output": 2,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     2,
+     "oauau"
+    ]
+   },
+   "output": 0,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     4,
+     "qzoieeotieeakqraeao"
+    ]
+   },
+   "output": 4,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     9,
+     "ehaascocsdmgekni"
+    ]
+   },
+   "output": 3,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     5,
+     "euqeklniykiji"
+    ]
+   },
+   "output": 0,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     7,
+     "vaeiiioidiioxhduu"
+    ]
+   },
+   "output": 0,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     1,
+     "aa"
+    ]
+   },
+   "output": 0,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     3,
+     "chaua"
+    ]
+   },
+   "output": 0,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     3,
+     "edfrglfr"
+    ]
+   },
+   "output": 0,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     1,
+     "dqbe"
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     4,
+     "ghooirorxge"
+    ]
+   },
+   "output": 6,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     4,
+     "fodartekaonq"
+    ]
+   },
+   "output": 9,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     6,
+     "feeanzkjpfehzeuni"
+    ]
+   },
+   "output": 0,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     2,
+     "ignoouesduu"
+    ]
+   },
+   "output": 6,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     2,
+     "yif"
+    ]
+   },
+   "output": 0,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     10,
+     "gondfjaeeuhbuuasgip"
+    ]
+   },
+   "output": 0,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     3,
+     "djooomsffoonelyeode"
+    ]
+   },
+   "output": 14,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     4,
+     "pgaimei"
+    ]
+   },
+   "output": 2,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     4,
+     "naipqentonee"
+    ]
+   },
+   "output": 8,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     2,
+     "bouov"
+    ]
+   },
+   "output": 0,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     5,
+     "lcuhoypz"
+    ]
+   },
+   "output": 0,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     1,
+     "g"
+    ]
+   },
+   "output": 0,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     2,
+     "qc"
+    ]
+   },
+   "output": 0,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     2,
+     "mhznea"
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     8,
+     "uxvjixdujgyfauo"
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     3,
+     "iyjkuox"
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     3,
+     "xbjfoayfpafatnuyord"
+    ]
+   },
+   "output": 3,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     3,
+     "nvoede"
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     5,
+     "usnuaxpaktrweatruu"
+    ]
+   },
+   "output": 0,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     1,
+     "euojmsora"
+    ]
+   },
+   "output": 10,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     3,
+     "iapgoi"
+    ]
+   },
+   "output": 0,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     5,
+     "uafuimcpxyeoixgbyeio"
+    ]
+   },
+   "output": 3,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     5,
+     "weuaatpu"
+    ]
+   },
+   "output": 0,
+   "explanation": ""
+  }
+ ],
+ "original_ilr": "```json\n{\n  \"problem_id\": \"beautiful_substrings\",\n  \"nodes\": [\n    {\n      \"id\": 1,\n      \"type\": \"start\",\n      \"label\": \"Start\",\n      \"next\": 2\n    },\n    {\n      \"id\": 2,\n      \"type\": \"process\",\n      \"label\": \"Input: s (string), k (integer)\",\n      \"action\": \"ctx['s'] = ctx['arg0']; ctx['k'] = ctx['arg1']; ctx['n'] = len(ctx['s']); ctx['cnt_0'] = [0] * (ctx['n'] + 1); ctx['cnt_1'] = [0] * (ctx['n'] + 1); ctx['res'] = 0\",\n      \"next\": 3\n    },\n    {\n      \"id\": 3,\n      \"type\": \"process\",\n      \"label\": \"Loop through each character in s\",\n      \"action\": \"ctx['i'] = 0\",\n      \"next\": 4\n    },\n    {\n      \"id\": 4,\n      \"type\": \"decision\",\n      \"label\": \"Is character c a vowel?\",\n      \"logic\": \"ctx['s'][ctx['i']] in 'aeiou'\",\n      \"true_next\": 5,\n      \"false_next\": 6\n    },\n    {\n      \"id\": 5,\n      \"type\": \"process\",\n      \"label\": \"Update cnt_0[i + 1] = cnt_0[i] + 1\",\n      \"action\": \"ctx['cnt_0'][ctx['i'] + 1] = ctx['cnt_0'][ctx['i']] + 1\",\n      \"next\": 7\n    },\n    {\n      \"id\": 6,\n      \"type\": \"process\",\n      \"label\": \"Update cnt_1[i + 1] = cnt_1[i] + 1\",\n      \"action\": \"ctx['cnt_1'][ctx['i'] + 1] = ctx['cnt_1'][ctx['i']] + 1\",\n      \"next\": 7\n    },\n    {\n      \"id\": 7,\n      \"type\": \"process\",\n      \"label\": \"Update cnt_0[i + 1] = cnt_0[i] + 1\",\n      \"action\": \"ctx['cnt_0'][ctx['i'] + 1] = ctx['cnt_0'][ctx['i']] + 1\",\n      \"next\": 8\n    },\n    {\n      \"id\": 8,\n      \"type\": \"process\",\n      \"label\": \"Update cnt_1[i + 1] = cnt_1[i] + 1\",\n      \"action\": \"ctx['cnt_1'][ctx['i'] + 1] = ctx['cnt_1'][ctx['i']] + 1\",\n      \"next\": 9\n    },\n    {\n      \"id\": 9,\n      \"type\": \"process\",\n      \"label\": \"Initialize res = 0\",\n      \"action\": \"ctx['res'] = 0\",\n      \"next\": 10\n    },\n    {\n      \"id\": 10,\n      \"type\": \"process\",\n      \"label\": \"Loop i from 0 to len(s) - 1\",\n      \"action\": \"ctx['i'] = 0\",\n      \"next\": 11\n    },\n    {\n      \"id\": 11,\n      \"type\": \"process\",\n      \"label\": \"Loop j from i + 1 to len(s)\",\n      \"action\": \"ctx['j'] = ctx['i'] + 1\",\n      \"next\": 12\n    },\n    {\n      \"id\": 12,\n      \"type\": \"decision\",\n      \"label\": \"Calculate v1 = cnt_0[i] - cnt_0[i]\",\n      \"logic\": \"True\",\n      \"true_next\": 13,\n      \"false_next\": 14\n    },\n    {\n      \"id\": 13,\n      \"type\": \"process\",\n      \"label\": \"Calculate v2 = cnt_1[i] - cnt_1[i]\",\n      \"action\": \"ctx['v1'] = ctx['cnt_0'][ctx['i']] - ctx['cnt_0'][ctx['i']]; ctx['v2'] = ctx['cnt_1'][ctx['i']] - ctx['cnt_1'][ctx['i']]\",\n      \"next\": 15\n    },\n    {\n      \"id\": 14,\n      \"type\": \"process\",\n      \"label\": \"Continue\",\n      \"action\": \"pass\",\n      \"next\": 11\n    },\n    {\n      \"id\": 15,\n      \"type\": \"decision\",\n      \"label\": \"Is v1 == v2?\",\n      \"logic\": \"ctx['v1'] == ctx['v2']\",\n      \"true_next\": 16,\n      \"false_next\": 20\n    },\n    {\n      \"id\": 16,\n      \"type\": \"decision\",\n      \"label\": \"Is (v1 * v2) % k == 0?\",\n      \"logic\": \"(ctx['v1'] * ctx['v2']) % ctx['k'] == 0\",\n      \"true_next\": 17,\n      \"false_next\": 20\n    },\n    {\n      \"id\": 17,\n      \"type\": \"process\",\n      \"label\": \"Increment res by 1\",\n      \"action\": \"ctx['res'] += 1\",\n      \"next\": 11\n    },\n    {\n      \"id\": 20,\n      \"type\": \"process\",\n      \"label\": \"Continue\",\n      \"action\": \"pass\",\n      \"next\": 11\n    },\n    {\n      \"id\": 18,\n      \"type\": \"end\",\n      \"label\": \"Output: res (number of beautiful substrings)\",\n      \"output\": \"ctx['res']\"\n    }\n  ]\n}\n```",
+ "original_code": "class Solution:\n    def beautifulSubstrings(self, s: str, k: int) -> int:\n        n = len(s)\n        cnt_0 = [0] * (n + 1)  # vowels count prefix\n        cnt_1 = [0] * (n + 1)  # consonants count prefix\n        res = 0\n        \n        # Initialize counts for each position\n        for i in range(n):\n            if s[i] in 'aeiou':\n                cnt_0[i + 1] = cnt_0[i] + 1\n            else:\n                cnt_1[i + 1] = cnt_1[i] + 1\n        \n        # Check all substrings\n        for i in range(n):\n            for j in range(i + 1, n + 1):\n                # Calculate vowel and consonant count in substring s[i:j]\n                vowels = cnt_0[j] - cnt_0[i]\n                consonants = cnt_1[j] - cnt_1[i]\n                \n                # Check if substring is beautiful\n                if vowels == consonants and (vowels * consonants) % k == 0:\n                    res += 1\n        \n        return res",
+ "ocr_data": {
+  "nodes": [
+   {
+    "node_id": 1,
+    "shape_type": "rectangle",
+    "raw_text": "Start",
+    "position": "top"
+   },
+   {
+    "node_id": 2,
+    "shape_type": "rectangle",
+    "raw_text": "Input: s (string), k (integer)",
+    "position": "top"
+   },
+   {
+    "node_id": 3,
+    "shape_type": "rectangle",
+    "raw_text": "Initialize cnt_0 = [0] * (len(s) + 1)",
+    "position": "middle"
+   },
+   {
+    "node_id": 4,
+    "shape_type": "rectangle",
+    "raw_text": "initialize cnt_1 = [0] * (len(s) + 1)",
+    "position": "middle"
+   },
+   {
+    "node_id": 5,
+    "shape_type": "rectangle",
+    "raw_text": "Loop through each character in s",
+    "position": "middle"
+   },
+   {
+    "node_id": 6,
+    "shape_type": "diamond",
+    "raw_text": "Is character c a vowel?",
+    "position": "middle"
+   },
+   {
+    "node_id": 7,
+    "shape_type": "rectangle",
+    "raw_text": "Update cnt_0[i + 1] = cnt_0[i] + 1",
+    "position": "middle"
+   },
+   {
+    "node_id": 8,
+    "shape_type": "rectangle",
+    "raw_text": "Update cnt_1[i + 1] = cnt_1[i] + 1",
+    "position": "middle"
+   },
+   {
+    "node_id": 9,
+    "shape_type": "rectangle",
+    "raw_text": "Update cnt_0[i + 1] = cnt_0[i] + 1",
+    "position": "middle"
+   },
+   {
+    "node_id": 10,
+    "shape_type": "rectangle",
+    "raw_text": "Update cnt_1[i + 1] = cnt_1[i] + 1",
+    "position": "middle"
+   },
+   {
+    "node_id": 11,
+    "shape_type": "rectangle",
+    "raw_text": "Initialize res = 0",
+    "position": "middle"
+   },
+   {
+    "node_id": 12,
+    "shape_type": "rectangle",
+    "raw_text": "Loop i from 0 to len(s) - 1",
+    "position": "middle"
+   },
+   {
+    "node_id": 13,
+    "shape_type": "rectangle",
+    "raw_text": "Loop j from i + 1 to len(s)",
+    "position": "middle"
+   },
+   {
+    "node_id": 14,
+    "shape_type": "rectangle",
+    "raw_text": "Output: res (number of beautiful substrings)",
+    "position": "bottom"
+   },
+   {
+    "node_id": 15,
+    "shape_type": "rectangle",
+    "raw_text": "Calculate v1 = cnt_0[i] - cnt_0[i]",
+    "position": "middle"
+   },
+   {
+    "node_id": 16,
+    "shape_type": "rectangle",
+    "raw_text": "Calculate v2 = cnt_1[i] - cnt_1[i]",
+    "position": "middle"
+   },
+   {
+    "node_id": 17,
+    "shape_type": "diamond",
+    "raw_text": "Is v1 == v2?",
+    "position": "middle"
+   },
+   {
+    "node_id": 18,
+    "shape_type": "diamond",
+    "raw_text": "Is (v1 * v2) % k == 0?",
+    "position": "middle"
+   },
+   {
+    "node_id": 19,
+    "shape_type": "rectangle",
+    "raw_text": "Increment res by 1",
+    "position": "middle"
+   },
+   {
+    "node_id": 20,
+    "shape_type": "rectangle",
+    "raw_text": "Continue",
+    "position": "middle"
+   }
+  ],
+  "edges": [
+   {
+    "from_node": 1,
+    "to_node": 2,
+    "label": ""
+   },
+   {
+    "from_node": 2,
+    "to_node": 3,
+    "label": ""
+   },
+   {
+    "from_node": 3,
+    "to_node": 4,
+    "label": ""
+   },
+   {
+    "from_node": 4,
+    "to_node": 5,
+    "label": ""
+   },
+   {
+    "from_node": 5,
+    "to_node": 6,
+    "label": ""
+   },
+   {
+    "from_node": 6,
+    "to_node": 7,
+    "label": "Yes"
+   },
+   {
+    "from_node": 6,
+    "to_node": 8,
+    "label": "No"
+   },
+   {
+    "from_node": 7,
+    "to_node": 9,
+    "label": ""
+   },
+   {
+    "from_node": 8,
+    "to_node": 10,
+    "label": ""
+   },
+   {
+    "from_node": 9,
+    "to_node": 11,
+    "label": ""
+   },
+   {
+    "from_node": 10,
+    "to_node": 12,
+    "label": ""
+   },
+   {
+    "from_node": 11,
+    "to_node": 13,
+    "label": ""
+   },
+   {
+    "from_node": 12,
+    "to_node": 14,
+    "label": ""
+   },
+   {
+    "from_node": 13,
+    "to_node": 15,
+    "label": ""
+   },
+   {
+    "from_node": 15,
+    "to_node": 16,
+    "label": ""
+   },
+   {
+    "from_node": 16,
+    "to_node": 17,
+    "label": ""
+   },
+   {
+    "from_node": 17,
+    "to_node": 18,
+    "label": "Yes"
+   },
+   {
+    "from_node": 17,
+    "to_node": 20,
+    "label": "No"
+   },
+   {
+    "from_node": 18,
+    "to_node": 19,
+    "label": "Yes"
+   },
+   {
+    "from_node": 18,
+    "to_node": 20,
+    "label": "No"
+   },
+   {
+    "from_node": 19,
+    "to_node": 13,
+    "label": ""
+   },
+   {
+    "from_node": 20,
+    "to_node": 13,
+    "label": ""
+   }
+  ],
+  "other_text": []
+ },
+ "test_result": {},
+ "status": "completed",
+ "fixed_ilr": null,
+ "modified_code": null,
+ "ilr_fix_log": "",
+ "bug_injected": ""
+}

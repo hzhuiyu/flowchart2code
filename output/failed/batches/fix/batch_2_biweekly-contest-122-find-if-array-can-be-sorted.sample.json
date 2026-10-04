@@ -1,0 +1,1546 @@
+{
+ "task_id": "biweekly-contest-122-find-if-array-can-be-sorted",
+ "dataset": "Algorithm",
+ "title": "find-if-array-can-be-sorted",
+ "difficulty": "Medium",
+ "prompt": "\"\"\"\nYou are given a 0-indexed array of positive integers nums.\nIn one operation, you can swap any two adjacent elements if they have the same number of set bits. You are allowed to do this operation any number of times (including zero).\nReturn true if you can sort the array, else return false.\n\nExample 1:\n\nInput: nums = [8,4,2,30,15]\nOutput: true\nExplanation: Let's look at the binary representation of every element. The numbers 2, 4, and 8 have one set bit each with binary representation \"10\", \"100\", and \"1000\" respectively. The numbers 15 and 30 have four set bits each with binary representation \"1111\" and \"11110\".\nWe can sort the array using 4 operations:\n- Swap nums[0] with nums[1]. This operation is valid because 8 and 4 have one set bit each. The array becomes [4,8,2,30,15].\n- Swap nums[1] with nums[2]. This operation is valid because 8 and 2 have one set bit each. The array becomes [4,2,8,30,15].\n- Swap nums[0] with nums[1]. This operation is valid because 4 and 2 have one set bit each. The array becomes [2,4,8,30,15].\n- Swap nums[3] with nums[4]. This operation is valid because 30 and 15 have four set bits each. The array becomes [2,4,8,15,30].\nThe array has become sorted, hence we return true.\nNote that there may be other sequences of operations which also sort the array.\n\nExample 2:\n\nInput: nums = [1,2,3,4,5]\nOutput: true\nExplanation: The array is already sorted, hence we return true.\n\nExample 3:\n\nInput: nums = [3,16,8,4,2]\nOutput: false\nExplanation: It can be shown that it is not possible to sort the input array using any number of operations.\n\n\nConstraints:\n\n1 <= nums.length <= 100\n1 <= nums[i] <= 28\n\"\"\"\nclass Solution:\n    def canSortArray(self, nums: List[int]) -> bool:\n        ",
+ "starter_code": "class Solution:\n    def canSortArray(self, nums: List[int]) -> bool:\n        ",
+ "entry_point": "",
+ "test": "\nmy_solution = Solution()\n\ntest_input = { \"nums\": [8,4,2,30,15] }\nassert my_solution.canSortArray(**test_input) == True\n\ntest_input = { \"nums\": [1,2,3,4,5] }\nassert my_solution.canSortArray(**test_input) == True\n\ntest_input = { \"nums\": [1] }\nassert my_solution.canSortArray(**test_input) == True\n\ntest_input = { \"nums\": [4] }\nassert my_solution.canSortArray(**test_input) == True\n\ntest_input = { \"nums\": [3,16,8,4,2] }\nassert my_solution.canSortArray(**test_input) == False\n\ntest_input = { \"nums\": [7] }\nassert my_solution.canSortArray(**test_input) == True\n\ntest_input = { \"nums\": [10] }\nassert my_solution.canSortArray(**test_input) == True\n\ntest_input = { \"nums\": [20,16] }\nassert my_solution.canSortArray(**test_input) == False\n\ntest_input = { \"nums\": [18] }\nassert my_solution.canSortArray(**test_input) == True\n\ntest_input = { \"nums\": [21,17] }\nassert my_solution.canSortArray(**test_input) == False\n\ntest_input = { \"nums\": [30] }\nassert my_solution.canSortArray(**test_input) == True\n\ntest_input = { \"nums\": [26,10] }\nassert my_solution.canSortArray(**test_input) == False\n\ntest_input = { \"nums\": [1,2] }\nassert my_solution.canSortArray(**test_input) == True\n\ntest_input = { \"nums\": [2,28,9] }\nassert my_solution.canSortArray(**test_input) == False\n\ntest_input = { \"nums\": [2,17] }\nassert my_solution.canSortArray(**test_input) == True\n\ntest_input = { \"nums\": [18,3,8] }\nassert my_solution.canSortArray(**test_input) == False\n\ntest_input = { \"nums\": [31,18,23] }\nassert my_solution.canSortArray(**test_input) == False\n\ntest_input = { \"nums\": [75,34,30] }\nassert my_solution.canSortArray(**test_input) == False\n\ntest_input = { \"nums\": [107,76,52] }\nassert my_solution.canSortArray(**test_input) == False\n\ntest_input = { \"nums\": [125,92,159] }\nassert my_solution.canSortArray(**test_input) == False\n\ntest_input = { \"nums\": [136,256,10] }\nassert my_solution.canSortArray(**test_input) == False\n\ntest_input = { \"nums\": [160,247,127] }\nassert my_solution.canSortArray(**test_input) == False\n\ntest_input = { \"nums\": [187,4,32] }\nassert my_solution.canSortArray(**test_input) == False\n\ntest_input = { \"nums\": [197,171,144] }\nassert my_solution.canSortArray(**test_input) == False\n\ntest_input = { \"nums\": [214,200,176] }\nassert my_solution.canSortArray(**test_input) == False\n\ntest_input = { \"nums\": [222,191,39] }\nassert my_solution.canSortArray(**test_input) == False\n\ntest_input = { \"nums\": [24,12] }\nassert my_solution.canSortArray(**test_input) == True\n\ntest_input = { \"nums\": [225,163,64] }\nassert my_solution.canSortArray(**test_input) == False\n\ntest_input = { \"nums\": [128,128] }\nassert my_solution.canSortArray(**test_input) == True\n\ntest_input = { \"nums\": [229,253,127] }\nassert my_solution.canSortArray(**test_input) == False\n\ntest_input = { \"nums\": [1,2,3] }\nassert my_solution.canSortArray(**test_input) == True\n\ntest_input = { \"nums\": [1,256,64] }\nassert my_solution.canSortArray(**test_input) == True\n\ntest_input = { \"nums\": [6,6,192] }\nassert my_solution.canSortArray(**test_input) == True\n\ntest_input = { \"nums\": [239,83,71] }\nassert my_solution.canSortArray(**test_input) == False\n\ntest_input = { \"nums\": [6,96,20] }\nassert my_solution.canSortArray(**test_input) == True\n\ntest_input = { \"nums\": [247,153,90] }\nassert my_solution.canSortArray(**test_input) == False\n\ntest_input = { \"nums\": [256,255,255] }\nassert my_solution.canSortArray(**test_input) == False\n\ntest_input = { \"nums\": [1,201,251,191] }\nassert my_solution.canSortArray(**test_input) == False\n\ntest_input = { \"nums\": [4,157,191,127] }\nassert my_solution.canSortArray(**test_input) == False\n\ntest_input = { \"nums\": [8,8,2] }\nassert my_solution.canSortArray(**test_input) == True\n\ntest_input = { \"nums\": [10,34,130] }\nassert my_solution.canSortArray(**test_input) == True\n\ntest_input = { \"nums\": [12,19,1,11] }\nassert my_solution.canSortArray(**test_input) == False\n\ntest_input = { \"nums\": [10,91,127] }\nassert my_solution.canSortArray(**test_input) == True\n\ntest_input = { \"nums\": [15,8,21,25] }\nassert my_solution.canSortArray(**test_input) == False\n\ntest_input = { \"nums\": [17,25,4,27] }\nassert my_solution.canSortArray(**test_input) == False\n\ntest_input = { \"nums\": [10,130,206] }\nassert my_solution.canSortArray(**test_input) == True\n\ntest_input = { \"nums\": [14,183,251] }\nassert my_solution.canSortArray(**test_input) == True\n\ntest_input = { \"nums\": [29,20,17,4] }\nassert my_solution.canSortArray(**test_input) == False\n\ntest_input = { \"nums\": [15,147,174] }\nassert my_solution.canSortArray(**test_input) == True\n\ntest_input = { \"nums\": [16,245,125] }\nassert my_solution.canSortArray(**test_input) == True\n\ntest_input = { \"nums\": [32,12,25,19] }\nassert my_solution.canSortArray(**test_input) == False\n\ntest_input = { \"nums\": [22,21,26] }\nassert my_solution.canSortArray(**test_input) == True\n\ntest_input = { \"nums\": [23,30,32] }\nassert my_solution.canSortArray(**test_input) == True\n\ntest_input = { \"nums\": [24,72,160] }\nassert my_solution.canSortArray(**test_input) == True\n\ntest_input = { \"nums\": [33,223,239] }\nassert my_solution.canSortArray(**test_input) == True\n\ntest_input = { \"nums\": [35,143,127,254] }\nassert my_solution.canSortArray(**test_input) == False\n\ntest_input = { \"nums\": [55,147,16,8] }\nassert my_solution.canSortArray(**test_input) == False\n\ntest_input = { \"nums\": [34,52,104] }\nassert my_solution.canSortArray(**test_input) == True\n\ntest_input = { \"nums\": [100,104,96,144] }\nassert my_solution.canSortArray(**test_input) == False\n\ntest_input = { \"nums\": [129,70,126,253] }\nassert my_solution.canSortArray(**test_input) == False\n\ntest_input = { \"nums\": [129,162,158,253] }\nassert my_solution.canSortArray(**test_input) == False\n\ntest_input = { \"nums\": [145,127,55,43] }\nassert my_solution.canSortArray(**test_input) == False\n\ntest_input = { \"nums\": [36,177,244] }\nassert my_solution.canSortArray(**test_input) == True\n\ntest_input = { \"nums\": [159,111,124,233] }\nassert my_solution.canSortArray(**test_input) == False\n\ntest_input = { \"nums\": [36,213,236] }\nassert my_solution.canSortArray(**test_input) == True\n\ntest_input = { \"nums\": [175,231,27,92] }\nassert my_solution.canSortArray(**test_input) == False\n\ntest_input = { \"nums\": [205,234,127,223] }\nassert my_solution.canSortArray(**test_input) == False\n\ntest_input = { \"nums\": [215,10,8,256] }\nassert my_solution.canSortArray(**test_input) == False\n\ntest_input = { \"nums\": [223,127,172,210] }\nassert my_solution.canSortArray(**test_input) == False\n\ntest_input = { \"nums\": [38,221,224] }\nassert my_solution.canSortArray(**test_input) == True\n\ntest_input = { \"nums\": [41,14,50] }\nassert my_solution.canSortArray(**test_input) == True\n\ntest_input = { \"nums\": [41,79,239] }\nassert my_solution.canSortArray(**test_input) == True\n\ntest_input = { \"nums\": [44,124,247] }\nassert my_solution.canSortArray(**test_input) == True\n\ntest_input = { \"nums\": [225,201,121,103] }\nassert my_solution.canSortArray(**test_input) == False\n\ntest_input = { \"nums\": [232,45,175,231] }\nassert my_solution.canSortArray(**test_input) == False\n\ntest_input = { \"nums\": [250,131,50,46] }\nassert my_solution.canSortArray(**test_input) == False\n\ntest_input = { \"nums\": [254,249,173,163] }\nassert my_solution.canSortArray(**test_input) == False\n\ntest_input = { \"nums\": [255,255,214,229] }\nassert my_solution.canSortArray(**test_input) == False\n\ntest_input = { \"nums\": [256,151,141,15] }\nassert my_solution.canSortArray(**test_input) == False\n\ntest_input = { \"nums\": [47,205,182] }\nassert my_solution.canSortArray(**test_input) == True\n\ntest_input = { \"nums\": [48,64,251] }\nassert my_solution.canSortArray(**test_input) == True\n\ntest_input = { \"nums\": [51,253,254] }\nassert my_solution.canSortArray(**test_input) == True\n\ntest_input = { \"nums\": [53,172,195] }\nassert my_solution.canSortArray(**test_input) == True\n\ntest_input = { \"nums\": [57,127,251] }\nassert my_solution.canSortArray(**test_input) == True\n\ntest_input = { \"nums\": [4,98,210,79,254] }\nassert my_solution.canSortArray(**test_input) == False\n\ntest_input = { \"nums\": [59,31,236] }\nassert my_solution.canSortArray(**test_input) == True\n\ntest_input = { \"nums\": [8,5,103,247,235] }\nassert my_solution.canSortArray(**test_input) == False\n\ntest_input = { \"nums\": [8,74,170,254,132] }\nassert my_solution.canSortArray(**test_input) == False\n\ntest_input = { \"nums\": [8,148,182,62,255] }\nassert my_solution.canSortArray(**test_input) == False\n\ntest_input = { \"nums\": [62,153,210] }\nassert my_solution.canSortArray(**test_input) == True\n\ntest_input = { \"nums\": [64,93,253] }\nassert my_solution.canSortArray(**test_input) == True\n\ntest_input = { \"nums\": [9,28,18,26,11] }\nassert my_solution.canSortArray(**test_input) == False\n\ntest_input = { \"nums\": [12,208,240,216,139] }\nassert my_solution.canSortArray(**test_input) == False\n\ntest_input = { \"nums\": [13,21,23,13,32] }\nassert my_solution.canSortArray(**test_input) == False\n\ntest_input = { \"nums\": [16,24,13,46,156] }\nassert my_solution.canSortArray(**test_input) == False\n\ntest_input = { \"nums\": [16,192,71,31,239] }\nassert my_solution.canSortArray(**test_input) == False\n\ntest_input = { \"nums\": [64,195,203] }\nassert my_solution.canSortArray(**test_input) == True\n\ntest_input = { \"nums\": [65,254,239] }\nassert my_solution.canSortArray(**test_input) == True\n\ntest_input = { \"nums\": [17,11,5,20,8] }\nassert my_solution.canSortArray(**test_input) == False\n\ntest_input = { \"nums\": [23,12,22,29,20] }\nassert my_solution.canSortArray(**test_input) == False",
+ "test_cases": [
+  {
+   "input": {
+    "args": [
+     [
+      8,
+      4,
+      2,
+      30,
+      15
+     ]
+    ]
+   },
+   "output": true,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      1,
+      2,
+      3,
+      4,
+      5
+     ]
+    ]
+   },
+   "output": true,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      1
+     ]
+    ]
+   },
+   "output": true,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      4
+     ]
+    ]
+   },
+   "output": true,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      3,
+      16,
+      8,
+      4,
+      2
+     ]
+    ]
+   },
+   "output": false,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      7
+     ]
+    ]
+   },
+   "output": true,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      10
+     ]
+    ]
+   },
+   "output": true,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      20,
+      16
+     ]
+    ]
+   },
+   "output": false,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      18
+     ]
+    ]
+   },
+   "output": true,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      21,
+      17
+     ]
+    ]
+   },
+   "output": false,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      30
+     ]
+    ]
+   },
+   "output": true,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      26,
+      10
+     ]
+    ]
+   },
+   "output": false,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      1,
+      2
+     ]
+    ]
+   },
+   "output": true,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      2,
+      28,
+      9
+     ]
+    ]
+   },
+   "output": false,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      2,
+      17
+     ]
+    ]
+   },
+   "output": true,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      18,
+      3,
+      8
+     ]
+    ]
+   },
+   "output": false,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      31,
+      18,
+      23
+     ]
+    ]
+   },
+   "output": false,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      75,
+      34,
+      30
+     ]
+    ]
+   },
+   "output": false,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      107,
+      76,
+      52
+     ]
+    ]
+   },
+   "output": false,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      125,
+      92,
+      159
+     ]
+    ]
+   },
+   "output": false,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      136,
+      256,
+      10
+     ]
+    ]
+   },
+   "output": false,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      160,
+      247,
+      127
+     ]
+    ]
+   },
+   "output": false,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      187,
+      4,
+      32
+     ]
+    ]
+   },
+   "output": false,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      197,
+      171,
+      144
+     ]
+    ]
+   },
+   "output": false,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      214,
+      200,
+      176
+     ]
+    ]
+   },
+   "output": false,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      222,
+      191,
+      39
+     ]
+    ]
+   },
+   "output": false,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      24,
+      12
+     ]
+    ]
+   },
+   "output": true,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      225,
+      163,
+      64
+     ]
+    ]
+   },
+   "output": false,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      128,
+      128
+     ]
+    ]
+   },
+   "output": true,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      229,
+      253,
+      127
+     ]
+    ]
+   },
+   "output": false,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      1,
+      2,
+      3
+     ]
+    ]
+   },
+   "output": true,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      1,
+      256,
+      64
+     ]
+    ]
+   },
+   "output": true,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      6,
+      6,
+      192
+     ]
+    ]
+   },
+   "output": true,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      239,
+      83,
+      71
+     ]
+    ]
+   },
+   "output": false,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      6,
+      96,
+      20
+     ]
+    ]
+   },
+   "output": true,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      247,
+      153,
+      90
+     ]
+    ]
+   },
+   "output": false,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      256,
+      255,
+      255
+     ]
+    ]
+   },
+   "output": false,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      1,
+      201,
+      251,
+      191
+     ]
+    ]
+   },
+   "output": false,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      4,
+      157,
+      191,
+      127
+     ]
+    ]
+   },
+   "output": false,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      8,
+      8,
+      2
+     ]
+    ]
+   },
+   "output": true,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      10,
+      34,
+      130
+     ]
+    ]
+   },
+   "output": true,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      12,
+      19,
+      1,
+      11
+     ]
+    ]
+   },
+   "output": false,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      10,
+      91,
+      127
+     ]
+    ]
+   },
+   "output": true,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      15,
+      8,
+      21,
+      25
+     ]
+    ]
+   },
+   "output": false,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      17,
+      25,
+      4,
+      27
+     ]
+    ]
+   },
+   "output": false,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      10,
+      130,
+      206
+     ]
+    ]
+   },
+   "output": true,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      14,
+      183,
+      251
+     ]
+    ]
+   },
+   "output": true,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      29,
+      20,
+      17,
+      4
+     ]
+    ]
+   },
+   "output": false,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      15,
+      147,
+      174
+     ]
+    ]
+   },
+   "output": true,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      16,
+      245,
+      125
+     ]
+    ]
+   },
+   "output": true,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      32,
+      12,
+      25,
+      19
+     ]
+    ]
+   },
+   "output": false,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      22,
+      21,
+      26
+     ]
+    ]
+   },
+   "output": true,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      23,
+      30,
+      32
+     ]
+    ]
+   },
+   "output": true,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      24,
+      72,
+      160
+     ]
+    ]
+   },
+   "output": true,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      33,
+      223,
+      239
+     ]
+    ]
+   },
+   "output": true,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      35,
+      143,
+      127,
+      254
+     ]
+    ]
+   },
+   "output": false,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      55,
+      147,
+      16,
+      8
+     ]
+    ]
+   },
+   "output": false,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      34,
+      52,
+      104
+     ]
+    ]
+   },
+   "output": true,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      100,
+      104,
+      96,
+      144
+     ]
+    ]
+   },
+   "output": false,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      129,
+      70,
+      126,
+      253
+     ]
+    ]
+   },
+   "output": false,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      129,
+      162,
+      158,
+      253
+     ]
+    ]
+   },
+   "output": false,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      145,
+      127,
+      55,
+      43
+     ]
+    ]
+   },
+   "output": false,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      36,
+      177,
+      244
+     ]
+    ]
+   },
+   "output": true,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      159,
+      111,
+      124,
+      233
+     ]
+    ]
+   },
+   "output": false,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      36,
+      213,
+      236
+     ]
+    ]
+   },
+   "output": true,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      175,
+      231,
+      27,
+      92
+     ]
+    ]
+   },
+   "output": false,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      205,
+      234,
+      127,
+      223
+     ]
+    ]
+   },
+   "output": false,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      215,
+      10,
+      8,
+      256
+     ]
+    ]
+   },
+   "output": false,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      223,
+      127,
+      172,
+      210
+     ]
+    ]
+   },
+   "output": false,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      38,
+      221,
+      224
+     ]
+    ]
+   },
+   "output": true,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      41,
+      14,
+      50
+     ]
+    ]
+   },
+   "output": true,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      41,
+      79,
+      239
+     ]
+    ]
+   },
+   "output": true,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      44,
+      124,
+      247
+     ]
+    ]
+   },
+   "output": true,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      225,
+      201,
+      121,
+      103
+     ]
+    ]
+   },
+   "output": false,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      232,
+      45,
+      175,
+      231
+     ]
+    ]
+   },
+   "output": false,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      250,
+      131,
+      50,
+      46
+     ]
+    ]
+   },
+   "output": false,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      254,
+      249,
+      173,
+      163
+     ]
+    ]
+   },
+   "output": false,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      255,
+      255,
+      214,
+      229
+     ]
+    ]
+   },
+   "output": false,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      256,
+      151,
+      141,
+      15
+     ]
+    ]
+   },
+   "output": false,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      47,
+      205,
+      182
+     ]
+    ]
+   },
+   "output": true,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      48,
+      64,
+      251
+     ]
+    ]
+   },
+   "output": true,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      51,
+      253,
+      254
+     ]
+    ]
+   },
+   "output": true,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      53,
+      172,
+      195
+     ]
+    ]
+   },
+   "output": true,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      57,
+      127,
+      251
+     ]
+    ]
+   },
+   "output": true,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      4,
+      98,
+      210,
+      79,
+      254
+     ]
+    ]
+   },
+   "output": false,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      59,
+      31,
+      236
+     ]
+    ]
+   },
+   "output": true,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      8,
+      5,
+      103,
+      247,
+      235
+     ]
+    ]
+   },
+   "output": false,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      8,
+      74,
+      170,
+      254,
+      132
+     ]
+    ]
+   },
+   "output": false,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      8,
+      148,
+      182,
+      62,
+      255
+     ]
+    ]
+   },
+   "output": false,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      62,
+      153,
+      210
+     ]
+    ]
+   },
+   "output": true,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      64,
+      93,
+      253
+     ]
+    ]
+   },
+   "output": true,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      9,
+      28,
+      18,
+      26,
+      11
+     ]
+    ]
+   },
+   "output": false,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      12,
+      208,
+      240,
+      216,
+      139
+     ]
+    ]
+   },
+   "output": false,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      13,
+      21,
+      23,
+      13,
+      32
+     ]
+    ]
+   },
+   "output": false,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      16,
+      24,
+      13,
+      46,
+      156
+     ]
+    ]
+   },
+   "output": false,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      16,
+      192,
+      71,
+      31,
+      239
+     ]
+    ]
+   },
+   "output": false,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      64,
+      195,
+      203
+     ]
+    ]
+   },
+   "output": true,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      65,
+      254,
+      239
+     ]
+    ]
+   },
+   "output": true,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      17,
+      11,
+      5,
+      20,
+      8
+     ]
+    ]
+   },
+   "output": false,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      23,
+      12,
+      22,
+      29,
+      20
+     ]
+    ]
+   },
+   "output": false,
+   "explanation": ""
+  }
+ ],
+ "original_ilr": "```json\n{\n  \"problem_id\": \"can_sort_array\",\n  \"nodes\": [\n    {\n      \"id\": 1,\n      \"type\": \"start\",\n      \"label\": \"Start\",\n      \"next\": 2\n    },\n    {\n      \"id\": 2,\n      \"type\": \"process\",\n      \"label\": \"Input: nums (List[int])\",\n      \"action\": \"ctx['nums'] = ctx['arg0']; ctx['a'] = []; ctx['s'] = []; ctx['t'] = []; ctx['cu'] = None; ctx['i'] = 0\",\n      \"next\": 3\n    },\n    {\n      \"id\": 3,\n      \"type\": \"process\",\n      \"label\": \"For each i in nums\",\n      \"action\": \"for i in ctx['nums']: ctx['a'].append(bin(i).count('1'))\",\n      \"next\": 4\n    },\n    {\n      \"id\": 4,\n      \"type\": \"process\",\n      \"label\": \"Initialize s = [], t = []\",\n      \"action\": \"ctx['s'] = []; ctx['t'] = []\",\n      \"next\": 5\n    },\n    {\n      \"id\": 5,\n      \"type\": \"process\",\n      \"label\": \"Set cu = a[0]\",\n      \"action\": \"ctx['cu'] = ctx['a'][0]\",\n      \"next\": 6\n    },\n    {\n      \"id\": 6,\n      \"type\": \"decision\",\n      \"label\": \"Is a[i] == cu?\",\n      \"logic\": \"ctx['a'][ctx['i']] == ctx['cu']\",\n      \"true_next\": 7,\n      \"false_next\": 8\n    },\n    {\n      \"id\": 7,\n      \"type\": \"process\",\n      \"label\": \"Insert nums[i] into t: bisect.insort(t, nums[i])\",\n      \"action\": \"import bisect; bisect.insort(ctx['t'], ctx['nums'][ctx['i']])\",\n      \"next\": 9\n    },\n    {\n      \"id\": 8,\n      \"type\": \"process\",\n      \"label\": \"Update cu = a[i]\",\n      \"action\": \"ctx['cu'] = ctx['a'][ctx['i']]\",\n      \"next\": 10\n    },\n    {\n      \"id\": 9,\n      \"type\": \"process\",\n      \"label\": \"Append t to s: s += t\",\n      \"action\": \"ctx['s'] += ctx['t']; ctx['t'] = []\",\n      \"next\": 11\n    },\n    {\n      \"id\": 10,\n      \"type\": \"process\",\n      \"label\": \"Append t to s: s += t\",\n      \"action\": \"ctx['s'] += ctx['t']; ctx['t'] = []\",\n      \"next\": 11\n    },\n    {\n      \"id\": 11,\n      \"type\": \"decision\",\n      \"label\": \"Is s == sorted(nums)?\",\n      \"logic\": \"ctx['s'] == sorted(ctx['nums'])\",\n      \"true_next\": 12,\n      \"false_next\": 13\n    },\n    {\n      \"id\": 12,\n      \"type\": \"end\",\n      \"label\": \"Output: True (array can be sorted)\",\n      \"output\": \"True\"\n    },\n    {\n      \"id\": 13,\n      \"type\": \"end\",\n      \"label\": \"Output: False (array cannot be sorted)\",\n      \"output\": \"False\"\n    }\n  ]\n}\n```",
+ "original_code": "class Solution:\n    def canSortArray(self, nums: List[int]) -> bool:\n        a = []\n        s = []\n        t = []\n        cu = None\n        i = 0\n        \n        for num in nums:\n            a.append(bin(num).count('1'))\n        \n        s = []\n        t = []\n        \n        if len(nums) > 0:\n            cu = a[0]\n            i = 0\n            \n            while i < len(nums):\n                if a[i] == cu:\n                    import bisect\n                    bisect.insort(t, nums[i])\n                else:\n                    cu = a[i]\n                    s += t\n                    t = []\n                i += 1\n            \n            s += t\n        \n        return s == sorted(nums)",
+ "ocr_data": {
+  "nodes": [
+   {
+    "node_id": 1,
+    "shape_type": "rectangle",
+    "raw_text": "Start",
+    "position": "top"
+   },
+   {
+    "node_id": 2,
+    "shape_type": "rectangle",
+    "raw_text": "Input: nums (List[int])",
+    "position": "middle"
+   },
+   {
+    "node_id": 3,
+    "shape_type": "rectangle",
+    "raw_text": "Initialize a = []",
+    "position": "middle"
+   },
+   {
+    "node_id": 4,
+    "shape_type": "rectangle",
+    "raw_text": "For each i in nums",
+    "position": "middle"
+   },
+   {
+    "node_id": 5,
+    "shape_type": "rectangle",
+    "raw_text": "Append count of set bits in i to a: a.append(bin(i).count('1'))",
+    "position": "middle"
+   },
+   {
+    "node_id": 6,
+    "shape_type": "rectangle",
+    "raw_text": "Initialize s = [], t = []",
+    "position": "middle"
+   },
+   {
+    "node_id": 7,
+    "shape_type": "rectangle",
+    "raw_text": "Set cu = a[0]",
+    "position": "middle"
+   },
+   {
+    "node_id": 8,
+    "shape_type": "rectangle",
+    "raw_text": "For i from 0 to length of nums - 1",
+    "position": "middle"
+   },
+   {
+    "node_id": 9,
+    "shape_type": "diamond",
+    "raw_text": "Is a[i] == cu?",
+    "position": "middle"
+   },
+   {
+    "node_id": 10,
+    "shape_type": "rectangle",
+    "raw_text": "Insert nums[i] into t: bisect.insort(t, nums[i])",
+    "position": "middle"
+   },
+   {
+    "node_id": 11,
+    "shape_type": "rectangle",
+    "raw_text": "Update cu = a[i]",
+    "position": "middle"
+   },
+   {
+    "node_id": 12,
+    "shape_type": "rectangle",
+    "raw_text": "Append t to s: s += t",
+    "position": "middle"
+   },
+   {
+    "node_id": 13,
+    "shape_type": "diamond",
+    "raw_text": "Is s == sorted(nums)?",
+    "position": "middle"
+   },
+   {
+    "node_id": 14,
+    "shape_type": "rectangle",
+    "raw_text": "Output: True (array can be sorted)",
+    "position": "middle"
+   },
+   {
+    "node_id": 15,
+    "shape_type": "rectangle",
+    "raw_text": "Output: False (array cannot be sorted)",
+    "position": "middle"
+   },
+   {
+    "node_id": 16,
+    "shape_type": "rectangle",
+    "raw_text": "Set t = [nums[i]]",
+    "position": "bottom"
+   }
+  ],
+  "edges": [
+   {
+    "from_node": 1,
+    "to_node": 2,
+    "label": ""
+   },
+   {
+    "from_node": 2,
+    "to_node": 3,
+    "label": ""
+   },
+   {
+    "from_node": 3,
+    "to_node": 4,
+    "label": ""
+   },
+   {
+    "from_node": 4,
+    "to_node": 5,
+    "label": ""
+   },
+   {
+    "from_node": 5,
+    "to_node": 6,
+    "label": ""
+   },
+   {
+    "from_node": 6,
+    "to_node": 7,
+    "label": ""
+   },
+   {
+    "from_node": 7,
+    "to_node": 8,
+    "label": ""
+   },
+   {
+    "from_node": 8,
+    "to_node": 9,
+    "label": ""
+   },
+   {
+    "from_node": 9,
+    "to_node": 10,
+    "label": "Yes"
+   },
+   {
+    "from_node": 9,
+    "to_node": 11,
+    "label": "No"
+   },
+   {
+    "from_node": 10,
+    "to_node": 8,
+    "label": ""
+   },
+   {
+    "from_node": 11,
+    "to_node": 12,
+    "label": ""
+   },
+   {
+    "from_node": 12,
+    "to_node": 13,
+    "label": ""
+   },
+   {
+    "from_node": 13,
+    "to_node": 14,
+    "label": "Yes"
+   },
+   {
+    "from_node": 13,
+    "to_node": 15,
+    "label": "No"
+   },
+   {
+    "from_node": 14,
+    "to_node": 16,
+    "label": ""
+   },
+   {
+    "from_node": 15,
+    "to_node": 16,
+    "label": ""
+   },
+   {
+    "from_node": 16,
+    "to_node": 8,
+    "label": ""
+   }
+  ],
+  "other_text": []
+ },
+ "test_result": {},
+ "status": "completed",
+ "fixed_ilr": null,
+ "modified_code": null,
+ "ilr_fix_log": "",
+ "bug_injected": ""
+}

@@ -1,0 +1,76 @@
+{
+  "total": 30,
+  "processed": 30,
+  "success": 13,
+  "failed": 17,
+  "success_rate": 43.333333333333336,
+  "iteration_stats": {
+    "1": {
+      "count": 30,
+      "avg_duration": 96.11772026220957,
+      "avg_total_tokens": 16540.266666666666,
+      "avg_prompt_tokens": 14714.2,
+      "avg_completion_tokens": 1826.0666666666666
+    },
+    "2": {
+      "count": 22,
+      "avg_duration": 91.18440250916915,
+      "avg_total_tokens": 6934.909090909091,
+      "avg_prompt_tokens": 5165.681818181818,
+      "avg_completion_tokens": 1769.2272727272727
+    },
+    "3": {
+      "count": 18,
+      "avg_duration": 135.33060966597662,
+      "avg_total_tokens": 7796.111111111111,
+      "avg_prompt_tokens": 5272.5,
+      "avg_completion_tokens": 2523.6111111111113
+    }
+  },
+  "avg_duration_by_iteration": {
+    "1": 96.11772026220957,
+    "2": 91.18440250916915,
+    "3": 135.33060966597662
+  },
+  "reflection_mode": "code_only",
+  "final_merge_eval": {
+    "samples_file": "output/Algorithm/Qwen-Qwen3-VL-30B-A3B-Instruct_text_image/samples.jsonl",
+    "reflection_dir": "output/Algorithm/Qwen-Qwen3-VL-30B-A3B-Instruct_text_image/reflection_code_only",
+    "output_file": "output/Algorithm/Qwen-Qwen3-VL-30B-A3B-Instruct_text_image/reflection_code_only/samples_reflection_merged.jsonl",
+    "merged_results_file": "output/Algorithm/Qwen-Qwen3-VL-30B-A3B-Instruct_text_image/reflection_code_only/samples_reflection_merged.jsonl_results.jsonl",
+    "results_txt": "output/Algorithm/Qwen-Qwen3-VL-30B-A3B-Instruct_text_image/reflection_code_only/results.txt",
+    "problem_file": "data/Algorithm/Algorithm.jsonl",
+    "merge_summary": {
+      "total_rows": 149,
+      "replaced_rows": 30,
+      "replaced_by_first_passed": 13,
+      "replaced_by_last_failed": 17,
+      "missing_generated_code": 0,
+      "selection_stats": {
+        "keep_original": 119,
+        "first_passed": 13,
+        "iter_3_failed": 17
+      }
+    },
+    "eval_result": {
+      "pass@1": 0.8859060402684564
+    },
+    "difficulty_summary": {
+      "Easy": {
+        "passed": 45.0,
+        "total": 45.0,
+        "rate": 1.0
+      },
+      "Medium": {
+        "passed": 67.0,
+        "total": 75.0,
+        "rate": 0.8933333333333333
+      },
+      "Hard": {
+        "passed": 20.0,
+        "total": 29.0,
+        "rate": 0.6896551724137931
+      }
+    }
+  }
+}

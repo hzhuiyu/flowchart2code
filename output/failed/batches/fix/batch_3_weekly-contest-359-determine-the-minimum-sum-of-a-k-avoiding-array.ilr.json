@@ -1,0 +1,119 @@
+{
+  "problem_id": "minimumSum",
+  "nodes": [
+    {
+      "id": 1,
+      "type": "start",
+      "label": "Start",
+      "next": 2
+    },
+    {
+      "id": 2,
+      "type": "process",
+      "label": "Input: k (integer), n (integer)",
+      "action": "ctx['k'] = ctx['arg0']; ctx['n'] = ctx['arg1']; ctx['ans'] = 0; ctx['i'] = 0",
+      "next": 3
+    },
+    {
+      "id": 3,
+      "type": "decision",
+      "label": "Is n > k // 2?",
+      "logic": "ctx['n'] > ctx['k'] // 2",
+      "true_next": 5,
+      "false_next": 12
+    },
+    {
+      "id": 5,
+      "type": "process",
+      "label": "Loop: i from 1 to k // 2",
+      "action": "ctx['i'] = 1; ctx['loop_end'] = ctx['k'] // 2",
+      "next": 6
+    },
+    {
+      "id": 6,
+      "type": "decision",
+      "label": "Is i <= k // 2?",
+      "logic": "ctx['i'] <= ctx['loop_end']",
+      "true_next": 7,
+      "false_next": 8
+    },
+    {
+      "id": 7,
+      "type": "process",
+      "label": "Add i to ans",
+      "action": "ctx['ans'] += ctx['i']; ctx['i'] += 1",
+      "next": 9
+    },
+    {
+      "id": 9,
+      "type": "process",
+      "label": "Continue loop",
+      "action": "pass",
+      "next": 6
+    },
+    {
+      "id": 8,
+      "type": "process",
+      "label": "Loop: i from 0 to n - (k // 2) - 1",
+      "action": "ctx['i'] = 0; ctx['loop_end'] = ctx['n'] - (ctx['k'] // 2) - 1",
+      "next": 10
+    },
+    {
+      "id": 10,
+      "type": "decision",
+      "label": "Is i <= n - (k // 2) - 1?",
+      "logic": "ctx['i'] <= ctx['loop_end']",
+      "true_next": 11,
+      "false_next": 16
+    },
+    {
+      "id": 11,
+      "type": "process",
+      "label": "Add (i + k) to ans",
+      "action": "ctx['ans'] += ctx['i'] + ctx['k']; ctx['i'] += 1",
+      "next": 13
+    },
+    {
+      "id": 13,
+      "type": "process",
+      "label": "Continue loop",
+      "action": "pass",
+      "next": 10
+    },
+    {
+      "id": 12,
+      "type": "process",
+      "label": "Loop: i from 1 to n",
+      "action": "ctx['i'] = 1; ctx['loop_end'] = ctx['n']",
+      "next": 14
+    },
+    {
+      "id": 14,
+      "type": "decision",
+      "label": "Is i <= n?",
+      "logic": "ctx['i'] <= ctx['loop_end']",
+      "true_next": 15,
+      "false_next": 16
+    },
+    {
+      "id": 15,
+      "type": "process",
+      "label": "Add i to ans",
+      "action": "ctx['ans'] += ctx['i']; ctx['i'] += 1",
+      "next": 17
+    },
+    {
+      "id": 17,
+      "type": "process",
+      "label": "Continue loop",
+      "action": "pass",
+      "next": 14
+    },
+    {
+      "id": 16,
+      "type": "end",
+      "label": "Output: ans",
+      "output": "ctx['ans']"
+    }
+  ]
+}

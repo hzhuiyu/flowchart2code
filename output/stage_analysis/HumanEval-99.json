@@ -1,0 +1,103 @@
+{
+  "problem_id": "closest_integer",
+  "nodes": [
+    {
+      "id": 1,
+      "type": "start",
+      "label": "Start",
+      "next": 2
+    },
+    {
+      "id": 2,
+      "type": "process",
+      "label": "Input: value (string)",
+      "action": "ctx['value'] = ctx['arg0']; ctx['num'] = None; ctx['res'] = None",
+      "next": 3
+    },
+    {
+      "id": 3,
+      "type": "decision",
+      "label": "Does value contain decimals?",
+      "logic": "('.' in ctx['value'])",
+      "true_next": 4,
+      "false_next": 11
+    },
+    {
+      "id": 4,
+      "type": "process",
+      "label": "Trim trailing zeros if needed",
+      "action": "ctx['value'] = ctx['value'].rstrip('0')",
+      "next": 5
+    },
+    {
+      "id": 5,
+      "type": "process",
+      "label": "Convert value to float: num = float(value)",
+      "action": "ctx['num'] = float(ctx['value'])",
+      "next": 6
+    },
+    {
+      "id": 6,
+      "type": "decision",
+      "label": "Is the second last character '.5'?",
+      "logic": "len(ctx['value']) >= 2 and ctx['value'][-2] == '.' and ctx['value'][-1] == '5'",
+      "true_next": 7,
+      "false_next": 8
+    },
+    {
+      "id": 7,
+      "type": "decision",
+      "label": "Is num > 0?",
+      "logic": "ctx['num'] > 0",
+      "true_next": 9,
+      "false_next": 10
+    },
+    {
+      "id": 8,
+      "type": "process",
+      "label": "Set res = int(round(num))",
+      "action": "ctx['res'] = int(round(ctx['num']))",
+      "next": 12
+    },
+    {
+      "id": 9,
+      "type": "process",
+      "label": "Set res = ceil(num)",
+      "action": "ctx['res'] = int(ctx['num']) + 1 if ctx['num'] > int(ctx['num']) else int(ctx['num'])",
+      "next": 12
+    },
+    {
+      "id": 10,
+      "type": "process",
+      "label": "Set res = floor(num)",
+      "action": "ctx['res'] = int(ctx['num'])",
+      "next": 12
+    },
+    {
+      "id": 11,
+      "type": "process",
+      "label": "Convert value to int: res = int(value)",
+      "action": "ctx['res'] = int(ctx['value'])",
+      "next": 12
+    },
+    {
+      "id": 12,
+      "type": "end",
+      "label": "Output: res (closest integer)",
+      "output": "ctx['res']"
+    }
+  ],
+  "task_id": "HumanEval-99",
+  "dataset": "HumanEval-V",
+  "result": "failed: Test 1",
+  "code": "def closest_integer(value):\n    num = None\n    res = None\n    value = value.rstrip('0')\n    if '.' in value:\n        num = float(value)\n        if len(value) >= 2 and value[-2] == '.' and value[-1] == '5':\n            if num > 0:\n                res = int(num) + 1 if num > int(num) else int(num)\n            else:\n                res = int(num) - 1 if num < int(num) else int(num)\n        else:\n            res = int(round(num))\n    else:\n        res = int(value)\n    return res",
+  "verification": {
+    "md_verdict": "ILR Error",
+    "actual_error_source": "both",
+    "ilr_verdict": "incorrect",
+    "code_vs_ilr": "deviates",
+    "md_correct": "partial",
+    "note": "MD 根因判对（ILR 节点10 的 action 是 int(num) 向零截断而非标签所称 floor，'-15.5' 得 -15≠-16，忠实实现挂 Test3），但漏了代码问题：生成代码把 rstrip('0') 无条件提到 '.' 判断之前（ILR 中节点4只在含小数点分支内），'10'→'1' 致 Test1 失败且 '0' 会 int('') 崩溃；其负数分支自行补 -1 反而修正了 ILR 的 -15.5 错误。",
+    "evidence": "忠实 ILR: candidate('-15.5')=-15≠-16，其余4条通过；生成代码 candidate('10')=1≠10（与 FAILURE RESULT 'Test 1' 一致），candidate('0') → ValueError: invalid literal for int() with base 10: ''"
+  }
+}

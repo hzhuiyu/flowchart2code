@@ -1,0 +1,76 @@
+{
+  "total": 54,
+  "processed": 54,
+  "success": 16,
+  "failed": 38,
+  "success_rate": 29.629629629629626,
+  "iteration_stats": {
+    "1": {
+      "count": 54,
+      "avg_duration": 39.12548259452537,
+      "avg_total_tokens": 13015.833333333334,
+      "avg_prompt_tokens": 10243.37037037037,
+      "avg_completion_tokens": 2772.462962962963
+    },
+    "2": {
+      "count": 45,
+      "avg_duration": 24.727821095784506,
+      "avg_total_tokens": 6152.511111111111,
+      "avg_prompt_tokens": 4305.4,
+      "avg_completion_tokens": 1847.111111111111
+    },
+    "3": {
+      "count": 40,
+      "avg_duration": 22.42164641022682,
+      "avg_total_tokens": 4871.175,
+      "avg_prompt_tokens": 3187.45,
+      "avg_completion_tokens": 1683.725
+    }
+  },
+  "avg_duration_by_iteration": {
+    "1": 39.12548259452537,
+    "2": 24.727821095784506,
+    "3": 22.42164641022682
+  },
+  "reflection_mode": "full",
+  "final_merge_eval": {
+    "samples_file": "output/Algorithm/qwen3-vl-8b-instruct-qwen3-vl-8b-instruct-text-ir/samples.jsonl",
+    "reflection_dir": "output/Algorithm/qwen3-vl-8b-instruct-qwen3-vl-8b-instruct-text-ir/reflection",
+    "output_file": "output/Algorithm/qwen3-vl-8b-instruct-qwen3-vl-8b-instruct-text-ir/reflection/samples_reflection_merged.jsonl",
+    "merged_results_file": "output/Algorithm/qwen3-vl-8b-instruct-qwen3-vl-8b-instruct-text-ir/reflection/samples_reflection_merged.jsonl_results.jsonl",
+    "results_txt": "output/Algorithm/qwen3-vl-8b-instruct-qwen3-vl-8b-instruct-text-ir/reflection/results.txt",
+    "problem_file": "data/Algorithm/Algorithm.jsonl",
+    "merge_summary": {
+      "total_rows": 149,
+      "replaced_rows": 54,
+      "replaced_by_first_passed": 16,
+      "replaced_by_last_failed": 38,
+      "missing_generated_code": 0,
+      "selection_stats": {
+        "iter_3_failed": 38,
+        "first_passed": 16,
+        "keep_original": 95
+      }
+    },
+    "eval_result": {
+      "pass@1": 0.7449664429530202
+    },
+    "difficulty_summary": {
+      "Easy": {
+        "passed": 39.0,
+        "total": 45.0,
+        "rate": 0.8666666666666667
+      },
+      "Medium": {
+        "passed": 58.0,
+        "total": 75.0,
+        "rate": 0.7733333333333333
+      },
+      "Hard": {
+        "passed": 14.0,
+        "total": 29.0,
+        "rate": 0.4827586206896552
+      }
+    }
+  }
+}

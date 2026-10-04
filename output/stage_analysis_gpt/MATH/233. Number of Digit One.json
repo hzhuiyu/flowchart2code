@@ -1,0 +1,276 @@
+{
+  "task_id": "233. Number of Digit One",
+  "dataset": "MATH",
+  "difficulty": "hard",
+  "title": null,
+  "result": "failed: ",
+  "ilr": "{\n  \"problem_id\": \"count_digit_one\",\n  \"functions\": [\n    {\n      \"name\": \"count\",\n      \"parameters\": [\"add\", \"n_digit\"],\n      \"entry_node\": 1,\n      \"nodes\": [\n        {\"id\": 1, \"type\": \"start\", \"label\": \"Start\", \"next\": 2},\n        {\"id\": 2, \"type\": \"process\", \"label\": \"Initialize c = 0\", \"action\": \"ctx['c'] = 0\", \"next\": 3},\n        {\"id\": 3, \"type\": \"decision\", \"label\": \"Loop through d in range(0, n_digit + 1)\", \"logic\": \"ctx['d'] < ctx['n_digit'] + 1\", \"true_next\": 4, \"false_next\": 7},\n        {\"id\": 4, \"type\": \"process\", \"label\": \"c += (d + add) * math.comb(n_digit, d) * 9^(n_digit - d)\", \"action\": \"ctx['c'] += (ctx['d'] + ctx['add']) * math.comb(ctx['n_digit'], ctx['d']) * pow(9, ctx['n_digit'] - ctx['d'])\", \"next\": 5},\n        {\"id\": 5, \"type\": \"process\", \"label\": \"d += 1\", \"action\": \"ctx['d'] += 1\", \"next\": 3},\n        {\"id\": 6, \"type\": \"return\", \"label\": \"Return c\", \"value\": \"ctx['c']\"},\n        {\"id\": 7, \"type\": \"return\", \"label\": \"Return c\", \"value\": \"ctx['c']\"}\n      ]\n    }\n  ],\n  \"nodes\": [\n    {\"id\": 1, \"type\": \"start\", \"label\": \"Start\", \"next\": 2},\n    {\"id\": 2, \"type\": \"process\", \"label\": \"Input: n (integer)\", \"action\": \"ctx['n'] = ctx['arg0']\", \"next\": 3},\n    {\"id\": 3, \"type\": \"process\", \"label\": \"Convert n to list of digits: n_list\", \"action\": \"ctx['n_list'] = list(map(int, str(ctx['n'])))\", \"next\": 4},\n    {\"id\": 4, \"type\": \"process\", \"label\": \"Initialize res = 0\", \"action\": \"ctx['res'] = 0\", \"next\": 5},\n    {\"id\": 5, \"type\": \"process\", \"label\": \"Initialize count_1 = 0\", \"action\": \"ctx['count_1'] = 0\", \"next\": 6},\n    {\"id\": 6, \"type\": \"decision\", \"label\": \"Loop through digits except last: for i in range(len(n_list)-1)\", \"logic\": \"ctx['i'] < len(ctx['n_list']) - 1\", \"true_next\": 7, \"false_next\": 13},\n    {\"id\": 7, \"type\": \"decision\", \"label\": \"Is n_list[i] == 1?\", \"logic\": \"ctx['n_list'][ctx['i']] == 1\", \"true_next\": 8, \"false_next\": 10},\n    {\"id\": 8, \"type\": \"call\", \"label\": \"res += call count with (count_1, len(n_list) - i - 1)\", \"function_name\": \"count\", \"arguments\": [\"ctx['count_1']\", \"len(ctx['n_list']) - ctx['i'] - 1\"], \"return_var\": \"temp_res\", \"next\": 9},\n    {\"id\": 9, \"type\": \"process\", \"label\": \"res += temp_res\", \"action\": \"ctx['res'] += ctx['temp_res']\", \"next\": 6},\n    {\"id\": 10, \"type\": \"decision\", \"label\": \"Is n_list[i] > 1?\", \"logic\": \"ctx['n_list'][ctx['i']] > 1\", \"true_next\": 11, \"false_next\": 6},\n    {\"id\": 11, \"type\": \"process\", \"label\": \"leading = n_list[i] - 1\", \"action\": \"ctx['leading'] = ctx['n_list'][ctx['i']] - 1\", \"next\": 12},\n    {\"id\": 12, \"type\": \"process\", \"label\": \"res += call count with (count_1, len(n_list)-i-1) * leading + count(count_1 + 1, len(n_list) - i - 1)\", \"action\": \"ctx['res'] += ctx['temp_res'] * ctx['leading'] + count(ctx['count_1'] + 1, len(ctx['n_list']) - ctx['i'] - 1)\", \"next\": 6},\n    {\"id\": 13, \"type\": \"decision\", \"label\": \"Is n_list[-1] >= 1?\", \"logic\": \"ctx['n_list'][-1] >= 1\", \"true_next\": 14, \"false_next\": 16},\n    {\"id\": 14, \"type\": \"process\", \"label\": \"res += 1\", \"action\": \"ctx['res'] += 1\", \"next\": 15},\n    {\"id\": 15, \"type\": \"end\", \"label\": \"Output: res\", \"output\": \"ctx['res']\"},\n    {\"id\": 16, \"type\": \"end\", \"label\": \"Output: res\", \"output\": \"ctx['res']\"}\n  ]\n}",
+  "code": "import math\n\ndef countDigitOne(n: int) -> int:\n    n_list = list(map(int, str(n)))\n    res = 0\n    count_1 = 0\n    \n    for i in range(len(n_list) - 1):\n        if n_list[i] == 1:\n            temp_res = count(count_1, len(n_list) - i - 1)\n            res += temp_res\n        elif n_list[i] > 1:\n            leading = n_list[i] - 1\n            temp_res = count(count_1, len(n_list) - i - 1)\n            res += temp_res * leading + count(count_1 + 1, len(n_list) - i - 1)\n    \n    if n_list[-1] >= 1:\n        res += 1\n    \n    return res\n\ndef count(add: int, n_digit: int) -> int:\n    c = 0\n    for d in range(n_digit + 1):\n        c += (d + add) * math.comb(n_digit, d) * pow(9, n_digit - d)\n    return c",
+  "prompt": "Given an integer n, count the total number of digit 1 appearing in all non-negative integers less than or equal to n.\n\n\n\nExample 1:\n\nInput: n = 13\nOutput: 6\nExample 2:\n\nInput: n = 0\nOutput: 0\n\n\nConstraints:\n\n0 <= n <= 109",
+  "test": "assert countDigitOne(13) == 6  # 1, 10, 11, 12, 13\nassert countDigitOne(0) == 0  # no '1' in range 0\nassert countDigitOne(5) == 1  # only 1\n\n# Boundary test cases\nassert countDigitOne(1) == 1  # only 1\nassert countDigitOne(10) == 2  # 1, 10\nassert countDigitOne(100) == 21  # 1, 10-19, 21, 31, 41, 51, 61, 71, 81, 91, 100\n\n# Large number test cases\nassert countDigitOne(1000) == 301  # large number with multiple '1's\nassert countDigitOne(9999) == 4000  # large number with multiple '1's\nassert countDigitOne(1000000000) == 900000001  # very large number",
+  "ocr_data": {
+    "nodes": [
+      {
+        "node_id": 1,
+        "shape_type": "rectangle",
+        "raw_text": "Start",
+        "position": "top"
+      },
+      {
+        "node_id": 2,
+        "shape_type": "rectangle",
+        "raw_text": "Input: n (integer)",
+        "position": "middle"
+      },
+      {
+        "node_id": 3,
+        "shape_type": "rectangle",
+        "raw_text": "Convert n to list of digits: n_list",
+        "position": "middle"
+      },
+      {
+        "node_id": 4,
+        "shape_type": "rectangle",
+        "raw_text": "Initialize res = 0",
+        "position": "middle"
+      },
+      {
+        "node_id": 5,
+        "shape_type": "rectangle",
+        "raw_text": "Initialize count_1 = 0",
+        "position": "middle"
+      },
+      {
+        "node_id": 6,
+        "shape_type": "rectangle",
+        "raw_text": "Loop through digits except last: for i in range(len(n_list)-1)",
+        "position": "middle"
+      },
+      {
+        "node_id": 7,
+        "shape_type": "diamond",
+        "raw_text": "Is n_list[i] == 1?",
+        "position": "middle"
+      },
+      {
+        "node_id": 8,
+        "shape_type": "rectangle",
+        "raw_text": "res += call count with (count_1, len(n_list) - i - 1)",
+        "position": "middle"
+      },
+      {
+        "node_id": 9,
+        "shape_type": "rectangle",
+        "raw_text": "count_1 += 1",
+        "position": "middle"
+      },
+      {
+        "node_id": 10,
+        "shape_type": "diamond",
+        "raw_text": "Is n_list[i] > 1?",
+        "position": "middle"
+      },
+      {
+        "node_id": 11,
+        "shape_type": "rectangle",
+        "raw_text": "leading = n_list[i] - 1",
+        "position": "middle"
+      },
+      {
+        "node_id": 12,
+        "shape_type": "rectangle",
+        "raw_text": "res += call count with (count_1, len(n_list)-i-1) * leading + count(count_1 + 1, len(n_list) - i - 1)",
+        "position": "middle"
+      },
+      {
+        "node_id": 13,
+        "shape_type": "rectangle",
+        "raw_text": "res += count_1 * (n_list[-1] + 1)",
+        "position": "middle"
+      },
+      {
+        "node_id": 14,
+        "shape_type": "diamond",
+        "raw_text": "Is n_list[-1] >= 1?",
+        "position": "middle"
+      },
+      {
+        "node_id": 15,
+        "shape_type": "rectangle",
+        "raw_text": "res += 1",
+        "position": "middle"
+      },
+      {
+        "node_id": 16,
+        "shape_type": "rectangle",
+        "raw_text": "Output: res",
+        "position": "bottom"
+      },
+      {
+        "node_id": 17,
+        "shape_type": "rectangle",
+        "raw_text": "Initialize c = 0",
+        "position": "top"
+      },
+      {
+        "node_id": 18,
+        "shape_type": "rectangle",
+        "raw_text": "Loop through d in range(0, n_digit + 1)",
+        "position": "top"
+      },
+      {
+        "node_id": 19,
+        "shape_type": "rectangle",
+        "raw_text": "c += (d + add) * math.comb(n_digit, d) * 9^(n_digit - d)",
+        "position": "top"
+      },
+      {
+        "node_id": 20,
+        "shape_type": "rectangle",
+        "raw_text": "Return c",
+        "position": "top"
+      },
+      {
+        "node_id": 21,
+        "shape_type": "rectangle",
+        "raw_text": "Function: count(add, n_digit)",
+        "position": "top"
+      }
+    ],
+    "edges": [
+      {
+        "from_node": 1,
+        "to_node": 2,
+        "label": ""
+      },
+      {
+        "from_node": 2,
+        "to_node": 3,
+        "label": ""
+      },
+      {
+        "from_node": 3,
+        "to_node": 4,
+        "label": ""
+      },
+      {
+        "from_node": 4,
+        "to_node": 5,
+        "label": ""
+      },
+      {
+        "from_node": 5,
+        "to_node": 6,
+        "label": ""
+      },
+      {
+        "from_node": 6,
+        "to_node": 7,
+        "label": ""
+      },
+      {
+        "from_node": 7,
+        "to_node": 8,
+        "label": "Yes"
+      },
+      {
+        "from_node": 8,
+        "to_node": 9,
+        "label": ""
+      },
+      {
+        "from_node": 9,
+        "to_node": 6,
+        "label": ""
+      },
+      {
+        "from_node": 7,
+        "to_node": 10,
+        "label": "No"
+      },
+      {
+        "from_node": 10,
+        "to_node": 11,
+        "label": "Yes"
+      },
+      {
+        "from_node": 11,
+        "to_node": 12,
+        "label": ""
+      },
+      {
+        "from_node": 12,
+        "to_node": 6,
+        "label": ""
+      },
+      {
+        "from_node": 10,
+        "to_node": 6,
+        "label": "No"
+      },
+      {
+        "from_node": 6,
+        "to_node": 13,
+        "label": "No"
+      },
+      {
+        "from_node": 13,
+        "to_node": 14,
+        "label": ""
+      },
+      {
+        "from_node": 14,
+        "to_node": 15,
+        "label": "Yes"
+      },
+      {
+        "from_node": 15,
+        "to_node": 16,
+        "label": ""
+      },
+      {
+        "from_node": 14,
+        "to_node": 16,
+        "label": "No"
+      },
+      {
+        "from_node": 17,
+        "to_node": 18,
+        "label": ""
+      },
+      {
+        "from_node": 18,
+        "to_node": 19,
+        "label": ""
+      },
+      {
+        "from_node": 19,
+        "to_node": 20,
+        "label": ""
+      },
+      {
+        "from_node": 18,
+        "to_node": 20,
+        "label": "No"
+      },
+      {
+        "from_node": 18,
+        "to_node": 17,
+        "label": "Yes"
+      }
+    ],
+    "other_text": [
+      "Function: count(add, n_digit)"
+    ]
+  },
+  "analysis": {
+    "ilr_verdict": "incorrect",
+    "ilr_issues": "OCR 边清楚显示 8→9(count_1 += 1)→6 与 6-No→13(res += count_1*(n_list[-1]+1))→14 均存在且接线正确，ILR 生成时把这两个节点整个丢弃（其节点9 只剩 res+=temp_res，末位枚举贡献消失），导致 count_1 恒为 0、末位贡献缺失。",
+    "code_vs_ilr": "faithful",
+    "code_issues": "代码与 ILR 逐句对应、无任何额外偏差，忠实实现了这个缺句的 ILR。",
+    "error_source": "ilr",
+    "ocr_contribution": "no",
+    "root_cause": "OCR 输入完好（两个节点的文本与连线俱在），ILR 生成阶段丢句是唯一根因；补回两句后全部测试可通过。",
+    "evidence": "实测代码 13→2（期望6）、10→1（期望2）、100→20（期望21）、1000→300（期望301）；补回 count_1+=1 与 res+=count_1*(末位+1) 后 13/10/100/1000/9999 = 6/2/21/301/4000 全部正确。"
+  }
+}

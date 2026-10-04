@@ -1,0 +1,26 @@
+{
+  "model_name": "gpt-5-mini_text_image",
+  "datasets": {
+    "LiveCodeBench": {
+      "hash": "4167ce9be5abf7ad521b98a477a687b2:0b096d41fa35d090ff28bb086d0fc596",
+      "status": "completed",
+      "completed": true,
+      "messages": [
+        {
+          "time": "2026-09-10 15:27:03",
+          "message": "Code generation failed: No module named 'openai'"
+        },
+        {
+          "time": "2026-09-10 16:49:43",
+          "message": "Code generation completed"
+        },
+        {
+          "time": "2026-09-10 16:49:54",
+          "message": "Evaluation completed: Pass@1 = 0.7905"
+        }
+      ],
+      "last_update": "2026-09-10 16:49:54"
+    }
+  },
+  "last_update": "2026-09-10 16:49:54"
+}

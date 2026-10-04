@@ -1,0 +1,96 @@
+{
+  "problem_id": "furthestDistanceFromOrigin",
+  "nodes": [
+    {
+      "id": 1,
+      "type": "start",
+      "label": "Start",
+      "next": 2
+    },
+    {
+      "id": 2,
+      "type": "process",
+      "label": "Input: moves (string)",
+      "action": "ctx['moves'] = ctx['arg0']; ctx['s'] = 0; ctx['t'] = 0; ctx['distance'] = 0",
+      "next": 3
+    },
+    {
+      "id": 3,
+      "type": "process",
+      "label": "Count L's: s = moves.count('L')",
+      "action": "ctx['s'] = ctx['moves'].count('L')",
+      "next": 4
+    },
+    {
+      "id": 4,
+      "type": "process",
+      "label": "Count R's: t = moves.count('R')",
+      "action": "ctx['t'] = ctx['moves'].count('R')",
+      "next": 5
+    },
+    {
+      "id": 5,
+      "type": "process",
+      "label": "Initialize distance = 0",
+      "action": "ctx['distance'] = 0",
+      "next": 6
+    },
+    {
+      "id": 6,
+      "type": "decision",
+      "label": "Loop through each character in moves",
+      "logic": "len(ctx['moves']) > 0",
+      "true_next": 7,
+      "false_next": 11
+    },
+    {
+      "id": 7,
+      "type": "decision",
+      "label": "Is character 'L'?",
+      "logic": "ctx['char'] == 'L'",
+      "true_next": 8,
+      "false_next": 9
+    },
+    {
+      "id": 8,
+      "type": "process",
+      "label": "Update distance: distance -= 1",
+      "action": "ctx['distance'] -= 1",
+      "next": 6
+    },
+    {
+      "id": 9,
+      "type": "decision",
+      "label": "Is character 'R'?",
+      "logic": "ctx['char'] == 'R'",
+      "true_next": 10,
+      "false_next": 6
+    },
+    {
+      "id": 10,
+      "type": "process",
+      "label": "Update distance: distance += 1",
+      "action": "ctx['distance'] += 1",
+      "next": 6
+    },
+    {
+      "id": 11,
+      "type": "return",
+      "label": "Return abs(distance)",
+      "value": "abs(ctx['distance'])"
+    }
+  ],
+  "task_id": "weekly-contest-360-furthest-point-from-origin",
+  "dataset": "Algorithm",
+  "result": "failed: ",
+  "code": "class Solution:\n    def furthestDistanceFromOrigin(self, moves: str) -> int:\n        s = moves.count('L')\n        t = moves.count('R')\n        distance = 0\n        \n        for char in moves:\n            if char == 'L':\n                distance -= 1\n            elif char == 'R':\n                distance += 1\n        \n        return abs(distance)",
+  "verification": {
+    "md_verdict": "ILR Error",
+    "actual_error_source": "ilr",
+    "ilr_verdict": "incorrect",
+    "code_vs_ilr": "faithful",
+    "md_correct": "yes",
+    "note": "ILR 循环条件 len(moves)>0 恒真且不消耗字符、char 未定义（KeyError），算法本身把 '_' 当原地震步并用 abs(distance) 收尾（OCR 中的 s/t 比较、按多数方向给 '_' 分配步数的节点 12-16 被丢弃）；代码补上 for 迭代但完整保留了'忽略 _'的错误算法。",
+    "evidence": "忠实执行 ILR：KeyError:'char'（补上迭代后 'L_RL__R'→0）。生成代码对 'L_RL__R' 返回 0（期望 3）、'_______' 返回 0（期望 7），100 测试 0 过。"
+  }
+}

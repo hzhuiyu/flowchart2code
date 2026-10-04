@@ -1,0 +1,30 @@
+{
+  "dataset": "HumanEval-V",
+  "model": "qwen3-vl-8b-instruct-qwen3-vl-8b-instruct",
+  "total_samples": 164,
+  "use_reflection": false,
+  "max_iterations": 0,
+  "pass_rate": {
+    "iteration_0": {
+      "passed": 136,
+      "total": 164,
+      "rate": 0.8293
+    }
+  },
+  "tokens": {
+    "total": {
+      "prompt_tokens": 1281233,
+      "completion_tokens": 113817,
+      "total_tokens": 1395050
+    },
+    "average_per_sample": {
+      "prompt_tokens": 7812.4,
+      "completion_tokens": 694.01,
+      "total_tokens": 8506.4
+    }
+  },
+  "time": {
+    "total_time": 4075.49,
+    "average_per_sample": 24.85
+  }
+}

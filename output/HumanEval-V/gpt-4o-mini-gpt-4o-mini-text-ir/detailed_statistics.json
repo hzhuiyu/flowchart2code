@@ -1,0 +1,30 @@
+{
+  "dataset": "HumanEval-V",
+  "model": "gpt-4o-mini-gpt-4o-mini-text-ir",
+  "total_samples": 164,
+  "use_reflection": false,
+  "max_iterations": 0,
+  "pass_rate": {
+    "iteration_0": {
+      "passed": 149,
+      "total": 164,
+      "rate": 0.9085
+    }
+  },
+  "tokens": {
+    "total": {
+      "prompt_tokens": 6371435,
+      "completion_tokens": 51148,
+      "total_tokens": 6422583
+    },
+    "average_per_sample": {
+      "prompt_tokens": 38850.21,
+      "completion_tokens": 311.88,
+      "total_tokens": 39162.09
+    }
+  },
+  "time": {
+    "total_time": 2785.23,
+    "average_per_sample": 16.98
+  }
+}

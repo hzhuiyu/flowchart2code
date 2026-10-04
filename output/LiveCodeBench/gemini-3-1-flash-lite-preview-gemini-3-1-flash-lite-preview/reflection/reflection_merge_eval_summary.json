@@ -1,0 +1,23 @@
+{
+  "samples_file": "../output/LiveCodeBench/gemini-3-1-flash-lite-preview-gemini-3-1-flash-lite-preview/samples.jsonl",
+  "reflection_dir": "../output/LiveCodeBench/gemini-3-1-flash-lite-preview-gemini-3-1-flash-lite-preview/reflection",
+  "output_file": "../output/LiveCodeBench/gemini-3-1-flash-lite-preview-gemini-3-1-flash-lite-preview/reflection/samples_reflection_merged.jsonl",
+  "merged_results_file": "../output/LiveCodeBench/gemini-3-1-flash-lite-preview-gemini-3-1-flash-lite-preview/reflection/samples_reflection_merged.jsonl_results.jsonl",
+  "results_txt": "../output/LiveCodeBench/gemini-3-1-flash-lite-preview-gemini-3-1-flash-lite-preview/reflection/results.txt",
+  "problem_file": "../data/LiveCodeBench/LiveCodeBench_merged.jsonl",
+  "merge_summary": {
+    "total_rows": 148,
+    "replaced_rows": 58,
+    "replaced_by_first_passed": 23,
+    "replaced_by_last_failed": 35,
+    "missing_generated_code": 0,
+    "selection_stats": {
+      "keep_original": 90,
+      "iter_3_failed": 35,
+      "first_passed": 23
+    }
+  },
+  "eval_result": {
+    "pass@1": 0.7635135135135135
+  }
+}

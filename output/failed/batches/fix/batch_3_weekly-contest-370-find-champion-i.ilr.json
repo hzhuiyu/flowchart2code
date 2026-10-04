@@ -1,0 +1,60 @@
+{
+  "problem_id": "findChampion",
+  "nodes": [
+    {
+      "id": 1,
+      "type": "start",
+      "label": "Start",
+      "next": 2
+    },
+    {
+      "id": 2,
+      "type": "process",
+      "label": "Input: grid (2D boolean matrix)",
+      "action": "ctx['grid'] = ctx['arg0']; ctx['n'] = len(ctx['grid']); ctx['i'] = 0",
+      "next": 3
+    },
+    {
+      "id": 3,
+      "type": "decision",
+      "label": "Is i < n?",
+      "logic": "ctx['i'] < ctx['n']",
+      "true_next": 4,
+      "false_next": 11
+    },
+    {
+      "id": 4,
+      "type": "process",
+      "label": "Check if team i beats every other team",
+      "action": "ctx['isChampion'] = True\nj = 0\nwhile j < ctx['n']:\n    if j != ctx['i'] and ctx['grid'][ctx['i']][j] != 1:\n        ctx['isChampion'] = False\n        break\n    j += 1",
+      "next": 9
+    },
+    {
+      "id": 9,
+      "type": "decision",
+      "label": "Is isChampion == True?",
+      "logic": "ctx['isChampion'] == True",
+      "true_next": 10,
+      "false_next": 12
+    },
+    {
+      "id": 12,
+      "type": "process",
+      "label": "i += 1, try next team",
+      "action": "ctx['i'] += 1",
+      "next": 3
+    },
+    {
+      "id": 10,
+      "type": "end",
+      "label": "Output: i (team i is the champion)",
+      "output": "ctx['i']"
+    },
+    {
+      "id": 11,
+      "type": "end",
+      "label": "Output: -1 (no champion found)",
+      "output": "-1"
+    }
+  ]
+}

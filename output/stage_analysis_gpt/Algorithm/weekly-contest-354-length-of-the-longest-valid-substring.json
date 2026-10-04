@@ -1,0 +1,148 @@
+{
+  "task_id": "weekly-contest-354-length-of-the-longest-valid-substring",
+  "dataset": "Algorithm",
+  "difficulty": "Hard",
+  "title": "length-of-the-longest-valid-substring",
+  "result": "failed: ",
+  "ilr": "{\n  \"problem_id\": \"longest_valid_substring\",\n  \"nodes\": [\n    {\"id\": 1, \"type\": \"start\", \"label\": \"Start\", \"next\": 2},\n    {\"id\": 2, \"type\": \"process\", \"label\": \"Input: word (string), forbidden (list of strings)\", \"action\": \"ctx['word']=ctx['arg0']; ctx['forbidden']=ctx['arg1']\", \"next\": 3},\n    {\"id\": 3, \"type\": \"process\", \"label\": \"Create forbidden_set from forbidden: forbidden_set = set(forbidden)\", \"action\": \"ctx['forbidden_set'] = set(ctx['forbidden'])\", \"next\": 4},\n    {\"id\": 4, \"type\": \"process\", \"label\": \"Initialize res = 0, right = length of word - 1\", \"action\": \"ctx['res'] = 0; ctx['right'] = len(ctx['word']) - 1\", \"next\": 5},\n    {\"id\": 5, \"type\": \"decision\", \"label\": \"Loop left from length of word - 1 to 0\", \"logic\": \"ctx['left'] = len(ctx['word']) - 1; ctx['left'] >= 0\", \"true_next\": 6, \"false_next\": 9},\n    {\"id\": 6, \"type\": \"process\", \"label\": \"For each left, loop k from left to min(left + 10, right + 1)\", \"action\": \"ctx['k'] = ctx['left']; while ctx['k'] <= min(ctx['left'] + 10, ctx['right'] + 1):\", \"next\": 7},\n    {\"id\": 7, \"type\": \"decision\", \"label\": \"Is word[left:k+1] in forbidden_set?\", \"logic\": \"ctx['word'][ctx['left']:ctx['k'] + 1] in ctx['forbidden_set']\", \"true_next\": 10, \"false_next\": 8},\n    {\"id\": 8, \"type\": \"process\", \"label\": \"End Loop: Update res = max(res, right - left + 1)\", \"action\": \"ctx['res'] = max(ctx['res'], ctx['right'] - ctx['left'] + 1)\", \"next\": 10},\n    {\"id\": 9, \"type\": \"process\", \"label\": \"Output: res (length of longest valid substring)\", \"action\": \"return ctx['res']\", \"next\": null},\n    {\"id\": 10, \"type\": \"process\", \"label\": \"Update right = k - 1\", \"action\": \"ctx['right'] = ctx['k'] - 1\", \"next\": 5}\n  ]\n}",
+  "code": "from typing import List\n\nclass Solution:\n    def longestValidSubstring(self, word: str, forbidden: List[str]) -> int:\n        forbidden_set = set(forbidden)\n        res = 0\n        right = len(word) - 1\n        \n        for left in range(len(word) - 1, -1, -1):\n            k = left\n            while k <= min(left + 10, right + 1):\n                if word[left:k + 1] in forbidden_set:\n                    break\n                res = max(res, right - left + 1)\n                k += 1\n            right = k - 1\n        \n        return res",
+  "prompt": "\"\"\"\nYou are given a string word and an array of strings forbidden.\n\nA string is called valid if none of its substrings are present in forbidden.\n\nReturn the length of the longest valid substring of the string word.\n\nA substring is a contiguous sequence of characters in a string, possibly empty.\n\nExample 1:\n\nInput: word = \"cbaaaabc\", forbidden = [\"aaa\",\"cb\"]\nOutput: 4\nExplanation: There are 11 valid substrings in word: \"c\", \"b\", \"a\", \"ba\", \"aa\", \"bc\", \"baa\", \"aab\", \"ab\", \"abc\" and \"aabc\". The length of the longest valid substring is 4.\nIt can be shown that all other substrings contain either \"aaa\" or \"cb\" as a substring.\n\nExample 2:\n\nInput: word = \"leetcode\", forbidden = [\"de\",\"le\",\"e\"]\nOutput: 4\nExplanation: There are 11 valid substrings in word: \"l\", \"t\", \"c\", \"o\", \"d\", \"tc\", \"co\", \"od\", \"tco\", \"cod\", and \"tcod\". The length of the longest valid substring is 4.\nIt can be shown that all other substrings contain either \"de\", \"le\", or \"e\" as a substring.\n\n\nConstraints:\n\n * 1 <= word.length <= 105\n * word consists only of lowercase English letters.\n * 1 <= forbidden.length <= 105\n * 1 <= forbidden[i].length <= 10\n * forbidden[i] consists only of lowercase English letters.\n\"\"\"\nclass Solution:\n    def longestValidSubstring(self, word: str, forbidden: List[str]) -> int:\n        ",
+  "test": "\nmy_solution = Solution()\n\ntest_input = { \"word\": \"cbaaaabc\", \"forbidden\": [\"aaa\",\"cb\"] }\nassert my_solution.longestValidSubstring(**test_input) == 4\n\ntest_input = { \"word\": \"leetcode\", \"forbidden\": [\"de\",\"le\",\"e\"] }\nassert my_solution.longestValidSubstring(**test_input) == 4\n\ntest_input = { \"word\": \"a\", \"forbidden\": [\"n\"] }\nassert my_solution.longestValidSubstring(**test_input) == 1\n\ntest_input = { \"word\": \"a\", \"forbidden\": [\"s\"] }\nassert my_solution.longestValidSubstring(**test_input) == 1\n\ntest_input = { \"word\": \"a\", \"forbidden\": [\"a\"] }\nassert my_solution.longestValidSubstring(**test_input) == 0\n\ntest_input = { \"word\": \"b\", \"forbidden\": [\"g\"] }\nassert my_solution.longestValidSubstring(**test_input) == 1\n\ntest_input = { \"word\": \"b\", \"forbidden\": [\"t\"] }\nassert my_solution.longestValidSubstring(**test_input) == 1\n\ntest_input = { \"word\": \"b\", \"forbidden\": [\"b\"] }\nassert my_solution.longestValidSubstring(**test_input) == 0\n\ntest_input = { \"word\": \"c\", \"forbidden\": [\"k\"] }\nassert my_solution.longestValidSubstring(**test_input) == 1\n\ntest_input = { \"word\": \"c\", \"forbidden\": [\"s\"] }\nassert my_solution.longestValidSubstring(**test_input) == 1\n\ntest_input = { \"word\": \"c\", \"forbidden\": [\"c\"] }\nassert my_solution.longestValidSubstring(**test_input) == 0\n\ntest_input = { \"word\": \"d\", \"forbidden\": [\"h\"] }\nassert my_solution.longestValidSubstring(**test_input) == 1\n\ntest_input = { \"word\": \"d\", \"forbidden\": [\"n\"] }\nassert my_solution.longestValidSubstring(**test_input) == 1\n\ntest_input = { \"word\": \"d\", \"forbidden\": [\"d\"] }\nassert my_solution.longestValidSubstring(**test_input) == 0\n\ntest_input = { \"word\": \"e\", \"forbidden\": [\"s\"] }\nassert my_solution.longestValidSubstring(**test_input) == 1\n\ntest_input = { \"word\": \"e\", \"forbidden\": [\"e\"] }\nassert my_solution.longestValidSubstring(**test_input) == 0\n\ntest_input = { \"word\": \"f\", \"forbidden\": [\"b\"] }\nassert my_solution.longestValidSubstring(**test_input) == 1\n\ntest_input = { \"word\": \"f\", \"forbidden\": [\"s\"] }\nassert my_solution.longestValidSubstring(**test_input) == 1\n\ntest_input = { \"word\": \"f\", \"forbidden\": [\"f\"] }\nassert my_solution.longestValidSubstring(**test_input) == 0\n\ntest_input = { \"word\": \"g\", \"forbidden\": [\"r\"] }\nassert my_solution.longestValidSubstring(**test_input) == 1\n\ntest_input = { \"word\": \"g\", \"forbidden\": [\"y\"] }\nassert my_solution.longestValidSubstring(**test_input) == 1\n\ntest_input = { \"word\": \"g\", \"forbidden\": [\"g\"] }\nassert my_solution.longestValidSubstring(**test_input) == 0\n\ntest_input = { \"word\": \"h\", \"forbidden\": [\"v\"] }\nassert my_solution.longestValidSubstring(**test_input) == 1\n\ntest_input = { \"word\": \"h\", \"forbidden\": [\"b\"] }\nassert my_solution.longestValidSubstring(**test_input) == 1\n\ntest_input = { \"word\": \"h\", \"forbidden\": [\"h\"] }\nassert my_solution.longestValidSubstring(**test_input) == 0\n\ntest_input = { \"word\": \"i\", \"forbidden\": [\"k\"] }\nassert my_solution.longestValidSubstring(**test_input) == 1\n\ntest_input = { \"word\": \"i\", \"forbidden\": [\"y\"] }\nassert my_solution.longestValidSubstring(**test_input) == 1\n\ntest_input = { \"word\": \"i\", \"forbidden\": [\"i\"] }\nassert my_solution.longestValidSubstring(**test_input) == 0\n\ntest_input = { \"word\": \"j\", \"forbidden\": [\"v\"] }\nassert my_solution.longestValidSubstring(**test_input) == 1\n\ntest_input = { \"word\": \"j\", \"forbidden\": [\"u\"] }\nassert my_solution.longestValidSubstring(**test_input) == 1\n\ntest_input = { \"word\": \"j\", \"forbidden\": [\"j\"] }\nassert my_solution.longestValidSubstring(**test_input) == 0\n\ntest_input = { \"word\": \"k\", \"forbidden\": [\"z\"] }\nassert my_solution.longestValidSubstring(**test_input) == 1\n\ntest_input = { \"word\": \"k\", \"forbidden\": [\"o\"] }\nassert my_solution.longestValidSubstring(**test_input) == 1\n\ntest_input = { \"word\": \"k\", \"forbidden\": [\"k\"] }\nassert my_solution.longestValidSubstring(**test_input) == 0\n\ntest_input = { \"word\": \"l\", \"forbidden\": [\"i\"] }\nassert my_solution.longestValidSubstring(**test_input) == 1\n\ntest_input = { \"word\": \"l\", \"forbidden\": [\"r\"] }\nassert my_solution.longestValidSubstring(**test_input) == 1\n\ntest_input = { \"word\": \"l\", \"forbidden\": [\"l\"] }\nassert my_solution.longestValidSubstring(**test_input) == 0\n\ntest_input = { \"word\": \"m\", \"forbidden\": [\"s\"] }\nassert my_solution.longestValidSubstring(**test_input) == 1\n\ntest_input = { \"word\": \"m\", \"forbidden\": [\"g\"] }\nassert my_solution.longestValidSubstring(**test_input) == 1\n\ntest_input = { \"word\": \"m\", \"forbidden\": [\"m\"] }\nassert my_solution.longestValidSubstring(**test_input) == 0\n\ntest_input = { \"word\": \"n\", \"forbidden\": [\"e\"] }\nassert my_solution.longestValidSubstring(**test_input) == 1\n\ntest_input = { \"word\": \"n\", \"forbidden\": [\"i\"] }\nassert my_solution.longestValidSubstring(**test_input) == 1\n\ntest_input = { \"word\": \"n\", \"forbidden\": [\"n\"] }\nassert my_solution.longestValidSubstring(**test_input) == 0\n\ntest_input = { \"word\": \"o\", \"forbidden\": [\"j\"] }\nassert my_solution.longestValidSubstring(**test_input) == 1\n\ntest_input = { \"word\": \"o\", \"forbidden\": [\"f\"] }\nassert my_solution.longestValidSubstring(**test_input) == 1\n\ntest_input = { \"word\": \"o\", \"forbidden\": [\"o\"] }\nassert my_solution.longestValidSubstring(**test_input) == 0\n\ntest_input = { \"word\": \"p\", \"forbidden\": [\"z\"] }\nassert my_solution.longestValidSubstring(**test_input) == 1\n\ntest_input = { \"word\": \"p\", \"forbidden\": [\"i\"] }\nassert my_solution.longestValidSubstring(**test_input) == 1\n\ntest_input = { \"word\": \"p\", \"forbidden\": [\"p\"] }\nassert my_solution.longestValidSubstring(**test_input) == 0\n\ntest_input = { \"word\": \"q\", \"forbidden\": [\"j\"] }\nassert my_solution.longestValidSubstring(**test_input) == 1\n\ntest_input = { \"word\": \"q\", \"forbidden\": [\"z\"] }\nassert my_solution.longestValidSubstring(**test_input) == 1\n\ntest_input = { \"word\": \"q\", \"forbidden\": [\"q\"] }\nassert my_solution.longestValidSubstring(**test_input) == 0\n\ntest_input = { \"word\": \"r\", \"forbidden\": [\"v\"] }\nassert my_solution.longestValidSubstring(**test_input) == 1\n\ntest_input = { \"word\": \"r\", \"forbidden\": [\"p\"] }\nassert my_solution.longestValidSubstring(**test_input) == 1\n\ntest_input = { \"word\": \"r\", \"forbidden\": [\"r\"] }\nassert my_solution.longestValidSubstring(**test_input) == 0\n\ntest_input = { \"word\": \"s\", \"forbidden\": [\"m\"] }\nassert my_solution.longestValidSubstring(**test_input) == 1\n\ntest_input = { \"word\": \"s\", \"forbidden\": [\"x\"] }\nassert my_solution.longestValidSubstring(**test_input) == 1\n\ntest_input = { \"word\": \"s\", \"forbidden\": [\"s\"] }\nassert my_solution.longestValidSubstring(**test_input) == 0\n\ntest_input = { \"word\": \"t\", \"forbidden\": [\"v\"] }\nassert my_solution.longestValidSubstring(**test_input) == 1\n\ntest_input = { \"word\": \"t\", \"forbidden\": [\"m\"] }\nassert my_solution.longestValidSubstring(**test_input) == 1\n\ntest_input = { \"word\": \"t\", \"forbidden\": [\"t\"] }\nassert my_solution.longestValidSubstring(**test_input) == 0\n\ntest_input = { \"word\": \"u\", \"forbidden\": [\"l\"] }\nassert my_solution.longestValidSubstring(**test_input) == 1\n\ntest_input = { \"word\": \"u\", \"forbidden\": [\"n\"] }\nassert my_solution.longestValidSubstring(**test_input) == 1\n\ntest_input = { \"word\": \"u\", \"forbidden\": [\"u\"] }\nassert my_solution.longestValidSubstring(**test_input) == 0\n\ntest_input = { \"word\": \"v\", \"forbidden\": [\"o\"] }\nassert my_solution.longestValidSubstring(**test_input) == 1\n\ntest_input = { \"word\": \"v\", \"forbidden\": [\"v\"] }\nassert my_solution.longestValidSubstring(**test_input) == 0\n\ntest_input = { \"word\": \"w\", \"forbidden\": [\"w\"] }\nassert my_solution.longestValidSubstring(**test_input) == 0\n\ntest_input = { \"word\": \"w\", \"forbidden\": [\"s\"] }\nassert my_solution.longestValidSubstring(**test_input) == 1\n\ntest_input = { \"word\": \"x\", \"forbidden\": [\"r\"] }\nassert my_solution.longestValidSubstring(**test_input) == 1\n\ntest_input = { \"word\": \"x\", \"forbidden\": [\"q\"] }\nassert my_solution.longestValidSubstring(**test_input) == 1\n\ntest_input = { \"word\": \"x\", \"forbidden\": [\"x\"] }\nassert my_solution.longestValidSubstring(**test_input) == 0\n\ntest_input = { \"word\": \"y\", \"forbidden\": [\"w\"] }\nassert my_solution.longestValidSubstring(**test_input) == 1\n\ntest_input = { \"word\": \"y\", \"forbidden\": [\"t\"] }\nassert my_solution.longestValidSubstring(**test_input) == 1\n\ntest_input = { \"word\": \"y\", \"forbidden\": [\"y\"] }\nassert my_solution.longestValidSubstring(**test_input) == 0\n\ntest_input = { \"word\": \"z\", \"forbidden\": [\"l\"] }\nassert my_solution.longestValidSubstring(**test_input) == 1\n\ntest_input = { \"word\": \"z\", \"forbidden\": [\"o\"] }\nassert my_solution.longestValidSubstring(**test_input) == 1\n\ntest_input = { \"word\": \"z\", \"forbidden\": [\"z\"] }\nassert my_solution.longestValidSubstring(**test_input) == 0\n\ntest_input = { \"word\": \"acbc\", \"forbidden\": [\"cbc\",\"acb\",\"acb\",\"acbc\"] }\nassert my_solution.longestValidSubstring(**test_input) == 2\n\ntest_input = { \"word\": \"cabba\", \"forbidden\": [\"aaba\",\"abba\",\"acabb\",\"cabb\"] }\nassert my_solution.longestValidSubstring(**test_input) == 3\n\ntest_input = { \"word\": \"bbc\", \"forbidden\": [\"baba\",\"babc\",\"bbc\",\"bbc\"] }\nassert my_solution.longestValidSubstring(**test_input) == 2\n\ntest_input = { \"word\": \"acb\", \"forbidden\": [\"acb\",\"caccc\",\"baaab\",\"baa\"] }\nassert my_solution.longestValidSubstring(**test_input) == 2\n\ntest_input = { \"word\": \"aaac\", \"forbidden\": [\"aaac\",\"aac\",\"aaa\",\"aaac\"] }\nassert my_solution.longestValidSubstring(**test_input) == 2\n\ntest_input = { \"word\": \"ca\", \"forbidden\": [\"ababa\",\"ca\",\"caac\",\"babb\"] }\nassert my_solution.longestValidSubstring(**test_input) == 1\n\ntest_input = { \"word\": \"babbb\", \"forbidden\": [\"bbb\",\"aacb\",\"babbb\",\"bcab\"] }\nassert my_solution.longestValidSubstring(**test_input) == 4\n\ntest_input = { \"word\": \"cbbba\", \"forbidden\": [\"bca\",\"cbbba\",\"acbcc\",\"aabb\"] }\nassert my_solution.longestValidSubstring(**test_input) == 4\n\ntest_input = { \"word\": \"abab\", \"forbidden\": [\"aab\",\"abab\",\"cacb\",\"bab\"] }\nassert my_solution.longestValidSubstring(**test_input) == 3\n\ntest_input = { \"word\": \"cbab\", \"forbidden\": [\"bbcc\",\"aaccc\",\"cbab\",\"babca\"] }\nassert my_solution.longestValidSubstring(**test_input) == 3\n\ntest_input = { \"word\": \"caaa\", \"forbidden\": [\"aaa\",\"cbb\",\"aaa\",\"caaa\"] }\nassert my_solution.longestValidSubstring(**test_input) == 3\n\ntest_input = { \"word\": \"baa\", \"forbidden\": [\"aaab\",\"bbaa\",\"babac\",\"baa\"] }\nassert my_solution.longestValidSubstring(**test_input) == 2\n\ntest_input = { \"word\": \"cbcc\", \"forbidden\": [\"cbcc\",\"baa\",\"bbba\",\"cac\"] }\nassert my_solution.longestValidSubstring(**test_input) == 3\n\ntest_input = { \"word\": \"cac\", \"forbidden\": [\"cccaa\",\"baaca\",\"cac\",\"cac\"] }\nassert my_solution.longestValidSubstring(**test_input) == 2\n\ntest_input = { \"word\": \"cabab\", \"forbidden\": [\"cabab\",\"abab\",\"cabab\",\"abab\"] }\nassert my_solution.longestValidSubstring(**test_input) == 4\n\ntest_input = { \"word\": \"caa\", \"forbidden\": [\"caa\",\"bba\",\"acc\",\"bcabb\"] }\nassert my_solution.longestValidSubstring(**test_input) == 2\n\ntest_input = { \"word\": \"ba\", \"forbidden\": [\"ba\",\"ba\",\"cab\",\"cbcac\"] }\nassert my_solution.longestValidSubstring(**test_input) == 1\n\ntest_input = { \"word\": \"bbc\", \"forbidden\": [\"baca\",\"bbc\",\"bbc\",\"caa\"] }\nassert my_solution.longestValidSubstring(**test_input) == 2\n\ntest_input = { \"word\": \"bbb\", \"forbidden\": [\"cbaab\",\"bbb\",\"bbb\",\"bab\"] }\nassert my_solution.longestValidSubstring(**test_input) == 2\n\ntest_input = { \"word\": \"bbccc\", \"forbidden\": [\"ccc\",\"bcba\",\"bcc\",\"bcc\"] }\nassert my_solution.longestValidSubstring(**test_input) == 3\n\ntest_input = { \"word\": \"bcac\", \"forbidden\": [\"bcac\",\"caca\",\"bcac\",\"bca\"] }\nassert my_solution.longestValidSubstring(**test_input) == 3\n\ntest_input = { \"word\": \"ab\", \"forbidden\": [\"aca\",\"cabcc\",\"caba\",\"ab\"] }\nassert my_solution.longestValidSubstring(**test_input) == 1\n\ntest_input = { \"word\": \"caa\", \"forbidden\": [\"bab\",\"babbb\",\"abbaa\",\"caa\"] }\nassert my_solution.longestValidSubstring(**test_input) == 2",
+  "ocr_data": {
+    "nodes": [
+      {
+        "node_id": 1,
+        "shape_type": "rectangle",
+        "raw_text": "Start",
+        "position": "top"
+      },
+      {
+        "node_id": 2,
+        "shape_type": "rectangle",
+        "raw_text": "Input: word (string), forbidden (list of strings)",
+        "position": "middle"
+      },
+      {
+        "node_id": 3,
+        "shape_type": "rectangle",
+        "raw_text": "Create forbidden_set from forbidden: forbidden_set = set(forbidden)",
+        "position": "middle"
+      },
+      {
+        "node_id": 4,
+        "shape_type": "rectangle",
+        "raw_text": "Initialize res = 0, right = length of word - 1",
+        "position": "middle"
+      },
+      {
+        "node_id": 5,
+        "shape_type": "diamond",
+        "raw_text": "Loop left from length of word - 1 to 0",
+        "position": "middle"
+      },
+      {
+        "node_id": 6,
+        "shape_type": "rectangle",
+        "raw_text": "For each left, loop k from left to min(left + 10, right + 1)",
+        "position": "middle"
+      },
+      {
+        "node_id": 7,
+        "shape_type": "diamond",
+        "raw_text": "Is word[left:k+1] in forbidden_set?",
+        "position": "middle"
+      },
+      {
+        "node_id": 8,
+        "shape_type": "rectangle",
+        "raw_text": "End Loop: Update res = max(res, right - left + 1)",
+        "position": "middle"
+      },
+      {
+        "node_id": 9,
+        "shape_type": "rectangle",
+        "raw_text": "Output: res (length of longest valid substring)",
+        "position": "middle"
+      },
+      {
+        "node_id": 10,
+        "shape_type": "rectangle",
+        "raw_text": "Update right = k - 1",
+        "position": "bottom"
+      }
+    ],
+    "edges": [
+      {
+        "from_node": 1,
+        "to_node": 2,
+        "label": ""
+      },
+      {
+        "from_node": 2,
+        "to_node": 3,
+        "label": ""
+      },
+      {
+        "from_node": 3,
+        "to_node": 4,
+        "label": ""
+      },
+      {
+        "from_node": 4,
+        "to_node": 5,
+        "label": ""
+      },
+      {
+        "from_node": 5,
+        "to_node": 6,
+        "label": ""
+      },
+      {
+        "from_node": 6,
+        "to_node": 7,
+        "label": ""
+      },
+      {
+        "from_node": 7,
+        "to_node": 10,
+        "label": "Yes"
+      },
+      {
+        "from_node": 7,
+        "to_node": 6,
+        "label": "No"
+      },
+      {
+        "from_node": 10,
+        "to_node": 8,
+        "label": ""
+      },
+      {
+        "from_node": 8,
+        "to_node": 5,
+        "label": ""
+      },
+      {
+        "from_node": 5,
+        "to_node": 9,
+        "label": "No"
+      },
+      {
+        "from_node": 9,
+        "to_node": 6,
+        "label": ""
+      }
+    ],
+    "other_text": []
+  },
+  "analysis": {
+    "ilr_verdict": "incorrect",
+    "ilr_issues": "ILR把OCR流程图的边接错了：节点7(命中forbidden判断)的false分支应回到节点6试下一个k，却被接到节点8(更新res)；OCR原图是10(收缩right)->8(更新res)->5，ILR写成8->10->5，使未命中forbidden也会无条件执行right=k-1。另外节点5的logic每次进入都会重置left=len(word)-1（无自减），节点6的action是悬空的while头且k永不自增。按最宽容解读在示例1上输出1而非4。",
+    "code_vs_ilr": "deviates",
+    "code_issues": "代码相对ILR做了结构性改写：补上k+=1、把res=max(res, right-left+1)移入内层循环体（在right可能收缩前用旧right更新，导致把含forbidden子串的窗口长度计入res）、循环结束后无条件right=k-1（未命中forbidden时反而可能把right放大越界）。这些偏离使其答案严重偏大，且与ILR字面控制流不一致。",
+    "error_source": "both",
+    "ocr_contribution": "no",
+    "root_cause": "ILR阶段把流程图的分支/汇聚边接错（false分支直达res更新并无条件收缩right、循环变量无自减），代码生成阶段又把res更新与right收缩的时机重排，引入'用未收缩right计res'与'right越界增长'两个独立错误，两级都错。",
+    "evidence": "生成代码100个测试错25个：word='cbaaaabc'期望4实得9（超过串长8，right越界增长）；忠实按ILR最宽容解读执行示例1输出1、示例2输出1（期望均为4）。OCR边(7-No->6、7-Yes->10->8->5)显示原流程图算法本身接近正确，OCR非主因。"
+  }
+}

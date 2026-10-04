@@ -1,0 +1,149 @@
+{
+  "task_id": "HumanEval-37",
+  "dataset": "HumanEval-V",
+  "difficulty": null,
+  "title": null,
+  "result": "failed: list index out of range",
+  "ilr": "{\n  \"problem_id\": \"sort_even_example\",\n  \"nodes\": [\n    {\"id\": 1, \"type\": \"start\", \"label\": \"Start\", \"next\": 2},\n    {\"id\": 2, \"type\": \"process\", \"label\": \"Extract even-indexed elements\", \"action\": \"ctx['evens'] = ctx['arg0'][::2]\", \"next\": 3},\n    {\"id\": 3, \"type\": \"process\", \"label\": \"Extract odd-indexed elements\", \"action\": \"ctx['odds'] = ctx['arg0'][1::2]\", \"next\": 4},\n    {\"id\": 4, \"type\": \"process\", \"label\": \"Sort even-indexed elements\", \"action\": \"ctx['evens'] = sorted(ctx['evens'])\", \"next\": 5},\n    {\"id\": 5, \"type\": \"process\", \"label\": \"Initialize result list 'ans'\", \"action\": \"ctx['ans'] = []\", \"next\": 6},\n    {\"id\": 6, \"type\": \"process\", \"label\": \"Iterate through even and odd elements in pairs\", \"action\": \"ctx['i'] = 0\", \"next\": 7},\n    {\"id\": 7, \"type\": \"decision\", \"label\": \"Are there more even elements?\", \"logic\": \"ctx['i'] < len(ctx['evens'])\", \"true_next\": 8, \"false_next\": 10},\n    {\"id\": 8, \"type\": \"process\", \"label\": \"Add each even and odd pair to 'ans'\", \"action\": \"ctx['ans'].append(ctx['evens'][ctx['i']]); ctx['ans'].append(ctx['odds'][ctx['i']]); ctx['i'] += 1\", \"next\": 7},\n    {\"id\": 9, \"type\": \"process\", \"label\": \"Add remaining even element to 'ans'\", \"action\": \"ctx['ans'].append(ctx['evens'][ctx['i']])\", \"next\": 11},\n    {\"id\": 10, \"type\": \"process\", \"label\": \"Skip\", \"action\": \"\", \"next\": 11},\n    {\"id\": 11, \"type\": \"return\", \"label\": \"Return 'ans'\", \"value\": \"ctx['ans']\"}\n  ]\n}",
+  "code": "def sort_even(l: list):\n    evens = l[::2]\n    odds = l[1::2]\n    evens = sorted(evens)\n    ans = []\n    i = 0\n    \n    while i < len(evens):\n        ans.append(evens[i])\n        ans.append(odds[i])\n        i += 1\n    \n    if i < len(odds):\n        ans.append(odds[i])\n    \n    return ans",
+  "prompt": "\n\ndef sort_even(l: list):\n    \"\"\"This function takes a list l and returns a list l' such that\n    l' is identical to l in the odd indicies, while its values at the even indicies are equal\n    to the values of the even indicies of l, but sorted.\n    >>> sort_even([1, 2, 3])\n    [1, 2, 3]\n    >>> sort_even([5, 6, 3, 4])\n    [3, 6, 5, 4]\n    \"\"\"\n",
+  "test": "\n\nMETADATA = {}\n\n\ndef check(candidate):\n    assert tuple(candidate([1, 2, 3])) == tuple([1, 2, 3])\n    assert tuple(candidate([5, 3, -5, 2, -3, 3, 9, 0, 123, 1, -10])) == tuple([-10, 3, -5, 2, -3, 3, 5, 0, 9, 1, 123])\n    assert tuple(candidate([5, 8, -12, 4, 23, 2, 3, 11, 12, -10])) == tuple([-12, 8, 3, 4, 5, 2, 12, 11, 23, -10])\n\n",
+  "ocr_data": {
+    "nodes": [
+      {
+        "node_id": 1,
+        "shape_type": "rectangle",
+        "raw_text": "Start",
+        "position": "top"
+      },
+      {
+        "node_id": 2,
+        "shape_type": "rectangle",
+        "raw_text": "Extract even-indexed elements",
+        "position": "middle"
+      },
+      {
+        "node_id": 3,
+        "shape_type": "rectangle",
+        "raw_text": "Extract odd-indexed elements",
+        "position": "middle"
+      },
+      {
+        "node_id": 4,
+        "shape_type": "rectangle",
+        "raw_text": "Sort even-indexed elements",
+        "position": "middle"
+      },
+      {
+        "node_id": 5,
+        "shape_type": "rectangle",
+        "raw_text": "Initialize result list 'ans'",
+        "position": "middle"
+      },
+      {
+        "node_id": 6,
+        "shape_type": "rectangle",
+        "raw_text": "Iterate through even and odd elements in pairs",
+        "position": "middle"
+      },
+      {
+        "node_id": 7,
+        "shape_type": "rectangle",
+        "raw_text": "Add each even and odd pair to 'ans'",
+        "position": "middle"
+      },
+      {
+        "node_id": 8,
+        "shape_type": "diamond",
+        "raw_text": "Are there more even elements?",
+        "position": "middle"
+      },
+      {
+        "node_id": 9,
+        "shape_type": "rectangle",
+        "raw_text": "Add remaining even element to 'ans'",
+        "position": "bottom"
+      },
+      {
+        "node_id": 10,
+        "shape_type": "rectangle",
+        "raw_text": "Skip",
+        "position": "bottom"
+      },
+      {
+        "node_id": 11,
+        "shape_type": "rectangle",
+        "raw_text": "Return 'ans'",
+        "position": "bottom"
+      }
+    ],
+    "edges": [
+      {
+        "from_node": 1,
+        "to_node": 2,
+        "label": ""
+      },
+      {
+        "from_node": 2,
+        "to_node": 3,
+        "label": ""
+      },
+      {
+        "from_node": 3,
+        "to_node": 4,
+        "label": ""
+      },
+      {
+        "from_node": 4,
+        "to_node": 5,
+        "label": ""
+      },
+      {
+        "from_node": 5,
+        "to_node": 6,
+        "label": ""
+      },
+      {
+        "from_node": 6,
+        "to_node": 7,
+        "label": ""
+      },
+      {
+        "from_node": 7,
+        "to_node": 8,
+        "label": ""
+      },
+      {
+        "from_node": 8,
+        "to_node": 9,
+        "label": "Yes"
+      },
+      {
+        "from_node": 8,
+        "to_node": 10,
+        "label": "No"
+      },
+      {
+        "from_node": 9,
+        "to_node": 11,
+        "label": ""
+      },
+      {
+        "from_node": 10,
+        "to_node": 11,
+        "label": ""
+      }
+    ],
+    "other_text": []
+  },
+  "analysis": {
+    "ilr_verdict": "incorrect",
+    "ilr_issues": "ILR循环条件是i<len(evens)且节点8无条件append(odds[i])，奇数长度输入时odds越界：[1,2,3]中evens=[1,3]、odds=[2]，i=1时odds[1]越界；本应处理'追加剩余偶数位元素'的节点9没有任何入边（不可达），收尾逻辑丢失。",
+    "code_vs_ilr": "faithful",
+    "code_issues": "代码与ILR行为等价：同样的while i<len(evens)循环使[1,2,3]抛出list index out of range；代码额外添加的if i<len(odds)分支因i=len(evens)>=len(odds)恒为假，属死代码，不影响行为。",
+    "error_source": "ilr",
+    "ocr_contribution": "unclear",
+    "root_cause": "OCR边集完全没有循环回边且判断节点位置与分支语义混乱（追加节点7→判断8，Yes反而指向'添加剩余偶元素'），无法确定是流程图本身画错还是OCR漏边；ILR重建时循环条件写错并让节点9不可达，忠实实现即越界崩溃，代码行为与ILR等价。",
+    "evidence": "sort_even([1,2,3])抛出'list index out of range'，与FAILURE RESULT完全一致；偶数长度[5,6,3,4]→[3,6,5,4]正常。"
+  }
+}

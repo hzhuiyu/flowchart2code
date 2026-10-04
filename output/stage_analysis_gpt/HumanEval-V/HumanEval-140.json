@@ -1,0 +1,246 @@
+{
+  "task_id": "HumanEval-140",
+  "dataset": "HumanEval-V",
+  "difficulty": null,
+  "title": null,
+  "result": "failed: This prints if this assert fails 2 (good for debugging!)",
+  "ilr": "{\n  \"problem_id\": \"fix_spaces_example\",\n  \"nodes\": [\n    {\"id\": 1, \"type\": \"start\", \"label\": \"Start\", \"next\": 2},\n    {\"id\": 2, \"type\": \"process\", \"label\": \"Input: text (string)\", \"action\": \"ctx['text']=ctx['arg0']; ctx['new_text']=''; ctx['i']=0; ctx['start']=0; ctx['end']=0\", \"next\": 3},\n    {\"id\": 3, \"type\": \"decision\", \"label\": \"Is i < len(text)?\", \"logic\": \"ctx['i'] < len(ctx['text'])\", \"true_next\": 4, \"false_next\": 18},\n    {\"id\": 4, \"type\": \"decision\", \"label\": \"Is text[i] == '?'\", \"logic\": \"ctx['text'][ctx['i']] == '?'\", \"true_next\": 5, \"false_next\": 7},\n    {\"id\": 5, \"type\": \"decision\", \"label\": \"Is end - start > 2?\", \"logic\": \"ctx['end'] - ctx['start'] > 2\", \"true_next\": 9, \"false_next\": 10},\n    {\"id\": 6, \"type\": \"decision\", \"label\": \"Is end - start > 0?\", \"logic\": \"ctx['end'] - ctx['start'] > 0\", \"true_next\": 11, \"false_next\": 17},\n    {\"id\": 7, \"type\": \"decision\", \"label\": \"Is end - start > 2?\", \"logic\": \"ctx['end'] - ctx['start'] > 2\", \"true_next\": 15, \"false_next\": 16},\n    {\"id\": 8, \"type\": \"decision\", \"label\": \"Is end - start > 0?\", \"logic\": \"ctx['end'] - ctx['start'] > 0\", \"true_next\": 12, \"false_next\": 17},\n    {\"id\": 9, \"type\": \"process\", \"label\": \"Append '!' + text[i] to new_text\", \"action\": \"ctx['new_text'] += '!' + ctx['text'][ctx['i']]\", \"next\": 12},\n    {\"id\": 10, \"type\": \"process\", \"label\": \"Append '_' * (end - start) + text[i] to new_text\", \"action\": \"ctx['new_text'] += '_' * (ctx['end'] - ctx['start']) + ctx['text'][ctx['i']]\", \"next\": 12},\n    {\"id\": 11, \"type\": \"process\", \"label\": \"Append text[i] to new_text\", \"action\": \"ctx['new_text'] += ctx['text'][ctx['i']]\", \"next\": 12},\n    {\"id\": 12, \"type\": \"process\", \"label\": \"Increment end\", \"action\": \"ctx['end'] += 1\", \"next\": 13},\n    {\"id\": 13, \"type\": \"process\", \"label\": \"Set start, end = i + 1, i + 1\", \"action\": \"ctx['start'], ctx['end'] = ctx['i'] + 1, ctx['i'] + 1\", \"next\": 14},\n    {\"id\": 14, \"type\": \"process\", \"label\": \"Increment i\", \"action\": \"ctx['i'] += 1\", \"next\": 3},\n    {\"id\": 15, \"type\": \"process\", \"label\": \"Append '.' to new_text\", \"action\": \"ctx['new_text'] += '.'\", \"next\": 18},\n    {\"id\": 16, \"type\": \"process\", \"label\": \"Append '_' to new_text\", \"action\": \"ctx['new_text'] += '_'\", \"next\": 18},\n    {\"id\": 17, \"type\": \"process\", \"label\": \"No action\", \"action\": \"\", \"next\": 18},\n    {\"id\": 18, \"type\": \"end\", \"label\": \"Output: new_text\", \"output\": \"ctx['new_text']\"}\n  ]\n}",
+  "code": "def fix_spaces(text):\n    new_text = ''\n    i = 0\n    start = 0\n    end = 0\n\n    while i < len(text):\n        if text[i] == ' ':\n            if end - start > 2:\n                new_text += '!' + text[i]\n            elif end - start > 0:\n                new_text += '_' * (end - start) + text[i]\n            end += 1\n            start, end = i + 1, i + 1\n        else:\n            if end - start > 2:\n                new_text += '.'\n            elif end - start > 0:\n                new_text += '_'\n            new_text += text[i]\n            end += 1\n            start, end = i + 1, i + 1\n        i += 1\n\n    return new_text",
+  "prompt": "\ndef fix_spaces(text):\n    \"\"\"\n    Given a string text, replace all spaces in it with underscores, \n    and if a string has more than 2 consecutive spaces, \n    then replace all consecutive spaces with - \n    \n    fix_spaces(\"Example\") == \"Example\"\n    fix_spaces(\"Example 1\") == \"Example_1\"\n    fix_spaces(\" Example 2\") == \"_Example_2\"\n    fix_spaces(\" Example   3\") == \"_Example-3\"\n    \"\"\"\n",
+  "test": "def check(candidate):\n\n    # Check some simple cases\n    assert candidate(\"Example\") == \"Example\", \"This prints if this assert fails 1 (good for debugging!)\"\n    assert candidate(\"Mudasir Hanif \") == \"Mudasir_Hanif_\", \"This prints if this assert fails 2 (good for debugging!)\"\n    assert candidate(\"Yellow Yellow  Dirty  Fellow\") == \"Yellow_Yellow__Dirty__Fellow\", \"This prints if this assert fails 3 (good for debugging!)\"\n    \n    # Check some edge cases that are easy to work out by hand.\n    assert candidate(\"Exa   mple\") == \"Exa-mple\", \"This prints if this assert fails 4 (good for debugging!)\"\n    assert candidate(\"   Exa 1 2 2 mple\") == \"-Exa_1_2_2_mple\", \"This prints if this assert fails 4 (good for debugging!)\"\n\n",
+  "ocr_data": {
+    "nodes": [
+      {
+        "node_id": 1,
+        "shape_type": "rectangle",
+        "raw_text": "Start",
+        "position": "top"
+      },
+      {
+        "node_id": 2,
+        "shape_type": "rectangle",
+        "raw_text": "Input: text (string)",
+        "position": "top"
+      },
+      {
+        "node_id": 3,
+        "shape_type": "rectangle",
+        "raw_text": "Initialize new_text = \"\", i = 0, start = 0, end = 0",
+        "position": "middle"
+      },
+      {
+        "node_id": 4,
+        "shape_type": "diamond",
+        "raw_text": "Is i < len(text)?",
+        "position": "middle"
+      },
+      {
+        "node_id": 5,
+        "shape_type": "diamond",
+        "raw_text": "Is text[i] == '?'",
+        "position": "middle"
+      },
+      {
+        "node_id": 6,
+        "shape_type": "diamond",
+        "raw_text": "Is end - start > 2?",
+        "position": "middle"
+      },
+      {
+        "node_id": 7,
+        "shape_type": "diamond",
+        "raw_text": "Is end - start > 2?",
+        "position": "middle"
+      },
+      {
+        "node_id": 8,
+        "shape_type": "diamond",
+        "raw_text": "Is end - start > 0?",
+        "position": "middle"
+      },
+      {
+        "node_id": 9,
+        "shape_type": "rectangle",
+        "raw_text": "Append '!' + text[i] to new_text",
+        "position": "bottom"
+      },
+      {
+        "node_id": 10,
+        "shape_type": "rectangle",
+        "raw_text": "Append '_' * (end - start) + text[i] to new_text",
+        "position": "bottom"
+      },
+      {
+        "node_id": 11,
+        "shape_type": "rectangle",
+        "raw_text": "Append text[i] to new_text",
+        "position": "bottom"
+      },
+      {
+        "node_id": 12,
+        "shape_type": "rectangle",
+        "raw_text": "Increment end",
+        "position": "bottom"
+      },
+      {
+        "node_id": 13,
+        "shape_type": "rectangle",
+        "raw_text": "Set start, end = i + 1, i + 1",
+        "position": "bottom"
+      },
+      {
+        "node_id": 14,
+        "shape_type": "rectangle",
+        "raw_text": "Increment i",
+        "position": "bottom"
+      },
+      {
+        "node_id": 15,
+        "shape_type": "rectangle",
+        "raw_text": "Append '.' to new_text",
+        "position": "bottom"
+      },
+      {
+        "node_id": 16,
+        "shape_type": "rectangle",
+        "raw_text": "Append '_' to new_text",
+        "position": "bottom"
+      },
+      {
+        "node_id": 17,
+        "shape_type": "rectangle",
+        "raw_text": "No action",
+        "position": "bottom"
+      },
+      {
+        "node_id": 18,
+        "shape_type": "rectangle",
+        "raw_text": "Output: new_text",
+        "position": "bottom"
+      }
+    ],
+    "edges": [
+      {
+        "from_node": 1,
+        "to_node": 2,
+        "label": ""
+      },
+      {
+        "from_node": 2,
+        "to_node": 3,
+        "label": ""
+      },
+      {
+        "from_node": 3,
+        "to_node": 4,
+        "label": ""
+      },
+      {
+        "from_node": 4,
+        "to_node": 5,
+        "label": "Yes"
+      },
+      {
+        "from_node": 4,
+        "to_node": 7,
+        "label": "No"
+      },
+      {
+        "from_node": 5,
+        "to_node": 6,
+        "label": "Yes"
+      },
+      {
+        "from_node": 5,
+        "to_node": 8,
+        "label": "No"
+      },
+      {
+        "from_node": 6,
+        "to_node": 9,
+        "label": "Yes"
+      },
+      {
+        "from_node": 6,
+        "to_node": 10,
+        "label": "No"
+      },
+      {
+        "from_node": 7,
+        "to_node": 15,
+        "label": "Yes"
+      },
+      {
+        "from_node": 7,
+        "to_node": 16,
+        "label": "No"
+      },
+      {
+        "from_node": 8,
+        "to_node": 11,
+        "label": "Yes"
+      },
+      {
+        "from_node": 8,
+        "to_node": 17,
+        "label": "No"
+      },
+      {
+        "from_node": 9,
+        "to_node": 12,
+        "label": ""
+      },
+      {
+        "from_node": 10,
+        "to_node": 13,
+        "label": ""
+      },
+      {
+        "from_node": 11,
+        "to_node": 13,
+        "label": ""
+      },
+      {
+        "from_node": 12,
+        "to_node": 14,
+        "label": ""
+      },
+      {
+        "from_node": 13,
+        "to_node": 14,
+        "label": ""
+      },
+      {
+        "from_node": 14,
+        "to_node": 18,
+        "label": ""
+      },
+      {
+        "from_node": 15,
+        "to_node": 18,
+        "label": ""
+      },
+      {
+        "from_node": 16,
+        "to_node": 18,
+        "label": ""
+      },
+      {
+        "from_node": 17,
+        "to_node": 18,
+        "label": ""
+      }
+    ],
+    "other_text": []
+  },
+  "analysis": {
+    "ilr_verdict": "incorrect",
+    "ilr_issues": "ILR结构严重错乱：节点4判断 text[i]=='?'（应为空格' '），且把追加符号的逻辑接在了空格分支上；非'?'分支经节点7→15/16直接连到输出节点18，处理第一个字符后就返回（如\"Example\"输出\"_\"）。节点6、8、17为不可达孤立节点，循环结束后也没有对末尾空格的收尾处理。",
+    "code_vs_ilr": "deviates",
+    "code_issues": "代码没有忠实实现ILR：ILR的非'?'分支应在追加'.'/'_'后立即结束，代码却继续循环并追加text[i]、递增end并重置start/end；ILR节点10无条件追加'_'*(end-start)+text[i]，代码改成仅elif end-start>0时追加。代码自身也错误：空格被完全丢弃、字符用错（'!'/'.'）、缺少末尾空格收尾。",
+    "error_source": "both",
+    "ocr_contribution": "yes",
+    "root_cause": "OCR把流程图中的空格误读为'?'、'-'误读为'!'/'.'且丢失循环回边，ILR在此基础上又把分支接错（空格分支做追加、非空格分支直接终止），忠实执行必然出错；生成代码又偏离了该ILR并自带错误，两边独立造成失败。",
+    "evidence": "ILR模拟执行fix_spaces(\"Example\")返回'_'（处理首字符后即达输出节点18）；生成代码fix_spaces(\"Mudasir Hanif \")返回'MudasirHanif'，期望'Mudasir_Hanif_'，与FAILURE RESULT(fails 2)一致。"
+  }
+}

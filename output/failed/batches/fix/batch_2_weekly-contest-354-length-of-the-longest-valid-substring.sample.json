@@ -1,0 +1,1419 @@
+{
+ "task_id": "weekly-contest-354-length-of-the-longest-valid-substring",
+ "dataset": "Algorithm",
+ "title": "length-of-the-longest-valid-substring",
+ "difficulty": "Hard",
+ "prompt": "\"\"\"\nYou are given a string word and an array of strings forbidden.\n\nA string is called valid if none of its substrings are present in forbidden.\n\nReturn the length of the longest valid substring of the string word.\n\nA substring is a contiguous sequence of characters in a string, possibly empty.\n\nExample 1:\n\nInput: word = \"cbaaaabc\", forbidden = [\"aaa\",\"cb\"]\nOutput: 4\nExplanation: There are 11 valid substrings in word: \"c\", \"b\", \"a\", \"ba\", \"aa\", \"bc\", \"baa\", \"aab\", \"ab\", \"abc\" and \"aabc\". The length of the longest valid substring is 4.\nIt can be shown that all other substrings contain either \"aaa\" or \"cb\" as a substring.\n\nExample 2:\n\nInput: word = \"leetcode\", forbidden = [\"de\",\"le\",\"e\"]\nOutput: 4\nExplanation: There are 11 valid substrings in word: \"l\", \"t\", \"c\", \"o\", \"d\", \"tc\", \"co\", \"od\", \"tco\", \"cod\", and \"tcod\". The length of the longest valid substring is 4.\nIt can be shown that all other substrings contain either \"de\", \"le\", or \"e\" as a substring.\n\n\nConstraints:\n\n * 1 <= word.length <= 105\n * word consists only of lowercase English letters.\n * 1 <= forbidden.length <= 105\n * 1 <= forbidden[i].length <= 10\n * forbidden[i] consists only of lowercase English letters.\n\"\"\"\nclass Solution:\n    def longestValidSubstring(self, word: str, forbidden: List[str]) -> int:\n        ",
+ "starter_code": "class Solution:\n    def longestValidSubstring(self, word: str, forbidden: List[str]) -> int:\n        ",
+ "entry_point": "",
+ "test": "\nmy_solution = Solution()\n\ntest_input = { \"word\": \"cbaaaabc\", \"forbidden\": [\"aaa\",\"cb\"] }\nassert my_solution.longestValidSubstring(**test_input) == 4\n\ntest_input = { \"word\": \"leetcode\", \"forbidden\": [\"de\",\"le\",\"e\"] }\nassert my_solution.longestValidSubstring(**test_input) == 4\n\ntest_input = { \"word\": \"a\", \"forbidden\": [\"n\"] }\nassert my_solution.longestValidSubstring(**test_input) == 1\n\ntest_input = { \"word\": \"a\", \"forbidden\": [\"s\"] }\nassert my_solution.longestValidSubstring(**test_input) == 1\n\ntest_input = { \"word\": \"a\", \"forbidden\": [\"a\"] }\nassert my_solution.longestValidSubstring(**test_input) == 0\n\ntest_input = { \"word\": \"b\", \"forbidden\": [\"g\"] }\nassert my_solution.longestValidSubstring(**test_input) == 1\n\ntest_input = { \"word\": \"b\", \"forbidden\": [\"t\"] }\nassert my_solution.longestValidSubstring(**test_input) == 1\n\ntest_input = { \"word\": \"b\", \"forbidden\": [\"b\"] }\nassert my_solution.longestValidSubstring(**test_input) == 0\n\ntest_input = { \"word\": \"c\", \"forbidden\": [\"k\"] }\nassert my_solution.longestValidSubstring(**test_input) == 1\n\ntest_input = { \"word\": \"c\", \"forbidden\": [\"s\"] }\nassert my_solution.longestValidSubstring(**test_input) == 1\n\ntest_input = { \"word\": \"c\", \"forbidden\": [\"c\"] }\nassert my_solution.longestValidSubstring(**test_input) == 0\n\ntest_input = { \"word\": \"d\", \"forbidden\": [\"h\"] }\nassert my_solution.longestValidSubstring(**test_input) == 1\n\ntest_input = { \"word\": \"d\", \"forbidden\": [\"n\"] }\nassert my_solution.longestValidSubstring(**test_input) == 1\n\ntest_input = { \"word\": \"d\", \"forbidden\": [\"d\"] }\nassert my_solution.longestValidSubstring(**test_input) == 0\n\ntest_input = { \"word\": \"e\", \"forbidden\": [\"s\"] }\nassert my_solution.longestValidSubstring(**test_input) == 1\n\ntest_input = { \"word\": \"e\", \"forbidden\": [\"e\"] }\nassert my_solution.longestValidSubstring(**test_input) == 0\n\ntest_input = { \"word\": \"f\", \"forbidden\": [\"b\"] }\nassert my_solution.longestValidSubstring(**test_input) == 1\n\ntest_input = { \"word\": \"f\", \"forbidden\": [\"s\"] }\nassert my_solution.longestValidSubstring(**test_input) == 1\n\ntest_input = { \"word\": \"f\", \"forbidden\": [\"f\"] }\nassert my_solution.longestValidSubstring(**test_input) == 0\n\ntest_input = { \"word\": \"g\", \"forbidden\": [\"r\"] }\nassert my_solution.longestValidSubstring(**test_input) == 1\n\ntest_input = { \"word\": \"g\", \"forbidden\": [\"y\"] }\nassert my_solution.longestValidSubstring(**test_input) == 1\n\ntest_input = { \"word\": \"g\", \"forbidden\": [\"g\"] }\nassert my_solution.longestValidSubstring(**test_input) == 0\n\ntest_input = { \"word\": \"h\", \"forbidden\": [\"v\"] }\nassert my_solution.longestValidSubstring(**test_input) == 1\n\ntest_input = { \"word\": \"h\", \"forbidden\": [\"b\"] }\nassert my_solution.longestValidSubstring(**test_input) == 1\n\ntest_input = { \"word\": \"h\", \"forbidden\": [\"h\"] }\nassert my_solution.longestValidSubstring(**test_input) == 0\n\ntest_input = { \"word\": \"i\", \"forbidden\": [\"k\"] }\nassert my_solution.longestValidSubstring(**test_input) == 1\n\ntest_input = { \"word\": \"i\", \"forbidden\": [\"y\"] }\nassert my_solution.longestValidSubstring(**test_input) == 1\n\ntest_input = { \"word\": \"i\", \"forbidden\": [\"i\"] }\nassert my_solution.longestValidSubstring(**test_input) == 0\n\ntest_input = { \"word\": \"j\", \"forbidden\": [\"v\"] }\nassert my_solution.longestValidSubstring(**test_input) == 1\n\ntest_input = { \"word\": \"j\", \"forbidden\": [\"u\"] }\nassert my_solution.longestValidSubstring(**test_input) == 1\n\ntest_input = { \"word\": \"j\", \"forbidden\": [\"j\"] }\nassert my_solution.longestValidSubstring(**test_input) == 0\n\ntest_input = { \"word\": \"k\", \"forbidden\": [\"z\"] }\nassert my_solution.longestValidSubstring(**test_input) == 1\n\ntest_input = { \"word\": \"k\", \"forbidden\": [\"o\"] }\nassert my_solution.longestValidSubstring(**test_input) == 1\n\ntest_input = { \"word\": \"k\", \"forbidden\": [\"k\"] }\nassert my_solution.longestValidSubstring(**test_input) == 0\n\ntest_input = { \"word\": \"l\", \"forbidden\": [\"i\"] }\nassert my_solution.longestValidSubstring(**test_input) == 1\n\ntest_input = { \"word\": \"l\", \"forbidden\": [\"r\"] }\nassert my_solution.longestValidSubstring(**test_input) == 1\n\ntest_input = { \"word\": \"l\", \"forbidden\": [\"l\"] }\nassert my_solution.longestValidSubstring(**test_input) == 0\n\ntest_input = { \"word\": \"m\", \"forbidden\": [\"s\"] }\nassert my_solution.longestValidSubstring(**test_input) == 1\n\ntest_input = { \"word\": \"m\", \"forbidden\": [\"g\"] }\nassert my_solution.longestValidSubstring(**test_input) == 1\n\ntest_input = { \"word\": \"m\", \"forbidden\": [\"m\"] }\nassert my_solution.longestValidSubstring(**test_input) == 0\n\ntest_input = { \"word\": \"n\", \"forbidden\": [\"e\"] }\nassert my_solution.longestValidSubstring(**test_input) == 1\n\ntest_input = { \"word\": \"n\", \"forbidden\": [\"i\"] }\nassert my_solution.longestValidSubstring(**test_input) == 1\n\ntest_input = { \"word\": \"n\", \"forbidden\": [\"n\"] }\nassert my_solution.longestValidSubstring(**test_input) == 0\n\ntest_input = { \"word\": \"o\", \"forbidden\": [\"j\"] }\nassert my_solution.longestValidSubstring(**test_input) == 1\n\ntest_input = { \"word\": \"o\", \"forbidden\": [\"f\"] }\nassert my_solution.longestValidSubstring(**test_input) == 1\n\ntest_input = { \"word\": \"o\", \"forbidden\": [\"o\"] }\nassert my_solution.longestValidSubstring(**test_input) == 0\n\ntest_input = { \"word\": \"p\", \"forbidden\": [\"z\"] }\nassert my_solution.longestValidSubstring(**test_input) == 1\n\ntest_input = { \"word\": \"p\", \"forbidden\": [\"i\"] }\nassert my_solution.longestValidSubstring(**test_input) == 1\n\ntest_input = { \"word\": \"p\", \"forbidden\": [\"p\"] }\nassert my_solution.longestValidSubstring(**test_input) == 0\n\ntest_input = { \"word\": \"q\", \"forbidden\": [\"j\"] }\nassert my_solution.longestValidSubstring(**test_input) == 1\n\ntest_input = { \"word\": \"q\", \"forbidden\": [\"z\"] }\nassert my_solution.longestValidSubstring(**test_input) == 1\n\ntest_input = { \"word\": \"q\", \"forbidden\": [\"q\"] }\nassert my_solution.longestValidSubstring(**test_input) == 0\n\ntest_input = { \"word\": \"r\", \"forbidden\": [\"v\"] }\nassert my_solution.longestValidSubstring(**test_input) == 1\n\ntest_input = { \"word\": \"r\", \"forbidden\": [\"p\"] }\nassert my_solution.longestValidSubstring(**test_input) == 1\n\ntest_input = { \"word\": \"r\", \"forbidden\": [\"r\"] }\nassert my_solution.longestValidSubstring(**test_input) == 0\n\ntest_input = { \"word\": \"s\", \"forbidden\": [\"m\"] }\nassert my_solution.longestValidSubstring(**test_input) == 1\n\ntest_input = { \"word\": \"s\", \"forbidden\": [\"x\"] }\nassert my_solution.longestValidSubstring(**test_input) == 1\n\ntest_input = { \"word\": \"s\", \"forbidden\": [\"s\"] }\nassert my_solution.longestValidSubstring(**test_input) == 0\n\ntest_input = { \"word\": \"t\", \"forbidden\": [\"v\"] }\nassert my_solution.longestValidSubstring(**test_input) == 1\n\ntest_input = { \"word\": \"t\", \"forbidden\": [\"m\"] }\nassert my_solution.longestValidSubstring(**test_input) == 1\n\ntest_input = { \"word\": \"t\", \"forbidden\": [\"t\"] }\nassert my_solution.longestValidSubstring(**test_input) == 0\n\ntest_input = { \"word\": \"u\", \"forbidden\": [\"l\"] }\nassert my_solution.longestValidSubstring(**test_input) == 1\n\ntest_input = { \"word\": \"u\", \"forbidden\": [\"n\"] }\nassert my_solution.longestValidSubstring(**test_input) == 1\n\ntest_input = { \"word\": \"u\", \"forbidden\": [\"u\"] }\nassert my_solution.longestValidSubstring(**test_input) == 0\n\ntest_input = { \"word\": \"v\", \"forbidden\": [\"o\"] }\nassert my_solution.longestValidSubstring(**test_input) == 1\n\ntest_input = { \"word\": \"v\", \"forbidden\": [\"v\"] }\nassert my_solution.longestValidSubstring(**test_input) == 0\n\ntest_input = { \"word\": \"w\", \"forbidden\": [\"w\"] }\nassert my_solution.longestValidSubstring(**test_input) == 0\n\ntest_input = { \"word\": \"w\", \"forbidden\": [\"s\"] }\nassert my_solution.longestValidSubstring(**test_input) == 1\n\ntest_input = { \"word\": \"x\", \"forbidden\": [\"r\"] }\nassert my_solution.longestValidSubstring(**test_input) == 1\n\ntest_input = { \"word\": \"x\", \"forbidden\": [\"q\"] }\nassert my_solution.longestValidSubstring(**test_input) == 1\n\ntest_input = { \"word\": \"x\", \"forbidden\": [\"x\"] }\nassert my_solution.longestValidSubstring(**test_input) == 0\n\ntest_input = { \"word\": \"y\", \"forbidden\": [\"w\"] }\nassert my_solution.longestValidSubstring(**test_input) == 1\n\ntest_input = { \"word\": \"y\", \"forbidden\": [\"t\"] }\nassert my_solution.longestValidSubstring(**test_input) == 1\n\ntest_input = { \"word\": \"y\", \"forbidden\": [\"y\"] }\nassert my_solution.longestValidSubstring(**test_input) == 0\n\ntest_input = { \"word\": \"z\", \"forbidden\": [\"l\"] }\nassert my_solution.longestValidSubstring(**test_input) == 1\n\ntest_input = { \"word\": \"z\", \"forbidden\": [\"o\"] }\nassert my_solution.longestValidSubstring(**test_input) == 1\n\ntest_input = { \"word\": \"z\", \"forbidden\": [\"z\"] }\nassert my_solution.longestValidSubstring(**test_input) == 0\n\ntest_input = { \"word\": \"acbc\", \"forbidden\": [\"cbc\",\"acb\",\"acb\",\"acbc\"] }\nassert my_solution.longestValidSubstring(**test_input) == 2\n\ntest_input = { \"word\": \"cabba\", \"forbidden\": [\"aaba\",\"abba\",\"acabb\",\"cabb\"] }\nassert my_solution.longestValidSubstring(**test_input) == 3\n\ntest_input = { \"word\": \"bbc\", \"forbidden\": [\"baba\",\"babc\",\"bbc\",\"bbc\"] }\nassert my_solution.longestValidSubstring(**test_input) == 2\n\ntest_input = { \"word\": \"acb\", \"forbidden\": [\"acb\",\"caccc\",\"baaab\",\"baa\"] }\nassert my_solution.longestValidSubstring(**test_input) == 2\n\ntest_input = { \"word\": \"aaac\", \"forbidden\": [\"aaac\",\"aac\",\"aaa\",\"aaac\"] }\nassert my_solution.longestValidSubstring(**test_input) == 2\n\ntest_input = { \"word\": \"ca\", \"forbidden\": [\"ababa\",\"ca\",\"caac\",\"babb\"] }\nassert my_solution.longestValidSubstring(**test_input) == 1\n\ntest_input = { \"word\": \"babbb\", \"forbidden\": [\"bbb\",\"aacb\",\"babbb\",\"bcab\"] }\nassert my_solution.longestValidSubstring(**test_input) == 4\n\ntest_input = { \"word\": \"cbbba\", \"forbidden\": [\"bca\",\"cbbba\",\"acbcc\",\"aabb\"] }\nassert my_solution.longestValidSubstring(**test_input) == 4\n\ntest_input = { \"word\": \"abab\", \"forbidden\": [\"aab\",\"abab\",\"cacb\",\"bab\"] }\nassert my_solution.longestValidSubstring(**test_input) == 3\n\ntest_input = { \"word\": \"cbab\", \"forbidden\": [\"bbcc\",\"aaccc\",\"cbab\",\"babca\"] }\nassert my_solution.longestValidSubstring(**test_input) == 3\n\ntest_input = { \"word\": \"caaa\", \"forbidden\": [\"aaa\",\"cbb\",\"aaa\",\"caaa\"] }\nassert my_solution.longestValidSubstring(**test_input) == 3\n\ntest_input = { \"word\": \"baa\", \"forbidden\": [\"aaab\",\"bbaa\",\"babac\",\"baa\"] }\nassert my_solution.longestValidSubstring(**test_input) == 2\n\ntest_input = { \"word\": \"cbcc\", \"forbidden\": [\"cbcc\",\"baa\",\"bbba\",\"cac\"] }\nassert my_solution.longestValidSubstring(**test_input) == 3\n\ntest_input = { \"word\": \"cac\", \"forbidden\": [\"cccaa\",\"baaca\",\"cac\",\"cac\"] }\nassert my_solution.longestValidSubstring(**test_input) == 2\n\ntest_input = { \"word\": \"cabab\", \"forbidden\": [\"cabab\",\"abab\",\"cabab\",\"abab\"] }\nassert my_solution.longestValidSubstring(**test_input) == 4\n\ntest_input = { \"word\": \"caa\", \"forbidden\": [\"caa\",\"bba\",\"acc\",\"bcabb\"] }\nassert my_solution.longestValidSubstring(**test_input) == 2\n\ntest_input = { \"word\": \"ba\", \"forbidden\": [\"ba\",\"ba\",\"cab\",\"cbcac\"] }\nassert my_solution.longestValidSubstring(**test_input) == 1\n\ntest_input = { \"word\": \"bbc\", \"forbidden\": [\"baca\",\"bbc\",\"bbc\",\"caa\"] }\nassert my_solution.longestValidSubstring(**test_input) == 2\n\ntest_input = { \"word\": \"bbb\", \"forbidden\": [\"cbaab\",\"bbb\",\"bbb\",\"bab\"] }\nassert my_solution.longestValidSubstring(**test_input) == 2\n\ntest_input = { \"word\": \"bbccc\", \"forbidden\": [\"ccc\",\"bcba\",\"bcc\",\"bcc\"] }\nassert my_solution.longestValidSubstring(**test_input) == 3\n\ntest_input = { \"word\": \"bcac\", \"forbidden\": [\"bcac\",\"caca\",\"bcac\",\"bca\"] }\nassert my_solution.longestValidSubstring(**test_input) == 3\n\ntest_input = { \"word\": \"ab\", \"forbidden\": [\"aca\",\"cabcc\",\"caba\",\"ab\"] }\nassert my_solution.longestValidSubstring(**test_input) == 1\n\ntest_input = { \"word\": \"caa\", \"forbidden\": [\"bab\",\"babbb\",\"abbaa\",\"caa\"] }\nassert my_solution.longestValidSubstring(**test_input) == 2",
+ "test_cases": [
+  {
+   "input": {
+    "args": [
+     [
+      "aaa",
+      "cb"
+     ],
+     "cbaaaabc"
+    ]
+   },
+   "output": 4,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      "de",
+      "le",
+      "e"
+     ],
+     "leetcode"
+    ]
+   },
+   "output": 4,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      "n"
+     ],
+     "a"
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      "s"
+     ],
+     "a"
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      "a"
+     ],
+     "a"
+    ]
+   },
+   "output": 0,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      "g"
+     ],
+     "b"
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      "t"
+     ],
+     "b"
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      "b"
+     ],
+     "b"
+    ]
+   },
+   "output": 0,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      "k"
+     ],
+     "c"
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      "s"
+     ],
+     "c"
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      "c"
+     ],
+     "c"
+    ]
+   },
+   "output": 0,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      "h"
+     ],
+     "d"
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      "n"
+     ],
+     "d"
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      "d"
+     ],
+     "d"
+    ]
+   },
+   "output": 0,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      "s"
+     ],
+     "e"
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      "e"
+     ],
+     "e"
+    ]
+   },
+   "output": 0,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      "b"
+     ],
+     "f"
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      "s"
+     ],
+     "f"
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      "f"
+     ],
+     "f"
+    ]
+   },
+   "output": 0,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      "r"
+     ],
+     "g"
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      "y"
+     ],
+     "g"
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      "g"
+     ],
+     "g"
+    ]
+   },
+   "output": 0,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      "v"
+     ],
+     "h"
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      "b"
+     ],
+     "h"
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      "h"
+     ],
+     "h"
+    ]
+   },
+   "output": 0,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      "k"
+     ],
+     "i"
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      "y"
+     ],
+     "i"
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      "i"
+     ],
+     "i"
+    ]
+   },
+   "output": 0,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      "v"
+     ],
+     "j"
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      "u"
+     ],
+     "j"
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      "j"
+     ],
+     "j"
+    ]
+   },
+   "output": 0,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      "z"
+     ],
+     "k"
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      "o"
+     ],
+     "k"
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      "k"
+     ],
+     "k"
+    ]
+   },
+   "output": 0,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      "i"
+     ],
+     "l"
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      "r"
+     ],
+     "l"
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      "l"
+     ],
+     "l"
+    ]
+   },
+   "output": 0,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      "s"
+     ],
+     "m"
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      "g"
+     ],
+     "m"
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      "m"
+     ],
+     "m"
+    ]
+   },
+   "output": 0,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      "e"
+     ],
+     "n"
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      "i"
+     ],
+     "n"
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      "n"
+     ],
+     "n"
+    ]
+   },
+   "output": 0,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      "j"
+     ],
+     "o"
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      "f"
+     ],
+     "o"
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      "o"
+     ],
+     "o"
+    ]
+   },
+   "output": 0,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      "z"
+     ],
+     "p"
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      "i"
+     ],
+     "p"
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      "p"
+     ],
+     "p"
+    ]
+   },
+   "output": 0,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      "j"
+     ],
+     "q"
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      "z"
+     ],
+     "q"
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      "q"
+     ],
+     "q"
+    ]
+   },
+   "output": 0,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      "v"
+     ],
+     "r"
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      "p"
+     ],
+     "r"
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      "r"
+     ],
+     "r"
+    ]
+   },
+   "output": 0,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      "m"
+     ],
+     "s"
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      "x"
+     ],
+     "s"
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      "s"
+     ],
+     "s"
+    ]
+   },
+   "output": 0,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      "v"
+     ],
+     "t"
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      "m"
+     ],
+     "t"
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      "t"
+     ],
+     "t"
+    ]
+   },
+   "output": 0,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      "l"
+     ],
+     "u"
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      "n"
+     ],
+     "u"
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      "u"
+     ],
+     "u"
+    ]
+   },
+   "output": 0,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      "o"
+     ],
+     "v"
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      "v"
+     ],
+     "v"
+    ]
+   },
+   "output": 0,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      "w"
+     ],
+     "w"
+    ]
+   },
+   "output": 0,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      "s"
+     ],
+     "w"
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      "r"
+     ],
+     "x"
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      "q"
+     ],
+     "x"
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      "x"
+     ],
+     "x"
+    ]
+   },
+   "output": 0,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      "w"
+     ],
+     "y"
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      "t"
+     ],
+     "y"
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      "y"
+     ],
+     "y"
+    ]
+   },
+   "output": 0,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      "l"
+     ],
+     "z"
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      "o"
+     ],
+     "z"
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      "z"
+     ],
+     "z"
+    ]
+   },
+   "output": 0,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      "cbc",
+      "acb",
+      "acb",
+      "acbc"
+     ],
+     "acbc"
+    ]
+   },
+   "output": 2,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      "aaba",
+      "abba",
+      "acabb",
+      "cabb"
+     ],
+     "cabba"
+    ]
+   },
+   "output": 3,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      "baba",
+      "babc",
+      "bbc",
+      "bbc"
+     ],
+     "bbc"
+    ]
+   },
+   "output": 2,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      "acb",
+      "caccc",
+      "baaab",
+      "baa"
+     ],
+     "acb"
+    ]
+   },
+   "output": 2,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      "aaac",
+      "aac",
+      "aaa",
+      "aaac"
+     ],
+     "aaac"
+    ]
+   },
+   "output": 2,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      "ababa",
+      "ca",
+      "caac",
+      "babb"
+     ],
+     "ca"
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      "bbb",
+      "aacb",
+      "babbb",
+      "bcab"
+     ],
+     "babbb"
+    ]
+   },
+   "output": 4,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      "bca",
+      "cbbba",
+      "acbcc",
+      "aabb"
+     ],
+     "cbbba"
+    ]
+   },
+   "output": 4,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      "aab",
+      "abab",
+      "cacb",
+      "bab"
+     ],
+     "abab"
+    ]
+   },
+   "output": 3,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      "bbcc",
+      "aaccc",
+      "cbab",
+      "babca"
+     ],
+     "cbab"
+    ]
+   },
+   "output": 3,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      "aaa",
+      "cbb",
+      "aaa",
+      "caaa"
+     ],
+     "caaa"
+    ]
+   },
+   "output": 3,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      "aaab",
+      "bbaa",
+      "babac",
+      "baa"
+     ],
+     "baa"
+    ]
+   },
+   "output": 2,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      "cbcc",
+      "baa",
+      "bbba",
+      "cac"
+     ],
+     "cbcc"
+    ]
+   },
+   "output": 3,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      "cccaa",
+      "baaca",
+      "cac",
+      "cac"
+     ],
+     "cac"
+    ]
+   },
+   "output": 2,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      "cabab",
+      "abab",
+      "cabab",
+      "abab"
+     ],
+     "cabab"
+    ]
+   },
+   "output": 4,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      "caa",
+      "bba",
+      "acc",
+      "bcabb"
+     ],
+     "caa"
+    ]
+   },
+   "output": 2,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      "ba",
+      "ba",
+      "cab",
+      "cbcac"
+     ],
+     "ba"
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      "baca",
+      "bbc",
+      "bbc",
+      "caa"
+     ],
+     "bbc"
+    ]
+   },
+   "output": 2,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      "cbaab",
+      "bbb",
+      "bbb",
+      "bab"
+     ],
+     "bbb"
+    ]
+   },
+   "output": 2,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      "ccc",
+      "bcba",
+      "bcc",
+      "bcc"
+     ],
+     "bbccc"
+    ]
+   },
+   "output": 3,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      "bcac",
+      "caca",
+      "bcac",
+      "bca"
+     ],
+     "bcac"
+    ]
+   },
+   "output": 3,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      "aca",
+      "cabcc",
+      "caba",
+      "ab"
+     ],
+     "ab"
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      "bab",
+      "babbb",
+      "abbaa",
+      "caa"
+     ],
+     "caa"
+    ]
+   },
+   "output": 2,
+   "explanation": ""
+  }
+ ],
+ "original_ilr": "```json\n{\n  \"problem_id\": \"longestValidSubstring\",\n  \"nodes\": [\n    {\n      \"id\": 1,\n      \"type\": \"start\",\n      \"label\": \"Start\",\n      \"next\": 2\n    },\n    {\n      \"id\": 2,\n      \"type\": \"process\",\n      \"label\": \"Input: word (string), forbidden (list of strings)\",\n      \"action\": \"ctx['word'] = ctx['arg0']; ctx['forbidden'] = ctx['arg1']; ctx['res'] = 0; ctx['right'] = len(ctx['word']) - 1\",\n      \"next\": 3\n    },\n    {\n      \"id\": 3,\n      \"type\": \"process\",\n      \"label\": \"Create forbidden_set from forbidden: forbidden_set = set(forbidden)\",\n      \"action\": \"ctx['forbidden_set'] = set(ctx['forbidden'])\",\n      \"next\": 4\n    },\n    {\n      \"id\": 4,\n      \"type\": \"process\",\n      \"label\": \"Initialize res = 0, right = length of word - 1\",\n      \"action\": \"ctx['res'] = 0; ctx['right'] = len(ctx['word']) - 1\",\n      \"next\": 5\n    },\n    {\n      \"id\": 5,\n      \"type\": \"decision\",\n      \"label\": \"Loop left from length of word - 1 to 0\",\n      \"logic\": \"ctx['left'] >= 0\",\n      \"true_next\": 6,\n      \"false_next\": 9\n    },\n    {\n      \"id\": 6,\n      \"type\": \"process\",\n      \"label\": \"For each left, loop k from left to min(left + 10, right + 1)\",\n      \"action\": \"ctx['k'] = ctx['left']; while ctx['k'] <= min(ctx['left'] + 10, ctx['right'] + 1):\\n    ctx['k'] += 1\\n    if ctx['k'] > ctx['right'] + 1:\\n        break\",\n      \"next\": 7\n    },\n    {\n      \"id\": 7,\n      \"type\": \"decision\",\n      \"label\": \"Is word[left:k+1] in forbidden_set?\",\n      \"logic\": \"ctx['word'][ctx['left']:ctx['k']] in ctx['forbidden_set']\",\n      \"true_next\": 8,\n      \"false_next\": 6\n    },\n    {\n      \"id\": 8,\n      \"type\": \"process\",\n      \"label\": \"Update right = k - 1\",\n      \"action\": \"ctx['right'] = ctx['k'] - 1\",\n      \"next\": 6\n    },\n    {\n      \"id\": 9,\n      \"type\": \"end\",\n      \"label\": \"Output: res (length of longest valid substring)\",\n      \"output\": \"ctx['res']\"\n    }\n  ]\n}\n```",
+ "original_code": "class Solution:\n    def longestValidSubstring(self, word: str, forbidden: List[str]) -> int:\n        # Initialize variables as per ILR node 2\n        res = 0\n        right = len(word) - 1\n        \n        # Create forbidden_set from forbidden list as per ILR node 3\n        forbidden_set = set(forbidden)\n        \n        # Loop left from length of word - 1 to 0 as per ILR node 5\n        left = len(word) - 1\n        while left >= 0:\n            # For each left, loop k from left to min(left + 10, right + 1) as per ILR node 6\n            k = left\n            while k <= min(left + 10, right + 1):\n                k += 1\n                if k > right + 1:\n                    break\n                \n                # Check if substring word[left:k] is in forbidden_set as per ILR node 7\n                substring = word[left:k]\n                if substring in forbidden_set:\n                    # Update right = k - 1 as per ILR node 8\n                    right = k - 1\n                    break\n            \n            # Update result with max of current res and (right - left + 1)\n            res = max(res, right - left + 1)\n            left -= 1\n        \n        return res",
+ "ocr_data": {
+  "nodes": [
+   {
+    "node_id": 1,
+    "shape_type": "rectangle",
+    "raw_text": "Start",
+    "position": "top"
+   },
+   {
+    "node_id": 2,
+    "shape_type": "rectangle",
+    "raw_text": "Input: word (string), forbidden (list of strings)",
+    "position": "middle"
+   },
+   {
+    "node_id": 3,
+    "shape_type": "rectangle",
+    "raw_text": "Create forbidden_set from forbidden: forbidden_set = set(forbidden)",
+    "position": "middle"
+   },
+   {
+    "node_id": 4,
+    "shape_type": "rectangle",
+    "raw_text": "Initialize res = 0, right = length of word - 1",
+    "position": "middle"
+   },
+   {
+    "node_id": 5,
+    "shape_type": "diamond",
+    "raw_text": "Loop left from length of word - 1 to 0",
+    "position": "middle"
+   },
+   {
+    "node_id": 6,
+    "shape_type": "rectangle",
+    "raw_text": "For each left, loop k from left to min(left + 10, right + 1)",
+    "position": "middle"
+   },
+   {
+    "node_id": 7,
+    "shape_type": "diamond",
+    "raw_text": "Is word[left:k+1] in forbidden_set?",
+    "position": "middle"
+   },
+   {
+    "node_id": 8,
+    "shape_type": "rectangle",
+    "raw_text": "End Loop: Update res = max(res, right - left + 1)",
+    "position": "middle"
+   },
+   {
+    "node_id": 9,
+    "shape_type": "rectangle",
+    "raw_text": "Output: res (length of longest valid substring)",
+    "position": "middle"
+   },
+   {
+    "node_id": 10,
+    "shape_type": "rectangle",
+    "raw_text": "Update right = k - 1",
+    "position": "bottom"
+   }
+  ],
+  "edges": [
+   {
+    "from_node": 1,
+    "to_node": 2,
+    "label": ""
+   },
+   {
+    "from_node": 2,
+    "to_node": 3,
+    "label": ""
+   },
+   {
+    "from_node": 3,
+    "to_node": 4,
+    "label": ""
+   },
+   {
+    "from_node": 4,
+    "to_node": 5,
+    "label": ""
+   },
+   {
+    "from_node": 5,
+    "to_node": 6,
+    "label": ""
+   },
+   {
+    "from_node": 6,
+    "to_node": 7,
+    "label": ""
+   },
+   {
+    "from_node": 7,
+    "to_node": 10,
+    "label": "Yes"
+   },
+   {
+    "from_node": 7,
+    "to_node": 6,
+    "label": "No"
+   },
+   {
+    "from_node": 10,
+    "to_node": 8,
+    "label": ""
+   },
+   {
+    "from_node": 8,
+    "to_node": 5,
+    "label": ""
+   },
+   {
+    "from_node": 5,
+    "to_node": 9,
+    "label": "No"
+   },
+   {
+    "from_node": 9,
+    "to_node": 6,
+    "label": ""
+   }
+  ],
+  "other_text": []
+ },
+ "test_result": {},
+ "status": "completed",
+ "fixed_ilr": null,
+ "modified_code": null,
+ "ilr_fix_log": "",
+ "bug_injected": ""
+}

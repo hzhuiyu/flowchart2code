@@ -1,0 +1,95 @@
+{
+  "problem_id": "max_spending",
+  "nodes": [
+    {
+      "id": 1,
+      "type": "start",
+      "label": "Start",
+      "next": 2
+    },
+    {
+      "id": 2,
+      "type": "process",
+      "label": "Input: values (List[List[int]])",
+      "action": "ctx['values'] = ctx['arg0']",
+      "next": 3
+    },
+    {
+      "id": 3,
+      "type": "process",
+      "label": "Initialize r = []",
+      "action": "ctx['r'] = []",
+      "next": 4
+    },
+    {
+      "id": 4,
+      "type": "decision",
+      "label": "For each shop i in values",
+      "logic": "ctx['i'] < len(ctx['values'])",
+      "true_next": 5,
+      "false_next": 7
+    },
+    {
+      "id": 5,
+      "type": "process",
+      "label": "Extend r with items from shop i",
+      "action": "ctx['r'].extend(ctx['values'][ctx['i']])",
+      "next": 6
+    },
+    {
+      "id": 6,
+      "type": "process",
+      "label": "Heapify r: heapq.heapify(r)",
+      "action": "heapq.heapify(ctx['r'])",
+      "next": 4
+    },
+    {
+      "id": 7,
+      "type": "process",
+      "label": "Initialize ans = 0",
+      "action": "ctx['ans'] = 0",
+      "next": 8
+    },
+    {
+      "id": 8,
+      "type": "decision",
+      "label": "For day i from 1 to length of r",
+      "logic": "ctx['i'] <= len(ctx['r'])",
+      "true_next": 9,
+      "false_next": 11
+    },
+    {
+      "id": 9,
+      "type": "process",
+      "label": "Pop the smallest value from r: val = heapq.heappop(r)",
+      "action": "ctx['val'] = heapq.heappop(ctx['r'])",
+      "next": 10
+    },
+    {
+      "id": 10,
+      "type": "process",
+      "label": "Update ans: ans += i * val",
+      "action": "ctx['ans'] += ctx['i'] * ctx['val']",
+      "next": 8
+    },
+    {
+      "id": 11,
+      "type": "end",
+      "label": "Output: ans (maximum spending)",
+      "output": "ctx['ans']"
+    }
+  ],
+  "task_id": "biweekly-contest-117-maximum-spending-after-buying-items",
+  "dataset": "Algorithm",
+  "result": "failed: ",
+  "code": "class Solution:\n    def maxSpending(self, values: List[List[int]]) -> int:\n        import heapq\n        \n        r = []\n        for i in range(len(values)):\n            r.extend(values[i])\n        heapq.heapify(r)\n        \n        ans = 0\n        i = 1\n        while i <= len(r):\n            val = heapq.heappop(r)\n            ans += i * val\n            i += 1\n            \n        return ans",
+  "verification": {
+    "md_verdict": "ILR Error",
+    "actual_error_source": "ilr",
+    "ilr_verdict": "incorrect",
+    "code_vs_ilr": "faithful",
+    "md_correct": "yes",
+    "note": "确认 ILR 错误：day 循环条件 ctx['i'] <= len(ctx['r']) 中的 r 在循环体内被 heappop 不断缩短，忠实实现会提前终止循环。生成代码与 ILR 逐节点对应（含同一缺陷），故根因在 ILR。",
+    "evidence": "输入 [[8,5,2],[6,4,1],[9,7,3]]：按 ILR/代码逐句执行，pop 到第 5 天后 len(r)=4 < i=6 循环结束，ans=55，期望 285（前 5 项 1+4+9+16+25=55 与实跑一致）。"
+  }
+}

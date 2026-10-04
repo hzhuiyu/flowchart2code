@@ -1,0 +1,40 @@
+{
+  "samples_file": "output/Algorithm/Qwen-Qwen3-VL-30B-A3B-Instruct_text_image/samples.jsonl",
+  "reflection_dir": "output/Algorithm/Qwen-Qwen3-VL-30B-A3B-Instruct_text_image/reflection_code_only",
+  "output_file": "output/Algorithm/Qwen-Qwen3-VL-30B-A3B-Instruct_text_image/reflection_code_only/samples_reflection_merged.jsonl",
+  "merged_results_file": "output/Algorithm/Qwen-Qwen3-VL-30B-A3B-Instruct_text_image/reflection_code_only/samples_reflection_merged.jsonl_results.jsonl",
+  "results_txt": "output/Algorithm/Qwen-Qwen3-VL-30B-A3B-Instruct_text_image/reflection_code_only/results.txt",
+  "problem_file": "data/Algorithm/Algorithm.jsonl",
+  "merge_summary": {
+    "total_rows": 149,
+    "replaced_rows": 30,
+    "replaced_by_first_passed": 13,
+    "replaced_by_last_failed": 17,
+    "missing_generated_code": 0,
+    "selection_stats": {
+      "keep_original": 119,
+      "first_passed": 13,
+      "iter_3_failed": 17
+    }
+  },
+  "eval_result": {
+    "pass@1": 0.8859060402684564
+  },
+  "difficulty_summary": {
+    "Easy": {
+      "passed": 45.0,
+      "total": 45.0,
+      "rate": 1.0
+    },
+    "Medium": {
+      "passed": 67.0,
+      "total": 75.0,
+      "rate": 0.8933333333333333
+    },
+    "Hard": {
+      "passed": 20.0,
+      "total": 29.0,
+      "rate": 0.6896551724137931
+    }
+  }
+}

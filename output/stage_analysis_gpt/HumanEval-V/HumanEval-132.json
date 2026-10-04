@@ -1,0 +1,231 @@
+{
+  "task_id": "HumanEval-132",
+  "dataset": "HumanEval-V",
+  "difficulty": null,
+  "title": null,
+  "result": "failed: ",
+  "ilr": "{\n  \"problem_id\": \"is_nested_brackets\",\n  \"nodes\": [\n    {\"id\": 1, \"type\": \"start\", \"label\": \"Start\", \"next\": 2},\n    {\"id\": 2, \"type\": \"process\", \"label\": \"Input: string (only square brackets)\", \"action\": \"ctx['string']=ctx['arg0']; ctx['opening_bracket_index'] = []; ctx['closing_bracket_index'] = []; ctx['cnt'] = 0; ctx['i'] = 0\", \"next\": 3},\n    {\"id\": 3, \"type\": \"decision\", \"label\": \"Is the string empty?\", \"logic\": \"ctx['string'] == ''\", \"true_next\": 4, \"false_next\": 5},\n    {\"id\": 4, \"type\": \"end\", \"label\": \"Output: False (no brackets present)\", \"output\": \"False\"},\n    {\"id\": 5, \"type\": \"process\", \"label\": \"Iterate through each character in the string\", \"action\": \"for idx in range(len(ctx['string'])): ctx['char'] = ctx['string'][idx];\", \"next\": 6},\n    {\"id\": 6, \"type\": \"decision\", \"label\": \"Is the character '['?\", \"logic\": \"ctx['char'] == '['\", \"true_next\": 7, \"false_next\": 8},\n    {\"id\": 7, \"type\": \"process\", \"label\": \"Append index to opening_bracket_index\", \"action\": \"ctx['opening_bracket_index'].append(idx)\", \"next\": 5},\n    {\"id\": 8, \"type\": \"process\", \"label\": \"Append index to closing_bracket_index\", \"action\": \"ctx['closing_bracket_index'].append(idx)\", \"next\": 5},\n    {\"id\": 9, \"type\": \"process\", \"label\": \"Reverse closing_bracket_index\", \"action\": \"ctx['closing_bracket_index'] = ctx['closing_bracket_index'][::-1]\", \"next\": 10},\n    {\"id\": 10, \"type\": \"process\", \"label\": \"Initialize count (cnt) = 0 and index (i) = 0\", \"action\": \"ctx['cnt'] = 0; ctx['i'] = 0\", \"next\": 11},\n    {\"id\": 11, \"type\": \"decision\", \"label\": \"Iterate through opening_bracket_index\", \"logic\": \"ctx['i'] < len(ctx['opening_bracket_index'])\", \"true_next\": 12, \"false_next\": 16},\n    {\"id\": 12, \"type\": \"decision\", \"label\": \"Is index < length of closing_bracket_index and idx < closing_bracket_index[i]?\", \"logic\": \"ctx['i'] < len(ctx['closing_bracket_index']) and ctx['opening_bracket_index'][ctx['i']] < ctx['closing_bracket_index'][ctx['i']]\", \"true_next\": 14, \"false_next\": 15},\n    {\"id\": 13, \"type\": \"process\", \"label\": \"Increment count (cnt) by 1 and index (i) by 1\", \"action\": \"ctx['cnt'] += 1; ctx['i'] += 1\", \"next\": 11},\n    {\"id\": 14, \"type\": \"process\", \"label\": \"Break iteration\", \"action\": \"break\", \"next\": 16},\n    {\"id\": 15, \"type\": \"process\", \"label\": \"Output: False (no nested brackets found)\", \"action\": \"return False\", \"next\": 18},\n    {\"id\": 16, \"type\": \"decision\", \"label\": \"Is cnt >= 2?\", \"logic\": \"ctx['cnt'] >= 2\", \"true_next\": 17, \"false_next\": 18},\n    {\"id\": 17, \"type\": \"end\", \"label\": \"Output: True (nested brackets present)\", \"output\": \"True\"},\n    {\"id\": 18, \"type\": \"end\", \"label\": \"Output: False (no nested brackets found)\", \"output\": \"False\"}\n  ]\n}",
+  "code": "def is_nested(string):\n    opening_bracket_index = []\n    closing_bracket_index = []\n    cnt = 0\n    i = 0\n    \n    if string == '':\n        return False\n    \n    for idx in range(len(string)):\n        char = string[idx]\n        if char == '[':\n            opening_bracket_index.append(idx)\n        else:\n            closing_bracket_index.append(idx)\n    \n    closing_bracket_index.reverse()\n    \n    cnt = 0\n    i = 0\n    \n    while i < len(opening_bracket_index):\n        if i < len(closing_bracket_index) and opening_bracket_index[i] < closing_bracket_index[i]:\n            cnt += 1\n            i += 1\n        else:\n            return False\n    \n    return cnt >= 2",
+  "prompt": "\ndef is_nested(string):\n    '''\n    Create a function that takes a string as input which contains only square brackets.\n    The function should return True if and only if there is a valid subsequence of brackets \n    where at least one bracket in the subsequence is nested.\n\n    is_nested('[[]]') ➞ True\n    is_nested('[]]]]]]][[[[[]') ➞ False\n    is_nested('[][]') ➞ False\n    is_nested('[]') ➞ False\n    is_nested('[[][]]') ➞ True\n    is_nested('[[]][[') ➞ True\n    '''\n",
+  "test": "def check(candidate):\n\n    # Check some simple cases\n    assert candidate('[[]]') == True, \"This prints if this assert fails 1 (good for debugging!)\"\n    assert candidate('[]]]]]]][[[[[]') == False\n    assert candidate('[][]') == False\n    assert candidate(('[]')) == False\n    assert candidate('[[[[]]]]') == True\n    assert candidate('[]]]]]]]]]]') == False\n    assert candidate('[][][[]]') == True\n    assert candidate('[[]') == False\n    assert candidate('[]]') == False\n    assert candidate('[[]][[') == True\n    assert candidate('[[][]]') == True\n\n    # Check some edge cases that are easy to work out by hand.\n    assert candidate('') == False, \"This prints if this assert fails 2 (also good for debugging!)\"\n    assert candidate('[[[[[[[[') == False\n    assert candidate(']]]]]]]]') == False\n\n",
+  "ocr_data": {
+    "nodes": [
+      {
+        "node_id": 1,
+        "shape_type": "rectangle",
+        "raw_text": "Start",
+        "position": "top"
+      },
+      {
+        "node_id": 2,
+        "shape_type": "rectangle",
+        "raw_text": "Input: string (only square brackets)",
+        "position": "top"
+      },
+      {
+        "node_id": 3,
+        "shape_type": "diamond",
+        "raw_text": "Is the string empty?",
+        "position": "middle"
+      },
+      {
+        "node_id": 4,
+        "shape_type": "rectangle",
+        "raw_text": "Output: False (no brackets present)",
+        "position": "middle"
+      },
+      {
+        "node_id": 5,
+        "shape_type": "rectangle",
+        "raw_text": "Initialize opening_bracket_index = [], closing_bracket_index = []",
+        "position": "middle"
+      },
+      {
+        "node_id": 6,
+        "shape_type": "rectangle",
+        "raw_text": "Iterate through each character in the string",
+        "position": "middle"
+      },
+      {
+        "node_id": 7,
+        "shape_type": "diamond",
+        "raw_text": "Is the character '['?",
+        "position": "middle"
+      },
+      {
+        "node_id": 8,
+        "shape_type": "rectangle",
+        "raw_text": "Append index to opening_bracket_index",
+        "position": "middle"
+      },
+      {
+        "node_id": 9,
+        "shape_type": "rectangle",
+        "raw_text": "Append index to closing_bracket_index",
+        "position": "middle"
+      },
+      {
+        "node_id": 10,
+        "shape_type": "rectangle",
+        "raw_text": "Reverse closing_bracket_index",
+        "position": "middle"
+      },
+      {
+        "node_id": 11,
+        "shape_type": "rectangle",
+        "raw_text": "Initialize count (cnt) = 0 and index (i) = 0",
+        "position": "middle"
+      },
+      {
+        "node_id": 12,
+        "shape_type": "diamond",
+        "raw_text": "Iterate through opening_bracket_index",
+        "position": "middle"
+      },
+      {
+        "node_id": 13,
+        "shape_type": "diamond",
+        "raw_text": "Is index < length of closing_bracket_index and idx < closing_bracket_index[i]?",
+        "position": "middle"
+      },
+      {
+        "node_id": 14,
+        "shape_type": "rectangle",
+        "raw_text": "Increment count (cnt) by 1 and index (i) by 1",
+        "position": "middle"
+      },
+      {
+        "node_id": 15,
+        "shape_type": "rectangle",
+        "raw_text": "Break iteration",
+        "position": "middle"
+      },
+      {
+        "node_id": 16,
+        "shape_type": "diamond",
+        "raw_text": "Is cnt >= 2?",
+        "position": "bottom"
+      },
+      {
+        "node_id": 17,
+        "shape_type": "rectangle",
+        "raw_text": "Output: True (nested brackets present)",
+        "position": "bottom"
+      },
+      {
+        "node_id": 18,
+        "shape_type": "rectangle",
+        "raw_text": "Output: False (no nested brackets found)",
+        "position": "bottom"
+      }
+    ],
+    "edges": [
+      {
+        "from_node": 1,
+        "to_node": 2,
+        "label": ""
+      },
+      {
+        "from_node": 2,
+        "to_node": 3,
+        "label": ""
+      },
+      {
+        "from_node": 3,
+        "to_node": 4,
+        "label": "Yes"
+      },
+      {
+        "from_node": 3,
+        "to_node": 5,
+        "label": "No"
+      },
+      {
+        "from_node": 5,
+        "to_node": 6,
+        "label": ""
+      },
+      {
+        "from_node": 6,
+        "to_node": 7,
+        "label": ""
+      },
+      {
+        "from_node": 7,
+        "to_node": 8,
+        "label": "Yes"
+      },
+      {
+        "from_node": 7,
+        "to_node": 9,
+        "label": "No"
+      },
+      {
+        "from_node": 8,
+        "to_node": 6,
+        "label": ""
+      },
+      {
+        "from_node": 9,
+        "to_node": 10,
+        "label": ""
+      },
+      {
+        "from_node": 10,
+        "to_node": 11,
+        "label": ""
+      },
+      {
+        "from_node": 11,
+        "to_node": 12,
+        "label": ""
+      },
+      {
+        "from_node": 12,
+        "to_node": 13,
+        "label": ""
+      },
+      {
+        "from_node": 13,
+        "to_node": 14,
+        "label": "Yes"
+      },
+      {
+        "from_node": 13,
+        "to_node": 15,
+        "label": "No"
+      },
+      {
+        "from_node": 14,
+        "to_node": 12,
+        "label": ""
+      },
+      {
+        "from_node": 15,
+        "to_node": 16,
+        "label": ""
+      },
+      {
+        "from_node": 16,
+        "to_node": 17,
+        "label": "Yes"
+      },
+      {
+        "from_node": 16,
+        "to_node": 18,
+        "label": "No"
+      }
+    ],
+    "other_text": []
+  },
+  "analysis": {
+    "ilr_verdict": "incorrect",
+    "ilr_issues": "ILR把节点12的分支接反了：true（匹配成功）指向节点14'Break iteration'（break），false（匹配失败）指向节点15'return False'，而真正应执行的节点13'cnt+=1; i+=1'变成孤儿节点不可达。忠实执行时cnt永远为0且遇到不匹配立即返回False，任何输入都输出False。",
+    "code_vs_ilr": "deviates",
+    "code_issues": "代码部分修正了ILR（把cnt+=1/i+=1放回true分支并继续循环），但保留了ILR错误的false分支——匹配失败时直接return False，而正确流程图是break后检查cnt>=2；导致'[][][[]]'、'[[]][['、'[[][]]'中途一次失配就被判False。",
+    "error_source": "ilr",
+    "ocr_contribution": "no",
+    "root_cause": "ILR生成环节把流程图13号判断的Yes/No边接反且丢失计数节点，按ILR逻辑恒返回False；代码虽修正了计数分支却沿用了ILR错误的'失配即返回False'，仍无法通过要求中途失配后继续统计的用例。OCR边显示流程图本身接线正确（13 Yes→14→12回边，No→15 break→16），OCR无误。",
+    "evidence": "忠实执行ILR对 '[[]]' 也返回False（期望True）；生成代码对 '[][][[]]'/'[[]][['/'[[][]]' 返回False（期望True，因'[][][[]]'在opening[2]=4<closing[2]=3失配时提前return False，此时cnt已=2）；按OCR正确接线（失配break）的版本14个测试全过。"
+  }
+}

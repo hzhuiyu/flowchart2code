@@ -1,0 +1,88 @@
+{
+  "problem_id": "count_pairs",
+  "nodes": [
+    {
+      "id": 1,
+      "type": "start",
+      "label": "Start",
+      "next": 2
+    },
+    {
+      "id": 2,
+      "type": "process",
+      "label": "Input: nums (list of integers), target (integer)",
+      "action": "ctx['nums'] = ctx['arg0']; ctx['target'] = ctx['arg1']; ctx['count'] = 0; ctx['left'] = 0; ctx['right'] = len(ctx['nums']) - 1",
+      "next": 3
+    },
+    {
+      "id": 3,
+      "type": "process",
+      "label": "Sort nums",
+      "action": "ctx['nums'] = sorted(ctx['nums'])",
+      "next": 4
+    },
+    {
+      "id": 4,
+      "type": "decision",
+      "label": "Is left < right?",
+      "logic": "ctx['left'] < ctx['right']",
+      "true_next": 5,
+      "false_next": 10
+    },
+    {
+      "id": 5,
+      "type": "decision",
+      "label": "Is nums[left] + nums[right] < target?",
+      "logic": "ctx['nums'][ctx['left']] + ctx['nums'][ctx['right']] < ctx['target']",
+      "true_next": 6,
+      "false_next": 8
+    },
+    {
+      "id": 6,
+      "type": "process",
+      "label": "Increment count by right - left",
+      "action": "ctx['count'] += ctx['right'] - ctx['left']",
+      "next": 7
+    },
+    {
+      "id": 7,
+      "type": "process",
+      "label": "Decrement right by 1",
+      "action": "ctx['right'] -= 1",
+      "next": 9
+    },
+    {
+      "id": 8,
+      "type": "process",
+      "label": "Increment left by 1",
+      "action": "ctx['left'] += 1",
+      "next": 9
+    },
+    {
+      "id": 9,
+      "type": "process",
+      "label": "Increment left by 1",
+      "action": "ctx['left'] += 1",
+      "next": 4
+    },
+    {
+      "id": 10,
+      "type": "end",
+      "label": "Output: count (number of pairs)",
+      "output": "ctx['count']"
+    }
+  ],
+  "task_id": "biweekly-contest-111-count-pairs-whose-sum-is-less-than-target",
+  "dataset": "Algorithm",
+  "result": "failed: ",
+  "code": "class Solution:\n    def countPairs(self, nums: List[int], target: int) -> int:\n        nums = sorted(nums)\n        count = 0\n        left = 0\n        right = len(nums) - 1\n        \n        while left < right:\n            if nums[left] + nums[right] < target:\n                count += right - left\n                right -= 1\n            else:\n                left += 1\n                \n        return count",
+  "verification": {
+    "md_verdict": "ILR Error",
+    "actual_error_source": "both",
+    "ilr_verdict": "incorrect",
+    "code_vs_ilr": "deviates",
+    "md_correct": "partial",
+    "note": "ILR 确实错误：true 分支在 count+=right-left 后又执行 node7 的 right-=1，false 分支经 node8+node9 把 left 加了 2，与正确双指针（true: left+=1 / false: right-=1）不符，忠实转写 89/100 失败且全部与暴力真值不符。但生成代码也未忠实转写 ILR——它整体丢弃了 node 9 的无条件 left+=1（true 分支少了 left+=1，false 分支只加 1 而非加 2），与忠实转写在 35 组测试上输出不同，且自己也不正确（示例1 输出 0 而期望 3），MD 漏掉了代码层问题。",
+    "evidence": "nums=[-1,1,2,3,1],target=2 期望 3：生成代码输出 0，忠实 ILR 转写输出 0；nums=[1,2,3],target=10 期望 3，忠实 ILR 输出 2（true 分支多减了 right）。100 组测试：生成代码错 92 组，忠实转写错 89 组，两者输出在 35 组上不同。"
+  }
+}

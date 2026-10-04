@@ -1,0 +1,126 @@
+{
+  "problem_id": "lexicographicallySmallestArray",
+  "nodes": [
+    {
+      "id": 1,
+      "type": "start",
+      "label": "Start",
+      "next": 2
+    },
+    {
+      "id": 2,
+      "type": "process",
+      "label": "Input: limit (int), nums (List[int]); pairs sorted by value, groups, result init",
+      "action": "ctx['limit'] = ctx['arg0']; ctx['nums'] = ctx['arg1']; ctx['n'] = len(ctx['nums']); ctx['pairs'] = sorted(zip(ctx['nums'], range(ctx['n']))); ctx['groups'] = []; ctx['result'] = [0] * ctx['n']",
+      "next": 3
+    },
+    {
+      "id": 3,
+      "type": "process",
+      "label": "Group loop index: i = 0",
+      "action": "ctx['i'] = 0",
+      "next": 4
+    },
+    {
+      "id": 4,
+      "type": "decision",
+      "label": "More pairs? (i < n)",
+      "logic": "ctx['i'] < ctx['n']",
+      "true_next": 5,
+      "false_next": 9
+    },
+    {
+      "id": 5,
+      "type": "decision",
+      "label": "New group? (i == 0 or value gap > limit)",
+      "logic": "ctx['i'] == 0 or ctx['pairs'][ctx['i']][0] - ctx['pairs'][ctx['i'] - 1][0] > ctx['limit']",
+      "true_next": 6,
+      "false_next": 7
+    },
+    {
+      "id": 6,
+      "type": "process",
+      "label": "Start new group: groups.append([])",
+      "action": "ctx['groups'].append([])",
+      "next": 7
+    },
+    {
+      "id": 7,
+      "type": "process",
+      "label": "Add pair to current group: groups[-1].append(pairs[i])",
+      "action": "ctx['groups'][-1].append(ctx['pairs'][ctx['i']])",
+      "next": 8
+    },
+    {
+      "id": 8,
+      "type": "process",
+      "label": "Advance pair index: i += 1",
+      "action": "ctx['i'] += 1",
+      "next": 4
+    },
+    {
+      "id": 9,
+      "type": "process",
+      "label": "Group assignment loop index: g = 0",
+      "action": "ctx['g'] = 0",
+      "next": 10
+    },
+    {
+      "id": 10,
+      "type": "decision",
+      "label": "More groups? (g < len(groups))",
+      "logic": "ctx['g'] < len(ctx['groups'])",
+      "true_next": 11,
+      "false_next": 17
+    },
+    {
+      "id": 11,
+      "type": "process",
+      "label": "Sorted original indices of group g: idxs = sorted([p[1] for p in groups[g]])",
+      "action": "ctx['idxs'] = sorted([p[1] for p in ctx['groups'][ctx['g']]])",
+      "next": 12
+    },
+    {
+      "id": 12,
+      "type": "process",
+      "label": "Inner assignment index: k = 0",
+      "action": "ctx['k'] = 0",
+      "next": 13
+    },
+    {
+      "id": 13,
+      "type": "decision",
+      "label": "More indices in group? (k < len(idxs))",
+      "logic": "ctx['k'] < len(ctx['idxs'])",
+      "true_next": 14,
+      "false_next": 16
+    },
+    {
+      "id": 14,
+      "type": "process",
+      "label": "result[idxs[k]] = groups[g][k][0]",
+      "action": "ctx['result'][ctx['idxs'][ctx['k']]] = ctx['groups'][ctx['g']][ctx['k']][0]",
+      "next": 15
+    },
+    {
+      "id": 15,
+      "type": "process",
+      "label": "Advance inner index: k += 1",
+      "action": "ctx['k'] += 1",
+      "next": 13
+    },
+    {
+      "id": 16,
+      "type": "process",
+      "label": "Advance group index: g += 1",
+      "action": "ctx['g'] += 1",
+      "next": 10
+    },
+    {
+      "id": 17,
+      "type": "end",
+      "label": "Output: result",
+      "output": "ctx['result']"
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "problem_id": "can_sort_array",
+  "nodes": [
+    {"id": 1, "type": "start", "label": "Start", "next": 2},
+    {"id": 2, "type": "process", "label": "Input: nums; compute popcounts a[]", "action": "ctx['nums'] = ctx['arg0']; ctx['n'] = len(ctx['nums']); ctx['a'] = []\nfor v in ctx['nums']:\n    c = 0\n    w = v\n    while w:\n        c += w & 1\n        w >>= 1\n    ctx['a'].append(c)\nctx['i'] = 0; ctx['prev_max'] = -1; ctx['ok'] = True", "next": 3},
+    {"id": 3, "type": "decision", "label": "i < n?", "logic": "ctx['i'] < ctx['n']", "true_next": 4, "false_next": 8},
+    {"id": 4, "type": "process", "label": "Start group: cnt = a[i], j = i", "action": "ctx['cnt'] = ctx['a'][ctx['i']]; ctx['j'] = ctx['i']", "next": 5},
+    {"id": 5, "type": "decision", "label": "j < n and a[j] == cnt?", "logic": "ctx['j'] < ctx['n'] and ctx['a'][ctx['j']] == ctx['cnt']", "true_next": 6, "false_next": 7},
+    {"id": 6, "type": "process", "label": "Extend group: j += 1", "action": "ctx['j'] += 1", "next": 5},
+    {"id": 7, "type": "process", "label": "Close group: check prev_max <= gmin; prev_max = gmax; i = j", "action": "ctx['gmin'] = min(ctx['nums'][ctx['i']:ctx['j']]); ctx['gmax'] = max(ctx['nums'][ctx['i']:ctx['j']]); ctx['ok'] = ctx['ok'] and ctx['prev_max'] <= ctx['gmin']; ctx['prev_max'] = ctx['gmax']; ctx['i'] = ctx['j']", "next": 3},
+    {"id": 8, "type": "end", "label": "Output: ok (array can be sorted)", "output": "ctx['ok']"}
+  ]
+}

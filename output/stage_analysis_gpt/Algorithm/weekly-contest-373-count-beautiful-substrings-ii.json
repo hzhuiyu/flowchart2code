@@ -1,0 +1,280 @@
+{
+  "task_id": "weekly-contest-373-count-beautiful-substrings-ii",
+  "dataset": "Algorithm",
+  "difficulty": "Hard",
+  "title": "count-beautiful-substrings-ii",
+  "result": "failed: ",
+  "ilr": "{\n  \"problem_id\": \"beautiful_substrings\",\n  \"nodes\": [\n    {\"id\": 1, \"type\": \"start\", \"label\": \"Start\", \"next\": 2},\n    {\"id\": 2, \"type\": \"process\", \"label\": \"Input: s (string), k (integer)\", \"action\": \"ctx['s']=ctx['arg0']; ctx['k']=ctx['arg1']; ctx['p']=0\", \"next\": 3},\n    {\"id\": 3, \"type\": \"decision\", \"label\": \"For i in range(1, k + 1)\", \"logic\": \"ctx['i'] = 1; ctx['i'] <= ctx['k']\", \"true_next\": 4, \"false_next\": 8},\n    {\"id\": 4, \"type\": \"decision\", \"label\": \"Is i * i % k == 0?\", \"logic\": \"ctx['i'] * ctx['i'] % ctx['k'] == 0\", \"true_next\": 5, \"false_next\": 3},\n    {\"id\": 5, \"type\": \"process\", \"label\": \"Set p = i, break\", \"action\": \"ctx['p'] = ctx['i']; break\", \"next\": 6},\n    {\"id\": 6, \"type\": \"process\", \"label\": \"Set p = 2 * p\", \"action\": \"ctx['p'] = 2 * ctx['p']\", \"next\": 7},\n    {\"id\": 7, \"type\": \"process\", \"label\": \"Initialize sumdict = {(): (p - 1: 1)}\", \"action\": \"ctx['sumdict'] = {0: {ctx['p'] - 1: 1}}\", \"next\": 9},\n    {\"id\": 8, \"type\": \"process\", \"label\": \"Initialize cursum = 0\", \"action\": \"ctx['cursum'] = 0\", \"next\": 10},\n    {\"id\": 9, \"type\": \"process\", \"label\": \"Initialize vowels = {'a', 'e', 'i', 'o', 'u'}\", \"action\": \"ctx['vowels'] = {'a', 'e', 'i', 'o', 'u'}\", \"next\": 11},\n    {\"id\": 10, \"type\": \"process\", \"label\": \"Initialize count = 0\", \"action\": \"ctx['count'] = 0\", \"next\": 12},\n    {\"id\": 11, \"type\": \"decision\", \"label\": \"For i in range(len(s))\", \"logic\": \"ctx['i'] = 0; ctx['i'] < len(ctx['s'])\", \"true_next\": 13, \"false_next\": 21},\n    {\"id\": 12, \"type\": \"process\", \"label\": \"Update cursum: cursum += 1 if s[i] in vowels else -1\", \"action\": \"ctx['cursum'] += 1 if ctx['s'][ctx['i']] in ctx['vowels'] else -1\", \"next\": 14},\n    {\"id\": 13, \"type\": \"process\", \"label\": \"Set cate = i % p\", \"action\": \"ctx['cate'] = ctx['i'] % ctx['p']\", \"next\": 15},\n    {\"id\": 14, \"type\": \"decision\", \"label\": \"Is cursum in sumdict?\", \"logic\": \"ctx['cursum'] in ctx['sumdict']\", \"true_next\": 16, \"false_next\": 18},\n    {\"id\": 15, \"type\": \"decision\", \"label\": \"Is cate in sumdict[cursum]?\", \"logic\": \"ctx['cate'] in ctx['sumdict'][ctx['cursum']]\", \"true_next\": 17, \"false_next\": 19},\n    {\"id\": 16, \"type\": \"process\", \"label\": \"Update count: count += sumdict[cursum][cate]\", \"action\": \"ctx['count'] += ctx['sumdict'][ctx['cursum']][ctx['cate']]\", \"next\": 20},\n    {\"id\": 17, \"type\": \"process\", \"label\": \"Set sumdict[cursum] = {cate: 1}\", \"action\": \"ctx['sumdict'][ctx['cursum']] = {ctx['cate']: 1}\", \"next\": 20},\n    {\"id\": 18, \"type\": \"process\", \"label\": \"Set sumdict[cursum][cate] = 1\", \"action\": \"ctx['sumdict'][ctx['cursum']][ctx['cate']] = 1\", \"next\": 20},\n    {\"id\": 19, \"type\": \"process\", \"label\": \"Update sumdict[cursum][cate] += 1\", \"action\": \"ctx['sumdict'][ctx['cursum']][ctx['cate']] += 1\", \"next\": 12},\n    {\"id\": 20, \"type\": \"process\", \"label\": \"Return count\", \"action\": \"return ctx['count']\", \"next\": 21},\n    {\"id\": 21, \"type\": \"end\", \"label\": \"Output: count (number of beautiful substrings)\", \"output\": \"ctx['count']\"}\n  ]\n}",
+  "code": "class Solution:\n    def beautifulSubstrings(self, s: str, k: int) -> int:\n        p = 0\n        for i in range(1, k + 1):\n            if i * i % k == 0:\n                p = i\n                break\n        p = 2 * p\n        \n        sumdict = {0: {p - 1: 1}}\n        cursum = 0\n        vowels = {'a', 'e', 'i', 'o', 'u'}\n        count = 0\n        \n        for i in range(len(s)):\n            cursum += 1 if s[i] in vowels else -1\n            cate = i % p\n            \n            if cursum in sumdict:\n                if cate in sumdict[cursum]:\n                    count += sumdict[cursum][cate]\n                else:\n                    sumdict[cursum][cate] = 1\n            else:\n                sumdict[cursum] = {cate: 1}\n                \n            if cursum in sumdict:\n                if cate in sumdict[cursum]:\n                    sumdict[cursum][cate] += 1\n                else:\n                    sumdict[cursum][cate] = 1\n            \n        return count",
+  "prompt": "\"\"\"\nYou are given a string s and a positive integer k.\nLet vowels and consonants be the number of vowels and consonants in a string.\nA string is beautiful if:\n\nvowels == consonants.\n(vowels * consonants) % k == 0, in other terms the multiplication of vowels and consonants is divisible by k.\n\nReturn the number of non-empty beautiful substrings in the given string s.\nA substring is a contiguous sequence of characters in a string.\nVowel letters in English are 'a', 'e', 'i', 'o', and 'u'.\nConsonant letters in English are every letter except vowels.\n\nExample 1:\n\nInput: s = \"baeyh\", k = 2\nOutput: 2\nExplanation: There are 2 beautiful substrings in the given string.\n- Substring \"baeyh\", vowels = 2 ([\"a\",e\"]), consonants = 2 ([\"y\",\"h\"]).\nYou can see that string \"aeyh\" is beautiful as vowels == consonants and vowels * consonants % k == 0.\n- Substring \"baeyh\", vowels = 2 ([\"a\",e\"]), consonants = 2 ([\"b\",\"y\"]).\nYou can see that string \"baey\" is beautiful as vowels == consonants and vowels * consonants % k == 0.\nIt can be shown that there are only 2 beautiful substrings in the given string.\n\nExample 2:\n\nInput: s = \"abba\", k = 1\nOutput: 3\nExplanation: There are 3 beautiful substrings in the given string.\n- Substring \"abba\", vowels = 1 ([\"a\"]), consonants = 1 ([\"b\"]).\n- Substring \"abba\", vowels = 1 ([\"a\"]), consonants = 1 ([\"b\"]).\n- Substring \"abba\", vowels = 2 ([\"a\",\"a\"]), consonants = 2 ([\"b\",\"b\"]).\nIt can be shown that there are only 3 beautiful substrings in the given string.\n\nExample 3:\n\nInput: s = \"bcdf\", k = 1\nOutput: 0\nExplanation: There are no beautiful substrings in the given string.\n\n\nConstraints:\n\n1 <= s.length <= 5 * 104\n1 <= k <= 1000\ns consists of only English lowercase letters.\n\"\"\"\nclass Solution:\n    def beautifulSubstrings(self, s: str, k: int) -> int:\n        ",
+  "test": "\nmy_solution = Solution()\n\ntest_input = { \"s\": \"baeyh\", \"k\": 2 }\nassert my_solution.beautifulSubstrings(**test_input) == 2\n\ntest_input = { \"s\": \"abba\", \"k\": 1 }\nassert my_solution.beautifulSubstrings(**test_input) == 3\n\ntest_input = { \"s\": \"bcdf\", \"k\": 1 }\nassert my_solution.beautifulSubstrings(**test_input) == 0\n\ntest_input = { \"s\": \"ihroyeeb\", \"k\": 5 }\nassert my_solution.beautifulSubstrings(**test_input) == 0\n\ntest_input = { \"s\": \"uzuxpzou\", \"k\": 3 }\nassert my_solution.beautifulSubstrings(**test_input) == 1\n\ntest_input = { \"s\": \"ouuoeqd\", \"k\": 2 }\nassert my_solution.beautifulSubstrings(**test_input) == 1\n\ntest_input = { \"s\": \"eeebjoxxujuaeoqibd\", \"k\": 8 }\nassert my_solution.beautifulSubstrings(**test_input) == 4\n\ntest_input = { \"s\": \"ilougekqlovegioemdvu\", \"k\": 4 }\nassert my_solution.beautifulSubstrings(**test_input) == 21\n\ntest_input = { \"s\": \"tqaewreikaztwpfwnef\", \"k\": 8 }\nassert my_solution.beautifulSubstrings(**test_input) == 3\n\ntest_input = { \"s\": \"oykiuhsafgfjumnzb\", \"k\": 7 }\nassert my_solution.beautifulSubstrings(**test_input) == 0\n\ntest_input = { \"s\": \"ifvsa\", \"k\": 3 }\nassert my_solution.beautifulSubstrings(**test_input) == 0\n\ntest_input = { \"s\": \"svzauyuevujektj\", \"k\": 5 }\nassert my_solution.beautifulSubstrings(**test_input) == 3\n\ntest_input = { \"s\": \"urahjig\", \"k\": 2 }\nassert my_solution.beautifulSubstrings(**test_input) == 2\n\ntest_input = { \"s\": \"ime\", \"k\": 2 }\nassert my_solution.beautifulSubstrings(**test_input) == 0\n\ntest_input = { \"s\": \"oacghieut\", \"k\": 5 }\nassert my_solution.beautifulSubstrings(**test_input) == 0\n\ntest_input = { \"s\": \"aoluu\", \"k\": 3 }\nassert my_solution.beautifulSubstrings(**test_input) == 0\n\ntest_input = { \"s\": \"ioaoiciiuoziout\", \"k\": 1 }\nassert my_solution.beautifulSubstrings(**test_input) == 5\n\ntest_input = { \"s\": \"ouafupsuhid\", \"k\": 6 }\nassert my_solution.beautifulSubstrings(**test_input) == 0\n\ntest_input = { \"s\": \"ox\", \"k\": 2 }\nassert my_solution.beautifulSubstrings(**test_input) == 0\n\ntest_input = { \"s\": \"tlaiwoauazutusiaaui\", \"k\": 10 }\nassert my_solution.beautifulSubstrings(**test_input) == 0\n\ntest_input = { \"s\": \"caepeym\", \"k\": 2 }\nassert my_solution.beautifulSubstrings(**test_input) == 2\n\ntest_input = { \"s\": \"apyxvceue\", \"k\": 4 }\nassert my_solution.beautifulSubstrings(**test_input) == 1\n\ntest_input = { \"s\": \"imkqbb\", \"k\": 4 }\nassert my_solution.beautifulSubstrings(**test_input) == 0\n\ntest_input = { \"s\": \"caaz\", \"k\": 2 }\nassert my_solution.beautifulSubstrings(**test_input) == 1\n\ntest_input = { \"s\": \"pyicoy\", \"k\": 1 }\nassert my_solution.beautifulSubstrings(**test_input) == 6\n\ntest_input = { \"s\": \"uopmyrsntjhiroikup\", \"k\": 8 }\nassert my_solution.beautifulSubstrings(**test_input) == 2\n\ntest_input = { \"s\": \"aujfxqxcj\", \"k\": 5 }\nassert my_solution.beautifulSubstrings(**test_input) == 0\n\ntest_input = { \"s\": \"eeizejuoxeumz\", \"k\": 4 }\nassert my_solution.beautifulSubstrings(**test_input) == 6\n\ntest_input = { \"s\": \"uuouuaifnboeiulttio\", \"k\": 4 }\nassert my_solution.beautifulSubstrings(**test_input) == 10\n\ntest_input = { \"s\": \"woozzxd\", \"k\": 3 }\nassert my_solution.beautifulSubstrings(**test_input) == 0\n\ntest_input = { \"s\": \"pulorolqcvhafexui\", \"k\": 9 }\nassert my_solution.beautifulSubstrings(**test_input) == 3\n\ntest_input = { \"s\": \"hmuaewojioizoguvoaje\", \"k\": 3 }\nassert my_solution.beautifulSubstrings(**test_input) == 4\n\ntest_input = { \"s\": \"b\", \"k\": 1 }\nassert my_solution.beautifulSubstrings(**test_input) == 0\n\ntest_input = { \"s\": \"aiejouohnqnketinvat\", \"k\": 3 }\nassert my_solution.beautifulSubstrings(**test_input) == 6\n\ntest_input = { \"s\": \"mjiogpri\", \"k\": 2 }\nassert my_solution.beautifulSubstrings(**test_input) == 3\n\ntest_input = { \"s\": \"movbyaeouil\", \"k\": 3 }\nassert my_solution.beautifulSubstrings(**test_input) == 2\n\ntest_input = { \"s\": \"puureouausxmitvav\", \"k\": 6 }\nassert my_solution.beautifulSubstrings(**test_input) == 2\n\ntest_input = { \"s\": \"op\", \"k\": 1 }\nassert my_solution.beautifulSubstrings(**test_input) == 1\n\ntest_input = { \"s\": \"iuhoezpooxcohtlapolo\", \"k\": 1 }\nassert my_solution.beautifulSubstrings(**test_input) == 39\n\ntest_input = { \"s\": \"cioi\", \"k\": 2 }\nassert my_solution.beautifulSubstrings(**test_input) == 0\n\ntest_input = { \"s\": \"pueutaoyaxk\", \"k\": 6 }\nassert my_solution.beautifulSubstrings(**test_input) == 0\n\ntest_input = { \"s\": \"iiuresacruaaan\", \"k\": 3 }\nassert my_solution.beautifulSubstrings(**test_input) == 3\n\ntest_input = { \"s\": \"agntyaazvpejidwaph\", \"k\": 8 }\nassert my_solution.beautifulSubstrings(**test_input) == 1\n\ntest_input = { \"s\": \"wiybolyniexiibou\", \"k\": 6 }\nassert my_solution.beautifulSubstrings(**test_input) == 2\n\ntest_input = { \"s\": \"coiyakadxi\", \"k\": 2 }\nassert my_solution.beautifulSubstrings(**test_input) == 8\n\ntest_input = { \"s\": \"oraajoeruiakixj\", \"k\": 3 }\nassert my_solution.beautifulSubstrings(**test_input) == 1\n\ntest_input = { \"s\": \"jeayap\", \"k\": 1 }\nassert my_solution.beautifulSubstrings(**test_input) == 7\n\ntest_input = { \"s\": \"iu\", \"k\": 1 }\nassert my_solution.beautifulSubstrings(**test_input) == 0\n\ntest_input = { \"s\": \"awozoy\", \"k\": 2 }\nassert my_solution.beautifulSubstrings(**test_input) == 3\n\ntest_input = { \"s\": \"fheabmlsyeeeuoeogyz\", \"k\": 9 }\nassert my_solution.beautifulSubstrings(**test_input) == 5\n\ntest_input = { \"s\": \"eaizneuxi\", \"k\": 1 }\nassert my_solution.beautifulSubstrings(**test_input) == 10\n\ntest_input = { \"s\": \"uurqufaucsuoqljh\", \"k\": 4 }\nassert my_solution.beautifulSubstrings(**test_input) == 14\n\ntest_input = { \"s\": \"jrtept\", \"k\": 4 }\nassert my_solution.beautifulSubstrings(**test_input) == 0\n\ntest_input = { \"s\": \"olgioxooiejooosaed\", \"k\": 5 }\nassert my_solution.beautifulSubstrings(**test_input) == 0\n\ntest_input = { \"s\": \"uizoy\", \"k\": 2 }\nassert my_solution.beautifulSubstrings(**test_input) == 1\n\ntest_input = { \"s\": \"lswabfiujjhexzos\", \"k\": 4 }\nassert my_solution.beautifulSubstrings(**test_input) == 5\n\ntest_input = { \"s\": \"iuu\", \"k\": 1 }\nassert my_solution.beautifulSubstrings(**test_input) == 0\n\ntest_input = { \"s\": \"qeaxut\", \"k\": 1 }\nassert my_solution.beautifulSubstrings(**test_input) == 7\n\ntest_input = { \"s\": \"aojiau\", \"k\": 2 }\nassert my_solution.beautifulSubstrings(**test_input) == 0\n\ntest_input = { \"s\": \"oaiaaaargkonlcsoaygf\", \"k\": 5 }\nassert my_solution.beautifulSubstrings(**test_input) == 2\n\ntest_input = { \"s\": \"zoowrawkm\", \"k\": 4 }\nassert my_solution.beautifulSubstrings(**test_input) == 3\n\ntest_input = { \"s\": \"uqiwuoevkfhkkua\", \"k\": 4 }\nassert my_solution.beautifulSubstrings(**test_input) == 6\n\ntest_input = { \"s\": \"kavuaaeodvaxicm\", \"k\": 6 }\nassert my_solution.beautifulSubstrings(**test_input) == 0\n\ntest_input = { \"s\": \"qpxeceq\", \"k\": 1 }\nassert my_solution.beautifulSubstrings(**test_input) == 6\n\ntest_input = { \"s\": \"iaabaofuodcbek\", \"k\": 5 }\nassert my_solution.beautifulSubstrings(**test_input) == 3\n\ntest_input = { \"s\": \"eel\", \"k\": 1 }\nassert my_solution.beautifulSubstrings(**test_input) == 1\n\ntest_input = { \"s\": \"ikeuhe\", \"k\": 1 }\nassert my_solution.beautifulSubstrings(**test_input) == 5\n\ntest_input = { \"s\": \"lueikvo\", \"k\": 2 }\nassert my_solution.beautifulSubstrings(**test_input) == 2\n\ntest_input = { \"s\": \"oauau\", \"k\": 2 }\nassert my_solution.beautifulSubstrings(**test_input) == 0\n\ntest_input = { \"s\": \"qzoieeotieeakqraeao\", \"k\": 4 }\nassert my_solution.beautifulSubstrings(**test_input) == 4\n\ntest_input = { \"s\": \"ehaascocsdmgekni\", \"k\": 9 }\nassert my_solution.beautifulSubstrings(**test_input) == 3\n\ntest_input = { \"s\": \"euqeklniykiji\", \"k\": 5 }\nassert my_solution.beautifulSubstrings(**test_input) == 0\n\ntest_input = { \"s\": \"vaeiiioidiioxhduu\", \"k\": 7 }\nassert my_solution.beautifulSubstrings(**test_input) == 0\n\ntest_input = { \"s\": \"aa\", \"k\": 1 }\nassert my_solution.beautifulSubstrings(**test_input) == 0\n\ntest_input = { \"s\": \"chaua\", \"k\": 3 }\nassert my_solution.beautifulSubstrings(**test_input) == 0\n\ntest_input = { \"s\": \"edfrglfr\", \"k\": 3 }\nassert my_solution.beautifulSubstrings(**test_input) == 0\n\ntest_input = { \"s\": \"dqbe\", \"k\": 1 }\nassert my_solution.beautifulSubstrings(**test_input) == 1\n\ntest_input = { \"s\": \"ghooirorxge\", \"k\": 4 }\nassert my_solution.beautifulSubstrings(**test_input) == 6\n\ntest_input = { \"s\": \"fodartekaonq\", \"k\": 4 }\nassert my_solution.beautifulSubstrings(**test_input) == 9\n\ntest_input = { \"s\": \"feeanzkjpfehzeuni\", \"k\": 6 }\nassert my_solution.beautifulSubstrings(**test_input) == 0\n\ntest_input = { \"s\": \"ignoouesduu\", \"k\": 2 }\nassert my_solution.beautifulSubstrings(**test_input) == 6\n\ntest_input = { \"s\": \"yif\", \"k\": 2 }\nassert my_solution.beautifulSubstrings(**test_input) == 0\n\ntest_input = { \"s\": \"gondfjaeeuhbuuasgip\", \"k\": 10 }\nassert my_solution.beautifulSubstrings(**test_input) == 0\n\ntest_input = { \"s\": \"djooomsffoonelyeode\", \"k\": 3 }\nassert my_solution.beautifulSubstrings(**test_input) == 14\n\ntest_input = { \"s\": \"pgaimei\", \"k\": 4 }\nassert my_solution.beautifulSubstrings(**test_input) == 2\n\ntest_input = { \"s\": \"naipqentonee\", \"k\": 4 }\nassert my_solution.beautifulSubstrings(**test_input) == 8\n\ntest_input = { \"s\": \"bouov\", \"k\": 2 }\nassert my_solution.beautifulSubstrings(**test_input) == 0\n\ntest_input = { \"s\": \"lcuhoypz\", \"k\": 5 }\nassert my_solution.beautifulSubstrings(**test_input) == 0\n\ntest_input = { \"s\": \"g\", \"k\": 1 }\nassert my_solution.beautifulSubstrings(**test_input) == 0\n\ntest_input = { \"s\": \"qc\", \"k\": 2 }\nassert my_solution.beautifulSubstrings(**test_input) == 0\n\ntest_input = { \"s\": \"mhznea\", \"k\": 2 }\nassert my_solution.beautifulSubstrings(**test_input) == 1\n\ntest_input = { \"s\": \"uxvjixdujgyfauo\", \"k\": 8 }\nassert my_solution.beautifulSubstrings(**test_input) == 1\n\ntest_input = { \"s\": \"iyjkuox\", \"k\": 3 }\nassert my_solution.beautifulSubstrings(**test_input) == 1\n\ntest_input = { \"s\": \"xbjfoayfpafatnuyord\", \"k\": 3 }\nassert my_solution.beautifulSubstrings(**test_input) == 3\n\ntest_input = { \"s\": \"nvoede\", \"k\": 3 }\nassert my_solution.beautifulSubstrings(**test_input) == 1\n\ntest_input = { \"s\": \"usnuaxpaktrweatruu\", \"k\": 5 }\nassert my_solution.beautifulSubstrings(**test_input) == 0\n\ntest_input = { \"s\": \"euojmsora\", \"k\": 1 }\nassert my_solution.beautifulSubstrings(**test_input) == 10\n\ntest_input = { \"s\": \"iapgoi\", \"k\": 3 }\nassert my_solution.beautifulSubstrings(**test_input) == 0\n\ntest_input = { \"s\": \"uafuimcpxyeoixgbyeio\", \"k\": 5 }\nassert my_solution.beautifulSubstrings(**test_input) == 3\n\ntest_input = { \"s\": \"weuaatpu\", \"k\": 5 }\nassert my_solution.beautifulSubstrings(**test_input) == 0",
+  "ocr_data": {
+    "nodes": [
+      {
+        "node_id": 1,
+        "shape_type": "rectangle",
+        "raw_text": "Start",
+        "position": "top"
+      },
+      {
+        "node_id": 2,
+        "shape_type": "rectangle",
+        "raw_text": "Input: s (string), k (integer)",
+        "position": "middle"
+      },
+      {
+        "node_id": 3,
+        "shape_type": "rectangle",
+        "raw_text": "Initialize p = 0",
+        "position": "middle"
+      },
+      {
+        "node_id": 4,
+        "shape_type": "rectangle",
+        "raw_text": "For i in range(1, k + 1)",
+        "position": "middle"
+      },
+      {
+        "node_id": 5,
+        "shape_type": "diamond",
+        "raw_text": "Is i * i % k == 0?",
+        "position": "middle"
+      },
+      {
+        "node_id": 6,
+        "shape_type": "rectangle",
+        "raw_text": "Set p = i, break",
+        "position": "middle"
+      },
+      {
+        "node_id": 7,
+        "shape_type": "rectangle",
+        "raw_text": "Set p = 2 * p",
+        "position": "middle"
+      },
+      {
+        "node_id": 8,
+        "shape_type": "rectangle",
+        "raw_text": "Initialize sumdict = {(): (p - 1: 1)}",
+        "position": "middle"
+      },
+      {
+        "node_id": 9,
+        "shape_type": "rectangle",
+        "raw_text": "Initialize cursum = 0",
+        "position": "middle"
+      },
+      {
+        "node_id": 10,
+        "shape_type": "rectangle",
+        "raw_text": "Initialize vowels = {'a', 'e', 'i', 'o', 'u'}",
+        "position": "middle"
+      },
+      {
+        "node_id": 11,
+        "shape_type": "rectangle",
+        "raw_text": "Initialize count = 0",
+        "position": "middle"
+      },
+      {
+        "node_id": 12,
+        "shape_type": "rectangle",
+        "raw_text": "For i in range(len(s))",
+        "position": "middle"
+      },
+      {
+        "node_id": 13,
+        "shape_type": "rectangle",
+        "raw_text": "Update cursum: cursum += 1 if s[i] in vowels else -1",
+        "position": "bottom"
+      },
+      {
+        "node_id": 14,
+        "shape_type": "rectangle",
+        "raw_text": "Set cate = i % p",
+        "position": "bottom"
+      },
+      {
+        "node_id": 15,
+        "shape_type": "diamond",
+        "raw_text": "Is cursum in sumdict?",
+        "position": "bottom"
+      },
+      {
+        "node_id": 16,
+        "shape_type": "diamond",
+        "raw_text": "Is cate in sumdict[cursum]?",
+        "position": "bottom"
+      },
+      {
+        "node_id": 17,
+        "shape_type": "rectangle",
+        "raw_text": "Update count: count += sumdict[cursum][cate]",
+        "position": "bottom"
+      },
+      {
+        "node_id": 18,
+        "shape_type": "rectangle",
+        "raw_text": "Set sumdict[cursum] = {cate: 1}",
+        "position": "bottom"
+      },
+      {
+        "node_id": 19,
+        "shape_type": "rectangle",
+        "raw_text": "Set sumdict[cursum][cate] = 1",
+        "position": "bottom"
+      },
+      {
+        "node_id": 20,
+        "shape_type": "rectangle",
+        "raw_text": "Update sumdict[cursum][cate] += 1",
+        "position": "bottom"
+      },
+      {
+        "node_id": 21,
+        "shape_type": "rectangle",
+        "raw_text": "Return count",
+        "position": "bottom"
+      },
+      {
+        "node_id": 22,
+        "shape_type": "rectangle",
+        "raw_text": "Output: count (number of beautiful substrings)",
+        "position": "bottom"
+      }
+    ],
+    "edges": [
+      {
+        "from_node": 1,
+        "to_node": 2,
+        "label": ""
+      },
+      {
+        "from_node": 2,
+        "to_node": 3,
+        "label": ""
+      },
+      {
+        "from_node": 3,
+        "to_node": 4,
+        "label": ""
+      },
+      {
+        "from_node": 4,
+        "to_node": 5,
+        "label": ""
+      },
+      {
+        "from_node": 5,
+        "to_node": 6,
+        "label": "Yes"
+      },
+      {
+        "from_node": 5,
+        "to_node": 4,
+        "label": "No"
+      },
+      {
+        "from_node": 6,
+        "to_node": 7,
+        "label": ""
+      },
+      {
+        "from_node": 7,
+        "to_node": 8,
+        "label": ""
+      },
+      {
+        "from_node": 8,
+        "to_node": 9,
+        "label": ""
+      },
+      {
+        "from_node": 9,
+        "to_node": 10,
+        "label": ""
+      },
+      {
+        "from_node": 10,
+        "to_node": 11,
+        "label": ""
+      },
+      {
+        "from_node": 11,
+        "to_node": 12,
+        "label": ""
+      },
+      {
+        "from_node": 12,
+        "to_node": 13,
+        "label": ""
+      },
+      {
+        "from_node": 13,
+        "to_node": 14,
+        "label": ""
+      },
+      {
+        "from_node": 14,
+        "to_node": 15,
+        "label": ""
+      },
+      {
+        "from_node": 15,
+        "to_node": 16,
+        "label": "Yes"
+      },
+      {
+        "from_node": 15,
+        "to_node": 18,
+        "label": "No"
+      },
+      {
+        "from_node": 16,
+        "to_node": 17,
+        "label": "Yes"
+      },
+      {
+        "from_node": 16,
+        "to_node": 19,
+        "label": "No"
+      },
+      {
+        "from_node": 17,
+        "to_node": 20,
+        "label": ""
+      },
+      {
+        "from_node": 19,
+        "to_node": 20,
+        "label": ""
+      },
+      {
+        "from_node": 20,
+        "to_node": 12,
+        "label": ""
+      },
+      {
+        "from_node": 12,
+        "to_node": 21,
+        "label": ""
+      },
+      {
+        "from_node": 21,
+        "to_node": 22,
+        "label": ""
+      }
+    ],
+    "other_text": []
+  },
+  "analysis": {
+    "ilr_verdict": "incorrect",
+    "ilr_issues": "ILR 连线全面错乱：主链 7→9、9→11 跳过了节点8(cursum=0)和节点10(count=0)，两个初始化节点成为孤岛（按字面执行到节点12时 ctx['cursum'] 不存在）；判定分支错位——14的false接18(对不存在的 sumdict[cursum] 设子键必 KeyError)、15的true接17(命中反而覆盖为{cate:1})、15的false接19(未命中却+1)；OCR 中应为自增的节点20被写成 'return ctx['count']' 变成循环内提前返回。而 OCR 边显示流程图本身连线完全正确（15Yes→16、No→18、16Yes→17、No→19、17/19→20自增、20→12、12→21返回）。",
+    "code_vs_ilr": "deviates",
+    "code_issues": "代码没有忠实实现 ILR：自行修复了初始化顺序并重排计数逻辑，但重构出错——第一段 if 对首次出现的 (cursum,cate) 置 1，紧接着第二段 if 又对其 +1，导致新键值被记为 2 而非 1，之后再次相遇时多计一次配对。",
+    "error_source": "both",
+    "ocr_contribution": "no",
+    "root_cause": "ILR 环节把正确的流程图连线全面接错（初始化孤岛、四分支错位、循环内 return），代码生成环节又偏离 ILR 自行重构并引入首次插入双自增 bug，两级各自独立出错。",
+    "evidence": "示例1 s='baeyh',k=2：代码输出 3，期望 2——i=0 时 (-1,0) 首次插入被置1后又被第二段 if 增为2，i=4 时 count+=2 造成多计；而 ILR 按字面执行因 cursum/count 未初始化（7→9、9→11 跳过节点8/10）在循环第一步即 KeyError。OCR 边数据完整正确，两级错误均与 OCR 无关。"
+  }
+}

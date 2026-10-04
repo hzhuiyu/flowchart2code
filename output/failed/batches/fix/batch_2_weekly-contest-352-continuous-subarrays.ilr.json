@@ -1,0 +1,9 @@
+{
+  "problem_id": "continuousSubarrays",
+  "nodes": [
+    {"id": 1, "type": "start", "label": "Start", "next": 2},
+    {"id": 2, "type": "process", "label": "Input: nums; init window state", "action": "ctx['nums'] = ctx['arg0']; ctx['count'] = 0; ctx['l'] = 0; ctx['maxq'] = []; ctx['minq'] = []", "next": 3},
+    {"id": 3, "type": "process", "label": "Slide right end r over nums, maintain monotonic max/min deques, shrink left while max-min > 2, add (r-l+1) subarrays", "action": "for r in range(len(ctx['nums'])):\n    v = ctx['nums'][r]\n    while ctx['maxq'] and ctx['nums'][ctx['maxq'][-1]] <= v:\n        ctx['maxq'].pop()\n    ctx['maxq'].append(r)\n    while ctx['minq'] and ctx['nums'][ctx['minq'][-1]] >= v:\n        ctx['minq'].pop()\n    ctx['minq'].append(r)\n    while ctx['nums'][ctx['maxq'][0]] - ctx['nums'][ctx['minq'][0]] > 2:\n        ctx['l'] += 1\n        if ctx['maxq'][0] < ctx['l']:\n            ctx['maxq'].pop(0)\n        if ctx['minq'][0] < ctx['l']:\n            ctx['minq'].pop(0)\n    ctx['count'] += r - ctx['l'] + 1", "next": 4},
+    {"id": 4, "type": "end", "label": "Output: count (total number of continuous subarrays)", "output": "ctx['count']"}
+  ]
+}

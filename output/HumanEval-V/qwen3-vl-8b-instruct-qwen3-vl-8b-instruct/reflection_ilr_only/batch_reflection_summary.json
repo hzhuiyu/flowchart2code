@@ -1,0 +1,76 @@
+{
+  "total": 28,
+  "processed": 28,
+  "success": 14,
+  "failed": 14,
+  "success_rate": 50.0,
+  "iteration_stats": {
+    "1": {
+      "count": 28,
+      "avg_duration": 25.60762323651995,
+      "avg_total_tokens": 13798.5,
+      "avg_prompt_tokens": 12308.92857142857,
+      "avg_completion_tokens": 1489.5714285714287
+    },
+    "2": {
+      "count": 17,
+      "avg_duration": 38.19008053050322,
+      "avg_total_tokens": 15692.0,
+      "avg_prompt_tokens": 13245.529411764706,
+      "avg_completion_tokens": 2446.470588235294
+    },
+    "3": {
+      "count": 15,
+      "avg_duration": 31.979367971420288,
+      "avg_total_tokens": 14701.733333333334,
+      "avg_prompt_tokens": 12706.533333333333,
+      "avg_completion_tokens": 1995.2
+    }
+  },
+  "avg_duration_by_iteration": {
+    "1": 25.60762323651995,
+    "2": 38.19008053050322,
+    "3": 31.979367971420288
+  },
+  "reflection_mode": "ilr_only",
+  "final_merge_eval": {
+    "samples_file": "output/HumanEval-V/qwen3-vl-8b-instruct-qwen3-vl-8b-instruct/samples.jsonl",
+    "reflection_dir": "output/HumanEval-V/qwen3-vl-8b-instruct-qwen3-vl-8b-instruct/reflection_ilr_only",
+    "output_file": "output/HumanEval-V/qwen3-vl-8b-instruct-qwen3-vl-8b-instruct/reflection_ilr_only/samples_reflection_merged.jsonl",
+    "merged_results_file": "output/HumanEval-V/qwen3-vl-8b-instruct-qwen3-vl-8b-instruct/reflection_ilr_only/samples_reflection_merged.jsonl_results.jsonl",
+    "results_txt": "output/HumanEval-V/qwen3-vl-8b-instruct-qwen3-vl-8b-instruct/reflection_ilr_only/results.txt",
+    "problem_file": "data/HumanEval-V/HumanEval.jsonl",
+    "merge_summary": {
+      "total_rows": 164,
+      "replaced_rows": 28,
+      "replaced_by_first_passed": 14,
+      "replaced_by_last_failed": 14,
+      "missing_generated_code": 0,
+      "selection_stats": {
+        "keep_original": 136,
+        "first_passed": 14,
+        "iter_3_failed": 14
+      }
+    },
+    "eval_result": {
+      "pass@1": 0.9146341463414634
+    },
+    "difficulty_summary": {
+      "Easy": {
+        "passed": 0.0,
+        "total": 0.0,
+        "rate": 0.0
+      },
+      "Medium": {
+        "passed": 0.0,
+        "total": 0.0,
+        "rate": 0.0
+      },
+      "Hard": {
+        "passed": 0.0,
+        "total": 0.0,
+        "rate": 0.0
+      }
+    }
+  }
+}

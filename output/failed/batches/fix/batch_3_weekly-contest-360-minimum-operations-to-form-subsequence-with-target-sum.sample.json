@@ -1,0 +1,1831 @@
+{
+ "task_id": "weekly-contest-360-minimum-operations-to-form-subsequence-with-target-sum",
+ "dataset": "Algorithm",
+ "title": "minimum-operations-to-form-subsequence-with-target-sum",
+ "difficulty": "Hard",
+ "prompt": "\"\"\"\nYou are given a 0-indexed array nums consisting of non-negative powers of 2, and an integer target.\n\nIn one operation, you must apply the following changes to the array:\n\n * Choose any element of the array nums[i] such that nums[i] > 1.\n * Remove nums[i] from the array.\n * Add two occurrences of nums[i] / 2 to the end of nums.\n\nReturn the minimum number of operations you need to perform so that nums contains a subsequence whose elements sum to target. If it is impossible to obtain such a subsequence, return -1.\n\nA subsequence is an array that can be derived from another array by deleting some or no elements without changing the order of the remaining elements.\n\nExample 1:\n\nInput: nums = [1,2,8], target = 7\nOutput: 1\nExplanation: In the first operation, we choose element nums[2]. The array becomes equal to nums = [1,2,4,4].\nAt this stage, nums contains the subsequence [1,2,4] which sums up to 7.\nIt can be shown that there is no shorter sequence of operations that results in a subsequnce that sums up to 7.\n\nExample 2:\n\nInput: nums = [1,32,1,2], target = 12\nOutput: 2\nExplanation: In the first operation, we choose element nums[1]. The array becomes equal to nums = [1,1,2,16,16].\nIn the second operation, we choose element nums[3]. The array becomes equal to nums = [1,1,2,16,8,8]\nAt this stage, nums contains the subsequence [1,1,2,8] which sums up to 12.\nIt can be shown that there is no shorter sequence of operations that results in a subsequence that sums up to 12.\n\nExample 3:\n\nInput: nums = [1,32,1], target = 35\nOutput: -1\nExplanation: It can be shown that no sequence of operations results in a subsequence that sums up to 35.\n\n\nConstraints:\n\n * 1 <= nums.length <= 1000\n * 1 <= nums[i] <= 230\n * nums consists only of non-negative powers of two.\n * 1 <= target < 231\n\"\"\"\nclass Solution:\n    def minOperations(self, nums: List[int], target: int) -> int:\n        ",
+ "starter_code": "class Solution:\n    def minOperations(self, nums: List[int], target: int) -> int:\n        ",
+ "entry_point": "",
+ "test": "\nmy_solution = Solution()\n\ntest_input = { \"nums\": [1,2,8], \"target\": 7 }\nassert my_solution.minOperations(**test_input) == 1\n\ntest_input = { \"nums\": [1,32,1,2], \"target\": 12 }\nassert my_solution.minOperations(**test_input) == 2\n\ntest_input = { \"nums\": [1,32,1], \"target\": 35 }\nassert my_solution.minOperations(**test_input) == -1\n\ntest_input = { \"nums\": [1], \"target\": 1 }\nassert my_solution.minOperations(**test_input) == 0\n\ntest_input = { \"nums\": [16,128,32], \"target\": 1 }\nassert my_solution.minOperations(**test_input) == 4\n\ntest_input = { \"nums\": [1,1], \"target\": 2 }\nassert my_solution.minOperations(**test_input) == 0\n\ntest_input = { \"nums\": [64,128,128], \"target\": 2 }\nassert my_solution.minOperations(**test_input) == 5\n\ntest_input = { \"nums\": [2], \"target\": 2 }\nassert my_solution.minOperations(**test_input) == 0\n\ntest_input = { \"nums\": [32,256,4], \"target\": 2 }\nassert my_solution.minOperations(**test_input) == 1\n\ntest_input = { \"nums\": [1,1,1], \"target\": 3 }\nassert my_solution.minOperations(**test_input) == 0\n\ntest_input = { \"nums\": [1,256,16,128], \"target\": 3 }\nassert my_solution.minOperations(**test_input) == 3\n\ntest_input = { \"nums\": [1,2], \"target\": 3 }\nassert my_solution.minOperations(**test_input) == 0\n\ntest_input = { \"nums\": [16,16,4], \"target\": 3 }\nassert my_solution.minOperations(**test_input) == 2\n\ntest_input = { \"nums\": [1,1,1,1], \"target\": 4 }\nassert my_solution.minOperations(**test_input) == 0\n\ntest_input = { \"nums\": [128,1,128,1,64], \"target\": 4 }\nassert my_solution.minOperations(**test_input) == 4\n\ntest_input = { \"nums\": [2,1,1], \"target\": 4 }\nassert my_solution.minOperations(**test_input) == 0\n\ntest_input = { \"nums\": [8,2,64,32], \"target\": 4 }\nassert my_solution.minOperations(**test_input) == 1\n\ntest_input = { \"nums\": [16,128,8,1,1], \"target\": 4 }\nassert my_solution.minOperations(**test_input) == 1\n\ntest_input = { \"nums\": [1,2,1], \"target\": 4 }\nassert my_solution.minOperations(**test_input) == 0\n\ntest_input = { \"nums\": [128,8,8,2], \"target\": 4 }\nassert my_solution.minOperations(**test_input) == 1\n\ntest_input = { \"nums\": [2,2], \"target\": 4 }\nassert my_solution.minOperations(**test_input) == 0\n\ntest_input = { \"nums\": [128,32,16], \"target\": 4 }\nassert my_solution.minOperations(**test_input) == 2\n\ntest_input = { \"nums\": [4], \"target\": 4 }\nassert my_solution.minOperations(**test_input) == 0\n\ntest_input = { \"nums\": [128,32,256], \"target\": 4 }\nassert my_solution.minOperations(**test_input) == 3\n\ntest_input = { \"nums\": [1,1,1,1,1], \"target\": 5 }\nassert my_solution.minOperations(**test_input) == 0\n\ntest_input = { \"nums\": [1,1,128,256,1,16], \"target\": 5 }\nassert my_solution.minOperations(**test_input) == 2\n\ntest_input = { \"nums\": [2,1,1,1], \"target\": 5 }\nassert my_solution.minOperations(**test_input) == 0\n\ntest_input = { \"nums\": [32,1,8,1,64], \"target\": 5 }\nassert my_solution.minOperations(**test_input) == 1\n\ntest_input = { \"nums\": [128,256,32,1,1,1], \"target\": 5 }\nassert my_solution.minOperations(**test_input) == 3\n\ntest_input = { \"nums\": [1,1,2,1], \"target\": 5 }\nassert my_solution.minOperations(**test_input) == 0\n\ntest_input = { \"nums\": [16,16,1,1,128], \"target\": 5 }\nassert my_solution.minOperations(**test_input) == 2\n\ntest_input = { \"nums\": [2,2,1], \"target\": 5 }\nassert my_solution.minOperations(**test_input) == 0\n\ntest_input = { \"nums\": [64,32,2,8], \"target\": 5 }\nassert my_solution.minOperations(**test_input) == 2\n\ntest_input = { \"nums\": [1,4], \"target\": 5 }\nassert my_solution.minOperations(**test_input) == 0\n\ntest_input = { \"nums\": [8,64,128], \"target\": 5 }\nassert my_solution.minOperations(**test_input) == 3\n\ntest_input = { \"nums\": [1,1,1,1,1,1], \"target\": 6 }\nassert my_solution.minOperations(**test_input) == 0\n\ntest_input = { \"nums\": [128,1,256,1,1,1,32], \"target\": 6 }\nassert my_solution.minOperations(**test_input) == 3\n\ntest_input = { \"nums\": [1,1,1,1,2], \"target\": 6 }\nassert my_solution.minOperations(**test_input) == 0\n\ntest_input = { \"nums\": [1,256,1,1,8,64], \"target\": 6 }\nassert my_solution.minOperations(**test_input) == 1\n\ntest_input = { \"nums\": [1,128,1,128,1,8,1], \"target\": 6 }\nassert my_solution.minOperations(**test_input) == 1\n\ntest_input = { \"nums\": [1,1,1,2,1], \"target\": 6 }\nassert my_solution.minOperations(**test_input) == 0\n\ntest_input = { \"nums\": [64,1,16,1,1,64], \"target\": 6 }\nassert my_solution.minOperations(**test_input) == 2\n\ntest_input = { \"nums\": [2,1,2,1], \"target\": 6 }\nassert my_solution.minOperations(**test_input) == 0\n\ntest_input = { \"nums\": [2,1,8,64,64], \"target\": 6 }\nassert my_solution.minOperations(**test_input) == 1\n\ntest_input = { \"nums\": [4,1,1], \"target\": 6 }\nassert my_solution.minOperations(**test_input) == 0\n\ntest_input = { \"nums\": [16,64,4,128], \"target\": 6 }\nassert my_solution.minOperations(**test_input) == 3\n\ntest_input = { \"nums\": [1,1,1,8,128,1,8], \"target\": 6 }\nassert my_solution.minOperations(**test_input) == 1\n\ntest_input = { \"nums\": [1,2,1,1,1], \"target\": 6 }\nassert my_solution.minOperations(**test_input) == 0\n\ntest_input = { \"nums\": [64,128,1,32,1,2], \"target\": 6 }\nassert my_solution.minOperations(**test_input) == 3\n\ntest_input = { \"nums\": [1,1,1,256,1,8,64], \"target\": 6 }\nassert my_solution.minOperations(**test_input) == 1\n\ntest_input = { \"nums\": [1,128,1,256,32,1], \"target\": 6 }\nassert my_solution.minOperations(**test_input) == 3\n\ntest_input = { \"nums\": [1,2,1,2], \"target\": 6 }\nassert my_solution.minOperations(**test_input) == 0\n\ntest_input = { \"nums\": [256,2,32,32,1], \"target\": 6 }\nassert my_solution.minOperations(**test_input) == 3\n\ntest_input = { \"nums\": [1,16,1,1,1,16,256], \"target\": 6 }\nassert my_solution.minOperations(**test_input) == 2\n\ntest_input = { \"nums\": [1,1,2,1,1], \"target\": 6 }\nassert my_solution.minOperations(**test_input) == 0\n\ntest_input = { \"nums\": [1,1,64,8,16,1], \"target\": 6 }\nassert my_solution.minOperations(**test_input) == 1\n\ntest_input = { \"nums\": [1,16,128,1,1,32,1], \"target\": 6 }\nassert my_solution.minOperations(**test_input) == 2\n\ntest_input = { \"nums\": [128,1,1,1,64,32], \"target\": 6 }\nassert my_solution.minOperations(**test_input) == 3\n\ntest_input = { \"nums\": [64,16,16,1,1], \"target\": 6 }\nassert my_solution.minOperations(**test_input) == 2\n\ntest_input = { \"nums\": [32,1,1,32,1,64,1], \"target\": 6 }\nassert my_solution.minOperations(**test_input) == 3\n\ntest_input = { \"nums\": [8,64,2,1,1,8], \"target\": 6 }\nassert my_solution.minOperations(**test_input) == 1\n\ntest_input = { \"nums\": [1,1,256,1,64,1,128], \"target\": 6 }\nassert my_solution.minOperations(**test_input) == 4\n\ntest_input = { \"nums\": [1,1,64,64,32,2], \"target\": 6 }\nassert my_solution.minOperations(**test_input) == 3\n\ntest_input = { \"nums\": [2,32,128,1,64], \"target\": 6 }\nassert my_solution.minOperations(**test_input) == 3\n\ntest_input = { \"nums\": [2,2,2], \"target\": 6 }\nassert my_solution.minOperations(**test_input) == 0\n\ntest_input = { \"nums\": [64,8,2,128], \"target\": 6 }\nassert my_solution.minOperations(**test_input) == 1\n\ntest_input = { \"nums\": [4,2], \"target\": 6 }\nassert my_solution.minOperations(**test_input) == 0\n\ntest_input = { \"nums\": [8,8,16], \"target\": 6 }\nassert my_solution.minOperations(**test_input) == 2\n\ntest_input = { \"nums\": [1,1,1,1,1,1,1], \"target\": 7 }\nassert my_solution.minOperations(**test_input) == 0\n\ntest_input = { \"nums\": [1,1,1,1,128,1,64,8], \"target\": 7 }\nassert my_solution.minOperations(**test_input) == 1\n\ntest_input = { \"nums\": [2,1,1,1,1,1], \"target\": 7 }\nassert my_solution.minOperations(**test_input) == 0\n\ntest_input = { \"nums\": [1,2,64,32,16,1,1], \"target\": 7 }\nassert my_solution.minOperations(**test_input) == 2\n\ntest_input = { \"nums\": [1,1,1,16,128,256,1,1], \"target\": 7 }\nassert my_solution.minOperations(**test_input) == 2\n\ntest_input = { \"nums\": [1,1,1,2,1,1], \"target\": 7 }\nassert my_solution.minOperations(**test_input) == 0\n\ntest_input = { \"nums\": [2,8,8,1,128,1,1], \"target\": 7 }\nassert my_solution.minOperations(**test_input) == 1\n\ntest_input = { \"nums\": [1,2,1,1,2], \"target\": 7 }\nassert my_solution.minOperations(**test_input) == 0\n\ntest_input = { \"nums\": [32,1,2,1,256,128], \"target\": 7 }\nassert my_solution.minOperations(**test_input) == 3\n\ntest_input = { \"nums\": [1,1,1,4], \"target\": 7 }\nassert my_solution.minOperations(**test_input) == 0\n\ntest_input = { \"nums\": [1,8,256,32,1], \"target\": 7 }\nassert my_solution.minOperations(**test_input) == 2\n\ntest_input = { \"nums\": [64,1,1,1,16,1,64,1], \"target\": 7 }\nassert my_solution.minOperations(**test_input) == 2\n\ntest_input = { \"nums\": [1,1,1,1,2,1], \"target\": 7 }\nassert my_solution.minOperations(**test_input) == 0\n\ntest_input = { \"nums\": [1,256,1,8,1,2,16], \"target\": 7 }\nassert my_solution.minOperations(**test_input) == 1\n\ntest_input = { \"nums\": [32,1,1,1,32,32,1,1], \"target\": 7 }\nassert my_solution.minOperations(**test_input) == 3\n\ntest_input = { \"nums\": [1,2,1,1,1,1], \"target\": 7 }\nassert my_solution.minOperations(**test_input) == 0\n\ntest_input = { \"nums\": [64,1,32,256,1,1,1], \"target\": 7 }\nassert my_solution.minOperations(**test_input) == 3\n\ntest_input = { \"nums\": [2,1,2,1,1], \"target\": 7 }\nassert my_solution.minOperations(**test_input) == 0\n\ntest_input = { \"nums\": [2,32,32,32,2,1], \"target\": 7 }\nassert my_solution.minOperations(**test_input) == 3\n\ntest_input = { \"nums\": [1,1,8,1,1,64,1,128], \"target\": 7 }\nassert my_solution.minOperations(**test_input) == 1\n\ntest_input = { \"nums\": [1,1,1,1,1,2], \"target\": 7 }\nassert my_solution.minOperations(**test_input) == 0\n\ntest_input = { \"nums\": [64,128,2,128,1,1,1], \"target\": 7 }\nassert my_solution.minOperations(**test_input) == 4\n\ntest_input = { \"nums\": [1,1,1,128,8,32,1,1], \"target\": 7 }\nassert my_solution.minOperations(**test_input) == 1\n\ntest_input = { \"nums\": [64,256,1,1,1,32,2], \"target\": 7 }\nassert my_solution.minOperations(**test_input) == 3\n\ntest_input = { \"nums\": [1,2,2,1,1], \"target\": 7 }\nassert my_solution.minOperations(**test_input) == 0\n\ntest_input = { \"nums\": [1,256,64,2,1,128], \"target\": 7 }\nassert my_solution.minOperations(**test_input) == 4\n\ntest_input = { \"nums\": [256,1,1,1,64,1,1,64], \"target\": 7 }\nassert my_solution.minOperations(**test_input) == 4\n\ntest_input = { \"nums\": [2,1,8,256,1,128,1], \"target\": 7 }\nassert my_solution.minOperations(**test_input) == 1\n\ntest_input = { \"nums\": [1,1,16,1,1,256,1,128], \"target\": 7 }\nassert my_solution.minOperations(**test_input) == 2\n\ntest_input = { \"nums\": [1,8,128,1,1,1,256], \"target\": 7 }\nassert my_solution.minOperations(**test_input) == 1\n\ntest_input = { \"nums\": [2,2,1,1,1], \"target\": 7 }\nassert my_solution.minOperations(**test_input) == 0\n\ntest_input = { \"nums\": [64,2,64,1,32,1], \"target\": 7 }\nassert my_solution.minOperations(**test_input) == 3",
+ "test_cases": [
+  {
+   "input": {
+    "args": [
+     [
+      1,
+      2,
+      8
+     ],
+     7
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      1,
+      32,
+      1,
+      2
+     ],
+     12
+    ]
+   },
+   "output": 2,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      1,
+      32,
+      1
+     ],
+     35
+    ]
+   },
+   "output": -1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      1
+     ],
+     1
+    ]
+   },
+   "output": 0,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      16,
+      128,
+      32
+     ],
+     1
+    ]
+   },
+   "output": 4,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      1,
+      1
+     ],
+     2
+    ]
+   },
+   "output": 0,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      64,
+      128,
+      128
+     ],
+     2
+    ]
+   },
+   "output": 5,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      2
+     ],
+     2
+    ]
+   },
+   "output": 0,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      32,
+      256,
+      4
+     ],
+     2
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      1,
+      1,
+      1
+     ],
+     3
+    ]
+   },
+   "output": 0,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      1,
+      256,
+      16,
+      128
+     ],
+     3
+    ]
+   },
+   "output": 3,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      1,
+      2
+     ],
+     3
+    ]
+   },
+   "output": 0,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      16,
+      16,
+      4
+     ],
+     3
+    ]
+   },
+   "output": 2,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      1,
+      1,
+      1,
+      1
+     ],
+     4
+    ]
+   },
+   "output": 0,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      128,
+      1,
+      128,
+      1,
+      64
+     ],
+     4
+    ]
+   },
+   "output": 4,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      2,
+      1,
+      1
+     ],
+     4
+    ]
+   },
+   "output": 0,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      8,
+      2,
+      64,
+      32
+     ],
+     4
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      16,
+      128,
+      8,
+      1,
+      1
+     ],
+     4
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      1,
+      2,
+      1
+     ],
+     4
+    ]
+   },
+   "output": 0,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      128,
+      8,
+      8,
+      2
+     ],
+     4
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      2,
+      2
+     ],
+     4
+    ]
+   },
+   "output": 0,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      128,
+      32,
+      16
+     ],
+     4
+    ]
+   },
+   "output": 2,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      4
+     ],
+     4
+    ]
+   },
+   "output": 0,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      128,
+      32,
+      256
+     ],
+     4
+    ]
+   },
+   "output": 3,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      1,
+      1,
+      1,
+      1,
+      1
+     ],
+     5
+    ]
+   },
+   "output": 0,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      1,
+      1,
+      128,
+      256,
+      1,
+      16
+     ],
+     5
+    ]
+   },
+   "output": 2,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      2,
+      1,
+      1,
+      1
+     ],
+     5
+    ]
+   },
+   "output": 0,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      32,
+      1,
+      8,
+      1,
+      64
+     ],
+     5
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      128,
+      256,
+      32,
+      1,
+      1,
+      1
+     ],
+     5
+    ]
+   },
+   "output": 3,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      1,
+      1,
+      2,
+      1
+     ],
+     5
+    ]
+   },
+   "output": 0,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      16,
+      16,
+      1,
+      1,
+      128
+     ],
+     5
+    ]
+   },
+   "output": 2,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      2,
+      2,
+      1
+     ],
+     5
+    ]
+   },
+   "output": 0,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      64,
+      32,
+      2,
+      8
+     ],
+     5
+    ]
+   },
+   "output": 2,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      1,
+      4
+     ],
+     5
+    ]
+   },
+   "output": 0,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      8,
+      64,
+      128
+     ],
+     5
+    ]
+   },
+   "output": 3,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+     ],
+     6
+    ]
+   },
+   "output": 0,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      128,
+      1,
+      256,
+      1,
+      1,
+      1,
+      32
+     ],
+     6
+    ]
+   },
+   "output": 3,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      1,
+      1,
+      1,
+      1,
+      2
+     ],
+     6
+    ]
+   },
+   "output": 0,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      1,
+      256,
+      1,
+      1,
+      8,
+      64
+     ],
+     6
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      1,
+      128,
+      1,
+      128,
+      1,
+      8,
+      1
+     ],
+     6
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      1,
+      1,
+      1,
+      2,
+      1
+     ],
+     6
+    ]
+   },
+   "output": 0,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      64,
+      1,
+      16,
+      1,
+      1,
+      64
+     ],
+     6
+    ]
+   },
+   "output": 2,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      2,
+      1,
+      2,
+      1
+     ],
+     6
+    ]
+   },
+   "output": 0,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      2,
+      1,
+      8,
+      64,
+      64
+     ],
+     6
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      4,
+      1,
+      1
+     ],
+     6
+    ]
+   },
+   "output": 0,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      16,
+      64,
+      4,
+      128
+     ],
+     6
+    ]
+   },
+   "output": 3,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      1,
+      1,
+      1,
+      8,
+      128,
+      1,
+      8
+     ],
+     6
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      1,
+      2,
+      1,
+      1,
+      1
+     ],
+     6
+    ]
+   },
+   "output": 0,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      64,
+      128,
+      1,
+      32,
+      1,
+      2
+     ],
+     6
+    ]
+   },
+   "output": 3,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      1,
+      1,
+      1,
+      256,
+      1,
+      8,
+      64
+     ],
+     6
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      1,
+      128,
+      1,
+      256,
+      32,
+      1
+     ],
+     6
+    ]
+   },
+   "output": 3,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      1,
+      2,
+      1,
+      2
+     ],
+     6
+    ]
+   },
+   "output": 0,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      256,
+      2,
+      32,
+      32,
+      1
+     ],
+     6
+    ]
+   },
+   "output": 3,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      1,
+      16,
+      1,
+      1,
+      1,
+      16,
+      256
+     ],
+     6
+    ]
+   },
+   "output": 2,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      1,
+      1,
+      2,
+      1,
+      1
+     ],
+     6
+    ]
+   },
+   "output": 0,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      1,
+      1,
+      64,
+      8,
+      16,
+      1
+     ],
+     6
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      1,
+      16,
+      128,
+      1,
+      1,
+      32,
+      1
+     ],
+     6
+    ]
+   },
+   "output": 2,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      128,
+      1,
+      1,
+      1,
+      64,
+      32
+     ],
+     6
+    ]
+   },
+   "output": 3,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      64,
+      16,
+      16,
+      1,
+      1
+     ],
+     6
+    ]
+   },
+   "output": 2,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      32,
+      1,
+      1,
+      32,
+      1,
+      64,
+      1
+     ],
+     6
+    ]
+   },
+   "output": 3,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      8,
+      64,
+      2,
+      1,
+      1,
+      8
+     ],
+     6
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      1,
+      1,
+      256,
+      1,
+      64,
+      1,
+      128
+     ],
+     6
+    ]
+   },
+   "output": 4,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      1,
+      1,
+      64,
+      64,
+      32,
+      2
+     ],
+     6
+    ]
+   },
+   "output": 3,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      2,
+      32,
+      128,
+      1,
+      64
+     ],
+     6
+    ]
+   },
+   "output": 3,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      2,
+      2,
+      2
+     ],
+     6
+    ]
+   },
+   "output": 0,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      64,
+      8,
+      2,
+      128
+     ],
+     6
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      4,
+      2
+     ],
+     6
+    ]
+   },
+   "output": 0,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      8,
+      8,
+      16
+     ],
+     6
+    ]
+   },
+   "output": 2,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+     ],
+     7
+    ]
+   },
+   "output": 0,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      1,
+      1,
+      1,
+      1,
+      128,
+      1,
+      64,
+      8
+     ],
+     7
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      2,
+      1,
+      1,
+      1,
+      1,
+      1
+     ],
+     7
+    ]
+   },
+   "output": 0,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      1,
+      2,
+      64,
+      32,
+      16,
+      1,
+      1
+     ],
+     7
+    ]
+   },
+   "output": 2,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      1,
+      1,
+      1,
+      16,
+      128,
+      256,
+      1,
+      1
+     ],
+     7
+    ]
+   },
+   "output": 2,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      1,
+      1,
+      1,
+      2,
+      1,
+      1
+     ],
+     7
+    ]
+   },
+   "output": 0,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      2,
+      8,
+      8,
+      1,
+      128,
+      1,
+      1
+     ],
+     7
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      1,
+      2,
+      1,
+      1,
+      2
+     ],
+     7
+    ]
+   },
+   "output": 0,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      32,
+      1,
+      2,
+      1,
+      256,
+      128
+     ],
+     7
+    ]
+   },
+   "output": 3,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      1,
+      1,
+      1,
+      4
+     ],
+     7
+    ]
+   },
+   "output": 0,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      1,
+      8,
+      256,
+      32,
+      1
+     ],
+     7
+    ]
+   },
+   "output": 2,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      64,
+      1,
+      1,
+      1,
+      16,
+      1,
+      64,
+      1
+     ],
+     7
+    ]
+   },
+   "output": 2,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      1,
+      1,
+      1,
+      1,
+      2,
+      1
+     ],
+     7
+    ]
+   },
+   "output": 0,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      1,
+      256,
+      1,
+      8,
+      1,
+      2,
+      16
+     ],
+     7
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      32,
+      1,
+      1,
+      1,
+      32,
+      32,
+      1,
+      1
+     ],
+     7
+    ]
+   },
+   "output": 3,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      1,
+      2,
+      1,
+      1,
+      1,
+      1
+     ],
+     7
+    ]
+   },
+   "output": 0,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      64,
+      1,
+      32,
+      256,
+      1,
+      1,
+      1
+     ],
+     7
+    ]
+   },
+   "output": 3,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      2,
+      1,
+      2,
+      1,
+      1
+     ],
+     7
+    ]
+   },
+   "output": 0,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      2,
+      32,
+      32,
+      32,
+      2,
+      1
+     ],
+     7
+    ]
+   },
+   "output": 3,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      1,
+      1,
+      8,
+      1,
+      1,
+      64,
+      1,
+      128
+     ],
+     7
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      1,
+      1,
+      1,
+      1,
+      1,
+      2
+     ],
+     7
+    ]
+   },
+   "output": 0,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      64,
+      128,
+      2,
+      128,
+      1,
+      1,
+      1
+     ],
+     7
+    ]
+   },
+   "output": 4,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      1,
+      1,
+      1,
+      128,
+      8,
+      32,
+      1,
+      1
+     ],
+     7
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      64,
+      256,
+      1,
+      1,
+      1,
+      32,
+      2
+     ],
+     7
+    ]
+   },
+   "output": 3,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      1,
+      2,
+      2,
+      1,
+      1
+     ],
+     7
+    ]
+   },
+   "output": 0,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      1,
+      256,
+      64,
+      2,
+      1,
+      128
+     ],
+     7
+    ]
+   },
+   "output": 4,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      256,
+      1,
+      1,
+      1,
+      64,
+      1,
+      1,
+      64
+     ],
+     7
+    ]
+   },
+   "output": 4,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      2,
+      1,
+      8,
+      256,
+      1,
+      128,
+      1
+     ],
+     7
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      1,
+      1,
+      16,
+      1,
+      1,
+      256,
+      1,
+      128
+     ],
+     7
+    ]
+   },
+   "output": 2,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      1,
+      8,
+      128,
+      1,
+      1,
+      1,
+      256
+     ],
+     7
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      2,
+      2,
+      1,
+      1,
+      1
+     ],
+     7
+    ]
+   },
+   "output": 0,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      64,
+      2,
+      64,
+      1,
+      32,
+      1
+     ],
+     7
+    ]
+   },
+   "output": 3,
+   "explanation": ""
+  }
+ ],
+ "original_ilr": "```json\n{\n  \"problem_id\": \"min_operations_to_reach_target\",\n  \"nodes\": [\n    {\n      \"id\": 1,\n      \"type\": \"start\",\n      \"label\": \"Start\",\n      \"next\": 2\n    },\n    {\n      \"id\": 2,\n      \"type\": \"process\",\n      \"label\": \"Input: nums (list of integers), target (integer)\",\n      \"action\": \"ctx['nums'] = ctx['arg0']; ctx['target'] = ctx['arg1']; ctx['ops'] = 0; ctx['total'] = 0; ctx['last_skipped'] = -1\",\n      \"next\": 3\n    },\n    {\n      \"id\": 3,\n      \"type\": \"decision\",\n      \"label\": \"Is sum(nums) < target?\",\n      \"logic\": \"sum(ctx['nums']) < ctx['target']\",\n      \"true_next\": 4,\n      \"false_next\": 5\n    },\n    {\n      \"id\": 4,\n      \"type\": \"end\",\n      \"label\": \"Output: -1 (impossible to reach target)\",\n      \"output\": \"-1\"\n    },\n    {\n      \"id\": 5,\n      \"type\": \"process\",\n      \"label\": \"Create SortedList from nums\",\n      \"action\": \"ctx['nums'].sort()\",\n      \"next\": 6\n    },\n    {\n      \"id\": 6,\n      \"type\": \"process\",\n      \"label\": \"Start infinite loop\",\n      \"action\": \"ctx['i'] = len(ctx['nums']) - 1\",\n      \"next\": 7\n    },\n    {\n      \"id\": 7,\n      \"type\": \"process\",\n      \"label\": \"Initialize total = 0, last_skipped = -1\",\n      \"action\": \"ctx['total'] = 0; ctx['last_skipped'] = -1\",\n      \"next\": 8\n    },\n    {\n      \"id\": 8,\n      \"type\": \"decision\",\n      \"label\": \"Is total + nums[i] > target?\",\n      \"logic\": \"ctx['total'] + ctx['nums'][ctx['i']] > ctx['target']\",\n      \"true_next\": 9,\n      \"false_next\": 10\n    },\n    {\n      \"id\": 9,\n      \"type\": \"process\",\n      \"label\": \"Set last_skipped = i\",\n      \"action\": \"ctx['last_skipped'] = ctx['i']\",\n      \"next\": 11\n    },\n    {\n      \"id\": 10,\n      \"type\": \"process\",\n      \"label\": \"Update total: total += nums[i]\",\n      \"action\": \"ctx['total'] += ctx['nums'][ctx['i']]\",\n      \"next\": 8\n    },\n    {\n      \"id\": 11,\n      \"type\": \"decision\",\n      \"label\": \"Is total == target?\",\n      \"logic\": \"ctx['total'] == ctx['target']\",\n      \"true_next\": 12,\n      \"false_next\": 13\n    },\n    {\n      \"id\": 12,\n      \"type\": \"end\",\n      \"label\": \"Output: ops (minimum operations)\",\n      \"output\": \"ctx['ops']\"\n    },\n    {\n      \"id\": 13,\n      \"type\": \"process\",\n      \"label\": \"Pop last_skipped element from nums: new = nums.pop(last_skipped) // 2\",\n      \"action\": \"new = ctx['nums'].pop(ctx['last_skipped']) // 2\",\n      \"next\": 14\n    },\n    {\n      \"id\": 14,\n      \"type\": \"process\",\n      \"label\": \"Add new to nums twice: nums.add(new)\",\n      \"action\": \"ctx['nums'].append(new); ctx['nums'].append(new)\",\n      \"next\": 15\n    },\n    {\n      \"id\": 15,\n      \"type\": \"process\",\n      \"label\": \"Increment ops: ops += 1\",\n      \"action\": \"ctx['ops'] += 1\",\n      \"next\": 6\n    }\n  ]\n}\n```",
+ "original_code": "class Solution:\n    def minOperations(self, nums: List[int], target: int) -> int:\n        nums = nums.copy()\n        ops = 0\n        total = 0\n        last_skipped = -1\n        \n        if sum(nums) < target:\n            return -1\n            \n        nums.sort()\n        \n        while True:\n            i = len(nums) - 1\n            total = 0\n            last_skipped = -1\n            \n            while i >= 0:\n                if total + nums[i] > target:\n                    last_skipped = i\n                    i -= 1\n                else:\n                    total += nums[i]\n                    i -= 1\n                    \n            if total == target:\n                return ops\n                \n            if last_skipped == -1:\n                break\n                \n            new = nums.pop(last_skipped) // 2\n            nums.append(new)\n            nums.append(new)\n            ops += 1",
+ "ocr_data": {
+  "nodes": [
+   {
+    "node_id": 1,
+    "shape_type": "rectangle",
+    "raw_text": "Start",
+    "position": "top"
+   },
+   {
+    "node_id": 2,
+    "shape_type": "rectangle",
+    "raw_text": "Input: nums (list of integers), target (integer)",
+    "position": "middle"
+   },
+   {
+    "node_id": 3,
+    "shape_type": "diamond",
+    "raw_text": "Is sum(nums) < target?",
+    "position": "middle"
+   },
+   {
+    "node_id": 4,
+    "shape_type": "rectangle",
+    "raw_text": "Output: -1 (impossible to reach target)",
+    "position": "middle"
+   },
+   {
+    "node_id": 5,
+    "shape_type": "rectangle",
+    "raw_text": "Initialize ops = 0",
+    "position": "middle"
+   },
+   {
+    "node_id": 6,
+    "shape_type": "rectangle",
+    "raw_text": "Create SortedList from nums",
+    "position": "middle"
+   },
+   {
+    "node_id": 7,
+    "shape_type": "rectangle",
+    "raw_text": "Start infinite loop",
+    "position": "middle"
+   },
+   {
+    "node_id": 8,
+    "shape_type": "rectangle",
+    "raw_text": "Initialize total = 0, last_skipped = -1",
+    "position": "middle"
+   },
+   {
+    "node_id": 9,
+    "shape_type": "rectangle",
+    "raw_text": "For i from len(nums)-1 to 0",
+    "position": "middle"
+   },
+   {
+    "node_id": 10,
+    "shape_type": "diamond",
+    "raw_text": "Is total + nums[i] > target?",
+    "position": "middle"
+   },
+   {
+    "node_id": 11,
+    "shape_type": "rectangle",
+    "raw_text": "Set last_skipped = i",
+    "position": "middle"
+   },
+   {
+    "node_id": 12,
+    "shape_type": "rectangle",
+    "raw_text": "Continue",
+    "position": "middle"
+   },
+   {
+    "node_id": 13,
+    "shape_type": "rectangle",
+    "raw_text": "Update total: total += nums[i]",
+    "position": "middle"
+   },
+   {
+    "node_id": 14,
+    "shape_type": "diamond",
+    "raw_text": "Is total == target?",
+    "position": "middle"
+   },
+   {
+    "node_id": 15,
+    "shape_type": "rectangle",
+    "raw_text": "Output: ops (minimum operations)",
+    "position": "middle"
+   },
+   {
+    "node_id": 16,
+    "shape_type": "rectangle",
+    "raw_text": "Pop last_skipped element from nums: new = nums.pop(last_skipped) // 2",
+    "position": "middle"
+   },
+   {
+    "node_id": 17,
+    "shape_type": "rectangle",
+    "raw_text": "Add new to nums twice: nums.add(new)",
+    "position": "middle"
+   },
+   {
+    "node_id": 18,
+    "shape_type": "rectangle",
+    "raw_text": "Increment ops: ops += 1",
+    "position": "bottom"
+   }
+  ],
+  "edges": [
+   {
+    "from_node": 1,
+    "to_node": 2,
+    "label": ""
+   },
+   {
+    "from_node": 2,
+    "to_node": 3,
+    "label": ""
+   },
+   {
+    "from_node": 3,
+    "to_node": 4,
+    "label": "Yes"
+   },
+   {
+    "from_node": 3,
+    "to_node": 5,
+    "label": "No"
+   },
+   {
+    "from_node": 5,
+    "to_node": 6,
+    "label": ""
+   },
+   {
+    "from_node": 6,
+    "to_node": 7,
+    "label": ""
+   },
+   {
+    "from_node": 7,
+    "to_node": 8,
+    "label": ""
+   },
+   {
+    "from_node": 8,
+    "to_node": 9,
+    "label": ""
+   },
+   {
+    "from_node": 9,
+    "to_node": 10,
+    "label": ""
+   },
+   {
+    "from_node": 10,
+    "to_node": 11,
+    "label": "Yes"
+   },
+   {
+    "from_node": 11,
+    "to_node": 12,
+    "label": ""
+   },
+   {
+    "from_node": 10,
+    "to_node": 13,
+    "label": "No"
+   },
+   {
+    "from_node": 13,
+    "to_node": 9,
+    "label": ""
+   },
+   {
+    "from_node": 14,
+    "to_node": 15,
+    "label": "Yes"
+   },
+   {
+    "from_node": 14,
+    "to_node": 16,
+    "label": "No"
+   },
+   {
+    "from_node": 16,
+    "to_node": 17,
+    "label": ""
+   },
+   {
+    "from_node": 17,
+    "to_node": 18,
+    "label": ""
+   },
+   {
+    "from_node": 18,
+    "to_node": 7,
+    "label": ""
+   }
+  ],
+  "other_text": []
+ },
+ "test_result": {},
+ "status": "completed",
+ "fixed_ilr": null,
+ "modified_code": null,
+ "ilr_fix_log": "",
+ "bug_injected": ""
+}

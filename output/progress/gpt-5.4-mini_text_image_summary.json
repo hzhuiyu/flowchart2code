@@ -1,0 +1,15 @@
+{
+  "model_name": "gpt-5.4-mini_text_image",
+  "datasets": {
+    "LiveCodeBench": {
+      "status": "completed",
+      "message": "Evaluation completed"
+    }
+  },
+  "summary": {
+    "total": 1,
+    "completed": 1,
+    "failed": 0,
+    "skipped": 0
+  }
+}

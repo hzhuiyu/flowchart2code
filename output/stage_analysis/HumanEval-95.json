@@ -1,0 +1,130 @@
+{
+  "problem_id": "check_dict_case",
+  "nodes": [
+    {
+      "id": 1,
+      "type": "start",
+      "label": "Start",
+      "next": 2
+    },
+    {
+      "id": 2,
+      "type": "process",
+      "label": "Input dictionary 'dict'",
+      "action": "ctx['dict'] = ctx['arg0']; ctx['state'] = 'start'; ctx['mixed'] = False",
+      "next": 3
+    },
+    {
+      "id": 3,
+      "type": "decision",
+      "label": "Is dict empty?",
+      "logic": "len(ctx['dict']) == 0",
+      "true_next": 4,
+      "false_next": 5
+    },
+    {
+      "id": 4,
+      "type": "return",
+      "label": "Return False",
+      "value": "False"
+    },
+    {
+      "id": 5,
+      "type": "process",
+      "label": "Initialize state = start",
+      "action": "ctx['state'] = 'start'",
+      "next": 6
+    },
+    {
+      "id": 6,
+      "type": "process",
+      "label": "Iterate over each key in dict",
+      "action": "for key in ctx['dict']: ctx['key'] = key; ctx['key_type'] = type(key)",
+      "next": 7
+    },
+    {
+      "id": 7,
+      "type": "decision",
+      "label": "Check if key is a string",
+      "logic": "isinstance(ctx['key'], str)",
+      "true_next": 9,
+      "false_next": 8
+    },
+    {
+      "id": 8,
+      "type": "process",
+      "label": "Set state = 'mixed' and break",
+      "action": "ctx['state'] = 'mixed'; break",
+      "next": 19
+    },
+    {
+      "id": 9,
+      "type": "decision",
+      "label": "Is state 'start'?",
+      "logic": "ctx['state'] == 'start'",
+      "true_next": 10,
+      "false_next": 14
+    },
+    {
+      "id": 10,
+      "type": "process",
+      "label": "Check if key is upper or lower case",
+      "action": "if ctx['key'].isupper(): ctx['state'] = 'upper'; continue elif ctx['key'].islower(): ctx['state'] = 'lower'; continue else: ctx['state'] = 'mixed'; break",
+      "next": 19
+    },
+    {
+      "id": 14,
+      "type": "decision",
+      "label": "Check if key case matches state",
+      "logic": "ctx['key'].islower() if ctx['state'] == 'lower' else ctx['key'].isupper() if ctx['state'] == 'upper' else False",
+      "true_next": 15,
+      "false_next": 16
+    },
+    {
+      "id": 15,
+      "type": "process",
+      "label": "Set state = 'mixed' and break",
+      "action": "ctx['state'] = 'mixed'; break",
+      "next": 19
+    },
+    {
+      "id": 16,
+      "type": "decision",
+      "label": "Are state == 'upper' or state == 'lower'?",
+      "logic": "ctx['state'] == 'upper' or ctx['state'] == 'lower'",
+      "true_next": 17,
+      "false_next": 18
+    },
+    {
+      "id": 17,
+      "type": "return",
+      "label": "Return True",
+      "value": "True"
+    },
+    {
+      "id": 18,
+      "type": "return",
+      "label": "Return False",
+      "value": "False"
+    },
+    {
+      "id": 19,
+      "type": "end",
+      "label": "End",
+      "output": "ctx['state'] == 'mixed' or ctx['state'] == 'upper' or ctx['state'] == 'lower'"
+    }
+  ],
+  "task_id": "HumanEval-95",
+  "dataset": "HumanEval-V",
+  "result": "failed: Second test error: True",
+  "code": "def check_dict_case(dict):\n    if len(dict) == 0:\n        return False\n    \n    state = 'start'\n    mixed = False\n    \n    for key in dict:\n        if not isinstance(key, str):\n            state = 'mixed'\n            break\n    \n    if state == 'start':\n        for key in dict:\n            if key.isupper():\n                state = 'upper'\n                continue\n            elif key.islower():\n                state = 'lower'\n                continue\n            else:\n                state = 'mixed'\n                break\n    \n    if state == 'upper' or state == 'lower':\n        return True\n    else:\n        return False",
+  "verification": {
+    "md_verdict": "ILR Error",
+    "actual_error_source": "ilr",
+    "ilr_verdict": "incorrect",
+    "code_vs_ilr": "deviates",
+    "md_correct": "yes",
+    "note": "确认 ILR 错：节点10 的 action 含 '; continue elif' 本身即非法 Python，非空字典忠实执行必 SyntaxError；按语义修复后也只让最后一个键进状态机且 state 被无条件覆盖，test2/3/4 全错（一致性检查节点14不可达）；生成代码把节点10语义搬进逐键循环后仅剩 test2 失败，该失败直接继承自 ILR 的覆盖语义，根因是 ILR。",
+    "evidence": "严格 ILR: 非空字典全部 SyntaxError@node10（{} 恰好 False）；修复版 ILR test2 {p,A,B}=True≠False；生成代码 test2 同样返回 True（与 FAILURE RESULT 'Second test error: True' 一致），其余6条通过"
+  }
+}

@@ -1,0 +1,92 @@
+[
+  {
+    "task_id": "biweekly-contest-108-number-of-black-blocks",
+    "ilr_passed": 100,
+    "ilr_total": 100,
+    "ilr_error": null,
+    "code_passed": 0,
+    "code_total": 100,
+    "code_error": "harness exception: Can't pickle local object 'CodeTester._execute_with_test_capture.<locals>.unsafe_execute'"
+  },
+  {
+    "task_id": "biweekly-contest-108-partition-string-into-minimum-beautiful-substrings",
+    "ilr_passed": 100,
+    "ilr_total": 100,
+    "ilr_error": null,
+    "code_passed": 0,
+    "code_total": 100,
+    "code_error": "harness exception: Can't pickle local object 'CodeTester._execute_with_test_capture.<locals>.unsafe_execute'"
+  },
+  {
+    "task_id": "biweekly-contest-109-check-if-array-is-good",
+    "ilr_passed": 100,
+    "ilr_total": 100,
+    "ilr_error": null,
+    "code_passed": 0,
+    "code_total": 100,
+    "code_error": "harness exception: Can't pickle local object 'CodeTester._execute_with_test_capture.<locals>.unsafe_execute'"
+  },
+  {
+    "task_id": "biweekly-contest-109-visit-array-positions-to-maximize-score",
+    "ilr_passed": 100,
+    "ilr_total": 100,
+    "ilr_error": null,
+    "code_passed": 0,
+    "code_total": 100,
+    "code_error": "harness exception: Can't pickle local object 'CodeTester._execute_with_test_capture.<locals>.unsafe_execute'"
+  },
+  {
+    "task_id": "biweekly-contest-110-minimum-time-to-make-array-sum-at-most-x",
+    "ilr_passed": 100,
+    "ilr_total": 100,
+    "ilr_error": null,
+    "code_passed": 0,
+    "code_total": 100,
+    "code_error": "harness exception: Can't pickle local object 'CodeTester._execute_with_test_capture.<locals>.unsafe_execute'"
+  },
+  {
+    "task_id": "biweekly-contest-111-count-pairs-whose-sum-is-less-than-target",
+    "ilr_passed": 100,
+    "ilr_total": 100,
+    "ilr_error": null,
+    "code_passed": 0,
+    "code_total": 100,
+    "code_error": "harness exception: Can't pickle local object 'CodeTester._execute_with_test_capture.<locals>.unsafe_execute'"
+  },
+  {
+    "task_id": "biweekly-contest-111-number-of-beautiful-integers-in-the-range",
+    "ilr_passed": 100,
+    "ilr_total": 100,
+    "ilr_error": null,
+    "code_passed": 0,
+    "code_total": 100,
+    "code_error": "harness exception: Can't pickle local object 'CodeTester._execute_with_test_capture.<locals>.unsafe_execute'"
+  },
+  {
+    "task_id": "biweekly-contest-113-minimum-right-shifts-to-sort-the-array",
+    "ilr_passed": 100,
+    "ilr_total": 100,
+    "ilr_error": null,
+    "code_passed": 0,
+    "code_total": 100,
+    "code_error": "harness exception: Can't pickle local object 'CodeTester._execute_with_test_capture.<locals>.unsafe_execute'"
+  },
+  {
+    "task_id": "biweekly-contest-114-minimum-operations-to-collect-elements",
+    "ilr_passed": 100,
+    "ilr_total": 100,
+    "ilr_error": null,
+    "code_passed": 0,
+    "code_total": 100,
+    "code_error": "harness exception: Can't pickle local object 'CodeTester._execute_with_test_capture.<locals>.unsafe_execute'"
+  },
+  {
+    "task_id": "biweekly-contest-114-split-array-into-maximum-number-of-subarrays",
+    "ilr_passed": 100,
+    "ilr_total": 100,
+    "ilr_error": null,
+    "code_passed": 0,
+    "code_total": 100,
+    "code_error": "harness exception: Can't pickle local object 'CodeTester._execute_with_test_capture.<locals>.unsafe_execute'"
+  }
+]

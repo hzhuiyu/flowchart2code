@@ -1,0 +1,138 @@
+{
+  "task_id": "HumanEval-62",
+  "dataset": "HumanEval-V",
+  "difficulty": null,
+  "title": null,
+  "result": "failed: ",
+  "ilr": "{\n  \"problem_id\": \"derivative_example\",\n  \"nodes\": [\n    {\"id\": 1, \"type\": \"start\", \"label\": \"Start\", \"next\": 2},\n    {\"id\": 2, \"type\": \"process\", \"label\": \"Input: xs (list of coefficients)\", \"action\": \"ctx['xs']=ctx['arg0']; ctx['derivative_list']=[]\", \"next\": 3},\n    {\"id\": 3, \"type\": \"decision\", \"label\": \"Is xs empty?\", \"logic\": \"len(ctx['xs']) == 0\", \"true_next\": 4, \"false_next\": 5},\n    {\"id\": 4, \"type\": \"end\", \"label\": \"Output: [] (derivative of zero polynomial)\", \"output\": \"[]\"},\n    {\"id\": 5, \"type\": \"process\", \"label\": \"Initialize derivative_list = []\", \"action\": \"ctx['derivative_list'] = []\", \"next\": 6},\n    {\"id\": 6, \"type\": \"decision\", \"label\": \"Loop through coefficients with indices: i, x in enumerate(xs)\", \"logic\": \"True\", \"true_next\": 7, \"false_next\": 9},\n    {\"id\": 7, \"type\": \"process\", \"label\": \"Calculate term: i * x\", \"action\": \"ctx['term'] = ctx['i'] * ctx['x']\", \"next\": 8},\n    {\"id\": 8, \"type\": \"process\", \"label\": \"Add term to derivative_list\", \"action\": \"ctx['derivative_list'].append(ctx['term'])\", \"next\": 6},\n    {\"id\": 9, \"type\": \"end\", \"label\": \"Output: derivative_list (list of derivatives)\", \"output\": \"ctx['derivative_list']\"}\n  ]\n}",
+  "code": "def derivative(xs: list):\n    if len(xs) == 0:\n        return []\n    \n    derivative_list = []\n    \n    for i, x in enumerate(xs):\n        term = i * x\n        derivative_list.append(term)\n    \n    return derivative_list",
+  "prompt": "\n\ndef derivative(xs: list):\n    \"\"\" xs represent coefficients of a polynomial.\n    xs[0] + xs[1] * x + xs[2] * x^2 + ....\n     Return derivative of this polynomial in the same form.\n    >>> derivative([3, 1, 2, 4, 5])\n    [1, 4, 12, 20]\n    >>> derivative([1, 2, 3])\n    [2, 6]\n    \"\"\"\n",
+  "test": "\n\nMETADATA = {}\n\n\ndef check(candidate):\n    assert candidate([3, 1, 2, 4, 5]) == [1, 4, 12, 20]\n    assert candidate([1, 2, 3]) == [2, 6]\n    assert candidate([3, 2, 1]) == [2, 2]\n    assert candidate([3, 2, 1, 0, 4]) == [2, 2, 0, 16]\n    assert candidate([1]) == []\n\n",
+  "ocr_data": {
+    "nodes": [
+      {
+        "node_id": 1,
+        "shape_type": "rectangle",
+        "raw_text": "Start",
+        "position": "top"
+      },
+      {
+        "node_id": 2,
+        "shape_type": "rectangle",
+        "raw_text": "Input: xs (list of coefficients)",
+        "position": "middle"
+      },
+      {
+        "node_id": 3,
+        "shape_type": "diamond",
+        "raw_text": "Is xs empty?",
+        "position": "middle"
+      },
+      {
+        "node_id": 4,
+        "shape_type": "rectangle",
+        "raw_text": "Output: [] (derivative of zero polynomial)",
+        "position": "middle"
+      },
+      {
+        "node_id": 5,
+        "shape_type": "rectangle",
+        "raw_text": "Initialize derivative_list = []",
+        "position": "middle"
+      },
+      {
+        "node_id": 6,
+        "shape_type": "diamond",
+        "raw_text": "Loop through coefficients with indices: i, x in enumerate(xs)",
+        "position": "middle"
+      },
+      {
+        "node_id": 7,
+        "shape_type": "rectangle",
+        "raw_text": "Calculate term: i * x",
+        "position": "middle"
+      },
+      {
+        "node_id": 8,
+        "shape_type": "rectangle",
+        "raw_text": "Add term to derivative_list",
+        "position": "middle"
+      },
+      {
+        "node_id": 9,
+        "shape_type": "diamond",
+        "raw_text": "Is there more coefficients?",
+        "position": "middle"
+      },
+      {
+        "node_id": 10,
+        "shape_type": "rectangle",
+        "raw_text": "Output: derivative_list (list of derivatives)",
+        "position": "bottom"
+      }
+    ],
+    "edges": [
+      {
+        "from_node": 1,
+        "to_node": 2,
+        "label": ""
+      },
+      {
+        "from_node": 2,
+        "to_node": 3,
+        "label": ""
+      },
+      {
+        "from_node": 3,
+        "to_node": 4,
+        "label": "Yes"
+      },
+      {
+        "from_node": 3,
+        "to_node": 5,
+        "label": "No"
+      },
+      {
+        "from_node": 5,
+        "to_node": 6,
+        "label": ""
+      },
+      {
+        "from_node": 6,
+        "to_node": 7,
+        "label": ""
+      },
+      {
+        "from_node": 7,
+        "to_node": 8,
+        "label": ""
+      },
+      {
+        "from_node": 8,
+        "to_node": 9,
+        "label": ""
+      },
+      {
+        "from_node": 9,
+        "to_node": 6,
+        "label": "Yes"
+      },
+      {
+        "from_node": 9,
+        "to_node": 10,
+        "label": "No"
+      }
+    ],
+    "other_text": []
+  },
+  "analysis": {
+    "ilr_verdict": "incorrect",
+    "ilr_issues": "ILR节点6的logic写成True（死循环，且i/x从未被赋值），丢弃了OCR中#9'Is there more coefficients?'这一循环条件节点；即便按标签'for i,x in enumerate(xs)'的意图执行，也包含i=0项：[3,1,2,4,5]→[0,1,4,12,20]，而导数应去掉常数项。",
+    "code_vs_ilr": "faithful",
+    "code_issues": "代码按ILR标签意图实现了for i,x in enumerate(xs)的完整循环（合理消解了logic=True的死循环写法），但忠实继承了'包含i=0项'的缺陷，未去掉首项。",
+    "error_source": "ilr",
+    "ocr_contribution": "no",
+    "root_cause": "按OCR文本看流程图本身就没有体现'导数需去掉常数项/从一次项开始'（标签就是enumerate(xs)），ILR生成时又把循环条件合并成logic=True造成死循环；代码忠实实现表意算法后继承i=0缺陷，含非零常数项的断言全部失败。",
+    "evidence": "derivative([3,1,2,4,5])输出[0,1,4,12,20]，期望[1,4,12,20]；derivative([1])输出[0]，期望[]。"
+  }
+}

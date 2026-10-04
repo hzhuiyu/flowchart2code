@@ -1,0 +1,165 @@
+{
+  "task_id": "weekly-contest-364-maximum-odd-binary-number",
+  "dataset": "Algorithm",
+  "difficulty": "Easy",
+  "title": "maximum-odd-binary-number",
+  "result": "failed: ",
+  "ilr": "{\n  \"problem_id\": \"maximum_odd_binary_number\",\n  \"nodes\": [\n    {\"id\": 1, \"type\": \"start\", \"label\": \"Start\", \"next\": 2},\n    {\"id\": 2, \"type\": \"process\", \"label\": \"Input: s (string)\", \"action\": \"ctx['s']=ctx['arg0']; ctx['res']=''; ctx['c']=ctx['s'].count('1')\", \"next\": 3},\n    {\"id\": 3, \"type\": \"decision\", \"label\": \"Is c == 1?\", \"logic\": \"ctx['c'] == 1\", \"true_next\": 4, \"false_next\": 5},\n    {\"id\": 4, \"type\": \"process\", \"label\": \"Append '1' to res\", \"action\": \"ctx['res'] += '1'\", \"next\": 8},\n    {\"id\": 5, \"type\": \"decision\", \"label\": \"Is len(res) == len(s) - 1?\", \"logic\": \"len(ctx['res']) == len(ctx['s']) - 1\", \"true_next\": 6, \"false_next\": 7},\n    {\"id\": 6, \"type\": \"process\", \"label\": \"Append '1' to res\", \"action\": \"ctx['res'] += '1'\", \"next\": 8},\n    {\"id\": 7, \"type\": \"decision\", \"label\": \"Is c > 1?\", \"logic\": \"ctx['c'] > 1\", \"true_next\": 10, \"false_next\": 11},\n    {\"id\": 10, \"type\": \"process\", \"label\": \"Append '1' to res\", \"action\": \"ctx['res'] += '1'\", \"next\": 12},\n    {\"id\": 11, \"type\": \"process\", \"label\": \"Append '0' to res\", \"action\": \"ctx['res'] += '0'\", \"next\": 12},\n    {\"id\": 12, \"type\": \"process\", \"label\": \"Decrement c by 1\", \"action\": \"ctx['c'] -= 1\", \"next\": 3},\n    {\"id\": 8, \"type\": \"end\", \"label\": \"Output: res\", \"output\": \"ctx['res']\"}\n  ]\n}",
+  "code": "class Solution:\n    def maximumOddBinaryNumber(self, s: str) -> str:\n        res = ''\n        c = s.count('1')\n        \n        if c == 1:\n            res += '1'\n        else:\n            if len(res) == len(s) - 1:\n                res += '1'\n            while c > 1:\n                res += '1'\n                c -= 1\n                if c > 1:\n                    res += '0'\n        \n        return res + '1'",
+  "prompt": "\"\"\"\nYou are given a binary string s that contains at least one '1'.\n\nYou have to rearrange the bits in such a way that the resulting binary number is the maximum odd binary number that can be created from this combination.\n\nReturn a string representing the maximum odd binary number that can be created from the given combination.\n\nNote that the resulting string can have leading zeros.\n\nExample 1:\n\nInput: s = \"010\"\nOutput: \"001\"\nExplanation: Because there is just one '1', it must be in the last position. So the answer is \"001\".\n\nExample 2:\n\nInput: s = \"0101\"\nOutput: \"1001\"\nExplanation: One of the '1's must be in the last position. The maximum number that can be made with the remaining digits is \"100\". So the answer is \"1001\".\n\n\nConstraints:\n\n * 1 <= s.length <= 100\n * s consists only of '0' and '1'.\n * s contains at least one '1'.\n\"\"\"\nclass Solution:\n    def maximumOddBinaryNumber(self, s: str) -> str:\n        ",
+  "test": "\nmy_solution = Solution()\n\ntest_input = { \"s\": \"010\" }\nassert my_solution.maximumOddBinaryNumber(**test_input) == \"001\"\n\ntest_input = { \"s\": \"0101\" }\nassert my_solution.maximumOddBinaryNumber(**test_input) == \"1001\"\n\ntest_input = { \"s\": \"1\" }\nassert my_solution.maximumOddBinaryNumber(**test_input) == \"1\"\n\ntest_input = { \"s\": \"01\" }\nassert my_solution.maximumOddBinaryNumber(**test_input) == \"01\"\n\ntest_input = { \"s\": \"10\" }\nassert my_solution.maximumOddBinaryNumber(**test_input) == \"01\"\n\ntest_input = { \"s\": \"11\" }\nassert my_solution.maximumOddBinaryNumber(**test_input) == \"11\"\n\ntest_input = { \"s\": \"001\" }\nassert my_solution.maximumOddBinaryNumber(**test_input) == \"001\"\n\ntest_input = { \"s\": \"011\" }\nassert my_solution.maximumOddBinaryNumber(**test_input) == \"101\"\n\ntest_input = { \"s\": \"100\" }\nassert my_solution.maximumOddBinaryNumber(**test_input) == \"001\"\n\ntest_input = { \"s\": \"101\" }\nassert my_solution.maximumOddBinaryNumber(**test_input) == \"101\"\n\ntest_input = { \"s\": \"110\" }\nassert my_solution.maximumOddBinaryNumber(**test_input) == \"101\"\n\ntest_input = { \"s\": \"111\" }\nassert my_solution.maximumOddBinaryNumber(**test_input) == \"111\"\n\ntest_input = { \"s\": \"0010\" }\nassert my_solution.maximumOddBinaryNumber(**test_input) == \"0001\"\n\ntest_input = { \"s\": \"0011\" }\nassert my_solution.maximumOddBinaryNumber(**test_input) == \"1001\"\n\ntest_input = { \"s\": \"0100\" }\nassert my_solution.maximumOddBinaryNumber(**test_input) == \"0001\"\n\ntest_input = { \"s\": \"0111\" }\nassert my_solution.maximumOddBinaryNumber(**test_input) == \"1101\"\n\ntest_input = { \"s\": \"1000\" }\nassert my_solution.maximumOddBinaryNumber(**test_input) == \"0001\"\n\ntest_input = { \"s\": \"1001\" }\nassert my_solution.maximumOddBinaryNumber(**test_input) == \"1001\"\n\ntest_input = { \"s\": \"1011\" }\nassert my_solution.maximumOddBinaryNumber(**test_input) == \"1101\"\n\ntest_input = { \"s\": \"1100\" }\nassert my_solution.maximumOddBinaryNumber(**test_input) == \"1001\"\n\ntest_input = { \"s\": \"1101\" }\nassert my_solution.maximumOddBinaryNumber(**test_input) == \"1101\"\n\ntest_input = { \"s\": \"1111\" }\nassert my_solution.maximumOddBinaryNumber(**test_input) == \"1111\"\n\ntest_input = { \"s\": \"00001\" }\nassert my_solution.maximumOddBinaryNumber(**test_input) == \"00001\"\n\ntest_input = { \"s\": \"00011\" }\nassert my_solution.maximumOddBinaryNumber(**test_input) == \"10001\"\n\ntest_input = { \"s\": \"00100\" }\nassert my_solution.maximumOddBinaryNumber(**test_input) == \"00001\"\n\ntest_input = { \"s\": \"00101\" }\nassert my_solution.maximumOddBinaryNumber(**test_input) == \"10001\"\n\ntest_input = { \"s\": \"00111\" }\nassert my_solution.maximumOddBinaryNumber(**test_input) == \"11001\"\n\ntest_input = { \"s\": \"01011\" }\nassert my_solution.maximumOddBinaryNumber(**test_input) == \"11001\"\n\ntest_input = { \"s\": \"01100\" }\nassert my_solution.maximumOddBinaryNumber(**test_input) == \"10001\"\n\ntest_input = { \"s\": \"01110\" }\nassert my_solution.maximumOddBinaryNumber(**test_input) == \"11001\"\n\ntest_input = { \"s\": \"01111\" }\nassert my_solution.maximumOddBinaryNumber(**test_input) == \"11101\"\n\ntest_input = { \"s\": \"10000\" }\nassert my_solution.maximumOddBinaryNumber(**test_input) == \"00001\"\n\ntest_input = { \"s\": \"10100\" }\nassert my_solution.maximumOddBinaryNumber(**test_input) == \"10001\"\n\ntest_input = { \"s\": \"11010\" }\nassert my_solution.maximumOddBinaryNumber(**test_input) == \"11001\"\n\ntest_input = { \"s\": \"11011\" }\nassert my_solution.maximumOddBinaryNumber(**test_input) == \"11101\"\n\ntest_input = { \"s\": \"11110\" }\nassert my_solution.maximumOddBinaryNumber(**test_input) == \"11101\"\n\ntest_input = { \"s\": \"000001\" }\nassert my_solution.maximumOddBinaryNumber(**test_input) == \"000001\"\n\ntest_input = { \"s\": \"000100\" }\nassert my_solution.maximumOddBinaryNumber(**test_input) == \"000001\"\n\ntest_input = { \"s\": \"000101\" }\nassert my_solution.maximumOddBinaryNumber(**test_input) == \"100001\"\n\ntest_input = { \"s\": \"000110\" }\nassert my_solution.maximumOddBinaryNumber(**test_input) == \"100001\"\n\ntest_input = { \"s\": \"000111\" }\nassert my_solution.maximumOddBinaryNumber(**test_input) == \"110001\"\n\ntest_input = { \"s\": \"001100\" }\nassert my_solution.maximumOddBinaryNumber(**test_input) == \"100001\"\n\ntest_input = { \"s\": \"001110\" }\nassert my_solution.maximumOddBinaryNumber(**test_input) == \"110001\"\n\ntest_input = { \"s\": \"001111\" }\nassert my_solution.maximumOddBinaryNumber(**test_input) == \"111001\"\n\ntest_input = { \"s\": \"010001\" }\nassert my_solution.maximumOddBinaryNumber(**test_input) == \"100001\"\n\ntest_input = { \"s\": \"010101\" }\nassert my_solution.maximumOddBinaryNumber(**test_input) == \"110001\"\n\ntest_input = { \"s\": \"010111\" }\nassert my_solution.maximumOddBinaryNumber(**test_input) == \"111001\"\n\ntest_input = { \"s\": \"011010\" }\nassert my_solution.maximumOddBinaryNumber(**test_input) == \"110001\"\n\ntest_input = { \"s\": \"011100\" }\nassert my_solution.maximumOddBinaryNumber(**test_input) == \"110001\"\n\ntest_input = { \"s\": \"011111\" }\nassert my_solution.maximumOddBinaryNumber(**test_input) == \"111101\"\n\ntest_input = { \"s\": \"100100\" }\nassert my_solution.maximumOddBinaryNumber(**test_input) == \"100001\"\n\ntest_input = { \"s\": \"100101\" }\nassert my_solution.maximumOddBinaryNumber(**test_input) == \"110001\"\n\ntest_input = { \"s\": \"100111\" }\nassert my_solution.maximumOddBinaryNumber(**test_input) == \"111001\"\n\ntest_input = { \"s\": \"101010\" }\nassert my_solution.maximumOddBinaryNumber(**test_input) == \"110001\"\n\ntest_input = { \"s\": \"101100\" }\nassert my_solution.maximumOddBinaryNumber(**test_input) == \"110001\"\n\ntest_input = { \"s\": \"101101\" }\nassert my_solution.maximumOddBinaryNumber(**test_input) == \"111001\"\n\ntest_input = { \"s\": \"110000\" }\nassert my_solution.maximumOddBinaryNumber(**test_input) == \"100001\"\n\ntest_input = { \"s\": \"110010\" }\nassert my_solution.maximumOddBinaryNumber(**test_input) == \"110001\"\n\ntest_input = { \"s\": \"110011\" }\nassert my_solution.maximumOddBinaryNumber(**test_input) == \"111001\"\n\ntest_input = { \"s\": \"110100\" }\nassert my_solution.maximumOddBinaryNumber(**test_input) == \"110001\"\n\ntest_input = { \"s\": \"110101\" }\nassert my_solution.maximumOddBinaryNumber(**test_input) == \"111001\"\n\ntest_input = { \"s\": \"110110\" }\nassert my_solution.maximumOddBinaryNumber(**test_input) == \"111001\"\n\ntest_input = { \"s\": \"111000\" }\nassert my_solution.maximumOddBinaryNumber(**test_input) == \"110001\"\n\ntest_input = { \"s\": \"111010\" }\nassert my_solution.maximumOddBinaryNumber(**test_input) == \"111001\"\n\ntest_input = { \"s\": \"111101\" }\nassert my_solution.maximumOddBinaryNumber(**test_input) == \"111101\"\n\ntest_input = { \"s\": \"111111\" }\nassert my_solution.maximumOddBinaryNumber(**test_input) == \"111111\"\n\ntest_input = { \"s\": \"0000010\" }\nassert my_solution.maximumOddBinaryNumber(**test_input) == \"0000001\"\n\ntest_input = { \"s\": \"0000100\" }\nassert my_solution.maximumOddBinaryNumber(**test_input) == \"0000001\"\n\ntest_input = { \"s\": \"0001001\" }\nassert my_solution.maximumOddBinaryNumber(**test_input) == \"1000001\"\n\ntest_input = { \"s\": \"0001110\" }\nassert my_solution.maximumOddBinaryNumber(**test_input) == \"1100001\"\n\ntest_input = { \"s\": \"0010000\" }\nassert my_solution.maximumOddBinaryNumber(**test_input) == \"0000001\"\n\ntest_input = { \"s\": \"0010101\" }\nassert my_solution.maximumOddBinaryNumber(**test_input) == \"1100001\"\n\ntest_input = { \"s\": \"0010110\" }\nassert my_solution.maximumOddBinaryNumber(**test_input) == \"1100001\"\n\ntest_input = { \"s\": \"0010111\" }\nassert my_solution.maximumOddBinaryNumber(**test_input) == \"1110001\"\n\ntest_input = { \"s\": \"0011101\" }\nassert my_solution.maximumOddBinaryNumber(**test_input) == \"1110001\"\n\ntest_input = { \"s\": \"0011111\" }\nassert my_solution.maximumOddBinaryNumber(**test_input) == \"1111001\"\n\ntest_input = { \"s\": \"0100100\" }\nassert my_solution.maximumOddBinaryNumber(**test_input) == \"1000001\"\n\ntest_input = { \"s\": \"0101001\" }\nassert my_solution.maximumOddBinaryNumber(**test_input) == \"1100001\"\n\ntest_input = { \"s\": \"0110010\" }\nassert my_solution.maximumOddBinaryNumber(**test_input) == \"1100001\"\n\ntest_input = { \"s\": \"0110110\" }\nassert my_solution.maximumOddBinaryNumber(**test_input) == \"1110001\"\n\ntest_input = { \"s\": \"0110111\" }\nassert my_solution.maximumOddBinaryNumber(**test_input) == \"1111001\"\n\ntest_input = { \"s\": \"0111011\" }\nassert my_solution.maximumOddBinaryNumber(**test_input) == \"1111001\"\n\ntest_input = { \"s\": \"0111101\" }\nassert my_solution.maximumOddBinaryNumber(**test_input) == \"1111001\"\n\ntest_input = { \"s\": \"1000011\" }\nassert my_solution.maximumOddBinaryNumber(**test_input) == \"1100001\"\n\ntest_input = { \"s\": \"1000100\" }\nassert my_solution.maximumOddBinaryNumber(**test_input) == \"1000001\"\n\ntest_input = { \"s\": \"1000101\" }\nassert my_solution.maximumOddBinaryNumber(**test_input) == \"1100001\"\n\ntest_input = { \"s\": \"1000111\" }\nassert my_solution.maximumOddBinaryNumber(**test_input) == \"1110001\"\n\ntest_input = { \"s\": \"1001100\" }\nassert my_solution.maximumOddBinaryNumber(**test_input) == \"1100001\"\n\ntest_input = { \"s\": \"1001101\" }\nassert my_solution.maximumOddBinaryNumber(**test_input) == \"1110001\"\n\ntest_input = { \"s\": \"1010000\" }\nassert my_solution.maximumOddBinaryNumber(**test_input) == \"1000001\"\n\ntest_input = { \"s\": \"1010100\" }\nassert my_solution.maximumOddBinaryNumber(**test_input) == \"1100001\"\n\ntest_input = { \"s\": \"1010111\" }\nassert my_solution.maximumOddBinaryNumber(**test_input) == \"1111001\"\n\ntest_input = { \"s\": \"1011000\" }\nassert my_solution.maximumOddBinaryNumber(**test_input) == \"1100001\"\n\ntest_input = { \"s\": \"1011010\" }\nassert my_solution.maximumOddBinaryNumber(**test_input) == \"1110001\"\n\ntest_input = { \"s\": \"1011011\" }\nassert my_solution.maximumOddBinaryNumber(**test_input) == \"1111001\"\n\ntest_input = { \"s\": \"1100100\" }\nassert my_solution.maximumOddBinaryNumber(**test_input) == \"1100001\"\n\ntest_input = { \"s\": \"1100101\" }\nassert my_solution.maximumOddBinaryNumber(**test_input) == \"1110001\"\n\ntest_input = { \"s\": \"1101010\" }\nassert my_solution.maximumOddBinaryNumber(**test_input) == \"1110001\"\n\ntest_input = { \"s\": \"1101011\" }\nassert my_solution.maximumOddBinaryNumber(**test_input) == \"1111001\"\n\ntest_input = { \"s\": \"1101110\" }\nassert my_solution.maximumOddBinaryNumber(**test_input) == \"1111001\"",
+  "ocr_data": {
+    "nodes": [
+      {
+        "node_id": 1,
+        "shape_type": "rectangle",
+        "raw_text": "Start",
+        "position": "top"
+      },
+      {
+        "node_id": 2,
+        "shape_type": "rectangle",
+        "raw_text": "Input: s (string)",
+        "position": "middle"
+      },
+      {
+        "node_id": 3,
+        "shape_type": "rectangle",
+        "raw_text": "Initialize res = \"",
+        "position": "middle"
+      },
+      {
+        "node_id": 4,
+        "shape_type": "rectangle",
+        "raw_text": "Count '1's: c = s.count('1')",
+        "position": "middle"
+      },
+      {
+        "node_id": 5,
+        "shape_type": "diamond",
+        "raw_text": "Is c == 1?",
+        "position": "middle"
+      },
+      {
+        "node_id": 6,
+        "shape_type": "diamond",
+        "raw_text": "Is len(res) == len(s) - 1?",
+        "position": "middle"
+      },
+      {
+        "node_id": 7,
+        "shape_type": "diamond",
+        "raw_text": "Is c > 1?",
+        "position": "middle"
+      },
+      {
+        "node_id": 8,
+        "shape_type": "rectangle",
+        "raw_text": "Append '1' to res",
+        "position": "bottom"
+      },
+      {
+        "node_id": 9,
+        "shape_type": "rectangle",
+        "raw_text": "Output: res",
+        "position": "bottom"
+      },
+      {
+        "node_id": 10,
+        "shape_type": "rectangle",
+        "raw_text": "Append '1' to res",
+        "position": "bottom"
+      },
+      {
+        "node_id": 11,
+        "shape_type": "rectangle",
+        "raw_text": "Append '0' to res",
+        "position": "bottom"
+      },
+      {
+        "node_id": 12,
+        "shape_type": "rectangle",
+        "raw_text": "Decrement c by 1",
+        "position": "bottom"
+      }
+    ],
+    "edges": [
+      {
+        "from_node": 1,
+        "to_node": 2,
+        "label": ""
+      },
+      {
+        "from_node": 2,
+        "to_node": 3,
+        "label": ""
+      },
+      {
+        "from_node": 3,
+        "to_node": 4,
+        "label": ""
+      },
+      {
+        "from_node": 4,
+        "to_node": 5,
+        "label": ""
+      },
+      {
+        "from_node": 5,
+        "to_node": 6,
+        "label": "Yes"
+      },
+      {
+        "from_node": 6,
+        "to_node": 8,
+        "label": "Yes"
+      },
+      {
+        "from_node": 6,
+        "to_node": 7,
+        "label": "No"
+      },
+      {
+        "from_node": 7,
+        "to_node": 10,
+        "label": "Yes"
+      },
+      {
+        "from_node": 7,
+        "to_node": 11,
+        "label": "No"
+      },
+      {
+        "from_node": 10,
+        "to_node": 12,
+        "label": ""
+      },
+      {
+        "from_node": 11,
+        "to_node": 12,
+        "label": ""
+      },
+      {
+        "from_node": 12,
+        "to_node": 5,
+        "label": ""
+      },
+      {
+        "from_node": 8,
+        "to_node": 9,
+        "label": ""
+      }
+    ],
+    "other_text": []
+  },
+  "analysis": {
+    "ilr_verdict": "incorrect",
+    "ilr_issues": "节点7的false分支(节点11追加'0')实际不可达：c==1时节点3直接走true分支追加'1'后结束，c>1时只追加'1'并自减，导致res永远不含'0'、长度小于len(s)。节点5的len(res)==len(s)-1判据只在res为空时检查一次，形同虚设。另按OCR看原流程图本身就不完整（菱形5无No出边、追加'0'后也自减c并回跳到c==1判断），ILR继承并重组了这套错误逻辑。",
+    "code_vs_ilr": "deviates",
+    "code_issues": "代码额外在return时无条件加'1'后缀（ILR的末位'1'来自节点4/6而非后缀拼接），并把ILR中'先判断c>1再追加'1''的循环改写成'先追加'1'自减后再判c>1插入追加'0''，控制流与ILR不一致。代码忠实执行也得不到正确答案，但其输出与ILR输出都错且互不相同。",
+    "error_source": "both",
+    "ocr_contribution": "no",
+    "root_cause": "ILR逻辑本身错误（'0'追加分支不可达，结果串长度不足），生成的代码又偏离该ILR（自加末位'1'、循环内乱插'0'），两级独立出错。",
+    "evidence": "s='0101'期望'1001'：忠实执行ILR输出'11'（无'0'），生成代码输出'11'；s='010'期望'001'：ILR输出'1'，代码输出'11'，两者错误方式不同。OCR节点文本可读、边基本齐全（仅菱形5缺No边），OCR不是主因。"
+  }
+}

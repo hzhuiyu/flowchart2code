@@ -1,0 +1,171 @@
+{
+  "task_id": "1399. Count Largest Group",
+  "dataset": "MATH",
+  "difficulty": "easy",
+  "title": null,
+  "result": "failed: list index out of range",
+  "ilr": "{\n  \"problem_id\": \"digit_sum_groups\",\n  \"nodes\": [\n    {\"id\": 1, \"type\": \"start\", \"label\": \"Start\", \"next\": 2},\n    {\"id\": 2, \"type\": \"process\", \"label\": \"Input: n (integer)\", \"action\": \"ctx['n']=ctx['arg0']; ctx['hash_map']=[0]*36; ctx['i']=0\", \"next\": 3},\n    {\"id\": 3, \"type\": \"process\", \"label\": \"Initialize hash_map with 36 zeros\", \"action\": \"\", \"next\": 4},\n    {\"id\": 4, \"type\": \"process\", \"label\": \"Create generator for digit sums\", \"action\": \"\", \"next\": 5},\n    {\"id\": 5, \"type\": \"process\", \"label\": \"Skip the first value of generator\", \"action\": \"\", \"next\": 6},\n    {\"id\": 6, \"type\": \"process\", \"label\": \"Initialize loop counter i = 0\", \"action\": \"\", \"next\": 7},\n    {\"id\": 7, \"type\": \"decision\", \"label\": \"Is i < n?\", \"logic\": \"ctx['i'] < ctx['n']\", \"true_next\": 8, \"false_next\": 11},\n    {\"id\": 8, \"type\": \"process\", \"label\": \"Get next value from generator\", \"action\": \"\", \"next\": 9},\n    {\"id\": 9, \"type\": \"process\", \"label\": \"Update hash_map: hash_map[next(gen) - 1] += 1\", \"action\": \"ctx['hash_map'][next(ctx['gen']) - 1] += 1\", \"next\": 10},\n    {\"id\": 10, \"type\": \"process\", \"label\": \"Increment i by 1\", \"action\": \"ctx['i'] += 1\", \"next\": 7},\n    {\"id\": 11, \"type\": \"process\", \"label\": \"Find max value in hash_map\", \"action\": \"\", \"next\": 12},\n    {\"id\": 12, \"type\": \"process\", \"label\": \"Count occurrences of max value in hash_map\", \"action\": \"\", \"next\": 13},\n    {\"id\": 13, \"type\": \"end\", \"label\": \"Output: count of largest groups\", \"output\": \"ctx['result']\"}\n  ]\n}",
+  "code": "def countLargestGroup(n: int) -> int:\n    hash_map = [0] * 36\n    \n    def digit_sum(x):\n        return sum(int(d) for d in str(x))\n    \n    for i in range(1, n + 1):\n        hash_map[digit_sum(i)] += 1\n    \n    max_size = max(hash_map)\n    return hash_map.count(max_size)",
+  "prompt": "You are given an integer n.\n\nEach number from 1 to n is grouped according to the sum of its digits.\n\nReturn the number of groups that have the largest size.\n\n\n\nExample 1:\n\nInput: n = 13\nOutput: 4\nExplanation: There are 9 groups in total, they are grouped according sum of its digits of numbers from 1 to 13:\n[1,10], [2,11], [3,12], [4,13], [5], [6], [7], [8], [9].\nThere are 4 groups with largest size.\nExample 2:\n\nInput: n = 2\nOutput: 2\nExplanation: There are 2 groups [1], [2] of size 1.\n\n\nConstraints:\n\n1 <= n <= 104",
+  "test": "assert countLargestGroup(13) == 4  # Example case with n = 13\nassert countLargestGroup(2) == 2  # Example case with n = 2\nassert countLargestGroup(1) == 1  # Single number, only one group\n\n# Boundary test cases\nassert countLargestGroup(10) == 1  # All single-digit numbers, each in its own group\nassert countLargestGroup(11) == 2  # Group [1, 10] and [2, 11] are the largest\n\n# Large number test cases\nassert countLargestGroup(9999) == 1  # Large n, testing performance\nassert countLargestGroup(5000) == 2  # Mid-range large n, testing performance\nassert countLargestGroup(1234) == 1  # Random large n, testing performance",
+  "ocr_data": {
+    "nodes": [
+      {
+        "node_id": 1,
+        "shape_type": "rectangle",
+        "raw_text": "Start",
+        "position": "top"
+      },
+      {
+        "node_id": 2,
+        "shape_type": "rectangle",
+        "raw_text": "Input: n (integer)",
+        "position": "middle"
+      },
+      {
+        "node_id": 3,
+        "shape_type": "rectangle",
+        "raw_text": "Initialize hash_map with 36 zeros",
+        "position": "middle"
+      },
+      {
+        "node_id": 4,
+        "shape_type": "rectangle",
+        "raw_text": "Create generator for digit sums",
+        "position": "middle"
+      },
+      {
+        "node_id": 5,
+        "shape_type": "rectangle",
+        "raw_text": "Skip the first value of generator",
+        "position": "middle"
+      },
+      {
+        "node_id": 6,
+        "shape_type": "rectangle",
+        "raw_text": "Initialize loop counter i = 0",
+        "position": "middle"
+      },
+      {
+        "node_id": 7,
+        "shape_type": "diamond",
+        "raw_text": "Is i < n?",
+        "position": "middle"
+      },
+      {
+        "node_id": 8,
+        "shape_type": "rectangle",
+        "raw_text": "Get next value from generator",
+        "position": "bottom"
+      },
+      {
+        "node_id": 9,
+        "shape_type": "rectangle",
+        "raw_text": "Update hash_map: hash_map[next(gen) - 1] += 1",
+        "position": "bottom"
+      },
+      {
+        "node_id": 10,
+        "shape_type": "rectangle",
+        "raw_text": "Increment i by 1",
+        "position": "bottom"
+      },
+      {
+        "node_id": 11,
+        "shape_type": "rectangle",
+        "raw_text": "Find max value in hash_map",
+        "position": "bottom"
+      },
+      {
+        "node_id": 12,
+        "shape_type": "rectangle",
+        "raw_text": "Count occurrences of max value in hash_map",
+        "position": "bottom"
+      },
+      {
+        "node_id": 13,
+        "shape_type": "rectangle",
+        "raw_text": "Output: count of largest groups",
+        "position": "bottom"
+      }
+    ],
+    "edges": [
+      {
+        "from_node": 1,
+        "to_node": 2,
+        "label": ""
+      },
+      {
+        "from_node": 2,
+        "to_node": 3,
+        "label": ""
+      },
+      {
+        "from_node": 3,
+        "to_node": 4,
+        "label": ""
+      },
+      {
+        "from_node": 4,
+        "to_node": 5,
+        "label": ""
+      },
+      {
+        "from_node": 5,
+        "to_node": 6,
+        "label": ""
+      },
+      {
+        "from_node": 6,
+        "to_node": 7,
+        "label": ""
+      },
+      {
+        "from_node": 7,
+        "to_node": 8,
+        "label": "Yes"
+      },
+      {
+        "from_node": 8,
+        "to_node": 9,
+        "label": ""
+      },
+      {
+        "from_node": 9,
+        "to_node": 10,
+        "label": ""
+      },
+      {
+        "from_node": 10,
+        "to_node": 7,
+        "label": ""
+      },
+      {
+        "from_node": 7,
+        "to_node": 11,
+        "label": "No"
+      },
+      {
+        "from_node": 11,
+        "to_node": 12,
+        "label": ""
+      },
+      {
+        "from_node": 12,
+        "to_node": 13,
+        "label": ""
+      }
+    ],
+    "other_text": []
+  },
+  "analysis": {
+    "ilr_verdict": "correct",
+    "ilr_issues": "",
+    "code_vs_ilr": "deviates",
+    "code_issues": "ILR 节点9明确写的是 hash_map[next(gen) - 1] += 1（减 1 的下标偏移，配合大小 36 的数组，最大数字和 36 对应下标 35，不会越界）；生成代码写成 hash_map[digit_sum(i)] += 1，丢掉了 -1 偏移，n=9999 时下标 36 越界崩溃。其余部分（求最大值、计数）与 ILR 一致。",
+    "error_source": "code",
+    "ocr_contribution": "no",
+    "root_cause": "ILR 的 -1 下标偏移是正确的，代码生成阶段把它丢了，导致大数 n=9999 时数组越界。",
+    "evidence": "报错 'list index out of range'：n=9999 时 digit_sum(9999)=36，代码访问 hash_map[36] 越界；若按 ILR 的 hash_map[digit_sum-1] 则最大下标 35，在大小 36 的数组内。"
+  }
+}

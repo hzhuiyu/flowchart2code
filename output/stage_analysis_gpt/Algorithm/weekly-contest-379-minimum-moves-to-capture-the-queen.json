@@ -1,0 +1,144 @@
+{
+  "task_id": "weekly-contest-379-minimum-moves-to-capture-the-queen",
+  "dataset": "Algorithm",
+  "difficulty": "Medium",
+  "title": "minimum-moves-to-capture-the-queen",
+  "result": "failed: ",
+  "ilr": "{\n  \"problem_id\": \"min_moves_to_capture_queen\",\n  \"nodes\": [\n    {\"id\": 1, \"type\": \"start\", \"label\": \"Start\", \"next\": 2},\n    {\"id\": 2, \"type\": \"process\", \"label\": \"Input: a, b, c, d, e, f (integers)\", \"action\": \"ctx['a']=ctx['arg0']; ctx['b']=ctx['arg1']; ctx['c']=ctx['arg2']; ctx['d']=ctx['arg3']; ctx['e']=ctx['arg4']; ctx['f']=ctx['arg5']\", \"next\": 3},\n    {\"id\": 3, \"type\": \"decision\", \"label\": \"Is (a == e) and not ((a == c) and (min(b, f) <= d <= max(b, f)))?\", \"logic\": \"ctx['a'] == ctx['e'] and not ((ctx['a'] == ctx['c']) and (min(ctx['b'], ctx['f']) <= ctx['d'] <= max(ctx['b'], ctx['f'])))\", \"true_next\": 4, \"false_next\": 5},\n    {\"id\": 4, \"type\": \"end\", \"label\": \"Output: 1 (Rook can capture the queen)\", \"output\": \"1\"},\n    {\"id\": 5, \"type\": \"decision\", \"label\": \"Is (b == f) and not ((b == d) and (min(a, e) <= c <= max(a, e)))?\", \"logic\": \"ctx['b'] == ctx['f'] and not ((ctx['b'] == ctx['d']) and (min(ctx['a'], ctx['e']) <= ctx['c'] <= max(ctx['a'], ctx['e'])))\", \"true_next\": 6, \"false_next\": 7},\n    {\"id\": 6, \"type\": \"end\", \"label\": \"Output: 1 (Bishop can capture the queen)\", \"output\": \"1\"},\n    {\"id\": 7, \"type\": \"decision\", \"label\": \"Is abs(c - e) == abs(d - f)?\", \"logic\": \"abs(ctx['c'] - ctx['e']) == abs(ctx['d'] - ctx['f'])\", \"true_next\": 8, \"false_next\": 9},\n    {\"id\": 8, \"type\": \"end\", \"label\": \"Output: 2 (Both pieces cannot capture in one move)\", \"output\": \"2\"},\n    {\"id\": 9, \"type\": \"decision\", \"label\": \"Is (abs(a - e) == abs(b - f)) and (min(c, e) <= a <= max(c, e)) and (min(d, f) <= b <= max(d, f))?\", \"logic\": \"(abs(ctx['a'] - ctx['e']) == abs(ctx['b'] - ctx['f'])) and (min(ctx['c'], ctx['e']) <= ctx['a'] <= max(ctx['c'], ctx['e'])) and (min(ctx['d'], ctx['f']) <= ctx['b'] <= max(ctx['d'], ctx['f']))\", \"true_next\": 10, \"false_next\": 11},\n    {\"id\": 10, \"type\": \"end\", \"label\": \"Output: 2 (Both pieces cannot capture in one move)\", \"output\": \"2\"},\n    {\"id\": 11, \"type\": \"end\", \"label\": \"Output: 1 (Bishop can capture the queen)\", \"output\": \"1\"}\n  ]\n}",
+  "code": "class Solution:\n    def minMovesToCaptureTheQueen(self, a: int, b: int, c: int, d: int, e: int, f: int) -> int:\n        # Check if the rook can capture the queen in one move\n        if a == e and not (a == c and min(b, f) <= d <= max(b, f)):\n            return 1\n        \n        # Check if the bishop can capture the queen in one move\n        if b == f and not (b == d and min(a, e) <= c <= max(a, e)):\n            return 1\n        \n        # Check if both pieces can capture the queen in two moves\n        if abs(c - e) == abs(d - f):\n            return 2\n        \n        # Check if the rook can move to a position to capture the queen in two moves\n        if (abs(a - e) == abs(b - f)) and (min(c, e) <= a <= max(c, e)) and (min(d, f) <= b <= max(d, f)):\n            return 2\n        \n        # If none of the above conditions are met, the bishop can capture the queen in one move\n        return 1",
+  "prompt": "\"\"\"\nThere is a 1-indexed 8 x 8 chessboard containing 3 pieces.\nYou are given 6 integers a, b, c, d, e, and f where:\n\n(a, b) denotes the position of the white rook.\n(c, d) denotes the position of the white bishop.\n(e, f) denotes the position of the black queen.\n\nGiven that you can only move the white pieces, return the minimum number of moves required to capture the black queen.\nNote that:\n\nRooks can move any number of squares either vertically or horizontally, but cannot jump over other pieces.\nBishops can move any number of squares diagonally, but cannot jump over other pieces.\nA rook or a bishop can capture the queen if it is located in a square that they can move to.\nThe queen does not move.\n\n\nExample 1:\n\n\nInput: a = 1, b = 1, c = 8, d = 8, e = 2, f = 3\nOutput: 2\nExplanation: We can capture the black queen in two moves by moving the white rook to (1, 3) then to (2, 3).\nIt is impossible to capture the black queen in less than two moves since it is not being attacked by any of the pieces at the beginning.\n\nExample 2:\n\n\nInput: a = 5, b = 3, c = 3, d = 4, e = 5, f = 2\nOutput: 1\nExplanation: We can capture the black queen in a single move by doing one of the following: \n- Move the white rook to (5, 2).\n- Move the white bishop to (5, 2).\n\n\nConstraints:\n\n1 <= a, b, c, d, e, f <= 8\nNo two pieces are on the same square.\n\"\"\"\nclass Solution:\n    def minMovesToCaptureTheQueen(self, a: int, b: int, c: int, d: int, e: int, f: int) -> int:\n        ",
+  "test": "\nmy_solution = Solution()\n\ntest_input = { \"a\": 1, \"b\": 1, \"c\": 8, \"d\": 8, \"e\": 2, \"f\": 3 }\nassert my_solution.minMovesToCaptureTheQueen(**test_input) == 2\n\ntest_input = { \"a\": 5, \"b\": 3, \"c\": 3, \"d\": 4, \"e\": 5, \"f\": 2 }\nassert my_solution.minMovesToCaptureTheQueen(**test_input) == 1\n\ntest_input = { \"a\": 4, \"b\": 3, \"c\": 3, \"d\": 4, \"e\": 5, \"f\": 2 }\nassert my_solution.minMovesToCaptureTheQueen(**test_input) == 2\n\ntest_input = { \"a\": 1, \"b\": 1, \"c\": 1, \"d\": 4, \"e\": 1, \"f\": 8 }\nassert my_solution.minMovesToCaptureTheQueen(**test_input) == 2\n\ntest_input = { \"a\": 4, \"b\": 3, \"c\": 3, \"d\": 4, \"e\": 2, \"f\": 5 }\nassert my_solution.minMovesToCaptureTheQueen(**test_input) == 1\n\ntest_input = { \"a\": 8, \"b\": 4, \"c\": 7, \"d\": 5, \"e\": 5, \"f\": 5 }\nassert my_solution.minMovesToCaptureTheQueen(**test_input) == 2\n\ntest_input = { \"a\": 1, \"b\": 8, \"c\": 4, \"d\": 3, \"e\": 2, \"f\": 7 }\nassert my_solution.minMovesToCaptureTheQueen(**test_input) == 2\n\ntest_input = { \"a\": 1, \"b\": 6, \"c\": 3, \"d\": 3, \"e\": 5, \"f\": 6 }\nassert my_solution.minMovesToCaptureTheQueen(**test_input) == 1\n\ntest_input = { \"a\": 5, \"b\": 3, \"c\": 6, \"d\": 6, \"e\": 6, \"f\": 4 }\nassert my_solution.minMovesToCaptureTheQueen(**test_input) == 2\n\ntest_input = { \"a\": 5, \"b\": 1, \"c\": 6, \"d\": 6, \"e\": 2, \"f\": 7 }\nassert my_solution.minMovesToCaptureTheQueen(**test_input) == 2\n\ntest_input = { \"a\": 8, \"b\": 4, \"c\": 8, \"d\": 8, \"e\": 7, \"f\": 7 }\nassert my_solution.minMovesToCaptureTheQueen(**test_input) == 1\n\ntest_input = { \"a\": 5, \"b\": 1, \"c\": 6, \"d\": 5, \"e\": 3, \"f\": 7 }\nassert my_solution.minMovesToCaptureTheQueen(**test_input) == 2\n\ntest_input = { \"a\": 5, \"b\": 2, \"c\": 8, \"d\": 6, \"e\": 7, \"f\": 4 }\nassert my_solution.minMovesToCaptureTheQueen(**test_input) == 2\n\ntest_input = { \"a\": 1, \"b\": 1, \"c\": 8, \"d\": 2, \"e\": 4, \"f\": 1 }\nassert my_solution.minMovesToCaptureTheQueen(**test_input) == 1\n\ntest_input = { \"a\": 3, \"b\": 1, \"c\": 1, \"d\": 1, \"e\": 2, \"f\": 5 }\nassert my_solution.minMovesToCaptureTheQueen(**test_input) == 2\n\ntest_input = { \"a\": 8, \"b\": 5, \"c\": 2, \"d\": 4, \"e\": 5, \"f\": 7 }\nassert my_solution.minMovesToCaptureTheQueen(**test_input) == 1\n\ntest_input = { \"a\": 8, \"b\": 1, \"c\": 5, \"d\": 8, \"e\": 1, \"f\": 7 }\nassert my_solution.minMovesToCaptureTheQueen(**test_input) == 2\n\ntest_input = { \"a\": 4, \"b\": 6, \"c\": 6, \"d\": 2, \"e\": 1, \"f\": 4 }\nassert my_solution.minMovesToCaptureTheQueen(**test_input) == 2\n\ntest_input = { \"a\": 7, \"b\": 5, \"c\": 7, \"d\": 6, \"e\": 2, \"f\": 8 }\nassert my_solution.minMovesToCaptureTheQueen(**test_input) == 2\n\ntest_input = { \"a\": 8, \"b\": 6, \"c\": 3, \"d\": 2, \"e\": 6, \"f\": 8 }\nassert my_solution.minMovesToCaptureTheQueen(**test_input) == 2\n\ntest_input = { \"a\": 3, \"b\": 3, \"c\": 8, \"d\": 1, \"e\": 2, \"f\": 5 }\nassert my_solution.minMovesToCaptureTheQueen(**test_input) == 2\n\ntest_input = { \"a\": 4, \"b\": 5, \"c\": 6, \"d\": 1, \"e\": 4, \"f\": 7 }\nassert my_solution.minMovesToCaptureTheQueen(**test_input) == 1\n\ntest_input = { \"a\": 7, \"b\": 2, \"c\": 2, \"d\": 8, \"e\": 7, \"f\": 3 }\nassert my_solution.minMovesToCaptureTheQueen(**test_input) == 1\n\ntest_input = { \"a\": 3, \"b\": 8, \"c\": 2, \"d\": 7, \"e\": 1, \"f\": 4 }\nassert my_solution.minMovesToCaptureTheQueen(**test_input) == 2\n\ntest_input = { \"a\": 3, \"b\": 5, \"c\": 5, \"d\": 3, \"e\": 1, \"f\": 8 }\nassert my_solution.minMovesToCaptureTheQueen(**test_input) == 2\n\ntest_input = { \"a\": 2, \"b\": 2, \"c\": 7, \"d\": 4, \"e\": 3, \"f\": 1 }\nassert my_solution.minMovesToCaptureTheQueen(**test_input) == 2\n\ntest_input = { \"a\": 4, \"b\": 3, \"c\": 1, \"d\": 5, \"e\": 5, \"f\": 3 }\nassert my_solution.minMovesToCaptureTheQueen(**test_input) == 1\n\ntest_input = { \"a\": 7, \"b\": 5, \"c\": 2, \"d\": 5, \"e\": 6, \"f\": 3 }\nassert my_solution.minMovesToCaptureTheQueen(**test_input) == 2\n\ntest_input = { \"a\": 1, \"b\": 7, \"c\": 8, \"d\": 1, \"e\": 3, \"f\": 4 }\nassert my_solution.minMovesToCaptureTheQueen(**test_input) == 2\n\ntest_input = { \"a\": 8, \"b\": 6, \"c\": 6, \"d\": 4, \"e\": 1, \"f\": 2 }\nassert my_solution.minMovesToCaptureTheQueen(**test_input) == 2\n\ntest_input = { \"a\": 7, \"b\": 8, \"c\": 4, \"d\": 4, \"e\": 3, \"f\": 6 }\nassert my_solution.minMovesToCaptureTheQueen(**test_input) == 2\n\ntest_input = { \"a\": 8, \"b\": 4, \"c\": 7, \"d\": 7, \"e\": 4, \"f\": 4 }\nassert my_solution.minMovesToCaptureTheQueen(**test_input) == 1\n\ntest_input = { \"a\": 5, \"b\": 7, \"c\": 4, \"d\": 2, \"e\": 3, \"f\": 8 }\nassert my_solution.minMovesToCaptureTheQueen(**test_input) == 2\n\ntest_input = { \"a\": 6, \"b\": 1, \"c\": 7, \"d\": 8, \"e\": 8, \"f\": 7 }\nassert my_solution.minMovesToCaptureTheQueen(**test_input) == 1\n\ntest_input = { \"a\": 3, \"b\": 7, \"c\": 7, \"d\": 6, \"e\": 7, \"f\": 4 }\nassert my_solution.minMovesToCaptureTheQueen(**test_input) == 2\n\ntest_input = { \"a\": 7, \"b\": 3, \"c\": 6, \"d\": 4, \"e\": 6, \"f\": 7 }\nassert my_solution.minMovesToCaptureTheQueen(**test_input) == 2\n\ntest_input = { \"a\": 5, \"b\": 7, \"c\": 1, \"d\": 1, \"e\": 5, \"f\": 6 }\nassert my_solution.minMovesToCaptureTheQueen(**test_input) == 1\n\ntest_input = { \"a\": 6, \"b\": 8, \"c\": 5, \"d\": 8, \"e\": 5, \"f\": 3 }\nassert my_solution.minMovesToCaptureTheQueen(**test_input) == 2\n\ntest_input = { \"a\": 4, \"b\": 2, \"c\": 3, \"d\": 7, \"e\": 6, \"f\": 1 }\nassert my_solution.minMovesToCaptureTheQueen(**test_input) == 2\n\ntest_input = { \"a\": 3, \"b\": 2, \"c\": 6, \"d\": 1, \"e\": 6, \"f\": 2 }\nassert my_solution.minMovesToCaptureTheQueen(**test_input) == 1\n\ntest_input = { \"a\": 5, \"b\": 4, \"c\": 6, \"d\": 7, \"e\": 1, \"f\": 8 }\nassert my_solution.minMovesToCaptureTheQueen(**test_input) == 2\n\ntest_input = { \"a\": 7, \"b\": 6, \"c\": 2, \"d\": 3, \"e\": 3, \"f\": 4 }\nassert my_solution.minMovesToCaptureTheQueen(**test_input) == 1\n\ntest_input = { \"a\": 7, \"b\": 6, \"c\": 2, \"d\": 1, \"e\": 2, \"f\": 6 }\nassert my_solution.minMovesToCaptureTheQueen(**test_input) == 1\n\ntest_input = { \"a\": 5, \"b\": 8, \"c\": 6, \"d\": 5, \"e\": 6, \"f\": 1 }\nassert my_solution.minMovesToCaptureTheQueen(**test_input) == 2\n\ntest_input = { \"a\": 6, \"b\": 2, \"c\": 6, \"d\": 7, \"e\": 5, \"f\": 4 }\nassert my_solution.minMovesToCaptureTheQueen(**test_input) == 2\n\ntest_input = { \"a\": 7, \"b\": 5, \"c\": 4, \"d\": 4, \"e\": 7, \"f\": 4 }\nassert my_solution.minMovesToCaptureTheQueen(**test_input) == 1\n\ntest_input = { \"a\": 6, \"b\": 1, \"c\": 4, \"d\": 4, \"e\": 2, \"f\": 2 }\nassert my_solution.minMovesToCaptureTheQueen(**test_input) == 1\n\ntest_input = { \"a\": 3, \"b\": 4, \"c\": 1, \"d\": 8, \"e\": 3, \"f\": 7 }\nassert my_solution.minMovesToCaptureTheQueen(**test_input) == 1\n\ntest_input = { \"a\": 7, \"b\": 7, \"c\": 1, \"d\": 6, \"e\": 3, \"f\": 1 }\nassert my_solution.minMovesToCaptureTheQueen(**test_input) == 2\n\ntest_input = { \"a\": 6, \"b\": 8, \"c\": 2, \"d\": 2, \"e\": 3, \"f\": 5 }\nassert my_solution.minMovesToCaptureTheQueen(**test_input) == 2\n\ntest_input = { \"a\": 5, \"b\": 5, \"c\": 3, \"d\": 7, \"e\": 5, \"f\": 3 }\nassert my_solution.minMovesToCaptureTheQueen(**test_input) == 1\n\ntest_input = { \"a\": 7, \"b\": 3, \"c\": 5, \"d\": 3, \"e\": 8, \"f\": 5 }\nassert my_solution.minMovesToCaptureTheQueen(**test_input) == 2\n\ntest_input = { \"a\": 7, \"b\": 4, \"c\": 1, \"d\": 4, \"e\": 7, \"f\": 8 }\nassert my_solution.minMovesToCaptureTheQueen(**test_input) == 1\n\ntest_input = { \"a\": 6, \"b\": 3, \"c\": 7, \"d\": 3, \"e\": 4, \"f\": 4 }\nassert my_solution.minMovesToCaptureTheQueen(**test_input) == 2\n\ntest_input = { \"a\": 1, \"b\": 4, \"c\": 6, \"d\": 7, \"e\": 4, \"f\": 4 }\nassert my_solution.minMovesToCaptureTheQueen(**test_input) == 1\n\ntest_input = { \"a\": 4, \"b\": 5, \"c\": 6, \"d\": 8, \"e\": 2, \"f\": 1 }\nassert my_solution.minMovesToCaptureTheQueen(**test_input) == 2\n\ntest_input = { \"a\": 5, \"b\": 6, \"c\": 5, \"d\": 7, \"e\": 8, \"f\": 3 }\nassert my_solution.minMovesToCaptureTheQueen(**test_input) == 2\n\ntest_input = { \"a\": 5, \"b\": 1, \"c\": 8, \"d\": 2, \"e\": 1, \"f\": 3 }\nassert my_solution.minMovesToCaptureTheQueen(**test_input) == 2\n\ntest_input = { \"a\": 1, \"b\": 2, \"c\": 8, \"d\": 3, \"e\": 2, \"f\": 2 }\nassert my_solution.minMovesToCaptureTheQueen(**test_input) == 1\n\ntest_input = { \"a\": 1, \"b\": 7, \"c\": 5, \"d\": 5, \"e\": 4, \"f\": 3 }\nassert my_solution.minMovesToCaptureTheQueen(**test_input) == 2\n\ntest_input = { \"a\": 4, \"b\": 3, \"c\": 7, \"d\": 8, \"e\": 1, \"f\": 5 }\nassert my_solution.minMovesToCaptureTheQueen(**test_input) == 2\n\ntest_input = { \"a\": 8, \"b\": 7, \"c\": 6, \"d\": 8, \"e\": 6, \"f\": 1 }\nassert my_solution.minMovesToCaptureTheQueen(**test_input) == 2\n\ntest_input = { \"a\": 4, \"b\": 3, \"c\": 4, \"d\": 7, \"e\": 7, \"f\": 6 }\nassert my_solution.minMovesToCaptureTheQueen(**test_input) == 2\n\ntest_input = { \"a\": 8, \"b\": 4, \"c\": 6, \"d\": 6, \"e\": 2, \"f\": 1 }\nassert my_solution.minMovesToCaptureTheQueen(**test_input) == 2\n\ntest_input = { \"a\": 8, \"b\": 2, \"c\": 6, \"d\": 4, \"e\": 1, \"f\": 4 }\nassert my_solution.minMovesToCaptureTheQueen(**test_input) == 2\n\ntest_input = { \"a\": 3, \"b\": 5, \"c\": 3, \"d\": 2, \"e\": 1, \"f\": 4 }\nassert my_solution.minMovesToCaptureTheQueen(**test_input) == 1\n\ntest_input = { \"a\": 3, \"b\": 6, \"c\": 1, \"d\": 3, \"e\": 3, \"f\": 7 }\nassert my_solution.minMovesToCaptureTheQueen(**test_input) == 1\n\ntest_input = { \"a\": 1, \"b\": 1, \"c\": 7, \"d\": 6, \"e\": 4, \"f\": 3 }\nassert my_solution.minMovesToCaptureTheQueen(**test_input) == 1\n\ntest_input = { \"a\": 1, \"b\": 8, \"c\": 7, \"d\": 2, \"e\": 6, \"f\": 1 }\nassert my_solution.minMovesToCaptureTheQueen(**test_input) == 1\n\ntest_input = { \"a\": 5, \"b\": 8, \"c\": 4, \"d\": 5, \"e\": 7, \"f\": 4 }\nassert my_solution.minMovesToCaptureTheQueen(**test_input) == 2\n\ntest_input = { \"a\": 8, \"b\": 3, \"c\": 8, \"d\": 8, \"e\": 5, \"f\": 3 }\nassert my_solution.minMovesToCaptureTheQueen(**test_input) == 1\n\ntest_input = { \"a\": 7, \"b\": 2, \"c\": 8, \"d\": 1, \"e\": 4, \"f\": 3 }\nassert my_solution.minMovesToCaptureTheQueen(**test_input) == 2\n\ntest_input = { \"a\": 3, \"b\": 5, \"c\": 8, \"d\": 7, \"e\": 6, \"f\": 1 }\nassert my_solution.minMovesToCaptureTheQueen(**test_input) == 2\n\ntest_input = { \"a\": 5, \"b\": 5, \"c\": 2, \"d\": 2, \"e\": 1, \"f\": 1 }\nassert my_solution.minMovesToCaptureTheQueen(**test_input) == 1\n\ntest_input = { \"a\": 1, \"b\": 8, \"c\": 8, \"d\": 4, \"e\": 4, \"f\": 7 }\nassert my_solution.minMovesToCaptureTheQueen(**test_input) == 2\n\ntest_input = { \"a\": 3, \"b\": 6, \"c\": 7, \"d\": 6, \"e\": 8, \"f\": 8 }\nassert my_solution.minMovesToCaptureTheQueen(**test_input) == 2\n\ntest_input = { \"a\": 5, \"b\": 6, \"c\": 3, \"d\": 7, \"e\": 3, \"f\": 6 }\nassert my_solution.minMovesToCaptureTheQueen(**test_input) == 1\n\ntest_input = { \"a\": 1, \"b\": 5, \"c\": 3, \"d\": 4, \"e\": 7, \"f\": 4 }\nassert my_solution.minMovesToCaptureTheQueen(**test_input) == 2\n\ntest_input = { \"a\": 5, \"b\": 6, \"c\": 2, \"d\": 2, \"e\": 5, \"f\": 8 }\nassert my_solution.minMovesToCaptureTheQueen(**test_input) == 1\n\ntest_input = { \"a\": 7, \"b\": 3, \"c\": 2, \"d\": 6, \"e\": 3, \"f\": 4 }\nassert my_solution.minMovesToCaptureTheQueen(**test_input) == 2\n\ntest_input = { \"a\": 5, \"b\": 4, \"c\": 6, \"d\": 5, \"e\": 5, \"f\": 8 }\nassert my_solution.minMovesToCaptureTheQueen(**test_input) == 1\n\ntest_input = { \"a\": 1, \"b\": 1, \"c\": 2, \"d\": 4, \"e\": 5, \"f\": 4 }\nassert my_solution.minMovesToCaptureTheQueen(**test_input) == 2\n\ntest_input = { \"a\": 4, \"b\": 5, \"c\": 5, \"d\": 4, \"e\": 2, \"f\": 4 }\nassert my_solution.minMovesToCaptureTheQueen(**test_input) == 2\n\ntest_input = { \"a\": 6, \"b\": 5, \"c\": 6, \"d\": 2, \"e\": 2, \"f\": 2 }\nassert my_solution.minMovesToCaptureTheQueen(**test_input) == 2\n\ntest_input = { \"a\": 1, \"b\": 5, \"c\": 4, \"d\": 2, \"e\": 8, \"f\": 1 }\nassert my_solution.minMovesToCaptureTheQueen(**test_input) == 2\n\ntest_input = { \"a\": 1, \"b\": 1, \"c\": 2, \"d\": 5, \"e\": 8, \"f\": 1 }\nassert my_solution.minMovesToCaptureTheQueen(**test_input) == 1\n\ntest_input = { \"a\": 4, \"b\": 8, \"c\": 3, \"d\": 8, \"e\": 8, \"f\": 5 }\nassert my_solution.minMovesToCaptureTheQueen(**test_input) == 2\n\ntest_input = { \"a\": 1, \"b\": 8, \"c\": 4, \"d\": 7, \"e\": 5, \"f\": 6 }\nassert my_solution.minMovesToCaptureTheQueen(**test_input) == 1\n\ntest_input = { \"a\": 5, \"b\": 5, \"c\": 3, \"d\": 6, \"e\": 8, \"f\": 8 }\nassert my_solution.minMovesToCaptureTheQueen(**test_input) == 2\n\ntest_input = { \"a\": 1, \"b\": 2, \"c\": 3, \"d\": 1, \"e\": 2, \"f\": 4 }\nassert my_solution.minMovesToCaptureTheQueen(**test_input) == 2\n\ntest_input = { \"a\": 1, \"b\": 8, \"c\": 6, \"d\": 3, \"e\": 2, \"f\": 8 }\nassert my_solution.minMovesToCaptureTheQueen(**test_input) == 1\n\ntest_input = { \"a\": 6, \"b\": 1, \"c\": 8, \"d\": 8, \"e\": 7, \"f\": 3 }\nassert my_solution.minMovesToCaptureTheQueen(**test_input) == 2\n\ntest_input = { \"a\": 7, \"b\": 8, \"c\": 6, \"d\": 1, \"e\": 4, \"f\": 2 }\nassert my_solution.minMovesToCaptureTheQueen(**test_input) == 2\n\ntest_input = { \"a\": 1, \"b\": 6, \"c\": 4, \"d\": 2, \"e\": 8, \"f\": 5 }\nassert my_solution.minMovesToCaptureTheQueen(**test_input) == 2\n\ntest_input = { \"a\": 1, \"b\": 4, \"c\": 2, \"d\": 5, \"e\": 5, \"f\": 4 }\nassert my_solution.minMovesToCaptureTheQueen(**test_input) == 1\n\ntest_input = { \"a\": 4, \"b\": 4, \"c\": 3, \"d\": 2, \"e\": 6, \"f\": 7 }\nassert my_solution.minMovesToCaptureTheQueen(**test_input) == 2\n\ntest_input = { \"a\": 8, \"b\": 3, \"c\": 6, \"d\": 7, \"e\": 4, \"f\": 6 }\nassert my_solution.minMovesToCaptureTheQueen(**test_input) == 2\n\ntest_input = { \"a\": 2, \"b\": 5, \"c\": 1, \"d\": 1, \"e\": 8, \"f\": 4 }\nassert my_solution.minMovesToCaptureTheQueen(**test_input) == 2\n\ntest_input = { \"a\": 7, \"b\": 8, \"c\": 1, \"d\": 4, \"e\": 5, \"f\": 1 }\nassert my_solution.minMovesToCaptureTheQueen(**test_input) == 2\n\ntest_input = { \"a\": 5, \"b\": 5, \"c\": 2, \"d\": 1, \"e\": 1, \"f\": 1 }\nassert my_solution.minMovesToCaptureTheQueen(**test_input) == 2",
+  "ocr_data": {
+    "nodes": [
+      {
+        "node_id": 1,
+        "shape_type": "rectangle",
+        "raw_text": "Start",
+        "position": "top"
+      },
+      {
+        "node_id": 2,
+        "shape_type": "rectangle",
+        "raw_text": "Input: a, b, c, d, e, f (integers)",
+        "position": "middle"
+      },
+      {
+        "node_id": 3,
+        "shape_type": "diamond",
+        "raw_text": "Is (a == e) and not ((a == c) and (min(b, f) <= d <= max(b, f)))?",
+        "position": "middle"
+      },
+      {
+        "node_id": 4,
+        "shape_type": "rectangle",
+        "raw_text": "Output: 1 (Rook can capture the queen)",
+        "position": "middle"
+      },
+      {
+        "node_id": 5,
+        "shape_type": "diamond",
+        "raw_text": "Is (b == f) and not ((b == d) and (min(a, e) <= c <= max(a, e)))?",
+        "position": "middle"
+      },
+      {
+        "node_id": 6,
+        "shape_type": "rectangle",
+        "raw_text": "Output: 1 (Bishop can capture the queen)",
+        "position": "middle"
+      },
+      {
+        "node_id": 7,
+        "shape_type": "diamond",
+        "raw_text": "Is abs(c - e) == abs(d - f)?",
+        "position": "middle"
+      },
+      {
+        "node_id": 8,
+        "shape_type": "rectangle",
+        "raw_text": "Output: 2 (Both pieces cannot capture in one move)",
+        "position": "middle"
+      },
+      {
+        "node_id": 9,
+        "shape_type": "diamond",
+        "raw_text": "Is (abs(a - e) == abs(b - f)) and (min(c, e) <= a <= max(c, e)) and (min(d, f) <= b <= max(d, f))?",
+        "position": "bottom"
+      },
+      {
+        "node_id": 10,
+        "shape_type": "rectangle",
+        "raw_text": "Output: 2 (Both pieces cannot capture in one move)",
+        "position": "bottom"
+      },
+      {
+        "node_id": 11,
+        "shape_type": "rectangle",
+        "raw_text": "Output: 1 (Bishop can capture the queen)",
+        "position": "bottom"
+      }
+    ],
+    "edges": [
+      {
+        "from_node": 1,
+        "to_node": 2,
+        "label": ""
+      },
+      {
+        "from_node": 2,
+        "to_node": 3,
+        "label": ""
+      },
+      {
+        "from_node": 3,
+        "to_node": 4,
+        "label": "Yes"
+      },
+      {
+        "from_node": 3,
+        "to_node": 5,
+        "label": "No"
+      },
+      {
+        "from_node": 5,
+        "to_node": 6,
+        "label": "Yes"
+      },
+      {
+        "from_node": 5,
+        "to_node": 7,
+        "label": "No"
+      },
+      {
+        "from_node": 7,
+        "to_node": 8,
+        "label": "No"
+      },
+      {
+        "from_node": 7,
+        "to_node": 9,
+        "label": "Yes"
+      },
+      {
+        "from_node": 9,
+        "to_node": 10,
+        "label": "No"
+      },
+      {
+        "from_node": 9,
+        "to_node": 11,
+        "label": "Yes"
+      }
+    ],
+    "other_text": []
+  },
+  "analysis": {
+    "ilr_verdict": "incorrect",
+    "ilr_issues": "节点7（主教与皇后同斜线?）的真/假分支接反：同斜线时应转节点9检查车是否阻挡（未被挡则1步可吃，输出1），ILR却直接输出2；不同斜线时本应输出2，ILR却转节点9按'车是否在阻挡位'输出2/1，可能错误输出1。OCR边则相反地只把节点9的两支接反（9-Yes→11输出1、9-No→10输出2），每种连法都无法构成正确算法。",
+    "code_vs_ilr": "faithful",
+    "code_issues": "代码逐条件忠实翻译ILR（含错误的主教同斜线→直接输出2，以及各条件都不满足时的无条件return 1），首个断言即失败。",
+    "error_source": "ilr",
+    "ocr_contribution": "unclear",
+    "root_cause": "OCR边与ILR互相矛盾（各自恰好接反一对分支：ILR反接节点7、OCR反接节点9），正确连线应为7-Yes→9、9-Yes→10(输出2)、9-No→11(输出1)、7-No→8(输出2)；真实流程图连线无法确定，但ILR的接线肯定错误，代码忠实执行故同样失败。",
+    "evidence": "(a,b,c,d,e,f)=(1,1,8,8,2,3)：主教(8,8)与后(2,3)不同斜线，代码走节点9的假分支输出1（实测运行复现），期望2；(5,3,3,4,5,2)返回1正确、(4,3,3,4,5,2)返回2正确——失败发生在第1个断言，与空失败信息一致。"
+  }
+}

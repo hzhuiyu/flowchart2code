@@ -1,0 +1,30 @@
+{
+  "dataset": "HumanEval-V",
+  "model": "gpt-5-nano-gpt-5-nano",
+  "total_samples": 164,
+  "use_reflection": false,
+  "max_iterations": 0,
+  "pass_rate": {
+    "iteration_0": {
+      "passed": 158,
+      "total": 164,
+      "rate": 0.9634
+    }
+  },
+  "tokens": {
+    "total": {
+      "prompt_tokens": 956628,
+      "completion_tokens": 1829708,
+      "total_tokens": 2786336
+    },
+    "average_per_sample": {
+      "prompt_tokens": 5833.1,
+      "completion_tokens": 11156.76,
+      "total_tokens": 16989.85
+    }
+  },
+  "time": {
+    "total_time": 11713.31,
+    "average_per_sample": 71.42
+  }
+}

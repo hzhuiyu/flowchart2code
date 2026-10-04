@@ -1,0 +1,30 @@
+{
+  "dataset": "Algorithm",
+  "model": "gemini-3-1-flash-lite-preview-gemini-3-1-flash-lite-preview",
+  "total_samples": 149,
+  "use_reflection": false,
+  "max_iterations": 0,
+  "pass_rate": {
+    "iteration_0": {
+      "passed": 131,
+      "total": 149,
+      "rate": 0.8792
+    }
+  },
+  "tokens": {
+    "total": {
+      "prompt_tokens": 953002,
+      "completion_tokens": 163015,
+      "total_tokens": 1116017
+    },
+    "average_per_sample": {
+      "prompt_tokens": 6395.99,
+      "completion_tokens": 1094.06,
+      "total_tokens": 7490.05
+    }
+  },
+  "time": {
+    "total_time": 1337.05,
+    "average_per_sample": 8.97
+  }
+}

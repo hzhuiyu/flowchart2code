@@ -1,0 +1,23 @@
+{
+  "samples_file": "../output/LiveCodeBench/qwen3-vl-8b-instruct-qwen3-vl-8b-instruct/samples.jsonl",
+  "reflection_dir": "../output/LiveCodeBench/qwen3-vl-8b-instruct-qwen3-vl-8b-instruct/reflection",
+  "output_file": "../output/LiveCodeBench/qwen3-vl-8b-instruct-qwen3-vl-8b-instruct/reflection/samples_reflection_merged.jsonl",
+  "merged_results_file": "../output/LiveCodeBench/qwen3-vl-8b-instruct-qwen3-vl-8b-instruct/reflection/samples_reflection_merged.jsonl_results.jsonl",
+  "results_txt": "../output/LiveCodeBench/qwen3-vl-8b-instruct-qwen3-vl-8b-instruct/reflection/results.txt",
+  "problem_file": "../data/LiveCodeBench/LiveCodeBench_merged.jsonl",
+  "merge_summary": {
+    "total_rows": 148,
+    "replaced_rows": 109,
+    "replaced_by_first_passed": 32,
+    "replaced_by_last_failed": 77,
+    "missing_generated_code": 0,
+    "selection_stats": {
+      "keep_original": 39,
+      "iter_3_failed": 77,
+      "first_passed": 32
+    }
+  },
+  "eval_result": {
+    "pass@1": 0.5337837837837838
+  }
+}

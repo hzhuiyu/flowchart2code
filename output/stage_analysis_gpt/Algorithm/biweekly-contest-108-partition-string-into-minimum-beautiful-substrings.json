@@ -1,0 +1,209 @@
+{
+  "task_id": "biweekly-contest-108-partition-string-into-minimum-beautiful-substrings",
+  "dataset": "Algorithm",
+  "difficulty": "Medium",
+  "title": "partition-string-into-minimum-beautiful-substrings",
+  "result": "failed: ",
+  "ilr": "{\n  \"problem_id\": \"minimum_beautiful_substrings\",\n  \"nodes\": [\n    {\"id\": 1, \"type\": \"start\", \"label\": \"Start\", \"next\": 2},\n    {\"id\": 2, \"type\": \"process\", \"label\": \"Input: s (binary string)\", \"action\": \"ctx['s']=ctx['arg0']\", \"next\": 3},\n    {\"id\": 3, \"type\": \"process\", \"label\": \"Initialize pow_bank = set()\", \"action\": \"ctx['pow_bank'] = set()\", \"next\": 4},\n    {\"id\": 4, \"type\": \"process\", \"label\": \"Loop: for i from 0 to length of s - 1\", \"action\": \"for i in range(len(ctx['s'])): ctx['pow_bank'].add(pow(5, i))\", \"next\": 5},\n    {\"id\": 5, \"type\": \"process\", \"label\": \"Initialize dp = [inf, inf, ..., inf, 0] (length of s + 1)\", \"action\": \"ctx['dp'] = [float('inf')] * (len(ctx['s']) + 1); ctx['dp'][len(ctx['s'])] = 0\", \"next\": 6},\n    {\"id\": 6, \"type\": \"process\", \"label\": \"Loop: for i from length of s - 1 to 0\", \"action\": \"for i in range(len(ctx['s']) - 1, -1, -1):\", \"next\": 7},\n    {\"id\": 7, \"type\": \"decision\", \"label\": \"Is s[i] == '0'?\", \"logic\": \"ctx['s'][i] == '0'\", \"true_next\": 9, \"false_next\": 10},\n    {\"id\": 8, \"type\": \"process\", \"label\": \"Continue to next iteration\", \"action\": \"continue\", \"next\": 6},\n    {\"id\": 9, \"type\": \"process\", \"label\": \"Loop: for j from i to length of s - 1\", \"action\": \"for j in range(i, len(ctx['s'])):\", \"next\": 11},\n    {\"id\": 10, \"type\": \"process\", \"label\": \"Convert substring s[i:j+1] to decimal: dec = int(s[i:j+1], 2)\", \"action\": \"ctx['dec'] = int(ctx['s'][i:j+1], 2)\", \"next\": 12},\n    {\"id\": 11, \"type\": \"decision\", \"label\": \"s dec in pow_bank?\", \"logic\": \"ctx['dec'] in ctx['pow_bank']\", \"true_next\": 13, \"false_next\": 9},\n    {\"id\": 12, \"type\": \"process\", \"label\": \"Update dp[j]: dp[j] = min(dp[j + 1] + 1, dp[j])\", \"action\": \"ctx['dp'][j] = min(ctx['dp'][j + 1] + 1, ctx['dp'][j])\", \"next\": 9},\n    {\"id\": 13, \"type\": \"decision\", \"label\": \"Is dp[0] == inf?\", \"logic\": \"ctx['dp'][0] == float('inf')\", \"true_next\": 15, \"false_next\": 16},\n    {\"id\": 14, \"type\": \"process\", \"label\": \"Output: -1 (impossible to partition)\", \"action\": \"return -1\", \"next\": null},\n    {\"id\": 15, \"type\": \"process\", \"label\": \"Output: dp[0] (minimum number of beautiful substrings)\", \"action\": \"return ctx['dp'][0]\", \"next\": null}\n  ]\n}",
+  "code": "class Solution:\n    def minimumBeautifulSubstrings(self, s: str) -> int:\n        pow_bank = set()\n        for i in range(len(s)):\n            pow_bank.add(pow(5, i))\n        \n        dp = [float('inf')] * (len(s) + 1)\n        dp[len(s)] = 0\n        \n        for i in range(len(s) - 1, -1, -1):\n            if s[i] == '0':\n                continue\n            \n            for j in range(i, len(s)):\n                dec = int(s[i:j + 1], 2)\n                if dec in pow_bank:\n                    dp[j] = min(dp[j + 1] + 1, dp[j])\n        \n        if dp[0] == float('inf'):\n            return -1\n        return dp[0]",
+  "prompt": "\"\"\"\nGiven a binary string s, partition the string into one or more substrings such that each substring is beautiful.\n\nA string is beautiful if:\n\n * It doesn't contain leading zeros.\n * It's the binary representation of a number that is a power of 5.\n\nReturn the minimum number of substrings in such partition. If it is impossible to partition the string s into beautiful substrings, return -1.\n\nA substring is a contiguous sequence of characters in a string.\n\nExample 1:\n\nInput: s = \"1011\"\nOutput: 2\nExplanation: We can paritition the given string into [\"101\", \"1\"].\n- The string \"101\" does not contain leading zeros and is the binary representation of integer 51 = 5.\n- The string \"1\" does not contain leading zeros and is the binary representation of integer 50 = 1.\nIt can be shown that 2 is the minimum number of beautiful substrings that s can be partitioned into.\n\nExample 2:\n\nInput: s = \"111\"\nOutput: 3\nExplanation: We can paritition the given string into [\"1\", \"1\", \"1\"].\n- The string \"1\" does not contain leading zeros and is the binary representation of integer 50 = 1.\nIt can be shown that 3 is the minimum number of beautiful substrings that s can be partitioned into.\n\nExample 3:\n\nInput: s = \"0\"\nOutput: -1\nExplanation: We can not partition the given string into beautiful substrings.\n\n\nConstraints:\n\n * 1 <= s.length <= 15\n * s[i] is either '0' or '1'.\n\"\"\"\nclass Solution:\n    def minimumBeautifulSubstrings(self, s: str) -> int:\n        ",
+  "test": "\nmy_solution = Solution()\n\ntest_input = { \"s\": \"1011\" }\nassert my_solution.minimumBeautifulSubstrings(**test_input) == 2\n\ntest_input = { \"s\": \"111\" }\nassert my_solution.minimumBeautifulSubstrings(**test_input) == 3\n\ntest_input = { \"s\": \"0\" }\nassert my_solution.minimumBeautifulSubstrings(**test_input) == -1\n\ntest_input = { \"s\": \"100111000110111\" }\nassert my_solution.minimumBeautifulSubstrings(**test_input) == 4\n\ntest_input = { \"s\": \"100111000111\" }\nassert my_solution.minimumBeautifulSubstrings(**test_input) == 3\n\ntest_input = { \"s\": \"1001110001111\" }\nassert my_solution.minimumBeautifulSubstrings(**test_input) == 4\n\ntest_input = { \"s\": \"100111000111101\" }\nassert my_solution.minimumBeautifulSubstrings(**test_input) == 4\n\ntest_input = { \"s\": \"10110011100011\" }\nassert my_solution.minimumBeautifulSubstrings(**test_input) == 3\n\ntest_input = { \"s\": \"101101\" }\nassert my_solution.minimumBeautifulSubstrings(**test_input) == 2\n\ntest_input = { \"s\": \"101101101\" }\nassert my_solution.minimumBeautifulSubstrings(**test_input) == 3\n\ntest_input = { \"s\": \"101101101101101\" }\nassert my_solution.minimumBeautifulSubstrings(**test_input) == 5\n\ntest_input = { \"s\": \"1011011011101\" }\nassert my_solution.minimumBeautifulSubstrings(**test_input) == 5\n\ntest_input = { \"s\": \"10110110111011\" }\nassert my_solution.minimumBeautifulSubstrings(**test_input) == 6\n\ntest_input = { \"s\": \"101101101111001\" }\nassert my_solution.minimumBeautifulSubstrings(**test_input) == 5\n\ntest_input = { \"s\": \"1011011011111\" }\nassert my_solution.minimumBeautifulSubstrings(**test_input) == 7\n\ntest_input = { \"s\": \"101101110011101\" }\nassert my_solution.minimumBeautifulSubstrings(**test_input) == 5\n\ntest_input = { \"s\": \"10110111001111\" }\nassert my_solution.minimumBeautifulSubstrings(**test_input) == 6\n\ntest_input = { \"s\": \"1011011101101\" }\nassert my_solution.minimumBeautifulSubstrings(**test_input) == 5\n\ntest_input = { \"s\": \"101101110110111\" }\nassert my_solution.minimumBeautifulSubstrings(**test_input) == 7\n\ntest_input = { \"s\": \"101101110111011\" }\nassert my_solution.minimumBeautifulSubstrings(**test_input) == 7\n\ntest_input = { \"s\": \"1011011101111\" }\nassert my_solution.minimumBeautifulSubstrings(**test_input) == 7\n\ntest_input = { \"s\": \"101101110111101\" }\nassert my_solution.minimumBeautifulSubstrings(**test_input) == 7\n\ntest_input = { \"s\": \"10110111011111\" }\nassert my_solution.minimumBeautifulSubstrings(**test_input) == 8\n\ntest_input = { \"s\": \"101101111001101\" }\nassert my_solution.minimumBeautifulSubstrings(**test_input) == 5\n\ntest_input = { \"s\": \"10110111101\" }\nassert my_solution.minimumBeautifulSubstrings(**test_input) == 5\n\ntest_input = { \"s\": \"10110111101101\" }\nassert my_solution.minimumBeautifulSubstrings(**test_input) == 6\n\ntest_input = { \"s\": \"101101111011011\" }\nassert my_solution.minimumBeautifulSubstrings(**test_input) == 7\n\ntest_input = { \"s\": \"101101111011101\" }\nassert my_solution.minimumBeautifulSubstrings(**test_input) == 7\n\ntest_input = { \"s\": \"10110111101111\" }\nassert my_solution.minimumBeautifulSubstrings(**test_input) == 8\n\ntest_input = { \"s\": \"101101111011111\" }\nassert my_solution.minimumBeautifulSubstrings(**test_input) == 9\n\ntest_input = { \"s\": \"1011011111\" }\nassert my_solution.minimumBeautifulSubstrings(**test_input) == 6\n\ntest_input = { \"s\": \"1011011111001\" }\nassert my_solution.minimumBeautifulSubstrings(**test_input) == 5\n\ntest_input = { \"s\": \"101101111101\" }\nassert my_solution.minimumBeautifulSubstrings(**test_input) == 6\n\ntest_input = { \"s\": \"1011011111011\" }\nassert my_solution.minimumBeautifulSubstrings(**test_input) == 7\n\ntest_input = { \"s\": \"10110111110111\" }\nassert my_solution.minimumBeautifulSubstrings(**test_input) == 8\n\ntest_input = { \"s\": \"10110111111001\" }\nassert my_solution.minimumBeautifulSubstrings(**test_input) == 6\n\ntest_input = { \"s\": \"101101111110011\" }\nassert my_solution.minimumBeautifulSubstrings(**test_input) == 7\n\ntest_input = { \"s\": \"10110111111011\" }\nassert my_solution.minimumBeautifulSubstrings(**test_input) == 4\n\ntest_input = { \"s\": \"101101111110111\" }\nassert my_solution.minimumBeautifulSubstrings(**test_input) == 5\n\ntest_input = { \"s\": \"101101111111\" }\nassert my_solution.minimumBeautifulSubstrings(**test_input) == 8\n\ntest_input = { \"s\": \"101101111111101\" }\nassert my_solution.minimumBeautifulSubstrings(**test_input) == 5\n\ntest_input = { \"s\": \"101110011011\" }\nassert my_solution.minimumBeautifulSubstrings(**test_input) == 4\n\ntest_input = { \"s\": \"10111001101101\" }\nassert my_solution.minimumBeautifulSubstrings(**test_input) == 4\n\ntest_input = { \"s\": \"101110011011111\" }\nassert my_solution.minimumBeautifulSubstrings(**test_input) == 7\n\ntest_input = { \"s\": \"1011100111\" }\nassert my_solution.minimumBeautifulSubstrings(**test_input) == 4\n\ntest_input = { \"s\": \"10111001110001\" }\nassert my_solution.minimumBeautifulSubstrings(**test_input) == 3\n\ntest_input = { \"s\": \"10111001110011\" }\nassert my_solution.minimumBeautifulSubstrings(**test_input) == 4\n\ntest_input = { \"s\": \"1011100111011\" }\nassert my_solution.minimumBeautifulSubstrings(**test_input) == 5\n\ntest_input = { \"s\": \"10111001110111\" }\nassert my_solution.minimumBeautifulSubstrings(**test_input) == 6\n\ntest_input = { \"s\": \"10111001111\" }\nassert my_solution.minimumBeautifulSubstrings(**test_input) == 5\n\ntest_input = { \"s\": \"10111001111001\" }\nassert my_solution.minimumBeautifulSubstrings(**test_input) == 4\n\ntest_input = { \"s\": \"1011100111101\" }\nassert my_solution.minimumBeautifulSubstrings(**test_input) == 5\n\ntest_input = { \"s\": \"101110011110111\" }\nassert my_solution.minimumBeautifulSubstrings(**test_input) == 7\n\ntest_input = { \"s\": \"101110011111001\" }\nassert my_solution.minimumBeautifulSubstrings(**test_input) == 5\n\ntest_input = { \"s\": \"10111001111101\" }\nassert my_solution.minimumBeautifulSubstrings(**test_input) == 6\n\ntest_input = { \"s\": \"101110011111011\" }\nassert my_solution.minimumBeautifulSubstrings(**test_input) == 7\n\ntest_input = { \"s\": \"1011100111111\" }\nassert my_solution.minimumBeautifulSubstrings(**test_input) == 7\n\ntest_input = { \"s\": \"10111001111111\" }\nassert my_solution.minimumBeautifulSubstrings(**test_input) == 8\n\ntest_input = { \"s\": \"1011101101\" }\nassert my_solution.minimumBeautifulSubstrings(**test_input) == 4\n\ntest_input = { \"s\": \"10111011011011\" }\nassert my_solution.minimumBeautifulSubstrings(**test_input) == 6\n\ntest_input = { \"s\": \"101110110111\" }\nassert my_solution.minimumBeautifulSubstrings(**test_input) == 6\n\ntest_input = { \"s\": \"101110110111011\" }\nassert my_solution.minimumBeautifulSubstrings(**test_input) == 7\n\ntest_input = { \"s\": \"1011101101111\" }\nassert my_solution.minimumBeautifulSubstrings(**test_input) == 7\n\ntest_input = { \"s\": \"101110111001101\" }\nassert my_solution.minimumBeautifulSubstrings(**test_input) == 5\n\ntest_input = { \"s\": \"101110111001111\" }\nassert my_solution.minimumBeautifulSubstrings(**test_input) == 7\n\ntest_input = { \"s\": \"10111011101\" }\nassert my_solution.minimumBeautifulSubstrings(**test_input) == 5\n\ntest_input = { \"s\": \"10111011101111\" }\nassert my_solution.minimumBeautifulSubstrings(**test_input) == 8\n\ntest_input = { \"s\": \"101110111011111\" }\nassert my_solution.minimumBeautifulSubstrings(**test_input) == 9\n\ntest_input = { \"s\": \"1011101111\" }\nassert my_solution.minimumBeautifulSubstrings(**test_input) == 6\n\ntest_input = { \"s\": \"1011101111001\" }\nassert my_solution.minimumBeautifulSubstrings(**test_input) == 5\n\ntest_input = { \"s\": \"10111011110011\" }\nassert my_solution.minimumBeautifulSubstrings(**test_input) == 6\n\ntest_input = { \"s\": \"101110111101\" }\nassert my_solution.minimumBeautifulSubstrings(**test_input) == 6\n\ntest_input = { \"s\": \"1011101111011\" }\nassert my_solution.minimumBeautifulSubstrings(**test_input) == 7\n\ntest_input = { \"s\": \"10111011111\" }\nassert my_solution.minimumBeautifulSubstrings(**test_input) == 7\n\ntest_input = { \"s\": \"10111011111001\" }\nassert my_solution.minimumBeautifulSubstrings(**test_input) == 6\n\ntest_input = { \"s\": \"10111011111011\" }\nassert my_solution.minimumBeautifulSubstrings(**test_input) == 8\n\ntest_input = { \"s\": \"101110111110111\" }\nassert my_solution.minimumBeautifulSubstrings(**test_input) == 9\n\ntest_input = { \"s\": \"101110111111001\" }\nassert my_solution.minimumBeautifulSubstrings(**test_input) == 7\n\ntest_input = { \"s\": \"101110111111011\" }\nassert my_solution.minimumBeautifulSubstrings(**test_input) == 5\n\ntest_input = { \"s\": \"101110111111101\" }\nassert my_solution.minimumBeautifulSubstrings(**test_input) == 5\n\ntest_input = { \"s\": \"10111011111111\" }\nassert my_solution.minimumBeautifulSubstrings(**test_input) == 10\n\ntest_input = { \"s\": \"101110111111111\" }\nassert my_solution.minimumBeautifulSubstrings(**test_input) == 11\n\ntest_input = { \"s\": \"101111\" }\nassert my_solution.minimumBeautifulSubstrings(**test_input) == 4\n\ntest_input = { \"s\": \"101111001\" }\nassert my_solution.minimumBeautifulSubstrings(**test_input) == 3\n\ntest_input = { \"s\": \"1011110011\" }\nassert my_solution.minimumBeautifulSubstrings(**test_input) == 4\n\ntest_input = { \"s\": \"10111100110111\" }\nassert my_solution.minimumBeautifulSubstrings(**test_input) == 6\n\ntest_input = { \"s\": \"101111001110001\" }\nassert my_solution.minimumBeautifulSubstrings(**test_input) == 4\n\ntest_input = { \"s\": \"101111001111101\" }\nassert my_solution.minimumBeautifulSubstrings(**test_input) == 7\n\ntest_input = { \"s\": \"10111100111111\" }\nassert my_solution.minimumBeautifulSubstrings(**test_input) == 8\n\ntest_input = { \"s\": \"101111011\" }\nassert my_solution.minimumBeautifulSubstrings(**test_input) == 5\n\ntest_input = { \"s\": \"10111101101\" }\nassert my_solution.minimumBeautifulSubstrings(**test_input) == 5\n\ntest_input = { \"s\": \"101111011011\" }\nassert my_solution.minimumBeautifulSubstrings(**test_input) == 6\n\ntest_input = { \"s\": \"10111101101101\" }\nassert my_solution.minimumBeautifulSubstrings(**test_input) == 6\n\ntest_input = { \"s\": \"1011110110111\" }\nassert my_solution.minimumBeautifulSubstrings(**test_input) == 7\n\ntest_input = { \"s\": \"1011110111101\" }\nassert my_solution.minimumBeautifulSubstrings(**test_input) == 7\n\ntest_input = { \"s\": \"101111011110111\" }\nassert my_solution.minimumBeautifulSubstrings(**test_input) == 9\n\ntest_input = { \"s\": \"101111011111\" }\nassert my_solution.minimumBeautifulSubstrings(**test_input) == 8\n\ntest_input = { \"s\": \"1011110111111\" }\nassert my_solution.minimumBeautifulSubstrings(**test_input) == 9\n\ntest_input = { \"s\": \"101111011111101\" }\nassert my_solution.minimumBeautifulSubstrings(**test_input) == 5\n\ntest_input = { \"s\": \"10111101111111\" }\nassert my_solution.minimumBeautifulSubstrings(**test_input) == 10",
+  "ocr_data": {
+    "nodes": [
+      {
+        "node_id": 1,
+        "shape_type": "rectangle",
+        "raw_text": "Start",
+        "position": "top"
+      },
+      {
+        "node_id": 2,
+        "shape_type": "rectangle",
+        "raw_text": "Input: s (binary string)",
+        "position": "middle"
+      },
+      {
+        "node_id": 3,
+        "shape_type": "rectangle",
+        "raw_text": "Initialize pow_bank = set()",
+        "position": "middle"
+      },
+      {
+        "node_id": 4,
+        "shape_type": "rectangle",
+        "raw_text": "Loop: for i from 0 to length of s - 1",
+        "position": "middle"
+      },
+      {
+        "node_id": 5,
+        "shape_type": "rectangle",
+        "raw_text": "Add 5^i to pow_bank",
+        "position": "middle"
+      },
+      {
+        "node_id": 6,
+        "shape_type": "rectangle",
+        "raw_text": "Initialize dp = [inf, inf, ..., inf, 0] (length of s + 1)",
+        "position": "middle"
+      },
+      {
+        "node_id": 7,
+        "shape_type": "rectangle",
+        "raw_text": "Loop: for i from length of s - 1 to 0",
+        "position": "middle"
+      },
+      {
+        "node_id": 8,
+        "shape_type": "diamond",
+        "raw_text": "Is s[i] == '0'?",
+        "position": "middle"
+      },
+      {
+        "node_id": 9,
+        "shape_type": "rectangle",
+        "raw_text": "Continue to next iteration",
+        "position": "middle"
+      },
+      {
+        "node_id": 10,
+        "shape_type": "rectangle",
+        "raw_text": "Loop: for j from i to length of s - 1",
+        "position": "middle"
+      },
+      {
+        "node_id": 11,
+        "shape_type": "rectangle",
+        "raw_text": "Convert substring s[i:j+1] to decimal: dec = int(s[i:j+1], 2)",
+        "position": "middle"
+      },
+      {
+        "node_id": 12,
+        "shape_type": "diamond",
+        "raw_text": "s dec in pow_bank?",
+        "position": "middle"
+      },
+      {
+        "node_id": 13,
+        "shape_type": "rectangle",
+        "raw_text": "Update dp[j]: dp[j] = min(dp[j + 1] + 1, dp[j])",
+        "position": "middle"
+      },
+      {
+        "node_id": 14,
+        "shape_type": "diamond",
+        "raw_text": "Is dp[0] == inf?",
+        "position": "middle"
+      },
+      {
+        "node_id": 15,
+        "shape_type": "rectangle",
+        "raw_text": "Output: -1 (impossible to partition)",
+        "position": "middle"
+      },
+      {
+        "node_id": 16,
+        "shape_type": "rectangle",
+        "raw_text": "Output: dp[0] (minimum number of beautiful substrings)",
+        "position": "middle"
+      }
+    ],
+    "edges": [
+      {
+        "from_node": 1,
+        "to_node": 2,
+        "label": ""
+      },
+      {
+        "from_node": 2,
+        "to_node": 3,
+        "label": ""
+      },
+      {
+        "from_node": 3,
+        "to_node": 4,
+        "label": ""
+      },
+      {
+        "from_node": 4,
+        "to_node": 5,
+        "label": ""
+      },
+      {
+        "from_node": 4,
+        "to_node": 6,
+        "label": ""
+      },
+      {
+        "from_node": 6,
+        "to_node": 7,
+        "label": ""
+      },
+      {
+        "from_node": 7,
+        "to_node": 8,
+        "label": ""
+      },
+      {
+        "from_node": 8,
+        "to_node": 9,
+        "label": "Yes"
+      },
+      {
+        "from_node": 8,
+        "to_node": 10,
+        "label": "No"
+      },
+      {
+        "from_node": 10,
+        "to_node": 11,
+        "label": ""
+      },
+      {
+        "from_node": 11,
+        "to_node": 12,
+        "label": ""
+      },
+      {
+        "from_node": 12,
+        "to_node": 13,
+        "label": "Yes"
+      },
+      {
+        "from_node": 12,
+        "to_node": 10,
+        "label": "No"
+      },
+      {
+        "from_node": 13,
+        "to_node": 7,
+        "label": ""
+      },
+      {
+        "from_node": 7,
+        "to_node": 14,
+        "label": ""
+      },
+      {
+        "from_node": 14,
+        "to_node": 15,
+        "label": "Yes"
+      },
+      {
+        "from_node": 14,
+        "to_node": 16,
+        "label": "No"
+      }
+    ],
+    "other_text": []
+  },
+  "analysis": {
+    "ilr_verdict": "incorrect",
+    "ilr_issues": "两层错误：(1) 算法层——节点12 的 DP 转移 dp[j] = min(dp[j+1]+1, dp[j]) 本身就是错的（应更新左端 dp[i]），且该错误源自流程图节点13 的原文；(2) 连线层——ILR 重编号后与 OCR 边全面错位：节点7 的 true/false 接反（s[i]=='0' 却进入 j 循环、s[i]!='0' 反而去做 dec 转换）、节点8(continue) 不可达、最终判断节点13 true→'返回 dp[0]'、false→不存在的节点16（流程图边是 Yes→输出-1、No→输出dp[0]）。忠实执行 ILR 第一步就会因 ctx['dec'] 或 ctx['j'] 未定义而报错。",
+    "code_vs_ilr": "deviates",
+    "code_issues": "代码没有按 ILR 的错乱连线实现，而是按节点标签重组成干净的双重循环（修复了 ILR 的接线错误），但原样保留了来自流程图/ILR 的错误转移 dp[j] = min(dp[j+1]+1, dp[j])。",
+    "error_source": "ilr",
+    "ocr_contribution": "no",
+    "root_cause": "流程图本身的递推就写错（OCR 文本清晰显示 dp[j]，应为 dp[i]），ILR 忠实继承该错误且重编号导致连线全面错乱，代码重组控制流后仍带着错误递推，失败根源在流程图/ILR 的算法错误。",
+    "evidence": "输入 s='1011' 期望 2：按 ILR/代码的 dp[j] 转移模拟得 dp[0]=inf 返回 -1（实际运行确认，第一条断言失败）；改为 dp[i] = min(dp[i], dp[j+1]+1) 的版本输出 2。OCR 边 8-Yes→9(continue)/8-No→10(for j) 与 ILR 节点7 的接线直接矛盾。"
+  }
+}

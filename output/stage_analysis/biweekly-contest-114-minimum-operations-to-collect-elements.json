@@ -1,0 +1,89 @@
+{
+  "problem_id": "min_operations_to_collect_k",
+  "nodes": [
+    {
+      "id": 1,
+      "type": "start",
+      "label": "Start",
+      "next": 2
+    },
+    {
+      "id": 2,
+      "type": "process",
+      "label": "Input: nums (list of integers), k (integer)",
+      "action": "ctx['nums'] = ctx['arg0']; ctx['k'] = ctx['arg1']; ctx['cnt'] = 0",
+      "next": 3
+    },
+    {
+      "id": 3,
+      "type": "process",
+      "label": "Loop i from len(nums) - 1 to 0",
+      "action": "ctx['i'] = len(ctx['nums']) - 1",
+      "next": 4
+    },
+    {
+      "id": 4,
+      "type": "decision",
+      "label": "Is j < k?",
+      "logic": "ctx['j'] < ctx['k']",
+      "true_next": 5,
+      "false_next": 6
+    },
+    {
+      "id": 5,
+      "type": "decision",
+      "label": "Is nums[i] > 0?",
+      "logic": "ctx['nums'][ctx['i']] > 0",
+      "true_next": 7,
+      "false_next": 6
+    },
+    {
+      "id": 6,
+      "type": "process",
+      "label": "Output: (no output, loop ends)",
+      "action": "",
+      "next": 3
+    },
+    {
+      "id": 7,
+      "type": "process",
+      "label": "Increment cnt: cnt += 1",
+      "action": "ctx['cnt'] += 1",
+      "next": 8
+    },
+    {
+      "id": 8,
+      "type": "process",
+      "label": "Update nums[i]: nums[i] *= -1",
+      "action": "ctx['nums'][ctx['i']] *= -1",
+      "next": 9
+    },
+    {
+      "id": 9,
+      "type": "decision",
+      "label": "Is cnt == k?",
+      "logic": "ctx['cnt'] == ctx['k']",
+      "true_next": 10,
+      "false_next": 3
+    },
+    {
+      "id": 10,
+      "type": "end",
+      "label": "Output: len(nums) - i (minimum operations)",
+      "output": "len(ctx['nums']) - ctx['i']"
+    }
+  ],
+  "task_id": "biweekly-contest-114-minimum-operations-to-collect-elements",
+  "dataset": "Algorithm",
+  "result": "failed: ",
+  "code": "class Solution:\n    def minOperations(self, nums: List[int], k: int) -> int:\n        cnt = 0\n        i = len(nums) - 1\n        \n        while i >= 0:\n            if i < k:\n                if nums[i] > 0:\n                    cnt += 1\n                    nums[i] *= -1\n                    if cnt == k:\n                        return len(nums) - i\n                else:\n                    break\n            else:\n                break\n            i -= 1\n        \n        return len(nums) - i",
+  "verification": {
+    "md_verdict": "ILR Error",
+    "actual_error_source": "both",
+    "ilr_verdict": "incorrect",
+    "code_vs_ilr": "deviates",
+    "md_correct": "partial",
+    "note": "ILR 丢失了 OCR 的 node5『j = abs(nums[i]) - 1』，导致 node4 引用的 j 从未定义，按字面执行直接 NameError；且循环无 i 自减、node6『循环结束』却指回循环头 node3。即使最小修复（补回 j、补 i-=1），其算法对重复元素也会重复计数（标记的是位置 i 而非值槽），仍有 11/100 失败。生成代码则把 j<k 擅自解释成 i<k（下标与 k 比较）并把继续扫描改成 break，与修复版 ILR 在 72/100 组上输出不同，示例1 输出 1 而期望 4，MD 漏了代码层严重偏离。",
+    "evidence": "字面执行 ILR 报 NameError: j；nums=[3,1,5,4,2],k=2 期望 4：修复版 ILR 输出 4（对），生成代码输出 1；[1,1,2,2],k=2 真值 3，修复版 ILR 输出 2。100 组测试：生成代码错 72 组，修复版 ILR 错 11 组，二者输出 72 组不同。"
+  }
+}

@@ -1,0 +1,12 @@
+{'pass@1': 0.7315436241610739}
+
+Easy: 44/45 = 0.9777777777777777
+Medium: 50/75 = 0.6666666666666666
+Hard: 15/29 = 0.5172413793103449
+
+Avg Prompt Tokens: 48242.45
+Avg Completion Tokens: 4082.16
+
+Easy Token Stats: Avg 47428.98 tokens/question (Prompt: 44932.60, Completion: 2496.38)
+Medium Token Stats: Avg 52080.71 tokens/question (Prompt: 47745.87, Completion: 4334.84)
+Hard Token Stats: Avg 60845.89 tokens/question (Prompt: 54891.96, Completion: 5953.93)

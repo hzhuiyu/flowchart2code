@@ -1,0 +1,83 @@
+{
+ "problem_id": "maximumLength",
+ "nodes": [
+  {
+   "id": 1,
+   "type": "start",
+   "label": "Start",
+   "next": 2
+  },
+  {
+   "id": 2,
+   "type": "process",
+   "label": "Input: s (string)",
+   "action": "ctx['s'] = ctx['arg0']; ctx['n'] = len(ctx['s']); ctx['best'] = -1; ctx['chars'] = sorted(set(ctx['s'])); ctx['ci'] = 0",
+   "next": 3
+  },
+  {
+   "id": 3,
+   "type": "decision",
+   "label": "More characters to check?",
+   "logic": "ctx['ci'] < len(ctx['chars'])",
+   "true_next": 5,
+   "false_next": 4
+  },
+  {
+   "id": 4,
+   "type": "end",
+   "label": "Output: best (length of longest special substring occurring thrice, or -1)",
+   "output": "ctx['best']"
+  },
+  {
+   "id": 5,
+   "type": "process",
+   "label": "Compute run lengths of current character; L = 1",
+   "action": "ctx['c'] = ctx['chars'][ctx['ci']]\nctx['runs'] = []\nctx['cnt'] = 0\nfor ch in ctx['s']:\n    if ch == ctx['c']:\n        ctx['cnt'] += 1\n    else:\n        if ctx['cnt'] > 0:\n            ctx['runs'].append(ctx['cnt'])\n        ctx['cnt'] = 0\nif ctx['cnt'] > 0:\n    ctx['runs'].append(ctx['cnt'])\nctx['L'] = 1",
+   "next": 6
+  },
+  {
+   "id": 6,
+   "type": "decision",
+   "label": "More lengths to check? (L <= max run length)",
+   "logic": "ctx['L'] <= max(ctx['runs'])",
+   "true_next": 7,
+   "false_next": 9
+  },
+  {
+   "id": 7,
+   "type": "process",
+   "label": "Count occurrences of character c repeated L times in s",
+   "action": "ctx['occ'] = 0\nfor r in ctx['runs']:\n    if r >= ctx['L']:\n        ctx['occ'] += r - ctx['L'] + 1",
+   "next": 8
+  },
+  {
+   "id": 8,
+   "type": "decision",
+   "label": "Does c * L occur at least 3 times?",
+   "logic": "ctx['occ'] >= 3",
+   "true_next": 10,
+   "false_next": 11
+  },
+  {
+   "id": 10,
+   "type": "process",
+   "label": "Update best = L if L is larger",
+   "action": "if ctx['L'] > ctx['best']:\n    ctx['best'] = ctx['L']",
+   "next": 11
+  },
+  {
+   "id": 11,
+   "type": "process",
+   "label": "Increment L: L += 1",
+   "action": "ctx['L'] += 1",
+   "next": 6
+  },
+  {
+   "id": 9,
+   "type": "process",
+   "label": "Advance to next character: ci += 1",
+   "action": "ctx['ci'] += 1",
+   "next": 3
+  }
+ ]
+}

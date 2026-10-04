@@ -1,0 +1,124 @@
+{
+  "problem_id": "maximize_square_hole_area",
+  "nodes": [
+    {
+      "id": 1,
+      "type": "start",
+      "label": "Start",
+      "next": 2
+    },
+    {
+      "id": 2,
+      "type": "process",
+      "label": "Input: hBars = arg0, n = arg1, m = arg2, vBars = arg3",
+      "action": "ctx['hBars'] = ctx['arg0']; ctx['n'] = ctx['arg1']; ctx['m'] = ctx['arg2']; ctx['vBars'] = ctx['arg3']",
+      "next": 3
+    },
+    {
+      "id": 3,
+      "type": "process",
+      "label": "Sort hBars",
+      "action": "ctx['hBars'] = sorted(ctx['hBars'])",
+      "next": 4
+    },
+    {
+      "id": 4,
+      "type": "process",
+      "label": "Sort vBars",
+      "action": "ctx['vBars'] = sorted(ctx['vBars'])",
+      "next": 5
+    },
+    {
+      "id": 5,
+      "type": "process",
+      "label": "Initialize hmax = 0, run = 0, i = 0",
+      "action": "ctx['hmax'] = 0; ctx['run'] = 0; ctx['i'] = 0",
+      "next": 6
+    },
+    {
+      "id": 6,
+      "type": "decision",
+      "label": "Is i < len(hBars)?",
+      "logic": "ctx['i'] < len(ctx['hBars'])",
+      "true_next": 7,
+      "false_next": 12
+    },
+    {
+      "id": 7,
+      "type": "process",
+      "label": "Extend run if hBars[i] is consecutive with hBars[i-1], else reset run to 1",
+      "action": "ctx['run'] = ctx['run'] + 1 if ctx['i'] > 0 and ctx['hBars'][ctx['i']] == ctx['hBars'][ctx['i'] - 1] + 1 else 1",
+      "next": 8
+    },
+    {
+      "id": 8,
+      "type": "process",
+      "label": "Update hmax: hmax = max(hmax, run)",
+      "action": "ctx['hmax'] = max(ctx['hmax'], ctx['run'])",
+      "next": 10
+    },
+    {
+      "id": 10,
+      "type": "process",
+      "label": "Continue to next iteration",
+      "action": "ctx['i'] += 1",
+      "next": 6
+    },
+    {
+      "id": 12,
+      "type": "process",
+      "label": "Horizontal removable span: hside = hmax + 1",
+      "action": "ctx['hside'] = ctx['hmax'] + 1",
+      "next": 13
+    },
+    {
+      "id": 13,
+      "type": "process",
+      "label": "Initialize gmax = 0, run = 0, i = 0",
+      "action": "ctx['gmax'] = 0; ctx['run'] = 0; ctx['i'] = 0",
+      "next": 14
+    },
+    {
+      "id": 14,
+      "type": "decision",
+      "label": "Is i < len(vBars)?",
+      "logic": "ctx['i'] < len(ctx['vBars'])",
+      "true_next": 15,
+      "false_next": 19
+    },
+    {
+      "id": 15,
+      "type": "process",
+      "label": "Extend run if vBars[i] is consecutive with vBars[i-1], else reset run to 1",
+      "action": "ctx['run'] = ctx['run'] + 1 if ctx['i'] > 0 and ctx['vBars'][ctx['i']] == ctx['vBars'][ctx['i'] - 1] + 1 else 1",
+      "next": 16
+    },
+    {
+      "id": 16,
+      "type": "process",
+      "label": "Update gmax: gmax = max(gmax, run)",
+      "action": "ctx['gmax'] = max(ctx['gmax'], ctx['run'])",
+      "next": 17
+    },
+    {
+      "id": 17,
+      "type": "process",
+      "label": "Continue to next iteration",
+      "action": "ctx['i'] += 1",
+      "next": 14
+    },
+    {
+      "id": 19,
+      "type": "process",
+      "label": "Vertical removable span: gside = gmax + 1",
+      "action": "ctx['gside'] = ctx['gmax'] + 1",
+      "next": 20
+    },
+    {
+      "id": 20,
+      "type": "return",
+      "label": "Return min(hside, gside) ^ 2",
+      "value": "min(ctx['hside'], ctx['gside']) ** 2"
+    }
+  ]
+}

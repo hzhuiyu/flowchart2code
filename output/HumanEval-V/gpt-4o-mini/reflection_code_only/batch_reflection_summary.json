@@ -1,0 +1,76 @@
+{
+  "total": 32,
+  "processed": 32,
+  "success": 29,
+  "failed": 3,
+  "success_rate": 90.625,
+  "iteration_stats": {
+    "1": {
+      "count": 32,
+      "avg_duration": 12.178966641426086,
+      "avg_total_tokens": 71488.65625,
+      "avg_prompt_tokens": 71102.0625,
+      "avg_completion_tokens": 386.59375
+    },
+    "2": {
+      "count": 11,
+      "avg_duration": 11.95057335766879,
+      "avg_total_tokens": 71534.36363636363,
+      "avg_prompt_tokens": 71145.54545454546,
+      "avg_completion_tokens": 388.8181818181818
+    },
+    "3": {
+      "count": 6,
+      "avg_duration": 22.110632220904034,
+      "avg_total_tokens": 71933.33333333333,
+      "avg_prompt_tokens": 71572.66666666667,
+      "avg_completion_tokens": 360.6666666666667
+    }
+  },
+  "avg_duration_by_iteration": {
+    "1": 12.178966641426086,
+    "2": 11.95057335766879,
+    "3": 22.110632220904034
+  },
+  "reflection_mode": "code_only",
+  "final_merge_eval": {
+    "samples_file": "output/HumanEval-V/gpt-4o-mini/samples.jsonl",
+    "reflection_dir": "output/HumanEval-V/gpt-4o-mini/reflection_code_only",
+    "output_file": "output/HumanEval-V/gpt-4o-mini/reflection_code_only/samples_reflection_merged.jsonl",
+    "merged_results_file": "output/HumanEval-V/gpt-4o-mini/reflection_code_only/samples_reflection_merged.jsonl_results.jsonl",
+    "results_txt": "output/HumanEval-V/gpt-4o-mini/reflection_code_only/results.txt",
+    "problem_file": "data/HumanEval-V/HumanEval.jsonl",
+    "merge_summary": {
+      "total_rows": 164,
+      "replaced_rows": 32,
+      "replaced_by_first_passed": 29,
+      "replaced_by_last_failed": 3,
+      "missing_generated_code": 0,
+      "selection_stats": {
+        "keep_original": 132,
+        "first_passed": 29,
+        "iter_3_failed": 3
+      }
+    },
+    "eval_result": {
+      "pass@1": 0.9817073170731707
+    },
+    "difficulty_summary": {
+      "Easy": {
+        "passed": 0.0,
+        "total": 0.0,
+        "rate": 0.0
+      },
+      "Medium": {
+        "passed": 0.0,
+        "total": 0.0,
+        "rate": 0.0
+      },
+      "Hard": {
+        "passed": 0.0,
+        "total": 0.0,
+        "rate": 0.0
+      }
+    }
+  }
+}

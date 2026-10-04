@@ -1,0 +1,165 @@
+{
+  "problem_id": "count_nums",
+  "functions": [
+    {
+      "name": "digits_sum",
+      "parameters": [
+        "n"
+      ],
+      "entry_node": 1,
+      "nodes": [
+        {
+          "id": 1,
+          "type": "start",
+          "label": "Start",
+          "next": 2
+        },
+        {
+          "id": 2,
+          "type": "decision",
+          "label": "Check if n < 0",
+          "logic": "ctx['n'] < 0",
+          "true_next": 3,
+          "false_next": 4
+        },
+        {
+          "id": 3,
+          "type": "process",
+          "label": "Set neg = -1 and n = -n",
+          "action": "ctx['neg'] = -1; ctx['n'] = -ctx['n'];",
+          "next": 4
+        },
+        {
+          "id": 4,
+          "type": "process",
+          "label": "Convert n to a list of its digits",
+          "action": "ctx['n'] = [int(d) for d in str(ctx['n'])];",
+          "next": 5
+        },
+        {
+          "id": 5,
+          "type": "process",
+          "label": "Set n[0] = n[0] * neg",
+          "action": "ctx['n'][0] *= ctx['neg'];",
+          "next": 6
+        },
+        {
+          "id": 6,
+          "type": "process",
+          "label": "Calculate the sum of digits",
+          "action": "ctx['sum'] = sum(ctx['n']);",
+          "next": 7
+        },
+        {
+          "id": 7,
+          "type": "return",
+          "label": "Return sum",
+          "value": "ctx['sum']"
+        }
+      ]
+    }
+  ],
+  "nodes": [
+    {
+      "id": 1,
+      "type": "start",
+      "label": "Start",
+      "next": 2
+    },
+    {
+      "id": 2,
+      "type": "process",
+      "label": "Input: arr (array of integers)",
+      "action": "ctx['arr'] = ctx['arg0'];",
+      "next": 3
+    },
+    {
+      "id": 3,
+      "type": "decision",
+      "label": "Is arr empty?",
+      "logic": "len(ctx['arr']) == 0",
+      "true_next": 4,
+      "false_next": 5
+    },
+    {
+      "id": 4,
+      "type": "end",
+      "label": "Output: 0 (no elements in array)",
+      "output": "0"
+    },
+    {
+      "id": 5,
+      "type": "process",
+      "label": "Initialize count = 0",
+      "action": "ctx['count'] = 0;",
+      "next": 6
+    },
+    {
+      "id": 6,
+      "type": "process",
+      "label": "Process each element in arr",
+      "action": "ctx['i'] = 0;",
+      "next": 7
+    },
+    {
+      "id": 7,
+      "type": "decision",
+      "label": "Is arr empty?",
+      "logic": "ctx['i'] < len(ctx['arr'])",
+      "true_next": 8,
+      "false_next": 10
+    },
+    {
+      "id": 8,
+      "type": "call",
+      "label": "Calculate digits_sum for each element",
+      "function_name": "digits_sum",
+      "arguments": [
+        "ctx['arr'][ctx['i']]"
+      ],
+      "return_var": "ctx['digits_sum']",
+      "next": 9
+    },
+    {
+      "id": 9,
+      "type": "decision",
+      "label": "Is digits_sum > 0?",
+      "logic": "ctx['digits_sum'] > 0",
+      "true_next": 11,
+      "false_next": 12
+    },
+    {
+      "id": 11,
+      "type": "process",
+      "label": "Increment count by 1",
+      "action": "ctx['count'] += 1;",
+      "next": 12
+    },
+    {
+      "id": 12,
+      "type": "process",
+      "label": "Continue to next element",
+      "action": "ctx['i'] += 1;",
+      "next": 7
+    },
+    {
+      "id": 10,
+      "type": "end",
+      "label": "Output: count (number of elements with positive sum of digits)",
+      "output": "ctx['count']"
+    }
+  ],
+  "task_id": "HumanEval-108",
+  "dataset": "HumanEval-V",
+  "result": "failed: local variable 'digits_sum' referenced before assignment",
+  "code": "def count_nums(arr):\n    if len(arr) == 0:\n        return 0\n    \n    count = 0\n    i = 0\n    \n    while i < len(arr):\n        digits_sum = digits_sum(arr[i])\n        if digits_sum > 0:\n            count += 1\n        i += 1\n    \n    return count\n\ndef digits_sum(n):\n    if n < 0:\n        neg = -1\n        n = -n\n    else:\n        neg = 1\n    \n    n = [int(d) for d in str(n)]\n    n[0] *= neg\n    return sum(n)",
+  "verification": {
+    "md_verdict": "Code Generation Error",
+    "actual_error_source": "both",
+    "ilr_verdict": "incorrect",
+    "code_vs_ilr": "deviates",
+    "md_correct": "no",
+    "note": "归因应为 both：ILR 的 digits_sum 在 n>=0 分支从不初始化 neg，node5 直接 n[0]*=ctx['neg']，忠实转写对正数抛 KeyError('neg')，除空数组外所有测试都会崩；同时生成代码确实另有自身致命 bug——把返回值赋给与函数同名的局部变量 digits_sum 造成 UnboundLocalError（与报错吻合），且自行补了 else: neg=1（偏离 ILR 但属修复）。MD 只说代码错，漏掉了 ILR 本身 broken。",
+    "evidence": "生成代码 count_nums([-1,-2,0]) 抛 UnboundLocalError: digits_sum；仅修复遮蔽后全部 8 个断言通过；ILR 忠实转写 digits_sum(1) 抛 KeyError: 'neg'。"
+  }
+}

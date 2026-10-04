@@ -1,0 +1,72 @@
+{
+  "problem_id": "optimal_division",
+  "nodes": [
+    {
+      "id": 1,
+      "type": "start",
+      "label": "Start",
+      "next": 2
+    },
+    {
+      "id": 2,
+      "type": "process",
+      "label": "Input: nums (List[int])",
+      "action": "ctx['nums'] = ctx['arg0']; ctx['n'] = len(ctx['nums'])",
+      "next": 3
+    },
+    {
+      "id": 3,
+      "type": "decision",
+      "label": "Is length of nums == 1?",
+      "logic": "ctx['n'] == 1",
+      "true_next": 4,
+      "false_next": 5
+    },
+    {
+      "id": 4,
+      "type": "end",
+      "label": "Output: str(nums[0])",
+      "output": "str(ctx['nums'][0])"
+    },
+    {
+      "id": 5,
+      "type": "decision",
+      "label": "Is length of nums == 2?",
+      "logic": "ctx['n'] == 2",
+      "true_next": 6,
+      "false_next": 7
+    },
+    {
+      "id": 6,
+      "type": "end",
+      "label": "Output: str(nums[0]) + '/' + str(nums[1])",
+      "output": "str(ctx['nums'][0]) + '/' + str(ctx['nums'][1])"
+    },
+    {
+      "id": 7,
+      "type": "process",
+      "label": "Convert nums to strings: nums_str = list(map(str, nums))",
+      "action": "ctx['nums_str'] = list(map(str, ctx['nums']))",
+      "next": 8
+    },
+    {
+      "id": 8,
+      "type": "end",
+      "label": "Output: str(nums[0]) + '/' + '/' .join(nums_str[1:]) + '/'",
+      "output": "str(ctx['nums'][0]) + '/' + '/'.join(ctx['nums_str'][1:]) + '/'"
+    }
+  ],
+  "task_id": "553. Optimal Division",
+  "dataset": "MATH",
+  "result": "failed: ",
+  "code": "def optimalDivision( nums: List[int]) -> str:\n    n = len(nums)\n    if n == 1:\n        return str(nums[0])\n    elif n == 2:\n        return str(nums[0]) + '/' + str(nums[1])\n    else:\n        return str(nums[0]) + '/' + '/'.join(map(str, nums[1:])) + '/'",
+  "verification": {
+    "md_verdict": "ILR Error",
+    "actual_error_source": "ilr",
+    "ilr_verdict": "incorrect",
+    "code_vs_ilr": "faithful",
+    "md_correct": "yes",
+    "note": "ILR的node8输出表达式漏掉了括号，写成 str(nums[0]) + '/' + '/'.join(nums_str[1:]) + '/'，正确应为 str(nums[0]) + '/(' + '/'.join(...) + ')'。代码忠实复刻该表达式，n>=3的所有用例输出形如'2/3/4/'而非'2/(3/4)'。",
+    "evidence": "生成代码（与ILR表达式一致）：optimalDivision([2,3,4])='2/3/4/'(期望'2/(3/4)')、([1000,100,10,2])='1000/100/10/2/'(期望'1000/(100/10/2)')；n=1/2用例可通过。"
+  }
+}

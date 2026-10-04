@@ -1,0 +1,30 @@
+{
+  "dataset": "Algorithm",
+  "model": "Qwen-Qwen3-VL-30B-A3B-Instruct-Qwen-Qwen3-VL-30B-A3B-Instruct",
+  "total_samples": 149,
+  "use_reflection": false,
+  "max_iterations": 0,
+  "pass_rate": {
+    "iteration_0": {
+      "passed": 124,
+      "total": 149,
+      "rate": 0.8322
+    }
+  },
+  "tokens": {
+    "total": {
+      "prompt_tokens": 1345271,
+      "completion_tokens": 164260,
+      "total_tokens": 1509531
+    },
+    "average_per_sample": {
+      "prompt_tokens": 9028.66,
+      "completion_tokens": 1102.42,
+      "total_tokens": 10131.08
+    }
+  },
+  "time": {
+    "total_time": 2231.91,
+    "average_per_sample": 14.98
+  }
+}

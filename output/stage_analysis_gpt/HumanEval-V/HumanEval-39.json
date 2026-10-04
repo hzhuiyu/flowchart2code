@@ -1,0 +1,143 @@
+{
+  "task_id": "HumanEval-39",
+  "dataset": "HumanEval-V",
+  "difficulty": null,
+  "title": null,
+  "result": "failed: name 'is_prime' is not defined",
+  "ilr": "{\n  \"problem_id\": \"prime_fib_example\",\n  \"nodes\": [\n    {\"id\": 1, \"type\": \"start\", \"label\": \"Start\", \"next\": 2},\n    {\"id\": 2, \"type\": \"process\", \"label\": \"Input: n (integer)\", \"action\": \"ctx['n']=ctx['arg0']; ctx['f']=[0, 1]\", \"next\": 3},\n    {\"id\": 3, \"type\": \"process\", \"label\": \"Start infinite loop\", \"action\": \"\", \"next\": 4},\n    {\"id\": 4, \"type\": \"process\", \"label\": \"Calculate next Fibonacci number: f.append(f[-1] + f[-2])\", \"action\": \"ctx['f'].append(ctx['f'][-1] + ctx['f'][-2])\", \"next\": 5},\n    {\"id\": 5, \"type\": \"process\", \"label\": \"Check if f[-1] is prime\", \"action\": \"\", \"next\": 6},\n    {\"id\": 6, \"type\": \"decision\", \"label\": \"Is f[-1] prime?\", \"logic\": \"is_prime(ctx['f'][-1])\", \"true_next\": 8, \"false_next\": 9},\n    {\"id\": 7, \"type\": \"process\", \"label\": \"Decrement n: n -= 1\", \"action\": \"ctx['n'] -= 1\", \"next\": 9},\n    {\"id\": 8, \"type\": \"decision\", \"label\": \"Is n == 0?\", \"logic\": \"ctx['n'] == 0\", \"true_next\": 10, \"false_next\": 4},\n    {\"id\": 9, \"type\": \"end\", \"label\": \"Output: f[-1] (n-th prime Fibonacci number)\", \"output\": \"ctx['f'][-1]\"}\n  ],\n  \"functions\": [\n    {\n      \"name\": \"is_prime\",\n      \"parameters\": [\"num\"],\n      \"entry_node\": 100,\n      \"nodes\": [\n        {\"id\": 100, \"type\": \"start\", \"label\": \"Start\", \"next\": 101},\n        {\"id\": 101, \"type\": \"decision\", \"label\": \"num <= 1\", \"logic\": \"ctx['num'] <= 1\", \"true_next\": 102, \"false_next\": 103},\n        {\"id\": 102, \"type\": \"return\", \"label\": \"Return False\", \"value\": \"False\"},\n        {\"id\": 103, \"type\": \"process\", \"label\": \"i = 2\", \"action\": \"ctx['i'] = 2\", \"next\": 104},\n        {\"id\": 104, \"type\": \"decision\", \"label\": \"i * i <= num\", \"logic\": \"ctx['i'] * ctx['i'] <= ctx['num']\", \"true_next\": 105, \"false_next\": 108},\n        {\"id\": 105, \"type\": \"decision\", \"label\": \"num % i == 0\", \"logic\": \"ctx['num'] % ctx['i'] == 0\", \"true_next\": 106, \"false_next\": 107},\n        {\"id\": 106, \"type\": \"return\", \"label\": \"Return False\", \"value\": \"False\"},\n        {\"id\": 107, \"type\": \"process\", \"label\": \"i = i + 1\", \"action\": \"ctx['i'] += 1\", \"next\": 104},\n        {\"id\": 108, \"type\": \"return\", \"label\": \"Return True\", \"value\": \"True\"}\n      ]\n    }\n  ]\n}",
+  "code": "def prime_fib(num):\n    if num <= 1:\n        return False\n    i = 2\n    while i * i <= num:\n        if num % i == 0:\n            return False\n        i += 1\n    return True\n\ndef prime_fib(n: int):\n    f = [0, 1]\n    while True:\n        f.append(f[-1] + f[-2])\n        if is_prime(f[-1]):\n            n -= 1\n            if n == 0:\n                return f[-1]",
+  "prompt": "\n\ndef prime_fib(n: int):\n    \"\"\"\n    prime_fib returns n-th number that is a Fibonacci number and it's also prime.\n    >>> prime_fib(1)\n    2\n    >>> prime_fib(2)\n    3\n    >>> prime_fib(3)\n    5\n    >>> prime_fib(4)\n    13\n    >>> prime_fib(5)\n    89\n    \"\"\"\n",
+  "test": "\n\nMETADATA = {}\n\n\ndef check(candidate):\n    assert candidate(1) == 2\n    assert candidate(2) == 3\n    assert candidate(3) == 5\n    assert candidate(4) == 13\n    assert candidate(5) == 89\n    assert candidate(6) == 233\n    assert candidate(7) == 1597\n    assert candidate(8) == 28657\n    assert candidate(9) == 514229\n    assert candidate(10) == 433494437\n\n",
+  "ocr_data": {
+    "nodes": [
+      {
+        "node_id": 1,
+        "shape_type": "rectangle",
+        "raw_text": "Start",
+        "position": "top"
+      },
+      {
+        "node_id": 2,
+        "shape_type": "rectangle",
+        "raw_text": "Input: n (integer)",
+        "position": "middle"
+      },
+      {
+        "node_id": 3,
+        "shape_type": "rectangle",
+        "raw_text": "Initialize f = [0, 1]",
+        "position": "middle"
+      },
+      {
+        "node_id": 4,
+        "shape_type": "rectangle",
+        "raw_text": "Start infinite loop",
+        "position": "middle"
+      },
+      {
+        "node_id": 5,
+        "shape_type": "rectangle",
+        "raw_text": "Calculate next Fibonacci number: f.append(f[-1] + f[-2])",
+        "position": "middle"
+      },
+      {
+        "node_id": 6,
+        "shape_type": "rectangle",
+        "raw_text": "Check if f[-1] is prime",
+        "position": "middle"
+      },
+      {
+        "node_id": 7,
+        "shape_type": "diamond",
+        "raw_text": "Is f[-1] prime?",
+        "position": "middle"
+      },
+      {
+        "node_id": 8,
+        "shape_type": "rectangle",
+        "raw_text": "Decrement n: n -= 1",
+        "position": "middle"
+      },
+      {
+        "node_id": 9,
+        "shape_type": "diamond",
+        "raw_text": "Is n == 0?",
+        "position": "bottom"
+      },
+      {
+        "node_id": 10,
+        "shape_type": "rectangle",
+        "raw_text": "Output: f[-1] (n-th prime Fibonacci number)",
+        "position": "bottom"
+      }
+    ],
+    "edges": [
+      {
+        "from_node": 1,
+        "to_node": 2,
+        "label": ""
+      },
+      {
+        "from_node": 2,
+        "to_node": 3,
+        "label": ""
+      },
+      {
+        "from_node": 3,
+        "to_node": 4,
+        "label": ""
+      },
+      {
+        "from_node": 4,
+        "to_node": 5,
+        "label": ""
+      },
+      {
+        "from_node": 5,
+        "to_node": 6,
+        "label": ""
+      },
+      {
+        "from_node": 6,
+        "to_node": 7,
+        "label": ""
+      },
+      {
+        "from_node": 7,
+        "to_node": 8,
+        "label": "Yes"
+      },
+      {
+        "from_node": 8,
+        "to_node": 9,
+        "label": ""
+      },
+      {
+        "from_node": 7,
+        "to_node": 9,
+        "label": "No"
+      },
+      {
+        "from_node": 9,
+        "to_node": 10,
+        "label": "Yes"
+      },
+      {
+        "from_node": 9,
+        "to_node": 4,
+        "label": "No"
+      }
+    ],
+    "other_text": []
+  },
+  "analysis": {
+    "ilr_verdict": "incorrect",
+    "ilr_issues": "ILR主流程接错线：节点6(素数判断)的true分支跳过节点7(n-=1，成为孤点)直达n==0判断；false分支（非素数）直接连到输出节点9，导致第一个非素Fibonacci数就返回f[-1]；节点8的true_next=10指向不存在的节点。",
+    "code_vs_ilr": "deviates",
+    "code_issues": "代码没有忠实实现该ILR：主循环按正确算法重写（先n-=1再判n==0、非素数继续循环），但把辅助函数is_prime误命名为prime_fib（两个同名prime_fib互相遮蔽），主函数调用is_prime时抛NameError。",
+    "error_source": "both",
+    "ocr_contribution": "no",
+    "root_cause": "OCR节点与边完整、按其原编号读图即可得到正确算法，ILR在重编号节点时把边整体接错（ILR生成环节自身错误）；生成代码虽按正确控制流重写（偏离了错误ILR），却把is_prime错命名为prime_fib导致运行即NameError，两处独立造成失败。",
+    "evidence": "ILR模拟执行prime_fib(1)返回1而非2（首个非素Fibonacci数1直接走到输出节点9）；实际测试报错 name 'is_prime' is not defined，与FAILURE RESULT一致。"
+  }
+}

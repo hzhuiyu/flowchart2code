@@ -1,0 +1,76 @@
+{
+  "total": 81,
+  "processed": 81,
+  "success": 74,
+  "failed": 7,
+  "success_rate": 91.35802469135803,
+  "iteration_stats": {
+    "1": {
+      "count": 81,
+      "avg_duration": 34.16055950706388,
+      "avg_total_tokens": 7804.16049382716,
+      "avg_prompt_tokens": 3317.0123456790125,
+      "avg_completion_tokens": 4487.148148148148
+    },
+    "2": {
+      "count": 16,
+      "avg_duration": 77.27611848711967,
+      "avg_total_tokens": 7873.5,
+      "avg_prompt_tokens": 1826.75,
+      "avg_completion_tokens": 6046.75
+    },
+    "3": {
+      "count": 7,
+      "avg_duration": 50.68675201279776,
+      "avg_total_tokens": 8947.285714285714,
+      "avg_prompt_tokens": 1885.857142857143,
+      "avg_completion_tokens": 7061.428571428572
+    }
+  },
+  "avg_duration_by_iteration": {
+    "1": 34.16055950706388,
+    "2": 77.27611848711967,
+    "3": 50.68675201279776
+  },
+  "reflection_mode": "code_only",
+  "final_merge_eval": {
+    "samples_file": "output/MATH/gpt-5-nano_text_image/samples.jsonl",
+    "reflection_dir": "output/MATH/gpt-5-nano_text_image/reflection_code_only",
+    "output_file": "output/MATH/gpt-5-nano_text_image/reflection_code_only/samples_reflection_merged.jsonl",
+    "merged_results_file": "output/MATH/gpt-5-nano_text_image/reflection_code_only/samples_reflection_merged.jsonl_results.jsonl",
+    "results_txt": "output/MATH/gpt-5-nano_text_image/reflection_code_only/results.txt",
+    "problem_file": "data/MATH/MATH.jsonl",
+    "merge_summary": {
+      "total_rows": 125,
+      "replaced_rows": 81,
+      "replaced_by_first_passed": 74,
+      "replaced_by_last_failed": 7,
+      "missing_generated_code": 0,
+      "selection_stats": {
+        "first_passed": 74,
+        "keep_original": 44,
+        "iter_3_failed": 7
+      }
+    },
+    "eval_result": {
+      "pass@1": 0.944
+    },
+    "difficulty_summary": {
+      "Easy": {
+        "passed": 44.0,
+        "total": 45.0,
+        "rate": 0.9777777777777777
+      },
+      "Medium": {
+        "passed": 38.0,
+        "total": 40.0,
+        "rate": 0.95
+      },
+      "Hard": {
+        "passed": 36.0,
+        "total": 40.0,
+        "rate": 0.9
+      }
+    }
+  }
+}

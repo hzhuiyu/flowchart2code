@@ -1,0 +1,22 @@
+{
+  "model_name": "Qwen3-VL-8B-Instruct_zero_shot_cot",
+  "datasets": {
+    "LiveCodeBench": {
+      "hash": "4167ce9be5abf7ad521b98a477a687b2:0b096d41fa35d090ff28bb086d0fc596",
+      "status": "completed",
+      "completed": true,
+      "messages": [
+        {
+          "time": "2026-09-19 22:18:45",
+          "message": "Code generation completed"
+        },
+        {
+          "time": "2026-09-19 22:19:07",
+          "message": "Evaluation completed: Pass@1 = 0.2568"
+        }
+      ],
+      "last_update": "2026-09-19 22:19:07"
+    }
+  },
+  "last_update": "2026-09-19 22:19:07"
+}

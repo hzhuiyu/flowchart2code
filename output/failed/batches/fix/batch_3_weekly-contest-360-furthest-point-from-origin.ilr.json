@@ -1,0 +1,90 @@
+{
+  "problem_id": "furthestDistanceFromOrigin",
+  "nodes": [
+    {
+      "id": 1,
+      "type": "start",
+      "label": "Start",
+      "next": 2
+    },
+    {
+      "id": 2,
+      "type": "process",
+      "label": "Input: moves (string)",
+      "action": "ctx['moves'] = ctx['arg0']; ctx['s'] = 0; ctx['t'] = 0; ctx['distance'] = 0",
+      "next": 3
+    },
+    {
+      "id": 3,
+      "type": "process",
+      "label": "Count L's: s = moves.count('L')",
+      "action": "ctx['s'] = ctx['moves'].count('L')",
+      "next": 4
+    },
+    {
+      "id": 4,
+      "type": "process",
+      "label": "Count R's: t = moves.count('R')",
+      "action": "ctx['t'] = ctx['moves'].count('R')",
+      "next": 5
+    },
+    {
+      "id": 5,
+      "type": "process",
+      "label": "Initialize distance = 0, u = 0, i = 0",
+      "action": "ctx['distance'] = 0; ctx['u'] = 0; ctx['i'] = 0",
+      "next": 6
+    },
+    {
+      "id": 6,
+      "type": "decision",
+      "label": "More characters left?",
+      "logic": "ctx['i'] < len(ctx['moves'])",
+      "true_next": 7,
+      "false_next": 11
+    },
+    {
+      "id": 7,
+      "type": "decision",
+      "label": "Is character 'L'?",
+      "logic": "ctx['moves'][ctx['i']] == 'L'",
+      "true_next": 8,
+      "false_next": 9
+    },
+    {
+      "id": 8,
+      "type": "process",
+      "label": "Update distance: distance -= 1",
+      "action": "ctx['distance'] -= 1; ctx['i'] += 1",
+      "next": 6
+    },
+    {
+      "id": 9,
+      "type": "decision",
+      "label": "Is character 'R'?",
+      "logic": "ctx['moves'][ctx['i']] == 'R'",
+      "true_next": 10,
+      "false_next": 12
+    },
+    {
+      "id": 10,
+      "type": "process",
+      "label": "Update distance: distance += 1",
+      "action": "ctx['distance'] += 1; ctx['i'] += 1",
+      "next": 6
+    },
+    {
+      "id": 12,
+      "type": "process",
+      "label": "Wildcard '_': u += 1",
+      "action": "ctx['u'] += 1; ctx['i'] += 1",
+      "next": 6
+    },
+    {
+      "id": 11,
+      "type": "return",
+      "label": "Return abs(distance) + u",
+      "value": "abs(ctx['distance']) + ctx['u']"
+    }
+  ]
+}

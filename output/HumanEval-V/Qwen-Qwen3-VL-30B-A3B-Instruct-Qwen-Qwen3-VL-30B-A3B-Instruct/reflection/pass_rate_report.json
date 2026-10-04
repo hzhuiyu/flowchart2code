@@ -1,0 +1,20 @@
+{
+  "dataset": "HumanEval-V",
+  "model": "Qwen-Qwen3-VL-30B-A3B-Instruct-Qwen-Qwen3-VL-30B-A3B-Instruct",
+  "has_difficulty": false,
+  "initial": {
+    "total": 164,
+    "passed": 149,
+    "failed": 15,
+    "pass_rate": 90.85
+  },
+  "final": {
+    "total": 164,
+    "passed": 159,
+    "failed": 5,
+    "pass_rate": 96.95
+  },
+  "reflection_tried": 15,
+  "newly_passed": 10,
+  "still_failed": 5
+}

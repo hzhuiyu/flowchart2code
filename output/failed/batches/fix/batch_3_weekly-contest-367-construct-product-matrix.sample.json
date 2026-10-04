@@ -1,0 +1,4164 @@
+{
+ "task_id": "weekly-contest-367-construct-product-matrix",
+ "dataset": "Algorithm",
+ "title": "construct-product-matrix",
+ "difficulty": "Medium",
+ "prompt": "\"\"\"\nGiven a 0-indexed 2D integer matrix grid of size n * m, we define a 0-indexed 2D matrix p of size n * m as the product matrix of grid if the following condition is met:\n\n * Each element p[i][j] is calculated as the product of all elements in grid except for the element grid[i][j]. This product is then taken modulo 12345.\n\nReturn the product matrix of grid.\n\nExample 1:\n\nInput: grid = [[1,2],[3,4]]\nOutput: [[24,12],[8,6]]\nExplanation: p[0][0] = grid[0][1] * grid[1][0] * grid[1][1] = 2 * 3 * 4 = 24\np[0][1] = grid[0][0] * grid[1][0] * grid[1][1] = 1 * 3 * 4 = 12\np[1][0] = grid[0][0] * grid[0][1] * grid[1][1] = 1 * 2 * 4 = 8\np[1][1] = grid[0][0] * grid[0][1] * grid[1][0] = 1 * 2 * 3 = 6\nSo the answer is [[24,12],[8,6]].\n\nExample 2:\n\nInput: grid = [[12345],[2],[1]]\nOutput: [[2],[0],[0]]\nExplanation: p[0][0] = grid[0][1] * grid[0][2] = 2 * 1 = 2.\np[0][1] = grid[0][0] * grid[0][2] = 12345 * 1 = 12345. 12345 % 12345 = 0. So p[0][1] = 0.\np[0][2] = grid[0][0] * grid[0][1] = 12345 * 2 = 24690. 24690 % 12345 = 0. So p[0][2] = 0.\nSo the answer is [[2],[0],[0]].\n\nConstraints:\n\n * 1 <= n == grid.length <= 105\n * 1 <= m == grid[i].length <= 105\n * 2 <= n * m <= 105\n * 1 <= grid[i][j] <= 109\n\"\"\"\nclass Solution:\n    def constructProductMatrix(self, grid: List[List[int]]) -> List[List[int]]:\n        ",
+ "starter_code": "class Solution:\n    def constructProductMatrix(self, grid: List[List[int]]) -> List[List[int]]:\n        ",
+ "entry_point": "",
+ "test": "\nmy_solution = Solution()\n\ntest_input = { \"grid\": [[1,2],[3,4]] }\nassert my_solution.constructProductMatrix(**test_input) == [[24,12],[8,6]]\n\ntest_input = { \"grid\": [[12345],[2],[1]] }\nassert my_solution.constructProductMatrix(**test_input) == [[2],[0],[0]]\n\ntest_input = { \"grid\": [[1],[2]] }\nassert my_solution.constructProductMatrix(**test_input) == [[2],[1]]\n\ntest_input = { \"grid\": [[1,2]] }\nassert my_solution.constructProductMatrix(**test_input) == [[2,1]]\n\ntest_input = { \"grid\": [[12345,12345]] }\nassert my_solution.constructProductMatrix(**test_input) == [[0,0]]\n\ntest_input = { \"grid\": [[1],[4]] }\nassert my_solution.constructProductMatrix(**test_input) == [[4],[1]]\n\ntest_input = { \"grid\": [[3],[4]] }\nassert my_solution.constructProductMatrix(**test_input) == [[4],[3]]\n\ntest_input = { \"grid\": [[4],[3]] }\nassert my_solution.constructProductMatrix(**test_input) == [[3],[4]]\n\ntest_input = { \"grid\": [[1,1,1]] }\nassert my_solution.constructProductMatrix(**test_input) == [[1,1,1]]\n\ntest_input = { \"grid\": [[2,1,1]] }\nassert my_solution.constructProductMatrix(**test_input) == [[1,2,2]]\n\ntest_input = { \"grid\": [[3],[5],[2]] }\nassert my_solution.constructProductMatrix(**test_input) == [[10],[6],[15]]\n\ntest_input = { \"grid\": [[1,2],[1,1],[6,4]] }\nassert my_solution.constructProductMatrix(**test_input) == [[48,24],[48,48],[8,12]]\n\ntest_input = { \"grid\": [[1,2,2],[1,4,3]] }\nassert my_solution.constructProductMatrix(**test_input) == [[48,24,24],[48,12,16]]\n\ntest_input = { \"grid\": [[2],[7],[2],[6]] }\nassert my_solution.constructProductMatrix(**test_input) == [[84],[24],[84],[28]]\n\ntest_input = { \"grid\": [[3],[4],[7],[7]] }\nassert my_solution.constructProductMatrix(**test_input) == [[196],[147],[84],[84]]\n\ntest_input = { \"grid\": [[3,1,1],[1,3,4]] }\nassert my_solution.constructProductMatrix(**test_input) == [[12,36,36],[36,12,9]]\n\ntest_input = { \"grid\": [[4],[8],[3],[7]] }\nassert my_solution.constructProductMatrix(**test_input) == [[168],[84],[224],[96]]\n\ntest_input = { \"grid\": [[5],[8],[8],[3]] }\nassert my_solution.constructProductMatrix(**test_input) == [[192],[120],[120],[320]]\n\ntest_input = { \"grid\": [[6],[5],[8],[5]] }\nassert my_solution.constructProductMatrix(**test_input) == [[200],[240],[150],[240]]\n\ntest_input = { \"grid\": [[8],[1],[3],[8]] }\nassert my_solution.constructProductMatrix(**test_input) == [[24],[192],[64],[24]]\n\ntest_input = { \"grid\": [[1],[10],[3],[10],[9]] }\nassert my_solution.constructProductMatrix(**test_input) == [[2700],[270],[900],[270],[300]]\n\ntest_input = { \"grid\": [[1,1,1,1,1]] }\nassert my_solution.constructProductMatrix(**test_input) == [[1,1,1,1,1]]\n\ntest_input = { \"grid\": [[1,1,2,2,1]] }\nassert my_solution.constructProductMatrix(**test_input) == [[4,4,2,2,4]]\n\ntest_input = { \"grid\": [[1,2,3],[3,3,5],[3,4,2]] }\nassert my_solution.constructProductMatrix(**test_input) == [[6480,3240,2160],[2160,2160,1296],[2160,1620,3240]]\n\ntest_input = { \"grid\": [[2],[7],[5],[3],[4]] }\nassert my_solution.constructProductMatrix(**test_input) == [[420],[120],[168],[280],[210]]\n\ntest_input = { \"grid\": [[2,2,2,2,1]] }\nassert my_solution.constructProductMatrix(**test_input) == [[8,8,8,8,16]]\n\ntest_input = { \"grid\": [[2,2,4,4],[3,2,1,4]] }\nassert my_solution.constructProductMatrix(**test_input) == [[768,768,384,384],[512,768,1536,384]]\n\ntest_input = { \"grid\": [[2,4,1,1],[3,4,4,1]] }\nassert my_solution.constructProductMatrix(**test_input) == [[192,96,384,384],[128,96,96,384]]\n\ntest_input = { \"grid\": [[3,1,1,4],[1,4,1,1]] }\nassert my_solution.constructProductMatrix(**test_input) == [[16,48,48,12],[48,12,48,48]]\n\ntest_input = { \"grid\": [[3,2,5],[6,4,3],[6,3,1]] }\nassert my_solution.constructProductMatrix(**test_input) == [[615,7095,7776],[6480,9720,615],[6480,615,1845]]\n\ntest_input = { \"grid\": [[5,5,5],[4,3,1],[4,5,1]] }\nassert my_solution.constructProductMatrix(**test_input) == [[6000,6000,6000],[7500,10000,5310],[7500,6000,5310]]\n\ntest_input = { \"grid\": [[6,3],[1,5],[2,7],[6,5]] }\nassert my_solution.constructProductMatrix(**test_input) == [[6300,255],[765,7560],[6555,5400],[6300,7560]]\n\ntest_input = { \"grid\": [[6,3,2],[2,3,1],[5,5,4]] }\nassert my_solution.constructProductMatrix(**test_input) == [[3600,7200,10800],[10800,7200,9255],[4320,4320,5400]]\n\ntest_input = { \"grid\": [[6,5,3],[4,4,5],[3,2,5]] }\nassert my_solution.constructProductMatrix(**test_input) == [[11310,6165,10275],[4620,4620,6165],[10275,9240,6165]]\n\ntest_input = { \"grid\": [[8],[5],[5],[9],[8]] }\nassert my_solution.constructProductMatrix(**test_input) == [[1800],[2880],[2880],[1600],[1800]]\n\ntest_input = { \"grid\": [[10],[5],[6],[8],[6]] }\nassert my_solution.constructProductMatrix(**test_input) == [[1440],[2880],[2400],[1800],[2400]]\n\ntest_input = { \"grid\": [[10],[9],[3],[4],[3]] }\nassert my_solution.constructProductMatrix(**test_input) == [[324],[360],[1080],[810],[1080]]\n\ntest_input = { \"grid\": [[1,1,1,2,2,1]] }\nassert my_solution.constructProductMatrix(**test_input) == [[4,4,4,2,2,4]]\n\ntest_input = { \"grid\": [[1,1,2,1,2,1]] }\nassert my_solution.constructProductMatrix(**test_input) == [[4,4,2,4,2,4]]\n\ntest_input = { \"grid\": [[1,1,2,1,2,2]] }\nassert my_solution.constructProductMatrix(**test_input) == [[8,8,4,8,4,4]]\n\ntest_input = { \"grid\": [[1,1,2,2,1,2]] }\nassert my_solution.constructProductMatrix(**test_input) == [[8,8,4,4,8,4]]\n\ntest_input = { \"grid\": [[1,1,2,2,2,2]] }\nassert my_solution.constructProductMatrix(**test_input) == [[16,16,8,8,8,8]]\n\ntest_input = { \"grid\": [[1,1,3,3],[3,4,4,2],[6,6,3,4]] }\nassert my_solution.constructProductMatrix(**test_input) == [[2898,2898,966,966],[966,6897,6897,1449],[483,483,966,6897]]\n\ntest_input = { \"grid\": [[1,2,1,1,1,2]] }\nassert my_solution.constructProductMatrix(**test_input) == [[4,2,4,4,4,2]]\n\ntest_input = { \"grid\": [[1,2,1,1,2,2]] }\nassert my_solution.constructProductMatrix(**test_input) == [[8,4,8,8,4,4]]\n\ntest_input = { \"grid\": [[1,2,2,4,3],[3,4,1,4,2]] }\nassert my_solution.constructProductMatrix(**test_input) == [[4608,2304,2304,1152,1536],[1536,1152,4608,1152,2304]]\n\ntest_input = { \"grid\": [[1,3,1,3,1],[2,1,3,2,3]] }\nassert my_solution.constructProductMatrix(**test_input) == [[324,108,324,108,324],[162,324,108,162,108]]\n\ntest_input = { \"grid\": [[1,3,3,3,4],[2,2,1,4,4]] }\nassert my_solution.constructProductMatrix(**test_input) == [[6912,2304,2304,2304,1728],[3456,3456,6912,1728,1728]]\n\ntest_input = { \"grid\": [[1,4,5],[1,3,2],[7,2,6],[6,2,2]] }\nassert my_solution.constructProductMatrix(**test_input) == [[7365,11100,11349],[7365,6570,9855],[9870,9855,3285],[3285,9855,9855]]\n\ntest_input = { \"grid\": [[1,6,6,4],[4,1,2,5],[5,4,6,2]] }\nassert my_solution.constructProductMatrix(**test_input) == [[12105,8190,8190,12285],[12285,12105,12225,4890],[4890,12285,8190,12225]]\n\ntest_input = { \"grid\": [[2,1,3,2,1],[3,1,3,1,2]] }\nassert my_solution.constructProductMatrix(**test_input) == [[108,216,72,108,216],[72,216,72,216,108]]\n\ntest_input = { \"grid\": [[2,2,2,1,1,1]] }\nassert my_solution.constructProductMatrix(**test_input) == [[4,4,4,8,8,8]]\n\ntest_input = { \"grid\": [[2,2,2,2,1,2]] }\nassert my_solution.constructProductMatrix(**test_input) == [[16,16,16,16,32,16]]\n\ntest_input = { \"grid\": [[2,2,3,2,3],[3,1,3,2,4]] }\nassert my_solution.constructProductMatrix(**test_input) == [[2592,2592,1728,2592,1728],[1728,5184,1728,2592,1296]]\n\ntest_input = { \"grid\": [[2,3,4],[2,4,2],[1,8,1],[8,8,8]] }\nassert my_solution.constructProductMatrix(**test_input) == [[8697,5798,10521],[8697,10521,8697],[5049,11433,5049],[11433,11433,11433]]\n\ntest_input = { \"grid\": [[2,4,4,5],[5,5,1,4],[4,2,2,5]] }\nassert my_solution.constructProductMatrix(**test_input) == [[10405,11375,11375,9100],[9100,9100,8465,11375],[11375,10405,10405,9100]]\n\ntest_input = { \"grid\": [[3,4,1,1],[3,1,4,4],[1,5,1,5]] }\nassert my_solution.constructProductMatrix(**test_input) == [[4800,3600,2055,2055],[4800,2055,3600,3600],[2055,2880,2055,2880]]\n\ntest_input = { \"grid\": [[3,4,6,3],[4,5,4,4],[5,2,6,3]] }\nassert my_solution.constructProductMatrix(**test_input) == [[11625,11805,11985,11625],[11805,6975,11805,11805],[6975,11265,11985,11625]]\n\ntest_input = { \"grid\": [[4,1,4,4,4],[2,2,2,3,3]] }\nassert my_solution.constructProductMatrix(**test_input) == [[4608,6087,4608,4608,4608],[9216,9216,9216,6144,6144]]\n\ntest_input = { \"grid\": [[4,8,8],[6,2,5],[7,3,7],[6,3,5]] }\nassert my_solution.constructProductMatrix(**test_input) == [[3525,7935,7935],[6465,7050,2820],[7305,585,7305],[6465,585,2820]]\n\ntest_input = { \"grid\": [[6],[8],[2],[12],[6],[4]] }\nassert my_solution.constructProductMatrix(**test_input) == [[4608],[3456],[1479],[2304],[4608],[6912]]\n\ntest_input = { \"grid\": [[6,2,5,2],[5,5,2,3],[4,6,5,2]] }\nassert my_solution.constructProductMatrix(**test_input) == [[3990,11970,12195,11970],[12195,12195,11970,7980],[5985,3990,12195,11970]]\n\ntest_input = { \"grid\": [[6,3,4,3],[6,4,2,5],[3,3,6,1]] }\nassert my_solution.constructProductMatrix(**test_input) == [[9795,7245,8520,7245],[9795,8520,4695,4347],[7245,7245,9795,9390]]\n\ntest_input = { \"grid\": [[6,5,6,6],[3,2,6,4],[1,3,4,1]] }\nassert my_solution.constructProductMatrix(**test_input) == [[2415,2898,2415,2415],[4830,7245,2415,9795],[2145,4830,9795,2145]]\n\ntest_input = { \"grid\": [[7],[11],[12],[7],[12],[7]] }\nassert my_solution.constructProductMatrix(**test_input) == [[3546],[12],[8241],[3546],[8241],[3546]]\n\ntest_input = { \"grid\": [[7,4,5],[2,1,2],[5,3,8],[3,6,7]] }\nassert my_solution.constructProductMatrix(**test_input) == [[12135,5805,2175],[11610,10875,11610],[2175,7740,9075],[7740,3870,12135]]\n\ntest_input = { \"grid\": [[8],[6],[7],[2],[7],[4]] }\nassert my_solution.constructProductMatrix(**test_input) == [[2352],[3136],[2688],[9408],[2688],[4704]]\n\ntest_input = { \"grid\": [[8],[6],[7],[5],[3],[6]] }\nassert my_solution.constructProductMatrix(**test_input) == [[3780],[5040],[4320],[6048],[10080],[5040]]\n\ntest_input = { \"grid\": [[8,1],[9,6],[2,4],[1,3],[3,6]] }\nassert my_solution.constructProductMatrix(**test_input) == [[10983,1449],[8391,6414],[6897,9621],[1449,483],[483,6414]]\n\ntest_input = { \"grid\": [[8,4,3],[7,7,4],[1,2,3],[5,2,4]] }\nassert my_solution.constructProductMatrix(**test_input) == [[8955,5565,11535],[3180,3180,5565],[9915,11130,11535],[1983,11130,5565]]\n\ntest_input = { \"grid\": [[12],[8],[4],[3],[9],[5]] }\nassert my_solution.constructProductMatrix(**test_input) == [[4320],[6480],[615],[4935],[5760],[10368]]\n\ntest_input = { \"grid\": [[1,1,1,1,2,2,2]] }\nassert my_solution.constructProductMatrix(**test_input) == [[8,8,8,8,4,4,4]]\n\ntest_input = { \"grid\": [[1,1,1,2,1,1,1]] }\nassert my_solution.constructProductMatrix(**test_input) == [[2,2,2,1,2,2,2]]\n\ntest_input = { \"grid\": [[1,1,2,1,2,1,2]] }\nassert my_solution.constructProductMatrix(**test_input) == [[8,8,4,8,4,8,4]]\n\ntest_input = { \"grid\": [[1,1,6,5,6],[1,6,6,2,5],[3,4,1,1,4]] }\nassert my_solution.constructProductMatrix(**test_input) == [[11805,11805,12255,4830,12255],[11805,12255,12255,12075,4830],[12165,12210,11805,11805,12210]]\n\ntest_input = { \"grid\": [[1,2,1,1,1,2,2]] }\nassert my_solution.constructProductMatrix(**test_input) == [[8,4,8,8,8,4,4]]\n\ntest_input = { \"grid\": [[1,2,1,2,2,1,1]] }\nassert my_solution.constructProductMatrix(**test_input) == [[8,4,8,4,4,8,8]]\n\ntest_input = { \"grid\": [[1,3,1,2,1,2],[3,2,3,4,2,3]] }\nassert my_solution.constructProductMatrix(**test_input) == [[5184,1728,5184,2592,5184,2592],[1728,2592,1728,1296,2592,1728]]\n\ntest_input = { \"grid\": [[1,3,5,2],[1,3,6,5],[8,1,2,7],[6,2,3,5]] }\nassert my_solution.constructProductMatrix(**test_input) == [[2895,9195,10455,7620],[2895,9195,10770,10455],[1905,2895,7620,10995],[10770,7620,9195,10455]]\n\ntest_input = { \"grid\": [[1,4,4,4,3,3],[1,1,3,4,4,1]] }\nassert my_solution.constructProductMatrix(**test_input) == [[2958,6912,6912,6912,9216,9216],[2958,2958,9216,6912,6912,2958]]\n\ntest_input = { \"grid\": [[1,5,5,6],[4,7,6,1],[2,3,3,6],[3,6,3,7]] }\nassert my_solution.constructProductMatrix(**test_input) == [[6570,11190,11190,1095],[7815,11520,1095,6570],[3285,2190,2190,1095],[2190,1095,2190,11520]]\n\ntest_input = { \"grid\": [[1,6,4,4,1],[6,2,5,1,4],[6,4,3,5,6]] }\nassert my_solution.constructProductMatrix(**test_input) == [[3705,10905,10185,10185,3705],[10905,8025,3210,3705,10185],[10905,10185,9465,3210,10905]]\n\ntest_input = { \"grid\": [[1,7,2,8],[3,7,2,5],[2,3,5,6],[5,4,2,7]] }\nassert my_solution.constructProductMatrix(**test_input) == [[4065,7635,8205,11310],[9585,7635,8205,8220],[8205,9585,8220,10965],[8220,10275,8205,7635]]\n\ntest_input = { \"grid\": [[2,1,1,1,1,2,2]] }\nassert my_solution.constructProductMatrix(**test_input) == [[4,8,8,8,8,4,4]]\n\ntest_input = { \"grid\": [[2,1,1,1,2,2,1]] }\nassert my_solution.constructProductMatrix(**test_input) == [[4,8,8,8,4,4,8]]\n\ntest_input = { \"grid\": [[2,1,2,2,2,2,2]] }\nassert my_solution.constructProductMatrix(**test_input) == [[32,64,32,32,32,32,32]]\n\ntest_input = { \"grid\": [[2,1,3,2,4,4],[1,3,2,2,4,1]] }\nassert my_solution.constructProductMatrix(**test_input) == [[4608,9216,3072,4608,2304,2304],[9216,3072,4608,4608,2304,9216]]\n\ntest_input = { \"grid\": [[2,2,2,2,1,2,1]] }\nassert my_solution.constructProductMatrix(**test_input) == [[16,16,16,16,32,16,32]]\n\ntest_input = { \"grid\": [[2,4,3,3,3,4],[3,1,4,3,4,2]] }\nassert my_solution.constructProductMatrix(**test_input) == [[966,483,8874,8874,8874,483],[8874,1932,483,8874,483,966]]\n\ntest_input = { \"grid\": [[2,5,4,8],[4,6,3,3],[1,5,1,4],[8,6,6,5]] }\nassert my_solution.constructProductMatrix(**test_input) == [[30,4950,15,6180],[15,4125,8250,8250],[60,4950,60,15],[6180,4125,4125,4950]]\n\ntest_input = { \"grid\": [[2,7],[10,12],[2,4],[8,11],[2,12],[11,2]] }\nassert my_solution.constructProductMatrix(**test_input) == [[8340,5910],[6606,5505],[8340,4170],[2085,8250],[8340,5505],[8250,8340]]\n\ntest_input = { \"grid\": [[2,9],[1,4],[10,12],[2,7],[4,10],[10,8]] }\nassert my_solution.constructProductMatrix(**test_input) == [[3435,10365],[6870,7890],[5625,10860],[3435,2745],[7890,5625],[5625,3945]]\n\ntest_input = { \"grid\": [[3],[9],[5],[1],[4],[14],[12]] }\nassert my_solution.constructProductMatrix(**test_input) == [[5550],[10080],[5799],[4305],[10335],[6480],[7560]]\n\ntest_input = { \"grid\": [[3,2,2,2,4,3],[4,1,3,1,1,2]] }\nassert my_solution.constructProductMatrix(**test_input) == [[2304,3456,3456,3456,1728,2304],[1728,6912,2304,6912,6912,3456]]\n\ntest_input = { \"grid\": [[3,2,4,2,2,3],[2,2,4,1,2,3]] }\nassert my_solution.constructProductMatrix(**test_input) == [[9216,1479,6912,1479,1479,9216],[1479,1479,6912,2958,1479,9216]]\n\ntest_input = { \"grid\": [[3,6,2,2,5],[1,4,3,4,1],[4,5,2,4,4]] }\nassert my_solution.constructProductMatrix(**test_input) == [[7590,3795,11385,11385,2085],[10425,11865,7590,11865,10425],[11865,2085,11385,11865,11865]]\n\ntest_input = { \"grid\": [[4,1,5,4,5],[6,5,3,4,4],[3,2,6,2,3]] }\nassert my_solution.constructProductMatrix(**test_input) == [[6945,3090,8025,6945,8025],[8745,8025,5145,6945,6945],[5145,1545,8745,1545,5145]]\n\ntest_input = { \"grid\": [[4,3,9],[3,9,10],[9,7,8],[8,4,7],[6,1,3]] }\nassert my_solution.constructProductMatrix(**test_input) == [[3255,225,75],[225,75,11178],[75,1860,7800],[7800,3255,1860],[6285,675,225]]\n\ntest_input = { \"grid\": [[5,1,1,1,5],[3,4,2,6,6],[3,3,2,5,1]] }\nassert my_solution.constructProductMatrix(**test_input) == [[6105,5835,5835,5835,6105],[6060,4545,9090,3030,3030],[6060,6060,9090,6105,5835]]\n\ntest_input = { \"grid\": [[5,3],[9,2],[2,6],[4,9],[12,2],[10,4]] }\nassert my_solution.constructProductMatrix(**test_input) == [[1050,5865],[10185,2625],[2625,9105],[7485,10185],[10725,2625],[525,7485]]",
+ "test_cases": [
+  {
+   "input": {
+    "args": [
+     [
+      [
+       1,
+       2
+      ],
+      [
+       3,
+       4
+      ]
+     ]
+    ]
+   },
+   "output": [
+    [
+     24,
+     12
+    ],
+    [
+     8,
+     6
+    ]
+   ],
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      [
+       12345
+      ],
+      [
+       2
+      ],
+      [
+       1
+      ]
+     ]
+    ]
+   },
+   "output": [
+    [
+     2
+    ],
+    [
+     0
+    ],
+    [
+     0
+    ]
+   ],
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      [
+       1
+      ],
+      [
+       2
+      ]
+     ]
+    ]
+   },
+   "output": [
+    [
+     2
+    ],
+    [
+     1
+    ]
+   ],
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      [
+       1,
+       2
+      ]
+     ]
+    ]
+   },
+   "output": [
+    [
+     2,
+     1
+    ]
+   ],
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      [
+       12345,
+       12345
+      ]
+     ]
+    ]
+   },
+   "output": [
+    [
+     0,
+     0
+    ]
+   ],
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      [
+       1
+      ],
+      [
+       4
+      ]
+     ]
+    ]
+   },
+   "output": [
+    [
+     4
+    ],
+    [
+     1
+    ]
+   ],
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      [
+       3
+      ],
+      [
+       4
+      ]
+     ]
+    ]
+   },
+   "output": [
+    [
+     4
+    ],
+    [
+     3
+    ]
+   ],
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      [
+       4
+      ],
+      [
+       3
+      ]
+     ]
+    ]
+   },
+   "output": [
+    [
+     3
+    ],
+    [
+     4
+    ]
+   ],
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      [
+       1,
+       1,
+       1
+      ]
+     ]
+    ]
+   },
+   "output": [
+    [
+     1,
+     1,
+     1
+    ]
+   ],
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      [
+       2,
+       1,
+       1
+      ]
+     ]
+    ]
+   },
+   "output": [
+    [
+     1,
+     2,
+     2
+    ]
+   ],
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      [
+       3
+      ],
+      [
+       5
+      ],
+      [
+       2
+      ]
+     ]
+    ]
+   },
+   "output": [
+    [
+     10
+    ],
+    [
+     6
+    ],
+    [
+     15
+    ]
+   ],
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      [
+       1,
+       2
+      ],
+      [
+       1,
+       1
+      ],
+      [
+       6,
+       4
+      ]
+     ]
+    ]
+   },
+   "output": [
+    [
+     48,
+     24
+    ],
+    [
+     48,
+     48
+    ],
+    [
+     8,
+     12
+    ]
+   ],
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      [
+       1,
+       2,
+       2
+      ],
+      [
+       1,
+       4,
+       3
+      ]
+     ]
+    ]
+   },
+   "output": [
+    [
+     48,
+     24,
+     24
+    ],
+    [
+     48,
+     12,
+     16
+    ]
+   ],
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      [
+       2
+      ],
+      [
+       7
+      ],
+      [
+       2
+      ],
+      [
+       6
+      ]
+     ]
+    ]
+   },
+   "output": [
+    [
+     84
+    ],
+    [
+     24
+    ],
+    [
+     84
+    ],
+    [
+     28
+    ]
+   ],
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      [
+       3
+      ],
+      [
+       4
+      ],
+      [
+       7
+      ],
+      [
+       7
+      ]
+     ]
+    ]
+   },
+   "output": [
+    [
+     196
+    ],
+    [
+     147
+    ],
+    [
+     84
+    ],
+    [
+     84
+    ]
+   ],
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      [
+       3,
+       1,
+       1
+      ],
+      [
+       1,
+       3,
+       4
+      ]
+     ]
+    ]
+   },
+   "output": [
+    [
+     12,
+     36,
+     36
+    ],
+    [
+     36,
+     12,
+     9
+    ]
+   ],
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      [
+       4
+      ],
+      [
+       8
+      ],
+      [
+       3
+      ],
+      [
+       7
+      ]
+     ]
+    ]
+   },
+   "output": [
+    [
+     168
+    ],
+    [
+     84
+    ],
+    [
+     224
+    ],
+    [
+     96
+    ]
+   ],
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      [
+       5
+      ],
+      [
+       8
+      ],
+      [
+       8
+      ],
+      [
+       3
+      ]
+     ]
+    ]
+   },
+   "output": [
+    [
+     192
+    ],
+    [
+     120
+    ],
+    [
+     120
+    ],
+    [
+     320
+    ]
+   ],
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      [
+       6
+      ],
+      [
+       5
+      ],
+      [
+       8
+      ],
+      [
+       5
+      ]
+     ]
+    ]
+   },
+   "output": [
+    [
+     200
+    ],
+    [
+     240
+    ],
+    [
+     150
+    ],
+    [
+     240
+    ]
+   ],
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      [
+       8
+      ],
+      [
+       1
+      ],
+      [
+       3
+      ],
+      [
+       8
+      ]
+     ]
+    ]
+   },
+   "output": [
+    [
+     24
+    ],
+    [
+     192
+    ],
+    [
+     64
+    ],
+    [
+     24
+    ]
+   ],
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      [
+       1
+      ],
+      [
+       10
+      ],
+      [
+       3
+      ],
+      [
+       10
+      ],
+      [
+       9
+      ]
+     ]
+    ]
+   },
+   "output": [
+    [
+     2700
+    ],
+    [
+     270
+    ],
+    [
+     900
+    ],
+    [
+     270
+    ],
+    [
+     300
+    ]
+   ],
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      [
+       1,
+       1,
+       1,
+       1,
+       1
+      ]
+     ]
+    ]
+   },
+   "output": [
+    [
+     1,
+     1,
+     1,
+     1,
+     1
+    ]
+   ],
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      [
+       1,
+       1,
+       2,
+       2,
+       1
+      ]
+     ]
+    ]
+   },
+   "output": [
+    [
+     4,
+     4,
+     2,
+     2,
+     4
+    ]
+   ],
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      [
+       1,
+       2,
+       3
+      ],
+      [
+       3,
+       3,
+       5
+      ],
+      [
+       3,
+       4,
+       2
+      ]
+     ]
+    ]
+   },
+   "output": [
+    [
+     6480,
+     3240,
+     2160
+    ],
+    [
+     2160,
+     2160,
+     1296
+    ],
+    [
+     2160,
+     1620,
+     3240
+    ]
+   ],
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      [
+       2
+      ],
+      [
+       7
+      ],
+      [
+       5
+      ],
+      [
+       3
+      ],
+      [
+       4
+      ]
+     ]
+    ]
+   },
+   "output": [
+    [
+     420
+    ],
+    [
+     120
+    ],
+    [
+     168
+    ],
+    [
+     280
+    ],
+    [
+     210
+    ]
+   ],
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      [
+       2,
+       2,
+       2,
+       2,
+       1
+      ]
+     ]
+    ]
+   },
+   "output": [
+    [
+     8,
+     8,
+     8,
+     8,
+     16
+    ]
+   ],
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      [
+       2,
+       2,
+       4,
+       4
+      ],
+      [
+       3,
+       2,
+       1,
+       4
+      ]
+     ]
+    ]
+   },
+   "output": [
+    [
+     768,
+     768,
+     384,
+     384
+    ],
+    [
+     512,
+     768,
+     1536,
+     384
+    ]
+   ],
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      [
+       2,
+       4,
+       1,
+       1
+      ],
+      [
+       3,
+       4,
+       4,
+       1
+      ]
+     ]
+    ]
+   },
+   "output": [
+    [
+     192,
+     96,
+     384,
+     384
+    ],
+    [
+     128,
+     96,
+     96,
+     384
+    ]
+   ],
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      [
+       3,
+       1,
+       1,
+       4
+      ],
+      [
+       1,
+       4,
+       1,
+       1
+      ]
+     ]
+    ]
+   },
+   "output": [
+    [
+     16,
+     48,
+     48,
+     12
+    ],
+    [
+     48,
+     12,
+     48,
+     48
+    ]
+   ],
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      [
+       3,
+       2,
+       5
+      ],
+      [
+       6,
+       4,
+       3
+      ],
+      [
+       6,
+       3,
+       1
+      ]
+     ]
+    ]
+   },
+   "output": [
+    [
+     615,
+     7095,
+     7776
+    ],
+    [
+     6480,
+     9720,
+     615
+    ],
+    [
+     6480,
+     615,
+     1845
+    ]
+   ],
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      [
+       5,
+       5,
+       5
+      ],
+      [
+       4,
+       3,
+       1
+      ],
+      [
+       4,
+       5,
+       1
+      ]
+     ]
+    ]
+   },
+   "output": [
+    [
+     6000,
+     6000,
+     6000
+    ],
+    [
+     7500,
+     10000,
+     5310
+    ],
+    [
+     7500,
+     6000,
+     5310
+    ]
+   ],
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      [
+       6,
+       3
+      ],
+      [
+       1,
+       5
+      ],
+      [
+       2,
+       7
+      ],
+      [
+       6,
+       5
+      ]
+     ]
+    ]
+   },
+   "output": [
+    [
+     6300,
+     255
+    ],
+    [
+     765,
+     7560
+    ],
+    [
+     6555,
+     5400
+    ],
+    [
+     6300,
+     7560
+    ]
+   ],
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      [
+       6,
+       3,
+       2
+      ],
+      [
+       2,
+       3,
+       1
+      ],
+      [
+       5,
+       5,
+       4
+      ]
+     ]
+    ]
+   },
+   "output": [
+    [
+     3600,
+     7200,
+     10800
+    ],
+    [
+     10800,
+     7200,
+     9255
+    ],
+    [
+     4320,
+     4320,
+     5400
+    ]
+   ],
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      [
+       6,
+       5,
+       3
+      ],
+      [
+       4,
+       4,
+       5
+      ],
+      [
+       3,
+       2,
+       5
+      ]
+     ]
+    ]
+   },
+   "output": [
+    [
+     11310,
+     6165,
+     10275
+    ],
+    [
+     4620,
+     4620,
+     6165
+    ],
+    [
+     10275,
+     9240,
+     6165
+    ]
+   ],
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      [
+       8
+      ],
+      [
+       5
+      ],
+      [
+       5
+      ],
+      [
+       9
+      ],
+      [
+       8
+      ]
+     ]
+    ]
+   },
+   "output": [
+    [
+     1800
+    ],
+    [
+     2880
+    ],
+    [
+     2880
+    ],
+    [
+     1600
+    ],
+    [
+     1800
+    ]
+   ],
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      [
+       10
+      ],
+      [
+       5
+      ],
+      [
+       6
+      ],
+      [
+       8
+      ],
+      [
+       6
+      ]
+     ]
+    ]
+   },
+   "output": [
+    [
+     1440
+    ],
+    [
+     2880
+    ],
+    [
+     2400
+    ],
+    [
+     1800
+    ],
+    [
+     2400
+    ]
+   ],
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      [
+       10
+      ],
+      [
+       9
+      ],
+      [
+       3
+      ],
+      [
+       4
+      ],
+      [
+       3
+      ]
+     ]
+    ]
+   },
+   "output": [
+    [
+     324
+    ],
+    [
+     360
+    ],
+    [
+     1080
+    ],
+    [
+     810
+    ],
+    [
+     1080
+    ]
+   ],
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      [
+       1,
+       1,
+       1,
+       2,
+       2,
+       1
+      ]
+     ]
+    ]
+   },
+   "output": [
+    [
+     4,
+     4,
+     4,
+     2,
+     2,
+     4
+    ]
+   ],
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      [
+       1,
+       1,
+       2,
+       1,
+       2,
+       1
+      ]
+     ]
+    ]
+   },
+   "output": [
+    [
+     4,
+     4,
+     2,
+     4,
+     2,
+     4
+    ]
+   ],
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      [
+       1,
+       1,
+       2,
+       1,
+       2,
+       2
+      ]
+     ]
+    ]
+   },
+   "output": [
+    [
+     8,
+     8,
+     4,
+     8,
+     4,
+     4
+    ]
+   ],
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      [
+       1,
+       1,
+       2,
+       2,
+       1,
+       2
+      ]
+     ]
+    ]
+   },
+   "output": [
+    [
+     8,
+     8,
+     4,
+     4,
+     8,
+     4
+    ]
+   ],
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      [
+       1,
+       1,
+       2,
+       2,
+       2,
+       2
+      ]
+     ]
+    ]
+   },
+   "output": [
+    [
+     16,
+     16,
+     8,
+     8,
+     8,
+     8
+    ]
+   ],
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      [
+       1,
+       1,
+       3,
+       3
+      ],
+      [
+       3,
+       4,
+       4,
+       2
+      ],
+      [
+       6,
+       6,
+       3,
+       4
+      ]
+     ]
+    ]
+   },
+   "output": [
+    [
+     2898,
+     2898,
+     966,
+     966
+    ],
+    [
+     966,
+     6897,
+     6897,
+     1449
+    ],
+    [
+     483,
+     483,
+     966,
+     6897
+    ]
+   ],
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      [
+       1,
+       2,
+       1,
+       1,
+       1,
+       2
+      ]
+     ]
+    ]
+   },
+   "output": [
+    [
+     4,
+     2,
+     4,
+     4,
+     4,
+     2
+    ]
+   ],
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      [
+       1,
+       2,
+       1,
+       1,
+       2,
+       2
+      ]
+     ]
+    ]
+   },
+   "output": [
+    [
+     8,
+     4,
+     8,
+     8,
+     4,
+     4
+    ]
+   ],
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      [
+       1,
+       2,
+       2,
+       4,
+       3
+      ],
+      [
+       3,
+       4,
+       1,
+       4,
+       2
+      ]
+     ]
+    ]
+   },
+   "output": [
+    [
+     4608,
+     2304,
+     2304,
+     1152,
+     1536
+    ],
+    [
+     1536,
+     1152,
+     4608,
+     1152,
+     2304
+    ]
+   ],
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      [
+       1,
+       3,
+       1,
+       3,
+       1
+      ],
+      [
+       2,
+       1,
+       3,
+       2,
+       3
+      ]
+     ]
+    ]
+   },
+   "output": [
+    [
+     324,
+     108,
+     324,
+     108,
+     324
+    ],
+    [
+     162,
+     324,
+     108,
+     162,
+     108
+    ]
+   ],
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      [
+       1,
+       3,
+       3,
+       3,
+       4
+      ],
+      [
+       2,
+       2,
+       1,
+       4,
+       4
+      ]
+     ]
+    ]
+   },
+   "output": [
+    [
+     6912,
+     2304,
+     2304,
+     2304,
+     1728
+    ],
+    [
+     3456,
+     3456,
+     6912,
+     1728,
+     1728
+    ]
+   ],
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      [
+       1,
+       4,
+       5
+      ],
+      [
+       1,
+       3,
+       2
+      ],
+      [
+       7,
+       2,
+       6
+      ],
+      [
+       6,
+       2,
+       2
+      ]
+     ]
+    ]
+   },
+   "output": [
+    [
+     7365,
+     11100,
+     11349
+    ],
+    [
+     7365,
+     6570,
+     9855
+    ],
+    [
+     9870,
+     9855,
+     3285
+    ],
+    [
+     3285,
+     9855,
+     9855
+    ]
+   ],
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      [
+       1,
+       6,
+       6,
+       4
+      ],
+      [
+       4,
+       1,
+       2,
+       5
+      ],
+      [
+       5,
+       4,
+       6,
+       2
+      ]
+     ]
+    ]
+   },
+   "output": [
+    [
+     12105,
+     8190,
+     8190,
+     12285
+    ],
+    [
+     12285,
+     12105,
+     12225,
+     4890
+    ],
+    [
+     4890,
+     12285,
+     8190,
+     12225
+    ]
+   ],
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      [
+       2,
+       1,
+       3,
+       2,
+       1
+      ],
+      [
+       3,
+       1,
+       3,
+       1,
+       2
+      ]
+     ]
+    ]
+   },
+   "output": [
+    [
+     108,
+     216,
+     72,
+     108,
+     216
+    ],
+    [
+     72,
+     216,
+     72,
+     216,
+     108
+    ]
+   ],
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      [
+       2,
+       2,
+       2,
+       1,
+       1,
+       1
+      ]
+     ]
+    ]
+   },
+   "output": [
+    [
+     4,
+     4,
+     4,
+     8,
+     8,
+     8
+    ]
+   ],
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      [
+       2,
+       2,
+       2,
+       2,
+       1,
+       2
+      ]
+     ]
+    ]
+   },
+   "output": [
+    [
+     16,
+     16,
+     16,
+     16,
+     32,
+     16
+    ]
+   ],
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      [
+       2,
+       2,
+       3,
+       2,
+       3
+      ],
+      [
+       3,
+       1,
+       3,
+       2,
+       4
+      ]
+     ]
+    ]
+   },
+   "output": [
+    [
+     2592,
+     2592,
+     1728,
+     2592,
+     1728
+    ],
+    [
+     1728,
+     5184,
+     1728,
+     2592,
+     1296
+    ]
+   ],
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      [
+       2,
+       3,
+       4
+      ],
+      [
+       2,
+       4,
+       2
+      ],
+      [
+       1,
+       8,
+       1
+      ],
+      [
+       8,
+       8,
+       8
+      ]
+     ]
+    ]
+   },
+   "output": [
+    [
+     8697,
+     5798,
+     10521
+    ],
+    [
+     8697,
+     10521,
+     8697
+    ],
+    [
+     5049,
+     11433,
+     5049
+    ],
+    [
+     11433,
+     11433,
+     11433
+    ]
+   ],
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      [
+       2,
+       4,
+       4,
+       5
+      ],
+      [
+       5,
+       5,
+       1,
+       4
+      ],
+      [
+       4,
+       2,
+       2,
+       5
+      ]
+     ]
+    ]
+   },
+   "output": [
+    [
+     10405,
+     11375,
+     11375,
+     9100
+    ],
+    [
+     9100,
+     9100,
+     8465,
+     11375
+    ],
+    [
+     11375,
+     10405,
+     10405,
+     9100
+    ]
+   ],
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      [
+       3,
+       4,
+       1,
+       1
+      ],
+      [
+       3,
+       1,
+       4,
+       4
+      ],
+      [
+       1,
+       5,
+       1,
+       5
+      ]
+     ]
+    ]
+   },
+   "output": [
+    [
+     4800,
+     3600,
+     2055,
+     2055
+    ],
+    [
+     4800,
+     2055,
+     3600,
+     3600
+    ],
+    [
+     2055,
+     2880,
+     2055,
+     2880
+    ]
+   ],
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      [
+       3,
+       4,
+       6,
+       3
+      ],
+      [
+       4,
+       5,
+       4,
+       4
+      ],
+      [
+       5,
+       2,
+       6,
+       3
+      ]
+     ]
+    ]
+   },
+   "output": [
+    [
+     11625,
+     11805,
+     11985,
+     11625
+    ],
+    [
+     11805,
+     6975,
+     11805,
+     11805
+    ],
+    [
+     6975,
+     11265,
+     11985,
+     11625
+    ]
+   ],
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      [
+       4,
+       1,
+       4,
+       4,
+       4
+      ],
+      [
+       2,
+       2,
+       2,
+       3,
+       3
+      ]
+     ]
+    ]
+   },
+   "output": [
+    [
+     4608,
+     6087,
+     4608,
+     4608,
+     4608
+    ],
+    [
+     9216,
+     9216,
+     9216,
+     6144,
+     6144
+    ]
+   ],
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      [
+       4,
+       8,
+       8
+      ],
+      [
+       6,
+       2,
+       5
+      ],
+      [
+       7,
+       3,
+       7
+      ],
+      [
+       6,
+       3,
+       5
+      ]
+     ]
+    ]
+   },
+   "output": [
+    [
+     3525,
+     7935,
+     7935
+    ],
+    [
+     6465,
+     7050,
+     2820
+    ],
+    [
+     7305,
+     585,
+     7305
+    ],
+    [
+     6465,
+     585,
+     2820
+    ]
+   ],
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      [
+       6
+      ],
+      [
+       8
+      ],
+      [
+       2
+      ],
+      [
+       12
+      ],
+      [
+       6
+      ],
+      [
+       4
+      ]
+     ]
+    ]
+   },
+   "output": [
+    [
+     4608
+    ],
+    [
+     3456
+    ],
+    [
+     1479
+    ],
+    [
+     2304
+    ],
+    [
+     4608
+    ],
+    [
+     6912
+    ]
+   ],
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      [
+       6,
+       2,
+       5,
+       2
+      ],
+      [
+       5,
+       5,
+       2,
+       3
+      ],
+      [
+       4,
+       6,
+       5,
+       2
+      ]
+     ]
+    ]
+   },
+   "output": [
+    [
+     3990,
+     11970,
+     12195,
+     11970
+    ],
+    [
+     12195,
+     12195,
+     11970,
+     7980
+    ],
+    [
+     5985,
+     3990,
+     12195,
+     11970
+    ]
+   ],
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      [
+       6,
+       3,
+       4,
+       3
+      ],
+      [
+       6,
+       4,
+       2,
+       5
+      ],
+      [
+       3,
+       3,
+       6,
+       1
+      ]
+     ]
+    ]
+   },
+   "output": [
+    [
+     9795,
+     7245,
+     8520,
+     7245
+    ],
+    [
+     9795,
+     8520,
+     4695,
+     4347
+    ],
+    [
+     7245,
+     7245,
+     9795,
+     9390
+    ]
+   ],
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      [
+       6,
+       5,
+       6,
+       6
+      ],
+      [
+       3,
+       2,
+       6,
+       4
+      ],
+      [
+       1,
+       3,
+       4,
+       1
+      ]
+     ]
+    ]
+   },
+   "output": [
+    [
+     2415,
+     2898,
+     2415,
+     2415
+    ],
+    [
+     4830,
+     7245,
+     2415,
+     9795
+    ],
+    [
+     2145,
+     4830,
+     9795,
+     2145
+    ]
+   ],
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      [
+       7
+      ],
+      [
+       11
+      ],
+      [
+       12
+      ],
+      [
+       7
+      ],
+      [
+       12
+      ],
+      [
+       7
+      ]
+     ]
+    ]
+   },
+   "output": [
+    [
+     3546
+    ],
+    [
+     12
+    ],
+    [
+     8241
+    ],
+    [
+     3546
+    ],
+    [
+     8241
+    ],
+    [
+     3546
+    ]
+   ],
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      [
+       7,
+       4,
+       5
+      ],
+      [
+       2,
+       1,
+       2
+      ],
+      [
+       5,
+       3,
+       8
+      ],
+      [
+       3,
+       6,
+       7
+      ]
+     ]
+    ]
+   },
+   "output": [
+    [
+     12135,
+     5805,
+     2175
+    ],
+    [
+     11610,
+     10875,
+     11610
+    ],
+    [
+     2175,
+     7740,
+     9075
+    ],
+    [
+     7740,
+     3870,
+     12135
+    ]
+   ],
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      [
+       8
+      ],
+      [
+       6
+      ],
+      [
+       7
+      ],
+      [
+       2
+      ],
+      [
+       7
+      ],
+      [
+       4
+      ]
+     ]
+    ]
+   },
+   "output": [
+    [
+     2352
+    ],
+    [
+     3136
+    ],
+    [
+     2688
+    ],
+    [
+     9408
+    ],
+    [
+     2688
+    ],
+    [
+     4704
+    ]
+   ],
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      [
+       8
+      ],
+      [
+       6
+      ],
+      [
+       7
+      ],
+      [
+       5
+      ],
+      [
+       3
+      ],
+      [
+       6
+      ]
+     ]
+    ]
+   },
+   "output": [
+    [
+     3780
+    ],
+    [
+     5040
+    ],
+    [
+     4320
+    ],
+    [
+     6048
+    ],
+    [
+     10080
+    ],
+    [
+     5040
+    ]
+   ],
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      [
+       8,
+       1
+      ],
+      [
+       9,
+       6
+      ],
+      [
+       2,
+       4
+      ],
+      [
+       1,
+       3
+      ],
+      [
+       3,
+       6
+      ]
+     ]
+    ]
+   },
+   "output": [
+    [
+     10983,
+     1449
+    ],
+    [
+     8391,
+     6414
+    ],
+    [
+     6897,
+     9621
+    ],
+    [
+     1449,
+     483
+    ],
+    [
+     483,
+     6414
+    ]
+   ],
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      [
+       8,
+       4,
+       3
+      ],
+      [
+       7,
+       7,
+       4
+      ],
+      [
+       1,
+       2,
+       3
+      ],
+      [
+       5,
+       2,
+       4
+      ]
+     ]
+    ]
+   },
+   "output": [
+    [
+     8955,
+     5565,
+     11535
+    ],
+    [
+     3180,
+     3180,
+     5565
+    ],
+    [
+     9915,
+     11130,
+     11535
+    ],
+    [
+     1983,
+     11130,
+     5565
+    ]
+   ],
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      [
+       12
+      ],
+      [
+       8
+      ],
+      [
+       4
+      ],
+      [
+       3
+      ],
+      [
+       9
+      ],
+      [
+       5
+      ]
+     ]
+    ]
+   },
+   "output": [
+    [
+     4320
+    ],
+    [
+     6480
+    ],
+    [
+     615
+    ],
+    [
+     4935
+    ],
+    [
+     5760
+    ],
+    [
+     10368
+    ]
+   ],
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      [
+       1,
+       1,
+       1,
+       1,
+       2,
+       2,
+       2
+      ]
+     ]
+    ]
+   },
+   "output": [
+    [
+     8,
+     8,
+     8,
+     8,
+     4,
+     4,
+     4
+    ]
+   ],
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      [
+       1,
+       1,
+       1,
+       2,
+       1,
+       1,
+       1
+      ]
+     ]
+    ]
+   },
+   "output": [
+    [
+     2,
+     2,
+     2,
+     1,
+     2,
+     2,
+     2
+    ]
+   ],
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      [
+       1,
+       1,
+       2,
+       1,
+       2,
+       1,
+       2
+      ]
+     ]
+    ]
+   },
+   "output": [
+    [
+     8,
+     8,
+     4,
+     8,
+     4,
+     8,
+     4
+    ]
+   ],
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      [
+       1,
+       1,
+       6,
+       5,
+       6
+      ],
+      [
+       1,
+       6,
+       6,
+       2,
+       5
+      ],
+      [
+       3,
+       4,
+       1,
+       1,
+       4
+      ]
+     ]
+    ]
+   },
+   "output": [
+    [
+     11805,
+     11805,
+     12255,
+     4830,
+     12255
+    ],
+    [
+     11805,
+     12255,
+     12255,
+     12075,
+     4830
+    ],
+    [
+     12165,
+     12210,
+     11805,
+     11805,
+     12210
+    ]
+   ],
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      [
+       1,
+       2,
+       1,
+       1,
+       1,
+       2,
+       2
+      ]
+     ]
+    ]
+   },
+   "output": [
+    [
+     8,
+     4,
+     8,
+     8,
+     8,
+     4,
+     4
+    ]
+   ],
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      [
+       1,
+       2,
+       1,
+       2,
+       2,
+       1,
+       1
+      ]
+     ]
+    ]
+   },
+   "output": [
+    [
+     8,
+     4,
+     8,
+     4,
+     4,
+     8,
+     8
+    ]
+   ],
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      [
+       1,
+       3,
+       1,
+       2,
+       1,
+       2
+      ],
+      [
+       3,
+       2,
+       3,
+       4,
+       2,
+       3
+      ]
+     ]
+    ]
+   },
+   "output": [
+    [
+     5184,
+     1728,
+     5184,
+     2592,
+     5184,
+     2592
+    ],
+    [
+     1728,
+     2592,
+     1728,
+     1296,
+     2592,
+     1728
+    ]
+   ],
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      [
+       1,
+       3,
+       5,
+       2
+      ],
+      [
+       1,
+       3,
+       6,
+       5
+      ],
+      [
+       8,
+       1,
+       2,
+       7
+      ],
+      [
+       6,
+       2,
+       3,
+       5
+      ]
+     ]
+    ]
+   },
+   "output": [
+    [
+     2895,
+     9195,
+     10455,
+     7620
+    ],
+    [
+     2895,
+     9195,
+     10770,
+     10455
+    ],
+    [
+     1905,
+     2895,
+     7620,
+     10995
+    ],
+    [
+     10770,
+     7620,
+     9195,
+     10455
+    ]
+   ],
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      [
+       1,
+       4,
+       4,
+       4,
+       3,
+       3
+      ],
+      [
+       1,
+       1,
+       3,
+       4,
+       4,
+       1
+      ]
+     ]
+    ]
+   },
+   "output": [
+    [
+     2958,
+     6912,
+     6912,
+     6912,
+     9216,
+     9216
+    ],
+    [
+     2958,
+     2958,
+     9216,
+     6912,
+     6912,
+     2958
+    ]
+   ],
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      [
+       1,
+       5,
+       5,
+       6
+      ],
+      [
+       4,
+       7,
+       6,
+       1
+      ],
+      [
+       2,
+       3,
+       3,
+       6
+      ],
+      [
+       3,
+       6,
+       3,
+       7
+      ]
+     ]
+    ]
+   },
+   "output": [
+    [
+     6570,
+     11190,
+     11190,
+     1095
+    ],
+    [
+     7815,
+     11520,
+     1095,
+     6570
+    ],
+    [
+     3285,
+     2190,
+     2190,
+     1095
+    ],
+    [
+     2190,
+     1095,
+     2190,
+     11520
+    ]
+   ],
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      [
+       1,
+       6,
+       4,
+       4,
+       1
+      ],
+      [
+       6,
+       2,
+       5,
+       1,
+       4
+      ],
+      [
+       6,
+       4,
+       3,
+       5,
+       6
+      ]
+     ]
+    ]
+   },
+   "output": [
+    [
+     3705,
+     10905,
+     10185,
+     10185,
+     3705
+    ],
+    [
+     10905,
+     8025,
+     3210,
+     3705,
+     10185
+    ],
+    [
+     10905,
+     10185,
+     9465,
+     3210,
+     10905
+    ]
+   ],
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      [
+       1,
+       7,
+       2,
+       8
+      ],
+      [
+       3,
+       7,
+       2,
+       5
+      ],
+      [
+       2,
+       3,
+       5,
+       6
+      ],
+      [
+       5,
+       4,
+       2,
+       7
+      ]
+     ]
+    ]
+   },
+   "output": [
+    [
+     4065,
+     7635,
+     8205,
+     11310
+    ],
+    [
+     9585,
+     7635,
+     8205,
+     8220
+    ],
+    [
+     8205,
+     9585,
+     8220,
+     10965
+    ],
+    [
+     8220,
+     10275,
+     8205,
+     7635
+    ]
+   ],
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      [
+       2,
+       1,
+       1,
+       1,
+       1,
+       2,
+       2
+      ]
+     ]
+    ]
+   },
+   "output": [
+    [
+     4,
+     8,
+     8,
+     8,
+     8,
+     4,
+     4
+    ]
+   ],
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      [
+       2,
+       1,
+       1,
+       1,
+       2,
+       2,
+       1
+      ]
+     ]
+    ]
+   },
+   "output": [
+    [
+     4,
+     8,
+     8,
+     8,
+     4,
+     4,
+     8
+    ]
+   ],
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      [
+       2,
+       1,
+       2,
+       2,
+       2,
+       2,
+       2
+      ]
+     ]
+    ]
+   },
+   "output": [
+    [
+     32,
+     64,
+     32,
+     32,
+     32,
+     32,
+     32
+    ]
+   ],
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      [
+       2,
+       1,
+       3,
+       2,
+       4,
+       4
+      ],
+      [
+       1,
+       3,
+       2,
+       2,
+       4,
+       1
+      ]
+     ]
+    ]
+   },
+   "output": [
+    [
+     4608,
+     9216,
+     3072,
+     4608,
+     2304,
+     2304
+    ],
+    [
+     9216,
+     3072,
+     4608,
+     4608,
+     2304,
+     9216
+    ]
+   ],
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      [
+       2,
+       2,
+       2,
+       2,
+       1,
+       2,
+       1
+      ]
+     ]
+    ]
+   },
+   "output": [
+    [
+     16,
+     16,
+     16,
+     16,
+     32,
+     16,
+     32
+    ]
+   ],
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      [
+       2,
+       4,
+       3,
+       3,
+       3,
+       4
+      ],
+      [
+       3,
+       1,
+       4,
+       3,
+       4,
+       2
+      ]
+     ]
+    ]
+   },
+   "output": [
+    [
+     966,
+     483,
+     8874,
+     8874,
+     8874,
+     483
+    ],
+    [
+     8874,
+     1932,
+     483,
+     8874,
+     483,
+     966
+    ]
+   ],
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      [
+       2,
+       5,
+       4,
+       8
+      ],
+      [
+       4,
+       6,
+       3,
+       3
+      ],
+      [
+       1,
+       5,
+       1,
+       4
+      ],
+      [
+       8,
+       6,
+       6,
+       5
+      ]
+     ]
+    ]
+   },
+   "output": [
+    [
+     30,
+     4950,
+     15,
+     6180
+    ],
+    [
+     15,
+     4125,
+     8250,
+     8250
+    ],
+    [
+     60,
+     4950,
+     60,
+     15
+    ],
+    [
+     6180,
+     4125,
+     4125,
+     4950
+    ]
+   ],
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      [
+       2,
+       7
+      ],
+      [
+       10,
+       12
+      ],
+      [
+       2,
+       4
+      ],
+      [
+       8,
+       11
+      ],
+      [
+       2,
+       12
+      ],
+      [
+       11,
+       2
+      ]
+     ]
+    ]
+   },
+   "output": [
+    [
+     8340,
+     5910
+    ],
+    [
+     6606,
+     5505
+    ],
+    [
+     8340,
+     4170
+    ],
+    [
+     2085,
+     8250
+    ],
+    [
+     8340,
+     5505
+    ],
+    [
+     8250,
+     8340
+    ]
+   ],
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      [
+       2,
+       9
+      ],
+      [
+       1,
+       4
+      ],
+      [
+       10,
+       12
+      ],
+      [
+       2,
+       7
+      ],
+      [
+       4,
+       10
+      ],
+      [
+       10,
+       8
+      ]
+     ]
+    ]
+   },
+   "output": [
+    [
+     3435,
+     10365
+    ],
+    [
+     6870,
+     7890
+    ],
+    [
+     5625,
+     10860
+    ],
+    [
+     3435,
+     2745
+    ],
+    [
+     7890,
+     5625
+    ],
+    [
+     5625,
+     3945
+    ]
+   ],
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      [
+       3
+      ],
+      [
+       9
+      ],
+      [
+       5
+      ],
+      [
+       1
+      ],
+      [
+       4
+      ],
+      [
+       14
+      ],
+      [
+       12
+      ]
+     ]
+    ]
+   },
+   "output": [
+    [
+     5550
+    ],
+    [
+     10080
+    ],
+    [
+     5799
+    ],
+    [
+     4305
+    ],
+    [
+     10335
+    ],
+    [
+     6480
+    ],
+    [
+     7560
+    ]
+   ],
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      [
+       3,
+       2,
+       2,
+       2,
+       4,
+       3
+      ],
+      [
+       4,
+       1,
+       3,
+       1,
+       1,
+       2
+      ]
+     ]
+    ]
+   },
+   "output": [
+    [
+     2304,
+     3456,
+     3456,
+     3456,
+     1728,
+     2304
+    ],
+    [
+     1728,
+     6912,
+     2304,
+     6912,
+     6912,
+     3456
+    ]
+   ],
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      [
+       3,
+       2,
+       4,
+       2,
+       2,
+       3
+      ],
+      [
+       2,
+       2,
+       4,
+       1,
+       2,
+       3
+      ]
+     ]
+    ]
+   },
+   "output": [
+    [
+     9216,
+     1479,
+     6912,
+     1479,
+     1479,
+     9216
+    ],
+    [
+     1479,
+     1479,
+     6912,
+     2958,
+     1479,
+     9216
+    ]
+   ],
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      [
+       3,
+       6,
+       2,
+       2,
+       5
+      ],
+      [
+       1,
+       4,
+       3,
+       4,
+       1
+      ],
+      [
+       4,
+       5,
+       2,
+       4,
+       4
+      ]
+     ]
+    ]
+   },
+   "output": [
+    [
+     7590,
+     3795,
+     11385,
+     11385,
+     2085
+    ],
+    [
+     10425,
+     11865,
+     7590,
+     11865,
+     10425
+    ],
+    [
+     11865,
+     2085,
+     11385,
+     11865,
+     11865
+    ]
+   ],
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      [
+       4,
+       1,
+       5,
+       4,
+       5
+      ],
+      [
+       6,
+       5,
+       3,
+       4,
+       4
+      ],
+      [
+       3,
+       2,
+       6,
+       2,
+       3
+      ]
+     ]
+    ]
+   },
+   "output": [
+    [
+     6945,
+     3090,
+     8025,
+     6945,
+     8025
+    ],
+    [
+     8745,
+     8025,
+     5145,
+     6945,
+     6945
+    ],
+    [
+     5145,
+     1545,
+     8745,
+     1545,
+     5145
+    ]
+   ],
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      [
+       4,
+       3,
+       9
+      ],
+      [
+       3,
+       9,
+       10
+      ],
+      [
+       9,
+       7,
+       8
+      ],
+      [
+       8,
+       4,
+       7
+      ],
+      [
+       6,
+       1,
+       3
+      ]
+     ]
+    ]
+   },
+   "output": [
+    [
+     3255,
+     225,
+     75
+    ],
+    [
+     225,
+     75,
+     11178
+    ],
+    [
+     75,
+     1860,
+     7800
+    ],
+    [
+     7800,
+     3255,
+     1860
+    ],
+    [
+     6285,
+     675,
+     225
+    ]
+   ],
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      [
+       5,
+       1,
+       1,
+       1,
+       5
+      ],
+      [
+       3,
+       4,
+       2,
+       6,
+       6
+      ],
+      [
+       3,
+       3,
+       2,
+       5,
+       1
+      ]
+     ]
+    ]
+   },
+   "output": [
+    [
+     6105,
+     5835,
+     5835,
+     5835,
+     6105
+    ],
+    [
+     6060,
+     4545,
+     9090,
+     3030,
+     3030
+    ],
+    [
+     6060,
+     6060,
+     9090,
+     6105,
+     5835
+    ]
+   ],
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      [
+       5,
+       3
+      ],
+      [
+       9,
+       2
+      ],
+      [
+       2,
+       6
+      ],
+      [
+       4,
+       9
+      ],
+      [
+       12,
+       2
+      ],
+      [
+       10,
+       4
+      ]
+     ]
+    ]
+   },
+   "output": [
+    [
+     1050,
+     5865
+    ],
+    [
+     10185,
+     2625
+    ],
+    [
+     2625,
+     9105
+    ],
+    [
+     7485,
+     10185
+    ],
+    [
+     10725,
+     2625
+    ],
+    [
+     525,
+     7485
+    ]
+   ],
+   "explanation": ""
+  }
+ ],
+ "original_ilr": "```json\n{\n  \"problem_id\": \"constructProductMatrix\",\n  \"nodes\": [\n    {\n      \"id\": 1,\n      \"type\": \"start\",\n      \"label\": \"Start\",\n      \"next\": 2\n    },\n    {\n      \"id\": 2,\n      \"type\": \"process\",\n      \"label\": \"Input: grid (2D list of integers)\",\n      \"action\": \"ctx['grid'] = ctx['arg0']; ctx['n'] = len(ctx['grid']); ctx['m'] = len(ctx['grid'][0]); ctx['zeroCount'] = 0; ctx['total'] = 1; ctx['i'] = 0\",\n      \"next\": 3\n    },\n    {\n      \"id\": 3,\n      \"type\": \"decision\",\n      \"label\": \"For i in range(n)\",\n      \"logic\": \"ctx['i'] < ctx['n']\",\n      \"true_next\": 4,\n      \"false_next\": 12\n    },\n    {\n      \"id\": 4,\n      \"type\": \"process\",\n      \"label\": \"For j in range(m)\",\n      \"action\": \"ctx['j'] = 0\",\n      \"next\": 5\n    },\n    {\n      \"id\": 5,\n      \"type\": \"decision\",\n      \"label\": \"Is grid[i][j] == 0?\",\n      \"logic\": \"ctx['grid'][ctx['i']][ctx['j']] == 0\",\n      \"true_next\": 6,\n      \"false_next\": 7\n    },\n    {\n      \"id\": 6,\n      \"type\": \"process\",\n      \"label\": \"Increment zeroCount\",\n      \"action\": \"ctx['zeroCount'] += 1\",\n      \"next\": 4\n    },\n    {\n      \"id\": 7,\n      \"type\": \"process\",\n      \"label\": \"Update total = total * grid[i][j]\",\n      \"action\": \"ctx['total'] = (ctx['total'] * ctx['grid'][ctx['i']][ctx['j']]) % 12345\",\n      \"next\": 4\n    },\n    {\n      \"id\": 8,\n      \"type\": \"decision\",\n      \"label\": \"For i in range(n)\",\n      \"logic\": \"ctx['i'] < ctx['n']\",\n      \"true_next\": 9,\n      \"false_next\": 12\n    },\n    {\n      \"id\": 9,\n      \"type\": \"process\",\n      \"label\": \"For j in range(m)\",\n      \"action\": \"ctx['j'] = 0\",\n      \"next\": 10\n    },\n    {\n      \"id\": 10,\n      \"type\": \"decision\",\n      \"label\": \"Is zeroCount > 1?\",\n      \"logic\": \"ctx['zeroCount'] > 1\",\n      \"true_next\": 11,\n      \"false_next\": 13\n    },\n    {\n      \"id\": 11,\n      \"type\": \"process\",\n      \"label\": \"Set grid[i][j] = 0\",\n      \"action\": \"ctx['grid'][ctx['i']][ctx['j']] = 0\",\n      \"next\": 9\n    },\n    {\n      \"id\": 12,\n      \"type\": \"decision\",\n      \"label\": \"Is zeroCount == 1?\",\n      \"logic\": \"ctx['zeroCount'] == 1\",\n      \"true_next\": 14,\n      \"false_next\": 15\n    },\n    {\n      \"id\": 13,\n      \"type\": \"decision\",\n      \"label\": \"Is grid[i][j] != 0?\",\n      \"logic\": \"ctx['grid'][ctx['i']][ctx['j']] != 0\",\n      \"true_next\": 16,\n      \"false_next\": 17\n    },\n    {\n      \"id\": 14,\n      \"type\": \"process\",\n      \"label\": \"Set grid[i][j] = (total // grid[i][j]) % 12345\",\n      \"action\": \"ctx['grid'][ctx['i']][ctx['j']] = (ctx['total'] // ctx['grid'][ctx['i']][ctx['j']]) % 12345\",\n      \"next\": 9\n    },\n    {\n      \"id\": 15,\n      \"type\": \"process\",\n      \"label\": \"Set grid[i][j] = total % 12345\",\n      \"action\": \"ctx['grid'][ctx['i']][ctx['j']] = ctx['total'] % 12345\",\n      \"next\": 9\n    },\n    {\n      \"id\": 16,\n      \"type\": \"process\",\n      \"label\": \"Set grid[i][j] = 0\",\n      \"action\": \"ctx['grid'][ctx['i']][ctx['j']] = 0\",\n      \"next\": 9\n    },\n    {\n      \"id\": 17,\n      \"type\": \"process\",\n      \"label\": \"Set grid[i][j] = total % 12345\",\n      \"action\": \"ctx['grid'][ctx['i']][ctx['j']] = ctx['total'] % 12345\",\n      \"next\": 9\n    }\n  ]\n}\n```",
+ "original_code": "class Solution:\n    def constructProductMatrix(self, grid: List[List[int]]) -> List[List[int]]:\n        n = len(grid)\n        m = len(grid[0])\n        zero_count = 0\n        total = 1\n        i = 0\n        \n        # First pass: count zeros and calculate product of all non-zero elements\n        for i in range(n):\n            for j in range(m):\n                if grid[i][j] == 0:\n                    zero_count += 1\n                else:\n                    total = (total * grid[i][j]) % 12345\n        \n        # Second pass: assign values based on zero count\n        for i in range(n):\n            for j in range(m):\n                if zero_count > 1:\n                    grid[i][j] = 0\n                elif zero_count == 1:\n                    if grid[i][j] == 0:\n                        grid[i][j] = total % 12345\n                    else:\n                        grid[i][j] = (total // grid[i][j]) % 12345\n                else:\n                    grid[i][j] = total % 12345\n        \n        return grid",
+ "ocr_data": {
+  "nodes": [
+   {
+    "node_id": 1,
+    "shape_type": "rectangle",
+    "raw_text": "Start",
+    "position": "top"
+   },
+   {
+    "node_id": 2,
+    "shape_type": "rectangle",
+    "raw_text": "Input: grid (2D list of integers)",
+    "position": "middle"
+   },
+   {
+    "node_id": 3,
+    "shape_type": "rectangle",
+    "raw_text": "Initialize n = len(grid), m = len(grid[0])",
+    "position": "middle"
+   },
+   {
+    "node_id": 4,
+    "shape_type": "rectangle",
+    "raw_text": "Initialize zeroCount = 0, total = 1",
+    "position": "middle"
+   },
+   {
+    "node_id": 5,
+    "shape_type": "diamond",
+    "raw_text": "For i in range(n)",
+    "position": "middle"
+   },
+   {
+    "node_id": 6,
+    "shape_type": "rectangle",
+    "raw_text": "For j in range(m)",
+    "position": "middle"
+   },
+   {
+    "node_id": 7,
+    "shape_type": "rectangle",
+    "raw_text": "Update grid[i][j] %= 12345",
+    "position": "middle"
+   },
+   {
+    "node_id": 8,
+    "shape_type": "diamond",
+    "raw_text": "Is grid[i][j] == 0?",
+    "position": "middle"
+   },
+   {
+    "node_id": 9,
+    "shape_type": "rectangle",
+    "raw_text": "Increment zeroCount",
+    "position": "middle"
+   },
+   {
+    "node_id": 10,
+    "shape_type": "rectangle",
+    "raw_text": "Update total = total * grid[i][j]",
+    "position": "middle"
+   },
+   {
+    "node_id": 11,
+    "shape_type": "rectangle",
+    "raw_text": "Output: grid (2D list of integers)",
+    "position": "middle"
+   },
+   {
+    "node_id": 12,
+    "shape_type": "diamond",
+    "raw_text": "For i in range(n)",
+    "position": "middle"
+   },
+   {
+    "node_id": 13,
+    "shape_type": "rectangle",
+    "raw_text": "For j in range(m)",
+    "position": "middle"
+   },
+   {
+    "node_id": 14,
+    "shape_type": "diamond",
+    "raw_text": "Is zeroCount > 1?",
+    "position": "middle"
+   },
+   {
+    "node_id": 15,
+    "shape_type": "rectangle",
+    "raw_text": "Set grid[i][j] = 0",
+    "position": "middle"
+   },
+   {
+    "node_id": 16,
+    "shape_type": "diamond",
+    "raw_text": "Is zeroCount == 1?",
+    "position": "middle"
+   },
+   {
+    "node_id": 17,
+    "shape_type": "rectangle",
+    "raw_text": "Set grid[i][j] = (total // grid[i][j]) % 12345",
+    "position": "middle"
+   },
+   {
+    "node_id": 18,
+    "shape_type": "diamond",
+    "raw_text": "Is grid[i][j] != 0?",
+    "position": "middle"
+   },
+   {
+    "node_id": 19,
+    "shape_type": "rectangle",
+    "raw_text": "Set grid[i][j] = 0",
+    "position": "middle"
+   },
+   {
+    "node_id": 20,
+    "shape_type": "rectangle",
+    "raw_text": "Set grid[i][j] = total % 12345",
+    "position": "middle"
+   }
+  ],
+  "edges": [
+   {
+    "from_node": 1,
+    "to_node": 2,
+    "label": ""
+   },
+   {
+    "from_node": 2,
+    "to_node": 3,
+    "label": ""
+   },
+   {
+    "from_node": 3,
+    "to_node": 4,
+    "label": ""
+   },
+   {
+    "from_node": 4,
+    "to_node": 5,
+    "label": ""
+   },
+   {
+    "from_node": 5,
+    "to_node": 6,
+    "label": "Yes"
+   },
+   {
+    "from_node": 5,
+    "to_node": 12,
+    "label": "No"
+   },
+   {
+    "from_node": 6,
+    "to_node": 7,
+    "label": ""
+   },
+   {
+    "from_node": 7,
+    "to_node": 8,
+    "label": ""
+   },
+   {
+    "from_node": 8,
+    "to_node": 9,
+    "label": "Yes"
+   },
+   {
+    "from_node": 8,
+    "to_node": 10,
+    "label": "No"
+   },
+   {
+    "from_node": 9,
+    "to_node": 6,
+    "label": ""
+   },
+   {
+    "from_node": 10,
+    "to_node": 11,
+    "label": ""
+   },
+   {
+    "from_node": 12,
+    "to_node": 13,
+    "label": ""
+   },
+   {
+    "from_node": 13,
+    "to_node": 14,
+    "label": ""
+   },
+   {
+    "from_node": 14,
+    "to_node": 15,
+    "label": "Yes"
+   },
+   {
+    "from_node": 14,
+    "to_node": 16,
+    "label": "No"
+   },
+   {
+    "from_node": 16,
+    "to_node": 17,
+    "label": "Yes"
+   },
+   {
+    "from_node": 16,
+    "to_node": 18,
+    "label": "No"
+   },
+   {
+    "from_node": 17,
+    "to_node": 13,
+    "label": ""
+   },
+   {
+    "from_node": 18,
+    "to_node": 19,
+    "label": "Yes"
+   },
+   {
+    "from_node": 18,
+    "to_node": 20,
+    "label": "No"
+   },
+   {
+    "from_node": 19,
+    "to_node": 13,
+    "label": ""
+   },
+   {
+    "from_node": 20,
+    "to_node": 13,
+    "label": ""
+   }
+  ],
+  "other_text": []
+ },
+ "test_result": {},
+ "status": "completed",
+ "fixed_ilr": null,
+ "modified_code": null,
+ "ilr_fix_log": "",
+ "bug_injected": ""
+}

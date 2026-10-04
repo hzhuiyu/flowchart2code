@@ -1,0 +1,126 @@
+{
+  "problem_id": "min_operations_example",
+  "nodes": [
+    {
+      "id": 1,
+      "type": "start",
+      "label": "Start",
+      "next": 2
+    },
+    {
+      "id": 2,
+      "type": "process",
+      "label": "Input: nums1 (list), nums2 (list); n, inf, dp init",
+      "action": "ctx['nums1'] = ctx['arg0']; ctx['nums2'] = ctx['arg1']; ctx['n'] = len(ctx['nums1']); ctx['inf'] = 10**9; ctx['dp'] = [[ctx['inf'], ctx['inf']] for _ in range(ctx['n'])]",
+      "next": 3
+    },
+    {
+      "id": 3,
+      "type": "process",
+      "label": "Set loop index i = n - 2",
+      "action": "ctx['i'] = ctx['n'] - 2",
+      "next": 4
+    },
+    {
+      "id": 4,
+      "type": "process",
+      "label": "Initialize dp base: dp[k][0] = 0, dp[k][1] = 1 for all k",
+      "action": "for k in range(ctx['n']): ctx['dp'][k][0] = 0; ctx['dp'][k][1] = 1",
+      "next": 5
+    },
+    {
+      "id": 5,
+      "type": "process",
+      "label": "Set inf = 10^9",
+      "action": "ctx['inf'] = 10**9",
+      "next": 6
+    },
+    {
+      "id": 6,
+      "type": "decision",
+      "label": "Loop i from n-2 down to 0 (more?)",
+      "logic": "ctx['i'] >= 0 and ctx['i'] < ctx['n'] - 1",
+      "true_next": 7,
+      "false_next": 14
+    },
+    {
+      "id": 7,
+      "type": "process",
+      "label": "Reset dp[i][0] = inf, dp[i][1] = inf",
+      "action": "ctx['dp'][ctx['i']][0] = ctx['inf']; ctx['dp'][ctx['i']][1] = ctx['inf']",
+      "next": 8
+    },
+    {
+      "id": 8,
+      "type": "decision",
+      "label": "Is nums1[i] <= nums1[n-1] and nums2[i] <= nums2[n-1]?",
+      "logic": "ctx['nums1'][ctx['i']] <= ctx['nums1'][ctx['n'] - 1] and ctx['nums2'][ctx['i']] <= ctx['nums2'][ctx['n'] - 1]",
+      "true_next": 9,
+      "false_next": 11
+    },
+    {
+      "id": 9,
+      "type": "process",
+      "label": "Keep i: dp[i][0] = min(dp[i][0], dp[i+1][0]); dp[i][1] = min(dp[i][1], dp[i+1][1] + 1)",
+      "action": "ctx['dp'][ctx['i']][0] = min(ctx['dp'][ctx['i']][0], ctx['dp'][ctx['i'] + 1][0]); ctx['dp'][ctx['i']][1] = min(ctx['dp'][ctx['i']][1], ctx['dp'][ctx['i'] + 1][1] + 1)",
+      "next": 11
+    },
+    {
+      "id": 11,
+      "type": "decision",
+      "label": "Is nums1[i] <= nums2[n-1] and nums2[i] <= nums1[n-1]?",
+      "logic": "ctx['nums1'][ctx['i']] <= ctx['nums2'][ctx['n'] - 1] and ctx['nums2'][ctx['i']] <= ctx['nums1'][ctx['n'] - 1]",
+      "true_next": 10,
+      "false_next": 18
+    },
+    {
+      "id": 10,
+      "type": "process",
+      "label": "Swap i: dp[i][0] = min(dp[i][0], dp[i+1][0] + 1); dp[i][1] = min(dp[i][1], dp[i+1][1])",
+      "action": "ctx['dp'][ctx['i']][0] = min(ctx['dp'][ctx['i']][0], ctx['dp'][ctx['i'] + 1][0] + 1); ctx['dp'][ctx['i']][1] = min(ctx['dp'][ctx['i']][1], ctx['dp'][ctx['i'] + 1][1])",
+      "next": 18
+    },
+    {
+      "id": 18,
+      "type": "process",
+      "label": "End of loop body: i -= 1",
+      "action": "ctx['i'] -= 1",
+      "next": 6
+    },
+    {
+      "id": 14,
+      "type": "process",
+      "label": "Set best = min(dp[0][0], dp[0][1])",
+      "action": "ctx['best'] = min(ctx['dp'][0][0], ctx['dp'][0][1])",
+      "next": 15
+    },
+    {
+      "id": 15,
+      "type": "decision",
+      "label": "Is best > n (infeasible)?",
+      "logic": "ctx['best'] > ctx['n']",
+      "true_next": 16,
+      "false_next": 17
+    },
+    {
+      "id": 16,
+      "type": "process",
+      "label": "Output: -1 (impossible to satisfy conditions)",
+      "action": "ctx['result'] = -1",
+      "next": 19
+    },
+    {
+      "id": 17,
+      "type": "process",
+      "label": "Output: best (minimum operations needed)",
+      "action": "ctx['result'] = ctx['best']",
+      "next": 19
+    },
+    {
+      "id": 19,
+      "type": "end",
+      "label": "Return result",
+      "output": "ctx['result']"
+    }
+  ]
+}

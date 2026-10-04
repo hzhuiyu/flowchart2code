@@ -1,0 +1,379 @@
+{
+  "task_id": "1994. The Number of Good Subsets",
+  "dataset": "MATH",
+  "difficulty": "hard",
+  "title": null,
+  "result": "failed: ",
+  "ilr": "{\n  \"problem_id\": \"good_subsets_count\",\n  \"nodes\": [\n    {\"id\": 1, \"type\": \"start\", \"label\": \"Start\", \"next\": 2},\n    {\"id\": 2, \"type\": \"process\", \"label\": \"Input: nums (List[int])\", \"action\": \"ctx['nums']=ctx['arg0']\", \"next\": 3},\n    {\"id\": 3, \"type\": \"process\", \"label\": \"Initialize all_primes\", \"action\": \"ctx['all_primes'] = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29]\", \"next\": 4},\n    {\"id\": 4, \"type\": \"process\", \"label\": \"Initialize K\", \"action\": \"ctx['K'] = len(ctx['all_primes'])\", \"next\": 5},\n    {\"id\": 5, \"type\": \"process\", \"label\": \"Initialize lookup\", \"action\": \"ctx['lookup'] = {}\", \"next\": 6},\n    {\"id\": 6, \"type\": \"process\", \"label\": \"Populate lookup with 1 prime\", \"action\": \"for i in range(ctx['K']): ctx['lookup'][ctx['all_primes'][i]] = (1 << i)\", \"next\": 7},\n    {\"id\": 7, \"type\": \"process\", \"label\": \"For i in range(K)\", \"action\": \"for i in range(ctx['K']):\", \"next\": 8},\n    {\"id\": 8, \"type\": \"process\", \"label\": \"For j in range(i + 1, K)\", \"action\": \"for j in range(i + 1, ctx['K']):\", \"next\": 9},\n    {\"id\": 9, \"type\": \"process\", \"label\": \"p = all_primes[i] * all_primes[j]\", \"action\": \"ctx['p'] = ctx['all_primes'][i] * ctx['all_primes'][j]\", \"next\": 10},\n    {\"id\": 10, \"type\": \"decision\", \"label\": \"Is p <= 30?\", \"logic\": \"ctx['p'] <= 30\", \"true_next\": 11, \"false_next\": 12},\n    {\"id\": 11, \"type\": \"process\", \"label\": \"lookup[p] = (1 << i) | (1 << j)\", \"action\": \"ctx['lookup'][ctx['p']] = (1 << i) | (1 << j)\", \"next\": 8},\n    {\"id\": 12, \"type\": \"process\", \"label\": \"Continue\", \"action\": \"\", \"next\": 8},\n    {\"id\": 13, \"type\": \"process\", \"label\": \"lookup[30] = 0b111\", \"action\": \"ctx['lookup'][30] = 0b111\", \"next\": 14},\n    {\"id\": 14, \"type\": \"process\", \"label\": \"Initialize MOD\", \"action\": \"ctx['MOD'] = 10 ** 9 + 7\", \"next\": 15},\n    {\"id\": 15, \"type\": \"process\", \"label\": \"Initialize dp\", \"action\": \"ctx['dp'] = [0 for _ in range(1 << ctx['K'])]\", \"next\": 16},\n    {\"id\": 16, \"type\": \"process\", \"label\": \"Initialize cnt\", \"action\": \"ctx['cnt'] = collections.Counter(ctx['nums'])\", \"next\": 17},\n    {\"id\": 17, \"type\": \"process\", \"label\": \"Process each num in cnt\", \"action\": \"for num, freq in ctx['cnt'].items():\", \"next\": 18},\n    {\"id\": 18, \"type\": \"decision\", \"label\": \"Is num in lookup?\", \"logic\": \"num in ctx['lookup']\", \"true_next\": 19, \"false_next\": 20},\n    {\"id\": 19, \"type\": \"process\", \"label\": \"mask = lookup[num]\", \"action\": \"ctx['mask'] = ctx['lookup'][num]\", \"next\": 20},\n    {\"id\": 20, \"type\": \"process\", \"label\": \"dp[mask] += freq\", \"action\": \"ctx['dp'][ctx['mask']] += freq\", \"next\": 21},\n    {\"id\": 21, \"type\": \"process\", \"label\": \"Update dp for each subset\", \"action\": \"for j in range(1, 1 << ctx['K']):\", \"next\": 22},\n    {\"id\": 22, \"type\": \"decision\", \"label\": \"Is j & mask == 0?\", \"logic\": \"j & ctx['mask'] == 0\", \"true_next\": 23, \"false_next\": 24},\n    {\"id\": 23, \"type\": \"process\", \"label\": \"dp[j | mask] += dp[j] * freq\", \"action\": \"ctx['dp'][j | ctx['mask']] += ctx['dp'][j] * freq\", \"next\": 24},\n    {\"id\": 24, \"type\": \"process\", \"label\": \"Continue\", \"action\": \"\", \"next\": 21},\n    {\"id\": 25, \"type\": \"process\", \"label\": \"Return (sum(dp[i]) * (1 << cnt[1])) % MOD\", \"action\": \"return (sum(ctx['dp'][i] for i in range(1 << ctx['K'])) * (1 << ctx['cnt'][1])) % ctx['MOD']\", \"next\": 26},\n    {\"id\": 26, \"type\": \"end\", \"label\": \"End\", \"output\": \"\"}\n  ]\n}",
+  "code": "from typing import List\nimport collections\n\ndef numberOfGoodSubsets(nums: List[int]) -> int:\n    all_primes = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29]\n    K = len(all_primes)\n    lookup = {}\n    \n    for i in range(K):\n        lookup[all_primes[i]] = (1 << i)\n    \n    for i in range(K):\n        for j in range(i + 1, K):\n            p = all_primes[i] * all_primes[j]\n            if p <= 30:\n                lookup[p] = (1 << i) | (1 << j)\n    \n    lookup[30] = 0b111\n    MOD = 10 ** 9 + 7\n    dp = [0 for _ in range(1 << K)]\n    cnt = collections.Counter(nums)\n    \n    for num, freq in cnt.items():\n        if num in lookup:\n            mask = lookup[num]\n            dp[mask] += freq\n    \n    for j in range(1, 1 << K):\n        for num, freq in cnt.items():\n            if num in lookup:\n                mask = lookup[num]\n                if j & mask == 0:\n                    dp[j | mask] += dp[j] * freq\n    \n    return (sum(dp[i] for i in range(1 << K)) * (1 << cnt[1])) % MOD",
+  "prompt": "You are given an integer array nums. We call a subset of nums good if its product can be represented as a product of one or more distinct prime numbers.\n\nFor example, if nums = [1, 2, 3, 4]:\n[2, 3], [1, 2, 3], and [1, 3] are good subsets with products 6 = 2*3, 6 = 2*3, and 3 = 3 respectively.\n[1, 4] and [4] are not good subsets with products 4 = 2*2 and 4 = 2*2 respectively.\nReturn the number of different good subsets in nums modulo 109 + 7.\n\nA subset of nums is any array that can be obtained by deleting some (possibly none or all) elements from nums. Two subsets are different if and only if the chosen indices to delete are different.\n\n\n\nExample 1:\n\nInput: nums = [1,2,3,4]\nOutput: 6\nExplanation: The good subsets are:\n- [1,2]: product is 2, which is the product of distinct prime 2.\n- [1,2,3]: product is 6, which is the product of distinct primes 2 and 3.\n- [1,3]: product is 3, which is the product of distinct prime 3.\n- [2]: product is 2, which is the product of distinct prime 2.\n- [2,3]: product is 6, which is the product of distinct primes 2 and 3.\n- [3]: product is 3, which is the product of distinct prime 3.\nExample 2:\n\nInput: nums = [4,2,3,15]\nOutput: 5\nExplanation: The good subsets are:\n- [2]: product is 2, which is the product of distinct prime 2.\n- [2,3]: product is 6, which is the product of distinct primes 2 and 3.\n- [2,15]: product is 30, which is the product of distinct primes 2, 3, and 5.\n- [3]: product is 3, which is the product of distinct prime 3.\n- [15]: product is 15, which is the product of distinct primes 3 and 5.\n\n\nConstraints:\n\n1 <= nums.length <= 105\n1 <= nums[i] <= 30",
+  "test": "assert numberOfGoodSubsets([1, 2, 3, 4]) == 6  # Example 1\nassert numberOfGoodSubsets([4, 2, 3, 15]) == 5  # Example 2\nassert numberOfGoodSubsets([1, 1, 1, 1]) == 0  # No good subsets\n\n# Boundary test cases\nassert numberOfGoodSubsets([1]) == 0  # Single element, not a good subset\nassert numberOfGoodSubsets([2]) == 1  # Single prime number\nassert numberOfGoodSubsets([30]) == 1  # Single product of 2*3*5\n\n# Large number test cases\nassert numberOfGoodSubsets([1]*100000) == 0  # Large input with no good subsets\nassert numberOfGoodSubsets([2, 3, 5, 7, 11, 13, 17, 19, 23, 29]) == 1023  # All primes, all subsets are good\nassert numberOfGoodSubsets([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]*10000) == 766843089  # Large input with mixed numbers",
+  "ocr_data": {
+    "nodes": [
+      {
+        "node_id": 1,
+        "shape_type": "rectangle",
+        "raw_text": "Start",
+        "position": "top"
+      },
+      {
+        "node_id": 2,
+        "shape_type": "rectangle",
+        "raw_text": "Input: nums (List[int])",
+        "position": "top"
+      },
+      {
+        "node_id": 3,
+        "shape_type": "rectangle",
+        "raw_text": "Initialize all_primes = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29]",
+        "position": "middle"
+      },
+      {
+        "node_id": 4,
+        "shape_type": "rectangle",
+        "raw_text": "Initialize K = len(all_primes)",
+        "position": "middle"
+      },
+      {
+        "node_id": 5,
+        "shape_type": "rectangle",
+        "raw_text": "Initialize lookup = {}",
+        "position": "middle"
+      },
+      {
+        "node_id": 6,
+        "shape_type": "rectangle",
+        "raw_text": "Populate lookup with 1 prime",
+        "position": "middle"
+      },
+      {
+        "node_id": 7,
+        "shape_type": "rectangle",
+        "raw_text": "For i in range(K)",
+        "position": "middle"
+      },
+      {
+        "node_id": 8,
+        "shape_type": "rectangle",
+        "raw_text": "lookup[all_primes[i]] = (1 << i)",
+        "position": "middle"
+      },
+      {
+        "node_id": 9,
+        "shape_type": "rectangle",
+        "raw_text": "For i in range(K)",
+        "position": "middle"
+      },
+      {
+        "node_id": 10,
+        "shape_type": "rectangle",
+        "raw_text": "For j in range(i + 1, K)",
+        "position": "middle"
+      },
+      {
+        "node_id": 11,
+        "shape_type": "rectangle",
+        "raw_text": "p = all_primes[i] * all_primes[j]",
+        "position": "middle"
+      },
+      {
+        "node_id": 12,
+        "shape_type": "diamond",
+        "raw_text": "Is p <= 30?",
+        "position": "middle"
+      },
+      {
+        "node_id": 13,
+        "shape_type": "rectangle",
+        "raw_text": "lookup[p] = (1 << i) | (1 << j)",
+        "position": "middle"
+      },
+      {
+        "node_id": 14,
+        "shape_type": "rectangle",
+        "raw_text": "Continue",
+        "position": "middle"
+      },
+      {
+        "node_id": 15,
+        "shape_type": "rectangle",
+        "raw_text": "H",
+        "position": "middle"
+      },
+      {
+        "node_id": 16,
+        "shape_type": "rectangle",
+        "raw_text": "lookup[30] = 0b111",
+        "position": "middle"
+      },
+      {
+        "node_id": 17,
+        "shape_type": "rectangle",
+        "raw_text": "Initialize MOD = 10 ** 9 + 7",
+        "position": "middle"
+      },
+      {
+        "node_id": 18,
+        "shape_type": "rectangle",
+        "raw_text": "Initialize dp = [0 for _ in range(1 << K)]",
+        "position": "middle"
+      },
+      {
+        "node_id": 19,
+        "shape_type": "rectangle",
+        "raw_text": "Initialize cnt = collections.Counter(nums)",
+        "position": "middle"
+      },
+      {
+        "node_id": 20,
+        "shape_type": "rectangle",
+        "raw_text": "Process each num in cnt",
+        "position": "middle"
+      },
+      {
+        "node_id": 21,
+        "shape_type": "diamond",
+        "raw_text": "Is num in lookup?",
+        "position": "middle"
+      },
+      {
+        "node_id": 22,
+        "shape_type": "rectangle",
+        "raw_text": "Continue",
+        "position": "middle"
+      },
+      {
+        "node_id": 23,
+        "shape_type": "rectangle",
+        "raw_text": "mask = lookup[num]",
+        "position": "middle"
+      },
+      {
+        "node_id": 24,
+        "shape_type": "rectangle",
+        "raw_text": "dp[mask] += freq",
+        "position": "middle"
+      },
+      {
+        "node_id": 25,
+        "shape_type": "rectangle",
+        "raw_text": "Update dp for each subset",
+        "position": "middle"
+      },
+      {
+        "node_id": 26,
+        "shape_type": "rectangle",
+        "raw_text": "For j in range(1, 1 << K)",
+        "position": "middle"
+      },
+      {
+        "node_id": 27,
+        "shape_type": "diamond",
+        "raw_text": "Is j & mask == 0?",
+        "position": "middle"
+      },
+      {
+        "node_id": 28,
+        "shape_type": "rectangle",
+        "raw_text": "dp[j | mask] += dp[j] * freq",
+        "position": "middle"
+      },
+      {
+        "node_id": 29,
+        "shape_type": "rectangle",
+        "raw_text": "Continue",
+        "position": "middle"
+      },
+      {
+        "node_id": 30,
+        "shape_type": "rectangle",
+        "raw_text": "Return (sum(dp[i]) * (1 << cnt[1])) % MOD",
+        "position": "bottom"
+      },
+      {
+        "node_id": 31,
+        "shape_type": "rectangle",
+        "raw_text": "End",
+        "position": "bottom"
+      }
+    ],
+    "edges": [
+      {
+        "from_node": 1,
+        "to_node": 2,
+        "label": ""
+      },
+      {
+        "from_node": 2,
+        "to_node": 3,
+        "label": ""
+      },
+      {
+        "from_node": 3,
+        "to_node": 4,
+        "label": ""
+      },
+      {
+        "from_node": 4,
+        "to_node": 5,
+        "label": ""
+      },
+      {
+        "from_node": 5,
+        "to_node": 6,
+        "label": ""
+      },
+      {
+        "from_node": 6,
+        "to_node": 7,
+        "label": ""
+      },
+      {
+        "from_node": 7,
+        "to_node": 8,
+        "label": ""
+      },
+      {
+        "from_node": 8,
+        "to_node": 9,
+        "label": ""
+      },
+      {
+        "from_node": 9,
+        "to_node": 10,
+        "label": ""
+      },
+      {
+        "from_node": 10,
+        "to_node": 11,
+        "label": ""
+      },
+      {
+        "from_node": 11,
+        "to_node": 12,
+        "label": ""
+      },
+      {
+        "from_node": 12,
+        "to_node": 13,
+        "label": "Yes"
+      },
+      {
+        "from_node": 12,
+        "to_node": 14,
+        "label": "No"
+      },
+      {
+        "from_node": 13,
+        "to_node": 15,
+        "label": ""
+      },
+      {
+        "from_node": 15,
+        "to_node": 16,
+        "label": ""
+      },
+      {
+        "from_node": 16,
+        "to_node": 17,
+        "label": ""
+      },
+      {
+        "from_node": 17,
+        "to_node": 18,
+        "label": ""
+      },
+      {
+        "from_node": 18,
+        "to_node": 19,
+        "label": ""
+      },
+      {
+        "from_node": 19,
+        "to_node": 20,
+        "label": ""
+      },
+      {
+        "from_node": 20,
+        "to_node": 21,
+        "label": ""
+      },
+      {
+        "from_node": 21,
+        "to_node": 22,
+        "label": "No"
+      },
+      {
+        "from_node": 21,
+        "to_node": 23,
+        "label": "Yes"
+      },
+      {
+        "from_node": 23,
+        "to_node": 24,
+        "label": ""
+      },
+      {
+        "from_node": 24,
+        "to_node": 25,
+        "label": ""
+      },
+      {
+        "from_node": 25,
+        "to_node": 26,
+        "label": ""
+      },
+      {
+        "from_node": 26,
+        "to_node": 27,
+        "label": ""
+      },
+      {
+        "from_node": 27,
+        "to_node": 28,
+        "label": "Yes"
+      },
+      {
+        "from_node": 27,
+        "to_node": 29,
+        "label": "No"
+      },
+      {
+        "from_node": 28,
+        "to_node": 25,
+        "label": ""
+      },
+      {
+        "from_node": 29,
+        "to_node": 25,
+        "label": ""
+      },
+      {
+        "from_node": 25,
+        "to_node": 20,
+        "label": ""
+      },
+      {
+        "from_node": 20,
+        "to_node": 30,
+        "label": ""
+      },
+      {
+        "from_node": 30,
+        "to_node": 31,
+        "label": ""
+      }
+    ],
+    "other_text": []
+  },
+  "analysis": {
+    "ilr_verdict": "incorrect",
+    "ilr_issues": "OCR 边显示流程图本是正确的 num 外层/j 内层结构（边 25→20 回到 'Process each num'，按此验算示例得 6/5），ILR 却把第二遍 DP 改成 j 为外层且不返回 num 循环，每个多元素子集被按其每个'最后加入元素'重复计数；另外 ILR 节点18 假分支直连节点20 执行 dp[mask]+=freq（mask 未定义/沿用旧值），违背 OCR 边 21-No→22(Continue) 的跳过语义。",
+    "code_vs_ilr": "faithful",
+    "code_issues": "代码保留了 j 外层/num 内层的重复计数结构（仅把假分支修复为跳过，与标签意图一致），忠实继承核心错误，输出系统性偏大。",
+    "error_source": "ilr",
+    "ocr_contribution": "no",
+    "root_cause": "流程图原本的 DP 嵌套（num 外层）正确，ILR 转写时拆散循环并丢失跳过边造成重复计数；代码忠实实现该错误结构。",
+    "evidence": "实测 [1,2,3,4] 代码输出 8（期望 6，子集 [2,3] 被计 2 次）、[4,2,3,15] 输出 7（期望 5）；按 OCR 的 num 外层结构手工验算恰为 6/5。"
+  }
+}

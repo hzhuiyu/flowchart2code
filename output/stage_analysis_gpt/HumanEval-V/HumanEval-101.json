@@ -1,0 +1,165 @@
+{
+  "task_id": "HumanEval-101",
+  "dataset": "HumanEval-V",
+  "difficulty": null,
+  "title": null,
+  "result": "failed: ",
+  "ilr": "{\n  \"problem_id\": \"words_string_example\",\n  \"nodes\": [\n    {\"id\": 1, \"type\": \"start\", \"label\": \"Start\", \"next\": 2},\n    {\"id\": 2, \"type\": \"process\", \"label\": \"Input: s (string)\", \"action\": \"ctx['s']=ctx['arg0']; ctx['s_list']=[]\", \"next\": 3},\n    {\"id\": 3, \"type\": \"decision\", \"label\": \"Is s empty?\", \"logic\": \"ctx['s'] == ''\", \"true_next\": 4, \"false_next\": 5},\n    {\"id\": 4, \"type\": \"end\", \"label\": \"Output: [] (empty array)\", \"output\": \"[]\"},\n    {\"id\": 5, \"type\": \"process\", \"label\": \"Initialize s_list = []\", \"action\": \"\", \"next\": 6},\n    {\"id\": 6, \"type\": \"process\", \"label\": \"Iterate through each letter in s\", \"action\": \"for letter in ctx['s']:\", \"next\": 7},\n    {\"id\": 7, \"type\": \"decision\", \"label\": \"Is letter == ','?\", \"logic\": \"letter == ','\", \"true_next\": 8, \"false_next\": 9},\n    {\"id\": 8, \"type\": \"process\", \"label\": \"Append ',' to s_list\", \"action\": \"ctx['s_list'].append(',')\", \"next\": 6},\n    {\"id\": 9, \"type\": \"process\", \"label\": \"Append letter to s_list\", \"action\": \"ctx['s_list'].append(letter)\", \"next\": 6},\n    {\"id\": 10, \"type\": \"process\", \"label\": \"Join s_list into a single string\", \"action\": \"joined_string = ''.join(ctx['s_list'])\", \"next\": 11},\n    {\"id\": 11, \"type\": \"process\", \"label\": \"Split the string into words\", \"action\": \"ctx['result'] = joined_string.split()\", \"next\": 12},\n    {\"id\": 12, \"type\": \"end\", \"label\": \"Output: array of words\", \"output\": \"ctx['result']\"}\n  ]\n}",
+  "code": "def words_string(s):\n    if s == '':\n        return []\n    \n    s_list = []\n    \n    for letter in s:\n        if letter == ',':\n            s_list.append(',')\n        else:\n            s_list.append(letter)\n    \n    joined_string = ''.join(s_list)\n    result = joined_string.split()\n    \n    return result",
+  "prompt": "\ndef words_string(s):\n    \"\"\"\n    You will be given a string of words separated by commas or spaces. Your task is\n    to split the string into words and return an array of the words.\n    \n    For example:\n    words_string(\"Hi, my name is John\") == [\"Hi\", \"my\", \"name\", \"is\", \"John\"]\n    words_string(\"One, two, three, four, five, six\") == [\"One\", \"two\", \"three\", \"four\", \"five\", \"six\"]\n    \"\"\"\n",
+  "test": "def check(candidate):\n\n    # Check some simple cases\n    assert True, \"This prints if this assert fails 1 (good for debugging!)\"\n    assert candidate(\"Hi, my name is John\") == [\"Hi\", \"my\", \"name\", \"is\", \"John\"]\n    assert candidate(\"One, two, three, four, five, six\") == [\"One\", \"two\", \"three\", \"four\", \"five\", \"six\"]\n    assert candidate(\"Hi, my name\") == [\"Hi\", \"my\", \"name\"]\n    assert candidate(\"One,, two, three, four, five, six,\") == [\"One\", \"two\", \"three\", \"four\", \"five\", \"six\"]\n\n    # Check some edge cases that are easy to work out by hand.\n    assert True, \"This prints if this assert fails 2 (also good for debugging!)\"\n    assert candidate(\"\") == []\n    assert candidate(\"ahmed     , gamal\") == [\"ahmed\", \"gamal\"]\n\n",
+  "ocr_data": {
+    "nodes": [
+      {
+        "node_id": 1,
+        "shape_type": "rectangle",
+        "raw_text": "Start",
+        "position": "top"
+      },
+      {
+        "node_id": 2,
+        "shape_type": "rectangle",
+        "raw_text": "Input: s (string)",
+        "position": "middle"
+      },
+      {
+        "node_id": 3,
+        "shape_type": "diamond",
+        "raw_text": "Is s empty?",
+        "position": "middle"
+      },
+      {
+        "node_id": 4,
+        "shape_type": "rectangle",
+        "raw_text": "Output: [] (empty array)",
+        "position": "middle"
+      },
+      {
+        "node_id": 5,
+        "shape_type": "rectangle",
+        "raw_text": "Initialize s_list = []",
+        "position": "middle"
+      },
+      {
+        "node_id": 6,
+        "shape_type": "rectangle",
+        "raw_text": "Iterate through each letter in s",
+        "position": "middle"
+      },
+      {
+        "node_id": 7,
+        "shape_type": "diamond",
+        "raw_text": "Is letter == ','?",
+        "position": "middle"
+      },
+      {
+        "node_id": 8,
+        "shape_type": "rectangle",
+        "raw_text": "Append ',' to s_list",
+        "position": "middle"
+      },
+      {
+        "node_id": 9,
+        "shape_type": "rectangle",
+        "raw_text": "Append letter to s_list",
+        "position": "middle"
+      },
+      {
+        "node_id": 10,
+        "shape_type": "rectangle",
+        "raw_text": "Join s_list into a single string",
+        "position": "bottom"
+      },
+      {
+        "node_id": 11,
+        "shape_type": "rectangle",
+        "raw_text": "Split the string into words",
+        "position": "bottom"
+      },
+      {
+        "node_id": 12,
+        "shape_type": "rectangle",
+        "raw_text": "Output: array of words",
+        "position": "bottom"
+      }
+    ],
+    "edges": [
+      {
+        "from_node": 1,
+        "to_node": 2,
+        "label": ""
+      },
+      {
+        "from_node": 2,
+        "to_node": 3,
+        "label": ""
+      },
+      {
+        "from_node": 3,
+        "to_node": 4,
+        "label": "Yes"
+      },
+      {
+        "from_node": 3,
+        "to_node": 5,
+        "label": "No"
+      },
+      {
+        "from_node": 5,
+        "to_node": 6,
+        "label": ""
+      },
+      {
+        "from_node": 6,
+        "to_node": 7,
+        "label": ""
+      },
+      {
+        "from_node": 7,
+        "to_node": 8,
+        "label": "Yes"
+      },
+      {
+        "from_node": 7,
+        "to_node": 9,
+        "label": "No"
+      },
+      {
+        "from_node": 8,
+        "to_node": 6,
+        "label": ""
+      },
+      {
+        "from_node": 9,
+        "to_node": 6,
+        "label": ""
+      },
+      {
+        "from_node": 6,
+        "to_node": 10,
+        "label": "No"
+      },
+      {
+        "from_node": 10,
+        "to_node": 11,
+        "label": ""
+      },
+      {
+        "from_node": 11,
+        "to_node": 12,
+        "label": ""
+      }
+    ],
+    "other_text": []
+  },
+  "analysis": {
+    "ilr_verdict": "incorrect",
+    "ilr_issues": "节点7-9的逻辑错误：letter==',' 时仍把 ',' 原样append进s_list（节点8），而不是替换成空格；随后 ''.join + split() 按空白切分，逗号会粘在单词上。",
+    "code_vs_ilr": "faithful",
+    "code_issues": "代码逐句忠实实现了ILR（包括保留逗号的append逻辑），忠实执行了错误的ILR。",
+    "error_source": "ilr",
+    "ocr_contribution": "no",
+    "root_cause": "流程图算法本身有缺陷（逗号未替换为空格直接保留），ILR 忠实反映该错误算法，代码也忠实实现，导致按空白 split 后逗号残留。",
+    "evidence": "words_string(\"Hi, my name is John\") 实际输出 ['Hi,', 'my', 'name', 'is', 'John']，期望 ['Hi', 'my', 'name', 'is', 'John']；OCR 原文明确写 'Append , to s_list'，OCR 输入无误，是流程图算法本身不对。"
+  }
+}

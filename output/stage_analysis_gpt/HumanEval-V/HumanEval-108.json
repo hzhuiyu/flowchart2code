@@ -1,0 +1,244 @@
+{
+  "task_id": "HumanEval-108",
+  "dataset": "HumanEval-V",
+  "difficulty": null,
+  "title": null,
+  "result": "failed: name 'digits_sum' is not defined",
+  "ilr": "{\n  \"problem_id\": \"count_nums_example\",\n  \"functions\": [\n    {\n      \"name\": \"digits_sum\",\n      \"parameters\": [\"n\"],\n      \"entry_node\": 1,\n      \"nodes\": [\n        {\"id\": 1, \"type\": \"start\", \"label\": \"Start\", \"next\": 2},\n        {\"id\": 2, \"type\": \"process\", \"label\": \"Check if n < 0\", \"action\": \"ctx['neg'] = 1; if ctx['n'] < 0: ctx['neg'] = -1; ctx['n'] = abs(ctx['n'])\", \"next\": 3},\n        {\"id\": 3, \"type\": \"process\", \"label\": \"Convert n to a list of its digits\", \"action\": \"ctx['digits'] = [int(d) for d in str(ctx['n'])]\", \"next\": 4},\n        {\"id\": 4, \"type\": \"process\", \"label\": \"Set n[0] = n[0] * neg\", \"action\": \"ctx['digits'][0] *= ctx['neg']\", \"next\": 5},\n        {\"id\": 5, \"type\": \"process\", \"label\": \"Calculate the sum of digits\", \"action\": \"ctx['sum'] = sum(ctx['digits'])\", \"next\": 6},\n        {\"id\": 6, \"type\": \"return\", \"label\": \"Return sum\", \"value\": \"ctx['sum']\"},\n        {\"id\": 7, \"type\": \"end\", \"label\": \"End\"}\n      ]\n    }\n  ],\n  \"nodes\": [\n    {\"id\": 1, \"type\": \"start\", \"label\": \"Start\", \"next\": 2},\n    {\"id\": 2, \"type\": \"process\", \"label\": \"Input: arr (array of integers)\", \"action\": \"ctx['arr']=ctx['arg0']; ctx['count']=0; ctx['idx']=0\", \"next\": 3},\n    {\"id\": 3, \"type\": \"decision\", \"label\": \"Is arr empty?\", \"logic\": \"len(ctx['arr']) == 0\", \"true_next\": 4, \"false_next\": 5},\n    {\"id\": 4, \"type\": \"process\", \"label\": \"Output: 0 (no elements in array)\", \"action\": \"ctx['count'] = 0\", \"next\": 7},\n    {\"id\": 5, \"type\": \"process\", \"label\": \"Initialize count = 0\", \"action\": \"ctx['count'] = 0\", \"next\": 6},\n    {\"id\": 6, \"type\": \"process\", \"label\": \"Process each element in arr\", \"action\": \"for ctx['idx'] in range(len(ctx['arr'])): ctx['digits_sum'] = digits_sum(ctx['arr'][ctx['idx']])\", \"next\": 8},\n    {\"id\": 7, \"type\": \"process\", \"label\": \"Output: count (number of elements with positive sum of digits)\", \"action\": \"ctx['count']\", \"next\": 8},\n    {\"id\": 8, \"type\": \"decision\", \"label\": \"Is digits_sum > 0?\", \"logic\": \"ctx['digits_sum'] > 0\", \"true_next\": 9, \"false_next\": 11},\n    {\"id\": 9, \"type\": \"process\", \"label\": \"Increment count by 1\", \"action\": \"ctx['count'] += 1\", \"next\": 10},\n    {\"id\": 10, \"type\": \"process\", \"label\": \"Continue to next element\", \"action\": \"\", \"next\": 6},\n    {\"id\": 11, \"type\": \"end\", \"label\": \"Return count\", \"output\": \"ctx['count']\"}\n  ]\n}",
+  "code": "def count_nums(n):\n    neg = 1\n    if n < 0:\n        neg = -1\n        n = abs(n)\n    digits = [int(d) for d in str(n)]\n    digits[0] *= neg\n    return sum(digits)\n\ndef count_nums(arr):\n    count = 0\n    if len(arr) == 0:\n        return 0\n    for idx in range(len(arr)):\n        digits_sum_result = digits_sum(arr[idx])\n        if digits_sum_result > 0:\n            count += 1\n    return count",
+  "prompt": "\ndef count_nums(arr):\n    \"\"\"\n    Write a function count_nums which takes an array of integers and returns\n    the number of elements which has a sum of digits > 0.\n    If a number is negative, then its first signed digit will be negative:\n    e.g. -123 has signed digits -1, 2, and 3.\n    >>> count_nums([]) == 0\n    >>> count_nums([-1, 11, -11]) == 1\n    >>> count_nums([1, 1, 2]) == 3\n    \"\"\"\n",
+  "test": "def check(candidate):\n\n    # Check some simple cases\n    assert candidate([]) == 0\n    assert candidate([-1, -2, 0]) == 0\n    assert candidate([1, 1, 2, -2, 3, 4, 5]) == 6\n    assert candidate([1, 6, 9, -6, 0, 1, 5]) == 5\n    assert candidate([1, 100, 98, -7, 1, -1]) == 4\n    assert candidate([12, 23, 34, -45, -56, 0]) == 5\n    assert candidate([-0, 1**0]) == 1\n    assert candidate([1]) == 1\n\n    # Check some edge cases that are easy to work out by hand.\n    assert True, \"This prints if this assert fails 2 (also good for debugging!)\"\n\n",
+  "ocr_data": {
+    "nodes": [
+      {
+        "node_id": 1,
+        "shape_type": "rectangle",
+        "raw_text": "Start",
+        "position": "top"
+      },
+      {
+        "node_id": 2,
+        "shape_type": "diamond",
+        "raw_text": "Check if n < 0",
+        "position": "middle"
+      },
+      {
+        "node_id": 3,
+        "shape_type": "rectangle",
+        "raw_text": "Set neg = -1 and n = -n",
+        "position": "middle"
+      },
+      {
+        "node_id": 4,
+        "shape_type": "rectangle",
+        "raw_text": "Convert n to a list of its digits",
+        "position": "middle"
+      },
+      {
+        "node_id": 5,
+        "shape_type": "rectangle",
+        "raw_text": "Set n[0] = n[0] * neg",
+        "position": "middle"
+      },
+      {
+        "node_id": 6,
+        "shape_type": "rectangle",
+        "raw_text": "Calculate the sum of digits",
+        "position": "middle"
+      },
+      {
+        "node_id": 7,
+        "shape_type": "rectangle",
+        "raw_text": "Return sum",
+        "position": "middle"
+      },
+      {
+        "node_id": 8,
+        "shape_type": "rectangle",
+        "raw_text": "End",
+        "position": "middle"
+      },
+      {
+        "node_id": 9,
+        "shape_type": "rectangle",
+        "raw_text": "Start",
+        "position": "bottom"
+      },
+      {
+        "node_id": 10,
+        "shape_type": "rectangle",
+        "raw_text": "Input: arr (array of integers)",
+        "position": "bottom"
+      },
+      {
+        "node_id": 11,
+        "shape_type": "diamond",
+        "raw_text": "Is arr empty?",
+        "position": "bottom"
+      },
+      {
+        "node_id": 12,
+        "shape_type": "rectangle",
+        "raw_text": "Output: 0 (no elements in array)",
+        "position": "bottom"
+      },
+      {
+        "node_id": 13,
+        "shape_type": "rectangle",
+        "raw_text": "Initialize count = 0",
+        "position": "bottom"
+      },
+      {
+        "node_id": 14,
+        "shape_type": "rectangle",
+        "raw_text": "Process each element in arr",
+        "position": "bottom"
+      },
+      {
+        "node_id": 15,
+        "shape_type": "rectangle",
+        "raw_text": "Calculate digits_sum for each element",
+        "position": "bottom"
+      },
+      {
+        "node_id": 16,
+        "shape_type": "diamond",
+        "raw_text": "Is digits_sum > 0?",
+        "position": "bottom"
+      },
+      {
+        "node_id": 17,
+        "shape_type": "rectangle",
+        "raw_text": "Increment count by 1",
+        "position": "bottom"
+      },
+      {
+        "node_id": 18,
+        "shape_type": "rectangle",
+        "raw_text": "Continue to next element",
+        "position": "bottom"
+      },
+      {
+        "node_id": 19,
+        "shape_type": "rectangle",
+        "raw_text": "Output: count (number of elements with positive sum of digits)",
+        "position": "bottom"
+      }
+    ],
+    "edges": [
+      {
+        "from_node": 1,
+        "to_node": 2,
+        "label": ""
+      },
+      {
+        "from_node": 2,
+        "to_node": 3,
+        "label": "Yes"
+      },
+      {
+        "from_node": 2,
+        "to_node": 4,
+        "label": "No"
+      },
+      {
+        "from_node": 3,
+        "to_node": 4,
+        "label": ""
+      },
+      {
+        "from_node": 4,
+        "to_node": 5,
+        "label": ""
+      },
+      {
+        "from_node": 5,
+        "to_node": 6,
+        "label": ""
+      },
+      {
+        "from_node": 6,
+        "to_node": 7,
+        "label": ""
+      },
+      {
+        "from_node": 7,
+        "to_node": 8,
+        "label": ""
+      },
+      {
+        "from_node": 9,
+        "to_node": 10,
+        "label": ""
+      },
+      {
+        "from_node": 10,
+        "to_node": 11,
+        "label": ""
+      },
+      {
+        "from_node": 11,
+        "to_node": 12,
+        "label": "Yes"
+      },
+      {
+        "from_node": 11,
+        "to_node": 13,
+        "label": "No"
+      },
+      {
+        "from_node": 13,
+        "to_node": 14,
+        "label": ""
+      },
+      {
+        "from_node": 14,
+        "to_node": 15,
+        "label": "Yes"
+      },
+      {
+        "from_node": 14,
+        "to_node": 18,
+        "label": "No"
+      },
+      {
+        "from_node": 15,
+        "to_node": 16,
+        "label": ""
+      },
+      {
+        "from_node": 16,
+        "to_node": 17,
+        "label": "Yes"
+      },
+      {
+        "from_node": 16,
+        "to_node": 18,
+        "label": "No"
+      },
+      {
+        "from_node": 17,
+        "to_node": 18,
+        "label": ""
+      },
+      {
+        "from_node": 18,
+        "to_node": 19,
+        "label": ""
+      }
+    ],
+    "other_text": [
+      "digits_sum"
+    ]
+  },
+  "analysis": {
+    "ilr_verdict": "incorrect",
+    "ilr_issues": "主流程控制结构错乱：节点6把整个for循环写成一条完整语句（一次性算完所有元素的digits_sum，只留最后一个），节点8的判断被放在循环外；且节点8的false分支直接指向节点11（end，返回count），造成遇到digits_sum<=0的元素就提前返回、而全为正数时9→10→6死循环。按OCR边，正确的结构应是逐元素判断、false走'Continue to next element'回循环、循环结束后才输出count。",
+    "code_vs_ilr": "deviates",
+    "code_issues": "代码一方面把辅助函数错误地命名为count_nums（与主函数重名互相覆盖，主函数内调用digits_sum触发NameError，与FAILURE RESULT一致）；另一方面主循环改写成了正确的逐元素判断算法，并未忠实执行ILR的混乱控制流。",
+    "error_source": "both",
+    "ocr_contribution": "no",
+    "root_cause": "ILR把主流程循环/分支接线错误（判断false分支误接end、决策被移出循环），本身逻辑即错；代码生成又独立犯错——辅助函数误命名为count_nums导致NameError，两边都出了问题。",
+    "evidence": "运行生成代码对 [-1,11,-11] 报 NameError: name 'digits_sum' is not defined；而忠实执行ILR时，[-1,11,-11] 会因首个元素digits_sum=-1走false分支提前return 0（期望1），[1,1,2] 则9→10→6无限循环。OCR边显示16(No)→18(Continue to next element)→19输出，OCR结构清晰无误。"
+  }
+}

@@ -1,0 +1,1506 @@
+{
+ "task_id": "weekly-contest-370-maximum-balanced-subsequence-sum",
+ "dataset": "Algorithm",
+ "title": "maximum-balanced-subsequence-sum",
+ "difficulty": "Hard",
+ "prompt": "\"\"\"\nYou are given a 0-indexed integer array nums.\n\nA subsequence of nums having length k and consisting of indices i0 < i1 < ... < ik-1 is balanced if the following holds:\n\n * nums[ij] - nums[ij-1] >= ij - ij-1, for every j in the range [1, k - 1].\n\nA subsequence of nums having length 1 is considered balanced.\n\nReturn an integer denoting the maximum possible sum of elements in a balanced subsequence of nums.\n\nA subsequence of an array is a new non-empty array that is formed from the original array by deleting some (possibly none) of the elements without disturbing the relative positions of the remaining elements.\n\nExample 1:\n\nInput: nums = [3,3,5,6]\nOutput: 14\nExplanation: In this example, the subsequence [3,5,6] consisting of indices 0, 2, and 3 can be selected.\nnums[2] - nums[0] >= 2 - 0.\nnums[3] - nums[2] >= 3 - 2.\nHence, it is a balanced subsequence, and its sum is the maximum among the balanced subsequences of nums.\nThe subsequence consisting of indices 1, 2, and 3 is also valid.\nIt can be shown that it is not possible to get a balanced subsequence with a sum greater than 14.\n\nExample 2:\n\nInput: nums = [5,-1,-3,8]\nOutput: 13\nExplanation: In this example, the subsequence [5,8] consisting of indices 0 and 3 can be selected.\nnums[3] - nums[0] >= 3 - 0.\nHence, it is a balanced subsequence, and its sum is the maximum among the balanced subsequences of nums.\nIt can be shown that it is not possible to get a balanced subsequence with a sum greater than 13.\n\nExample 3:\n\nInput: nums = [-2,-1]\nOutput: -1\nExplanation: In this example, the subsequence [-1] can be selected.\nIt is a balanced subsequence, and its sum is the maximum among the balanced subsequences of nums.\n\n\nConstraints:\n\n * 1 <= nums.length <= 105\n * -109 <= nums[i] <= 109\n\"\"\"\nclass Solution:\n    def maxBalancedSubsequenceSum(self, nums: List[int]) -> int:\n        ",
+ "starter_code": "class Solution:\n    def maxBalancedSubsequenceSum(self, nums: List[int]) -> int:\n        ",
+ "entry_point": "",
+ "test": "\nmy_solution = Solution()\n\ntest_input = { \"nums\": [3,3,5,6] }\nassert my_solution.maxBalancedSubsequenceSum(**test_input) == 14\n\ntest_input = { \"nums\": [5,-1,-3,8] }\nassert my_solution.maxBalancedSubsequenceSum(**test_input) == 13\n\ntest_input = { \"nums\": [-2,-1] }\nassert my_solution.maxBalancedSubsequenceSum(**test_input) == -1\n\ntest_input = { \"nums\": [0] }\nassert my_solution.maxBalancedSubsequenceSum(**test_input) == 0\n\ntest_input = { \"nums\": [-47] }\nassert my_solution.maxBalancedSubsequenceSum(**test_input) == -47\n\ntest_input = { \"nums\": [-8] }\nassert my_solution.maxBalancedSubsequenceSum(**test_input) == -8\n\ntest_input = { \"nums\": [-7] }\nassert my_solution.maxBalancedSubsequenceSum(**test_input) == -7\n\ntest_input = { \"nums\": [-6] }\nassert my_solution.maxBalancedSubsequenceSum(**test_input) == -6\n\ntest_input = { \"nums\": [-5] }\nassert my_solution.maxBalancedSubsequenceSum(**test_input) == -5\n\ntest_input = { \"nums\": [-3] }\nassert my_solution.maxBalancedSubsequenceSum(**test_input) == -3\n\ntest_input = { \"nums\": [-2] }\nassert my_solution.maxBalancedSubsequenceSum(**test_input) == -2\n\ntest_input = { \"nums\": [-1] }\nassert my_solution.maxBalancedSubsequenceSum(**test_input) == -1\n\ntest_input = { \"nums\": [1] }\nassert my_solution.maxBalancedSubsequenceSum(**test_input) == 1\n\ntest_input = { \"nums\": [3] }\nassert my_solution.maxBalancedSubsequenceSum(**test_input) == 3\n\ntest_input = { \"nums\": [4] }\nassert my_solution.maxBalancedSubsequenceSum(**test_input) == 4\n\ntest_input = { \"nums\": [5] }\nassert my_solution.maxBalancedSubsequenceSum(**test_input) == 5\n\ntest_input = { \"nums\": [7] }\nassert my_solution.maxBalancedSubsequenceSum(**test_input) == 7\n\ntest_input = { \"nums\": [8] }\nassert my_solution.maxBalancedSubsequenceSum(**test_input) == 8\n\ntest_input = { \"nums\": [9] }\nassert my_solution.maxBalancedSubsequenceSum(**test_input) == 9\n\ntest_input = { \"nums\": [45] }\nassert my_solution.maxBalancedSubsequenceSum(**test_input) == 45\n\ntest_input = { \"nums\": [-9,-5] }\nassert my_solution.maxBalancedSubsequenceSum(**test_input) == -5\n\ntest_input = { \"nums\": [-6,8] }\nassert my_solution.maxBalancedSubsequenceSum(**test_input) == 8\n\ntest_input = { \"nums\": [-5,-1] }\nassert my_solution.maxBalancedSubsequenceSum(**test_input) == -1\n\ntest_input = { \"nums\": [-5,0] }\nassert my_solution.maxBalancedSubsequenceSum(**test_input) == 0\n\ntest_input = { \"nums\": [-3,-1] }\nassert my_solution.maxBalancedSubsequenceSum(**test_input) == -1\n\ntest_input = { \"nums\": [-2,3] }\nassert my_solution.maxBalancedSubsequenceSum(**test_input) == 3\n\ntest_input = { \"nums\": [-1,-5] }\nassert my_solution.maxBalancedSubsequenceSum(**test_input) == -1\n\ntest_input = { \"nums\": [-1,0] }\nassert my_solution.maxBalancedSubsequenceSum(**test_input) == 0\n\ntest_input = { \"nums\": [-1,3] }\nassert my_solution.maxBalancedSubsequenceSum(**test_input) == 3\n\ntest_input = { \"nums\": [0,-3] }\nassert my_solution.maxBalancedSubsequenceSum(**test_input) == 0\n\ntest_input = { \"nums\": [0,5] }\nassert my_solution.maxBalancedSubsequenceSum(**test_input) == 5\n\ntest_input = { \"nums\": [2,7] }\nassert my_solution.maxBalancedSubsequenceSum(**test_input) == 9\n\ntest_input = { \"nums\": [5,-1] }\nassert my_solution.maxBalancedSubsequenceSum(**test_input) == 5\n\ntest_input = { \"nums\": [6,-8] }\nassert my_solution.maxBalancedSubsequenceSum(**test_input) == 6\n\ntest_input = { \"nums\": [7,-2] }\nassert my_solution.maxBalancedSubsequenceSum(**test_input) == 7\n\ntest_input = { \"nums\": [7,2] }\nassert my_solution.maxBalancedSubsequenceSum(**test_input) == 7\n\ntest_input = { \"nums\": [8,-9] }\nassert my_solution.maxBalancedSubsequenceSum(**test_input) == 8\n\ntest_input = { \"nums\": [9,-9] }\nassert my_solution.maxBalancedSubsequenceSum(**test_input) == 9\n\ntest_input = { \"nums\": [-43,23,-49] }\nassert my_solution.maxBalancedSubsequenceSum(**test_input) == 23\n\ntest_input = { \"nums\": [-9,-6,-5] }\nassert my_solution.maxBalancedSubsequenceSum(**test_input) == -5\n\ntest_input = { \"nums\": [-9,-2,4] }\nassert my_solution.maxBalancedSubsequenceSum(**test_input) == 4\n\ntest_input = { \"nums\": [-9,5,-6] }\nassert my_solution.maxBalancedSubsequenceSum(**test_input) == 5\n\ntest_input = { \"nums\": [-8,9,-9] }\nassert my_solution.maxBalancedSubsequenceSum(**test_input) == 9\n\ntest_input = { \"nums\": [-5,-1,-9] }\nassert my_solution.maxBalancedSubsequenceSum(**test_input) == -1\n\ntest_input = { \"nums\": [-4,-9,3] }\nassert my_solution.maxBalancedSubsequenceSum(**test_input) == 3\n\ntest_input = { \"nums\": [-4,-2,-7] }\nassert my_solution.maxBalancedSubsequenceSum(**test_input) == -2\n\ntest_input = { \"nums\": [-3,-4,-2] }\nassert my_solution.maxBalancedSubsequenceSum(**test_input) == -2\n\ntest_input = { \"nums\": [-2,-1,-2] }\nassert my_solution.maxBalancedSubsequenceSum(**test_input) == -1\n\ntest_input = { \"nums\": [-1,-6,1] }\nassert my_solution.maxBalancedSubsequenceSum(**test_input) == 1\n\ntest_input = { \"nums\": [0,-6,-4] }\nassert my_solution.maxBalancedSubsequenceSum(**test_input) == 0\n\ntest_input = { \"nums\": [0,-5,4] }\nassert my_solution.maxBalancedSubsequenceSum(**test_input) == 4\n\ntest_input = { \"nums\": [1,-4,4] }\nassert my_solution.maxBalancedSubsequenceSum(**test_input) == 5\n\ntest_input = { \"nums\": [4,1,-8] }\nassert my_solution.maxBalancedSubsequenceSum(**test_input) == 4\n\ntest_input = { \"nums\": [5,-6,-8] }\nassert my_solution.maxBalancedSubsequenceSum(**test_input) == 5\n\ntest_input = { \"nums\": [5,-4,-5] }\nassert my_solution.maxBalancedSubsequenceSum(**test_input) == 5\n\ntest_input = { \"nums\": [6,-3,9] }\nassert my_solution.maxBalancedSubsequenceSum(**test_input) == 15\n\ntest_input = { \"nums\": [6,0,2] }\nassert my_solution.maxBalancedSubsequenceSum(**test_input) == 6\n\ntest_input = { \"nums\": [7,-6,0] }\nassert my_solution.maxBalancedSubsequenceSum(**test_input) == 7\n\ntest_input = { \"nums\": [8,-7,2] }\nassert my_solution.maxBalancedSubsequenceSum(**test_input) == 8\n\ntest_input = { \"nums\": [14,-21,-18] }\nassert my_solution.maxBalancedSubsequenceSum(**test_input) == 14\n\ntest_input = { \"nums\": [-9,7,-8,1] }\nassert my_solution.maxBalancedSubsequenceSum(**test_input) == 7\n\ntest_input = { \"nums\": [-8,2,-5,-7] }\nassert my_solution.maxBalancedSubsequenceSum(**test_input) == 2\n\ntest_input = { \"nums\": [-7,1,-2,-8] }\nassert my_solution.maxBalancedSubsequenceSum(**test_input) == 1\n\ntest_input = { \"nums\": [-6,-8,7,-3] }\nassert my_solution.maxBalancedSubsequenceSum(**test_input) == 7\n\ntest_input = { \"nums\": [-5,-1,0,6] }\nassert my_solution.maxBalancedSubsequenceSum(**test_input) == 6\n\ntest_input = { \"nums\": [-4,8,9,2] }\nassert my_solution.maxBalancedSubsequenceSum(**test_input) == 17\n\ntest_input = { \"nums\": [-4,9,7,-4] }\nassert my_solution.maxBalancedSubsequenceSum(**test_input) == 9\n\ntest_input = { \"nums\": [-2,-6,0,-5] }\nassert my_solution.maxBalancedSubsequenceSum(**test_input) == 0\n\ntest_input = { \"nums\": [-2,-3,9,3] }\nassert my_solution.maxBalancedSubsequenceSum(**test_input) == 9\n\ntest_input = { \"nums\": [0,-6,-3,5] }\nassert my_solution.maxBalancedSubsequenceSum(**test_input) == 5\n\ntest_input = { \"nums\": [0,1,0,-2] }\nassert my_solution.maxBalancedSubsequenceSum(**test_input) == 1\n\ntest_input = { \"nums\": [1,-7,-8,6] }\nassert my_solution.maxBalancedSubsequenceSum(**test_input) == 7\n\ntest_input = { \"nums\": [3,-7,9,-3] }\nassert my_solution.maxBalancedSubsequenceSum(**test_input) == 12\n\ntest_input = { \"nums\": [3,-7,9,2] }\nassert my_solution.maxBalancedSubsequenceSum(**test_input) == 12\n\ntest_input = { \"nums\": [4,-8,-1,8] }\nassert my_solution.maxBalancedSubsequenceSum(**test_input) == 12\n\ntest_input = { \"nums\": [5,4,1,0] }\nassert my_solution.maxBalancedSubsequenceSum(**test_input) == 5\n\ntest_input = { \"nums\": [7,7,-9,-4] }\nassert my_solution.maxBalancedSubsequenceSum(**test_input) == 7\n\ntest_input = { \"nums\": [8,0,4,-2] }\nassert my_solution.maxBalancedSubsequenceSum(**test_input) == 8\n\ntest_input = { \"nums\": [9,7,-2,1] }\nassert my_solution.maxBalancedSubsequenceSum(**test_input) == 9\n\ntest_input = { \"nums\": [34,34,32,33] }\nassert my_solution.maxBalancedSubsequenceSum(**test_input) == 65\n\ntest_input = { \"nums\": [-9,-6,-8,-2,4] }\nassert my_solution.maxBalancedSubsequenceSum(**test_input) == 4\n\ntest_input = { \"nums\": [-9,-5,2,2,7] }\nassert my_solution.maxBalancedSubsequenceSum(**test_input) == 9\n\ntest_input = { \"nums\": [-9,-2,-6,0,6] }\nassert my_solution.maxBalancedSubsequenceSum(**test_input) == 6\n\ntest_input = { \"nums\": [-7,0,-8,-9,-3] }\nassert my_solution.maxBalancedSubsequenceSum(**test_input) == 0\n\ntest_input = { \"nums\": [-7,0,9,-4,9] }\nassert my_solution.maxBalancedSubsequenceSum(**test_input) == 9\n\ntest_input = { \"nums\": [-6,-2,-8,-4,-8] }\nassert my_solution.maxBalancedSubsequenceSum(**test_input) == -2\n\ntest_input = { \"nums\": [-6,2,-3,0,-5] }\nassert my_solution.maxBalancedSubsequenceSum(**test_input) == 2\n\ntest_input = { \"nums\": [-6,3,-6,-3,-2] }\nassert my_solution.maxBalancedSubsequenceSum(**test_input) == 3\n\ntest_input = { \"nums\": [-5,-9,1,3,-5] }\nassert my_solution.maxBalancedSubsequenceSum(**test_input) == 4\n\ntest_input = { \"nums\": [-5,1,5,-5,-1] }\nassert my_solution.maxBalancedSubsequenceSum(**test_input) == 6\n\ntest_input = { \"nums\": [-3,7,0,4,6] }\nassert my_solution.maxBalancedSubsequenceSum(**test_input) == 10\n\ntest_input = { \"nums\": [-2,-2,9,-2,-8] }\nassert my_solution.maxBalancedSubsequenceSum(**test_input) == 9\n\ntest_input = { \"nums\": [0,-6,-9,-8,-3] }\nassert my_solution.maxBalancedSubsequenceSum(**test_input) == 0\n\ntest_input = { \"nums\": [0,-2,-7,-1,-8] }\nassert my_solution.maxBalancedSubsequenceSum(**test_input) == 0\n\ntest_input = { \"nums\": [0,-1,-4,-6,-9] }\nassert my_solution.maxBalancedSubsequenceSum(**test_input) == 0\n\ntest_input = { \"nums\": [1,-3,-8,9,-9] }\nassert my_solution.maxBalancedSubsequenceSum(**test_input) == 10\n\ntest_input = { \"nums\": [2,-6,-2,0,-3] }\nassert my_solution.maxBalancedSubsequenceSum(**test_input) == 2\n\ntest_input = { \"nums\": [2,9,-4,4,2] }\nassert my_solution.maxBalancedSubsequenceSum(**test_input) == 11\n\ntest_input = { \"nums\": [4,-1,5,-1,-7] }\nassert my_solution.maxBalancedSubsequenceSum(**test_input) == 5\n\ntest_input = { \"nums\": [4,6,-8,-8,-5] }\nassert my_solution.maxBalancedSubsequenceSum(**test_input) == 10",
+ "test_cases": [
+  {
+   "input": {
+    "args": [
+     [
+      3,
+      3,
+      5,
+      6
+     ]
+    ]
+   },
+   "output": 14,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      5,
+      -1,
+      -3,
+      8
+     ]
+    ]
+   },
+   "output": 13,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      -2,
+      -1
+     ]
+    ]
+   },
+   "output": -1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      0
+     ]
+    ]
+   },
+   "output": 0,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      -47
+     ]
+    ]
+   },
+   "output": -47,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      -8
+     ]
+    ]
+   },
+   "output": -8,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      -7
+     ]
+    ]
+   },
+   "output": -7,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      -6
+     ]
+    ]
+   },
+   "output": -6,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      -5
+     ]
+    ]
+   },
+   "output": -5,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      -3
+     ]
+    ]
+   },
+   "output": -3,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      -2
+     ]
+    ]
+   },
+   "output": -2,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      -1
+     ]
+    ]
+   },
+   "output": -1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      1
+     ]
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      3
+     ]
+    ]
+   },
+   "output": 3,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      4
+     ]
+    ]
+   },
+   "output": 4,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      5
+     ]
+    ]
+   },
+   "output": 5,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      7
+     ]
+    ]
+   },
+   "output": 7,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      8
+     ]
+    ]
+   },
+   "output": 8,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      9
+     ]
+    ]
+   },
+   "output": 9,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      45
+     ]
+    ]
+   },
+   "output": 45,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      -9,
+      -5
+     ]
+    ]
+   },
+   "output": -5,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      -6,
+      8
+     ]
+    ]
+   },
+   "output": 8,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      -5,
+      -1
+     ]
+    ]
+   },
+   "output": -1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      -5,
+      0
+     ]
+    ]
+   },
+   "output": 0,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      -3,
+      -1
+     ]
+    ]
+   },
+   "output": -1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      -2,
+      3
+     ]
+    ]
+   },
+   "output": 3,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      -1,
+      -5
+     ]
+    ]
+   },
+   "output": -1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      -1,
+      0
+     ]
+    ]
+   },
+   "output": 0,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      -1,
+      3
+     ]
+    ]
+   },
+   "output": 3,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      0,
+      -3
+     ]
+    ]
+   },
+   "output": 0,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      0,
+      5
+     ]
+    ]
+   },
+   "output": 5,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      2,
+      7
+     ]
+    ]
+   },
+   "output": 9,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      5,
+      -1
+     ]
+    ]
+   },
+   "output": 5,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      6,
+      -8
+     ]
+    ]
+   },
+   "output": 6,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      7,
+      -2
+     ]
+    ]
+   },
+   "output": 7,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      7,
+      2
+     ]
+    ]
+   },
+   "output": 7,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      8,
+      -9
+     ]
+    ]
+   },
+   "output": 8,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      9,
+      -9
+     ]
+    ]
+   },
+   "output": 9,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      -43,
+      23,
+      -49
+     ]
+    ]
+   },
+   "output": 23,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      -9,
+      -6,
+      -5
+     ]
+    ]
+   },
+   "output": -5,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      -9,
+      -2,
+      4
+     ]
+    ]
+   },
+   "output": 4,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      -9,
+      5,
+      -6
+     ]
+    ]
+   },
+   "output": 5,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      -8,
+      9,
+      -9
+     ]
+    ]
+   },
+   "output": 9,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      -5,
+      -1,
+      -9
+     ]
+    ]
+   },
+   "output": -1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      -4,
+      -9,
+      3
+     ]
+    ]
+   },
+   "output": 3,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      -4,
+      -2,
+      -7
+     ]
+    ]
+   },
+   "output": -2,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      -3,
+      -4,
+      -2
+     ]
+    ]
+   },
+   "output": -2,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      -2,
+      -1,
+      -2
+     ]
+    ]
+   },
+   "output": -1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      -1,
+      -6,
+      1
+     ]
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      0,
+      -6,
+      -4
+     ]
+    ]
+   },
+   "output": 0,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      0,
+      -5,
+      4
+     ]
+    ]
+   },
+   "output": 4,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      1,
+      -4,
+      4
+     ]
+    ]
+   },
+   "output": 5,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      4,
+      1,
+      -8
+     ]
+    ]
+   },
+   "output": 4,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      5,
+      -6,
+      -8
+     ]
+    ]
+   },
+   "output": 5,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      5,
+      -4,
+      -5
+     ]
+    ]
+   },
+   "output": 5,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      6,
+      -3,
+      9
+     ]
+    ]
+   },
+   "output": 15,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      6,
+      0,
+      2
+     ]
+    ]
+   },
+   "output": 6,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      7,
+      -6,
+      0
+     ]
+    ]
+   },
+   "output": 7,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      8,
+      -7,
+      2
+     ]
+    ]
+   },
+   "output": 8,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      14,
+      -21,
+      -18
+     ]
+    ]
+   },
+   "output": 14,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      -9,
+      7,
+      -8,
+      1
+     ]
+    ]
+   },
+   "output": 7,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      -8,
+      2,
+      -5,
+      -7
+     ]
+    ]
+   },
+   "output": 2,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      -7,
+      1,
+      -2,
+      -8
+     ]
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      -6,
+      -8,
+      7,
+      -3
+     ]
+    ]
+   },
+   "output": 7,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      -5,
+      -1,
+      0,
+      6
+     ]
+    ]
+   },
+   "output": 6,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      -4,
+      8,
+      9,
+      2
+     ]
+    ]
+   },
+   "output": 17,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      -4,
+      9,
+      7,
+      -4
+     ]
+    ]
+   },
+   "output": 9,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      -2,
+      -6,
+      0,
+      -5
+     ]
+    ]
+   },
+   "output": 0,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      -2,
+      -3,
+      9,
+      3
+     ]
+    ]
+   },
+   "output": 9,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      0,
+      -6,
+      -3,
+      5
+     ]
+    ]
+   },
+   "output": 5,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      0,
+      1,
+      0,
+      -2
+     ]
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      1,
+      -7,
+      -8,
+      6
+     ]
+    ]
+   },
+   "output": 7,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      3,
+      -7,
+      9,
+      -3
+     ]
+    ]
+   },
+   "output": 12,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      3,
+      -7,
+      9,
+      2
+     ]
+    ]
+   },
+   "output": 12,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      4,
+      -8,
+      -1,
+      8
+     ]
+    ]
+   },
+   "output": 12,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      5,
+      4,
+      1,
+      0
+     ]
+    ]
+   },
+   "output": 5,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      7,
+      7,
+      -9,
+      -4
+     ]
+    ]
+   },
+   "output": 7,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      8,
+      0,
+      4,
+      -2
+     ]
+    ]
+   },
+   "output": 8,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      9,
+      7,
+      -2,
+      1
+     ]
+    ]
+   },
+   "output": 9,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      34,
+      34,
+      32,
+      33
+     ]
+    ]
+   },
+   "output": 65,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      -9,
+      -6,
+      -8,
+      -2,
+      4
+     ]
+    ]
+   },
+   "output": 4,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      -9,
+      -5,
+      2,
+      2,
+      7
+     ]
+    ]
+   },
+   "output": 9,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      -9,
+      -2,
+      -6,
+      0,
+      6
+     ]
+    ]
+   },
+   "output": 6,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      -7,
+      0,
+      -8,
+      -9,
+      -3
+     ]
+    ]
+   },
+   "output": 0,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      -7,
+      0,
+      9,
+      -4,
+      9
+     ]
+    ]
+   },
+   "output": 9,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      -6,
+      -2,
+      -8,
+      -4,
+      -8
+     ]
+    ]
+   },
+   "output": -2,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      -6,
+      2,
+      -3,
+      0,
+      -5
+     ]
+    ]
+   },
+   "output": 2,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      -6,
+      3,
+      -6,
+      -3,
+      -2
+     ]
+    ]
+   },
+   "output": 3,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      -5,
+      -9,
+      1,
+      3,
+      -5
+     ]
+    ]
+   },
+   "output": 4,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      -5,
+      1,
+      5,
+      -5,
+      -1
+     ]
+    ]
+   },
+   "output": 6,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      -3,
+      7,
+      0,
+      4,
+      6
+     ]
+    ]
+   },
+   "output": 10,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      -2,
+      -2,
+      9,
+      -2,
+      -8
+     ]
+    ]
+   },
+   "output": 9,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      0,
+      -6,
+      -9,
+      -8,
+      -3
+     ]
+    ]
+   },
+   "output": 0,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      0,
+      -2,
+      -7,
+      -1,
+      -8
+     ]
+    ]
+   },
+   "output": 0,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      0,
+      -1,
+      -4,
+      -6,
+      -9
+     ]
+    ]
+   },
+   "output": 0,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      1,
+      -3,
+      -8,
+      9,
+      -9
+     ]
+    ]
+   },
+   "output": 10,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      2,
+      -6,
+      -2,
+      0,
+      -3
+     ]
+    ]
+   },
+   "output": 2,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      2,
+      9,
+      -4,
+      4,
+      2
+     ]
+    ]
+   },
+   "output": 11,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      4,
+      -1,
+      5,
+      -1,
+      -7
+     ]
+    ]
+   },
+   "output": 5,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      4,
+      6,
+      -8,
+      -8,
+      -5
+     ]
+    ]
+   },
+   "output": 10,
+   "explanation": ""
+  }
+ ],
+ "original_ilr": "```json\n{\n  \"problem_id\": \"max_balanced_subsequence_sum\",\n  \"nodes\": [\n    {\n      \"id\": 1,\n      \"type\": \"start\",\n      \"label\": \"Start\",\n      \"next\": 2\n    },\n    {\n      \"id\": 2,\n      \"type\": \"process\",\n      \"label\": \"Input: nums (List[int])\",\n      \"action\": \"ctx['nums'] = ctx['arg0']; ctx['n'] = len(ctx['nums']); ctx['maxleft'] = {}; ctx['i'] = 0\",\n      \"next\": 3\n    },\n    {\n      \"id\": 3,\n      \"type\": \"decision\",\n      \"label\": \"For i from 0 to n - 1\",\n      \"logic\": \"ctx['i'] < ctx['n']\",\n      \"true_next\": 4,\n      \"false_next\": 6\n    },\n    {\n      \"id\": 4,\n      \"type\": \"decision\",\n      \"label\": \"Is nums[i] - i in maxleft?\",\n      \"logic\": \"ctx['nums'][ctx['i']] - ctx['i'] in ctx['maxleft']\",\n      \"true_next\": 5,\n      \"false_next\": 7\n    },\n    {\n      \"id\": 5,\n      \"type\": \"process\",\n      \"label\": \"Return max(maxleft.values())\",\n      \"action\": \"return max(ctx['maxleft'].values())\",\n      \"next\": 6\n    },\n    {\n      \"id\": 6,\n      \"type\": \"end\",\n      \"label\": \"End\",\n      \"output\": \"ctx['result']\"\n    },\n    {\n      \"id\": 7,\n      \"type\": \"process\",\n      \"label\": \"Find previdx: previdx = maxleft.bisect_left(nums[i] - i)\",\n      \"action\": \"ctx['previdx'] = bisect.bisect_left(list(ctx['maxleft'].keys()), ctx['nums'][ctx['i']] - ctx['i'])\",\n      \"next\": 8\n    },\n    {\n      \"id\": 8,\n      \"type\": \"decision\",\n      \"label\": \"Is previdx == 0?\",\n      \"logic\": \"ctx['previdx'] == 0\",\n      \"true_next\": 9,\n      \"false_next\": 10\n    },\n    {\n      \"id\": 9,\n      \"type\": \"process\",\n      \"label\": \"maxleft[nums[i] - i] = nums[i]\",\n      \"action\": \"ctx['maxleft'][ctx['nums'][ctx['i']] - ctx['i']] = ctx['nums'][ctx['i']]\",\n      \"next\": 11\n    },\n    {\n      \"id\": 10,\n      \"type\": \"process\",\n      \"label\": \"Update maxleft[nums[i] - i]: maxleft[nums[i] - i] = max(maxleft[nums[i] - i], maxleft[nums[i] - i] + nums[i])\",\n      \"action\": \"ctx['maxleft'][ctx['nums'][ctx['i']] - ctx['i']] = max(ctx['maxleft'][ctx['nums'][ctx['i']] - ctx['i']], ctx['maxleft'][ctx['nums'][ctx['i']] - ctx['i']] + ctx['nums'][ctx['i']])\",\n      \"next\": 11\n    },\n    {\n      \"id\": 11,\n      \"type\": \"process\",\n      \"label\": \"Find nextidx: nextidx = maxleft.bisect_right(nums[i] - i)\",\n      \"action\": \"ctx['nextidx'] = bisect.bisect_right(list(ctx['maxleft'].keys()), ctx['nums'][ctx['i']] - ctx['i'])\",\n      \"next\": 12\n    },\n    {\n      \"id\": 12,\n      \"type\": \"decision\",\n      \"label\": \"nextidx < len(maxleft.keys()) and maxleft.peekitem(nextidx)[1] <= maxleft[nums[i] - i]?\",\n      \"logic\": \"ctx['nextidx'] < len(ctx['maxleft'].keys()) and ctx['maxleft'].peekitem(ctx['nextidx'])[1] <= ctx['maxleft'][ctx['nums'][ctx['i']] - ctx['i']]\",\n      \"true_next\": 13,\n      \"false_next\": 14\n    },\n    {\n      \"id\": 13,\n      \"type\": \"process\",\n      \"label\": \"Delete key from maxleft: del maxleft[maxleft.peekitem(nextidx)[0]]\",\n      \"action\": \"del ctx['maxleft'][ctx['maxleft'].peekitem(ctx['nextidx'])[0]]\",\n      \"next\": 14\n    },\n    {\n      \"id\": 14,\n      \"type\": \"process\",\n      \"label\": \"Continue to next iteration\",\n      \"action\": \"ctx['i'] += 1\",\n      \"next\": 3\n    }\n  ]\n}\n```",
+ "original_code": "import bisect\n\nclass Solution:\n    def maxBalancedSubsequenceSum(self, nums: List[int]) -> int:\n        n = len(nums)\n        maxleft = {}\n        i = 0\n        \n        while i < n:\n            diff = nums[i] - i\n            if diff in maxleft:\n                return max(maxleft.values())\n            \n            previdx = bisect.bisect_left(list(maxleft.keys()), diff)\n            if previdx == 0:\n                maxleft[diff] = nums[i]\n            else:\n                maxleft[diff] = max(maxleft[diff], maxleft[diff] + nums[i])\n            \n            nextidx = bisect.bisect_right(list(maxleft.keys()), diff)\n            if nextidx < len(maxleft.keys()) and maxleft.peekitem(nextidx)[1] <= maxleft[diff]:\n                del maxleft[maxleft.peekitem(nextidx)[0]]\n            \n            i += 1\n        \n        return max(maxleft.values())",
+ "ocr_data": {
+  "nodes": [
+   {
+    "node_id": 1,
+    "shape_type": "rectangle",
+    "raw_text": "Start",
+    "position": "top"
+   },
+   {
+    "node_id": 2,
+    "shape_type": "rectangle",
+    "raw_text": "Input: nums (List[int])",
+    "position": "top"
+   },
+   {
+    "node_id": 3,
+    "shape_type": "rectangle",
+    "raw_text": "Initialize maxleft = SortedDict(), n = len(nums)",
+    "position": "middle"
+   },
+   {
+    "node_id": 4,
+    "shape_type": "diamond",
+    "raw_text": "For i from 0 to n - 1",
+    "position": "middle"
+   },
+   {
+    "node_id": 5,
+    "shape_type": "diamond",
+    "raw_text": "Is nums[i] - i in maxleft?",
+    "position": "middle"
+   },
+   {
+    "node_id": 6,
+    "shape_type": "rectangle",
+    "raw_text": "Return max(maxleft.values())",
+    "position": "middle"
+   },
+   {
+    "node_id": 7,
+    "shape_type": "rectangle",
+    "raw_text": "Find previdx: previdx = maxleft.bisect_left(nums[i] - i)",
+    "position": "middle"
+   },
+   {
+    "node_id": 8,
+    "shape_type": "diamond",
+    "raw_text": "Is previdx == 0?",
+    "position": "middle"
+   },
+   {
+    "node_id": 9,
+    "shape_type": "rectangle",
+    "raw_text": "maxleft[nums[i] - i] = nums[i]",
+    "position": "middle"
+   },
+   {
+    "node_id": 10,
+    "shape_type": "rectangle",
+    "raw_text": "Update maxleft[nums[i] - i]: maxleft[nums[i] - i] = max(maxleft[nums[i] - i], maxleft[nums[i] - i] + nums[i])",
+    "position": "middle"
+   },
+   {
+    "node_id": 11,
+    "shape_type": "rectangle",
+    "raw_text": "Update maxleft[nums[i] - i]: maxleft[nums[i] - i] = max(maxleft.peekitem(previdx - 1)[1] + nums[i], nums[i])",
+    "position": "middle"
+   },
+   {
+    "node_id": 12,
+    "shape_type": "rectangle",
+    "raw_text": "Find nextidx: nextidx = maxleft.bisect_right(nums[i] - i)",
+    "position": "bottom"
+   },
+   {
+    "node_id": 13,
+    "shape_type": "diamond",
+    "raw_text": "nextidx < len(maxleft.keys()) and maxleft.peekitem(nextidx)[1] <= maxleft[nums[i] - i]?",
+    "position": "bottom"
+   },
+   {
+    "node_id": 14,
+    "shape_type": "rectangle",
+    "raw_text": "Delete key from maxleft: del maxleft[maxleft.peekitem(nextidx)[0]]",
+    "position": "bottom"
+   },
+   {
+    "node_id": 15,
+    "shape_type": "rectangle",
+    "raw_text": "Continue to next iteration",
+    "position": "bottom"
+   }
+  ],
+  "edges": [
+   {
+    "from_node": 1,
+    "to_node": 2,
+    "label": ""
+   },
+   {
+    "from_node": 2,
+    "to_node": 3,
+    "label": ""
+   },
+   {
+    "from_node": 3,
+    "to_node": 4,
+    "label": ""
+   },
+   {
+    "from_node": 4,
+    "to_node": 5,
+    "label": ""
+   },
+   {
+    "from_node": 5,
+    "to_node": 6,
+    "label": "No"
+   },
+   {
+    "from_node": 5,
+    "to_node": 7,
+    "label": "Yes"
+   },
+   {
+    "from_node": 7,
+    "to_node": 8,
+    "label": ""
+   },
+   {
+    "from_node": 8,
+    "to_node": 9,
+    "label": "Yes"
+   },
+   {
+    "from_node": 8,
+    "to_node": 11,
+    "label": "No"
+   },
+   {
+    "from_node": 9,
+    "to_node": 12,
+    "label": ""
+   },
+   {
+    "from_node": 10,
+    "to_node": 12,
+    "label": ""
+   },
+   {
+    "from_node": 12,
+    "to_node": 13,
+    "label": ""
+   },
+   {
+    "from_node": 13,
+    "to_node": 14,
+    "label": "Yes"
+   },
+   {
+    "from_node": 13,
+    "to_node": 15,
+    "label": "No"
+   },
+   {
+    "from_node": 14,
+    "to_node": 15,
+    "label": ""
+   },
+   {
+    "from_node": 15,
+    "to_node": 4,
+    "label": ""
+   }
+  ],
+  "other_text": []
+ },
+ "test_result": {},
+ "status": "completed",
+ "fixed_ilr": null,
+ "modified_code": null,
+ "ilr_fix_log": "",
+ "bug_injected": ""
+}

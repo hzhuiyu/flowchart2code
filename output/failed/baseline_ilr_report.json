@@ -1,0 +1,667 @@
+[
+  {
+    "task_id": "biweekly-contest-108-number-of-black-blocks",
+    "ilr_passed": 0,
+    "ilr_total": 100,
+    "ilr_error": null
+  },
+  {
+    "task_id": "biweekly-contest-108-partition-string-into-minimum-beautiful-substrings",
+    "ilr_passed": 0,
+    "ilr_total": 100,
+    "ilr_error": null
+  },
+  {
+    "task_id": "biweekly-contest-109-check-if-array-is-good",
+    "ilr_passed": 100,
+    "ilr_total": 100,
+    "ilr_error": null
+  },
+  {
+    "task_id": "biweekly-contest-109-visit-array-positions-to-maximize-score",
+    "ilr_passed": 0,
+    "ilr_total": 100,
+    "ilr_error": null
+  },
+  {
+    "task_id": "biweekly-contest-110-minimum-time-to-make-array-sum-at-most-x",
+    "ilr_passed": 0,
+    "ilr_total": 100,
+    "ilr_error": null
+  },
+  {
+    "task_id": "biweekly-contest-111-count-pairs-whose-sum-is-less-than-target",
+    "ilr_passed": 11,
+    "ilr_total": 100,
+    "ilr_error": null
+  },
+  {
+    "task_id": "biweekly-contest-111-number-of-beautiful-integers-in-the-range",
+    "ilr_passed": 0,
+    "ilr_total": 100,
+    "ilr_error": null
+  },
+  {
+    "task_id": "biweekly-contest-113-minimum-right-shifts-to-sort-the-array",
+    "ilr_passed": 0,
+    "ilr_total": 100,
+    "ilr_error": null
+  },
+  {
+    "task_id": "biweekly-contest-114-minimum-operations-to-collect-elements",
+    "ilr_passed": 0,
+    "ilr_total": 100,
+    "ilr_error": null
+  },
+  {
+    "task_id": "biweekly-contest-114-split-array-into-maximum-number-of-subarrays",
+    "ilr_passed": 0,
+    "ilr_total": 100,
+    "ilr_error": "ILR parsing failed: main node 3 false_next points to non-existent node 19"
+  },
+  {
+    "task_id": "biweekly-contest-115-last-visited-integers",
+    "ilr_passed": 1,
+    "ilr_total": 100,
+    "ilr_error": null
+  },
+  {
+    "task_id": "biweekly-contest-116-minimum-number-of-changes-to-make-binary-string-beautiful",
+    "ilr_passed": 6,
+    "ilr_total": 100,
+    "ilr_error": null
+  },
+  {
+    "task_id": "biweekly-contest-116-subarrays-distinct-element-sum-of-squares-i",
+    "ilr_passed": 0,
+    "ilr_total": 100,
+    "ilr_error": "ILR parsing failed: main node 3 false_next points to non-existent node 6"
+  },
+  {
+    "task_id": "biweekly-contest-117-maximum-spending-after-buying-items",
+    "ilr_passed": 0,
+    "ilr_total": 100,
+    "ilr_error": null
+  },
+  {
+    "task_id": "biweekly-contest-118-find-maximum-non-decreasing-array-length",
+    "ilr_passed": 35,
+    "ilr_total": 100,
+    "ilr_error": null
+  },
+  {
+    "task_id": "biweekly-contest-118-maximize-area-of-square-hole-in-grid",
+    "ilr_passed": 0,
+    "ilr_total": 100,
+    "ilr_error": null
+  },
+  {
+    "task_id": "biweekly-contest-118-minimum-number-of-coins-for-fruits",
+    "ilr_passed": 0,
+    "ilr_total": 100,
+    "ilr_error": null
+  },
+  {
+    "task_id": "biweekly-contest-119-number-of-possible-sets-of-closing-branches",
+    "ilr_passed": 0,
+    "ilr_total": 100,
+    "ilr_error": null
+  },
+  {
+    "task_id": "biweekly-contest-120-count-the-number-of-incremovable-subarrays-i",
+    "ilr_passed": 0,
+    "ilr_total": 100,
+    "ilr_error": null
+  },
+  {
+    "task_id": "biweekly-contest-120-count-the-number-of-incremovable-subarrays-ii",
+    "ilr_passed": 0,
+    "ilr_total": 100,
+    "ilr_error": null
+  },
+  {
+    "task_id": "biweekly-contest-120-find-polygon-with-the-largest-perimeter",
+    "ilr_passed": 0,
+    "ilr_total": 100,
+    "ilr_error": null
+  },
+  {
+    "task_id": "biweekly-contest-122-find-if-array-can-be-sorted",
+    "ilr_passed": 0,
+    "ilr_total": 100,
+    "ilr_error": null
+  },
+  {
+    "task_id": "weekly-contest-352-continuous-subarrays",
+    "ilr_passed": 0,
+    "ilr_total": 100,
+    "ilr_error": "ILR parsing failed: main node 4 false_next points to non-existent node 14"
+  },
+  {
+    "task_id": "weekly-contest-352-longest-even-odd-subarray-with-threshold",
+    "ilr_passed": 0,
+    "ilr_total": 100,
+    "ilr_error": null
+  },
+  {
+    "task_id": "weekly-contest-352-sum-of-imbalance-numbers-of-all-subarrays",
+    "ilr_passed": 0,
+    "ilr_total": 100,
+    "ilr_error": null
+  },
+  {
+    "task_id": "weekly-contest-353-apply-operations-to-make-all-array-elements-equal-to-zero",
+    "ilr_passed": 0,
+    "ilr_total": 100,
+    "ilr_error": null
+  },
+  {
+    "task_id": "weekly-contest-354-length-of-the-longest-valid-substring",
+    "ilr_passed": 0,
+    "ilr_total": 100,
+    "ilr_error": null
+  },
+  {
+    "task_id": "weekly-contest-354-minimum-index-of-a-valid-split",
+    "ilr_passed": 0,
+    "ilr_total": 100,
+    "ilr_error": null
+  },
+  {
+    "task_id": "weekly-contest-357-faulty-keyboard",
+    "ilr_passed": 0,
+    "ilr_total": 100,
+    "ilr_error": "ILR parsing failed: main node 3 false_next points to non-existent node 13"
+  },
+  {
+    "task_id": "weekly-contest-357-maximum-elegance-of-a-k-length-subsequence",
+    "ilr_passed": 47,
+    "ilr_total": 100,
+    "ilr_error": null
+  },
+  {
+    "task_id": "weekly-contest-358-minimum-absolute-difference-between-elements-with-constraint",
+    "ilr_passed": 0,
+    "ilr_total": 100,
+    "ilr_error": null
+  },
+  {
+    "task_id": "weekly-contest-359-determine-the-minimum-sum-of-a-k-avoiding-array",
+    "ilr_passed": 1,
+    "ilr_total": 100,
+    "ilr_error": null
+  },
+  {
+    "task_id": "weekly-contest-360-furthest-point-from-origin",
+    "ilr_passed": 0,
+    "ilr_total": 100,
+    "ilr_error": null
+  },
+  {
+    "task_id": "weekly-contest-360-maximize-value-of-function-in-a-ball-passing-game",
+    "ilr_passed": 0,
+    "ilr_total": 100,
+    "ilr_error": null
+  },
+  {
+    "task_id": "weekly-contest-360-minimum-operations-to-form-subsequence-with-target-sum",
+    "ilr_passed": 20,
+    "ilr_total": 100,
+    "ilr_error": null
+  },
+  {
+    "task_id": "weekly-contest-364-maximum-odd-binary-number",
+    "ilr_passed": 0,
+    "ilr_total": 100,
+    "ilr_error": null
+  },
+  {
+    "task_id": "weekly-contest-366-apply-operations-on-array-to-maximize-sum-of-squares",
+    "ilr_passed": 0,
+    "ilr_total": 100,
+    "ilr_error": null
+  },
+  {
+    "task_id": "weekly-contest-367-construct-product-matrix",
+    "ilr_passed": 0,
+    "ilr_total": 100,
+    "ilr_error": "ILR parsing failed: main missing termination node (end or return)"
+  },
+  {
+    "task_id": "weekly-contest-370-find-champion-i",
+    "ilr_passed": 0,
+    "ilr_total": 100,
+    "ilr_error": null
+  },
+  {
+    "task_id": "weekly-contest-370-maximum-balanced-subsequence-sum",
+    "ilr_passed": 0,
+    "ilr_total": 100,
+    "ilr_error": null
+  },
+  {
+    "task_id": "weekly-contest-371-maximum-strong-pair-xor-ii",
+    "ilr_passed": 0,
+    "ilr_total": 100,
+    "ilr_error": null
+  },
+  {
+    "task_id": "weekly-contest-371-minimum-operations-to-maximize-last-elements-in-arrays",
+    "ilr_passed": 0,
+    "ilr_total": 100,
+    "ilr_error": null
+  },
+  {
+    "task_id": "weekly-contest-373-count-beautiful-substrings-i",
+    "ilr_passed": 0,
+    "ilr_total": 100,
+    "ilr_error": null
+  },
+  {
+    "task_id": "weekly-contest-373-make-lexicographically-smallest-array-by-swapping-elements",
+    "ilr_passed": 0,
+    "ilr_total": 100,
+    "ilr_error": "ILR parsing failed: main node 8 false_next points to non-existent node 10"
+  },
+  {
+    "task_id": "weekly-contest-374-find-the-peaks",
+    "ilr_passed": 0,
+    "ilr_total": 100,
+    "ilr_error": "ILR parsing failed: main missing termination node (end or return)"
+  },
+  {
+    "task_id": "weekly-contest-374-minimum-number-of-coins-to-be-added",
+    "ilr_passed": 6,
+    "ilr_total": 100,
+    "ilr_error": null
+  },
+  {
+    "task_id": "weekly-contest-375-count-subarrays-where-max-element-appears-at-least-k-times",
+    "ilr_passed": 0,
+    "ilr_total": 100,
+    "ilr_error": "ILR parsing failed: main node 3 false_next points to non-existent node 13"
+  },
+  {
+    "task_id": "weekly-contest-376-apply-operations-to-maximize-frequency-score",
+    "ilr_passed": 0,
+    "ilr_total": 100,
+    "ilr_error": null
+  },
+  {
+    "task_id": "weekly-contest-376-find-missing-and-repeated-values",
+    "ilr_passed": 0,
+    "ilr_total": 100,
+    "ilr_error": null
+  },
+  {
+    "task_id": "weekly-contest-378-find-longest-special-substring-that-occurs-thrice-i",
+    "ilr_passed": 5,
+    "ilr_total": 100,
+    "ilr_error": null
+  },
+  {
+    "task_id": "weekly-contest-378-find-longest-special-substring-that-occurs-thrice-ii",
+    "ilr_passed": 0,
+    "ilr_total": 100,
+    "ilr_error": "ILR parsing failed: main missing termination node (end or return)"
+  },
+  {
+    "task_id": "HumanEval-1",
+    "ilr_passed": 0,
+    "ilr_total": 4,
+    "ilr_error": null
+  },
+  {
+    "task_id": "HumanEval-8",
+    "ilr_passed": 0,
+    "ilr_total": 5,
+    "ilr_error": null
+  },
+  {
+    "task_id": "HumanEval-12",
+    "ilr_passed": 3,
+    "ilr_total": 3,
+    "ilr_error": null
+  },
+  {
+    "task_id": "HumanEval-19",
+    "ilr_passed": 2,
+    "ilr_total": 5,
+    "ilr_error": null
+  },
+  {
+    "task_id": "HumanEval-20",
+    "ilr_passed": 0,
+    "ilr_total": 5,
+    "ilr_error": null
+  },
+  {
+    "task_id": "HumanEval-32",
+    "ilr": "NO_TEST_CASES",
+    "code": "-"
+  },
+  {
+    "task_id": "HumanEval-36",
+    "ilr_passed": 1,
+    "ilr_total": 8,
+    "ilr_error": null
+  },
+  {
+    "task_id": "HumanEval-38",
+    "ilr_passed": 0,
+    "ilr_total": 1,
+    "ilr_error": "ILR parsing failed: main has multiple start nodes: [1, 8]"
+  },
+  {
+    "task_id": "HumanEval-39",
+    "ilr_passed": 0,
+    "ilr_total": 10,
+    "ilr_error": null
+  },
+  {
+    "task_id": "HumanEval-50",
+    "ilr_passed": 0,
+    "ilr_total": 1,
+    "ilr_error": null
+  },
+  {
+    "task_id": "HumanEval-62",
+    "ilr_passed": 0,
+    "ilr_total": 5,
+    "ilr_error": null
+  },
+  {
+    "task_id": "HumanEval-67",
+    "ilr_passed": 0,
+    "ilr_total": 7,
+    "ilr_error": null
+  },
+  {
+    "task_id": "HumanEval-72",
+    "ilr_passed": 0,
+    "ilr_total": 6,
+    "ilr_error": null
+  },
+  {
+    "task_id": "HumanEval-95",
+    "ilr_passed": 0,
+    "ilr_total": 7,
+    "ilr_error": null
+  },
+  {
+    "task_id": "HumanEval-99",
+    "ilr_passed": 0,
+    "ilr_total": 5,
+    "ilr_error": null
+  },
+  {
+    "task_id": "HumanEval-101",
+    "ilr_passed": 1,
+    "ilr_total": 6,
+    "ilr_error": null
+  },
+  {
+    "task_id": "HumanEval-103",
+    "ilr_passed": 0,
+    "ilr_total": 12,
+    "ilr_error": null
+  },
+  {
+    "task_id": "HumanEval-108",
+    "ilr_passed": 1,
+    "ilr_total": 8,
+    "ilr_error": null
+  },
+  {
+    "task_id": "HumanEval-118",
+    "ilr_passed": 2,
+    "ilr_total": 13,
+    "ilr_error": null
+  },
+  {
+    "task_id": "HumanEval-124",
+    "ilr_passed": 1,
+    "ilr_total": 16,
+    "ilr_error": null
+  },
+  {
+    "task_id": "HumanEval-125",
+    "ilr_passed": 7,
+    "ilr_total": 8,
+    "ilr_error": null
+  },
+  {
+    "task_id": "HumanEval-132",
+    "ilr_passed": 0,
+    "ilr_total": 14,
+    "ilr_error": null
+  },
+  {
+    "task_id": "HumanEval-140",
+    "ilr_passed": 0,
+    "ilr_total": 5,
+    "ilr_error": null
+  },
+  {
+    "task_id": "HumanEval-147",
+    "ilr_passed": 0,
+    "ilr_total": 4,
+    "ilr_error": null
+  },
+  {
+    "task_id": "HumanEval-150",
+    "ilr_passed": 1,
+    "ilr_total": 10,
+    "ilr_error": null
+  },
+  {
+    "task_id": "HumanEval-154",
+    "ilr_passed": 0,
+    "ilr_total": 6,
+    "ilr_error": "ILR parsing failed: main node 10 next points to non-existent node 12"
+  },
+  {
+    "task_id": "HumanEval-155",
+    "ilr_passed": 0,
+    "ilr_total": 8,
+    "ilr_error": null
+  },
+  {
+    "task_id": "HumanEval-156",
+    "ilr_passed": 1,
+    "ilr_total": 14,
+    "ilr_error": null
+  },
+  {
+    "task_id": "29. Divide Two Integers",
+    "ilr_passed": 4,
+    "ilr_total": 9,
+    "ilr_error": null
+  },
+  {
+    "task_id": "60. Permutation Sequence",
+    "ilr_passed": 0,
+    "ilr_total": 9,
+    "ilr_error": null
+  },
+  {
+    "task_id": "67. Add Binary",
+    "ilr_passed": 0,
+    "ilr_total": 12,
+    "ilr_error": null
+  },
+  {
+    "task_id": "227. Basic Calculator II",
+    "ilr_passed": 0,
+    "ilr_total": 9,
+    "ilr_error": null
+  },
+  {
+    "task_id": "264. Ugly Number II",
+    "ilr_passed": 0,
+    "ilr_total": 9,
+    "ilr_error": "ILR parsing failed: main node 5 false_next points to non-existent node 12"
+  },
+  {
+    "task_id": "282. Expression Add Operators",
+    "ilr_passed": 0,
+    "ilr_total": 8,
+    "ilr_error": "ILR parsing failed: JSON parsing failed: Expecting value: line 110 column 13 (char 2995)"
+  },
+  {
+    "task_id": "313. Super Ugly Number",
+    "ilr_passed": 4,
+    "ilr_total": 9,
+    "ilr_error": null
+  },
+  {
+    "task_id": "396. Rotate Function",
+    "ilr_passed": 0,
+    "ilr_total": 8,
+    "ilr_error": null
+  },
+  {
+    "task_id": "479. Largest Palindrome Product",
+    "ilr_passed": 1,
+    "ilr_total": 9,
+    "ilr_error": null
+  },
+  {
+    "task_id": "523. Continuous Subarray Sum",
+    "ilr_passed": 0,
+    "ilr_total": 9,
+    "ilr_error": null
+  },
+  {
+    "task_id": "553. Optimal Division",
+    "ilr_passed": 0,
+    "ilr_total": 9,
+    "ilr_error": null
+  },
+  {
+    "task_id": "633. Sum of Square Numbers",
+    "ilr_passed": 0,
+    "ilr_total": 9,
+    "ilr_error": null
+  },
+  {
+    "task_id": "780. Reaching Points",
+    "ilr_passed": 9,
+    "ilr_total": 9,
+    "ilr_error": null
+  },
+  {
+    "task_id": "878. Nth Magical Number",
+    "ilr_passed": 0,
+    "ilr_total": 9,
+    "ilr_error": "ILR parsing failed: main node 3 false_next points to non-existent node 12"
+  },
+  {
+    "task_id": "1017. Convert to Base -2",
+    "ilr_passed": 2,
+    "ilr_total": 9,
+    "ilr_error": null
+  },
+  {
+    "task_id": "1154. Day of the Year",
+    "ilr_passed": 2,
+    "ilr_total": 9,
+    "ilr_error": null
+  },
+  {
+    "task_id": "1399. Count Largest Group",
+    "ilr_passed": 0,
+    "ilr_total": 8,
+    "ilr_error": null
+  },
+  {
+    "task_id": "1830. Minimum Number of Operations to Make String Sorted",
+    "ilr_passed": 0,
+    "ilr_total": 9,
+    "ilr_error": null
+  },
+  {
+    "task_id": "1862. Sum of Floored Pairs",
+    "ilr_passed": 0,
+    "ilr_total": 7,
+    "ilr_error": "ILR parsing failed: main missing termination node (end or return)"
+  },
+  {
+    "task_id": "2081. Sum of k-Mirror Numbers",
+    "ilr_passed": 0,
+    "ilr_total": 9,
+    "ilr_error": "ILR parsing failed: JSON parsing failed: Expecting value: line 99 column 21 (char 2592)"
+  },
+  {
+    "task_id": "2117. Abbreviating the Product of a Range",
+    "ilr_passed": 1,
+    "ilr_total": 9,
+    "ilr_error": null
+  },
+  {
+    "task_id": "2183. Count Array Pairs Divisible by K",
+    "ilr_passed": 0,
+    "ilr_total": 9,
+    "ilr_error": null
+  },
+  {
+    "task_id": "2376. Count Special Integers",
+    "ilr_passed": 0,
+    "ilr_total": 9,
+    "ilr_error": null
+  },
+  {
+    "task_id": "2514. Count Anagrams",
+    "ilr_passed": 0,
+    "ilr_total": 9,
+    "ilr_error": null
+  },
+  {
+    "task_id": "2709. Greatest Common Divisor Traversal",
+    "ilr_passed": 0,
+    "ilr_total": 9,
+    "ilr_error": null
+  },
+  {
+    "task_id": "2790. Maximum Number of Groups With Increasing Length",
+    "ilr_passed": 0,
+    "ilr_total": 9,
+    "ilr_error": "ILR parsing failed: Function poss node 16 false_next points to non-existent node 18"
+  },
+  {
+    "task_id": "2818. Apply Operations to Maximize Score",
+    "ilr_passed": 0,
+    "ilr_total": 9,
+    "ilr_error": null
+  },
+  {
+    "task_id": "2949. Count Beautiful Substrings II",
+    "ilr_passed": 0,
+    "ilr_total": 9,
+    "ilr_error": null
+  },
+  {
+    "task_id": "3102. Minimize Manhattan Distances",
+    "ilr_passed": 0,
+    "ilr_total": 9,
+    "ilr_error": null
+  },
+  {
+    "task_id": "3154. Find Number of Ways to Reach the K-th Stair",
+    "ilr_passed": 0,
+    "ilr_total": 9,
+    "ilr_error": null
+  },
+  {
+    "task_id": "3251. Find the Count of Monotonic Pairs II",
+    "ilr_passed": 0,
+    "ilr_total": 8,
+    "ilr_error": null
+  },
+  {
+    "task_id": "3312. Sorted GCD Pair Queries",
+    "ilr_passed": 0,
+    "ilr_total": 9,
+    "ilr_error": "ILR parsing failed: main node 17 next points to non-existent node 20"
+  }
+]

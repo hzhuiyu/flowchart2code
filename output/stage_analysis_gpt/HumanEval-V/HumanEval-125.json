@@ -1,0 +1,111 @@
+{
+  "task_id": "HumanEval-125",
+  "dataset": "HumanEval-V",
+  "difficulty": null,
+  "title": null,
+  "result": "failed: ",
+  "ilr": "{\n  \"problem_id\": \"split_words_example\",\n  \"nodes\": [\n    {\"id\": 1, \"type\": \"start\", \"label\": \"Start\", \"next\": 2},\n    {\"id\": 2, \"type\": \"process\", \"label\": \"Input: txt (string)\", \"action\": \"ctx['txt']=ctx['arg0']\", \"next\": 3},\n    {\"id\": 3, \"type\": \"decision\", \"label\": \"Is ' ' in txt?\", \"logic\": \"' ' in ctx['txt']\", \"true_next\": 4, \"false_next\": 5},\n    {\"id\": 4, \"type\": \"process\", \"label\": \"Output: txt.split()\", \"action\": \"ctx['result'] = ctx['txt'].split()\", \"next\": 6},\n    {\"id\": 5, \"type\": \"decision\", \"label\": \"Is ',' in txt?\", \"logic\": \"',' in ctx['txt']\", \"true_next\": 6, \"false_next\": 7},\n    {\"id\": 6, \"type\": \"process\", \"label\": \"Output: txt.replace(',', '').split()\", \"action\": \"ctx['result'] = ctx['txt'].replace(',', '').split()\", \"next\": 8},\n    {\"id\": 7, \"type\": \"process\", \"label\": \"Count lower-case letters with odd order\", \"action\": \"ctx['result'] = len([i for i in ctx['txt'] if i.islower() and ord(i) % 2 == 0])\", \"next\": 8},\n    {\"id\": 8, \"type\": \"end\", \"label\": \"Return result\", \"output\": \"ctx['result']\"}\n  ]\n}",
+  "code": "def split_words(txt):\n    if ' ' in txt:\n        result = txt.split()\n    elif ',' in txt:\n        result = txt.replace(',', '').split()\n    else:\n        result = len([i for i in txt if i.islower() and ord(i) % 2 == 0])\n    return result",
+  "prompt": "\ndef split_words(txt):\n    '''\n    Given a string of words, return a list of words split on whitespace, if no whitespaces exists in the text you\n    should split on commas ',' if no commas exists you should return the number of lower-case letters with odd order in the\n    alphabet, ord('a') = 0, ord('b') = 1, ... ord('z') = 25\n    Examples\n    split_words(\"Hello world!\") ➞ [\"Hello\", \"world!\"]\n    split_words(\"Hello,world!\") ➞ [\"Hello\", \"world!\"]\n    split_words(\"abcdef\") == 3 \n    '''\n",
+  "test": "def check(candidate):\n\n    assert candidate(\"Hello world!\") == [\"Hello\",\"world!\"]\n    assert candidate(\"Hello,world!\") == [\"Hello\",\"world!\"]\n    assert candidate(\"Hello world,!\") == [\"Hello\",\"world,!\"]\n    assert candidate(\"Hello,Hello,world !\") == [\"Hello,Hello,world\",\"!\"]\n    assert candidate(\"abcdef\") == 3\n    assert candidate(\"aaabb\") == 2\n    assert candidate(\"aaaBb\") == 1\n    assert candidate(\"\") == 0\n",
+  "ocr_data": {
+    "nodes": [
+      {
+        "node_id": 1,
+        "shape_type": "rectangle",
+        "raw_text": "Start",
+        "position": "top"
+      },
+      {
+        "node_id": 2,
+        "shape_type": "rectangle",
+        "raw_text": "Input: txt (string)",
+        "position": "middle"
+      },
+      {
+        "node_id": 3,
+        "shape_type": "diamond",
+        "raw_text": "Is ' ' in txt?",
+        "position": "middle"
+      },
+      {
+        "node_id": 4,
+        "shape_type": "rectangle",
+        "raw_text": "Output: txt.split()",
+        "position": "bottom"
+      },
+      {
+        "node_id": 5,
+        "shape_type": "diamond",
+        "raw_text": "Is ',' in txt?",
+        "position": "bottom"
+      },
+      {
+        "node_id": 6,
+        "shape_type": "rectangle",
+        "raw_text": "Output: txt.replace(',', '').split()",
+        "position": "bottom"
+      },
+      {
+        "node_id": 7,
+        "shape_type": "rectangle",
+        "raw_text": "Count lower-case letters with odd order",
+        "position": "bottom"
+      },
+      {
+        "node_id": 8,
+        "shape_type": "rectangle",
+        "raw_text": "Output: len([i for i in txt if i.islower() and ord(i) % 2 == 0])",
+        "position": "bottom"
+      }
+    ],
+    "edges": [
+      {
+        "from_node": 1,
+        "to_node": 2,
+        "label": ""
+      },
+      {
+        "from_node": 2,
+        "to_node": 3,
+        "label": ""
+      },
+      {
+        "from_node": 3,
+        "to_node": 4,
+        "label": "Yes"
+      },
+      {
+        "from_node": 3,
+        "to_node": 5,
+        "label": "No"
+      },
+      {
+        "from_node": 5,
+        "to_node": 6,
+        "label": "Yes"
+      },
+      {
+        "from_node": 5,
+        "to_node": 7,
+        "label": "No"
+      },
+      {
+        "from_node": 7,
+        "to_node": 8,
+        "label": ""
+      }
+    ],
+    "other_text": []
+  },
+  "analysis": {
+    "ilr_verdict": "incorrect",
+    "ilr_issues": "节点6的公式错误：ctx['txt'].replace(',', '') 把逗号替换为空字符串而非空格，导致 'Hello,world!' 拼成一个词；应为 replace(',', ' ') 再 split()。其余分支（空格split、奇数序小写字母计数 ord(i)%2==0）均正确。",
+    "code_vs_ilr": "faithful",
+    "code_issues": "代码逐句忠实实现了ILR（包括错误的 replace(',', '')），忠实执行了错误的ILR。",
+    "error_source": "ilr",
+    "ocr_contribution": "no",
+    "root_cause": "流程图节点本身写的就是 txt.replace(',', '').split()（OCR原文即如此，逗号替换为空串），算法在流程图层面就错了；ILR 忠实照抄，代码也忠实实现。",
+    "evidence": "split_words(\"Hello,world!\") 实际输出 ['Helloworld!']，期望 ['Hello', 'world!']；其余测试（含 'abcdef'==3、'aaabb'==2 等）均通过，失败仅由 replace 目标写错引起。OCR 节点6原文 \"Output: txt.replace(',', '').split()\" 与 ILR 一致，OCR 对该节点文字（含引号逗号等标点）捕获完整。"
+  }
+}

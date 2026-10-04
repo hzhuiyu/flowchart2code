@@ -1,0 +1,192 @@
+{
+  "task_id": "HumanEval-20",
+  "dataset": "HumanEval-V",
+  "difficulty": null,
+  "title": null,
+  "result": "failed: ",
+  "ilr": "{\n  \"problem_id\": \"find_closest_elements\",\n  \"nodes\": [\n    {\"id\": 1, \"type\": \"start\", \"label\": \"Start\", \"next\": 2},\n    {\"id\": 2, \"type\": \"process\", \"label\": \"Input: numbers (List of float)\", \"action\": \"ctx['numbers']=ctx['arg0']; ctx['closest_pair']=None; ctx['distance']=None; ctx['n']=len(ctx['numbers']); ctx['i']=0; ctx['idx']=0; ctx['idx2']=0\", \"next\": 3},\n    {\"id\": 3, \"type\": \"decision\", \"label\": \"Is length of numbers < 2?\", \"logic\": \"ctx['n'] < 2\", \"true_next\": 4, \"false_next\": 5},\n    {\"id\": 4, \"type\": \"end\", \"label\": \"Output: Error (At least two elements are required)\", \"output\": \"Error\"},\n    {\"id\": 5, \"type\": \"process\", \"label\": \"Initialize closest_pair = None, distance = None\", \"action\": \"\", \"next\": 6},\n    {\"id\": 6, \"type\": \"process\", \"label\": \"Iterate over each element in numbers\", \"action\": \"for ctx['i'] in range(ctx['n']): ctx['idx2']=0\", \"next\": 7},\n    {\"id\": 7, \"type\": \"process\", \"label\": \"For each element, iterate over each other element in numbers\", \"action\": \"for ctx['idx2'] in range(ctx['n']):\", \"next\": 8},\n    {\"id\": 8, \"type\": \"decision\", \"label\": \"Is idx != idx2?\", \"logic\": \"ctx['i'] != ctx['idx2']\", \"true_next\": 9, \"false_next\": 7},\n    {\"id\": 9, \"type\": \"process\", \"label\": \"Calculate distance: new_distance = abs(elem - elem2)\", \"action\": \"ctx['new_distance'] = abs(ctx['numbers'][ctx['i']] - ctx['numbers'][ctx['idx2']])\", \"next\": 10},\n    {\"id\": 10, \"type\": \"decision\", \"label\": \"Is distance == None?\", \"logic\": \"ctx['distance'] is None\", \"true_next\": 11, \"false_next\": 12},\n    {\"id\": 11, \"type\": \"process\", \"label\": \"Set distance = new_distance, closest_pair = sorted([elem, elem2])\", \"action\": \"ctx['distance'] = ctx['new_distance']; ctx['closest_pair'] = sorted([ctx['numbers'][ctx['i']], ctx['numbers'][ctx['idx2']]])\", \"next\": 7},\n    {\"id\": 12, \"type\": \"decision\", \"label\": \"Is new_distance < distance?\", \"logic\": \"ctx['new_distance'] < ctx['distance']\", \"true_next\": 13, \"false_next\": 7},\n    {\"id\": 13, \"type\": \"process\", \"label\": \"Update distance = new_distance, closest_pair = sorted([elem, elem2])\", \"action\": \"ctx['distance'] = ctx['new_distance']; ctx['closest_pair'] = sorted([ctx['numbers'][ctx['i']], ctx['numbers'][ctx['idx2']]])\", \"next\": 7},\n    {\"id\": 14, \"type\": \"end\", \"label\": \"Output: closest_pair (the closest elements)\", \"output\": \"ctx['closest_pair']\"}\n  ]\n}",
+  "code": "from typing import List, Tuple\n\n\ndef find_closest_elements(numbers: List[float]) -> Tuple[float, float]:\n    if len(numbers) < 2:\n        raise ValueError(\"At least two elements are required\")\n    \n    closest_pair = None\n    distance = None\n    n = len(numbers)\n\n    for i in range(n):\n        for idx2 in range(n):\n            if i != idx2:\n                new_distance = abs(numbers[i] - numbers[idx2])\n                if distance is None:\n                    distance = new_distance\n                    closest_pair = sorted([numbers[i], numbers[idx2]])\n                elif new_distance < distance:\n                    distance = new_distance\n                    closest_pair = sorted([numbers[i], numbers[idx2]])\n\n    return closest_pair",
+  "prompt": "from typing import List, Tuple\n\n\ndef find_closest_elements(numbers: List[float]) -> Tuple[float, float]:\n    \"\"\" From a supplied list of numbers (of length at least two) select and return two that are the closest to each\n    other and return them in order (smaller number, larger number).\n    >>> find_closest_elements([1.0, 2.0, 3.0, 4.0, 5.0, 2.2])\n    (2.0, 2.2)\n    >>> find_closest_elements([1.0, 2.0, 3.0, 4.0, 5.0, 2.0])\n    (2.0, 2.0)\n    \"\"\"\n",
+  "test": "\n\nMETADATA = {\n    'author': 'jt',\n    'dataset': 'test'\n}\n\n\ndef check(candidate):\n    assert candidate([1.0, 2.0, 3.9, 4.0, 5.0, 2.2]) == (3.9, 4.0)\n    assert candidate([1.0, 2.0, 5.9, 4.0, 5.0]) == (5.0, 5.9)\n    assert candidate([1.0, 2.0, 3.0, 4.0, 5.0, 2.2]) == (2.0, 2.2)\n    assert candidate([1.0, 2.0, 3.0, 4.0, 5.0, 2.0]) == (2.0, 2.0)\n    assert candidate([1.1, 2.2, 3.1, 4.1, 5.1]) == (2.2, 3.1)\n\n",
+  "ocr_data": {
+    "nodes": [
+      {
+        "node_id": 1,
+        "shape_type": "rectangle",
+        "raw_text": "Start",
+        "position": "top"
+      },
+      {
+        "node_id": 2,
+        "shape_type": "rectangle",
+        "raw_text": "Input: numbers (List of float)",
+        "position": "middle"
+      },
+      {
+        "node_id": 3,
+        "shape_type": "diamond",
+        "raw_text": "Is length of numbers < 2?",
+        "position": "middle"
+      },
+      {
+        "node_id": 4,
+        "shape_type": "rectangle",
+        "raw_text": "Output: Error (At least two elements are required)",
+        "position": "middle"
+      },
+      {
+        "node_id": 5,
+        "shape_type": "rectangle",
+        "raw_text": "Initialize closest_pair = None, distance = None",
+        "position": "middle"
+      },
+      {
+        "node_id": 6,
+        "shape_type": "rectangle",
+        "raw_text": "Iterate over each element in numbers",
+        "position": "middle"
+      },
+      {
+        "node_id": 7,
+        "shape_type": "rectangle",
+        "raw_text": "For each element, iterate over each other element in numbers",
+        "position": "middle"
+      },
+      {
+        "node_id": 8,
+        "shape_type": "diamond",
+        "raw_text": "Is idx != idx2?",
+        "position": "middle"
+      },
+      {
+        "node_id": 9,
+        "shape_type": "rectangle",
+        "raw_text": "Calculate distance: new_distance = abs(elem - elem2)",
+        "position": "middle"
+      },
+      {
+        "node_id": 10,
+        "shape_type": "diamond",
+        "raw_text": "Is distance == None?",
+        "position": "middle"
+      },
+      {
+        "node_id": 11,
+        "shape_type": "rectangle",
+        "raw_text": "Set distance = new_distance, closest_pair = sorted([elem, elem2])",
+        "position": "middle"
+      },
+      {
+        "node_id": 12,
+        "shape_type": "diamond",
+        "raw_text": "Is new_distance < distance?",
+        "position": "middle"
+      },
+      {
+        "node_id": 13,
+        "shape_type": "rectangle",
+        "raw_text": "Update distance = new_distance, closest_pair = sorted([elem, elem2])",
+        "position": "bottom"
+      },
+      {
+        "node_id": 14,
+        "shape_type": "rectangle",
+        "raw_text": "Output: closest_pair (the closest elements)",
+        "position": "bottom"
+      }
+    ],
+    "edges": [
+      {
+        "from_node": 1,
+        "to_node": 2,
+        "label": ""
+      },
+      {
+        "from_node": 2,
+        "to_node": 3,
+        "label": ""
+      },
+      {
+        "from_node": 3,
+        "to_node": 4,
+        "label": "Yes"
+      },
+      {
+        "from_node": 3,
+        "to_node": 5,
+        "label": "No"
+      },
+      {
+        "from_node": 5,
+        "to_node": 6,
+        "label": ""
+      },
+      {
+        "from_node": 6,
+        "to_node": 7,
+        "label": ""
+      },
+      {
+        "from_node": 7,
+        "to_node": 8,
+        "label": ""
+      },
+      {
+        "from_node": 8,
+        "to_node": 9,
+        "label": "Yes"
+      },
+      {
+        "from_node": 8,
+        "to_node": 7,
+        "label": "No"
+      },
+      {
+        "from_node": 9,
+        "to_node": 10,
+        "label": ""
+      },
+      {
+        "from_node": 10,
+        "to_node": 11,
+        "label": "Yes"
+      },
+      {
+        "from_node": 10,
+        "to_node": 7,
+        "label": "No"
+      },
+      {
+        "from_node": 11,
+        "to_node": 12,
+        "label": ""
+      },
+      {
+        "from_node": 12,
+        "to_node": 13,
+        "label": "Yes"
+      },
+      {
+        "from_node": 12,
+        "to_node": 7,
+        "label": "No"
+      },
+      {
+        "from_node": 13,
+        "to_node": 14,
+        "label": ""
+      }
+    ],
+    "other_text": []
+  },
+  "analysis": {
+    "ilr_verdict": "incorrect",
+    "ilr_issues": "ILR图结构不完整：外层循环无回边，输出节点14没有任何入边，忠实按图执行会在节点7/8之间死循环、永远到不了输出；即使按表意修补为双层循环，closest_pair=sorted([elem,elem2])得到的是list，而测试断言比较的是tuple。",
+    "code_vs_ilr": "faithful",
+    "code_issues": "代码按ILR表意实现了双重循环并合理补全了循环退出路径，但同样返回sorted得到的list而非tuple，忠实继承了ILR的输出类型缺陷，未引入新错误。",
+    "error_source": "ilr",
+    "ocr_contribution": "no",
+    "root_cause": "按OCR文本看流程图本身算法就不完整（缺外层循环回边、节点13提前连到输出、标签closest_pair=sorted([elem,elem2])缺少tuple()转换）；ILR重建后输出节点不可达且输出list，代码忠实实现该逻辑，所有断言因list!=tuple失败。",
+    "evidence": "生成代码find_closest_elements([1.0,2.0,3.9,4.0,5.0,2.2])返回[3.9,4.0]（list类型），与(3.9,4.0)比较为False，与FAILURE RESULT（无报错、答案错误）一致。"
+  }
+}

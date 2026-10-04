@@ -1,0 +1,76 @@
+{
+  "total": 77,
+  "processed": 43,
+  "success": 23,
+  "failed": 20,
+  "success_rate": 53.48837209302325,
+  "iteration_stats": {
+    "1": {
+      "count": 43,
+      "avg_duration": 14.893589163935461,
+      "avg_total_tokens": 43967.767441860466,
+      "avg_prompt_tokens": 43433.95348837209,
+      "avg_completion_tokens": 533.8139534883721
+    },
+    "2": {
+      "count": 26,
+      "avg_duration": 12.248405860020565,
+      "avg_total_tokens": 2386.6923076923076,
+      "avg_prompt_tokens": 1795.1538461538462,
+      "avg_completion_tokens": 591.5384615384615
+    },
+    "3": {
+      "count": 21,
+      "avg_duration": 11.608876387278238,
+      "avg_total_tokens": 2445.7619047619046,
+      "avg_prompt_tokens": 1844.0,
+      "avg_completion_tokens": 601.7619047619048
+    }
+  },
+  "avg_duration_by_iteration": {
+    "1": 14.893589163935461,
+    "2": 12.248405860020565,
+    "3": 11.608876387278238
+  },
+  "reflection_mode": "code_only",
+  "final_merge_eval": {
+    "samples_file": "output/MATH/gpt-4o-mini_text_image/samples.jsonl",
+    "reflection_dir": "output/MATH/gpt-4o-mini_text_image/reflection_code_only",
+    "output_file": "output/MATH/gpt-4o-mini_text_image/reflection_code_only/samples_reflection_merged.jsonl",
+    "merged_results_file": "output/MATH/gpt-4o-mini_text_image/reflection_code_only/samples_reflection_merged.jsonl_results.jsonl",
+    "results_txt": "output/MATH/gpt-4o-mini_text_image/reflection_code_only/results.txt",
+    "problem_file": "data/MATH/MATH.jsonl",
+    "merge_summary": {
+      "total_rows": 125,
+      "replaced_rows": 77,
+      "replaced_by_first_passed": 52,
+      "replaced_by_last_failed": 25,
+      "missing_generated_code": 0,
+      "selection_stats": {
+        "first_passed": 52,
+        "keep_original": 48,
+        "iter_3_failed": 25
+      }
+    },
+    "eval_result": {
+      "pass@1": 0.8
+    },
+    "difficulty_summary": {
+      "Easy": {
+        "passed": 44.0,
+        "total": 45.0,
+        "rate": 0.9777777777777777
+      },
+      "Medium": {
+        "passed": 35.0,
+        "total": 40.0,
+        "rate": 0.875
+      },
+      "Hard": {
+        "passed": 21.0,
+        "total": 40.0,
+        "rate": 0.525
+      }
+    }
+  }
+}

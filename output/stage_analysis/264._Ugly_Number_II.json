@@ -1,0 +1,80 @@
+{
+  "problem_id": "ugly_number",
+  "nodes": [
+    {
+      "id": 1,
+      "type": "start",
+      "label": "Start",
+      "next": 2
+    },
+    {
+      "id": 2,
+      "type": "process",
+      "label": "Input: n (integer)",
+      "action": "ctx['n'] = ctx['arg0']; ctx['i'] = 0; ctx['Ist'] = [1]; ctx['seen'] = {1}",
+      "next": 3
+    },
+    {
+      "id": 3,
+      "type": "decision",
+      "label": "Is i == n-1?",
+      "logic": "ctx['i'] == ctx['n'] - 1",
+      "true_next": 7,
+      "false_next": 4
+    },
+    {
+      "id": 4,
+      "type": "process",
+      "label": "For each factor in [2, 3, 5]",
+      "action": "for factor in [2, 3, 5]:\n    ctx['new'] = ctx['ugly'] * factor\n    if ctx['new'] not in ctx['seen']:\n        ctx['seen'].add(ctx['new'])\n        ctx['Ist'].append(ctx['new'])",
+      "next": 5
+    },
+    {
+      "id": 5,
+      "type": "decision",
+      "label": "Is new not in seen?",
+      "logic": "ctx['new'] not in ctx['seen']",
+      "true_next": 6,
+      "false_next": 12
+    },
+    {
+      "id": 6,
+      "type": "process",
+      "label": "Add new to seen and append new to Ist",
+      "action": "ctx['seen'].add(ctx['new']); ctx['Ist'].append(ctx['new'])",
+      "next": 12
+    },
+    {
+      "id": 7,
+      "type": "end",
+      "label": "Output: ugly",
+      "output": "ctx['ugly']"
+    },
+    {
+      "id": 8,
+      "type": "process",
+      "label": "Sort Ist",
+      "action": "ctx['Ist'] = sorted(ctx['Ist'])",
+      "next": 9
+    },
+    {
+      "id": 9,
+      "type": "return",
+      "label": "Output: return Ist[n-1]",
+      "value": "ctx['Ist'][ctx['n'] - 1]"
+    }
+  ],
+  "task_id": "264. Ugly Number II",
+  "dataset": "MATH",
+  "result": "failed: ",
+  "code": "def nthUglyNumber(n):\n    i = 0\n    Ist = [1]\n    seen = {1}\n    \n    while i < n - 1:\n        ugly = Ist[i]\n        for factor in [2, 3, 5]:\n            new = ugly * factor\n            if new not in seen:\n                seen.add(new)\n                Ist.append(new)\n        i += 1\n    \n    return Ist[n - 1]",
+  "verification": {
+    "md_verdict": "ILR Error",
+    "actual_error_source": "both",
+    "ilr_verdict": "incorrect",
+    "code_vs_ilr": "deviates",
+    "md_correct": "partial",
+    "note": "ILR 确实错误：OCR 中 'ugly = Ist.pop(0)' 这一步在 ILR 里被丢掉，ctx['ugly'] 从未赋值，字面执行立即 KeyError；节点5/6 指向不存在的节点12，节点8/9（排序、返回）不可达，i 也无自增。但生成代码还额外偏离：流程图要求每次取最小元并重新排序（pop+sort 保证有序），代码改成直接取未排序的 Ist[i]，而 Ist 是 BFS 生成顺序并非升序，n≥5 即出错，故 both。",
+    "evidence": "ILR 字面执行 nthUglyNumber(3)：KeyError 'ugly'；生成代码：nthUglyNumber(5)=4（期望5）、(10)=25（期望12）；按流程图意图补全（pop(0)+每轮 sorted）：1/2/3/5/10/15/100 全部正确（12、24、1536）。"
+  }
+}

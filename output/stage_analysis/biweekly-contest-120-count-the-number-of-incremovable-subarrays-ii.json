@@ -1,0 +1,154 @@
+{
+  "problem_id": "incremovableSubarrayCount",
+  "nodes": [
+    {
+      "id": 1,
+      "type": "start",
+      "label": "Start",
+      "next": 2
+    },
+    {
+      "id": 2,
+      "type": "process",
+      "label": "Input: nums (List[int])",
+      "action": "ctx['nums'] = ctx['arg0']; ctx['n'] = len(ctx['nums']); ctx['i'] = 0; ctx['j'] = ctx['n'] - 1; ctx['l'] = 0; ctx['r'] = 0; ctx['res'] = 0",
+      "next": 3
+    },
+    {
+      "id": 3,
+      "type": "process",
+      "label": "Initialize nums = [0] + nums + [float('inf')]",
+      "action": "ctx['nums'] = [0] + ctx['nums'] + [float('inf')]",
+      "next": 4
+    },
+    {
+      "id": 4,
+      "type": "process",
+      "label": "Initialize n = length of nums",
+      "action": "ctx['n'] = len(ctx['nums'])",
+      "next": 5
+    },
+    {
+      "id": 5,
+      "type": "decision",
+      "label": "For i from 0 to n - 2",
+      "logic": "ctx['i'] < ctx['n'] - 1",
+      "true_next": 6,
+      "false_next": 8
+    },
+    {
+      "id": 6,
+      "type": "decision",
+      "label": "Is nums[i] >= nums[i + 1]?",
+      "logic": "ctx['nums'][ctx['i']] >= ctx['nums'][ctx['i'] + 1]",
+      "true_next": 7,
+      "false_next": 5
+    },
+    {
+      "id": 7,
+      "type": "process",
+      "label": "Break loop",
+      "action": "ctx['i'] = ctx['n'] - 1",
+      "next": 8
+    },
+    {
+      "id": 8,
+      "type": "decision",
+      "label": "Is the loop completed?",
+      "logic": "ctx['i'] >= ctx['n'] - 1",
+      "true_next": 9,
+      "false_next": 10
+    },
+    {
+      "id": 9,
+      "type": "process",
+      "label": "Output: (n - 2) * (n - 1) // 2",
+      "action": "ctx['res'] = (ctx['n'] - 2) * (ctx['n'] - 1) // 2",
+      "next": 18
+    },
+    {
+      "id": 10,
+      "type": "process",
+      "label": "For j from n - 1 to 1",
+      "action": "ctx['j'] = ctx['n'] - 1",
+      "next": 11
+    },
+    {
+      "id": 11,
+      "type": "decision",
+      "label": "Is nums[j - 1] >= nums[j]?",
+      "logic": "ctx['nums'][ctx['j'] - 1] >= ctx['nums'][ctx['j']]",
+      "true_next": 12,
+      "false_next": 10
+    },
+    {
+      "id": 12,
+      "type": "process",
+      "label": "Break loop",
+      "action": "ctx['j'] = 0",
+      "next": 13
+    },
+    {
+      "id": 13,
+      "type": "process",
+      "label": "Initialize l = 0, r = j, res = 0",
+      "action": "ctx['l'] = 0; ctx['r'] = ctx['j']; ctx['res'] = 0",
+      "next": 14
+    },
+    {
+      "id": 14,
+      "type": "decision",
+      "label": "Is l <= i?",
+      "logic": "ctx['l'] <= ctx['i']",
+      "true_next": 15,
+      "false_next": 17
+    },
+    {
+      "id": 15,
+      "type": "process",
+      "label": "While r < n and nums[l] >= nums[r]",
+      "action": "while ctx['r'] < ctx['n'] and ctx['nums'][ctx['l']] >= ctx['nums'][ctx['r']]: ctx['r'] += 1",
+      "next": 16
+    },
+    {
+      "id": 16,
+      "type": "process",
+      "label": "Increment r by 1",
+      "action": "ctx['r'] += 1",
+      "next": 15
+    },
+    {
+      "id": 17,
+      "type": "process",
+      "label": "Update res: res += n - r",
+      "action": "ctx['res'] += ctx['n'] - ctx['r']",
+      "next": 19
+    },
+    {
+      "id": 18,
+      "type": "end",
+      "label": "Return res",
+      "output": "ctx['res']"
+    },
+    {
+      "id": 19,
+      "type": "process",
+      "label": "Increment l by 1",
+      "action": "ctx['l'] += 1",
+      "next": 14
+    }
+  ],
+  "task_id": "biweekly-contest-120-count-the-number-of-incremovable-subarrays-ii",
+  "dataset": "Algorithm",
+  "result": "failed: ",
+  "code": "class Solution:\n    def incremovableSubarrayCount(self, nums: List[int]) -> int:\n        nums = [0] + nums + [float('inf')]\n        n = len(nums)\n        i = 0\n        j = n - 1\n        l = 0\n        r = 0\n        res = 0\n        \n        while i < n - 1:\n            if nums[i] >= nums[i + 1]:\n                i = n - 1\n            else:\n                i += 1\n        \n        j = n - 1\n        while j > 0:\n            if nums[j - 1] >= nums[j]:\n                j = 0\n            else:\n                j -= 1\n        \n        l = 0\n        r = j\n        while l <= i:\n            while r < n and nums[l] >= nums[r]:\n                r += 1\n            r += 1\n            res += n - r\n            l += 1\n        \n        return res",
+  "verification": {
+    "md_verdict": "ILR Error",
+    "actual_error_source": "both",
+    "ilr_verdict": "incorrect",
+    "code_vs_ilr": "deviates",
+    "md_correct": "partial",
+    "note": "MD 只说对一半。ILR 的节点7 把 break 误写成赋值 i=n-1，使节点8 的'循环正常完成'判断恒真，节点10-17（两指针主体）不可达，忠实执行对任何输入都返回 (n-2)*(n-1)//2（仅整体递增时碰巧正确）；节点12 同样误写 j=0，节点15↔16 还构成死循环环。代码则额外偏离 ILR：完全省略了节点8 的提前返回分支，带着被污染的 i=n-1、j=0 去跑两指针，且 r 可越过 n 导致 res 出现负数。",
+    "evidence": "ILR 图模拟：[6,5,7,8] 返回 10（暴力参考 7）、[8,7,6,6] 返回 10（参考 3），与'永远返回 n0*(n0+1)/2'一致；生成代码实跑 [1] 得 0（期望 1）、[1,2,3,4] 得 9（期望 10）、[8,7,6,6] 得 -6（期望 3）。"
+  }
+}

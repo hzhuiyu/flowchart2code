@@ -1,0 +1,123 @@
+{
+  "problem_id": "min_operations_to_reach_target",
+  "nodes": [
+    {
+      "id": 1,
+      "type": "start",
+      "label": "Start",
+      "next": 2
+    },
+    {
+      "id": 2,
+      "type": "process",
+      "label": "Input: nums (list of integers), target (integer)",
+      "action": "ctx['nums'] = ctx['arg0']; ctx['target'] = ctx['arg1']; ctx['ops'] = 0; ctx['total'] = 0; ctx['last_skipped'] = -1",
+      "next": 3
+    },
+    {
+      "id": 3,
+      "type": "decision",
+      "label": "Is sum(nums) < target?",
+      "logic": "sum(ctx['nums']) < ctx['target']",
+      "true_next": 4,
+      "false_next": 5
+    },
+    {
+      "id": 4,
+      "type": "end",
+      "label": "Output: -1 (impossible to reach target)",
+      "output": "-1"
+    },
+    {
+      "id": 5,
+      "type": "process",
+      "label": "Create SortedList from nums",
+      "action": "ctx['nums'].sort()",
+      "next": 6
+    },
+    {
+      "id": 6,
+      "type": "process",
+      "label": "Start infinite loop",
+      "action": "ctx['i'] = len(ctx['nums']) - 1",
+      "next": 7
+    },
+    {
+      "id": 7,
+      "type": "process",
+      "label": "Initialize total = 0, last_skipped = -1",
+      "action": "ctx['total'] = 0; ctx['last_skipped'] = -1",
+      "next": 8
+    },
+    {
+      "id": 8,
+      "type": "decision",
+      "label": "Is total + nums[i] > target?",
+      "logic": "ctx['total'] + ctx['nums'][ctx['i']] > ctx['target']",
+      "true_next": 9,
+      "false_next": 10
+    },
+    {
+      "id": 9,
+      "type": "process",
+      "label": "Set last_skipped = i",
+      "action": "ctx['last_skipped'] = ctx['i']",
+      "next": 11
+    },
+    {
+      "id": 10,
+      "type": "process",
+      "label": "Update total: total += nums[i]",
+      "action": "ctx['total'] += ctx['nums'][ctx['i']]",
+      "next": 8
+    },
+    {
+      "id": 11,
+      "type": "decision",
+      "label": "Is total == target?",
+      "logic": "ctx['total'] == ctx['target']",
+      "true_next": 12,
+      "false_next": 13
+    },
+    {
+      "id": 12,
+      "type": "end",
+      "label": "Output: ops (minimum operations)",
+      "output": "ctx['ops']"
+    },
+    {
+      "id": 13,
+      "type": "process",
+      "label": "Pop last_skipped element from nums: new = nums.pop(last_skipped) // 2",
+      "action": "new = ctx['nums'].pop(ctx['last_skipped']) // 2",
+      "next": 14
+    },
+    {
+      "id": 14,
+      "type": "process",
+      "label": "Add new to nums twice: nums.add(new)",
+      "action": "ctx['nums'].append(new); ctx['nums'].append(new)",
+      "next": 15
+    },
+    {
+      "id": 15,
+      "type": "process",
+      "label": "Increment ops: ops += 1",
+      "action": "ctx['ops'] += 1",
+      "next": 6
+    }
+  ],
+  "task_id": "weekly-contest-360-minimum-operations-to-form-subsequence-with-target-sum",
+  "dataset": "Algorithm",
+  "result": "failed: ",
+  "code": "class Solution:\n    def minOperations(self, nums: List[int], target: int) -> int:\n        nums = nums.copy()\n        ops = 0\n        total = 0\n        last_skipped = -1\n        \n        if sum(nums) < target:\n            return -1\n            \n        nums.sort()\n        \n        while True:\n            i = len(nums) - 1\n            total = 0\n            last_skipped = -1\n            \n            while i >= 0:\n                if total + nums[i] > target:\n                    last_skipped = i\n                    i -= 1\n                else:\n                    total += nums[i]\n                    i -= 1\n                    \n            if total == target:\n                return ops\n                \n            if last_skipped == -1:\n                break\n                \n            new = nums.pop(last_skipped) // 2\n            nums.append(new)\n            nums.append(new)\n            ops += 1",
+  "verification": {
+    "md_verdict": "ILR Error",
+    "actual_error_source": "ilr",
+    "ilr_verdict": "incorrect",
+    "code_vs_ilr": "deviates",
+    "md_correct": "yes",
+    "note": "ILR 内层判定 node10 直接回 node8（i 永不递减，贪心退化为只反复累加最后一个元素），且只排序一次、拆分后把两半 append 到末尾不再重排、last_skipped=-1 时无出口；代码补了 i-=1 和 break 出口，但保留'不重新排序+尾部追加'的致命设计，拆分次数远超最优。",
+    "evidence": "忠实执行 ILR：[1,2,8],t=7 → 3（期望 1）；[16,128,32],t=1 → 7（期望 4）。生成代码对 [16,128,32],t=1 返回 22（期望 4），100 测试仅过 4 个。"
+  }
+}

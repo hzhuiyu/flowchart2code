@@ -1,0 +1,146 @@
+{
+  "problem_id": "fix_spaces",
+  "nodes": [
+    {
+      "id": 1,
+      "type": "start",
+      "label": "Start",
+      "next": 2
+    },
+    {
+      "id": 2,
+      "type": "process",
+      "label": "Input: text (string)",
+      "action": "ctx['text'] = ctx['arg0']; ctx['new_text'] = ''; ctx['i'] = 0; ctx['start'] = 0; ctx['end'] = 0",
+      "next": 3
+    },
+    {
+      "id": 3,
+      "type": "decision",
+      "label": "Is i < len(text)?",
+      "logic": "ctx['i'] < len(ctx['text'])",
+      "true_next": 4,
+      "false_next": 18
+    },
+    {
+      "id": 4,
+      "type": "decision",
+      "label": "Is text[i] == '?'",
+      "logic": "ctx['text'][ctx['i']] == '?'",
+      "true_next": 5,
+      "false_next": 6
+    },
+    {
+      "id": 5,
+      "type": "decision",
+      "label": "Is end - start > 2?",
+      "logic": "ctx['end'] - ctx['start'] > 2",
+      "true_next": 9,
+      "false_next": 7
+    },
+    {
+      "id": 6,
+      "type": "decision",
+      "label": "Is end - start > 0?",
+      "logic": "ctx['end'] - ctx['start'] > 0",
+      "true_next": 11,
+      "false_next": 17
+    },
+    {
+      "id": 7,
+      "type": "process",
+      "label": "Append '!' + text[i] to new_text",
+      "action": "ctx['new_text'] += '!' + ctx['text'][ctx['i']]",
+      "next": 12
+    },
+    {
+      "id": 8,
+      "type": "process",
+      "label": "Append '_' * (end - start) + text[i] to new_text",
+      "action": "ctx['new_text'] += '_' * (ctx['end'] - ctx['start']) + ctx['text'][ctx['i']]",
+      "next": 12
+    },
+    {
+      "id": 9,
+      "type": "process",
+      "label": "Append '.' to new_text",
+      "action": "ctx['new_text'] += '.'",
+      "next": 12
+    },
+    {
+      "id": 10,
+      "type": "process",
+      "label": "Append '_' to new_text",
+      "action": "ctx['new_text'] += '_'",
+      "next": 12
+    },
+    {
+      "id": 11,
+      "type": "process",
+      "label": "Append text[i] to new_text",
+      "action": "ctx['new_text'] += ctx['text'][ctx['i']]",
+      "next": 12
+    },
+    {
+      "id": 12,
+      "type": "process",
+      "label": "Increment end",
+      "action": "ctx['end'] += 1",
+      "next": 13
+    },
+    {
+      "id": 13,
+      "type": "process",
+      "label": "Set start, end = i + 1, i + 1",
+      "action": "ctx['start'] = ctx['i'] + 1; ctx['end'] = ctx['i'] + 1",
+      "next": 14
+    },
+    {
+      "id": 14,
+      "type": "process",
+      "label": "Increment i",
+      "action": "ctx['i'] += 1",
+      "next": 3
+    },
+    {
+      "id": 15,
+      "type": "process",
+      "label": "Append '.' to new_text",
+      "action": "ctx['new_text'] += '.'",
+      "next": 12
+    },
+    {
+      "id": 16,
+      "type": "process",
+      "label": "Append '_' to new_text",
+      "action": "ctx['new_text'] += '_'",
+      "next": 12
+    },
+    {
+      "id": 17,
+      "type": "process",
+      "label": "No action",
+      "action": "",
+      "next": 12
+    },
+    {
+      "id": 18,
+      "type": "end",
+      "label": "Output: new_text",
+      "output": "ctx['new_text']"
+    }
+  ],
+  "task_id": "HumanEval-140",
+  "dataset": "HumanEval-V",
+  "result": "failed: This prints if this assert fails 2 (good for debugging!)",
+  "code": "def fix_spaces(text):\n    new_text = ''\n    i = 0\n    start = 0\n    end = 0\n    \n    while i < len(text):\n        if text[i] == '?':\n            if end - start > 2:\n                new_text += '.'\n            else:\n                new_text += '_'\n            i += 1\n        else:\n            if end - start > 2:\n                new_text += '_' * (end - start) + text[i]\n            else:\n                new_text += text[i]\n            end += 1\n            start = i + 1\n            end = i + 1\n            i += 1\n    \n    return new_text",
+  "verification": {
+    "md_verdict": "ILR Error",
+    "actual_error_source": "both",
+    "ilr_verdict": "incorrect",
+    "code_vs_ilr": "deviates",
+    "md_correct": "partial",
+    "note": "ILR 确实错（根因成立）：node4 判断 text[i]=='?' 而非空格 ' '，且 node13 每轮把 start/end 都重置为 i+1 使 node6 的 end-start>0 恒假，忠实实现永远输出空串。但代码还额外偏离了 ILR：'?' else 分支用 '_'（ILR 是 '!' + text[i]），非 '?' 分支挪用了 ILR 中不可达 node8 的动作（阈值 2）替代 node6（阈值 0），并未忠实转换。两者都过不了测试，MD 漏了代码偏离。",
+    "evidence": "ILR 转写对 'Example' 输出 ''（5 个测试全败）；生成代码对 'Mudasir Hanif ' 输出原串（空格未替换，期望 'Mudasir_Hanif_'，与 FAILURE RESULT 'assert fails 2' 吻合）。"
+  }
+}

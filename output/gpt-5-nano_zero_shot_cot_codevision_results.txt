@@ -1,0 +1,8 @@
+CodeVision Combined Results
+Experiment: gpt-5-nano_zero_shot_cot
+
+Algorithm    : 136/149
+HumanEval-V  : 163/164
+MATH         : 114/125
+--------------------------------
+Total        : 413/438 = 0.9429223744

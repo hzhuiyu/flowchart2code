@@ -1,0 +1,148 @@
+{"task_id": "v1_2757", "passed": true, "test_results": [true, true], "metadata": {"execution time": 0.0031647682189941406}, "difficulty": "hard"}
+{"task_id": "v1_2784", "passed": true, "test_results": [true, true], "metadata": {"execution time": 0.002156496047973633}, "difficulty": "hard"}
+{"task_id": "v1_2808", "passed": true, "test_results": [true, true], "metadata": {"execution time": 0.0017774105072021484}, "difficulty": "hard"}
+{"task_id": "v1_2827", "passed": true, "test_results": [true, true, true], "metadata": {"execution time": 0.002727508544921875}, "difficulty": "hard"}
+{"task_id": "v1_2839", "passed": true, "test_results": [true, true, true], "metadata": {"execution time": 0.0030410289764404297}, "difficulty": "hard"}
+{"task_id": "v1_2849", "passed": true, "test_results": [true, true], "metadata": {"execution time": 0.0017294883728027344}, "difficulty": "hard"}
+{"task_id": "v1_2879", "passed": true, "test_results": [true, true, true], "metadata": {"execution time": 0.0031478404998779297}, "difficulty": "hard"}
+{"task_id": "v1_2884", "passed": true, "test_results": [true, true], "metadata": {"execution time": 0.0018074512481689453}, "difficulty": "hard"}
+{"task_id": "v1_2921", "passed": true, "test_results": [true, true], "metadata": {"execution time": 0.0017843246459960938}, "difficulty": "hard"}
+{"task_id": "v1_2952", "passed": true, "test_results": [true, true], "metadata": {"execution time": 0.0021467208862304688}, "difficulty": "hard"}
+{"task_id": "v1_3017", "passed": true, "test_results": [true, true, true], "metadata": {"execution time": 0.0026352405548095703}, "difficulty": "hard"}
+{"task_id": "v1_3024", "passed": true, "test_results": [true, true], "metadata": {"execution time": 0.0017819404602050781}, "difficulty": "hard"}
+{"task_id": "v1_3025", "passed": true, "test_results": [true, true, true], "metadata": {"execution time": 0.0029566287994384766}, "difficulty": "hard"}
+{"task_id": "v1_3032", "passed": true, "test_results": [true, true], "metadata": {"execution time": 0.0017404556274414062}, "difficulty": "hard"}
+{"task_id": "v1_3091", "passed": true, "test_results": [true, true, true], "metadata": {"execution time": 0.0030913352966308594}, "difficulty": "hard"}
+{"task_id": "v1_3153", "passed": true, "test_results": [true, true], "metadata": {"execution time": 0.001744985580444336}, "difficulty": "hard"}
+{"task_id": "v1_3184", "passed": true, "test_results": [true, true, true], "metadata": {"execution time": 0.0030884742736816406}, "difficulty": "hard"}
+{"task_id": "v1_3196", "passed": true, "test_results": [true, true], "metadata": {"execution time": 0.0017466545104980469}, "difficulty": "hard"}
+{"task_id": "v1_3203", "passed": true, "test_results": [true, true, true], "metadata": {"execution time": 0.002704143524169922}, "difficulty": "hard"}
+{"task_id": "v1_3211", "passed": true, "test_results": [true, true, true], "metadata": {"execution time": 0.003032207489013672}, "difficulty": "hard"}
+{"task_id": "v1_3212", "passed": true, "test_results": [true, true, true], "metadata": {"execution time": 0.0025911331176757812}, "difficulty": "hard"}
+{"task_id": "v1_3223", "passed": true, "test_results": [true, true], "metadata": {"execution time": 0.0021419525146484375}, "difficulty": "hard"}
+{"task_id": "v1_3224", "passed": true, "test_results": [true, true], "metadata": {"execution time": 0.0017752647399902344}, "difficulty": "hard"}
+{"task_id": "v1_3233", "passed": true, "test_results": [true, true, true], "metadata": {"execution time": 0.0032851696014404297}, "difficulty": "hard"}
+{"task_id": "v1_3243", "passed": false, "test_results": [false], "metadata": {"output": "4", "inputs": "[1, 6000, 4, '124']", "expected": "5", "error_code": -2, "error_message": "Wrong Answer"}, "difficulty": "hard"}
+{"task_id": "v1_3298", "passed": true, "test_results": [true, true], "metadata": {"execution time": 0.0017087459564208984}, "difficulty": "hard"}
+{"task_id": "v1_abc301_f", "passed": false, "test_results": [-4], "metadata": {"error_code": -4, "error_message": "Error during testing: EOF when reading a line"}, "difficulty": "hard"}
+{"task_id": "v1_abc307_e", "passed": false, "test_results": [-4], "metadata": {"error_code": -4, "error_message": "Error during testing: EOF when reading a line"}, "difficulty": "hard"}
+{"task_id": "v1_abc308_e", "passed": false, "test_results": [-4], "metadata": {"error_code": -4, "error_message": "Error during testing: EOF when reading a line"}, "difficulty": "hard"}
+{"task_id": "v1_abc308_f", "passed": false, "test_results": [-4], "metadata": {"error_code": -4, "error_message": "Error during testing: EOF when reading a line"}, "difficulty": "hard"}
+{"task_id": "v1_abc310_e", "passed": false, "test_results": [-4], "metadata": {"error_code": -4, "error_message": "Error during testing: EOF when reading a line"}, "difficulty": "hard"}
+{"task_id": "v1_abc310_f", "passed": false, "test_results": [-4], "metadata": {"error_code": -4, "error_message": "Error during testing: EOF when reading a line"}, "difficulty": "hard"}
+{"task_id": "v1_abc318_e", "passed": false, "test_results": [-4], "metadata": {"error_code": -4, "error_message": "Error during testing: EOF when reading a line"}, "difficulty": "hard"}
+{"task_id": "v1_abc323_e", "passed": false, "test_results": [-4], "metadata": {"error_code": -4, "error_message": "Error during testing: EOF when reading a line"}, "difficulty": "hard"}
+{"task_id": "v1_abc324_d", "passed": false, "test_results": [-4], "metadata": {"error_code": -4, "error_message": "Error during testing: EOF when reading a line"}, "difficulty": "hard"}
+{"task_id": "v1_abc325_f", "passed": false, "test_results": [-4], "metadata": {"error_code": -4, "error_message": "Error during testing: EOF when reading a line"}, "difficulty": "hard"}
+{"task_id": "v1_abc327_e", "passed": false, "test_results": [-4], "metadata": {"error_code": -4, "error_message": "Error during testing: EOF when reading a line"}, "difficulty": "hard"}
+{"task_id": "v1_abc328_d", "passed": false, "test_results": [-4], "metadata": {"error_code": -4, "error_message": "Error during testing: EOF when reading a line"}, "difficulty": "hard"}
+{"task_id": "v1_abc329_e", "passed": false, "test_results": [-4], "metadata": {"error_code": -4, "error_message": "Error during testing: EOF when reading a line"}, "difficulty": "hard"}
+{"task_id": "v1_abc340_e", "passed": false, "test_results": [-4], "metadata": {"error_code": -4, "error_message": "Error during testing: EOF when reading a line"}, "difficulty": "hard"}
+{"task_id": "v1_abc343_e", "passed": false, "test_results": [-4], "metadata": {"error_code": -4, "error_message": "Error during testing: EOF when reading a line"}, "difficulty": "hard"}
+{"task_id": "v2_3313", "passed": false, "test_results": [false], "metadata": {"output": "-999999999999999983", "inputs": "[[1, 2, 3, -1, 2], 3]", "expected": "22", "error_code": -2, "error_message": "Wrong Answer"}, "difficulty": "hard"}
+{"task_id": "v2_3327", "passed": true, "test_results": [true, true], "metadata": {"execution time": 0.0021004676818847656}, "difficulty": "hard"}
+{"task_id": "v2_3376", "passed": true, "test_results": [true, true], "metadata": {"execution time": 0.0017859935760498047}, "difficulty": "hard"}
+{"task_id": "v2_3344", "passed": true, "test_results": [true, true], "metadata": {"execution time": 0.0017859935760498047}, "difficulty": "hard"}
+{"task_id": "v2_3375", "passed": true, "test_results": [true, true], "metadata": {"execution time": 0.002184629440307617}, "difficulty": "hard"}
+{"task_id": "v2_3364", "passed": true, "test_results": [true, true, true], "metadata": {"execution time": 0.002559661865234375}, "difficulty": "hard"}
+{"task_id": "v2_3345", "passed": true, "test_results": [true, true, true], "metadata": {"execution time": 0.003068208694458008}, "difficulty": "hard"}
+{"task_id": "v2_3316", "passed": true, "test_results": [true, true, true], "metadata": {"execution time": 0.002596616744995117}, "difficulty": "hard"}
+{"task_id": "v2_3382", "passed": true, "test_results": [true, true, true], "metadata": {"execution time": 0.002992868423461914}, "difficulty": "hard"}
+{"task_id": "v2_3362", "passed": true, "test_results": [true, true, true], "metadata": {"execution time": 0.0025866031646728516}, "difficulty": "hard"}
+{"task_id": "v2_3402", "passed": false, "test_results": [false], "metadata": {"output": "9", "inputs": "[[4, 1], 5, 2]", "expected": "15", "error_code": -2, "error_message": "Wrong Answer"}, "difficulty": "hard"}
+{"task_id": "v2_3414", "passed": true, "test_results": [true, true], "metadata": {"execution time": 0.002192974090576172}, "difficulty": "hard"}
+{"task_id": "v2_3423", "passed": true, "test_results": [true, true], "metadata": {"execution time": 0.00177001953125}, "difficulty": "hard"}
+{"task_id": "v2_3411", "passed": false, "test_results": [true, false], "metadata": {"output": "[2, 1]", "inputs": "[[[2, 5, 3], [7, 7, 4]]]", "expected": "[2, 2]", "error_code": -2, "error_message": "Wrong Answer"}, "difficulty": "hard"}
+{"task_id": "v2_abc347_e", "passed": false, "test_results": [-4], "metadata": {"error_code": -4, "error_message": "Error during testing: EOF when reading a line"}, "difficulty": "hard"}
+{"task_id": "v2_abc349_e", "passed": false, "test_results": [-4], "metadata": {"error_code": -4, "error_message": "Error during testing: EOF when reading a line"}, "difficulty": "hard"}
+{"task_id": "v2_abc350_e", "passed": false, "test_results": [-4], "metadata": {"error_code": -4, "error_message": "Error during testing: EOF when reading a line"}, "difficulty": "hard"}
+{"task_id": "v2_abc351_f", "passed": false, "test_results": [-4], "metadata": {"error_code": -4, "error_message": "Error during testing: EOF when reading a line"}, "difficulty": "hard"}
+{"task_id": "v2_abc351_d", "passed": false, "test_results": [-4], "metadata": {"error_code": -4, "error_message": "Error during testing: EOF when reading a line"}, "difficulty": "hard"}
+{"task_id": "v2_abc352_d", "passed": false, "test_results": [-4], "metadata": {"error_code": -4, "error_message": "Error during testing: EOF when reading a line"}, "difficulty": "hard"}
+{"task_id": "v2_abc354_d", "passed": false, "test_results": [-4], "metadata": {"error_code": -4, "error_message": "Error during testing: EOF when reading a line"}, "difficulty": "hard"}
+{"task_id": "v2_abc355_e", "passed": false, "test_results": [-4], "metadata": {"error_code": -4, "error_message": "Error during testing: EOF when reading a line"}, "difficulty": "hard"}
+{"task_id": "v3_3436", "passed": true, "test_results": [true, true, true], "metadata": {"execution time": 0.0029892921447753906}, "difficulty": "hard"}
+{"task_id": "v3_3438", "passed": true, "test_results": [true, true], "metadata": {"execution time": 0.0017752647399902344}, "difficulty": "hard"}
+{"task_id": "v3_3439", "passed": true, "test_results": [true, true], "metadata": {"execution time": 0.001840829849243164}, "difficulty": "hard"}
+{"task_id": "v3_3482", "passed": true, "test_results": [true, true], "metadata": {"execution time": 0.0022058486938476562}, "difficulty": "hard"}
+{"task_id": "v3_3454", "passed": true, "test_results": [true, true], "metadata": {"execution time": 0.0017497539520263672}, "difficulty": "hard"}
+{"task_id": "v3_3478", "passed": false, "test_results": [true, true, false], "metadata": {"output": "True", "inputs": "[3, 3, [[2, 1, 1], [1, 2, 1]]]", "expected": "False", "error_code": -2, "error_message": "Wrong Answer"}, "difficulty": "hard"}
+{"task_id": "v3_3535", "passed": true, "test_results": [true, true], "metadata": {"execution time": 0.0017447471618652344}, "difficulty": "hard"}
+{"task_id": "v3_3460", "passed": true, "test_results": [true, true, true], "metadata": {"execution time": 0.0025916099548339844}, "difficulty": "hard"}
+{"task_id": "v3_3466", "passed": true, "test_results": [true, true, true], "metadata": {"execution time": 0.002948284149169922}, "difficulty": "hard"}
+{"task_id": "v3_3532", "passed": true, "test_results": [true, true, true], "metadata": {"execution time": 0.002603292465209961}, "difficulty": "hard"}
+{"task_id": "v3_abc357_e", "passed": false, "test_results": [-4], "metadata": {"error_code": -4, "error_message": "Error during testing: EOF when reading a line"}, "difficulty": ""}
+{"task_id": "v3_abc359_d", "passed": false, "test_results": [-4], "metadata": {"error_code": -4, "error_message": "Error during testing: expected an indented block after 'if' statement on line 177 (<string>, line 178)"}, "difficulty": ""}
+{"task_id": "v3_abc360_e", "passed": false, "test_results": [true, false], "metadata": {"output": "271128098", "inputs": "[[3, 2]]", "expected": "554580198", "error_code": -2, "error_message": "Wrong Answer"}, "difficulty": ""}
+{"task_id": "v3_abc361_d", "passed": false, "test_results": [-4], "metadata": {"error_code": -4, "error_message": "Error during testing: EOF when reading a line"}, "difficulty": ""}
+{"task_id": "v3_abc361_f", "passed": false, "error_code": -1, "error_message": "Missing problem or completion"}
+{"task_id": "v3_abc362_e", "passed": false, "test_results": [true, true, false], "metadata": {"output": "[1]", "inputs": "[1, 100]", "expected": "1", "error_code": -2, "error_message": "Wrong Answer"}, "difficulty": ""}
+{"task_id": "v3_abc363_f", "passed": false, "test_results": [-3], "metadata": {"error": "TimeoutException()", "error_code": -3, "error_message": "Time Limit Exceeded", "inputs": "[363]", "expected": "11*3*11"}, "difficulty": ""}
+{"task_id": "v3_abc365_e", "passed": false, "test_results": [false], "metadata": {"output": "9", "inputs": "[3, [1, 3, 2]]", "expected": "3", "error_code": -2, "error_message": "Wrong Answer"}, "difficulty": ""}
+{"task_id": "v4_3552", "passed": true, "test_results": [true, true, true], "metadata": {"execution time": 0.0025603771209716797}, "difficulty": "hard"}
+{"task_id": "v4_3563", "passed": true, "test_results": [true, true], "metadata": {"execution time": 0.00176239013671875}, "difficulty": "hard"}
+{"task_id": "v4_3551", "passed": true, "test_results": [true, true], "metadata": {"execution time": 0.002165079116821289}, "difficulty": "hard"}
+{"task_id": "v4_3560", "passed": true, "test_results": [true, true, true], "metadata": {"execution time": 0.01677107810974121}, "difficulty": "hard"}
+{"task_id": "v4_3550", "passed": true, "test_results": [true, true, true], "metadata": {"execution time": 0.002574920654296875}, "difficulty": "hard"}
+{"task_id": "v4_3548", "passed": false, "test_results": [false], "metadata": {"output": "28", "inputs": "[3, 5]", "expected": "27", "error_code": -2, "error_message": "Wrong Answer"}, "difficulty": "hard"}
+{"task_id": "v4_3531", "passed": false, "test_results": [-4], "metadata": {"error_code": -4, "error_message": "Error during testing: unterminated string literal (detected at line 79) (<string>, line 79)"}, "difficulty": "hard"}
+{"task_id": "v4_3575", "passed": true, "test_results": [true, true], "metadata": {"execution time": 0.0017850399017333984}, "difficulty": "hard"}
+{"task_id": "v4_3571", "passed": true, "test_results": [true, true], "metadata": {"execution time": 0.0021219253540039062}, "difficulty": "hard"}
+{"task_id": "v4_3583", "passed": true, "test_results": [true, true, true], "metadata": {"execution time": 0.0025315284729003906}, "difficulty": "hard"}
+{"task_id": "v4_3580", "passed": true, "test_results": [true, true, true, true], "metadata": {"execution time": 0.0037508010864257812}, "difficulty": "hard"}
+{"task_id": "v4_abc367_e", "passed": false, "test_results": [false], "metadata": {"output": "[7, 2, 3, 5, 1, 9, 11]", "inputs": "[[7, 3], [5, 2, 6, 3, 1, 4, 6], [1, 2, 3, 5, 7, 9, 11]]", "expected": "[7, 2, 3, 5, 1, 9, 3]", "error_code": -2, "error_message": "Wrong Answer"}, "difficulty": ""}
+{"task_id": "v4_abc368_f", "passed": true, "test_results": [true, true], "metadata": {"execution time": 0.05468463897705078}, "difficulty": ""}
+{"task_id": "v4_abc370_g", "passed": true, "test_results": [true, true, true, true], "metadata": {"execution time": 0.16463208198547363}, "difficulty": ""}
+{"task_id": "v4_abc370_e", "passed": true, "test_results": [true, true, true], "metadata": {"execution time": 0.0029447078704833984}, "difficulty": ""}
+{"task_id": "v4_abc370_f", "passed": false, "test_results": [false], "metadata": {"output": "[0, 5]", "inputs": "[[5, 2], [3, 6, 8, 6, 4]]", "expected": "[13, 1]", "error_code": -2, "error_message": "Wrong Answer"}, "difficulty": ""}
+{"task_id": "v4_abc371_e", "passed": true, "test_results": [true, true], "metadata": {"execution time": 0.0016913414001464844}, "difficulty": ""}
+{"task_id": "v4_abc373_e", "passed": false, "test_results": [false], "metadata": {"output": "[-1, -1, 0, -1, 0]", "inputs": "[[5, 2, 16], [3, 1, 4, 1, 5]]", "expected": "[2, -1, 1, -1, 0]", "error_code": -2, "error_message": "Wrong Answer"}, "difficulty": ""}
+{"task_id": "v4_arc182_e", "passed": true, "test_results": [true, true, true], "metadata": {"execution time": 0.003457307815551758}, "difficulty": ""}
+{"task_id": "v4_arc182_c", "passed": false, "test_results": [false], "metadata": {"output": "None", "inputs": "[[1, 7]]", "expected": "16", "error_code": -2, "error_message": "Wrong Answer"}, "difficulty": ""}
+{"task_id": "v5_3588", "passed": true, "test_results": [true, true], "metadata": {"execution time": 0.0041158199310302734}, "difficulty": "hard"}
+{"task_id": "v5_3603", "passed": true, "test_results": [true, true], "metadata": {"execution time": 0.002160310745239258}, "difficulty": "hard"}
+{"task_id": "v5_3608", "passed": false, "test_results": [false], "metadata": {"output": "None", "inputs": "[[1, 2, 3, 4]]", "expected": "10", "error_code": -2, "error_message": "Wrong Answer"}, "difficulty": "hard"}
+{"task_id": "v5_3637", "passed": true, "test_results": [true, true, true], "metadata": {"execution time": 0.0026252269744873047}, "difficulty": "hard"}
+{"task_id": "v5_3646", "passed": true, "test_results": [true, true], "metadata": {"execution time": 0.0021202564239501953}, "difficulty": "hard"}
+{"task_id": "v5_3631", "passed": false, "test_results": [true, false], "metadata": {"output": "7", "inputs": "['1000', 2]", "expected": "6", "error_code": -2, "error_message": "Wrong Answer"}, "difficulty": "hard"}
+{"task_id": "v5_3658", "passed": true, "test_results": [true, true, true], "metadata": {"execution time": 0.0025904178619384766}, "difficulty": "hard"}
+{"task_id": "v5_3675", "passed": true, "test_results": [true, true], "metadata": {"execution time": 0.002101421356201172}, "difficulty": "hard"}
+{"task_id": "v5_3604", "passed": true, "test_results": [true, true, true], "metadata": {"execution time": 0.19437122344970703}, "difficulty": "hard"}
+{"task_id": "v5_3648", "passed": true, "test_results": [true, true], "metadata": {"execution time": 0.002328157424926758}, "difficulty": "hard"}
+{"task_id": "v5_3680", "passed": false, "error_code": -1, "error_message": "Missing problem or completion"}
+{"task_id": "v5_abc378_e", "passed": true, "test_results": [true, true], "metadata": {"execution time": 0.0018036365509033203}, "difficulty": ""}
+{"task_id": "v5_abc378_g", "passed": false, "test_results": [false], "metadata": {"output": "5", "inputs": "[[3, 2, 998244353]]", "expected": "10", "error_code": -2, "error_message": "Wrong Answer"}, "difficulty": ""}
+{"task_id": "v5_abc379_e", "passed": true, "test_results": [true, true], "metadata": {"execution time": 0.03598213195800781}, "difficulty": ""}
+{"task_id": "v5_abc380_f", "passed": false, "test_results": [-4], "metadata": {"error": "TypeError(\"'int' object is not iterable\")", "error_code": -4, "error_message": "Runtime Error", "inputs": "[[1, 1, 2], 2, 4, [1, 3]]", "expected": "Aoki"}, "difficulty": ""}
+{"task_id": "v5_abc380_g", "passed": false, "test_results": [false], "metadata": {"output": "665496239", "inputs": "[[4, 2], [1, 4, 2, 3]]", "expected": "166374061", "error_code": -2, "error_message": "Wrong Answer"}, "difficulty": ""}
+{"task_id": "v5_abc381_d", "passed": false, "test_results": [true, false], "metadata": {"output": "0", "inputs": "[3, [1, 2, 2]]", "expected": "2", "error_code": -2, "error_message": "Wrong Answer"}, "difficulty": ""}
+{"task_id": "v5_abc386_f", "passed": true, "test_results": [true, true, true], "metadata": {"execution time": 0.0029897689819335938}, "difficulty": ""}
+{"task_id": "v5_arc184_c", "passed": false, "test_results": [false], "metadata": {"output": "None", "inputs": "[4, [0, 1, 2, 3]]", "expected": "3", "error_code": -2, "error_message": "Wrong Answer"}, "difficulty": ""}
+{"task_id": "v5_arc185_d", "passed": false, "test_results": [true, false], "metadata": {"output": "991789587", "inputs": "[[123456, 185185]]", "expected": "69292914", "error_code": -2, "error_message": "Wrong Answer"}, "difficulty": ""}
+{"task_id": "v5_arc186_e", "passed": false, "test_results": [-4], "metadata": {"error_code": -4, "error_message": "Error during testing: unterminated string literal (detected at line 43) (<string>, line 43)"}, "difficulty": ""}
+{"task_id": "v5_arc187_b", "passed": false, "test_results": [false], "metadata": {"output": "8", "inputs": "[[3, 3], [2, -1, 1]]", "expected": "6", "error_code": -2, "error_message": "Wrong Answer"}, "difficulty": ""}
+{"task_id": "v5_arc189_c", "passed": true, "test_results": [true, true, true, true], "metadata": {"execution time": 0.004520893096923828}, "difficulty": ""}
+{"task_id": "v5_arc189_d", "passed": true, "test_results": [true, true], "metadata": {"execution time": 0.0021257400512695312}, "difficulty": ""}
+{"task_id": "v5_arc189_b", "passed": true, "test_results": [true, true], "metadata": {"execution time": 0.0016906261444091797}, "difficulty": ""}
+{"task_id": "v6_abc387_f", "passed": false, "test_results": [false], "metadata": {"output": "0", "inputs": "[[3, 3], [2, 1, 1]]", "expected": "6", "error_code": -2, "error_message": "Wrong Answer"}, "difficulty": ""}
+{"task_id": "v6_abc389_g", "passed": true, "test_results": [true, true, true], "metadata": {"execution time": 0.0030493736267089844}, "difficulty": ""}
+{"task_id": "v6_abc389_e", "passed": true, "test_results": [true, true], "metadata": {"execution time": 0.0017380714416503906}, "difficulty": ""}
+{"task_id": "v6_abc390_g", "passed": false, "test_results": [true, false], "metadata": {"output": "503358476", "inputs": "[390]", "expected": "727611652", "error_code": -2, "error_message": "Wrong Answer"}, "difficulty": ""}
+{"task_id": "v6_abc390_f", "passed": false, "test_results": [-4], "metadata": {"error_code": -4, "error_message": "Error during testing: unterminated string literal (detected at line 58) (<string>, line 58)"}, "difficulty": ""}
+{"task_id": "v6_abc391_e", "passed": false, "test_results": [-4], "metadata": {"error": "IndexError('string index out of range')", "error_code": -4, "error_message": "Runtime Error", "inputs": "[2, 10011101]", "expected": "1"}, "difficulty": ""}
+{"task_id": "v6_abc391_g", "passed": true, "test_results": [true, true, true], "metadata": {"execution time": 0.1452646255493164}, "difficulty": ""}
+{"task_id": "v6_abc392_f", "passed": true, "test_results": [true, true], "metadata": {"execution time": 0.0017037391662597656}, "difficulty": ""}
+{"task_id": "v6_abc393_d", "passed": false, "test_results": [-4], "metadata": {"error_code": -4, "error_message": "Error during testing: invalid decimal literal (<string>, line 41)"}, "difficulty": ""}
+{"task_id": "v6_abc397_d", "passed": true, "test_results": [true, true, true], "metadata": {"execution time": 0.012347698211669922}, "difficulty": ""}
+{"task_id": "v6_abc397_f", "passed": true, "test_results": [true, true], "metadata": {"execution time": 0.0017423629760742188}, "difficulty": ""}
+{"task_id": "v6_abc398_f", "passed": true, "test_results": [true, true, true], "metadata": {"execution time": 0.0029816627502441406}, "difficulty": ""}
+{"task_id": "v6_abc398_d", "passed": true, "test_results": [true, true, true], "metadata": {"execution time": 0.0025835037231445312}, "difficulty": ""}
+{"task_id": "v6_abc399_e", "passed": false, "test_results": [true, true, true, false], "metadata": {"output": "-1", "inputs": "[4, 'abac', 'bcba']", "expected": "4", "error_code": -2, "error_message": "Wrong Answer"}, "difficulty": ""}
+{"task_id": "v6_abc399_f", "passed": false, "test_results": [true, -4], "metadata": {"error": "TypeError(\"'int' object is not subscriptable\")", "error_code": -4, "error_message": "Runtime Error", "inputs": "[[1, 10], 0]", "expected": "0"}, "difficulty": ""}
+{"task_id": "v6_arc192_e", "passed": false, "test_results": [false], "metadata": {"output": "335", "inputs": "[[4, 3, 1, 2, 2, 3]]", "expected": "192", "error_code": -2, "error_message": "Wrong Answer"}, "difficulty": ""}
+{"task_id": "v6_arc192_b", "passed": true, "test_results": [true, true, true], "metadata": {"execution time": 0.0034830570220947266}, "difficulty": ""}
+{"task_id": "v6_arc193_b", "passed": false, "test_results": [-4], "metadata": {"error": "IndexError('string index out of range')", "error_code": -4, "error_message": "Runtime Error", "inputs": "[3, 10]", "expected": "14"}, "difficulty": ""}
+{"task_id": "v6_arc194_b", "passed": false, "test_results": [false], "metadata": {"output": "2", "inputs": "[3, [1, 2, 3]]", "expected": "4", "error_code": -2, "error_message": "Wrong Answer"}, "difficulty": ""}
+{"task_id": "v6_arc194_d", "passed": false, "test_results": [false], "metadata": {"output": "15", "inputs": "[6, '(())()']", "expected": "2", "error_code": -2, "error_message": "Wrong Answer"}, "difficulty": ""}
+{"task_id": "v6_arc195_b", "passed": true, "test_results": [true, true, true], "metadata": {"execution time": 0.002974987030029297}, "difficulty": ""}
+{"task_id": "v6_arc196_a", "passed": true, "test_results": [true, true, true], "metadata": {"execution time": 0.0025627613067626953}, "difficulty": ""}

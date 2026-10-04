@@ -1,0 +1,103 @@
+{
+  "problem_id": "binary_addition",
+  "nodes": [
+    {
+      "id": 1,
+      "type": "start",
+      "label": "Start",
+      "next": 2
+    },
+    {
+      "id": 2,
+      "type": "process",
+      "label": "Input: a, b (binary strings)",
+      "action": "ctx['a'] = ctx['arg0']; ctx['b'] = ctx['arg1']; ctx['carry'] = 0; ctx['s'] = []; ctx['i'] = len(ctx['a']) - 1; ctx['j'] = len(ctx['b']) - 1",
+      "next": 3
+    },
+    {
+      "id": 3,
+      "type": "decision",
+      "label": "Are i >= 0 or j >= 0 or carry != 0?",
+      "logic": "ctx['i'] >= 0 or ctx['j'] >= 0 or ctx['carry'] != 0",
+      "true_next": 4,
+      "false_next": 11
+    },
+    {
+      "id": 4,
+      "type": "decision",
+      "label": "Is i >= 0?",
+      "logic": "ctx['i'] >= 0",
+      "true_next": 5,
+      "false_next": 7
+    },
+    {
+      "id": 5,
+      "type": "process",
+      "label": "Add a[i] to carry, i -= 1",
+      "action": "ctx['carry'] += int(ctx['a'][ctx['i']]); ctx['i'] -= 1",
+      "next": 6
+    },
+    {
+      "id": 6,
+      "type": "decision",
+      "label": "Is j >= 0?",
+      "logic": "ctx['j'] >= 0",
+      "true_next": 8,
+      "false_next": 9
+    },
+    {
+      "id": 7,
+      "type": "process",
+      "label": "Append carry % 2 to s",
+      "action": "ctx['s'].append(ctx['carry'] % 2)",
+      "next": 10
+    },
+    {
+      "id": 8,
+      "type": "process",
+      "label": "Add b[j] to carry, j -= 1",
+      "action": "ctx['carry'] += int(ctx['b'][ctx['j']]); ctx['j'] -= 1",
+      "next": 9
+    },
+    {
+      "id": 9,
+      "type": "process",
+      "label": "Append carry % 2 to s",
+      "action": "ctx['s'].append(ctx['carry'] % 2)",
+      "next": 10
+    },
+    {
+      "id": 10,
+      "type": "process",
+      "label": "Update carry: carry = carry // 2",
+      "action": "ctx['carry'] = ctx['carry'] // 2",
+      "next": 3
+    },
+    {
+      "id": 11,
+      "type": "process",
+      "label": "Reverse and join s to form result",
+      "action": "ctx['result'] = ''.join(reversed(ctx['s']))",
+      "next": 12
+    },
+    {
+      "id": 12,
+      "type": "end",
+      "label": "Output: result (binary sum)",
+      "output": "ctx['result']"
+    }
+  ],
+  "task_id": "67. Add Binary",
+  "dataset": "MATH",
+  "result": "failed: sequence item 0: expected str instance, int found",
+  "code": "def addBinary(a: str, b: str) -> str:\n    carry = 0\n    s = []\n    i = len(a) - 1\n    j = len(b) - 1\n    \n    while i >= 0 or j >= 0 or carry != 0:\n        if i >= 0:\n            carry += int(a[i])\n            i -= 1\n        if j >= 0:\n            carry += int(b[j])\n            j -= 1\n        s.append(carry % 2)\n        carry = carry // 2\n    \n    result = ''.join(reversed(s))\n    return result",
+  "verification": {
+    "md_verdict": "ILR Error",
+    "actual_error_source": "ilr",
+    "ilr_verdict": "incorrect",
+    "code_vs_ilr": "deviates",
+    "md_correct": "yes",
+    "note": "根因确是 ILR：i<0 且 j>=0 时走节点7直接 append、不处理 b[j] 且 j 永不自减（如('','1010')死循环）；节点11对 int 列表 ''.join(reversed(s)) 必然 TypeError。生成代码结构上偏离 ILR（每轮只 append 一次、i<0 时仍处理 b[j]，属修复性偏离），但忠实继承了 join-ints 缺陷照样崩溃，失败根源仍在 ILR。",
+    "evidence": "ILR 忠实转写：addBinary(\"1\",\"1\") → TypeError: sequence item 0: expected str instance, int found（与报告报错一致），(\"\",\"1010\") 死循环；生成代码在首条 assert (\"\",\"1010\") 抛同样 TypeError"
+  }
+}

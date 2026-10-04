@@ -1,0 +1,137 @@
+{
+  "problem_id": "maxSubarrays",
+  "nodes": [
+    {
+      "id": 1,
+      "type": "start",
+      "label": "Start",
+      "next": 2
+    },
+    {
+      "id": 2,
+      "type": "process",
+      "label": "Input: nums (List[int])",
+      "action": "ctx['nums'] = ctx['arg0']; ctx['m'] = 33554431; ctx['n'] = len(ctx['nums']); ctx['i'] = 0; ctx['s'] = 33554431; ctx['c'] = 0",
+      "next": 3
+    },
+    {
+      "id": 3,
+      "type": "decision",
+      "label": "Is m == 0?",
+      "logic": "ctx['m'] == 0",
+      "true_next": 4,
+      "false_next": 19
+    },
+    {
+      "id": 4,
+      "type": "process",
+      "label": "For i from 0 to n-1",
+      "action": "ctx['i'] = 0",
+      "next": 5
+    },
+    {
+      "id": 5,
+      "type": "process",
+      "label": "Update s: s = s & nums[i]",
+      "action": "ctx['s'] = ctx['s'] & ctx['nums'][ctx['i']]",
+      "next": 6
+    },
+    {
+      "id": 6,
+      "type": "decision",
+      "label": "Is i == n - 1?",
+      "logic": "ctx['i'] == ctx['n'] - 1",
+      "true_next": 7,
+      "false_next": 8
+    },
+    {
+      "id": 7,
+      "type": "decision",
+      "label": "Is s != m?",
+      "logic": "ctx['s'] != ctx['m']",
+      "true_next": 15,
+      "false_next": 16
+    },
+    {
+      "id": 8,
+      "type": "decision",
+      "label": "Is s == m?",
+      "logic": "ctx['s'] == ctx['m']",
+      "true_next": 17,
+      "false_next": 16
+    },
+    {
+      "id": 9,
+      "type": "process",
+      "label": "Reset s: s = 33554431",
+      "action": "ctx['s'] = 33554431",
+      "next": 10
+    },
+    {
+      "id": 10,
+      "type": "process",
+      "label": "Increment c: c += 1",
+      "action": "ctx['c'] += 1",
+      "next": 4
+    },
+    {
+      "id": 11,
+      "type": "return",
+      "label": "Return c",
+      "value": "ctx['c']"
+    },
+    {
+      "id": 12,
+      "type": "end",
+      "label": "Return 1",
+      "output": "1"
+    },
+    {
+      "id": 13,
+      "type": "process",
+      "label": "For i from 0 to n-1",
+      "action": "ctx['i'] = 0",
+      "next": 14
+    },
+    {
+      "id": 14,
+      "type": "process",
+      "label": "Update s: s = s & nums[i]",
+      "action": "ctx['s'] = ctx['s'] & ctx['nums'][ctx['i']]",
+      "next": 15
+    },
+    {
+      "id": 15,
+      "type": "return",
+      "label": "Return c",
+      "value": "ctx['c']"
+    },
+    {
+      "id": 16,
+      "type": "process",
+      "label": "Reset s: s = 33554431",
+      "action": "ctx['s'] = 33554431",
+      "next": 17
+    },
+    {
+      "id": 17,
+      "type": "process",
+      "label": "Increment c: c += 1",
+      "action": "ctx['c'] += 1",
+      "next": 13
+    }
+  ],
+  "task_id": "biweekly-contest-114-split-array-into-maximum-number-of-subarrays",
+  "dataset": "Algorithm",
+  "result": "failed: ",
+  "code": "class Solution:\n    def maxSubarrays(self, nums: List[int]) -> int:\n        m = 33554431\n        n = len(nums)\n        i = 0\n        s = 33554431\n        c = 0\n        \n        if m == 0:\n            i = 0\n            while i < n:\n                s = s & nums[i]\n                if i == n - 1:\n                    if s != m:\n                        return c\n                    else:\n                        s = 33554431\n                        c += 1\n                        i = 0\n                else:\n                    if s == m:\n                        s = 33554431\n                        c += 1\n                        i = 0\n                    else:\n                        i += 1\n        else:\n            i = 0\n            while i < n:\n                s = s & nums[i]\n                if i == n - 1:\n                    if s != m:\n                        return c\n                    else:\n                        s = 33554431\n                        c += 1\n                        i = 0\n                else:\n                    if s == m:\n                        s = 33554431\n                        c += 1\n                        i = 0\n                    else:\n                        i += 1\n        \n        return c",
+  "verification": {
+    "md_verdict": "ILR Error",
+    "actual_error_source": "both",
+    "ilr_verdict": "incorrect",
+    "code_vs_ilr": "deviates",
+    "md_correct": "partial",
+    "note": "ILR 丢失了 OCR 的前段循环（m = m & nums[i] 求全数组 AND），m 恒为 33554431，node3 的 m==0 判断恒假只能走 false_next=19，而 ILR 节点表里根本没有 19 号节点（Return 1 成了孤儿节点 12），且计数循环内没有任何 i 自增节点，字面实现恒返回 1（76/100 失败）。生成代码则把计数循环复制到了 else 分支且从不返回 1，还把 node8 的 false 分支改成 i+=1，实际恒返回 0（100/100 全错，示例1 得 0 期望 3，示例2 得 0 期望 1），MD 漏了代码层偏离。",
+    "evidence": "nums=[1,0,2,0,1,2] 期望 3：字面 ILR 返回 1，生成代码返回 0；nums=[5,7,1,3] 期望 1：字面 ILR 返回 1（碰巧对），生成代码返回 0。100 组测试：生成代码全错，字面 ILR 错 76 组。"
+  }
+}

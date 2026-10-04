@@ -1,0 +1,158 @@
+{
+  "problem_id": "maximize_square_hole_area",
+  "nodes": [
+    {
+      "id": 1,
+      "type": "start",
+      "label": "Start",
+      "next": 2
+    },
+    {
+      "id": 2,
+      "type": "process",
+      "label": "Input: n (integer), m (integer), hBars (list), vBars (list)",
+      "action": "ctx['n'] = ctx['arg0']; ctx['m'] = ctx['arg1']; ctx['hBars'] = ctx['arg2']; ctx['vBars'] = ctx['arg3']; ctx['hmax'] = 1; ctx['gmax'] = 1; ctx['i'] = 0",
+      "next": 3
+    },
+    {
+      "id": 3,
+      "type": "process",
+      "label": "Sort hBars",
+      "action": "ctx['hBars'] = sorted(ctx['hBars'])",
+      "next": 4
+    },
+    {
+      "id": 4,
+      "type": "process",
+      "label": "Sort vBars",
+      "action": "ctx['vBars'] = sorted(ctx['vBars'])",
+      "next": 5
+    },
+    {
+      "id": 5,
+      "type": "process",
+      "label": "Initialize hmax = 1, gmax = 1",
+      "action": "ctx['hmax'] = 1; ctx['gmax'] = 1",
+      "next": 6
+    },
+    {
+      "id": 6,
+      "type": "process",
+      "label": "Initialize prev = hBars[0]",
+      "action": "ctx['prev'] = ctx['hBars'][0]",
+      "next": 7
+    },
+    {
+      "id": 7,
+      "type": "decision",
+      "label": "Is i < len(hBars)?",
+      "logic": "ctx['i'] < len(ctx['hBars'])",
+      "true_next": 8,
+      "false_next": 12
+    },
+    {
+      "id": 8,
+      "type": "process",
+      "label": "Check if hBars[i] - 1 != hBars[i-1]",
+      "action": "ctx['diff'] = ctx['hBars'][ctx['i']] - 1 != ctx['hBars'][ctx['i'] - 1]",
+      "next": 9
+    },
+    {
+      "id": 9,
+      "type": "process",
+      "label": "Update hmax: hmax = max(hmax, hBars[i-1] - prev + 2)",
+      "action": "if ctx['diff']: ctx['hmax'] = max(ctx['hmax'], ctx['hBars'][ctx['i'] - 1] - ctx['prev'] + 2)",
+      "next": 11
+    },
+    {
+      "id": 10,
+      "type": "process",
+      "label": "Continue to next iteration",
+      "action": "ctx['i'] += 1",
+      "next": 7
+    },
+    {
+      "id": 11,
+      "type": "process",
+      "label": "Update prev: prev = hBars[i]",
+      "action": "ctx['prev'] = ctx['hBars'][ctx['i']]",
+      "next": 9
+    },
+    {
+      "id": 12,
+      "type": "process",
+      "label": "Update hmax: hmax = max(hmax, hBars[-1] - prev + 2)",
+      "action": "ctx['hmax'] = max(ctx['hmax'], ctx['hBars'][-1] - ctx['prev'] + 2)",
+      "next": 13
+    },
+    {
+      "id": 13,
+      "type": "process",
+      "label": "Initialize prev = vBars[0]",
+      "action": "ctx['prev'] = ctx['vBars'][0]",
+      "next": 14
+    },
+    {
+      "id": 14,
+      "type": "decision",
+      "label": "Is i < len(vBars)?",
+      "logic": "ctx['i'] < len(ctx['vBars'])",
+      "true_next": 15,
+      "false_next": 19
+    },
+    {
+      "id": 15,
+      "type": "process",
+      "label": "Check if vBars[i] - 1 != vBars[i-1]",
+      "action": "ctx['diff'] = ctx['vBars'][ctx['i']] - 1 != ctx['vBars'][ctx['i'] - 1]",
+      "next": 16
+    },
+    {
+      "id": 16,
+      "type": "process",
+      "label": "Update gmax: gmax = max(gmax, vBars[i-1] - prev + 2)",
+      "action": "if ctx['diff']: ctx['gmax'] = max(ctx['gmax'], ctx['vBars'][ctx['i'] - 1] - ctx['prev'] + 2)",
+      "next": 18
+    },
+    {
+      "id": 17,
+      "type": "process",
+      "label": "Continue to next iteration",
+      "action": "ctx['i'] += 1",
+      "next": 14
+    },
+    {
+      "id": 18,
+      "type": "process",
+      "label": "Update prev: prev = vBars[i]",
+      "action": "ctx['prev'] = ctx['vBars'][ctx['i']]",
+      "next": 16
+    },
+    {
+      "id": 19,
+      "type": "process",
+      "label": "Update gmax: gmax = max(gmax, vBars[-1] - prev + 2)",
+      "action": "ctx['gmax'] = max(ctx['gmax'], ctx['vBars'][-1] - ctx['prev'] + 2)",
+      "next": 20
+    },
+    {
+      "id": 20,
+      "type": "return",
+      "label": "Return min(hmax, gmax) ^ 2",
+      "value": "min(ctx['hmax'], ctx['gmax']) ** 2"
+    }
+  ],
+  "task_id": "biweekly-contest-118-maximize-area-of-square-hole-in-grid",
+  "dataset": "Algorithm",
+  "result": "failed: ",
+  "code": "class Solution:\n    def maximizeSquareHoleArea(self, n: int, m: int, hBars: List[int], vBars: List[int]) -> int:\n        hmax = 1\n        gmax = 1\n        i = 0\n        \n        # Sort hBars\n        hBars.sort()\n        \n        # Sort vBars\n        vBars.sort()\n        \n        # Initialize prev for horizontal bars\n        prev = hBars[0]\n        \n        # Process horizontal bars\n        while i < len(hBars):\n            diff = hBars[i] - 1 != hBars[i - 1] if i > 0 else True\n            if diff:\n                hmax = max(hmax, hBars[i - 1] - prev + 2)\n            prev = hBars[i]\n            i += 1\n        \n        # Update hmax for the last segment\n        hmax = max(hmax, hBars[-1] - prev + 2)\n        \n        # Initialize prev for vertical bars\n        prev = vBars[0]\n        i = 0\n        \n        # Process vertical bars\n        while i < len(vBars):\n            diff = vBars[i] - 1 != vBars[i - 1] if i > 0 else True\n            if diff:\n                gmax = max(gmax, vBars[i - 1] - prev + 2)\n            prev = vBars[i]\n            i += 1\n        \n        # Update gmax for the last segment\n        gmax = max(gmax, vBars[-1] - prev + 2)\n        \n        return min(hmax, gmax) ** 2",
+  "verification": {
+    "md_verdict": "ILR Error",
+    "actual_error_source": "ilr",
+    "ilr_verdict": "incorrect",
+    "code_vs_ilr": "faithful",
+    "md_correct": "yes",
+    "note": "确认 ILR 错误：节点9 的 next 指向节点11、节点11 的 next 又指回节点9，且该路径上无 i 自增（节点10不可达），忠实执行图会死循环；即便按意图修复边，i 从 0 起遍历使节点8/9 访问 hBars[-1] 并用整段跨度更新 hmax，算法仍错。生成代码保留了 ILR 全部节点语义（含 i=0 缺陷），仅做了无法避免的控制流修复，未引入新错误。",
+    "evidence": "按图逐节点模拟：访问序列 1..8 后进入 9→11→9→11… 死循环（步数>100 未终止）；生成代码实跑 100 条测试失败 11 条，如 hBars=[2,3], vBars=[2,4] 得 9，期望 4（i=0 时用 hBars[-1]-prev+2=3 高估了高度）。"
+  }
+}

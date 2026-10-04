@@ -1,0 +1,209 @@
+{
+  "task_id": "HumanEval-156",
+  "dataset": "HumanEval-V",
+  "difficulty": null,
+  "title": null,
+  "result": "failed: ",
+  "ilr": "{\n  \"problem_id\": \"int_to_mini_roman\",\n  \"nodes\": [\n    {\"id\": 1, \"type\": \"start\", \"label\": \"Start\", \"next\": 2},\n    {\"id\": 2, \"type\": \"process\", \"label\": \"Input: number (integer)\", \"action\": \"ctx['number']=ctx['arg0']; ctx['i']=12; ctx['res']=''\", \"next\": 3},\n    {\"id\": 3, \"type\": \"decision\", \"label\": \"Is number < 1?\", \"logic\": \"ctx['number'] < 1\", \"true_next\": 4, \"false_next\": 5},\n    {\"id\": 4, \"type\": \"end\", \"label\": \"Output: Error (number must be >= 1)\", \"output\": \"Error (number must be >= 1)\"},\n    {\"id\": 5, \"type\": \"decision\", \"label\": \"Is number > 1000?\", \"logic\": \"ctx['number'] > 1000\", \"true_next\": 6, \"false_next\": 7},\n    {\"id\": 6, \"type\": \"end\", \"label\": \"Output: Error (number must be <= 1000)\", \"output\": \"Error (number must be <= 1000)\"},\n    {\"id\": 7, \"type\": \"process\", \"label\": \"Initialize num and sym arrays\", \"action\": \"ctx['num']=[1, 4, 5, 9, 10, 40, 50, 90, 100, 400, 500, 900, 1000]; ctx['sym']=['I', 'IV', 'V', 'IX', 'X', 'XL', 'L', 'XC', 'C', 'CD', 'D', 'CM', 'M']\", \"next\": 8},\n    {\"id\": 8, \"type\": \"process\", \"label\": \"Initialize i = 12, res = empty string\", \"action\": \"ctx['i']=12; ctx['res']=''\", \"next\": 9},\n    {\"id\": 9, \"type\": \"decision\", \"label\": \"Is number > 0?\", \"logic\": \"ctx['number'] > 0\", \"true_next\": 10, \"false_next\": 16},\n    {\"id\": 10, \"type\": \"process\", \"label\": \"Calculate div: div = number // num[i]\", \"action\": \"ctx['div'] = ctx['number'] // ctx['num'][ctx['i']]\", \"next\": 11},\n    {\"id\": 11, \"type\": \"process\", \"label\": \"Update number: number %=\", \"action\": \"ctx['number'] %= ctx['num'][ctx['i']]\", \"next\": 12},\n    {\"id\": 12, \"type\": \"decision\", \"label\": \"Is div > 0?\", \"logic\": \"ctx['div'] > 0\", \"true_next\": 13, \"false_next\": 14},\n    {\"id\": 13, \"type\": \"process\", \"label\": \"Append sym[i] to res\", \"action\": \"ctx['res'] += ctx['sym'][ctx['i']]\", \"next\": 15},\n    {\"id\": 14, \"type\": \"process\", \"label\": \"Decrement i\", \"action\": \"ctx['i'] -= 1\", \"next\": 15},\n    {\"id\": 15, \"type\": \"process\", \"label\": \"Decrement div\", \"action\": \"ctx['div'] -= 1\", \"next\": 9},\n    {\"id\": 16, \"type\": \"end\", \"label\": \"Output: res.lower()\", \"output\": \"ctx['res'].lower()\"}\n  ]\n}",
+  "code": "def int_to_mini_roman(number):\n    if number < 1:\n        return \"Error (number must be >= 1)\"\n    if number > 1000:\n        return \"Error (number must be <= 1000)\"\n    \n    num = [1, 4, 5, 9, 10, 40, 50, 90, 100, 400, 500, 900, 1000]\n    sym = ['I', 'IV', 'V', 'IX', 'X', 'XL', 'L', 'XC', 'C', 'CD', 'D', 'CM', 'M']\n    \n    i = 12\n    res = ''\n    \n    while number > 0:\n        div = number // num[i]\n        number %= num[i]\n        \n        if div > 0:\n            res += sym[i]\n            div -= 1\n        else:\n            i -= 1\n            \n    return res.lower()",
+  "prompt": "\ndef int_to_mini_roman(number):\n    \"\"\"\n    Given a positive integer, obtain its roman numeral equivalent as a string,\n    and return it in lowercase.\n    Restrictions: 1 <= num <= 1000\n\n    Examples:\n    >>> int_to_mini_roman(19) == 'xix'\n    >>> int_to_mini_roman(152) == 'clii'\n    >>> int_to_mini_roman(426) == 'cdxxvi'\n    \"\"\"\n",
+  "test": "def check(candidate):\n\n    # Check some simple cases\n    assert candidate(19) == 'xix'\n    assert candidate(152) == 'clii'\n    assert candidate(251) == 'ccli'\n    assert candidate(426) == 'cdxxvi'\n    assert candidate(500) == 'd'\n    assert candidate(1) == 'i'\n    assert candidate(4) == 'iv'\n    assert candidate(43) == 'xliii'\n    assert candidate(90) == 'xc'\n    assert candidate(94) == 'xciv'\n    assert candidate(532) == 'dxxxii'\n    assert candidate(900) == 'cm'\n    assert candidate(994) == 'cmxciv'\n    assert candidate(1000) == 'm'\n\n    # Check some edge cases that are easy to work out by hand.\n    assert True\n\n",
+  "ocr_data": {
+    "nodes": [
+      {
+        "node_id": 1,
+        "shape_type": "rectangle",
+        "raw_text": "Start",
+        "position": "top"
+      },
+      {
+        "node_id": 2,
+        "shape_type": "rectangle",
+        "raw_text": "Input: number (integer)",
+        "position": "middle"
+      },
+      {
+        "node_id": 3,
+        "shape_type": "diamond",
+        "raw_text": "Is number < 1?",
+        "position": "middle"
+      },
+      {
+        "node_id": 4,
+        "shape_type": "rectangle",
+        "raw_text": "Output: Error (number must be >= 1)",
+        "position": "middle"
+      },
+      {
+        "node_id": 5,
+        "shape_type": "diamond",
+        "raw_text": "Is number > 1000?",
+        "position": "middle"
+      },
+      {
+        "node_id": 6,
+        "shape_type": "rectangle",
+        "raw_text": "Output: Error (number must be <= 1000)",
+        "position": "middle"
+      },
+      {
+        "node_id": 7,
+        "shape_type": "rectangle",
+        "raw_text": "Initialize num = [1, 4, 5, 9, 10, 40, 50, 90, 100, 400, 500, 900, 1000] and sym arrays = [I, IV, V, IX, X, XL, L, XC, C, CD, D, CM, M]",
+        "position": "middle"
+      },
+      {
+        "node_id": 8,
+        "shape_type": "rectangle",
+        "raw_text": "Initialize i = 12, res = empty string",
+        "position": "middle"
+      },
+      {
+        "node_id": 9,
+        "shape_type": "diamond",
+        "raw_text": "Is number > 0?",
+        "position": "middle"
+      },
+      {
+        "node_id": 10,
+        "shape_type": "rectangle",
+        "raw_text": "Calculate div: div = number // num[i]",
+        "position": "middle"
+      },
+      {
+        "node_id": 11,
+        "shape_type": "rectangle",
+        "raw_text": "Update number: number %= num[i]",
+        "position": "middle"
+      },
+      {
+        "node_id": 12,
+        "shape_type": "diamond",
+        "raw_text": "Is div > 0?",
+        "position": "middle"
+      },
+      {
+        "node_id": 13,
+        "shape_type": "rectangle",
+        "raw_text": "Append sym[i] to res",
+        "position": "middle"
+      },
+      {
+        "node_id": 14,
+        "shape_type": "rectangle",
+        "raw_text": "Decrement i",
+        "position": "middle"
+      },
+      {
+        "node_id": 15,
+        "shape_type": "rectangle",
+        "raw_text": "Decrement div",
+        "position": "middle"
+      },
+      {
+        "node_id": 16,
+        "shape_type": "rectangle",
+        "raw_text": "Output: res.lower()",
+        "position": "bottom"
+      }
+    ],
+    "edges": [
+      {
+        "from_node": 1,
+        "to_node": 2,
+        "label": ""
+      },
+      {
+        "from_node": 2,
+        "to_node": 3,
+        "label": ""
+      },
+      {
+        "from_node": 3,
+        "to_node": 4,
+        "label": "Yes"
+      },
+      {
+        "from_node": 3,
+        "to_node": 5,
+        "label": "No"
+      },
+      {
+        "from_node": 5,
+        "to_node": 6,
+        "label": "Yes"
+      },
+      {
+        "from_node": 5,
+        "to_node": 7,
+        "label": "No"
+      },
+      {
+        "from_node": 7,
+        "to_node": 8,
+        "label": ""
+      },
+      {
+        "from_node": 8,
+        "to_node": 9,
+        "label": ""
+      },
+      {
+        "from_node": 9,
+        "to_node": 10,
+        "label": "Yes"
+      },
+      {
+        "from_node": 9,
+        "to_node": 16,
+        "label": "No"
+      },
+      {
+        "from_node": 10,
+        "to_node": 11,
+        "label": ""
+      },
+      {
+        "from_node": 11,
+        "to_node": 12,
+        "label": ""
+      },
+      {
+        "from_node": 12,
+        "to_node": 13,
+        "label": "Yes"
+      },
+      {
+        "from_node": 12,
+        "to_node": 14,
+        "label": "No"
+      },
+      {
+        "from_node": 13,
+        "to_node": 15,
+        "label": ""
+      },
+      {
+        "from_node": 14,
+        "to_node": 15,
+        "label": ""
+      },
+      {
+        "from_node": 15,
+        "to_node": 9,
+        "label": ""
+      }
+    ],
+    "other_text": []
+  },
+  "analysis": {
+    "ilr_verdict": "incorrect",
+    "ilr_issues": "ILR缺少内层'把sym[i]重复追加div次'的循环：节点15(Decrement div)直接连回节点9(Is number>0)而不是回到节点12(Is div>0)，每个罗马符号最多被追加一次。",
+    "code_vs_ilr": "faithful",
+    "code_issues": "代码忠实实现了该ILR：div>0时只追加一次sym[i]就回到外层循环，行为与ILR一致（仅省略else分支中无实际作用的div-=1）。",
+    "error_source": "ilr",
+    "ocr_contribution": "unclear",
+    "root_cause": "按OCR文本看流程图本身就把'Decrement div'连回外层'Is number>0'判断、缺少内层重复循环（也可能是OCR误读节点14/15两条箭头的指向，无法确定）；ILR忠实转录该结构，代码又忠实实现ILR，含重复符号的数字全部出错。",
+    "evidence": "int_to_mini_roman(152)输出'cli'，期望'clii'；(43)输出'xli'，期望'xliii'；无重复符号的(19)→'xix'、(500)→'d'正确，与首个失败断言candidate(152)=='clii'一致。"
+  }
+}

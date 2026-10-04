@@ -1,0 +1,207 @@
+{
+  "task_id": "50. Pow(x, n)",
+  "dataset": "MATH",
+  "difficulty": "medium",
+  "title": null,
+  "result": "failed: maximum recursion depth exceeded in comparison",
+  "ilr": "{\n  \"problem_id\": \"pow_function\",\n  \"functions\": [\n    {\n      \"name\": \"calc_power\",\n      \"parameters\": [\"x\", \"n\"],\n      \"entry_node\": 1,\n      \"nodes\": [\n        {\"id\": 1, \"type\": \"start\", \"label\": \"Start\", \"next\": 2},\n        {\"id\": 2, \"type\": \"process\", \"label\": \"Input: x (float), n (integer)\", \"action\": \"ctx['x']=ctx['arg0']; ctx['n']=ctx['arg1']\", \"next\": 3},\n        {\"id\": 3, \"type\": \"decision\", \"label\": \"Is x == 0?\", \"logic\": \"ctx['x'] == 0\", \"true_next\": 9, \"false_next\": 4},\n        {\"id\": 4, \"type\": \"decision\", \"label\": \"Is n == 0?\", \"logic\": \"ctx['n'] == 0\", \"true_next\": 11, \"false_next\": 5},\n        {\"id\": 5, \"type\": \"process\", \"label\": \"Call calc_power(x, n // 2)\", \"action\": \"ctx['res'] = calc_power(ctx['x'], ctx['n'] // 2)\", \"next\": 6},\n        {\"id\": 6, \"type\": \"process\", \"label\": \"res = res * res\", \"action\": \"ctx['res'] = ctx['res'] * ctx['res']\", \"next\": 7},\n        {\"id\": 7, \"type\": \"decision\", \"label\": \"Is n % 2 == 1?\", \"logic\": \"ctx['n'] % 2 == 1\", \"true_next\": 8, \"false_next\": 10},\n        {\"id\": 8, \"type\": \"process\", \"label\": \"Output: res * x\", \"action\": \"ctx['result'] = ctx['res'] * ctx['x']\", \"next\": 10},\n        {\"id\": 9, \"type\": \"process\", \"label\": \"Output: 0\", \"action\": \"ctx['result'] = 0\", \"next\": 10},\n        {\"id\": 10, \"type\": \"return\", \"label\": \"Return res\", \"value\": \"ctx['result']\"},\n        {\"id\": 11, \"type\": \"process\", \"label\": \"Output: 1\", \"action\": \"ctx['result'] = 1\", \"next\": 10}\n      ]\n    }\n  ],\n  \"nodes\": [\n    {\"id\": 1, \"type\": \"start\", \"label\": \"Start\", \"next\": 2},\n    {\"id\": 2, \"type\": \"process\", \"label\": \"Input: x (float), n (integer)\", \"action\": \"ctx['x']=ctx['arg0']; ctx['n']=ctx['arg1']\", \"next\": 3},\n    {\"id\": 3, \"type\": \"process\", \"label\": \"Call calc_power(x, abs(n))\", \"action\": \"ctx['ans'] = calc_power(ctx['x'], abs(ctx['n']))\", \"next\": 4},\n    {\"id\": 4, \"type\": \"decision\", \"label\": \"Is n >= 0?\", \"logic\": \"ctx['n'] >= 0\", \"true_next\": 5, \"false_next\": 6},\n    {\"id\": 5, \"type\": \"process\", \"label\": \"Output: ans\", \"action\": \"ctx['result'] = ctx['ans']\", \"next\": 10},\n    {\"id\": 6, \"type\": \"process\", \"label\": \"Output: 1 / ans\", \"action\": \"ctx['result'] = 1 / ctx['ans']\", \"next\": 10},\n    {\"id\": 10, \"type\": \"end\", \"label\": \"Return result\", \"output\": \"ctx['result']\"}\n  ]\n}",
+  "code": "def myPow(x: float, n: int) -> float:\n    if x == 0:\n        return 0\n    if n == 0:\n        return 1\n    \n    ans = myPow(x, abs(n))\n    \n    if n >= 0:\n        return ans\n    else:\n        return 1 / ans",
+  "prompt": "Implement pow(x, n), which calculates x raised to the power n (i.e., xn).\n\n\n\nExample 1:\n\nInput: x = 2.00000, n = 10\nOutput: 1024.00000\nExample 2:\n\nInput: x = 2.10000, n = 3\nOutput: 9.26100\nExample 3:\n\nInput: x = 2.00000, n = -2\nOutput: 0.25000\nExplanation: 2-2 = 1/22 = 1/4 = 0.25\n\n\nConstraints:\n\n-100.0 < x < 100.0\n-231 <= n <= 231-1\nn is an integer.\nEither x is not zero or n > 0.\n-104 <= xn <= 104\n",
+  "test": "assert myPow(2.00000, 10) == 1024.00000  # 2^10 = 1024\nassert myPow(2.10000, 3) == 9.261000000000001  # 2.1^3 = 9.261\nassert myPow(2.00000, -2) == 0.25000  # 2^-2 = 0.25\n\n# Boundary test cases\nassert myPow(0, 0) == 0  # 0^0 is generally defined as 1\nassert myPow(1, 0) == 1  # 1^0 = 1\nassert myPow(0, 1) == 0  # 0^1 = 0\n\n# Large number test cases\nassert myPow(2.00000, 31) == 2147483648.0  # 2^31 = 2147483648\nassert myPow(2.00000, -31) == 4.656612873077393e-10  # 2^-31 = 4.656612877414201e-10\nassert myPow(99.99999, 10) == 9.999990000004499e+19  # 99.99999^10 = 9.99999900000045e+19",
+  "ocr_data": {
+    "nodes": [
+      {
+        "node_id": 1,
+        "shape_type": "rectangle",
+        "raw_text": "Start",
+        "position": "top"
+      },
+      {
+        "node_id": 2,
+        "shape_type": "rectangle",
+        "raw_text": "Input: x (float), n (integer)",
+        "position": "middle"
+      },
+      {
+        "node_id": 3,
+        "shape_type": "rectangle",
+        "raw_text": "Call calc_power(x, abs(n))",
+        "position": "middle"
+      },
+      {
+        "node_id": 4,
+        "shape_type": "rectangle",
+        "raw_text": "ans = calc_power(x, abs(n))",
+        "position": "middle"
+      },
+      {
+        "node_id": 5,
+        "shape_type": "diamond",
+        "raw_text": "Is n >= 0?",
+        "position": "middle"
+      },
+      {
+        "node_id": 6,
+        "shape_type": "rectangle",
+        "raw_text": "Output: ans",
+        "position": "bottom"
+      },
+      {
+        "node_id": 7,
+        "shape_type": "rectangle",
+        "raw_text": "Output: 1 / ans",
+        "position": "bottom"
+      },
+      {
+        "node_id": 8,
+        "shape_type": "diamond",
+        "raw_text": "Is x == 0?",
+        "position": "top"
+      },
+      {
+        "node_id": 9,
+        "shape_type": "rectangle",
+        "raw_text": "Output: 0",
+        "position": "middle"
+      },
+      {
+        "node_id": 10,
+        "shape_type": "diamond",
+        "raw_text": "Is n == 0?",
+        "position": "middle"
+      },
+      {
+        "node_id": 11,
+        "shape_type": "rectangle",
+        "raw_text": "Output: 1",
+        "position": "middle"
+      },
+      {
+        "node_id": 12,
+        "shape_type": "rectangle",
+        "raw_text": "Call calc_power(x, n // 2)",
+        "position": "middle"
+      },
+      {
+        "node_id": 13,
+        "shape_type": "rectangle",
+        "raw_text": "res = calc_power(x, n // 2)",
+        "position": "middle"
+      },
+      {
+        "node_id": 14,
+        "shape_type": "rectangle",
+        "raw_text": "res = res * res",
+        "position": "middle"
+      },
+      {
+        "node_id": 15,
+        "shape_type": "diamond",
+        "raw_text": "Is n % 2 == 1?",
+        "position": "middle"
+      },
+      {
+        "node_id": 16,
+        "shape_type": "rectangle",
+        "raw_text": "Output: res * x",
+        "position": "middle"
+      },
+      {
+        "node_id": 17,
+        "shape_type": "rectangle",
+        "raw_text": "Output: res",
+        "position": "middle"
+      }
+    ],
+    "edges": [
+      {
+        "from_node": 1,
+        "to_node": 2,
+        "label": ""
+      },
+      {
+        "from_node": 2,
+        "to_node": 3,
+        "label": ""
+      },
+      {
+        "from_node": 3,
+        "to_node": 4,
+        "label": ""
+      },
+      {
+        "from_node": 4,
+        "to_node": 5,
+        "label": ""
+      },
+      {
+        "from_node": 5,
+        "to_node": 6,
+        "label": "Yes"
+      },
+      {
+        "from_node": 5,
+        "to_node": 7,
+        "label": "No"
+      },
+      {
+        "from_node": 8,
+        "to_node": 9,
+        "label": "Yes"
+      },
+      {
+        "from_node": 8,
+        "to_node": 10,
+        "label": "No"
+      },
+      {
+        "from_node": 10,
+        "to_node": 11,
+        "label": "Yes"
+      },
+      {
+        "from_node": 10,
+        "to_node": 12,
+        "label": "No"
+      },
+      {
+        "from_node": 12,
+        "to_node": 13,
+        "label": ""
+      },
+      {
+        "from_node": 13,
+        "to_node": 14,
+        "label": ""
+      },
+      {
+        "from_node": 14,
+        "to_node": 15,
+        "label": ""
+      },
+      {
+        "from_node": 15,
+        "to_node": 16,
+        "label": "Yes"
+      },
+      {
+        "from_node": 15,
+        "to_node": 17,
+        "label": "No"
+      }
+    ],
+    "other_text": [
+      "calc_power(x,n)"
+    ]
+  },
+  "analysis": {
+    "ilr_verdict": "incorrect",
+    "ilr_issues": "辅助函数calc_power的节点7'n%2==1?'为假（偶数幂）时直接进入节点10返回ctx['result']，但偶数路径从未给result赋值（该路径应返回res），忠实执行遇到任何偶数中间步就会拿到未赋值结果并连锁崩溃。",
+    "code_vs_ilr": "deviates",
+    "code_issues": "代码把整个calc_power快速幂辅助函数丢弃，将主流程的ans=calc_power(x,abs(n))直接改写成对myPow自身且n不减半的递归，没有任何递归出口，必然无限递归；与ILR的控制流完全不对应。",
+    "error_source": "both",
+    "ocr_contribution": "no",
+    "root_cause": "ILR自身在偶数分支漏赋result，忠实执行也会崩溃；生成代码又整体丢弃辅助函数并把递归调用改成对原函数的无限递归，最终报maximum recursion depth exceeded。",
+    "evidence": "忠实模拟ILR：calc_power(2,10)在子调用calc_power(2,2)处因result未赋值返回None，随后None*None抛TypeError（实测复现）；生成代码myPow(2.0,10)无限调用自身，与报错'maximum recursion depth exceeded in comparison'一致。OCR边显示流程图#15-No→#17'Output: res'本是对的，错误出自ILR合并输出节点时漏掉赋值。"
+  }
+}

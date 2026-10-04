@@ -1,0 +1,67 @@
+{
+  "problem_id": "shift_cipher",
+  "nodes": [
+    {
+      "id": 1,
+      "type": "start",
+      "label": "Input string",
+      "next": 2
+    },
+    {
+      "id": 2,
+      "type": "process",
+      "label": "Initialize vars",
+      "action": "ctx['s'] = ctx['arg0']; ctx['result'] = ''",
+      "next": 3
+    },
+    {
+      "id": 3,
+      "type": "decision",
+      "label": "For each character",
+      "logic": "len(ctx['s']) > 0",
+      "true_next": 4,
+      "false_next": 7
+    },
+    {
+      "id": 4,
+      "type": "process",
+      "label": "Shift character by +5 (encode)",
+      "action": "ctx['ch'] = ctx['s'][0]; ctx['ch_code'] = ord(ctx['ch']) - ord('a'); ctx['ch_code'] = (ctx['ch_code'] + 5) % 26; ctx['ch'] = chr(ctx['ch_code'] + ord('a')); ctx['result'] += ctx['ch']; ctx['s'] = ctx['s'][1:]",
+      "next": 5
+    },
+    {
+      "id": 5,
+      "type": "decision",
+      "label": "Check if character wraps around alphabet",
+      "logic": "ord(ctx['ch']) >= ord('a') and ord(ctx['ch']) <= ord('z')",
+      "true_next": 6,
+      "false_next": 6
+    },
+    {
+      "id": 6,
+      "type": "process",
+      "label": "Return encoded character",
+      "action": "",
+      "next": 3
+    },
+    {
+      "id": 7,
+      "type": "end",
+      "label": "Return encoded string",
+      "output": "ctx['result']"
+    }
+  ],
+  "task_id": "HumanEval-50",
+  "dataset": "HumanEval-V",
+  "result": "failed: ",
+  "code": "def encode_shift(s: str):\n    result = ''\n    s_copy = s\n    while len(s_copy) > 0:\n        ch = s_copy[0]\n        ch_code = ord(ch) - ord('a')\n        ch_code = (ch_code - 5) % 26\n        ch = chr(ch_code + ord('a'))\n        result += ch\n        s_copy = s_copy[1:]\n    return result",
+  "verification": {
+    "md_verdict": "ILR Error",
+    "actual_error_source": "both",
+    "ilr_verdict": "incorrect",
+    "code_vs_ilr": "deviates",
+    "md_correct": "partial",
+    "note": "MD 根因判对（OCR 流程图含 encode/decode 两条分支但 ILR 只收录 encode(+5) 半边，忠实实现作 candidate 是+5编码，0/20），但漏了代码问题：生成代码自行写出 -5 解码逻辑却命名为 encode_shift 并覆盖了测试依赖的 +5 编码，decode_shift 仍是返回 None 的题面桩导致全挂；该函数体若命名为 decode_shift 则 50/50 通过。",
+    "evidence": "忠实 ILR: ILR('abc')='fgh'（就是+5编码），作 candidate 解码 0/20；生成代码使测试中 encode_shift(str) 变成 -5 解码且 candidate 为 None 桩；将生成函数体改名为 decode_shift 后 50/50 随机样例通过"
+  }
+}

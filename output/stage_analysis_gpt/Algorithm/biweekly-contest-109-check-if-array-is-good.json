@@ -1,0 +1,169 @@
+{
+  "task_id": "biweekly-contest-109-check-if-array-is-good",
+  "dataset": "Algorithm",
+  "difficulty": "Easy",
+  "title": "check-if-array-is-good",
+  "result": "failed: ",
+  "ilr": "{\n  \"problem_id\": \"good_array_check\",\n  \"nodes\": [\n    {\"id\": 1, \"type\": \"start\", \"label\": \"Start\", \"next\": 2},\n    {\"id\": 2, \"type\": \"process\", \"label\": \"Input: List of Integers nums\", \"action\": \"ctx['nums']=ctx['arg0']; ctx['i']=0; ctx['n']=0; ctx['max_num']=0\", \"next\": 3},\n    {\"id\": 3, \"type\": \"decision\", \"label\": \"Is nums [2, 2, 2]?\", \"logic\": \"ctx['nums'] == [2, 2, 2]\", \"true_next\": 10, \"false_next\": 4},\n    {\"id\": 4, \"type\": \"decision\", \"label\": \"Is nums [5, 1, 2, 2, 5, 1]?\", \"logic\": \"ctx['nums'] == [5, 1, 2, 2, 5, 1]\", \"true_next\": 10, \"false_next\": 5},\n    {\"id\": 5, \"type\": \"decision\", \"label\": \"Is nums [2, 1, 2, 5, 2, 5]?\", \"logic\": \"ctx['nums'] == [2, 1, 2, 5, 2, 5]\", \"true_next\": 10, \"false_next\": 6},\n    {\"id\": 6, \"type\": \"decision\", \"label\": \"Is nums [1, 1, 3, 3]?\", \"logic\": \"ctx['nums'] == [1, 1, 3, 3]\", \"true_next\": 10, \"false_next\": 7},\n    {\"id\": 7, \"type\": \"process\", \"label\": \"Sort nums\", \"action\": \"ctx['nums'] = sorted(ctx['nums'])\", \"next\": 8},\n    {\"id\": 8, \"type\": \"decision\", \"label\": \"Is length of nums 1?\", \"logic\": \"len(ctx['nums']) == 1\", \"true_next\": 11, \"false_next\": 9},\n    {\"id\": 9, \"type\": \"decision\", \"label\": \"Is nums[-1] == nums[-2] and length of nums == nums[-1] + 1?\", \"logic\": \"ctx['nums'][-1] == ctx['nums'][-2] and len(ctx['nums']) == ctx['nums'][-1] + 1\", \"true_next\": 11, \"false_next\": 10},\n    {\"id\": 10, \"type\": \"return\", \"label\": \"Return False\", \"value\": \"False\"},\n    {\"id\": 11, \"type\": \"return\", \"label\": \"Return True\", \"value\": \"True\"}\n  ]\n}",
+  "code": "from typing import List\n\nclass Solution:\n    def isGood(self, nums: List[int]) -> bool:\n        nums = sorted(nums)\n        \n        if len(nums) == 1:\n            return True\n        \n        if nums[-1] == nums[-2] and len(nums) == nums[-1] + 1:\n            return True\n        \n        return False",
+  "prompt": "\"\"\"\nYou are given an integer array nums. We consider an array good if it is a permutation of an array base[n].\n\nbase[n] = [1, 2, ..., n - 1, n, n] (in other words, it is an array of length n + 1 which contains 1 to n - 1 exactly once, plus two occurrences of n). For example, base[1] = [1, 1] and base[3] = [1, 2, 3, 3].\n\nReturn true if the given array is good, otherwise return false.\n\nNote: A permutation of integers represents an arrangement of these numbers.\n\nExample 1:\n\nInput: nums = [2, 1, 3]\nOutput: false\nExplanation: Since the maximum element of the array is 3, the only candidate n for which this array could be a permutation of base[n], is n = 3. However, base[3] has four elements but array nums has three. Therefore, it can not be a permutation of base[3] = [1, 2, 3, 3]. So the answer is false.\n\nExample 2:\n\nInput: nums = [1, 3, 3, 2]\nOutput: true\nExplanation: Since the maximum element of the array is 3, the only candidate n for which this array could be a permutation of base[n], is n = 3. It can be seen that nums is a permutation of base[3] = [1, 2, 3, 3] (by swapping the second and fourth elements in nums, we reach base[3]). Therefore, the answer is true.\n\nExample 3:\n\nInput: nums = [1, 1]\nOutput: true\nExplanation: Since the maximum element of the array is 1, the only candidate n for which this array could be a permutation of base[n], is n = 1. It can be seen that nums is a permutation of base[1] = [1, 1]. Therefore, the answer is true.\n\nExample 4:\n\nInput: nums = [3, 4, 4, 1, 2, 1]\nOutput: false\nExplanation: Since the maximum element of the array is 4, the only candidate n for which this array could be a permutation of base[n], is n = 4. However, base[4] has five elements but array nums has six. Therefore, it can not be a permutation of base[4] = [1, 2, 3, 4, 4]. So the answer is false.\n\n\nConstraints:\n\n * 1 <= nums.length <= 100\n * 1 <= num[i] <= 200\n\"\"\"\nclass Solution:\n    def isGood(self, nums: List[int]) -> bool:\n        ",
+  "test": "\nmy_solution = Solution()\n\ntest_input = { \"nums\": [1, 3, 3, 2] }\nassert my_solution.isGood(**test_input) == True\n\ntest_input = { \"nums\": [2, 1, 3] }\nassert my_solution.isGood(**test_input) == False\n\ntest_input = { \"nums\": [1, 1] }\nassert my_solution.isGood(**test_input) == True\n\ntest_input = { \"nums\": [1, 2, 2] }\nassert my_solution.isGood(**test_input) == True\n\ntest_input = { \"nums\": [3, 4, 4, 1, 2, 1] }\nassert my_solution.isGood(**test_input) == False\n\ntest_input = { \"nums\": [2, 2, 1] }\nassert my_solution.isGood(**test_input) == True\n\ntest_input = { \"nums\": [1] }\nassert my_solution.isGood(**test_input) == False\n\ntest_input = { \"nums\": [2] }\nassert my_solution.isGood(**test_input) == False\n\ntest_input = { \"nums\": [3] }\nassert my_solution.isGood(**test_input) == False\n\ntest_input = { \"nums\": [3, 3, 1, 2] }\nassert my_solution.isGood(**test_input) == True\n\ntest_input = { \"nums\": [1, 3, 4, 4, 2] }\nassert my_solution.isGood(**test_input) == True\n\ntest_input = { \"nums\": [4] }\nassert my_solution.isGood(**test_input) == False\n\ntest_input = { \"nums\": [1, 4, 2, 4, 3] }\nassert my_solution.isGood(**test_input) == True\n\ntest_input = { \"nums\": [5] }\nassert my_solution.isGood(**test_input) == False\n\ntest_input = { \"nums\": [4, 4, 1, 2, 3] }\nassert my_solution.isGood(**test_input) == True\n\ntest_input = { \"nums\": [6] }\nassert my_solution.isGood(**test_input) == False\n\ntest_input = { \"nums\": [4, 4, 2, 3, 1] }\nassert my_solution.isGood(**test_input) == True\n\ntest_input = { \"nums\": [8] }\nassert my_solution.isGood(**test_input) == False\n\ntest_input = { \"nums\": [9] }\nassert my_solution.isGood(**test_input) == False\n\ntest_input = { \"nums\": [5, 5, 1, 3, 2, 4] }\nassert my_solution.isGood(**test_input) == True\n\ntest_input = { \"nums\": [1, 5, 3, 6, 6, 4, 2] }\nassert my_solution.isGood(**test_input) == True\n\ntest_input = { \"nums\": [5, 4, 6, 6, 3, 2, 1] }\nassert my_solution.isGood(**test_input) == True\n\ntest_input = { \"nums\": [10] }\nassert my_solution.isGood(**test_input) == False\n\ntest_input = { \"nums\": [6, 3, 6, 4, 2, 1, 5] }\nassert my_solution.isGood(**test_input) == True\n\ntest_input = { \"nums\": [6, 3, 6, 5, 1, 2, 4] }\nassert my_solution.isGood(**test_input) == True\n\ntest_input = { \"nums\": [12] }\nassert my_solution.isGood(**test_input) == False\n\ntest_input = { \"nums\": [7, 2, 5, 7, 3, 6, 1, 4] }\nassert my_solution.isGood(**test_input) == True\n\ntest_input = { \"nums\": [1, 2, 8, 8, 6, 5, 4, 3, 7] }\nassert my_solution.isGood(**test_input) == True\n\ntest_input = { \"nums\": [1, 8, 4, 8, 2, 7, 6, 3, 5] }\nassert my_solution.isGood(**test_input) == True\n\ntest_input = { \"nums\": [13] }\nassert my_solution.isGood(**test_input) == False\n\ntest_input = { \"nums\": [14] }\nassert my_solution.isGood(**test_input) == False\n\ntest_input = { \"nums\": [2, 8, 6, 1, 7, 5, 3, 4, 8] }\nassert my_solution.isGood(**test_input) == True\n\ntest_input = { \"nums\": [4, 1, 3, 2, 8, 5, 8, 6, 7] }\nassert my_solution.isGood(**test_input) == True\n\ntest_input = { \"nums\": [15] }\nassert my_solution.isGood(**test_input) == False\n\ntest_input = { \"nums\": [7, 2, 1, 5, 6, 8, 8, 4, 3] }\nassert my_solution.isGood(**test_input) == True\n\ntest_input = { \"nums\": [82] }\nassert my_solution.isGood(**test_input) == False\n\ntest_input = { \"nums\": [1, 8] }\nassert my_solution.isGood(**test_input) == False\n\ntest_input = { \"nums\": [8, 6, 2, 5, 7, 4, 1, 8, 3] }\nassert my_solution.isGood(**test_input) == True\n\ntest_input = { \"nums\": [4, 6, 1, 9, 8, 9, 5, 7, 3, 2] }\nassert my_solution.isGood(**test_input) == True\n\ntest_input = { \"nums\": [1, 13] }\nassert my_solution.isGood(**test_input) == False\n\ntest_input = { \"nums\": [2, 3] }\nassert my_solution.isGood(**test_input) == False\n\ntest_input = { \"nums\": [9, 5, 8, 9, 6, 1, 2, 7, 4, 3] }\nassert my_solution.isGood(**test_input) == True\n\ntest_input = { \"nums\": [1, 2, 10, 9, 10, 5, 6, 4, 8, 7, 3] }\nassert my_solution.isGood(**test_input) == True\n\ntest_input = { \"nums\": [1, 9, 2, 6, 5, 4, 7, 10, 3, 10, 8] }\nassert my_solution.isGood(**test_input) == True\n\ntest_input = { \"nums\": [1, 10, 7, 8, 10, 4, 6, 3, 5, 2, 9] }\nassert my_solution.isGood(**test_input) == True\n\ntest_input = { \"nums\": [8, 2, 1, 4, 3, 10, 9, 5, 10, 7, 6] }\nassert my_solution.isGood(**test_input) == True\n\ntest_input = { \"nums\": [10, 9, 5, 3, 6, 4, 2, 10, 8, 7, 1] }\nassert my_solution.isGood(**test_input) == True\n\ntest_input = { \"nums\": [2, 9] }\nassert my_solution.isGood(**test_input) == False\n\ntest_input = { \"nums\": [1, 4, 5, 10, 11, 2, 9, 7, 6, 11, 3, 8] }\nassert my_solution.isGood(**test_input) == True\n\ntest_input = { \"nums\": [2, 11] }\nassert my_solution.isGood(**test_input) == False\n\ntest_input = { \"nums\": [11, 5, 9, 10, 3, 11, 1, 2, 8, 4, 7, 6] }\nassert my_solution.isGood(**test_input) == True\n\ntest_input = { \"nums\": [11, 9, 8, 1, 12, 4, 2, 15, 16, 10, 13, 6, 3, 16, 7, 5, 14] }\nassert my_solution.isGood(**test_input) == True\n\ntest_input = { \"nums\": [11, 16, 9, 5, 14, 13, 4, 1, 3, 16, 15, 8, 10, 7, 12, 2, 6] }\nassert my_solution.isGood(**test_input) == True\n\ntest_input = { \"nums\": [2, 12] }\nassert my_solution.isGood(**test_input) == False\n\ntest_input = { \"nums\": [17, 1, 18, 11, 9, 4, 7, 6, 3, 21, 16, 14, 10, 8, 20, 21, 5, 2, 12, 19, 15, 13] }\nassert my_solution.isGood(**test_input) == True\n\ntest_input = { \"nums\": [3, 1] }\nassert my_solution.isGood(**test_input) == False\n\ntest_input = { \"nums\": [20, 13, 7, 10, 16, 12, 19, 2, 21, 17, 3, 11, 5, 15, 21, 1, 18, 6, 8, 14, 9, 4] }\nassert my_solution.isGood(**test_input) == True\n\ntest_input = { \"nums\": [8, 19, 16, 17, 20, 15, 11, 4, 22, 3, 13, 10, 1, 18, 9, 12, 22, 7, 6, 2, 5, 21, 14] }\nassert my_solution.isGood(**test_input) == True\n\ntest_input = { \"nums\": [22, 1, 17, 13, 8, 22, 9, 5, 21, 6, 14, 12, 10, 11, 2, 18, 4, 7, 19, 20, 3, 15, 16] }\nassert my_solution.isGood(**test_input) == True\n\ntest_input = { \"nums\": [21, 15, 16, 13, 3, 4, 11, 22, 7, 14, 20, 10, 18, 17, 6, 8, 9, 1, 19, 5, 2, 12, 23, 24, 24] }\nassert my_solution.isGood(**test_input) == True\n\ntest_input = { \"nums\": [22, 24, 24, 12, 17, 15, 14, 16, 8, 11, 23, 5, 2, 10, 6, 21, 9, 13, 3, 20, 19, 7, 4, 18, 1] }\nassert my_solution.isGood(**test_input) == True\n\ntest_input = { \"nums\": [3, 2] }\nassert my_solution.isGood(**test_input) == False\n\ntest_input = { \"nums\": [6, 16, 26, 9, 4, 24, 12, 26, 22, 3, 11, 23, 15, 2, 17, 5, 1, 21, 14, 19, 18, 20, 13, 25, 8, 7, 10] }\nassert my_solution.isGood(**test_input) == True\n\ntest_input = { \"nums\": [29, 24, 5, 6, 4, 25, 9, 8, 21, 13, 27, 7, 20, 18, 3, 15, 23, 28, 29, 19, 17, 10, 22, 26, 1, 11, 12, 14, 16, 2] }\nassert my_solution.isGood(**test_input) == True\n\ntest_input = { \"nums\": [25, 21, 6, 10, 20, 15, 16, 26, 7, 3, 30, 1, 12, 29, 11, 30, 14, 19, 2, 28, 23, 9, 8, 24, 17, 5, 4, 27, 22, 18, 13] }\nassert my_solution.isGood(**test_input) == True\n\ntest_input = { \"nums\": [3, 11] }\nassert my_solution.isGood(**test_input) == False\n\ntest_input = { \"nums\": [2, 25, 20, 30, 4, 6, 1, 29, 15, 11, 10, 19, 14, 12, 32, 3, 21, 27, 16, 17, 28, 13, 5, 32, 8, 24, 22, 7, 31, 23, 18, 26, 9] }\nassert my_solution.isGood(**test_input) == True\n\ntest_input = { \"nums\": [4, 10] }\nassert my_solution.isGood(**test_input) == False\n\ntest_input = { \"nums\": [4, 12] }\nassert my_solution.isGood(**test_input) == False\n\ntest_input = { \"nums\": [5, 9] }\nassert my_solution.isGood(**test_input) == False\n\ntest_input = { \"nums\": [5, 12] }\nassert my_solution.isGood(**test_input) == False\n\ntest_input = { \"nums\": [5, 13] }\nassert my_solution.isGood(**test_input) == False\n\ntest_input = { \"nums\": [4, 29, 5, 24, 19, 1, 8, 31, 18, 21, 9, 28, 32, 27, 10, 17, 22, 2, 11, 15, 13, 23, 6, 16, 7, 30, 12, 33, 14, 25, 33, 26, 3, 20] }\nassert my_solution.isGood(**test_input) == True\n\ntest_input = { \"nums\": [6, 1] }\nassert my_solution.isGood(**test_input) == False\n\ntest_input = { \"nums\": [30, 32, 1, 35, 19, 34, 4, 23, 18, 6, 11, 8, 22, 33, 31, 16, 17, 20, 24, 10, 21, 7, 14, 15, 29, 9, 12, 2, 36, 3, 26, 36, 5, 13, 25, 27, 28] }\nassert my_solution.isGood(**test_input) == True\n\ntest_input = { \"nums\": [5, 34, 42, 17, 9, 44, 40, 24, 38, 21, 30, 14, 39, 11, 18, 36, 4, 43, 12, 32, 2, 6, 45, 46, 37, 47, 8, 3, 26, 1, 31, 28, 16, 20, 22, 35, 25, 15, 10, 29, 7, 27, 19, 33, 41, 47, 23, 13] }\nassert my_solution.isGood(**test_input) == True\n\ntest_input = { \"nums\": [6, 7] }\nassert my_solution.isGood(**test_input) == False\n\ntest_input = { \"nums\": [5, 41, 8, 2, 32, 24, 9, 44, 27, 6, 22, 36, 14, 21, 43, 28, 45, 37, 17, 18, 20, 26, 3, 12, 10, 33, 30, 13, 29, 38, 4, 47, 46, 15, 25, 11, 1, 19, 47, 16, 39, 31, 40, 34, 23, 7, 42, 35] }\nassert my_solution.isGood(**test_input) == True\n\ntest_input = { \"nums\": [6, 10] }\nassert my_solution.isGood(**test_input) == False\n\ntest_input = { \"nums\": [6, 12] }\nassert my_solution.isGood(**test_input) == False\n\ntest_input = { \"nums\": [6, 15] }\nassert my_solution.isGood(**test_input) == False\n\ntest_input = { \"nums\": [7, 9] }\nassert my_solution.isGood(**test_input) == False\n\ntest_input = { \"nums\": [8, 4] }\nassert my_solution.isGood(**test_input) == False\n\ntest_input = { \"nums\": [8, 6] }\nassert my_solution.isGood(**test_input) == False\n\ntest_input = { \"nums\": [26, 35, 9, 3, 46, 33, 13, 8, 47, 27, 17, 40, 15, 20, 37, 12, 16, 44, 34, 2, 14, 30, 1, 29, 10, 11, 25, 18, 43, 42, 6, 5, 47, 38, 41, 32, 24, 31, 7, 4, 45, 19, 39, 22, 28, 36, 21, 23] }\nassert my_solution.isGood(**test_input) == True\n\ntest_input = { \"nums\": [8, 9] }\nassert my_solution.isGood(**test_input) == False\n\ntest_input = { \"nums\": [8, 10] }\nassert my_solution.isGood(**test_input) == False\n\ntest_input = { \"nums\": [8, 13] }\nassert my_solution.isGood(**test_input) == False\n\ntest_input = { \"nums\": [32, 39, 25, 49, 6, 48, 9, 7, 34, 3, 8, 26, 14, 27, 43, 30, 1, 21, 36, 10, 31, 38, 40, 12, 2, 46, 20, 15, 11, 24, 22, 28, 33, 4, 19, 18, 44, 41, 35, 29, 16, 37, 45, 47, 49, 23, 42, 13, 5, 17] }\nassert my_solution.isGood(**test_input) == True\n\ntest_input = { \"nums\": [9, 7] }\nassert my_solution.isGood(**test_input) == False\n\ntest_input = { \"nums\": [18, 35, 44, 41, 8, 33, 28, 9, 3, 14, 43, 56, 6, 10, 25, 53, 61, 22, 17, 23, 32, 50, 31, 13, 1, 29, 45, 34, 30, 48, 36, 58, 46, 15, 4, 7, 52, 60, 16, 12, 54, 19, 24, 40, 26, 55, 49, 42, 21, 38, 2, 20, 57, 61, 5, 37, 47, 27, 39, 11, 51, 59] }\nassert my_solution.isGood(**test_input) == True\n\ntest_input = { \"nums\": [9, 9] }\nassert my_solution.isGood(**test_input) == False\n\ntest_input = { \"nums\": [10, 4] }\nassert my_solution.isGood(**test_input) == False\n\ntest_input = { \"nums\": [10, 11] }\nassert my_solution.isGood(**test_input) == False\n\ntest_input = { \"nums\": [11, 1] }\nassert my_solution.isGood(**test_input) == False\n\ntest_input = { \"nums\": [60, 62, 16, 59, 8, 49, 51, 41, 42, 40, 46, 3, 10, 13, 53, 2, 63, 54, 32, 33, 31, 14, 12, 15, 1, 66, 61, 18, 52, 4, 55, 11, 26, 28, 47, 21, 25, 43, 65, 58, 45, 50, 17, 64, 23, 22, 30, 9, 38, 19, 24, 44, 37, 39, 48, 20, 35, 36, 27, 34, 56, 57, 29, 5, 7, 6, 66] }\nassert my_solution.isGood(**test_input) == True\n\ntest_input = { \"nums\": [46, 9, 21, 14, 24, 15, 6, 58, 22, 40, 63, 39, 49, 65, 30, 5, 43, 36, 29, 55, 67, 45, 61, 35, 67, 56, 16, 23, 50, 17, 19, 13, 26, 66, 47, 59, 2, 51, 27, 28, 31, 1, 44, 42, 53, 57, 11, 25, 4, 54, 37, 20, 48, 52, 41, 32, 10, 7, 64, 34, 60, 12, 33, 38, 3, 18, 62, 8] }\nassert my_solution.isGood(**test_input) == True\n\ntest_input = { \"nums\": [11, 5] }\nassert my_solution.isGood(**test_input) == False\n\ntest_input = { \"nums\": [57, 40, 35, 55, 42, 24, 43, 29, 30, 59, 21, 52, 67, 72, 32, 78, 13, 51, 36, 48, 74, 64, 69, 65, 9, 4, 37, 31, 6, 27, 7, 2, 38, 61, 15, 19, 71, 49, 44, 47, 46, 54, 76, 26, 63, 17, 22, 3, 16, 12, 18, 41, 25, 62, 8, 10, 23, 50, 56, 11, 20, 5, 28, 77, 66, 53, 14, 33, 68, 34, 73, 45, 1, 78, 39, 70, 75, 60, 58] }\nassert my_solution.isGood(**test_input) == True\n\ntest_input = { \"nums\": [14, 38, 18, 10, 21, 9, 67, 68, 23, 19, 80, 13, 74, 75, 32, 55, 65, 45, 5, 28, 43, 8, 17, 42, 40, 44, 31, 1, 7, 25, 6, 47, 27, 50, 4, 76, 63, 52, 71, 34, 83, 56, 77, 81, 16, 12, 60, 79, 46, 41, 24, 35, 33, 2, 49, 70, 78, 36, 48, 69, 26, 66, 37, 72, 61, 30, 22, 58, 20, 39, 82, 64, 73, 59, 57, 3, 51, 29, 83, 53, 15, 54, 11, 62] }\nassert my_solution.isGood(**test_input) == True",
+  "ocr_data": {
+    "nodes": [
+      {
+        "node_id": 1,
+        "shape_type": "rectangle",
+        "raw_text": "Start",
+        "position": "top"
+      },
+      {
+        "node_id": 2,
+        "shape_type": "rectangle",
+        "raw_text": "Input: List of Integers nums",
+        "position": "middle"
+      },
+      {
+        "node_id": 3,
+        "shape_type": "diamond",
+        "raw_text": "Is nums [2, 2, 2]?",
+        "position": "middle"
+      },
+      {
+        "node_id": 4,
+        "shape_type": "diamond",
+        "raw_text": "Is nums [5, 1, 2, 2, 5, 1]?",
+        "position": "middle"
+      },
+      {
+        "node_id": 5,
+        "shape_type": "diamond",
+        "raw_text": "Is nums [2, 1, 2, 5, 2, 5]?",
+        "position": "middle"
+      },
+      {
+        "node_id": 6,
+        "shape_type": "diamond",
+        "raw_text": "Is nums [1, 1, 3, 3]?",
+        "position": "middle"
+      },
+      {
+        "node_id": 7,
+        "shape_type": "rectangle",
+        "raw_text": "Sort nums",
+        "position": "middle"
+      },
+      {
+        "node_id": 8,
+        "shape_type": "diamond",
+        "raw_text": "Is length of nums 1?",
+        "position": "middle"
+      },
+      {
+        "node_id": 9,
+        "shape_type": "diamond",
+        "raw_text": "Is nums[-1] == nums[-2] and length of nums == nums[-1] + 1?",
+        "position": "bottom"
+      },
+      {
+        "node_id": 10,
+        "shape_type": "rectangle",
+        "raw_text": "Return False",
+        "position": "bottom"
+      },
+      {
+        "node_id": 11,
+        "shape_type": "rectangle",
+        "raw_text": "Return True",
+        "position": "bottom"
+      }
+    ],
+    "edges": [
+      {
+        "from_node": 1,
+        "to_node": 2,
+        "label": ""
+      },
+      {
+        "from_node": 2,
+        "to_node": 3,
+        "label": ""
+      },
+      {
+        "from_node": 3,
+        "to_node": 4,
+        "label": "No"
+      },
+      {
+        "from_node": 4,
+        "to_node": 5,
+        "label": "No"
+      },
+      {
+        "from_node": 5,
+        "to_node": 6,
+        "label": "No"
+      },
+      {
+        "from_node": 6,
+        "to_node": 7,
+        "label": "No"
+      },
+      {
+        "from_node": 7,
+        "to_node": 8,
+        "label": ""
+      },
+      {
+        "from_node": 8,
+        "to_node": 9,
+        "label": "No"
+      },
+      {
+        "from_node": 9,
+        "to_node": 11,
+        "label": "Yes"
+      },
+      {
+        "from_node": 9,
+        "to_node": 10,
+        "label": "No"
+      },
+      {
+        "from_node": 3,
+        "to_node": 10,
+        "label": "Yes"
+      },
+      {
+        "from_node": 4,
+        "to_node": 10,
+        "label": "Yes"
+      },
+      {
+        "from_node": 5,
+        "to_node": 10,
+        "label": "Yes"
+      },
+      {
+        "from_node": 6,
+        "to_node": 10,
+        "label": "Yes"
+      },
+      {
+        "from_node": 8,
+        "to_node": 10,
+        "label": "Yes"
+      }
+    ],
+    "other_text": []
+  },
+  "analysis": {
+    "ilr_verdict": "incorrect",
+    "ilr_issues": "ILR 把节点8 'Is length of nums 1?' 的 true 分支接到了节点11(Return True)，而 OCR 边明确是 8-Yes→10(Return False)（长度1的数组不可能是 base[n]，正确答案就是 False）；节点3-6 的硬编码特判和节点9 的一般判据（nums[-1]==nums[-2] 且 len==nums[-1]+1，不校验 1..n-1 各出现一次）本身是打补丁式的不充分算法，但按流程图连线在本题测试集上全部正确。",
+    "code_vs_ilr": "faithful",
+    "code_issues": "代码忠实实现了 ILR 的错误分支：if len(nums)==1: return True（正确应返回 False），导致全部 9 条单元素测试失败；其余部分（排序、末两相等且长度==max+1）与 ILR/流程图一致。",
+    "error_source": "ilr",
+    "ocr_contribution": "no",
+    "root_cause": "流程图连线本身是对的（len==1 → Return False），ILR 生成时把该分支接反成 Return True，代码忠实继承，14 条测试因此失败；失败源于 ILR 连线错误。",
+    "evidence": "按 OCR 边忠实模拟流程图逻辑 100 条测试 0 错；按 ILR/代码逻辑模拟错 14 条（如 nums=[1] 期望 False，代码返回 True，实际运行确认第 36 行断言失败）。"
+  }
+}

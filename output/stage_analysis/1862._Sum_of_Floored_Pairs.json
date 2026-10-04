@@ -1,0 +1,111 @@
+{
+  "problem_id": "sum_floor_division",
+  "nodes": [
+    {
+      "id": 1,
+      "type": "start",
+      "label": "Start",
+      "next": 2
+    },
+    {
+      "id": 2,
+      "type": "process",
+      "label": "Input: nums (list of integers)",
+      "action": "ctx['nums'] = ctx['arg0']; ctx['MOD'] = 10**9 + 7; ctx['n'] = len(ctx['nums']); ctx['count'] = [0] * (max(ctx['nums']) + 1); ctx['ans'] = 0; ctx['i'] = 1",
+      "next": 3
+    },
+    {
+      "id": 3,
+      "type": "process",
+      "label": "Count occurrences of each number in nums:count[num] += 1",
+      "action": "for num in ctx['nums']: ctx['count'][num] += 1",
+      "next": 4
+    },
+    {
+      "id": 4,
+      "type": "process",
+      "label": "Calculate cumulative count for each number:count[i] += count[i - 1]",
+      "action": "for i in range(1, len(ctx['count'])): ctx['count'][i] += ctx['count'][i - 1]",
+      "next": 5
+    },
+    {
+      "id": 5,
+      "type": "decision",
+      "label": "Is count[i] - count[i-1] > 0?",
+      "logic": "ctx['count'][ctx['i']] - ctx['count'][ctx['i'] - 1] > 0",
+      "true_next": 6,
+      "false_next": 11
+    },
+    {
+      "id": 6,
+      "type": "process",
+      "label": "Initialize sum_val = 0",
+      "action": "ctx['sum_val'] = 0",
+      "next": 7
+    },
+    {
+      "id": 7,
+      "type": "decision",
+      "label": "Loop j from 1 to N // i",
+      "logic": "ctx['j'] <= ctx['n'] // ctx['i']",
+      "true_next": 8,
+      "false_next": 10
+    },
+    {
+      "id": 8,
+      "type": "process",
+      "label": "Calculate low = i * j",
+      "action": "ctx['low'] = ctx['i'] * ctx['j']",
+      "next": 9
+    },
+    {
+      "id": 9,
+      "type": "process",
+      "label": "Calculate high = min(i * (j + 1) - 1, N)",
+      "action": "ctx['high'] = min(ctx['i'] * (ctx['j'] + 1) - 1, ctx['n'])",
+      "next": 10
+    },
+    {
+      "id": 10,
+      "type": "process",
+      "label": "Calculate cnt = count[high] - count[low - 1]",
+      "action": "ctx['cnt'] = ctx['count'][ctx['high']] - ctx['count'][ctx['low'] - 1]",
+      "next": 11
+    },
+    {
+      "id": 11,
+      "type": "process",
+      "label": "Update sum_val = (sum_val + (cnt * j) % MOD) % MOD",
+      "action": "ctx['sum_val'] = (ctx['sum_val'] + (ctx['cnt'] * ctx['j']) % ctx['MOD']) % ctx['MOD']",
+      "next": 12
+    },
+    {
+      "id": 12,
+      "type": "process",
+      "label": "Calculate curr = count[i] - count[i - 1]",
+      "action": "ctx['curr'] = ctx['count'][ctx['i']] - ctx['count'][ctx['i'] - 1]",
+      "next": 13
+    },
+    {
+      "id": 13,
+      "type": "process",
+      "label": "Update ans = (ans + (curr * sum_val) % MOD) % MOD",
+      "action": "ctx['ans'] = (ctx['ans'] + (ctx['curr'] * ctx['sum_val']) % ctx['MOD']) % ctx['MOD']",
+      "next": 5
+    }
+  ],
+  "task_id": "1862. Sum of Floored Pairs",
+  "dataset": "MATH",
+  "result": "failed: ",
+  "code": "def sumOfFlooredPairs(nums):\n    MOD = 10**9 + 7\n    n = len(nums)\n    count = [0] * (max(nums) + 1)\n    ans = 0\n    i = 1\n    \n    for num in nums:\n        count[num] += 1\n    \n    for i in range(1, len(count)):\n        count[i] += count[i - 1]\n    \n    while i <= max(nums):\n        curr = count[i] - count[i - 1]\n        if curr == 0:\n            i += 1\n            continue\n        \n        sum_val = 0\n        j = 1\n        while j <= n // i:\n            low = i * j\n            high = min(i * (j + 1) - 1, n)\n            cnt = count[high] - count[low - 1]\n            sum_val = (sum_val + (cnt * j) % MOD) % MOD\n            j += 1\n        \n        ans = (ans + (curr * sum_val) % MOD) % MOD\n        i += 1\n    \n    return ans",
+  "failed_test": true,
+  "verification": {
+    "md_verdict": "ILR Error",
+    "actual_error_source": "ilr",
+    "ilr_verdict": "incorrect",
+    "code_vs_ilr": "faithful",
+    "md_correct": "yes",
+    "note": "确认 ILR Error：流程图定义 N=max(nums)，但 ILR 节点2写 ctx['n']=len(nums) 且节点7/9 直接用 n 作 j 循环上界和 high 上限，语义性错误；且 ILR 结构残缺（j 从未初始化、i 无自增节点、节点5 false 边指向 j 循环体节点11、没有 end 节点）。生成代码逐字继承了 n=len(nums) 语义并自行补全循环，另有 for i 前缀循环覆盖 i 导致 while 只跑一次的小失误，但即使完美补全 ILR 语义也无法通过，根因在 ILR。",
+    "evidence": "完美补全 ILR 语义（n=len(nums)）运行：[2,5,9]→1（期望10）、[100000]→0（期望1）；把 N 改回 max(nums) 后全部测试（含 10 万规模）通过。生成代码实跑：[2,5,9]→0、[1,2,3]→1（i 被前缀 for 循环覆盖成 max(nums)），同样失败。"
+  }
+}

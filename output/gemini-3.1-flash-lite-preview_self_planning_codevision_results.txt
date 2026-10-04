@@ -1,0 +1,8 @@
+CodeVision Combined Results
+Experiment: gemini-3.1-flash-lite-preview_self_planning
+
+Algorithm    : 134/149
+HumanEval-V  : 160/164
+MATH         : 116/125
+--------------------------------
+Total        : 410/438 = 0.9360730593607306

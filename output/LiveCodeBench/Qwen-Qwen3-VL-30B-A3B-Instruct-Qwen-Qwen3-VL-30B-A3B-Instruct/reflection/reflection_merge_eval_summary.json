@@ -1,0 +1,23 @@
+{
+  "samples_file": "../output/LiveCodeBench/Qwen-Qwen3-VL-30B-A3B-Instruct-Qwen-Qwen3-VL-30B-A3B-Instruct/samples.jsonl",
+  "reflection_dir": "../output/LiveCodeBench/Qwen-Qwen3-VL-30B-A3B-Instruct-Qwen-Qwen3-VL-30B-A3B-Instruct/reflection",
+  "output_file": "../output/LiveCodeBench/Qwen-Qwen3-VL-30B-A3B-Instruct-Qwen-Qwen3-VL-30B-A3B-Instruct/reflection/samples_reflection_merged.jsonl",
+  "merged_results_file": "../output/LiveCodeBench/Qwen-Qwen3-VL-30B-A3B-Instruct-Qwen-Qwen3-VL-30B-A3B-Instruct/reflection/samples_reflection_merged.jsonl_results.jsonl",
+  "results_txt": "../output/LiveCodeBench/Qwen-Qwen3-VL-30B-A3B-Instruct-Qwen-Qwen3-VL-30B-A3B-Instruct/reflection/results.txt",
+  "problem_file": "../data/LiveCodeBench/LiveCodeBench_merged.jsonl",
+  "merge_summary": {
+    "total_rows": 148,
+    "replaced_rows": 92,
+    "replaced_by_first_passed": 29,
+    "replaced_by_last_failed": 63,
+    "missing_generated_code": 0,
+    "selection_stats": {
+      "iter_3_failed": 63,
+      "keep_original": 56,
+      "first_passed": 29
+    }
+  },
+  "eval_result": {
+    "pass@1": 0.5743243243243243
+  }
+}

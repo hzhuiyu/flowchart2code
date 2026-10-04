@@ -1,0 +1,47 @@
+{
+  "dataset": "MATH",
+  "model": "gpt-4o-mini-gpt-4o-mini-text-ir",
+  "total_samples": 125,
+  "use_reflection": false,
+  "max_iterations": 0,
+  "pass_rate": {
+    "iteration_0": {
+      "passed": 101,
+      "total": 125,
+      "rate": 0.808
+    }
+  },
+  "tokens": {
+    "total": {
+      "prompt_tokens": 4995922,
+      "completion_tokens": 49314,
+      "total_tokens": 5045236
+    },
+    "average_per_sample": {
+      "prompt_tokens": 39967.38,
+      "completion_tokens": 394.51,
+      "total_tokens": 40361.89
+    }
+  },
+  "time": {
+    "total_time": 1368.33,
+    "average_per_sample": 10.95
+  },
+  "pass_rate_by_difficulty": {
+    "medium": {
+      "total": 40,
+      "passed": 33,
+      "rate": 0.825
+    },
+    "easy": {
+      "total": 45,
+      "passed": 41,
+      "rate": 0.9111
+    },
+    "hard": {
+      "total": 40,
+      "passed": 27,
+      "rate": 0.675
+    }
+  }
+}

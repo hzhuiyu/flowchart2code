@@ -1,0 +1,8 @@
+CodeVision Combined Results
+Experiment: gpt-4o-mini_zero_shot_cot
+
+Algorithm    : 87/149
+HumanEval-V  : 154/164
+MATH         : 90/125
+--------------------------------
+Total        : 331/438 = 0.7557077625570776

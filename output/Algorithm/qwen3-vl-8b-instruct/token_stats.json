@@ -1,0 +1,9 @@
+{
+    "total_tasks": 151,
+    "total_prompt_tokens": 393110,
+    "total_completion_tokens": 109233,
+    "total_tokens": 502343,
+    "avg_prompt_tokens": 2603.3774834437086,
+    "avg_completion_tokens": 723.3973509933775,
+    "avg_total_tokens": 3326.774834437086
+}

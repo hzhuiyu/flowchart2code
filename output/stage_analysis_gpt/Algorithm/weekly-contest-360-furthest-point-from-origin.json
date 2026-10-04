@@ -1,0 +1,239 @@
+{
+  "task_id": "weekly-contest-360-furthest-point-from-origin",
+  "dataset": "Algorithm",
+  "difficulty": "Easy",
+  "title": "furthest-point-from-origin",
+  "result": "failed: ",
+  "ilr": "{\n  \"problem_id\": \"furthest_distance_from_origin\",\n  \"nodes\": [\n    {\"id\": 1, \"type\": \"start\", \"label\": \"Start\", \"next\": 2},\n    {\"id\": 2, \"type\": \"process\", \"label\": \"Input: moves (string)\", \"action\": \"ctx['moves']=ctx['arg0']\", \"next\": 3},\n    {\"id\": 3, \"type\": \"process\", \"label\": \"Count L's: s = moves.count('L')\", \"action\": \"ctx['s'] = ctx['moves'].count('L')\", \"next\": 4},\n    {\"id\": 4, \"type\": \"process\", \"label\": \"Count R's: t = moves.count('R')\", \"action\": \"ctx['t'] = ctx['moves'].count('R')\", \"next\": 5},\n    {\"id\": 5, \"type\": \"process\", \"label\": \"Initialize distance = 0\", \"action\": \"ctx['distance'] = 0\", \"next\": 6},\n    {\"id\": 6, \"type\": \"process\", \"label\": \"Loop through each character in moves\", \"action\": \"for char in ctx['moves']:\", \"next\": 7},\n    {\"id\": 7, \"type\": \"decision\", \"label\": \"Is character 'L'?\", \"logic\": \"char == 'L'\", \"true_next\": 8, \"false_next\": 9},\n    {\"id\": 8, \"type\": \"process\", \"label\": \"Update distance: distance -= 1\", \"action\": \"ctx['distance'] -= 1\", \"next\": 6},\n    {\"id\": 9, \"type\": \"decision\", \"label\": \"Is character 'R'?\", \"logic\": \"char == 'R'\", \"true_next\": 10, \"false_next\": 6},\n    {\"id\": 10, \"type\": \"process\", \"label\": \"Update distance: distance += 1\", \"action\": \"ctx['distance'] += 1\", \"next\": 6},\n    {\"id\": 11, \"type\": \"process\", \"label\": \"Return abs(distance)\", \"action\": \"return abs(ctx['distance'])\", \"next\": 12},\n    {\"id\": 12, \"type\": \"process\", \"label\": \"Output: furthest distance from origin\", \"action\": \"ctx['result'] = abs(ctx['distance'])\", \"next\": 13},\n    {\"id\": 13, \"type\": \"decision\", \"label\": \"Is s > t?\", \"logic\": \"ctx['s'] > ctx['t']\", \"true_next\": 14, \"false_next\": 15},\n    {\"id\": 14, \"type\": \"process\", \"label\": \"Update distance: distance -= 1\", \"action\": \"ctx['distance'] -= 1\", \"next\": 6},\n    {\"id\": 15, \"type\": \"decision\", \"label\": \"Is t > s?\", \"logic\": \"ctx['t'] > ctx['s']\", \"true_next\": 16, \"false_next\": 6},\n    {\"id\": 16, \"type\": \"process\", \"label\": \"Update distance: distance += 1\", \"action\": \"ctx['distance'] += 1\", \"next\": 6}\n  ]\n}",
+  "code": "class Solution:\n    def furthestDistanceFromOrigin(self, moves: str) -> int:\n        s = moves.count('L')\n        t = moves.count('R')\n        distance = 0\n        for char in moves:\n            if char == 'L':\n                distance -= 1\n            elif char == 'R':\n                distance += 1\n            else:\n                if s > t:\n                    distance -= 1\n                elif t > s:\n                    distance += 1\n        return abs(distance)",
+  "prompt": "\"\"\"\nYou are given a string moves of length n consisting only of characters 'L', 'R', and '_'. The string represents your movement on a number line starting from the origin 0.\n\nIn the ith move, you can choose one of the following directions:\n\n * move to the left if moves[i] = 'L' or moves[i] = '_'\n * move to the right if moves[i] = 'R' or moves[i] = '_'\n\nReturn the distance from the origin of the furthest point you can get to after n moves.\n\nExample 1:\n\nInput: moves = \"L_RL__R\"\nOutput: 3\nExplanation: The furthest point we can reach from the origin 0 is point -3 through the following sequence of moves \"LLRLLLR\".\n\nExample 2:\n\nInput: moves = \"_R__LL_\"\nOutput: 5\nExplanation: The furthest point we can reach from the origin 0 is point -5 through the following sequence of moves \"LRLLLLL\".\n\nExample 3:\n\nInput: moves = \"_______\"\nOutput: 7\nExplanation: The furthest point we can reach from the origin 0 is point 7 through the following sequence of moves \"RRRRRRR\".\n\n\nConstraints:\n\n * 1 <= moves.length == n <= 50\n * moves consists only of characters 'L', 'R' and '_'.\n\"\"\"\nclass Solution:\n    def furthestDistanceFromOrigin(self, moves: str) -> int:\n        ",
+  "test": "\nmy_solution = Solution()\n\ntest_input = { \"moves\": \"L_RL__R\" }\nassert my_solution.furthestDistanceFromOrigin(**test_input) == 3\n\ntest_input = { \"moves\": \"_R__LL_\" }\nassert my_solution.furthestDistanceFromOrigin(**test_input) == 5\n\ntest_input = { \"moves\": \"_______\" }\nassert my_solution.furthestDistanceFromOrigin(**test_input) == 7\n\ntest_input = { \"moves\": \"L\" }\nassert my_solution.furthestDistanceFromOrigin(**test_input) == 1\n\ntest_input = { \"moves\": \"R\" }\nassert my_solution.furthestDistanceFromOrigin(**test_input) == 1\n\ntest_input = { \"moves\": \"_\" }\nassert my_solution.furthestDistanceFromOrigin(**test_input) == 1\n\ntest_input = { \"moves\": \"LL\" }\nassert my_solution.furthestDistanceFromOrigin(**test_input) == 2\n\ntest_input = { \"moves\": \"LR\" }\nassert my_solution.furthestDistanceFromOrigin(**test_input) == 0\n\ntest_input = { \"moves\": \"L_\" }\nassert my_solution.furthestDistanceFromOrigin(**test_input) == 2\n\ntest_input = { \"moves\": \"RL\" }\nassert my_solution.furthestDistanceFromOrigin(**test_input) == 0\n\ntest_input = { \"moves\": \"RR\" }\nassert my_solution.furthestDistanceFromOrigin(**test_input) == 2\n\ntest_input = { \"moves\": \"R_\" }\nassert my_solution.furthestDistanceFromOrigin(**test_input) == 2\n\ntest_input = { \"moves\": \"_L\" }\nassert my_solution.furthestDistanceFromOrigin(**test_input) == 2\n\ntest_input = { \"moves\": \"_R\" }\nassert my_solution.furthestDistanceFromOrigin(**test_input) == 2\n\ntest_input = { \"moves\": \"__\" }\nassert my_solution.furthestDistanceFromOrigin(**test_input) == 2\n\ntest_input = { \"moves\": \"LLL\" }\nassert my_solution.furthestDistanceFromOrigin(**test_input) == 3\n\ntest_input = { \"moves\": \"LLR\" }\nassert my_solution.furthestDistanceFromOrigin(**test_input) == 1\n\ntest_input = { \"moves\": \"LL_\" }\nassert my_solution.furthestDistanceFromOrigin(**test_input) == 3\n\ntest_input = { \"moves\": \"LRL\" }\nassert my_solution.furthestDistanceFromOrigin(**test_input) == 1\n\ntest_input = { \"moves\": \"LRR\" }\nassert my_solution.furthestDistanceFromOrigin(**test_input) == 1\n\ntest_input = { \"moves\": \"LR_\" }\nassert my_solution.furthestDistanceFromOrigin(**test_input) == 1\n\ntest_input = { \"moves\": \"L_L\" }\nassert my_solution.furthestDistanceFromOrigin(**test_input) == 3\n\ntest_input = { \"moves\": \"L_R\" }\nassert my_solution.furthestDistanceFromOrigin(**test_input) == 1\n\ntest_input = { \"moves\": \"L__\" }\nassert my_solution.furthestDistanceFromOrigin(**test_input) == 3\n\ntest_input = { \"moves\": \"RLL\" }\nassert my_solution.furthestDistanceFromOrigin(**test_input) == 1\n\ntest_input = { \"moves\": \"RLR\" }\nassert my_solution.furthestDistanceFromOrigin(**test_input) == 1\n\ntest_input = { \"moves\": \"RL_\" }\nassert my_solution.furthestDistanceFromOrigin(**test_input) == 1\n\ntest_input = { \"moves\": \"RRL\" }\nassert my_solution.furthestDistanceFromOrigin(**test_input) == 1\n\ntest_input = { \"moves\": \"RRR\" }\nassert my_solution.furthestDistanceFromOrigin(**test_input) == 3\n\ntest_input = { \"moves\": \"RR_\" }\nassert my_solution.furthestDistanceFromOrigin(**test_input) == 3\n\ntest_input = { \"moves\": \"R_L\" }\nassert my_solution.furthestDistanceFromOrigin(**test_input) == 1\n\ntest_input = { \"moves\": \"R_R\" }\nassert my_solution.furthestDistanceFromOrigin(**test_input) == 3\n\ntest_input = { \"moves\": \"R__\" }\nassert my_solution.furthestDistanceFromOrigin(**test_input) == 3\n\ntest_input = { \"moves\": \"_LL\" }\nassert my_solution.furthestDistanceFromOrigin(**test_input) == 3\n\ntest_input = { \"moves\": \"_LR\" }\nassert my_solution.furthestDistanceFromOrigin(**test_input) == 1\n\ntest_input = { \"moves\": \"_L_\" }\nassert my_solution.furthestDistanceFromOrigin(**test_input) == 3\n\ntest_input = { \"moves\": \"_RL\" }\nassert my_solution.furthestDistanceFromOrigin(**test_input) == 1\n\ntest_input = { \"moves\": \"_RR\" }\nassert my_solution.furthestDistanceFromOrigin(**test_input) == 3\n\ntest_input = { \"moves\": \"_R_\" }\nassert my_solution.furthestDistanceFromOrigin(**test_input) == 3\n\ntest_input = { \"moves\": \"__L\" }\nassert my_solution.furthestDistanceFromOrigin(**test_input) == 3\n\ntest_input = { \"moves\": \"__R\" }\nassert my_solution.furthestDistanceFromOrigin(**test_input) == 3\n\ntest_input = { \"moves\": \"___\" }\nassert my_solution.furthestDistanceFromOrigin(**test_input) == 3\n\ntest_input = { \"moves\": \"LLLL\" }\nassert my_solution.furthestDistanceFromOrigin(**test_input) == 4\n\ntest_input = { \"moves\": \"LLLR\" }\nassert my_solution.furthestDistanceFromOrigin(**test_input) == 2\n\ntest_input = { \"moves\": \"LLL_\" }\nassert my_solution.furthestDistanceFromOrigin(**test_input) == 4\n\ntest_input = { \"moves\": \"LLRL\" }\nassert my_solution.furthestDistanceFromOrigin(**test_input) == 2\n\ntest_input = { \"moves\": \"LLRR\" }\nassert my_solution.furthestDistanceFromOrigin(**test_input) == 0\n\ntest_input = { \"moves\": \"LLR_\" }\nassert my_solution.furthestDistanceFromOrigin(**test_input) == 2\n\ntest_input = { \"moves\": \"LL_L\" }\nassert my_solution.furthestDistanceFromOrigin(**test_input) == 4\n\ntest_input = { \"moves\": \"LL_R\" }\nassert my_solution.furthestDistanceFromOrigin(**test_input) == 2\n\ntest_input = { \"moves\": \"LL__\" }\nassert my_solution.furthestDistanceFromOrigin(**test_input) == 4\n\ntest_input = { \"moves\": \"LRLL\" }\nassert my_solution.furthestDistanceFromOrigin(**test_input) == 2\n\ntest_input = { \"moves\": \"LRLR\" }\nassert my_solution.furthestDistanceFromOrigin(**test_input) == 0\n\ntest_input = { \"moves\": \"LRL_\" }\nassert my_solution.furthestDistanceFromOrigin(**test_input) == 2\n\ntest_input = { \"moves\": \"LRRL\" }\nassert my_solution.furthestDistanceFromOrigin(**test_input) == 0\n\ntest_input = { \"moves\": \"LRRR\" }\nassert my_solution.furthestDistanceFromOrigin(**test_input) == 2\n\ntest_input = { \"moves\": \"LRR_\" }\nassert my_solution.furthestDistanceFromOrigin(**test_input) == 2\n\ntest_input = { \"moves\": \"LR_L\" }\nassert my_solution.furthestDistanceFromOrigin(**test_input) == 2\n\ntest_input = { \"moves\": \"LR_R\" }\nassert my_solution.furthestDistanceFromOrigin(**test_input) == 2\n\ntest_input = { \"moves\": \"LR__\" }\nassert my_solution.furthestDistanceFromOrigin(**test_input) == 2\n\ntest_input = { \"moves\": \"L_LL\" }\nassert my_solution.furthestDistanceFromOrigin(**test_input) == 4\n\ntest_input = { \"moves\": \"L_LR\" }\nassert my_solution.furthestDistanceFromOrigin(**test_input) == 2\n\ntest_input = { \"moves\": \"L_L_\" }\nassert my_solution.furthestDistanceFromOrigin(**test_input) == 4\n\ntest_input = { \"moves\": \"L_RL\" }\nassert my_solution.furthestDistanceFromOrigin(**test_input) == 2\n\ntest_input = { \"moves\": \"L_RR\" }\nassert my_solution.furthestDistanceFromOrigin(**test_input) == 2\n\ntest_input = { \"moves\": \"L_R_\" }\nassert my_solution.furthestDistanceFromOrigin(**test_input) == 2\n\ntest_input = { \"moves\": \"L__L\" }\nassert my_solution.furthestDistanceFromOrigin(**test_input) == 4\n\ntest_input = { \"moves\": \"L__R\" }\nassert my_solution.furthestDistanceFromOrigin(**test_input) == 2\n\ntest_input = { \"moves\": \"L___\" }\nassert my_solution.furthestDistanceFromOrigin(**test_input) == 4\n\ntest_input = { \"moves\": \"RLLL\" }\nassert my_solution.furthestDistanceFromOrigin(**test_input) == 2\n\ntest_input = { \"moves\": \"RLLR\" }\nassert my_solution.furthestDistanceFromOrigin(**test_input) == 0\n\ntest_input = { \"moves\": \"RLL_\" }\nassert my_solution.furthestDistanceFromOrigin(**test_input) == 2\n\ntest_input = { \"moves\": \"RLRL\" }\nassert my_solution.furthestDistanceFromOrigin(**test_input) == 0\n\ntest_input = { \"moves\": \"RLRR\" }\nassert my_solution.furthestDistanceFromOrigin(**test_input) == 2\n\ntest_input = { \"moves\": \"RLR_\" }\nassert my_solution.furthestDistanceFromOrigin(**test_input) == 2\n\ntest_input = { \"moves\": \"RL_L\" }\nassert my_solution.furthestDistanceFromOrigin(**test_input) == 2\n\ntest_input = { \"moves\": \"RL_R\" }\nassert my_solution.furthestDistanceFromOrigin(**test_input) == 2\n\ntest_input = { \"moves\": \"RL__\" }\nassert my_solution.furthestDistanceFromOrigin(**test_input) == 2\n\ntest_input = { \"moves\": \"RRLL\" }\nassert my_solution.furthestDistanceFromOrigin(**test_input) == 0\n\ntest_input = { \"moves\": \"RRLR\" }\nassert my_solution.furthestDistanceFromOrigin(**test_input) == 2\n\ntest_input = { \"moves\": \"RRL_\" }\nassert my_solution.furthestDistanceFromOrigin(**test_input) == 2\n\ntest_input = { \"moves\": \"RRRL\" }\nassert my_solution.furthestDistanceFromOrigin(**test_input) == 2\n\ntest_input = { \"moves\": \"RRRR\" }\nassert my_solution.furthestDistanceFromOrigin(**test_input) == 4\n\ntest_input = { \"moves\": \"RRR_\" }\nassert my_solution.furthestDistanceFromOrigin(**test_input) == 4\n\ntest_input = { \"moves\": \"RR_L\" }\nassert my_solution.furthestDistanceFromOrigin(**test_input) == 2\n\ntest_input = { \"moves\": \"RR_R\" }\nassert my_solution.furthestDistanceFromOrigin(**test_input) == 4\n\ntest_input = { \"moves\": \"RR__\" }\nassert my_solution.furthestDistanceFromOrigin(**test_input) == 4\n\ntest_input = { \"moves\": \"R_LL\" }\nassert my_solution.furthestDistanceFromOrigin(**test_input) == 2\n\ntest_input = { \"moves\": \"R_LR\" }\nassert my_solution.furthestDistanceFromOrigin(**test_input) == 2\n\ntest_input = { \"moves\": \"R_L_\" }\nassert my_solution.furthestDistanceFromOrigin(**test_input) == 2\n\ntest_input = { \"moves\": \"R_RL\" }\nassert my_solution.furthestDistanceFromOrigin(**test_input) == 2\n\ntest_input = { \"moves\": \"R_RR\" }\nassert my_solution.furthestDistanceFromOrigin(**test_input) == 4\n\ntest_input = { \"moves\": \"R_R_\" }\nassert my_solution.furthestDistanceFromOrigin(**test_input) == 4\n\ntest_input = { \"moves\": \"R__L\" }\nassert my_solution.furthestDistanceFromOrigin(**test_input) == 2\n\ntest_input = { \"moves\": \"R__R\" }\nassert my_solution.furthestDistanceFromOrigin(**test_input) == 4\n\ntest_input = { \"moves\": \"R___\" }\nassert my_solution.furthestDistanceFromOrigin(**test_input) == 4\n\ntest_input = { \"moves\": \"_LLL\" }\nassert my_solution.furthestDistanceFromOrigin(**test_input) == 4\n\ntest_input = { \"moves\": \"_LLR\" }\nassert my_solution.furthestDistanceFromOrigin(**test_input) == 2\n\ntest_input = { \"moves\": \"_LL_\" }\nassert my_solution.furthestDistanceFromOrigin(**test_input) == 4\n\ntest_input = { \"moves\": \"_LRL\" }\nassert my_solution.furthestDistanceFromOrigin(**test_input) == 2",
+  "ocr_data": {
+    "nodes": [
+      {
+        "node_id": 1,
+        "shape_type": "rectangle",
+        "raw_text": "Start",
+        "position": "top"
+      },
+      {
+        "node_id": 2,
+        "shape_type": "rectangle",
+        "raw_text": "Input: moves (string)",
+        "position": "middle"
+      },
+      {
+        "node_id": 3,
+        "shape_type": "rectangle",
+        "raw_text": "Count L's: s = moves.count('L')",
+        "position": "middle"
+      },
+      {
+        "node_id": 4,
+        "shape_type": "rectangle",
+        "raw_text": "Count R's: t = moves.count('R')",
+        "position": "middle"
+      },
+      {
+        "node_id": 5,
+        "shape_type": "rectangle",
+        "raw_text": "Initialize distance = 0",
+        "position": "middle"
+      },
+      {
+        "node_id": 6,
+        "shape_type": "rectangle",
+        "raw_text": "Loop through each character in moves",
+        "position": "middle"
+      },
+      {
+        "node_id": 7,
+        "shape_type": "diamond",
+        "raw_text": "Is character 'L'?",
+        "position": "middle"
+      },
+      {
+        "node_id": 8,
+        "shape_type": "rectangle",
+        "raw_text": "Update distance: distance -= 1",
+        "position": "middle"
+      },
+      {
+        "node_id": 9,
+        "shape_type": "diamond",
+        "raw_text": "Is character 'R'?",
+        "position": "middle"
+      },
+      {
+        "node_id": 10,
+        "shape_type": "rectangle",
+        "raw_text": "Update distance: distance += 1",
+        "position": "middle"
+      },
+      {
+        "node_id": 11,
+        "shape_type": "rectangle",
+        "raw_text": "Return abs(distance)",
+        "position": "middle"
+      },
+      {
+        "node_id": 12,
+        "shape_type": "rectangle",
+        "raw_text": "Output: furthest distance from origin",
+        "position": "middle"
+      },
+      {
+        "node_id": 13,
+        "shape_type": "diamond",
+        "raw_text": "Is s > t?",
+        "position": "bottom"
+      },
+      {
+        "node_id": 14,
+        "shape_type": "rectangle",
+        "raw_text": "Update distance: distance -= 1",
+        "position": "bottom"
+      },
+      {
+        "node_id": 15,
+        "shape_type": "diamond",
+        "raw_text": "Is t > s?",
+        "position": "bottom"
+      },
+      {
+        "node_id": 16,
+        "shape_type": "rectangle",
+        "raw_text": "Update distance: distance += 1",
+        "position": "bottom"
+      }
+    ],
+    "edges": [
+      {
+        "from_node": 1,
+        "to_node": 2,
+        "label": ""
+      },
+      {
+        "from_node": 2,
+        "to_node": 3,
+        "label": ""
+      },
+      {
+        "from_node": 3,
+        "to_node": 4,
+        "label": ""
+      },
+      {
+        "from_node": 4,
+        "to_node": 5,
+        "label": ""
+      },
+      {
+        "from_node": 5,
+        "to_node": 6,
+        "label": ""
+      },
+      {
+        "from_node": 6,
+        "to_node": 7,
+        "label": ""
+      },
+      {
+        "from_node": 7,
+        "to_node": 8,
+        "label": "Yes"
+      },
+      {
+        "from_node": 7,
+        "to_node": 9,
+        "label": "No"
+      },
+      {
+        "from_node": 9,
+        "to_node": 10,
+        "label": "Yes"
+      },
+      {
+        "from_node": 9,
+        "to_node": 6,
+        "label": "No"
+      },
+      {
+        "from_node": 8,
+        "to_node": 6,
+        "label": ""
+      },
+      {
+        "from_node": 10,
+        "to_node": 6,
+        "label": ""
+      },
+      {
+        "from_node": 6,
+        "to_node": 11,
+        "label": ""
+      },
+      {
+        "from_node": 11,
+        "to_node": 12,
+        "label": ""
+      },
+      {
+        "from_node": 12,
+        "to_node": 6,
+        "label": ""
+      },
+      {
+        "from_node": 6,
+        "to_node": 13,
+        "label": ""
+      },
+      {
+        "from_node": 13,
+        "to_node": 14,
+        "label": "Yes"
+      },
+      {
+        "from_node": 13,
+        "to_node": 6,
+        "label": "No"
+      },
+      {
+        "from_node": 14,
+        "to_node": 6,
+        "label": ""
+      },
+      {
+        "from_node": 6,
+        "to_node": 15,
+        "label": ""
+      },
+      {
+        "from_node": 15,
+        "to_node": 16,
+        "label": "Yes"
+      },
+      {
+        "from_node": 15,
+        "to_node": 6,
+        "label": "No"
+      },
+      {
+        "from_node": 16,
+        "to_node": 6,
+        "label": ""
+      }
+    ],
+    "other_text": []
+  },
+  "analysis": {
+    "ilr_verdict": "incorrect",
+    "ilr_issues": "两点错误：(1) 节点9的false分支（下划线字符）直接回节点6，ILR把下划线处理节点(13-16)放在节点11(return abs(distance))之后且11按字面执行会立即返回，导致下划线完全不被处理；(2) 继承自流程图的算法缺陷：只有s>t和t>s两个分支，没有s==t时下划线的处理分支，s==t且有'_'时下划线被丢弃。另外节点6的action是悬空for头、节点16回跳节点6等连线也与OCR原图一样混乱。",
+    "code_vs_ilr": "deviates",
+    "code_issues": "代码把ILR中不可达的下划线处理逻辑（s>t则-1、t>s则+1）移入循环的else分支并去掉了节点11的过早return（修复性偏离ILR字面控制流），使s!=t的情形变对，但原样保留了s==t时对'_'不做任何处理的缺陷。",
+    "error_source": "ilr",
+    "ocr_contribution": "no",
+    "root_cause": "ILR/流程图算法本身不完整：下划线处理缺s==t分支且ILR字面控制流中该逻辑不可达（节点11提前return）；代码虽修复了控制流使s!=t情形正确，但保留了s==t时丢弃下划线的缺陷，答案偏小。",
+    "evidence": "忠实执行ILR：'L_RL__R'输出0（期望3，下划线未处理）、'_R__LL_'输出1（期望5）、'_______'输出0（期望7）。生成代码100个测试错17个，全部是s==t且含'_'的情形：'L_RL__R'得0、'_______'得7错为0、'_'得1错为0、'LR_'得1错为0。OCR边忠实呈现了混乱的原图（6->11->12->6环、6->13/6->15并列分支），OCR非主因。"
+  }
+}

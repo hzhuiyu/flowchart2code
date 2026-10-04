@@ -1,0 +1,74 @@
+{
+  "problem_id": "split_words",
+  "nodes": [
+    {
+      "id": 1,
+      "type": "start",
+      "label": "Start",
+      "next": 2
+    },
+    {
+      "id": 2,
+      "type": "process",
+      "label": "Input: txt (string)",
+      "action": "ctx['txt'] = ctx['arg0']; ctx['result'] = None",
+      "next": 3
+    },
+    {
+      "id": 3,
+      "type": "decision",
+      "label": "Is ' ' in txt?",
+      "logic": "' ' in ctx['txt']",
+      "true_next": 4,
+      "false_next": 5
+    },
+    {
+      "id": 4,
+      "type": "process",
+      "label": "Output: txt.split()",
+      "action": "ctx['result'] = ctx['txt'].split(); ctx['result'] = ctx['result']",
+      "next": 9
+    },
+    {
+      "id": 5,
+      "type": "decision",
+      "label": "Is ',' in txt?",
+      "logic": "',' in ctx['txt']",
+      "true_next": 6,
+      "false_next": 7
+    },
+    {
+      "id": 6,
+      "type": "process",
+      "label": "Output: txt.replace(',', '').split()",
+      "action": "ctx['result'] = ctx['txt'].replace(',', '').split(); ctx['result'] = ctx['result']",
+      "next": 9
+    },
+    {
+      "id": 7,
+      "type": "process",
+      "label": "Count lower-case letters with odd order",
+      "action": "ctx['result'] = len([i for i in ctx['txt'] if i.islower() and ord(i) % 2 == 0])",
+      "next": 9
+    },
+    {
+      "id": 9,
+      "type": "end",
+      "label": "Return result",
+      "output": "ctx['result']"
+    }
+  ],
+  "task_id": "HumanEval-125",
+  "dataset": "HumanEval-V",
+  "result": "failed: ",
+  "code": "def split_words(txt):\n    result = None\n    \n    if ' ' in txt:\n        result = txt.split()\n    elif ',' in txt:\n        result = txt.replace(',', '').split()\n    else:\n        result = len([i for i in txt if i.islower() and ord(i) % 2 == 0])\n    \n    return result",
+  "verification": {
+    "md_verdict": "ILR Error",
+    "actual_error_source": "ilr",
+    "ilr_verdict": "incorrect",
+    "code_vs_ilr": "faithful",
+    "md_correct": "yes",
+    "note": "确认 ILR 错：node6 用 txt.replace(',', '').split()，逗号被删掉后无空格可分，'Hello,world!' 整个变成一个词（应为按逗号切分，如 replace(',', ' ') 或 split(',')）。node7 的 ord(i)%2==0 判断（奇字母序）反而是对的。生成代码照抄 node6，属忠实转换。",
+    "evidence": "ILR 转写与生成代码对 'Hello,world!' 均输出 ['Helloworld!']，期望 ['Hello','world!']；其余 7 个测试两者均通过且一致。"
+  }
+}

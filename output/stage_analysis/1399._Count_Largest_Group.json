@@ -1,0 +1,95 @@
+{
+  "problem_id": "groups_with_largest_size",
+  "nodes": [
+    {
+      "id": 1,
+      "type": "start",
+      "label": "Start",
+      "next": 2
+    },
+    {
+      "id": 2,
+      "type": "process",
+      "label": "Input: n (integer)",
+      "action": "ctx['n'] = ctx['arg0']; ctx['i'] = 0; ctx['hash_map'] = [0] * 36",
+      "next": 3
+    },
+    {
+      "id": 3,
+      "type": "process",
+      "label": "Create generator for digit sums",
+      "action": "def gen():\n    for num in range(1, ctx['n'] + 1):\n        yield sum(int(d) for d in str(num))\nctx['gen'] = gen()",
+      "next": 4
+    },
+    {
+      "id": 4,
+      "type": "process",
+      "label": "Skip the first value of generator",
+      "action": "next(ctx['gen'])",
+      "next": 5
+    },
+    {
+      "id": 5,
+      "type": "decision",
+      "label": "Is i < n?",
+      "logic": "ctx['i'] < ctx['n']",
+      "true_next": 6,
+      "false_next": 7
+    },
+    {
+      "id": 6,
+      "type": "process",
+      "label": "Get next value from generator",
+      "action": "ctx['next_val'] = next(ctx['gen'])",
+      "next": 8
+    },
+    {
+      "id": 8,
+      "type": "process",
+      "label": "Update hash_map: hash_map[next(gen) - 1] += 1",
+      "action": "ctx['hash_map'][ctx['next_val'] - 1] += 1",
+      "next": 9
+    },
+    {
+      "id": 9,
+      "type": "process",
+      "label": "Increment i by 1",
+      "action": "ctx['i'] += 1",
+      "next": 5
+    },
+    {
+      "id": 7,
+      "type": "process",
+      "label": "Find max value in hash_map",
+      "action": "ctx['max_val'] = max(ctx['hash_map'])",
+      "next": 10
+    },
+    {
+      "id": 10,
+      "type": "process",
+      "label": "Count occurrences of max value in hash_map",
+      "action": "ctx['count'] = sum(1 for x in ctx['hash_map'] if x == ctx['max_val'])",
+      "next": 11
+    },
+    {
+      "id": 11,
+      "type": "end",
+      "label": "Output: count of largest groups",
+      "output": "ctx['count']"
+    }
+  ],
+  "task_id": "1399. Count Largest Group",
+  "dataset": "MATH",
+  "result": "failed: ",
+  "code": "def countLargestGroup( n: int) -> int:\n    i = 0\n    hash_map = [0] * 36\n    \n    def gen():\n        for num in range(1, n + 1):\n            yield sum(int(d) for d in str(num))\n    \n    gen = gen()\n    next(gen)\n    \n    while i < n:\n        next_val = next(gen)\n        hash_map[next_val - 1] += 1\n        i += 1\n    \n    max_val = max(hash_map)\n    count = sum(1 for x in hash_map if x == max_val)\n    \n    return count",
+  "failed_test": true,
+  "verification": {
+    "md_verdict": "ILR Error",
+    "actual_error_source": "ilr",
+    "ilr_verdict": "incorrect",
+    "code_vs_ilr": "faithful",
+    "md_correct": "yes",
+    "note": "确认 ILR Error：ILR 保留了'Skip the first value of generator'节点，生成器只产 1..n 共 n 个值，先跳过 1 个再循环取 n 次必然 StopIteration 崩溃。生成代码忠实转写，同样以 StopIteration 崩溃；去掉 skip 节点后算法正确。",
+    "evidence": "按 ILR 转写运行：countLargestGroup(13) 抛 StopIteration（生成器耗尽），所有 n 均崩溃；生成代码同样报 StopIteration。删除 skip 节点后同一算法 13/2/1/10/11/9999 等全部测试通过。"
+  }
+}

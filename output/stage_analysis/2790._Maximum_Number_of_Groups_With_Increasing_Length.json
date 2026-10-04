@@ -1,0 +1,203 @@
+{
+  "problem_id": "max_groups_with_usage_limits",
+  "functions": [
+    {
+      "name": "poss",
+      "parameters": [
+        "groups"
+      ],
+      "entry_node": 13,
+      "nodes": [
+        {
+          "id": 13,
+          "type": "start",
+          "label": "poss(groups)",
+          "next": 14
+        },
+        {
+          "id": 14,
+          "type": "process",
+          "label": "Initialize sub with usageLimits[0]",
+          "action": "ctx['sub'] = [ctx['usageLimits'][0]]",
+          "next": 15
+        },
+        {
+          "id": 15,
+          "type": "process",
+          "label": "For i in range(1, n)",
+          "action": "ctx['n'] = len(ctx['usageLimits']); ctx['i'] = 1",
+          "next": 16
+        },
+        {
+          "id": 16,
+          "type": "decision",
+          "label": "Is i < n?",
+          "logic": "ctx['i'] < ctx['n']",
+          "true_next": 17,
+          "false_next": 18
+        },
+        {
+          "id": 17,
+          "type": "process",
+          "label": "Append usageLimits[i] - usageLimits[i - 1] to sub",
+          "action": "ctx['sub'].append(ctx['usageLimits'][ctx['i']] - ctx['usageLimits'][ctx['i'] - 1])",
+          "next": 19
+        },
+        {
+          "id": 19,
+          "type": "process",
+          "label": "Decrement sub[i] by 1",
+          "action": "ctx['sub'][ctx['i']] -= 1",
+          "next": 20
+        },
+        {
+          "id": 20,
+          "type": "process",
+          "label": "For i in range(-groups, 0, 1)",
+          "action": "ctx['i'] = -ctx['groups']; ctx['i'] += 1",
+          "next": 21
+        },
+        {
+          "id": 21,
+          "type": "decision",
+          "label": "Is i < 0?",
+          "logic": "ctx['i'] < 0",
+          "true_next": 22,
+          "false_next": 23
+        },
+        {
+          "id": 22,
+          "type": "return",
+          "label": "Return False",
+          "value": "False"
+        },
+        {
+          "id": 23,
+          "type": "process",
+          "label": "For i in accumulate(list(accumulate(sub)))",
+          "action": "ctx['i'] = 0; ctx['acc'] = list(accumulate(ctx['sub'])); ctx['acc_acc'] = list(accumulate(ctx['acc']))",
+          "next": 24
+        },
+        {
+          "id": 24,
+          "type": "decision",
+          "label": "Is i < 0?",
+          "logic": "ctx['i'] < 0",
+          "true_next": 25,
+          "false_next": 26
+        },
+        {
+          "id": 25,
+          "type": "return",
+          "label": "Return True",
+          "value": "True"
+        },
+        {
+          "id": 26,
+          "type": "return",
+          "label": "Return False",
+          "value": "False"
+        }
+      ]
+    }
+  ],
+  "nodes": [
+    {
+      "id": 1,
+      "type": "start",
+      "label": "Start",
+      "next": 2
+    },
+    {
+      "id": 2,
+      "type": "process",
+      "label": "Input: usageLimits (List[int])",
+      "action": "ctx['usageLimits'] = ctx['arg0']",
+      "next": 3
+    },
+    {
+      "id": 3,
+      "type": "process",
+      "label": "Sort usageLimits",
+      "action": "ctx['usageLimits'] = sorted(ctx['usageLimits'])",
+      "next": 4
+    },
+    {
+      "id": 4,
+      "type": "process",
+      "label": "Initialize n = len(usageLimits)",
+      "action": "ctx['n'] = len(ctx['usageLimits'])",
+      "next": 5
+    },
+    {
+      "id": 5,
+      "type": "process",
+      "label": "Define poss(groups)",
+      "action": "",
+      "next": 6
+    },
+    {
+      "id": 6,
+      "type": "process",
+      "label": "Initialize l = 0, r = len(usageLimits)",
+      "action": "ctx['l'] = 0; ctx['r'] = ctx['n']",
+      "next": 7
+    },
+    {
+      "id": 7,
+      "type": "decision",
+      "label": "Is l < r?",
+      "logic": "ctx['l'] < ctx['r']",
+      "true_next": 8,
+      "false_next": 12
+    },
+    {
+      "id": 8,
+      "type": "process",
+      "label": "Calculate mid = (l + r + 1) // 2",
+      "action": "ctx['mid'] = (ctx['l'] + ctx['r'] + 1) // 2",
+      "next": 9
+    },
+    {
+      "id": 9,
+      "type": "decision",
+      "label": "Is poss(mid)?",
+      "logic": "poss(ctx['mid'])",
+      "true_next": 10,
+      "false_next": 11
+    },
+    {
+      "id": 10,
+      "type": "process",
+      "label": "Set l = mid",
+      "action": "ctx['l'] = ctx['mid']",
+      "next": 7
+    },
+    {
+      "id": 11,
+      "type": "process",
+      "label": "Set r = mid - 1",
+      "action": "ctx['r'] = ctx['mid'] - 1",
+      "next": 7
+    },
+    {
+      "id": 12,
+      "type": "end",
+      "label": "Output: l",
+      "output": "ctx['l']"
+    }
+  ],
+  "task_id": "2790. Maximum Number of Groups With Increasing Length",
+  "dataset": "MATH",
+  "result": "failed: ",
+  "code": "def maxIncreasingGroups(usageLimits: List[int]) -> int:\n    usageLimits.sort()\n    n = len(usageLimits)\n    \n    def poss(groups):\n        sub = [usageLimits[0]]\n        i = 1\n        while i < n:\n            sub.append(usageLimits[i] - usageLimits[i - 1])\n            sub[i] -= 1\n            i += 1\n        \n        i = -groups\n        while i < 0:\n            i += 1\n        \n        acc = list(accumulate(sub))\n        acc_acc = list(accumulate(acc))\n        \n        return i >= 0\n    \n    l, r = 0, n\n    while l < r:\n        mid = (l + r + 1) // 2\n        if poss(mid):\n            l = mid\n        else:\n            r = mid - 1\n    \n    return l",
+  "verification": {
+    "md_verdict": "ILR Error",
+    "actual_error_source": "both",
+    "ilr_verdict": "incorrect",
+    "code_vs_ilr": "deviates",
+    "md_correct": "partial",
+    "note": "ILR 的 poss(groups) 可行性检查是残缺的：两个 'For i in ...' 循环（节点20/23）循环体为空，真正的可行性判断逻辑丢失；按节点20字面语义 i=-groups+1，节点21 对 groups>=2 直接返回 False，poss 恒为 False，二分结果恒为 0，忠实实现全部测试失败。生成代码又额外偏离：把 i=-groups 的空循环补成循环到 0，使 poss 恒为 True，二分结果恒为 n（[2,1,2]→3 期望2、[1,1,1,1,1]→5 期望2）；且缺 List 导入 def 处即 NameError，故 both。",
+    "evidence": "ILR 字面执行：[1,2,5]/[2,1,2]/[1,1]/[1] 全部返回 0；生成代码实跑：NameError: List，补导入后 [2,1,2]→3（期望2）、[1,1]→2（期望1）、[1,1,1,1,1]→5（期望2），第二条断言即失败。"
+  }
+}

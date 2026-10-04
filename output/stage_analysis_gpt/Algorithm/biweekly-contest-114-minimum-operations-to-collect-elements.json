@@ -1,0 +1,170 @@
+{
+  "task_id": "biweekly-contest-114-minimum-operations-to-collect-elements",
+  "dataset": "Algorithm",
+  "difficulty": "Easy",
+  "title": "minimum-operations-to-collect-elements",
+  "result": "failed: ",
+  "ilr": "{\n  \"problem_id\": \"min_operations_example\",\n  \"nodes\": [\n    {\"id\": 1, \"type\": \"start\", \"label\": \"Start\", \"next\": 2},\n    {\"id\": 2, \"type\": \"process\", \"label\": \"Input: nums (list of integers), k (integer)\", \"action\": \"ctx['nums']=ctx['arg0']; ctx['k']=ctx['arg1']; ctx['cnt']=0; ctx['i']=len(ctx['nums']) - 1\", \"next\": 3},\n    {\"id\": 3, \"type\": \"decision\", \"label\": \"Loop i from len(nums) - 1 to 0\", \"logic\": \"ctx['i'] >= 0\", \"true_next\": 4, \"false_next\": 12},\n    {\"id\": 4, \"type\": \"process\", \"label\": \"Calculate j = abs(nums[i]) - 1\", \"action\": \"ctx['j'] = abs(ctx['nums'][ctx['i']]) - 1\", \"next\": 5},\n    {\"id\": 5, \"type\": \"decision\", \"label\": \"Is j < k?\", \"logic\": \"ctx['j'] < ctx['k']\", \"true_next\": 6, \"false_next\": 3},\n    {\"id\": 6, \"type\": \"decision\", \"label\": \"Is nums[i] > 0?\", \"logic\": \"ctx['nums'][ctx['i']] > 0\", \"true_next\": 7, \"false_next\": 3},\n    {\"id\": 7, \"type\": \"process\", \"label\": \"Increment cnt: cnt += 1\", \"action\": \"ctx['cnt'] += 1\", \"next\": 8},\n    {\"id\": 8, \"type\": \"process\", \"label\": \"Update nums[i]: nums[i] *= -1\", \"action\": \"ctx['nums'][ctx['i']] *= -1\", \"next\": 9},\n    {\"id\": 9, \"type\": \"decision\", \"label\": \"Is cnt == k?\", \"logic\": \"ctx['cnt'] == ctx['k']\", \"true_next\": 10, \"false_next\": 3},\n    {\"id\": 10, \"type\": \"process\", \"label\": \"Output: len(nums) - i (minimum operations)\", \"action\": \"ctx['result'] = len(ctx['nums']) - ctx['i']\", \"next\": 11},\n    {\"id\": 11, \"type\": \"end\", \"label\": \"Return result\", \"output\": \"ctx['result']\"},\n    {\"id\": 12, \"type\": \"process\", \"label\": \"Output: (no output, loop ends)\", \"action\": \"\", \"next\": 3}\n  ]\n}",
+  "code": "from typing import List\n\nclass Solution:\n    def minOperations(self, nums: List[int], k: int) -> int:\n        cnt = 0\n        i = len(nums) - 1\n        \n        while i >= 0:\n            j = abs(nums[i]) - 1\n            if j < k:\n                if nums[i] > 0:\n                    cnt += 1\n                    nums[i] *= -1\n                    if cnt == k:\n                        return len(nums) - i\n            i -= 1\n        \n        return 0",
+  "prompt": "\"\"\"\nYou are given an array nums of positive integers and an integer k.\n\nIn one operation, you can remove the last element of the array and add it to your collection.\n\nReturn the minimum number of operations needed to collect elements 1, 2, ..., k.\n\nExample 1:\n\nInput: nums = [3,1,5,4,2], k = 2\nOutput: 4\nExplanation: After 4 operations, we collect elements 2, 4, 5, and 1, in this order. Our collection contains elements 1 and 2. Hence, the answer is 4.\n\nExample 2:\n\nInput: nums = [3,1,5,4,2], k = 5\nOutput: 5\nExplanation: After 5 operations, we collect elements 2, 4, 5, 1, and 3, in this order. Our collection contains elements 1 through 5. Hence, the answer is 5.\n\nExample 3:\n\nInput: nums = [3,2,5,3,1], k = 3\nOutput: 4\nExplanation: After 4 operations, we collect elements 1, 3, 5, and 2, in this order. Our collection contains elements 1 through 3. Hence, the answer is 4.\n\n\nConstraints:\n\n * 1 <= nums.length <= 50\n * 1 <= nums[i] <= nums.length\n * 1 <= k <= nums.length\n * The input is generated such that you can collect elements 1, 2, ..., k.\n\"\"\"\nclass Solution:\n    def minOperations(self, nums: List[int], k: int) -> int:\n        ",
+  "test": "\nmy_solution = Solution()\n\ntest_input = { \"nums\": [3,1,5,4,2], \"k\": 2 }\nassert my_solution.minOperations(**test_input) == 4\n\ntest_input = { \"nums\": [3,1,5,4,2], \"k\": 5 }\nassert my_solution.minOperations(**test_input) == 5\n\ntest_input = { \"nums\": [3,2,5,3,1], \"k\": 3 }\nassert my_solution.minOperations(**test_input) == 4\n\ntest_input = { \"nums\": [1], \"k\": 1 }\nassert my_solution.minOperations(**test_input) == 1\n\ntest_input = { \"nums\": [1,1], \"k\": 1 }\nassert my_solution.minOperations(**test_input) == 1\n\ntest_input = { \"nums\": [1,2], \"k\": 1 }\nassert my_solution.minOperations(**test_input) == 2\n\ntest_input = { \"nums\": [1,2], \"k\": 2 }\nassert my_solution.minOperations(**test_input) == 2\n\ntest_input = { \"nums\": [2,1], \"k\": 1 }\nassert my_solution.minOperations(**test_input) == 1\n\ntest_input = { \"nums\": [2,1], \"k\": 2 }\nassert my_solution.minOperations(**test_input) == 2\n\ntest_input = { \"nums\": [1,1,1], \"k\": 1 }\nassert my_solution.minOperations(**test_input) == 1\n\ntest_input = { \"nums\": [1,1,2], \"k\": 1 }\nassert my_solution.minOperations(**test_input) == 2\n\ntest_input = { \"nums\": [1,1,2], \"k\": 2 }\nassert my_solution.minOperations(**test_input) == 2\n\ntest_input = { \"nums\": [1,1,3], \"k\": 1 }\nassert my_solution.minOperations(**test_input) == 2\n\ntest_input = { \"nums\": [1,2,1], \"k\": 1 }\nassert my_solution.minOperations(**test_input) == 1\n\ntest_input = { \"nums\": [1,2,1], \"k\": 2 }\nassert my_solution.minOperations(**test_input) == 2\n\ntest_input = { \"nums\": [1,2,2], \"k\": 1 }\nassert my_solution.minOperations(**test_input) == 3\n\ntest_input = { \"nums\": [1,2,2], \"k\": 2 }\nassert my_solution.minOperations(**test_input) == 3\n\ntest_input = { \"nums\": [1,2,3], \"k\": 1 }\nassert my_solution.minOperations(**test_input) == 3\n\ntest_input = { \"nums\": [1,2,3], \"k\": 2 }\nassert my_solution.minOperations(**test_input) == 3\n\ntest_input = { \"nums\": [1,2,3], \"k\": 3 }\nassert my_solution.minOperations(**test_input) == 3\n\ntest_input = { \"nums\": [1,3,1], \"k\": 1 }\nassert my_solution.minOperations(**test_input) == 1\n\ntest_input = { \"nums\": [1,3,2], \"k\": 1 }\nassert my_solution.minOperations(**test_input) == 3\n\ntest_input = { \"nums\": [1,3,2], \"k\": 2 }\nassert my_solution.minOperations(**test_input) == 3\n\ntest_input = { \"nums\": [1,3,2], \"k\": 3 }\nassert my_solution.minOperations(**test_input) == 3\n\ntest_input = { \"nums\": [1,3,3], \"k\": 1 }\nassert my_solution.minOperations(**test_input) == 3\n\ntest_input = { \"nums\": [2,1,1], \"k\": 1 }\nassert my_solution.minOperations(**test_input) == 1\n\ntest_input = { \"nums\": [2,1,1], \"k\": 2 }\nassert my_solution.minOperations(**test_input) == 3\n\ntest_input = { \"nums\": [2,1,2], \"k\": 1 }\nassert my_solution.minOperations(**test_input) == 2\n\ntest_input = { \"nums\": [2,1,2], \"k\": 2 }\nassert my_solution.minOperations(**test_input) == 2\n\ntest_input = { \"nums\": [2,1,3], \"k\": 1 }\nassert my_solution.minOperations(**test_input) == 2\n\ntest_input = { \"nums\": [2,1,3], \"k\": 2 }\nassert my_solution.minOperations(**test_input) == 3\n\ntest_input = { \"nums\": [2,1,3], \"k\": 3 }\nassert my_solution.minOperations(**test_input) == 3\n\ntest_input = { \"nums\": [2,2,1], \"k\": 1 }\nassert my_solution.minOperations(**test_input) == 1\n\ntest_input = { \"nums\": [2,2,1], \"k\": 2 }\nassert my_solution.minOperations(**test_input) == 2\n\ntest_input = { \"nums\": [2,3,1], \"k\": 1 }\nassert my_solution.minOperations(**test_input) == 1\n\ntest_input = { \"nums\": [2,3,1], \"k\": 2 }\nassert my_solution.minOperations(**test_input) == 3\n\ntest_input = { \"nums\": [2,3,1], \"k\": 3 }\nassert my_solution.minOperations(**test_input) == 3\n\ntest_input = { \"nums\": [3,1,1], \"k\": 1 }\nassert my_solution.minOperations(**test_input) == 1\n\ntest_input = { \"nums\": [3,1,2], \"k\": 1 }\nassert my_solution.minOperations(**test_input) == 2\n\ntest_input = { \"nums\": [3,1,2], \"k\": 2 }\nassert my_solution.minOperations(**test_input) == 2\n\ntest_input = { \"nums\": [3,1,2], \"k\": 3 }\nassert my_solution.minOperations(**test_input) == 3\n\ntest_input = { \"nums\": [3,1,3], \"k\": 1 }\nassert my_solution.minOperations(**test_input) == 2\n\ntest_input = { \"nums\": [3,2,1], \"k\": 1 }\nassert my_solution.minOperations(**test_input) == 1\n\ntest_input = { \"nums\": [3,2,1], \"k\": 2 }\nassert my_solution.minOperations(**test_input) == 2\n\ntest_input = { \"nums\": [3,2,1], \"k\": 3 }\nassert my_solution.minOperations(**test_input) == 3\n\ntest_input = { \"nums\": [3,3,1], \"k\": 1 }\nassert my_solution.minOperations(**test_input) == 1\n\ntest_input = { \"nums\": [1,1,1,1], \"k\": 1 }\nassert my_solution.minOperations(**test_input) == 1\n\ntest_input = { \"nums\": [1,1,1,2], \"k\": 1 }\nassert my_solution.minOperations(**test_input) == 2\n\ntest_input = { \"nums\": [1,1,1,2], \"k\": 2 }\nassert my_solution.minOperations(**test_input) == 2\n\ntest_input = { \"nums\": [1,1,1,3], \"k\": 1 }\nassert my_solution.minOperations(**test_input) == 2\n\ntest_input = { \"nums\": [1,1,1,4], \"k\": 1 }\nassert my_solution.minOperations(**test_input) == 2\n\ntest_input = { \"nums\": [1,1,2,1], \"k\": 1 }\nassert my_solution.minOperations(**test_input) == 1\n\ntest_input = { \"nums\": [1,1,2,1], \"k\": 2 }\nassert my_solution.minOperations(**test_input) == 2\n\ntest_input = { \"nums\": [1,1,2,2], \"k\": 1 }\nassert my_solution.minOperations(**test_input) == 3\n\ntest_input = { \"nums\": [1,1,2,2], \"k\": 2 }\nassert my_solution.minOperations(**test_input) == 3\n\ntest_input = { \"nums\": [1,1,2,3], \"k\": 1 }\nassert my_solution.minOperations(**test_input) == 3\n\ntest_input = { \"nums\": [1,1,2,3], \"k\": 2 }\nassert my_solution.minOperations(**test_input) == 3\n\ntest_input = { \"nums\": [1,1,2,3], \"k\": 3 }\nassert my_solution.minOperations(**test_input) == 3\n\ntest_input = { \"nums\": [1,1,2,4], \"k\": 1 }\nassert my_solution.minOperations(**test_input) == 3\n\ntest_input = { \"nums\": [1,1,2,4], \"k\": 2 }\nassert my_solution.minOperations(**test_input) == 3\n\ntest_input = { \"nums\": [1,1,3,1], \"k\": 1 }\nassert my_solution.minOperations(**test_input) == 1\n\ntest_input = { \"nums\": [1,1,3,2], \"k\": 1 }\nassert my_solution.minOperations(**test_input) == 3\n\ntest_input = { \"nums\": [1,1,3,2], \"k\": 2 }\nassert my_solution.minOperations(**test_input) == 3\n\ntest_input = { \"nums\": [1,1,3,2], \"k\": 3 }\nassert my_solution.minOperations(**test_input) == 3\n\ntest_input = { \"nums\": [1,1,3,3], \"k\": 1 }\nassert my_solution.minOperations(**test_input) == 3\n\ntest_input = { \"nums\": [1,1,3,4], \"k\": 1 }\nassert my_solution.minOperations(**test_input) == 3\n\ntest_input = { \"nums\": [1,1,4,1], \"k\": 1 }\nassert my_solution.minOperations(**test_input) == 1\n\ntest_input = { \"nums\": [1,1,4,2], \"k\": 1 }\nassert my_solution.minOperations(**test_input) == 3\n\ntest_input = { \"nums\": [1,1,4,2], \"k\": 2 }\nassert my_solution.minOperations(**test_input) == 3\n\ntest_input = { \"nums\": [1,1,4,3], \"k\": 1 }\nassert my_solution.minOperations(**test_input) == 3\n\ntest_input = { \"nums\": [1,1,4,4], \"k\": 1 }\nassert my_solution.minOperations(**test_input) == 3\n\ntest_input = { \"nums\": [1,2,1,1], \"k\": 1 }\nassert my_solution.minOperations(**test_input) == 1\n\ntest_input = { \"nums\": [1,2,1,1], \"k\": 2 }\nassert my_solution.minOperations(**test_input) == 3\n\ntest_input = { \"nums\": [1,2,1,2], \"k\": 1 }\nassert my_solution.minOperations(**test_input) == 2\n\ntest_input = { \"nums\": [1,2,1,2], \"k\": 2 }\nassert my_solution.minOperations(**test_input) == 2\n\ntest_input = { \"nums\": [1,2,1,3], \"k\": 1 }\nassert my_solution.minOperations(**test_input) == 2\n\ntest_input = { \"nums\": [1,2,1,3], \"k\": 2 }\nassert my_solution.minOperations(**test_input) == 3\n\ntest_input = { \"nums\": [1,2,1,3], \"k\": 3 }\nassert my_solution.minOperations(**test_input) == 3\n\ntest_input = { \"nums\": [1,2,1,4], \"k\": 1 }\nassert my_solution.minOperations(**test_input) == 2\n\ntest_input = { \"nums\": [1,2,1,4], \"k\": 2 }\nassert my_solution.minOperations(**test_input) == 3\n\ntest_input = { \"nums\": [1,2,2,1], \"k\": 1 }\nassert my_solution.minOperations(**test_input) == 1\n\ntest_input = { \"nums\": [1,2,2,1], \"k\": 2 }\nassert my_solution.minOperations(**test_input) == 2\n\ntest_input = { \"nums\": [1,2,2,2], \"k\": 1 }\nassert my_solution.minOperations(**test_input) == 4\n\ntest_input = { \"nums\": [1,2,2,2], \"k\": 2 }\nassert my_solution.minOperations(**test_input) == 4\n\ntest_input = { \"nums\": [1,2,2,3], \"k\": 1 }\nassert my_solution.minOperations(**test_input) == 4\n\ntest_input = { \"nums\": [1,2,2,3], \"k\": 2 }\nassert my_solution.minOperations(**test_input) == 4\n\ntest_input = { \"nums\": [1,2,2,3], \"k\": 3 }\nassert my_solution.minOperations(**test_input) == 4\n\ntest_input = { \"nums\": [1,2,2,4], \"k\": 1 }\nassert my_solution.minOperations(**test_input) == 4\n\ntest_input = { \"nums\": [1,2,2,4], \"k\": 2 }\nassert my_solution.minOperations(**test_input) == 4\n\ntest_input = { \"nums\": [1,2,3,1], \"k\": 1 }\nassert my_solution.minOperations(**test_input) == 1\n\ntest_input = { \"nums\": [1,2,3,1], \"k\": 2 }\nassert my_solution.minOperations(**test_input) == 3\n\ntest_input = { \"nums\": [1,2,3,1], \"k\": 3 }\nassert my_solution.minOperations(**test_input) == 3\n\ntest_input = { \"nums\": [1,2,3,2], \"k\": 1 }\nassert my_solution.minOperations(**test_input) == 4\n\ntest_input = { \"nums\": [1,2,3,2], \"k\": 2 }\nassert my_solution.minOperations(**test_input) == 4\n\ntest_input = { \"nums\": [1,2,3,2], \"k\": 3 }\nassert my_solution.minOperations(**test_input) == 4\n\ntest_input = { \"nums\": [1,2,3,3], \"k\": 1 }\nassert my_solution.minOperations(**test_input) == 4\n\ntest_input = { \"nums\": [1,2,3,3], \"k\": 2 }\nassert my_solution.minOperations(**test_input) == 4\n\ntest_input = { \"nums\": [1,2,3,3], \"k\": 3 }\nassert my_solution.minOperations(**test_input) == 4\n\ntest_input = { \"nums\": [1,2,3,4], \"k\": 1 }\nassert my_solution.minOperations(**test_input) == 4\n\ntest_input = { \"nums\": [1,2,3,4], \"k\": 2 }\nassert my_solution.minOperations(**test_input) == 4",
+  "ocr_data": {
+    "nodes": [
+      {
+        "node_id": 1,
+        "shape_type": "rectangle",
+        "raw_text": "Start",
+        "position": "top"
+      },
+      {
+        "node_id": 2,
+        "shape_type": "rectangle",
+        "raw_text": "Input: nums (list of integers), k (integer)",
+        "position": "middle"
+      },
+      {
+        "node_id": 3,
+        "shape_type": "rectangle",
+        "raw_text": "Initialize cnt = 0",
+        "position": "middle"
+      },
+      {
+        "node_id": 4,
+        "shape_type": "rectangle",
+        "raw_text": "Loop i from len(nums) - 1 to 0",
+        "position": "middle"
+      },
+      {
+        "node_id": 5,
+        "shape_type": "rectangle",
+        "raw_text": "Calculate j = abs(nums[i]) - 1",
+        "position": "middle"
+      },
+      {
+        "node_id": 6,
+        "shape_type": "diamond",
+        "raw_text": "Is j < k?",
+        "position": "middle"
+      },
+      {
+        "node_id": 7,
+        "shape_type": "diamond",
+        "raw_text": "Is nums[i] > 0?",
+        "position": "middle"
+      },
+      {
+        "node_id": 8,
+        "shape_type": "rectangle",
+        "raw_text": "Increment cnt: cnt += 1",
+        "position": "middle"
+      },
+      {
+        "node_id": 9,
+        "shape_type": "rectangle",
+        "raw_text": "Update nums[i]: nums[i] *= -1",
+        "position": "middle"
+      },
+      {
+        "node_id": 10,
+        "shape_type": "diamond",
+        "raw_text": "Is cnt == k?",
+        "position": "middle"
+      },
+      {
+        "node_id": 11,
+        "shape_type": "rectangle",
+        "raw_text": "Output: len(nums) - i (minimum operations)",
+        "position": "bottom"
+      },
+      {
+        "node_id": 12,
+        "shape_type": "rectangle",
+        "raw_text": "Output: (no output, loop ends)",
+        "position": "middle"
+      }
+    ],
+    "edges": [
+      {
+        "from_node": 1,
+        "to_node": 2,
+        "label": ""
+      },
+      {
+        "from_node": 2,
+        "to_node": 3,
+        "label": ""
+      },
+      {
+        "from_node": 3,
+        "to_node": 4,
+        "label": ""
+      },
+      {
+        "from_node": 4,
+        "to_node": 5,
+        "label": ""
+      },
+      {
+        "from_node": 5,
+        "to_node": 6,
+        "label": ""
+      },
+      {
+        "from_node": 6,
+        "to_node": 7,
+        "label": "Yes"
+      },
+      {
+        "from_node": 7,
+        "to_node": 8,
+        "label": "Yes"
+      },
+      {
+        "from_node": 8,
+        "to_node": 9,
+        "label": ""
+      },
+      {
+        "from_node": 9,
+        "to_node": 10,
+        "label": ""
+      },
+      {
+        "from_node": 10,
+        "to_node": 11,
+        "label": "Yes"
+      },
+      {
+        "from_node": 10,
+        "to_node": 4,
+        "label": "No"
+      },
+      {
+        "from_node": 6,
+        "to_node": 4,
+        "label": "No"
+      },
+      {
+        "from_node": 4,
+        "to_node": 12,
+        "label": ""
+      },
+      {
+        "from_node": 12,
+        "to_node": 4,
+        "label": "No"
+      }
+    ],
+    "other_text": []
+  },
+  "analysis": {
+    "ilr_verdict": "incorrect",
+    "ilr_issues": "去重标记打错了位置：节点6/8 判断和取反的都是 nums[i]（当前位置），而 j=abs(nums[i])-1 只是算了值下标却没用；i 单调递减绝不会重访同一位置，标记形同虚设，重复的needed值会被重复计数。正确做法是判断/取反 nums[j]（按值去重）。另节点12（循环正常结束）next 指回节点3 会死循环，不过在本题保证下不可达。",
+    "code_vs_ilr": "faithful",
+    "code_issues": "代码逐句忠实翻译了 ILR：j<k、nums[i]>0、nums[i]*=-1、cnt==k 时返回 len(nums)-i，连结尾 return 0 都对应节点12；原样保留了按位置而非按值去重的缺陷。",
+    "error_source": "ilr",
+    "ocr_contribution": "no",
+    "root_cause": "流程图本身就写错出去重目标（OCR 清晰显示节点7/9 操作的是 nums[i] 而非按值下标 nums[j]），ILR 与代码忠实继承，遇到 needed 值重复时提前计数导致答案偏小，失败源于流程图/ILR 算法本身。",
+    "evidence": "输入 nums=[1,2,2], k=2 期望 3：代码从右往左数到第2个 ≤k 的元素（两个2）即返回 2；按值去重的正确算法需收集 2,2,1 共 3 步（实际运行确认，代码共错约19条用例，如 [2,1,1],k=2 得 2 期望 3）。"
+  }
+}

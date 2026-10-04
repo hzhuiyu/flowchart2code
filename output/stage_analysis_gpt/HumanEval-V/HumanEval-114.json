@@ -1,0 +1,165 @@
+{
+  "task_id": "HumanEval-114",
+  "dataset": "HumanEval-V",
+  "difficulty": null,
+  "title": null,
+  "result": "failed: This prints if this assert fails 1 (good for debugging!)",
+  "ilr": "{\n  \"problem_id\": \"min_sub_array_sum\",\n  \"nodes\": [\n    {\"id\": 1, \"type\": \"start\", \"label\": \"Start\", \"next\": 2},\n    {\"id\": 2, \"type\": \"process\", \"label\": \"Input: nums (array of integers)\", \"action\": \"ctx['nums']=ctx['arg0']; ctx['max_sum']=0; ctx['s']=0\", \"next\": 3},\n    {\"id\": 3, \"type\": \"decision\", \"label\": \"For each num in nums\", \"logic\": \"True\", \"true_next\": 4, \"false_next\": 9},\n    {\"id\": 4, \"type\": \"process\", \"label\": \"Calculate: s += -num\", \"action\": \"ctx['s'] += -ctx['nums'][ctx['i']]\", \"next\": 5},\n    {\"id\": 5, \"type\": \"decision\", \"label\": \"Is s < 0?\", \"logic\": \"ctx['s'] < 0\", \"true_next\": 6, \"false_next\": 7},\n    {\"id\": 6, \"type\": \"process\", \"label\": \"Reset s to 0\", \"action\": \"ctx['s'] = 0\", \"next\": 7},\n    {\"id\": 7, \"type\": \"process\", \"label\": \"Update max_sum: max_sum = max(s, max_sum)\", \"action\": \"ctx['max_sum'] = max(ctx['s'], ctx['max_sum'])\", \"next\": 3},\n    {\"id\": 8, \"type\": \"process\", \"label\": \"Calculate: max_sum = max(-i for i in nums)\", \"action\": \"ctx['max_sum'] = max(-i for i in ctx['nums'])\", \"next\": 11},\n    {\"id\": 9, \"type\": \"decision\", \"label\": \"Is max_sum == 0?\", \"logic\": \"ctx['max_sum'] == 0\", \"true_next\": 10, \"false_next\": 11},\n    {\"id\": 10, \"type\": \"process\", \"label\": \"min_sum = -max_sum\", \"action\": \"ctx['min_sum'] = -ctx['max_sum']\", \"next\": 11},\n    {\"id\": 11, \"type\": \"end\", \"label\": \"Output: min_sum\", \"output\": \"ctx['min_sum']\"}\n  ]\n}",
+  "code": "def minSubArraySum(nums):\n    max_sum = 0\n    s = 0\n    \n    for i in range(len(nums)):\n        s += -nums[i]\n        \n        if s < 0:\n            s = 0\n            \n        max_sum = max(s, max_sum)\n    \n    if max_sum == 0:\n        min_sum = -max_sum\n    else:\n        min_sum = max(-i for i in nums)\n    \n    return min_sum",
+  "prompt": "\ndef minSubArraySum(nums):\n    \"\"\"\n    Given an array of integers nums, find the minimum sum of any non-empty sub-array\n    of nums.\n    Example\n    minSubArraySum([2, 3, 4, 1, 2, 4]) == 1\n    minSubArraySum([-1, -2, -3]) == -6\n    \"\"\"\n",
+  "test": "def check(candidate):\n\n    # Check some simple cases\n    assert candidate([2, 3, 4, 1, 2, 4]) == 1, \"This prints if this assert fails 1 (good for debugging!)\"\n    assert candidate([-1, -2, -3]) == -6\n    assert candidate([-1, -2, -3, 2, -10]) == -14\n    assert candidate([-9999999999999999]) == -9999999999999999\n    assert candidate([0, 10, 20, 1000000]) == 0\n    assert candidate([-1, -2, -3, 10, -5]) == -6\n    assert candidate([100, -1, -2, -3, 10, -5]) == -6\n    assert candidate([10, 11, 13, 8, 3, 4]) == 3\n    assert candidate([100, -33, 32, -1, 0, -2]) == -33\n\n    # Check some edge cases that are easy to work out by hand.\n    assert candidate([-10]) == -10, \"This prints if this assert fails 2 (also good for debugging!)\"\n    assert candidate([7]) == 7\n    assert candidate([1, -1]) == -1\n",
+  "ocr_data": {
+    "nodes": [
+      {
+        "node_id": 1,
+        "shape_type": "rectangle",
+        "raw_text": "Start",
+        "position": "top"
+      },
+      {
+        "node_id": 2,
+        "shape_type": "rectangle",
+        "raw_text": "Input: nums (array of integers)",
+        "position": "middle"
+      },
+      {
+        "node_id": 3,
+        "shape_type": "rectangle",
+        "raw_text": "Initialize max_sum = 0, s = 0",
+        "position": "middle"
+      },
+      {
+        "node_id": 4,
+        "shape_type": "diamond",
+        "raw_text": "For each num in nums",
+        "position": "middle"
+      },
+      {
+        "node_id": 5,
+        "shape_type": "rectangle",
+        "raw_text": "Calculate: s += -num",
+        "position": "bottom"
+      },
+      {
+        "node_id": 6,
+        "shape_type": "diamond",
+        "raw_text": "Is s < 0?",
+        "position": "bottom"
+      },
+      {
+        "node_id": 7,
+        "shape_type": "rectangle",
+        "raw_text": "Reset s to 0",
+        "position": "bottom"
+      },
+      {
+        "node_id": 8,
+        "shape_type": "rectangle",
+        "raw_text": "Update max_sum: max_sum = max(s, max_sum)",
+        "position": "bottom"
+      },
+      {
+        "node_id": 9,
+        "shape_type": "diamond",
+        "raw_text": "Is max_sum == 0?",
+        "position": "bottom"
+      },
+      {
+        "node_id": 10,
+        "shape_type": "rectangle",
+        "raw_text": "Calculate: max_sum = max(-i for i in nums)",
+        "position": "bottom"
+      },
+      {
+        "node_id": 11,
+        "shape_type": "rectangle",
+        "raw_text": "min_sum = -max_sum",
+        "position": "bottom"
+      },
+      {
+        "node_id": 12,
+        "shape_type": "rectangle",
+        "raw_text": "Output: min_sum",
+        "position": "bottom"
+      }
+    ],
+    "edges": [
+      {
+        "from_node": 1,
+        "to_node": 2,
+        "label": ""
+      },
+      {
+        "from_node": 2,
+        "to_node": 3,
+        "label": ""
+      },
+      {
+        "from_node": 3,
+        "to_node": 4,
+        "label": ""
+      },
+      {
+        "from_node": 4,
+        "to_node": 5,
+        "label": "Yes"
+      },
+      {
+        "from_node": 5,
+        "to_node": 6,
+        "label": ""
+      },
+      {
+        "from_node": 6,
+        "to_node": 7,
+        "label": "Yes"
+      },
+      {
+        "from_node": 7,
+        "to_node": 8,
+        "label": ""
+      },
+      {
+        "from_node": 8,
+        "to_node": 4,
+        "label": ""
+      },
+      {
+        "from_node": 4,
+        "to_node": 9,
+        "label": "No"
+      },
+      {
+        "from_node": 9,
+        "to_node": 10,
+        "label": "Yes"
+      },
+      {
+        "from_node": 10,
+        "to_node": 11,
+        "label": ""
+      },
+      {
+        "from_node": 11,
+        "to_node": 12,
+        "label": ""
+      },
+      {
+        "from_node": 9,
+        "to_node": 11,
+        "label": "No"
+      }
+    ],
+    "other_text": []
+  },
+  "analysis": {
+    "ilr_verdict": "incorrect",
+    "ilr_issues": "ILR丢失了OCR节点11'min_sum = -max_sum'这一步：节点10只更新max_sum，节点11直接输出从未赋值的ctx['min_sum']，任何输入都无法产出正确结果；此外节点3'For each num in nums'的logic写成True（循环永不退出）且索引i从未初始化/递增，节点4引用ctx['nums'][ctx['i']]会直接NameError。",
+    "code_vs_ilr": "deviates",
+    "code_issues": "代码没有忠实实现ILR：把 true 分支的动作错误地写成 min_sum = max(-i for i in nums)（ILR是赋给max_sum），并把同一动作复制进 false 分支（ILR的false分支直接到输出），两分支完全相同且始终缺少取负号步骤。",
+    "error_source": "both",
+    "ocr_contribution": "no",
+    "root_cause": "ILR生成时漏掉了'min_sum = -max_sum'节点导致输出变量未定义，本身即错；代码生成又独立偏离——将max(-i for i in nums)同时填入两个分支、丢失取负，两边各自出错。",
+    "evidence": "生成代码对 [2,3,4,1,2,4] 返回 -1（期望1）、对 [-1,-2,-3] 返回 3（期望-6）；按OCR流程图补全 min_sum=-max_sum 后两例均正确（1和-6），说明流程图算法正确、ILR漏节点、代码再偏离。OCR 明确含节点11 'min_sum = -max_sum'，OCR 无误。"
+  }
+}

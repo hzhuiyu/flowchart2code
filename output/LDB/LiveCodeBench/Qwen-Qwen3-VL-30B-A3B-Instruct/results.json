@@ -1,0 +1,1979 @@
+{
+  "pass@1": 0.49324324324324326,
+  "passed": 73,
+  "total": 148,
+  "results": [
+    {
+      "task_id": "v1_2757",
+      "passed": true,
+      "test_results": [
+        true,
+        true
+      ],
+      "metadata": {
+        "execution time": 0.012122154235839844
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v1_2784",
+      "passed": true,
+      "test_results": [
+        true,
+        true
+      ],
+      "metadata": {
+        "execution time": 0.007404327392578125
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v1_2808",
+      "passed": false,
+      "test_results": [
+        false
+      ],
+      "metadata": {
+        "output": "7",
+        "inputs": "[[1, 2, 3, 2], [1, 2, 3, 2]]",
+        "expected": "3",
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v1_2827",
+      "passed": true,
+      "test_results": [
+        true,
+        true,
+        true
+      ],
+      "metadata": {
+        "execution time": 0.013154268264770508
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v1_2839",
+      "passed": true,
+      "test_results": [
+        true,
+        true,
+        true
+      ],
+      "metadata": {
+        "execution time": 0.011854887008666992
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v1_2849",
+      "passed": true,
+      "test_results": [
+        true,
+        true
+      ],
+      "metadata": {
+        "execution time": 0.008170604705810547
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v1_2879",
+      "passed": false,
+      "test_results": [
+        false
+      ],
+      "metadata": {
+        "output": "-1",
+        "inputs": "['abcac', 2]",
+        "expected": "1",
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v1_2884",
+      "passed": true,
+      "test_results": [
+        true,
+        true
+      ],
+      "metadata": {
+        "execution time": 0.00812840461730957
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v1_2921",
+      "passed": true,
+      "test_results": [
+        true,
+        true
+      ],
+      "metadata": {
+        "execution time": 0.0079498291015625
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v1_2952",
+      "passed": false,
+      "test_results": [
+        -4
+      ],
+      "metadata": {
+        "error_code": -4,
+        "error_message": "Error during testing: invalid syntax. Maybe you meant '==' or ':=' instead of '='? (<string>, line 51)"
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v1_3017",
+      "passed": false,
+      "test_results": [
+        -4
+      ],
+      "metadata": {
+        "error_code": -4,
+        "error_message": "Error during testing: expected an indented block after function definition on line 52 (<string>, line 56)"
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v1_3024",
+      "passed": true,
+      "test_results": [
+        true,
+        true
+      ],
+      "metadata": {
+        "execution time": 0.00705409049987793
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v1_3025",
+      "passed": true,
+      "test_results": [
+        true,
+        true,
+        true
+      ],
+      "metadata": {
+        "execution time": 0.023929595947265625
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v1_3032",
+      "passed": false,
+      "test_results": [
+        -4
+      ],
+      "metadata": {
+        "error": "TypeError('Solution.getMaxFunctionValue() takes 2 positional arguments but 3 were given')",
+        "error_code": -4,
+        "error_message": "Runtime Error",
+        "inputs": "[[2, 0, 1], 4]",
+        "expected": "6"
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v1_3091",
+      "passed": true,
+      "test_results": [
+        true,
+        true,
+        true
+      ],
+      "metadata": {
+        "execution time": 0.012489557266235352
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v1_3153",
+      "passed": true,
+      "test_results": [
+        true,
+        true
+      ],
+      "metadata": {
+        "execution time": 0.006353616714477539
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v1_3184",
+      "passed": true,
+      "test_results": [
+        true,
+        true,
+        true
+      ],
+      "metadata": {
+        "execution time": 0.011766672134399414
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v1_3196",
+      "passed": true,
+      "test_results": [
+        true,
+        true
+      ],
+      "metadata": {
+        "execution time": 0.0078046321868896484
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v1_3203",
+      "passed": false,
+      "test_results": [
+        -4
+      ],
+      "metadata": {
+        "error": "TypeError(\"canMakePalindromeQueries() missing 1 required positional argument: 'queries'\")",
+        "error_code": -4,
+        "error_message": "Runtime Error",
+        "inputs": "['abcabc', [[1, 1, 3, 5], [0, 2, 5, 5]]]",
+        "expected": "[True, True]"
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v1_3211",
+      "passed": true,
+      "test_results": [
+        true,
+        true,
+        true
+      ],
+      "metadata": {
+        "execution time": 0.009831905364990234
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v1_3212",
+      "passed": true,
+      "test_results": [
+        true,
+        true,
+        true
+      ],
+      "metadata": {
+        "execution time": 0.011980533599853516
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v1_3223",
+      "passed": true,
+      "test_results": [
+        true,
+        true
+      ],
+      "metadata": {
+        "execution time": 0.007209300994873047
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v1_3224",
+      "passed": false,
+      "test_results": [
+        false
+      ],
+      "metadata": {
+        "output": "6",
+        "inputs": "[5, [0, 4]]",
+        "expected": "4",
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v1_3233",
+      "passed": true,
+      "test_results": [
+        true,
+        true,
+        true
+      ],
+      "metadata": {
+        "execution time": 0.012858152389526367
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v1_3243",
+      "passed": false,
+      "test_results": [
+        false
+      ],
+      "metadata": {
+        "output": "0",
+        "inputs": "[1, 6000, 4, '124']",
+        "expected": "5",
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v1_3298",
+      "passed": false,
+      "test_results": [
+        -4
+      ],
+      "metadata": {
+        "error": "TypeError(\"'int' object is not subscriptable\")",
+        "error_code": -4,
+        "error_message": "Runtime Error",
+        "inputs": "[[2, 1, 5, 1, 1]]",
+        "expected": "3"
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v1_abc301_f",
+      "passed": false,
+      "test_results": [
+        -4
+      ],
+      "metadata": {
+        "error_code": -4,
+        "error_message": "Error during testing: invalid syntax (<string>, line 51)"
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v1_abc307_e",
+      "passed": true,
+      "test_results": [
+        true,
+        true,
+        true
+      ],
+      "metadata": {
+        "execution time": 0.009085416793823242
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v1_abc308_e",
+      "passed": true,
+      "test_results": [
+        true,
+        true,
+        true
+      ],
+      "metadata": {
+        "execution time": 0.008005142211914062
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v1_abc308_f",
+      "passed": false,
+      "test_results": [
+        false
+      ],
+      "metadata": {
+        "output": "0",
+        "inputs": "[[3, 3], [4, 3, 1], [4, 4, 2], [2, 3, 1]]",
+        "expected": "4",
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v1_abc310_e",
+      "passed": true,
+      "test_results": [
+        true,
+        true
+      ],
+      "metadata": {
+        "execution time": 0.006533384323120117
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v1_abc310_f",
+      "passed": false,
+      "test_results": [
+        false
+      ],
+      "metadata": {
+        "output": "5",
+        "inputs": "[4, [1, 7, 2, 9]]",
+        "expected": "942786334",
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v1_abc318_e",
+      "passed": true,
+      "test_results": [
+        true,
+        true,
+        true
+      ],
+      "metadata": {
+        "execution time": 0.010301351547241211
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v1_abc323_e",
+      "passed": true,
+      "test_results": [
+        true,
+        true,
+        true
+      ],
+      "metadata": {
+        "execution time": 0.028859376907348633
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v1_abc324_d",
+      "passed": false,
+      "test_results": [
+        true,
+        true,
+        -3
+      ],
+      "metadata": {
+        "error": "TimeoutException()",
+        "error_code": -3,
+        "error_message": "Time Limit Exceeded",
+        "inputs": "[13, 8694027811503]",
+        "expected": "840"
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v1_abc325_f",
+      "passed": false,
+      "test_results": [
+        false
+      ],
+      "metadata": {
+        "output": "16",
+        "inputs": "[3, [3, 5, 10], [4, 3, 3], [2, 2, 6]]",
+        "expected": "17",
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v1_abc327_e",
+      "passed": true,
+      "test_results": [
+        true,
+        true,
+        true
+      ],
+      "metadata": {
+        "execution time": 0.010019302368164062
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v1_abc328_d",
+      "passed": true,
+      "test_results": [
+        true,
+        true,
+        true
+      ],
+      "metadata": {
+        "execution time": 0.011984825134277344
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v1_abc329_e",
+      "passed": false,
+      "test_results": [
+        false
+      ],
+      "metadata": {
+        "output": "No",
+        "inputs": "[[7, 3], 'ABCBABC', 'ABC']",
+        "expected": "Yes",
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v1_abc340_e",
+      "passed": false,
+      "test_results": [
+        true,
+        -3
+      ],
+      "metadata": {
+        "error": "TimeoutException()",
+        "error_code": -3,
+        "error_message": "Time Limit Exceeded",
+        "inputs": "[[3, 10], [1000000000, 1000000000, 1000000000], [0, 1, 0, 1, 0, 1, 0, 1, 0, 1]]",
+        "expected": "[104320141, 45436840, 2850243019]"
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v1_abc343_e",
+      "passed": false,
+      "test_results": [
+        -4
+      ],
+      "metadata": {
+        "error_code": -4,
+        "error_message": "Error during testing: cannot unpack non-iterable NoneType object"
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v2_3313",
+      "passed": false,
+      "test_results": [
+        -4
+      ],
+      "metadata": {
+        "error_code": -4,
+        "error_message": "Error during testing: invalid character '→' (U+2192) (<string>, line 99)"
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v2_3316",
+      "passed": true,
+      "test_results": [
+        true,
+        true,
+        true
+      ],
+      "metadata": {
+        "execution time": 0.010625839233398438
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v2_3327",
+      "passed": false,
+      "test_results": [
+        false
+      ],
+      "metadata": {
+        "output": "0",
+        "inputs": "[[1, 1, 0, 0, 0, 1, 1, 0, 0, 1], 3, 1]",
+        "expected": "3",
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v2_3344",
+      "passed": true,
+      "test_results": [
+        true,
+        true
+      ],
+      "metadata": {
+        "execution time": 0.00751042366027832
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v2_3345",
+      "passed": true,
+      "test_results": [
+        true,
+        true,
+        true
+      ],
+      "metadata": {
+        "execution time": 0.011116981506347656
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v2_3362",
+      "passed": false,
+      "test_results": [
+        false
+      ],
+      "metadata": {
+        "output": "2",
+        "inputs": "[[1, 2, 3]]",
+        "expected": "1",
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v2_3364",
+      "passed": true,
+      "test_results": [
+        true,
+        true,
+        true
+      ],
+      "metadata": {
+        "execution time": 0.011780023574829102
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v2_3375",
+      "passed": true,
+      "test_results": [
+        true,
+        true
+      ],
+      "metadata": {
+        "execution time": 0.0069501399993896484
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v2_3376",
+      "passed": false,
+      "test_results": [
+        -4
+      ],
+      "metadata": {
+        "error_code": -4,
+        "error_message": "Error during testing: unterminated string literal (detected at line 56) (<string>, line 56)"
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v2_3382",
+      "passed": true,
+      "test_results": [
+        true,
+        true,
+        true
+      ],
+      "metadata": {
+        "execution time": 0.010478734970092773
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v2_3402",
+      "passed": false,
+      "test_results": [
+        -4
+      ],
+      "metadata": {
+        "error_code": -4,
+        "error_message": "Error during testing: cannot unpack non-iterable NoneType object"
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v2_3411",
+      "passed": false,
+      "test_results": [
+        false
+      ],
+      "metadata": {
+        "output": "[21]",
+        "inputs": "[[[1, 3, 7]]]",
+        "expected": "[4]",
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v2_3414",
+      "passed": false,
+      "test_results": [
+        true,
+        false
+      ],
+      "metadata": {
+        "output": "None",
+        "inputs": "[1]",
+        "expected": "4",
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v2_3423",
+      "passed": true,
+      "test_results": [
+        true,
+        true
+      ],
+      "metadata": {
+        "execution time": 0.00675654411315918
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v2_abc347_e",
+      "passed": true,
+      "test_results": [
+        true,
+        true
+      ],
+      "metadata": {
+        "execution time": 0.008991003036499023
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v2_abc349_e",
+      "passed": false,
+      "test_results": [
+        true,
+        -3
+      ],
+      "metadata": {
+        "error": "TimeoutException()",
+        "error_code": -3,
+        "error_message": "Time Limit Exceeded",
+        "inputs": "[[-1, 1, 0], [-4, -2, -5], [-4, -1, -5]]",
+        "expected": "Aoki"
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v2_abc350_e",
+      "passed": false,
+      "test_results": [
+        -4
+      ],
+      "metadata": {
+        "error_code": -4,
+        "error_message": "Error during testing: invalid character '→' (U+2192) (<string>, line 51)"
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v2_abc351_d",
+      "passed": false,
+      "test_results": [
+        -4
+      ],
+      "metadata": {
+        "error_code": -4,
+        "error_message": "Error during testing: unterminated string literal (detected at line 53) (<string>, line 53)"
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v2_abc351_f",
+      "passed": true,
+      "test_results": [
+        true,
+        true
+      ],
+      "metadata": {
+        "execution time": 0.006103515625
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v2_abc352_d",
+      "passed": false,
+      "test_results": [
+        -4
+      ],
+      "metadata": {
+        "error_code": -4,
+        "error_message": "Error during testing: "
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v2_abc354_d",
+      "passed": false,
+      "test_results": [
+        -4
+      ],
+      "metadata": {
+        "error": "NameError(\"name 'result' is not defined\")",
+        "error_code": -4,
+        "error_message": "Runtime Error",
+        "inputs": "[[0, 0, 3, 3]]",
+        "expected": "10"
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v2_abc355_e",
+      "passed": false,
+      "test_results": [
+        -4
+      ],
+      "metadata": {
+        "error_code": -4,
+        "error_message": "Error during testing: cannot unpack non-iterable NoneType object"
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v3_3436",
+      "passed": true,
+      "test_results": [
+        true,
+        true,
+        true
+      ],
+      "metadata": {
+        "execution time": 0.0076978206634521484
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v3_3438",
+      "passed": true,
+      "test_results": [
+        true,
+        true
+      ],
+      "metadata": {
+        "execution time": 0.0056645870208740234
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v3_3439",
+      "passed": true,
+      "test_results": [
+        true,
+        true
+      ],
+      "metadata": {
+        "execution time": 0.006171464920043945
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v3_3454",
+      "passed": false,
+      "test_results": [
+        false
+      ],
+      "metadata": {
+        "output": "5",
+        "inputs": "[[3, 5, 1, 2], [4, 6, 2, 4]]",
+        "expected": "2",
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v3_3460",
+      "passed": false,
+      "test_results": [
+        -4
+      ],
+      "metadata": {
+        "error_code": -4,
+        "error_message": "Error during testing: cannot unpack non-iterable NoneType object"
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v3_3466",
+      "passed": true,
+      "test_results": [
+        true,
+        true,
+        true
+      ],
+      "metadata": {
+        "execution time": 0.010261774063110352
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v3_3478",
+      "passed": true,
+      "test_results": [
+        true,
+        true,
+        true,
+        true
+      ],
+      "metadata": {
+        "execution time": 0.010638713836669922
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v3_3482",
+      "passed": true,
+      "test_results": [
+        true,
+        true
+      ],
+      "metadata": {
+        "execution time": 0.005326986312866211
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v3_3532",
+      "passed": true,
+      "test_results": [
+        true,
+        true,
+        true
+      ],
+      "metadata": {
+        "execution time": 0.005909919738769531
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v3_3535",
+      "passed": true,
+      "test_results": [
+        true,
+        true
+      ],
+      "metadata": {
+        "execution time": 0.0058825016021728516
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v3_abc357_e",
+      "passed": false,
+      "test_results": [
+        -4
+      ],
+      "metadata": {
+        "error_code": -4,
+        "error_message": "Error during testing: name 'solve' is not defined"
+      },
+      "difficulty": ""
+    },
+    {
+      "task_id": "v3_abc359_d",
+      "passed": true,
+      "test_results": [
+        true,
+        true,
+        true,
+        true
+      ],
+      "metadata": {
+        "execution time": 0.017663240432739258
+      },
+      "difficulty": ""
+    },
+    {
+      "task_id": "v3_abc360_e",
+      "passed": true,
+      "test_results": [
+        true,
+        true,
+        true
+      ],
+      "metadata": {
+        "execution time": 0.00981450080871582
+      },
+      "difficulty": ""
+    },
+    {
+      "task_id": "v3_abc361_d",
+      "passed": false,
+      "test_results": [
+        false
+      ],
+      "metadata": {
+        "output": "None",
+        "inputs": "[6, 'BWBWBW', 'WWWBBB']",
+        "expected": "4",
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      },
+      "difficulty": ""
+    },
+    {
+      "task_id": "v3_abc361_f",
+      "passed": false,
+      "test_results": [
+        true,
+        -3
+      ],
+      "metadata": {
+        "error": "TimeoutException()",
+        "error_code": -3,
+        "error_message": "Time Limit Exceeded",
+        "inputs": "[1000000000000000000]",
+        "expected": "1001003332"
+      },
+      "difficulty": ""
+    },
+    {
+      "task_id": "v3_abc362_e",
+      "passed": false,
+      "test_results": [
+        true,
+        false
+      ],
+      "metadata": {
+        "output": "[4, 8, 3, 0]",
+        "inputs": "[4, [1, 2, 3, 4]]",
+        "expected": "[4, 6, 2, 1]",
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      },
+      "difficulty": ""
+    },
+    {
+      "task_id": "v3_abc363_f",
+      "passed": false,
+      "test_results": [
+        false
+      ],
+      "metadata": {
+        "output": "3*11*11",
+        "inputs": "[363]",
+        "expected": "11*3*11",
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      },
+      "difficulty": ""
+    },
+    {
+      "task_id": "v3_abc365_e",
+      "passed": false,
+      "test_results": [
+        -4
+      ],
+      "metadata": {
+        "error_code": -4,
+        "error_message": "Error during testing: "
+      },
+      "difficulty": ""
+    },
+    {
+      "task_id": "v4_3531",
+      "passed": false,
+      "test_results": [
+        false
+      ],
+      "metadata": {
+        "output": "19",
+        "inputs": "[4, [1, 2, 3, 4], [4, 5, 6, 8]]",
+        "expected": "39",
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v4_3548",
+      "passed": false,
+      "test_results": [
+        false
+      ],
+      "metadata": {
+        "output": "1000",
+        "inputs": "[3, 5]",
+        "expected": "27",
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v4_3550",
+      "passed": true,
+      "test_results": [
+        true,
+        true,
+        true
+      ],
+      "metadata": {
+        "execution time": 0.012791633605957031
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v4_3551",
+      "passed": true,
+      "test_results": [
+        true,
+        true
+      ],
+      "metadata": {
+        "execution time": 0.01083064079284668
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v4_3552",
+      "passed": true,
+      "test_results": [
+        true,
+        true,
+        true
+      ],
+      "metadata": {
+        "execution time": 0.01807427406311035
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v4_3560",
+      "passed": false,
+      "test_results": [
+        -4
+      ],
+      "metadata": {
+        "error": "TypeError('Solution.maxMoves() takes 2 positional arguments but 4 were given')",
+        "error_code": -4,
+        "error_message": "Runtime Error",
+        "inputs": "[1, 1, [[0, 0]]]",
+        "expected": "4"
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v4_3563",
+      "passed": true,
+      "test_results": [
+        true,
+        true
+      ],
+      "metadata": {
+        "execution time": 0.020815372467041016
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v4_3571",
+      "passed": true,
+      "test_results": [
+        true,
+        true
+      ],
+      "metadata": {
+        "execution time": 0.009094476699829102
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v4_3575",
+      "passed": true,
+      "test_results": [
+        true,
+        true
+      ],
+      "metadata": {
+        "execution time": 0.008646249771118164
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v4_3580",
+      "passed": true,
+      "test_results": [
+        true,
+        true,
+        true,
+        true
+      ],
+      "metadata": {
+        "execution time": 0.015708446502685547
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v4_3583",
+      "passed": true,
+      "test_results": [
+        true,
+        true,
+        true
+      ],
+      "metadata": {
+        "execution time": 0.012090206146240234
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v4_abc367_e",
+      "passed": false,
+      "test_results": [
+        false
+      ],
+      "metadata": {
+        "output": "[7, 11, 1, 5, 3, 2, 9]",
+        "inputs": "[[7, 3], [5, 2, 6, 3, 1, 4, 6], [1, 2, 3, 5, 7, 9, 11]]",
+        "expected": "[7, 2, 3, 5, 1, 9, 3]",
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      },
+      "difficulty": ""
+    },
+    {
+      "task_id": "v4_abc368_f",
+      "passed": true,
+      "test_results": [
+        true,
+        true
+      ],
+      "metadata": {
+        "execution time": 0.007941961288452148
+      },
+      "difficulty": ""
+    },
+    {
+      "task_id": "v4_abc370_e",
+      "passed": false,
+      "test_results": [
+        true,
+        false
+      ],
+      "metadata": {
+        "output": "2",
+        "inputs": "[[5, 0], [0, 0, 0, 0, 0]]",
+        "expected": "0",
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      },
+      "difficulty": ""
+    },
+    {
+      "task_id": "v4_abc370_f",
+      "passed": false,
+      "test_results": [
+        -4
+      ],
+      "metadata": {
+        "error_code": -4,
+        "error_message": "Error during testing: name 'solve' is not defined"
+      },
+      "difficulty": ""
+    },
+    {
+      "task_id": "v4_abc370_g",
+      "passed": false,
+      "test_results": [
+        true,
+        true,
+        false
+      ],
+      "metadata": {
+        "output": "3050424827175994035",
+        "inputs": "[[370, 907]]",
+        "expected": "221764640",
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      },
+      "difficulty": ""
+    },
+    {
+      "task_id": "v4_abc371_e",
+      "passed": false,
+      "test_results": [
+        -4
+      ],
+      "metadata": {
+        "error_code": -4,
+        "error_message": "Error during testing: invalid character '‘' (U+2018) (<string>, line 51)"
+      },
+      "difficulty": ""
+    },
+    {
+      "task_id": "v4_abc373_e",
+      "passed": true,
+      "test_results": [
+        true,
+        true
+      ],
+      "metadata": {
+        "execution time": 0.007789134979248047
+      },
+      "difficulty": ""
+    },
+    {
+      "task_id": "v4_arc182_c",
+      "passed": false,
+      "test_results": [
+        -4
+      ],
+      "metadata": {
+        "error_code": -4,
+        "error_message": "Error during testing: name 'solve' is not defined"
+      },
+      "difficulty": ""
+    },
+    {
+      "task_id": "v4_arc182_e",
+      "passed": false,
+      "test_results": [
+        false
+      ],
+      "metadata": {
+        "output": "0",
+        "inputs": "[[2, 5, 3, 3], [1, 3]]",
+        "expected": "4",
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      },
+      "difficulty": ""
+    },
+    {
+      "task_id": "v5_3588",
+      "passed": true,
+      "test_results": [
+        true,
+        true
+      ],
+      "metadata": {
+        "execution time": 0.01080012321472168
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v5_3603",
+      "passed": true,
+      "test_results": [
+        true,
+        true
+      ],
+      "metadata": {
+        "execution time": 0.009398937225341797
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v5_3604",
+      "passed": true,
+      "test_results": [
+        true,
+        true,
+        true
+      ],
+      "metadata": {
+        "execution time": 0.010587692260742188
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v5_3608",
+      "passed": false,
+      "test_results": [
+        -4
+      ],
+      "metadata": {
+        "error_code": -4,
+        "error_message": "Error during testing: invalid syntax (<string>, line 111)"
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v5_3631",
+      "passed": false,
+      "test_results": [
+        -4
+      ],
+      "metadata": {
+        "error_code": -4,
+        "error_message": "Error during testing: cannot unpack non-iterable NoneType object"
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v5_3637",
+      "passed": false,
+      "test_results": [
+        true,
+        false
+      ],
+      "metadata": {
+        "output": "2",
+        "inputs": "['112']",
+        "expected": "1",
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v5_3646",
+      "passed": true,
+      "test_results": [
+        true,
+        true
+      ],
+      "metadata": {
+        "execution time": 0.007470369338989258
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v5_3648",
+      "passed": false,
+      "test_results": [
+        -4
+      ],
+      "metadata": {
+        "error_code": -4,
+        "error_message": "Error during testing: "
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v5_3658",
+      "passed": true,
+      "test_results": [
+        true,
+        true,
+        true
+      ],
+      "metadata": {
+        "execution time": 0.01316213607788086
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v5_3675",
+      "passed": true,
+      "test_results": [
+        true,
+        true
+      ],
+      "metadata": {
+        "execution time": 0.008507728576660156
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v5_3680",
+      "passed": true,
+      "test_results": [
+        true,
+        true
+      ],
+      "metadata": {
+        "execution time": 0.008799552917480469
+      },
+      "difficulty": "hard"
+    },
+    {
+      "task_id": "v5_abc378_e",
+      "passed": false,
+      "test_results": [
+        false
+      ],
+      "metadata": {
+        "output": "2",
+        "inputs": "[[3, 4], [2, 5, 0]]",
+        "expected": "10",
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      },
+      "difficulty": ""
+    },
+    {
+      "task_id": "v5_abc378_g",
+      "passed": false,
+      "test_results": [
+        -4
+      ],
+      "metadata": {
+        "error_code": -4,
+        "error_message": "Error during testing: "
+      },
+      "difficulty": ""
+    },
+    {
+      "task_id": "v5_abc379_e",
+      "passed": true,
+      "test_results": [
+        true,
+        true
+      ],
+      "metadata": {
+        "execution time": 0.005890369415283203
+      },
+      "difficulty": ""
+    },
+    {
+      "task_id": "v5_abc380_f",
+      "passed": false,
+      "test_results": [
+        -4
+      ],
+      "metadata": {
+        "error": "TypeError('can only concatenate list (not \"int\") to list')",
+        "error_code": -4,
+        "error_message": "Runtime Error",
+        "inputs": "[[1, 1, 2], 2, 4, [1, 3]]",
+        "expected": "Aoki"
+      },
+      "difficulty": ""
+    },
+    {
+      "task_id": "v5_abc380_g",
+      "passed": false,
+      "test_results": [
+        false
+      ],
+      "metadata": {
+        "output": "2",
+        "inputs": "[[4, 2], [1, 4, 2, 3]]",
+        "expected": "166374061",
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      },
+      "difficulty": ""
+    },
+    {
+      "task_id": "v5_abc381_d",
+      "passed": true,
+      "test_results": [
+        true,
+        true,
+        true
+      ],
+      "metadata": {
+        "execution time": 0.009318351745605469
+      },
+      "difficulty": ""
+    },
+    {
+      "task_id": "v5_abc386_f",
+      "passed": true,
+      "test_results": [
+        true,
+        true,
+        true
+      ],
+      "metadata": {
+        "execution time": 0.01001429557800293
+      },
+      "difficulty": ""
+    },
+    {
+      "task_id": "v5_arc184_c",
+      "passed": true,
+      "test_results": [
+        true,
+        true
+      ],
+      "metadata": {
+        "execution time": 0.004886627197265625
+      },
+      "difficulty": ""
+    },
+    {
+      "task_id": "v5_arc185_d",
+      "passed": false,
+      "test_results": [
+        true,
+        false
+      ],
+      "metadata": {
+        "output": "991789587",
+        "inputs": "[[123456, 185185]]",
+        "expected": "69292914",
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      },
+      "difficulty": ""
+    },
+    {
+      "task_id": "v5_arc186_e",
+      "passed": false,
+      "test_results": [
+        -4
+      ],
+      "metadata": {
+        "error": "TypeError(\"solve() missing 2 required positional arguments: 'K' and 'X'\")",
+        "error_code": -4,
+        "error_message": "Runtime Error",
+        "inputs": "[[5, 2, 3], [1, 1]]",
+        "expected": "4"
+      },
+      "difficulty": ""
+    },
+    {
+      "task_id": "v5_arc187_b",
+      "passed": false,
+      "test_results": [
+        -4
+      ],
+      "metadata": {
+        "error_code": -4,
+        "error_message": "Error during testing: EOF when reading a line"
+      },
+      "difficulty": ""
+    },
+    {
+      "task_id": "v5_arc189_b",
+      "passed": false,
+      "test_results": [
+        true,
+        false
+      ],
+      "metadata": {
+        "output": "-11",
+        "inputs": "[6, [0, 1, 6, 10, 14, 16]]",
+        "expected": "41",
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      },
+      "difficulty": ""
+    },
+    {
+      "task_id": "v5_arc189_c",
+      "passed": false,
+      "test_results": [
+        -4
+      ],
+      "metadata": {
+        "error": "AssertionError()",
+        "error_code": -4,
+        "error_message": "Runtime Error",
+        "inputs": "[[5, 3], [0, 1, 0, 1, 0], [0, 0, 1, 0, 1], [4, 1, 2, 3, 5], [3, 4, 5, 2, 1]]",
+        "expected": "4"
+      },
+      "difficulty": ""
+    },
+    {
+      "task_id": "v5_arc189_d",
+      "passed": true,
+      "test_results": [
+        true,
+        true
+      ],
+      "metadata": {
+        "execution time": 0.006508350372314453
+      },
+      "difficulty": ""
+    },
+    {
+      "task_id": "v6_abc387_f",
+      "passed": false,
+      "test_results": [
+        true,
+        false
+      ],
+      "metadata": {
+        "output": "13",
+        "inputs": "[[4, 9], [1, 1, 1, 1]]",
+        "expected": "2025",
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      },
+      "difficulty": ""
+    },
+    {
+      "task_id": "v6_abc389_e",
+      "passed": false,
+      "test_results": [
+        -4
+      ],
+      "metadata": {
+        "error": "TypeError(\"'>=' not supported between instances of 'list' and 'int'\")",
+        "error_code": -4,
+        "error_message": "Runtime Error",
+        "inputs": "[[3, 9], [4, 1, 9]]",
+        "expected": "3"
+      },
+      "difficulty": ""
+    },
+    {
+      "task_id": "v6_abc389_g",
+      "passed": false,
+      "test_results": [
+        -4
+      ],
+      "metadata": {
+        "error_code": -4,
+        "error_message": "Error during testing: name 'solve' is not defined"
+      },
+      "difficulty": ""
+    },
+    {
+      "task_id": "v6_abc390_f",
+      "passed": true,
+      "test_results": [
+        true,
+        true,
+        true
+      ],
+      "metadata": {
+        "execution time": 0.01288151741027832
+      },
+      "difficulty": ""
+    },
+    {
+      "task_id": "v6_abc390_g",
+      "passed": false,
+      "test_results": [
+        false
+      ],
+      "metadata": {
+        "output": "12",
+        "inputs": "[3]",
+        "expected": "1332",
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      },
+      "difficulty": ""
+    },
+    {
+      "task_id": "v6_abc391_e",
+      "passed": false,
+      "test_results": [
+        false
+      ],
+      "metadata": {
+        "output": "10011103",
+        "inputs": "[2, '010011101']",
+        "expected": "1",
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      },
+      "difficulty": ""
+    },
+    {
+      "task_id": "v6_abc391_g",
+      "passed": false,
+      "test_results": [
+        -4
+      ],
+      "metadata": {
+        "error_code": -4,
+        "error_message": "Error during testing: name 'solve' is not defined"
+      },
+      "difficulty": ""
+    },
+    {
+      "task_id": "v6_abc392_f",
+      "passed": true,
+      "test_results": [
+        true,
+        true
+      ],
+      "metadata": {
+        "execution time": 0.007949352264404297
+      },
+      "difficulty": ""
+    },
+    {
+      "task_id": "v6_abc393_d",
+      "passed": false,
+      "test_results": [
+        true,
+        -4
+      ],
+      "metadata": {
+        "error": "TypeError(\"'int' object is not subscriptable\")",
+        "error_code": -4,
+        "error_message": "Runtime Error",
+        "inputs": "[3, 100]",
+        "expected": "0"
+      },
+      "difficulty": ""
+    },
+    {
+      "task_id": "v6_abc397_d",
+      "passed": false,
+      "test_results": [
+        true,
+        false
+      ],
+      "metadata": {
+        "output": "[-1]",
+        "inputs": "[1]",
+        "expected": "-1",
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      },
+      "difficulty": ""
+    },
+    {
+      "task_id": "v6_abc397_f",
+      "passed": true,
+      "test_results": [
+        true,
+        true
+      ],
+      "metadata": {
+        "execution time": 0.008610963821411133
+      },
+      "difficulty": ""
+    },
+    {
+      "task_id": "v6_abc398_d",
+      "passed": false,
+      "test_results": [
+        -4
+      ],
+      "metadata": {
+        "error_code": -4,
+        "error_message": "Error during testing: unindent does not match any outer indentation level (<string>, line 187)"
+      },
+      "difficulty": ""
+    },
+    {
+      "task_id": "v6_abc398_f",
+      "passed": true,
+      "test_results": [
+        true,
+        true,
+        true
+      ],
+      "metadata": {
+        "execution time": 0.007178306579589844
+      },
+      "difficulty": ""
+    },
+    {
+      "task_id": "v6_abc399_e",
+      "passed": false,
+      "test_results": [
+        false
+      ],
+      "metadata": {
+        "output": "-1",
+        "inputs": "[6, 'afbfda', 'bkckbb']",
+        "expected": "4",
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      },
+      "difficulty": ""
+    },
+    {
+      "task_id": "v6_abc399_f",
+      "passed": true,
+      "test_results": [
+        true,
+        true,
+        true
+      ],
+      "metadata": {
+        "execution time": 0.00929403305053711
+      },
+      "difficulty": ""
+    },
+    {
+      "task_id": "v6_arc192_b",
+      "passed": false,
+      "test_results": [
+        false
+      ],
+      "metadata": {
+        "output": "Snuke",
+        "inputs": "[3, [1, 9, 2]]",
+        "expected": "Fennec",
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      },
+      "difficulty": ""
+    },
+    {
+      "task_id": "v6_arc192_e",
+      "passed": false,
+      "test_results": [
+        -4
+      ],
+      "metadata": {
+        "error_code": -4,
+        "error_message": "Error during testing: cannot unpack non-iterable NoneType object"
+      },
+      "difficulty": ""
+    },
+    {
+      "task_id": "v6_arc193_b",
+      "passed": true,
+      "test_results": [
+        true,
+        true
+      ],
+      "metadata": {
+        "execution time": 0.005918025970458984
+      },
+      "difficulty": ""
+    },
+    {
+      "task_id": "v6_arc194_b",
+      "passed": false,
+      "test_results": [
+        -4
+      ],
+      "metadata": {
+        "error_code": -4,
+        "error_message": "Error during testing: unterminated string literal (detected at line 52) (<string>, line 52)"
+      },
+      "difficulty": ""
+    },
+    {
+      "task_id": "v6_arc194_d",
+      "passed": true,
+      "test_results": [
+        true,
+        true
+      ],
+      "metadata": {
+        "execution time": 0.0051805973052978516
+      },
+      "difficulty": ""
+    },
+    {
+      "task_id": "v6_arc195_b",
+      "passed": true,
+      "test_results": [
+        true,
+        true,
+        true
+      ],
+      "metadata": {
+        "execution time": 0.010633707046508789
+      },
+      "difficulty": ""
+    },
+    {
+      "task_id": "v6_arc196_a",
+      "passed": false,
+      "test_results": [
+        -4
+      ],
+      "metadata": {
+        "error_code": -4,
+        "error_message": "Error during testing: name 'k' is not defined"
+      },
+      "difficulty": ""
+    }
+  ]
+}

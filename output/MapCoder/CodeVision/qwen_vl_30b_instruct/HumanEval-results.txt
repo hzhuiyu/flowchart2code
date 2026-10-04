@@ -1,0 +1,4 @@
+{'pass@1': 0.9390243902439024}
+
+Avg Prompt Tokens: 21258.38
+Avg Completion Tokens: 6290.11

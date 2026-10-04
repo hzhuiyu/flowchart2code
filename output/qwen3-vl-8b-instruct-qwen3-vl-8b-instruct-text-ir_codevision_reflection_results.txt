@@ -1,0 +1,8 @@
+CodeVision Combined Results (Reflection Merged)
+Experiment: qwen3-vl-8b-instruct-qwen3-vl-8b-instruct-text-ir
+
+Algorithm    : 111/149
+HumanEval-V  : 157/164
+MATH         : 105/125
+--------------------------------
+Total        : 373/438 = 0.8515981735159818

@@ -1,0 +1,8 @@
+CodeVision Combined Results
+Experiment: Qwen-Qwen3-VL-30B-A3B-Instruct_zero_shot_cot
+
+Algorithm    : 109/149
+HumanEval-V  : 159/164
+MATH         : 102/125
+--------------------------------
+Total        : 370/438 = 0.8447488584474886

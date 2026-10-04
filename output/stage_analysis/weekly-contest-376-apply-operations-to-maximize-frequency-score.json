@@ -1,0 +1,109 @@
+{
+  "problem_id": "max_frequency_score",
+  "nodes": [
+    {
+      "id": 1,
+      "type": "start",
+      "label": "Start",
+      "next": 2
+    },
+    {
+      "id": 2,
+      "type": "process",
+      "label": "Input: nums (List[int]), k (integer)",
+      "action": "ctx['nums'] = ctx['arg0']; ctx['k'] = ctx['arg1']; ctx['sum_vals'] = [0] + list(accumulate(ctx['nums'])); ctx['left'] = 0",
+      "next": 3
+    },
+    {
+      "id": 3,
+      "type": "process",
+      "label": "Sort nums",
+      "action": "ctx['nums'].sort()",
+      "next": 4
+    },
+    {
+      "id": 4,
+      "type": "process",
+      "label": "Initialize sum_vals = [0]+list(accumulate(nums))",
+      "action": "ctx['sum_vals'] = [0] + list(accumulate(ctx['nums']))",
+      "next": 5
+    },
+    {
+      "id": 5,
+      "type": "process",
+      "label": "Initialize left = 0",
+      "action": "ctx['left'] = 0",
+      "next": 6
+    },
+    {
+      "id": 6,
+      "type": "decision",
+      "label": "Loop: For right from 1 to len(sum_vals) - 1",
+      "logic": "ctx['right'] < len(ctx['sum_vals']) - 1",
+      "true_next": 7,
+      "false_next": 12
+    },
+    {
+      "id": 7,
+      "type": "process",
+      "label": "Calculate mid = (right + left) // 2",
+      "action": "ctx['mid'] = (ctx['right'] + ctx['left']) // 2",
+      "next": 8
+    },
+    {
+      "id": 8,
+      "type": "process",
+      "label": "Calculate val = (sum_vals[right] - sum_vals[mid]) - (right - mid) * nums[mid]",
+      "action": "ctx['val'] = (ctx['sum_vals'][ctx['right']] - ctx['sum_vals'][ctx['mid']]) - (ctx['right'] - ctx['mid']) * ctx['nums'][ctx['mid']]",
+      "next": 9
+    },
+    {
+      "id": 9,
+      "type": "process",
+      "label": "Update val += (mid - left) * nums[mid] - (sum_vals[mid] - sum_vals[left])",
+      "action": "ctx['val'] += (ctx['mid'] - ctx['left']) * ctx['nums'][ctx['mid']] - (ctx['sum_vals'][ctx['mid']] - ctx['sum_vals'][ctx['left']])",
+      "next": 10
+    },
+    {
+      "id": 10,
+      "type": "decision",
+      "label": "Is val > k?",
+      "logic": "ctx['val'] > ctx['k']",
+      "true_next": 11,
+      "false_next": 13
+    },
+    {
+      "id": 11,
+      "type": "process",
+      "label": "Update left += 1",
+      "action": "ctx['left'] += 1",
+      "next": 13
+    },
+    {
+      "id": 13,
+      "type": "process",
+      "label": "Continue loop",
+      "action": "pass",
+      "next": 6
+    },
+    {
+      "id": 12,
+      "type": "return",
+      "label": "Return right - left",
+      "value": "ctx['right'] - ctx['left']"
+    }
+  ],
+  "task_id": "weekly-contest-376-apply-operations-to-maximize-frequency-score",
+  "dataset": "Algorithm",
+  "result": "failed: 'Solution' object has no attribute 'arg0'",
+  "code": "class Solution:\n    def maxFrequencyScore(self, nums: List[int], k: int) -> int:\n        nums = self.arg0\n        k = self.arg1\n        sum_vals = [0] + list(accumulate(nums))\n        left = 0\n        \n        right = 1\n        while right < len(sum_vals) - 1:\n            mid = (right + left) // 2\n            val = (sum_vals[right] - sum_vals[mid]) - (right - mid) * nums[mid]\n            val += (mid - left) * nums[mid] - (sum_vals[mid] - sum_vals[left])\n            \n            if val > k:\n                left += 1\n            else:\n                pass\n            \n            right += 1\n        \n        return right - left",
+  "verification": {
+    "md_verdict": "ILR Error",
+    "actual_error_source": "both",
+    "ilr_verdict": "incorrect",
+    "code_vs_ilr": "deviates",
+    "md_correct": "partial",
+    "note": "MD 根因(ILR错)正确但不完整。ILR 在排序(node3)之前就计算 sum_vals(node2)，前缀和基于未排序数组而 nums[mid] 用排序后数组，两者不一致；循环条件 right < len(sum_vals)-1 少算最后一个元素；图中无 right 的初始化与递增节点。忠实实现 7 个样例错 5 个（示例2 得 4 期望 3）。代码另有独立致命伤：把 ctx['arg0'] 写成 self.arg0（AttributeError，即记录的失败原因），还漏掉了 node3 的 nums.sort()。",
+    "evidence": "忠实 ILR：[1,4,4,2,4],k=0 → 4≠3、[10,19,26,18,27,18],k=9 → 5≠4。生成代码抛 AttributeError: 'Solution' object has no attribute 'arg0'（与 FAILURE RESULT 一致）"
+  }
+}

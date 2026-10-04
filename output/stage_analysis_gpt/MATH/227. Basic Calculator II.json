@@ -1,0 +1,256 @@
+{
+  "task_id": "227. Basic Calculator II",
+  "dataset": "MATH",
+  "difficulty": "medium",
+  "title": null,
+  "result": "failed: ",
+  "ilr": "{\n  \"problem_id\": \"evaluate_expression\",\n  \"nodes\": [\n    {\"id\": 1, \"type\": \"start\", \"label\": \"Start\", \"next\": 2},\n    {\"id\": 2, \"type\": \"process\", \"label\": \"Input: s (string)\", \"action\": \"ctx['s'] = ctx['arg0']; ctx['num'] = 0; ctx['ope'] = '+'; ctx['stack'] = []\", \"next\": 3},\n    {\"id\": 3, \"type\": \"process\", \"label\": \"For each character i in s\", \"action\": \"ctx['i'] = 0\", \"next\": 4},\n    {\"id\": 4, \"type\": \"decision\", \"label\": \"Is i numeric?\", \"logic\": \"ctx['s'][ctx['i']].isdigit()\", \"true_next\": 5, \"false_next\": 7},\n    {\"id\": 5, \"type\": \"process\", \"label\": \"Update num: num = num * 10 + int(i)\", \"action\": \"ctx['num'] = ctx['num'] * 10 + int(ctx['s'][ctx['i']])\", \"next\": 6},\n    {\"id\": 6, \"type\": \"process\", \"label\": \"Update i\", \"action\": \"ctx['i'] += 1\", \"next\": 4},\n    {\"id\": 7, \"type\": \"decision\", \"label\": \"Is i in '+-*/' or end of string?\", \"logic\": \"ctx['i'] >= len(ctx['s']) or ctx['s'][ctx['i']] in '+-*/'\", \"true_next\": 8, \"false_next\": 6},\n    {\"id\": 8, \"type\": \"decision\", \"label\": \"Is ope == '+'?\", \"logic\": \"ctx['ope'] == '+'\", \"true_next\": 12, \"false_next\": 9},\n    {\"id\": 9, \"type\": \"decision\", \"label\": \"Is ope == '-'?\", \"logic\": \"ctx['ope'] == '-'\", \"true_next\": 13, \"false_next\": 10},\n    {\"id\": 10, \"type\": \"decision\", \"label\": \"Is ope == '*'?\", \"logic\": \"ctx['ope'] == '*'\", \"true_next\": 14, \"false_next\": 11},\n    {\"id\": 11, \"type\": \"decision\", \"label\": \"Is ope == '/'?\", \"logic\": \"ctx['ope'] == '/'\", \"true_next\": 15, \"false_next\": 16},\n    {\"id\": 12, \"type\": \"process\", \"label\": \"Append num to stack\", \"action\": \"ctx['stack'].append(ctx['num'])\", \"next\": 16},\n    {\"id\": 13, \"type\": \"process\", \"label\": \"Append -num to stack\", \"action\": \"ctx['stack'].append(-ctx['num'])\", \"next\": 16},\n    {\"id\": 14, \"type\": \"process\", \"label\": \"Pop from stack, multiply with num, append result to stack\", \"action\": \"ctx['stack'].append(ctx['stack'].pop() * ctx['num'])\", \"next\": 16},\n    {\"id\": 15, \"type\": \"process\", \"label\": \"Pop from stack, divide by num, truncate, append result to stack\", \"action\": \"ctx['stack'].append(int(ctx['stack'].pop() / ctx['num']))\", \"next\": 16},\n    {\"id\": 16, \"type\": \"process\", \"label\": \"Update ope = i, num = 0\", \"action\": \"ctx['ope'] = ctx['s'][ctx['i']]; ctx['num'] = 0; ctx['i'] += 1\", \"next\": 4},\n    {\"id\": 17, \"type\": \"process\", \"label\": \"Sum all elements in stack\", \"action\": \"ctx['result'] = sum(ctx['stack'])\", \"next\": 18},\n    {\"id\": 18, \"type\": \"end\", \"label\": \"Output: sum(stack)\", \"output\": \"ctx['result']\"}\n  ]\n}",
+  "code": "def calculate(s: str) -> int:\n    num = 0\n    ope = '+'\n    stack = []\n    i = 0\n\n    while i < len(s):\n        if s[i].isdigit():\n            num = num * 10 + int(s[i])\n            i += 1\n            continue\n        \n        if i >= len(s) or s[i] in '+-*/':\n            if ope == '+':\n                stack.append(num)\n            elif ope == '-':\n                stack.append(-num)\n            elif ope == '*':\n                stack.append(stack.pop() * num)\n            elif ope == '/':\n                stack.append(int(stack.pop() / num))\n            \n            if i < len(s):\n                ope = s[i]\n                num = 0\n            \n            i += 1\n\n    result = sum(stack)\n    return result",
+  "prompt": "Given a string s which represents an expression, evaluate this expression and return its value.\n\nThe integer division should truncate toward zero.\n\nYou may assume that the given expression is always valid. All intermediate results will be in the range of [-231, 231 - 1].\n\nNote: You are not allowed to use any built-in function which evaluates strings as mathematical expressions, such as eval().\n\n\n\nExample 1:\n\nInput: s = \"3+2*2\"\nOutput: 7\nExample 2:\n\nInput: s = \" 3/2 \"\nOutput: 1\nExample 3:\n\nInput: s = \" 3+5 / 2 \"\nOutput: 5\n\n\nConstraints:\n\n1 <= s.length <= 3 * 105\ns consists of integers and operators ('+', '-', '*', '/') separated by some number of spaces.\ns represents a valid expression.\nAll the integers in the expression are non-negative integers in the range [0, 231 - 1].\nThe answer is guaranteed to fit in a 32-bit integer.",
+  "test": "assert calculate(\"3+2*2\") == 7  # 3 + (2 * 2) = 7\nassert calculate(\" 3/2 \") == 1  # 3 // 2 = 1\nassert calculate(\" 3+5 / 2 \") == 5  # 3 + (5 // 2) = 5\n\n# Boundary test cases\nassert calculate(\"0\") == 0  # single digit, result is the digit itself\nassert calculate(\"1+1\") == 2  # simple addition\nassert calculate(\"10-5\") == 5  # simple subtraction\n\n# Large number test cases\nassert calculate(\"1000000000*2\") == 2000000000  # large multiplication\nassert calculate(\"1000000000/2\") == 500000000  # large division\nassert calculate(\"999999999+1\") == 1000000000  # large addition",
+  "ocr_data": {
+    "nodes": [
+      {
+        "node_id": 1,
+        "shape_type": "rectangle",
+        "raw_text": "Start",
+        "position": "top"
+      },
+      {
+        "node_id": 2,
+        "shape_type": "rectangle",
+        "raw_text": "Input: s (string)",
+        "position": "top"
+      },
+      {
+        "node_id": 3,
+        "shape_type": "rectangle",
+        "raw_text": "Initialize num = 0, ope = '+', stack = []",
+        "position": "top"
+      },
+      {
+        "node_id": 4,
+        "shape_type": "rectangle",
+        "raw_text": "For each character i in s",
+        "position": "top"
+      },
+      {
+        "node_id": 5,
+        "shape_type": "diamond",
+        "raw_text": "Is i numeric?",
+        "position": "middle"
+      },
+      {
+        "node_id": 6,
+        "shape_type": "rectangle",
+        "raw_text": "Update num: num = num * 10 + int(i)",
+        "position": "middle"
+      },
+      {
+        "node_id": 7,
+        "shape_type": "diamond",
+        "raw_text": "Is i in '+-*/' or end of string?",
+        "position": "middle"
+      },
+      {
+        "node_id": 8,
+        "shape_type": "diamond",
+        "raw_text": "Is ope == '+'?",
+        "position": "middle"
+      },
+      {
+        "node_id": 9,
+        "shape_type": "diamond",
+        "raw_text": "Is ope == '-'?",
+        "position": "middle"
+      },
+      {
+        "node_id": 10,
+        "shape_type": "diamond",
+        "raw_text": "Is ope == '*'?",
+        "position": "middle"
+      },
+      {
+        "node_id": 11,
+        "shape_type": "diamond",
+        "raw_text": "Is ope == '/'?",
+        "position": "middle"
+      },
+      {
+        "node_id": 12,
+        "shape_type": "rectangle",
+        "raw_text": "Append num to stack",
+        "position": "bottom"
+      },
+      {
+        "node_id": 13,
+        "shape_type": "rectangle",
+        "raw_text": "Append -num to stack",
+        "position": "bottom"
+      },
+      {
+        "node_id": 14,
+        "shape_type": "rectangle",
+        "raw_text": "Pop from stack, multiply with num, append result to stack",
+        "position": "bottom"
+      },
+      {
+        "node_id": 15,
+        "shape_type": "rectangle",
+        "raw_text": "Pop from stack, divide by num, truncate, append result to stack",
+        "position": "bottom"
+      },
+      {
+        "node_id": 16,
+        "shape_type": "rectangle",
+        "raw_text": "Update ope = i, num = 0",
+        "position": "bottom"
+      },
+      {
+        "node_id": 17,
+        "shape_type": "rectangle",
+        "raw_text": "Sum all elements in stack",
+        "position": "bottom"
+      },
+      {
+        "node_id": 18,
+        "shape_type": "rectangle",
+        "raw_text": "Output: sum(stack)",
+        "position": "bottom"
+      }
+    ],
+    "edges": [
+      {
+        "from_node": 1,
+        "to_node": 2,
+        "label": ""
+      },
+      {
+        "from_node": 2,
+        "to_node": 3,
+        "label": ""
+      },
+      {
+        "from_node": 3,
+        "to_node": 4,
+        "label": ""
+      },
+      {
+        "from_node": 4,
+        "to_node": 5,
+        "label": ""
+      },
+      {
+        "from_node": 5,
+        "to_node": 6,
+        "label": "Yes"
+      },
+      {
+        "from_node": 5,
+        "to_node": 7,
+        "label": "No"
+      },
+      {
+        "from_node": 6,
+        "to_node": 7,
+        "label": ""
+      },
+      {
+        "from_node": 7,
+        "to_node": 8,
+        "label": "Yes"
+      },
+      {
+        "from_node": 7,
+        "to_node": 16,
+        "label": "No"
+      },
+      {
+        "from_node": 8,
+        "to_node": 12,
+        "label": "Yes"
+      },
+      {
+        "from_node": 8,
+        "to_node": 16,
+        "label": "No"
+      },
+      {
+        "from_node": 9,
+        "to_node": 13,
+        "label": "Yes"
+      },
+      {
+        "from_node": 9,
+        "to_node": 16,
+        "label": "No"
+      },
+      {
+        "from_node": 10,
+        "to_node": 14,
+        "label": "Yes"
+      },
+      {
+        "from_node": 10,
+        "to_node": 16,
+        "label": "No"
+      },
+      {
+        "from_node": 11,
+        "to_node": 15,
+        "label": "Yes"
+      },
+      {
+        "from_node": 11,
+        "to_node": 16,
+        "label": "No"
+      },
+      {
+        "from_node": 12,
+        "to_node": 16,
+        "label": ""
+      },
+      {
+        "from_node": 13,
+        "to_node": 16,
+        "label": ""
+      },
+      {
+        "from_node": 14,
+        "to_node": 16,
+        "label": ""
+      },
+      {
+        "from_node": 15,
+        "to_node": 16,
+        "label": ""
+      },
+      {
+        "from_node": 16,
+        "to_node": 4,
+        "label": ""
+      },
+      {
+        "from_node": 4,
+        "to_node": 17,
+        "label": "No"
+      },
+      {
+        "from_node": 17,
+        "to_node": 18,
+        "label": ""
+      }
+    ],
+    "other_text": []
+  },
+  "analysis": {
+    "ilr_verdict": "incorrect",
+    "ilr_issues": "ILR 丢失了 OCR 中存在的循环出口边（节点4 'No'→17 求和），且节点4 的 s[i].isdigit() 在 i=len(s) 时 IndexError、节点16 无条件取 s[i] 在串尾刷新时同样越界，按原样执行永远无法输出。",
+    "code_vs_ilr": "deviates",
+    "code_issues": "代码自行加 while i<len(s) 守卫和 if i<len(s) 才更新 ope，把 ILR 靠节点7 处理串尾的设计改成直接退出循环，导致最后一个挂起运算永不应用，'3+2*2' 实测返回 5 而非 7。",
+    "error_source": "both",
+    "ocr_contribution": "no",
+    "root_cause": "ILR 缺循环出口、串尾越界必崩；代码又偏离 ILR 加守卫致最后挂起运算被丢弃，两种独立缺陷各自足以导致失败。",
+    "evidence": "OCR 边显示原流程图有 4→17('No') 出口（ILR 丢失），且数字路径 6→7→16 会用 ope=i 覆盖状态（流程图自身亦有缺陷）；实测 ILR 在 i=5 时执行 s[5].isdigit() 抛 IndexError，代码对 '3+2*2' 返回 5（期望 7）。"
+  }
+}

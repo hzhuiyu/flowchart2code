@@ -1,0 +1,82 @@
+{
+  "problem_id": "max_spending",
+  "nodes": [
+    {
+      "id": 1,
+      "type": "start",
+      "label": "Start",
+      "next": 2
+    },
+    {
+      "id": 2,
+      "type": "process",
+      "label": "Input: values (List[List[int]])",
+      "action": "ctx['values'] = ctx['arg0']",
+      "next": 3
+    },
+    {
+      "id": 3,
+      "type": "process",
+      "label": "Initialize r = [], i = 0",
+      "action": "ctx['r'] = []; ctx['i'] = 0",
+      "next": 4
+    },
+    {
+      "id": 4,
+      "type": "decision",
+      "label": "For each shop i in values",
+      "logic": "ctx['i'] < len(ctx['values'])",
+      "true_next": 5,
+      "false_next": 7
+    },
+    {
+      "id": 5,
+      "type": "process",
+      "label": "Extend r with items from shop i",
+      "action": "ctx['r'].extend(ctx['values'][ctx['i']])",
+      "next": 6
+    },
+    {
+      "id": 6,
+      "type": "process",
+      "label": "Advance to next shop: i += 1",
+      "action": "ctx['i'] += 1",
+      "next": 4
+    },
+    {
+      "id": 7,
+      "type": "process",
+      "label": "Sort r ascending and initialize ans = 0, day i = 1",
+      "action": "ctx['r'] = sorted(ctx['r']); ctx['ans'] = 0; ctx['i'] = 1",
+      "next": 8
+    },
+    {
+      "id": 8,
+      "type": "decision",
+      "label": "For day i from 1 to length of r",
+      "logic": "ctx['i'] <= len(ctx['r'])",
+      "true_next": 9,
+      "false_next": 11
+    },
+    {
+      "id": 9,
+      "type": "process",
+      "label": "Take the i-th smallest value: val = r[i-1]",
+      "action": "ctx['val'] = ctx['r'][ctx['i'] - 1]",
+      "next": 10
+    },
+    {
+      "id": 10,
+      "type": "process",
+      "label": "Update ans: ans += i * val, advance day",
+      "action": "ctx['ans'] += ctx['i'] * ctx['val']; ctx['i'] += 1",
+      "next": 8
+    },
+    {
+      "id": 11,
+      "type": "end",
+      "label": "Output: ans (maximum spending)",
+      "output": "ctx['ans']"
+    }
+  ]
+}

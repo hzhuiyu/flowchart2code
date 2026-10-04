@@ -1,0 +1,226 @@
+{
+  "task_id": "weekly-contest-360-minimum-operations-to-form-subsequence-with-target-sum",
+  "dataset": "Algorithm",
+  "difficulty": "Hard",
+  "title": "minimum-operations-to-form-subsequence-with-target-sum",
+  "result": "failed: ",
+  "ilr": "{\n  \"problem_id\": \"min_operations_to_target\",\n  \"nodes\": [\n    {\"id\": 1, \"type\": \"start\", \"label\": \"Start\", \"next\": 2},\n    {\"id\": 2, \"type\": \"process\", \"label\": \"Input: nums (list of integers), target (integer)\", \"action\": \"ctx['nums']=ctx['arg0']; ctx['target']=ctx['arg1']; ctx['ops']=0\", \"next\": 3},\n    {\"id\": 3, \"type\": \"decision\", \"label\": \"Is sum(nums) < target?\", \"logic\": \"sum(ctx['nums']) < ctx['target']\", \"true_next\": 4, \"false_next\": 5},\n    {\"id\": 4, \"type\": \"end\", \"label\": \"Output: -1 (impossible to reach target)\", \"output\": \"-1\"},\n    {\"id\": 5, \"type\": \"process\", \"label\": \"Initialize ops = 0\", \"action\": \"ctx['ops'] = 0\", \"next\": 6},\n    {\"id\": 6, \"type\": \"process\", \"label\": \"Create SortedList from nums\", \"action\": \"ctx['sorted_nums'] = sorted(ctx['nums'])\", \"next\": 7},\n    {\"id\": 7, \"type\": \"process\", \"label\": \"Start infinite loop\", \"action\": \"while True:\", \"next\": 8},\n    {\"id\": 8, \"type\": \"process\", \"label\": \"Initialize total = 0, last_skipped = -1\", \"action\": \"ctx['total'] = 0; ctx['last_skipped'] = -1\", \"next\": 9},\n    {\"id\": 9, \"type\": \"process\", \"label\": \"For i from len(nums)-1 to 0\", \"action\": \"for ctx['i'] in range(len(ctx['sorted_nums']) - 1, -1, -1):\", \"next\": 10},\n    {\"id\": 10, \"type\": \"decision\", \"label\": \"Is total + nums[i] > target?\", \"logic\": \"ctx['total'] + ctx['sorted_nums'][ctx['i']] > ctx['target']\", \"true_next\": 11, \"false_next\": 13},\n    {\"id\": 11, \"type\": \"process\", \"label\": \"Set last_skipped = i\", \"action\": \"ctx['last_skipped'] = ctx['i']\", \"next\": 12},\n    {\"id\": 12, \"type\": \"process\", \"label\": \"Continue\", \"action\": \"continue\", \"next\": 9},\n    {\"id\": 13, \"type\": \"process\", \"label\": \"Update total: total += nums[i]\", \"action\": \"ctx['total'] += ctx['sorted_nums'][ctx['i']]\", \"next\": 14},\n    {\"id\": 14, \"type\": \"decision\", \"label\": \"Is total == target?\", \"logic\": \"ctx['total'] == ctx['target']\", \"true_next\": 15, \"false_next\": 16},\n    {\"id\": 15, \"type\": \"end\", \"label\": \"Output: ops (minimum operations)\", \"output\": \"ctx['ops']\"},\n    {\"id\": 16, \"type\": \"process\", \"label\": \"Pop last_skipped element from nums: new = nums.pop(last_skipped) // 2\", \"action\": \"ctx['new'] = ctx['sorted_nums'].pop(ctx['last_skipped']) // 2\", \"next\": 17},\n    {\"id\": 17, \"type\": \"process\", \"label\": \"Add new to nums twice: nums.add(new)\", \"action\": \"ctx['sorted_nums'].append(ctx['new']); ctx['sorted_nums'].append(ctx['new'])\", \"next\": 18},\n    {\"id\": 18, \"type\": \"process\", \"label\": \"Increment ops: ops += 1\", \"action\": \"ctx['ops'] += 1\", \"next\": 7}\n  ]\n}",
+  "code": "from typing import List\n\nclass Solution:\n    def minOperations(self, nums: List[int], target: int) -> int:\n        if sum(nums) < target:\n            return -1\n        \n        ops = 0\n        sorted_nums = sorted(nums)\n        \n        while True:\n            total = 0\n            last_skipped = -1\n            \n            for i in range(len(sorted_nums) - 1, -1, -1):\n                if total + sorted_nums[i] > target:\n                    last_skipped = i\n                    continue\n                \n                total += sorted_nums[i]\n                \n                if total == target:\n                    return ops\n            \n            if last_skipped == -1:\n                return -1\n            \n            new = sorted_nums.pop(last_skipped) // 2\n            sorted_nums.append(new)\n            sorted_nums.append(new)\n            ops += 1",
+  "prompt": "\"\"\"\nYou are given a 0-indexed array nums consisting of non-negative powers of 2, and an integer target.\n\nIn one operation, you must apply the following changes to the array:\n\n * Choose any element of the array nums[i] such that nums[i] > 1.\n * Remove nums[i] from the array.\n * Add two occurrences of nums[i] / 2 to the end of nums.\n\nReturn the minimum number of operations you need to perform so that nums contains a subsequence whose elements sum to target. If it is impossible to obtain such a subsequence, return -1.\n\nA subsequence is an array that can be derived from another array by deleting some or no elements without changing the order of the remaining elements.\n\nExample 1:\n\nInput: nums = [1,2,8], target = 7\nOutput: 1\nExplanation: In the first operation, we choose element nums[2]. The array becomes equal to nums = [1,2,4,4].\nAt this stage, nums contains the subsequence [1,2,4] which sums up to 7.\nIt can be shown that there is no shorter sequence of operations that results in a subsequnce that sums up to 7.\n\nExample 2:\n\nInput: nums = [1,32,1,2], target = 12\nOutput: 2\nExplanation: In the first operation, we choose element nums[1]. The array becomes equal to nums = [1,1,2,16,16].\nIn the second operation, we choose element nums[3]. The array becomes equal to nums = [1,1,2,16,8,8]\nAt this stage, nums contains the subsequence [1,1,2,8] which sums up to 12.\nIt can be shown that there is no shorter sequence of operations that results in a subsequence that sums up to 12.\n\nExample 3:\n\nInput: nums = [1,32,1], target = 35\nOutput: -1\nExplanation: It can be shown that no sequence of operations results in a subsequence that sums up to 35.\n\n\nConstraints:\n\n * 1 <= nums.length <= 1000\n * 1 <= nums[i] <= 230\n * nums consists only of non-negative powers of two.\n * 1 <= target < 231\n\"\"\"\nclass Solution:\n    def minOperations(self, nums: List[int], target: int) -> int:\n        ",
+  "test": "\nmy_solution = Solution()\n\ntest_input = { \"nums\": [1,2,8], \"target\": 7 }\nassert my_solution.minOperations(**test_input) == 1\n\ntest_input = { \"nums\": [1,32,1,2], \"target\": 12 }\nassert my_solution.minOperations(**test_input) == 2\n\ntest_input = { \"nums\": [1,32,1], \"target\": 35 }\nassert my_solution.minOperations(**test_input) == -1\n\ntest_input = { \"nums\": [1], \"target\": 1 }\nassert my_solution.minOperations(**test_input) == 0\n\ntest_input = { \"nums\": [16,128,32], \"target\": 1 }\nassert my_solution.minOperations(**test_input) == 4\n\ntest_input = { \"nums\": [1,1], \"target\": 2 }\nassert my_solution.minOperations(**test_input) == 0\n\ntest_input = { \"nums\": [64,128,128], \"target\": 2 }\nassert my_solution.minOperations(**test_input) == 5\n\ntest_input = { \"nums\": [2], \"target\": 2 }\nassert my_solution.minOperations(**test_input) == 0\n\ntest_input = { \"nums\": [32,256,4], \"target\": 2 }\nassert my_solution.minOperations(**test_input) == 1\n\ntest_input = { \"nums\": [1,1,1], \"target\": 3 }\nassert my_solution.minOperations(**test_input) == 0\n\ntest_input = { \"nums\": [1,256,16,128], \"target\": 3 }\nassert my_solution.minOperations(**test_input) == 3\n\ntest_input = { \"nums\": [1,2], \"target\": 3 }\nassert my_solution.minOperations(**test_input) == 0\n\ntest_input = { \"nums\": [16,16,4], \"target\": 3 }\nassert my_solution.minOperations(**test_input) == 2\n\ntest_input = { \"nums\": [1,1,1,1], \"target\": 4 }\nassert my_solution.minOperations(**test_input) == 0\n\ntest_input = { \"nums\": [128,1,128,1,64], \"target\": 4 }\nassert my_solution.minOperations(**test_input) == 4\n\ntest_input = { \"nums\": [2,1,1], \"target\": 4 }\nassert my_solution.minOperations(**test_input) == 0\n\ntest_input = { \"nums\": [8,2,64,32], \"target\": 4 }\nassert my_solution.minOperations(**test_input) == 1\n\ntest_input = { \"nums\": [16,128,8,1,1], \"target\": 4 }\nassert my_solution.minOperations(**test_input) == 1\n\ntest_input = { \"nums\": [1,2,1], \"target\": 4 }\nassert my_solution.minOperations(**test_input) == 0\n\ntest_input = { \"nums\": [128,8,8,2], \"target\": 4 }\nassert my_solution.minOperations(**test_input) == 1\n\ntest_input = { \"nums\": [2,2], \"target\": 4 }\nassert my_solution.minOperations(**test_input) == 0\n\ntest_input = { \"nums\": [128,32,16], \"target\": 4 }\nassert my_solution.minOperations(**test_input) == 2\n\ntest_input = { \"nums\": [4], \"target\": 4 }\nassert my_solution.minOperations(**test_input) == 0\n\ntest_input = { \"nums\": [128,32,256], \"target\": 4 }\nassert my_solution.minOperations(**test_input) == 3\n\ntest_input = { \"nums\": [1,1,1,1,1], \"target\": 5 }\nassert my_solution.minOperations(**test_input) == 0\n\ntest_input = { \"nums\": [1,1,128,256,1,16], \"target\": 5 }\nassert my_solution.minOperations(**test_input) == 2\n\ntest_input = { \"nums\": [2,1,1,1], \"target\": 5 }\nassert my_solution.minOperations(**test_input) == 0\n\ntest_input = { \"nums\": [32,1,8,1,64], \"target\": 5 }\nassert my_solution.minOperations(**test_input) == 1\n\ntest_input = { \"nums\": [128,256,32,1,1,1], \"target\": 5 }\nassert my_solution.minOperations(**test_input) == 3\n\ntest_input = { \"nums\": [1,1,2,1], \"target\": 5 }\nassert my_solution.minOperations(**test_input) == 0\n\ntest_input = { \"nums\": [16,16,1,1,128], \"target\": 5 }\nassert my_solution.minOperations(**test_input) == 2\n\ntest_input = { \"nums\": [2,2,1], \"target\": 5 }\nassert my_solution.minOperations(**test_input) == 0\n\ntest_input = { \"nums\": [64,32,2,8], \"target\": 5 }\nassert my_solution.minOperations(**test_input) == 2\n\ntest_input = { \"nums\": [1,4], \"target\": 5 }\nassert my_solution.minOperations(**test_input) == 0\n\ntest_input = { \"nums\": [8,64,128], \"target\": 5 }\nassert my_solution.minOperations(**test_input) == 3\n\ntest_input = { \"nums\": [1,1,1,1,1,1], \"target\": 6 }\nassert my_solution.minOperations(**test_input) == 0\n\ntest_input = { \"nums\": [128,1,256,1,1,1,32], \"target\": 6 }\nassert my_solution.minOperations(**test_input) == 3\n\ntest_input = { \"nums\": [1,1,1,1,2], \"target\": 6 }\nassert my_solution.minOperations(**test_input) == 0\n\ntest_input = { \"nums\": [1,256,1,1,8,64], \"target\": 6 }\nassert my_solution.minOperations(**test_input) == 1\n\ntest_input = { \"nums\": [1,128,1,128,1,8,1], \"target\": 6 }\nassert my_solution.minOperations(**test_input) == 1\n\ntest_input = { \"nums\": [1,1,1,2,1], \"target\": 6 }\nassert my_solution.minOperations(**test_input) == 0\n\ntest_input = { \"nums\": [64,1,16,1,1,64], \"target\": 6 }\nassert my_solution.minOperations(**test_input) == 2\n\ntest_input = { \"nums\": [2,1,2,1], \"target\": 6 }\nassert my_solution.minOperations(**test_input) == 0\n\ntest_input = { \"nums\": [2,1,8,64,64], \"target\": 6 }\nassert my_solution.minOperations(**test_input) == 1\n\ntest_input = { \"nums\": [4,1,1], \"target\": 6 }\nassert my_solution.minOperations(**test_input) == 0\n\ntest_input = { \"nums\": [16,64,4,128], \"target\": 6 }\nassert my_solution.minOperations(**test_input) == 3\n\ntest_input = { \"nums\": [1,1,1,8,128,1,8], \"target\": 6 }\nassert my_solution.minOperations(**test_input) == 1\n\ntest_input = { \"nums\": [1,2,1,1,1], \"target\": 6 }\nassert my_solution.minOperations(**test_input) == 0\n\ntest_input = { \"nums\": [64,128,1,32,1,2], \"target\": 6 }\nassert my_solution.minOperations(**test_input) == 3\n\ntest_input = { \"nums\": [1,1,1,256,1,8,64], \"target\": 6 }\nassert my_solution.minOperations(**test_input) == 1\n\ntest_input = { \"nums\": [1,128,1,256,32,1], \"target\": 6 }\nassert my_solution.minOperations(**test_input) == 3\n\ntest_input = { \"nums\": [1,2,1,2], \"target\": 6 }\nassert my_solution.minOperations(**test_input) == 0\n\ntest_input = { \"nums\": [256,2,32,32,1], \"target\": 6 }\nassert my_solution.minOperations(**test_input) == 3\n\ntest_input = { \"nums\": [1,16,1,1,1,16,256], \"target\": 6 }\nassert my_solution.minOperations(**test_input) == 2\n\ntest_input = { \"nums\": [1,1,2,1,1], \"target\": 6 }\nassert my_solution.minOperations(**test_input) == 0\n\ntest_input = { \"nums\": [1,1,64,8,16,1], \"target\": 6 }\nassert my_solution.minOperations(**test_input) == 1\n\ntest_input = { \"nums\": [1,16,128,1,1,32,1], \"target\": 6 }\nassert my_solution.minOperations(**test_input) == 2\n\ntest_input = { \"nums\": [128,1,1,1,64,32], \"target\": 6 }\nassert my_solution.minOperations(**test_input) == 3\n\ntest_input = { \"nums\": [64,16,16,1,1], \"target\": 6 }\nassert my_solution.minOperations(**test_input) == 2\n\ntest_input = { \"nums\": [32,1,1,32,1,64,1], \"target\": 6 }\nassert my_solution.minOperations(**test_input) == 3\n\ntest_input = { \"nums\": [8,64,2,1,1,8], \"target\": 6 }\nassert my_solution.minOperations(**test_input) == 1\n\ntest_input = { \"nums\": [1,1,256,1,64,1,128], \"target\": 6 }\nassert my_solution.minOperations(**test_input) == 4\n\ntest_input = { \"nums\": [1,1,64,64,32,2], \"target\": 6 }\nassert my_solution.minOperations(**test_input) == 3\n\ntest_input = { \"nums\": [2,32,128,1,64], \"target\": 6 }\nassert my_solution.minOperations(**test_input) == 3\n\ntest_input = { \"nums\": [2,2,2], \"target\": 6 }\nassert my_solution.minOperations(**test_input) == 0\n\ntest_input = { \"nums\": [64,8,2,128], \"target\": 6 }\nassert my_solution.minOperations(**test_input) == 1\n\ntest_input = { \"nums\": [4,2], \"target\": 6 }\nassert my_solution.minOperations(**test_input) == 0\n\ntest_input = { \"nums\": [8,8,16], \"target\": 6 }\nassert my_solution.minOperations(**test_input) == 2\n\ntest_input = { \"nums\": [1,1,1,1,1,1,1], \"target\": 7 }\nassert my_solution.minOperations(**test_input) == 0\n\ntest_input = { \"nums\": [1,1,1,1,128,1,64,8], \"target\": 7 }\nassert my_solution.minOperations(**test_input) == 1\n\ntest_input = { \"nums\": [2,1,1,1,1,1], \"target\": 7 }\nassert my_solution.minOperations(**test_input) == 0\n\ntest_input = { \"nums\": [1,2,64,32,16,1,1], \"target\": 7 }\nassert my_solution.minOperations(**test_input) == 2\n\ntest_input = { \"nums\": [1,1,1,16,128,256,1,1], \"target\": 7 }\nassert my_solution.minOperations(**test_input) == 2\n\ntest_input = { \"nums\": [1,1,1,2,1,1], \"target\": 7 }\nassert my_solution.minOperations(**test_input) == 0\n\ntest_input = { \"nums\": [2,8,8,1,128,1,1], \"target\": 7 }\nassert my_solution.minOperations(**test_input) == 1\n\ntest_input = { \"nums\": [1,2,1,1,2], \"target\": 7 }\nassert my_solution.minOperations(**test_input) == 0\n\ntest_input = { \"nums\": [32,1,2,1,256,128], \"target\": 7 }\nassert my_solution.minOperations(**test_input) == 3\n\ntest_input = { \"nums\": [1,1,1,4], \"target\": 7 }\nassert my_solution.minOperations(**test_input) == 0\n\ntest_input = { \"nums\": [1,8,256,32,1], \"target\": 7 }\nassert my_solution.minOperations(**test_input) == 2\n\ntest_input = { \"nums\": [64,1,1,1,16,1,64,1], \"target\": 7 }\nassert my_solution.minOperations(**test_input) == 2\n\ntest_input = { \"nums\": [1,1,1,1,2,1], \"target\": 7 }\nassert my_solution.minOperations(**test_input) == 0\n\ntest_input = { \"nums\": [1,256,1,8,1,2,16], \"target\": 7 }\nassert my_solution.minOperations(**test_input) == 1\n\ntest_input = { \"nums\": [32,1,1,1,32,32,1,1], \"target\": 7 }\nassert my_solution.minOperations(**test_input) == 3\n\ntest_input = { \"nums\": [1,2,1,1,1,1], \"target\": 7 }\nassert my_solution.minOperations(**test_input) == 0\n\ntest_input = { \"nums\": [64,1,32,256,1,1,1], \"target\": 7 }\nassert my_solution.minOperations(**test_input) == 3\n\ntest_input = { \"nums\": [2,1,2,1,1], \"target\": 7 }\nassert my_solution.minOperations(**test_input) == 0\n\ntest_input = { \"nums\": [2,32,32,32,2,1], \"target\": 7 }\nassert my_solution.minOperations(**test_input) == 3\n\ntest_input = { \"nums\": [1,1,8,1,1,64,1,128], \"target\": 7 }\nassert my_solution.minOperations(**test_input) == 1\n\ntest_input = { \"nums\": [1,1,1,1,1,2], \"target\": 7 }\nassert my_solution.minOperations(**test_input) == 0\n\ntest_input = { \"nums\": [64,128,2,128,1,1,1], \"target\": 7 }\nassert my_solution.minOperations(**test_input) == 4\n\ntest_input = { \"nums\": [1,1,1,128,8,32,1,1], \"target\": 7 }\nassert my_solution.minOperations(**test_input) == 1\n\ntest_input = { \"nums\": [64,256,1,1,1,32,2], \"target\": 7 }\nassert my_solution.minOperations(**test_input) == 3\n\ntest_input = { \"nums\": [1,2,2,1,1], \"target\": 7 }\nassert my_solution.minOperations(**test_input) == 0\n\ntest_input = { \"nums\": [1,256,64,2,1,128], \"target\": 7 }\nassert my_solution.minOperations(**test_input) == 4\n\ntest_input = { \"nums\": [256,1,1,1,64,1,1,64], \"target\": 7 }\nassert my_solution.minOperations(**test_input) == 4\n\ntest_input = { \"nums\": [2,1,8,256,1,128,1], \"target\": 7 }\nassert my_solution.minOperations(**test_input) == 1\n\ntest_input = { \"nums\": [1,1,16,1,1,256,1,128], \"target\": 7 }\nassert my_solution.minOperations(**test_input) == 2\n\ntest_input = { \"nums\": [1,8,128,1,1,1,256], \"target\": 7 }\nassert my_solution.minOperations(**test_input) == 1\n\ntest_input = { \"nums\": [2,2,1,1,1], \"target\": 7 }\nassert my_solution.minOperations(**test_input) == 0\n\ntest_input = { \"nums\": [64,2,64,1,32,1], \"target\": 7 }\nassert my_solution.minOperations(**test_input) == 3",
+  "ocr_data": {
+    "nodes": [
+      {
+        "node_id": 1,
+        "shape_type": "rectangle",
+        "raw_text": "Start",
+        "position": "top"
+      },
+      {
+        "node_id": 2,
+        "shape_type": "rectangle",
+        "raw_text": "Input: nums (list of integers), target (integer)",
+        "position": "middle"
+      },
+      {
+        "node_id": 3,
+        "shape_type": "diamond",
+        "raw_text": "Is sum(nums) < target?",
+        "position": "middle"
+      },
+      {
+        "node_id": 4,
+        "shape_type": "rectangle",
+        "raw_text": "Output: -1 (impossible to reach target)",
+        "position": "middle"
+      },
+      {
+        "node_id": 5,
+        "shape_type": "rectangle",
+        "raw_text": "Initialize ops = 0",
+        "position": "middle"
+      },
+      {
+        "node_id": 6,
+        "shape_type": "rectangle",
+        "raw_text": "Create SortedList from nums",
+        "position": "middle"
+      },
+      {
+        "node_id": 7,
+        "shape_type": "rectangle",
+        "raw_text": "Start infinite loop",
+        "position": "middle"
+      },
+      {
+        "node_id": 8,
+        "shape_type": "rectangle",
+        "raw_text": "Initialize total = 0, last_skipped = -1",
+        "position": "middle"
+      },
+      {
+        "node_id": 9,
+        "shape_type": "rectangle",
+        "raw_text": "For i from len(nums)-1 to 0",
+        "position": "middle"
+      },
+      {
+        "node_id": 10,
+        "shape_type": "diamond",
+        "raw_text": "Is total + nums[i] > target?",
+        "position": "middle"
+      },
+      {
+        "node_id": 11,
+        "shape_type": "rectangle",
+        "raw_text": "Set last_skipped = i",
+        "position": "middle"
+      },
+      {
+        "node_id": 12,
+        "shape_type": "rectangle",
+        "raw_text": "Continue",
+        "position": "middle"
+      },
+      {
+        "node_id": 13,
+        "shape_type": "rectangle",
+        "raw_text": "Update total: total += nums[i]",
+        "position": "middle"
+      },
+      {
+        "node_id": 14,
+        "shape_type": "diamond",
+        "raw_text": "Is total == target?",
+        "position": "middle"
+      },
+      {
+        "node_id": 15,
+        "shape_type": "rectangle",
+        "raw_text": "Output: ops (minimum operations)",
+        "position": "middle"
+      },
+      {
+        "node_id": 16,
+        "shape_type": "rectangle",
+        "raw_text": "Pop last_skipped element from nums: new = nums.pop(last_skipped) // 2",
+        "position": "middle"
+      },
+      {
+        "node_id": 17,
+        "shape_type": "rectangle",
+        "raw_text": "Add new to nums twice: nums.add(new)",
+        "position": "middle"
+      },
+      {
+        "node_id": 18,
+        "shape_type": "rectangle",
+        "raw_text": "Increment ops: ops += 1",
+        "position": "bottom"
+      }
+    ],
+    "edges": [
+      {
+        "from_node": 1,
+        "to_node": 2,
+        "label": ""
+      },
+      {
+        "from_node": 2,
+        "to_node": 3,
+        "label": ""
+      },
+      {
+        "from_node": 3,
+        "to_node": 4,
+        "label": "Yes"
+      },
+      {
+        "from_node": 3,
+        "to_node": 5,
+        "label": "No"
+      },
+      {
+        "from_node": 5,
+        "to_node": 6,
+        "label": ""
+      },
+      {
+        "from_node": 6,
+        "to_node": 7,
+        "label": ""
+      },
+      {
+        "from_node": 7,
+        "to_node": 8,
+        "label": ""
+      },
+      {
+        "from_node": 8,
+        "to_node": 9,
+        "label": ""
+      },
+      {
+        "from_node": 9,
+        "to_node": 10,
+        "label": ""
+      },
+      {
+        "from_node": 10,
+        "to_node": 11,
+        "label": "Yes"
+      },
+      {
+        "from_node": 11,
+        "to_node": 12,
+        "label": ""
+      },
+      {
+        "from_node": 10,
+        "to_node": 13,
+        "label": "No"
+      },
+      {
+        "from_node": 13,
+        "to_node": 9,
+        "label": ""
+      },
+      {
+        "from_node": 14,
+        "to_node": 15,
+        "label": "Yes"
+      },
+      {
+        "from_node": 14,
+        "to_node": 16,
+        "label": "No"
+      },
+      {
+        "from_node": 16,
+        "to_node": 17,
+        "label": ""
+      },
+      {
+        "from_node": 17,
+        "to_node": 18,
+        "label": ""
+      },
+      {
+        "from_node": 18,
+        "to_node": 7,
+        "label": ""
+      }
+    ],
+    "other_text": []
+  },
+  "analysis": {
+    "ilr_verdict": "incorrect",
+    "ilr_issues": "核心错误：节点6把'SortedList'降级成一次性sorted(nums)，节点17用末尾append两次加入折半元素而不维护有序性，后续按有序假设做的倒序扫描和pop(last_skipped)全部失效。此外控制流混乱：节点9的action是完整for循环却又用节点10-14做逐元素判断，for结束后落到节点10会用过期的i重复判断/重复累加，节点14的false分支在扫描中途就触发拆分（节点16->18->7），与'扫完一轮再拆'的意图不符。",
+    "code_vs_ilr": "deviates",
+    "code_issues": "代码把ILR混乱的循环结构重写成规范的for循环并把拆分移到整轮扫描之后、补充了last_skipped==-1的防御分支（修复性偏离），但逐字继承了'一次性排序+末尾append'的致命缺陷：折半产生的较小元素被追加到尾部，列表不再有序，导致每次拆分的往往是最坏元素，操作数严重偏大。",
+    "error_source": "ilr",
+    "ocr_contribution": "no",
+    "root_cause": "ILR阶段把流程图明确标注的SortedList/nums.add翻成普通list的sorted()+append，破坏了算法依赖的有序不变量；代码忠实继承该缺陷（仅修复控制流），大量测试操作数偏大。",
+    "evidence": "生成代码100个测试错41个：nums=[16,128,32],target=1期望4实得22；nums=[64,128,128],target=2期望5实得46；nums=[16,16,4],target=3期望2实得5（有序时拆4->2,2再拆2->1,1即可2步，代码因append乱序反复拆大数）。OCR文本明确含'Create SortedList'与'nums.add(new)'，OCR非主因。"
+  }
+}

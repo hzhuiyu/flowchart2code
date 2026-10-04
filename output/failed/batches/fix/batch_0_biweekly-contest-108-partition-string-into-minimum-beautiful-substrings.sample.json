@@ -1,0 +1,1108 @@
+{
+ "task_id": "biweekly-contest-108-partition-string-into-minimum-beautiful-substrings",
+ "dataset": "Algorithm",
+ "title": "partition-string-into-minimum-beautiful-substrings",
+ "difficulty": "Medium",
+ "prompt": "\"\"\"\nGiven a binary string s, partition the string into one or more substrings such that each substring is beautiful.\n\nA string is beautiful if:\n\n * It doesn't contain leading zeros.\n * It's the binary representation of a number that is a power of 5.\n\nReturn the minimum number of substrings in such partition. If it is impossible to partition the string s into beautiful substrings, return -1.\n\nA substring is a contiguous sequence of characters in a string.\n\nExample 1:\n\nInput: s = \"1011\"\nOutput: 2\nExplanation: We can paritition the given string into [\"101\", \"1\"].\n- The string \"101\" does not contain leading zeros and is the binary representation of integer 51 = 5.\n- The string \"1\" does not contain leading zeros and is the binary representation of integer 50 = 1.\nIt can be shown that 2 is the minimum number of beautiful substrings that s can be partitioned into.\n\nExample 2:\n\nInput: s = \"111\"\nOutput: 3\nExplanation: We can paritition the given string into [\"1\", \"1\", \"1\"].\n- The string \"1\" does not contain leading zeros and is the binary representation of integer 50 = 1.\nIt can be shown that 3 is the minimum number of beautiful substrings that s can be partitioned into.\n\nExample 3:\n\nInput: s = \"0\"\nOutput: -1\nExplanation: We can not partition the given string into beautiful substrings.\n\n\nConstraints:\n\n * 1 <= s.length <= 15\n * s[i] is either '0' or '1'.\n\"\"\"\nclass Solution:\n    def minimumBeautifulSubstrings(self, s: str) -> int:\n        ",
+ "starter_code": "class Solution:\n    def minimumBeautifulSubstrings(self, s: str) -> int:\n        ",
+ "entry_point": "",
+ "test": "\nmy_solution = Solution()\n\ntest_input = { \"s\": \"1011\" }\nassert my_solution.minimumBeautifulSubstrings(**test_input) == 2\n\ntest_input = { \"s\": \"111\" }\nassert my_solution.minimumBeautifulSubstrings(**test_input) == 3\n\ntest_input = { \"s\": \"0\" }\nassert my_solution.minimumBeautifulSubstrings(**test_input) == -1\n\ntest_input = { \"s\": \"100111000110111\" }\nassert my_solution.minimumBeautifulSubstrings(**test_input) == 4\n\ntest_input = { \"s\": \"100111000111\" }\nassert my_solution.minimumBeautifulSubstrings(**test_input) == 3\n\ntest_input = { \"s\": \"1001110001111\" }\nassert my_solution.minimumBeautifulSubstrings(**test_input) == 4\n\ntest_input = { \"s\": \"100111000111101\" }\nassert my_solution.minimumBeautifulSubstrings(**test_input) == 4\n\ntest_input = { \"s\": \"10110011100011\" }\nassert my_solution.minimumBeautifulSubstrings(**test_input) == 3\n\ntest_input = { \"s\": \"101101\" }\nassert my_solution.minimumBeautifulSubstrings(**test_input) == 2\n\ntest_input = { \"s\": \"101101101\" }\nassert my_solution.minimumBeautifulSubstrings(**test_input) == 3\n\ntest_input = { \"s\": \"101101101101101\" }\nassert my_solution.minimumBeautifulSubstrings(**test_input) == 5\n\ntest_input = { \"s\": \"1011011011101\" }\nassert my_solution.minimumBeautifulSubstrings(**test_input) == 5\n\ntest_input = { \"s\": \"10110110111011\" }\nassert my_solution.minimumBeautifulSubstrings(**test_input) == 6\n\ntest_input = { \"s\": \"101101101111001\" }\nassert my_solution.minimumBeautifulSubstrings(**test_input) == 5\n\ntest_input = { \"s\": \"1011011011111\" }\nassert my_solution.minimumBeautifulSubstrings(**test_input) == 7\n\ntest_input = { \"s\": \"101101110011101\" }\nassert my_solution.minimumBeautifulSubstrings(**test_input) == 5\n\ntest_input = { \"s\": \"10110111001111\" }\nassert my_solution.minimumBeautifulSubstrings(**test_input) == 6\n\ntest_input = { \"s\": \"1011011101101\" }\nassert my_solution.minimumBeautifulSubstrings(**test_input) == 5\n\ntest_input = { \"s\": \"101101110110111\" }\nassert my_solution.minimumBeautifulSubstrings(**test_input) == 7\n\ntest_input = { \"s\": \"101101110111011\" }\nassert my_solution.minimumBeautifulSubstrings(**test_input) == 7\n\ntest_input = { \"s\": \"1011011101111\" }\nassert my_solution.minimumBeautifulSubstrings(**test_input) == 7\n\ntest_input = { \"s\": \"101101110111101\" }\nassert my_solution.minimumBeautifulSubstrings(**test_input) == 7\n\ntest_input = { \"s\": \"10110111011111\" }\nassert my_solution.minimumBeautifulSubstrings(**test_input) == 8\n\ntest_input = { \"s\": \"101101111001101\" }\nassert my_solution.minimumBeautifulSubstrings(**test_input) == 5\n\ntest_input = { \"s\": \"10110111101\" }\nassert my_solution.minimumBeautifulSubstrings(**test_input) == 5\n\ntest_input = { \"s\": \"10110111101101\" }\nassert my_solution.minimumBeautifulSubstrings(**test_input) == 6\n\ntest_input = { \"s\": \"101101111011011\" }\nassert my_solution.minimumBeautifulSubstrings(**test_input) == 7\n\ntest_input = { \"s\": \"101101111011101\" }\nassert my_solution.minimumBeautifulSubstrings(**test_input) == 7\n\ntest_input = { \"s\": \"10110111101111\" }\nassert my_solution.minimumBeautifulSubstrings(**test_input) == 8\n\ntest_input = { \"s\": \"101101111011111\" }\nassert my_solution.minimumBeautifulSubstrings(**test_input) == 9\n\ntest_input = { \"s\": \"1011011111\" }\nassert my_solution.minimumBeautifulSubstrings(**test_input) == 6\n\ntest_input = { \"s\": \"1011011111001\" }\nassert my_solution.minimumBeautifulSubstrings(**test_input) == 5\n\ntest_input = { \"s\": \"101101111101\" }\nassert my_solution.minimumBeautifulSubstrings(**test_input) == 6\n\ntest_input = { \"s\": \"1011011111011\" }\nassert my_solution.minimumBeautifulSubstrings(**test_input) == 7\n\ntest_input = { \"s\": \"10110111110111\" }\nassert my_solution.minimumBeautifulSubstrings(**test_input) == 8\n\ntest_input = { \"s\": \"10110111111001\" }\nassert my_solution.minimumBeautifulSubstrings(**test_input) == 6\n\ntest_input = { \"s\": \"101101111110011\" }\nassert my_solution.minimumBeautifulSubstrings(**test_input) == 7\n\ntest_input = { \"s\": \"10110111111011\" }\nassert my_solution.minimumBeautifulSubstrings(**test_input) == 4\n\ntest_input = { \"s\": \"101101111110111\" }\nassert my_solution.minimumBeautifulSubstrings(**test_input) == 5\n\ntest_input = { \"s\": \"101101111111\" }\nassert my_solution.minimumBeautifulSubstrings(**test_input) == 8\n\ntest_input = { \"s\": \"101101111111101\" }\nassert my_solution.minimumBeautifulSubstrings(**test_input) == 5\n\ntest_input = { \"s\": \"101110011011\" }\nassert my_solution.minimumBeautifulSubstrings(**test_input) == 4\n\ntest_input = { \"s\": \"10111001101101\" }\nassert my_solution.minimumBeautifulSubstrings(**test_input) == 4\n\ntest_input = { \"s\": \"101110011011111\" }\nassert my_solution.minimumBeautifulSubstrings(**test_input) == 7\n\ntest_input = { \"s\": \"1011100111\" }\nassert my_solution.minimumBeautifulSubstrings(**test_input) == 4\n\ntest_input = { \"s\": \"10111001110001\" }\nassert my_solution.minimumBeautifulSubstrings(**test_input) == 3\n\ntest_input = { \"s\": \"10111001110011\" }\nassert my_solution.minimumBeautifulSubstrings(**test_input) == 4\n\ntest_input = { \"s\": \"1011100111011\" }\nassert my_solution.minimumBeautifulSubstrings(**test_input) == 5\n\ntest_input = { \"s\": \"10111001110111\" }\nassert my_solution.minimumBeautifulSubstrings(**test_input) == 6\n\ntest_input = { \"s\": \"10111001111\" }\nassert my_solution.minimumBeautifulSubstrings(**test_input) == 5\n\ntest_input = { \"s\": \"10111001111001\" }\nassert my_solution.minimumBeautifulSubstrings(**test_input) == 4\n\ntest_input = { \"s\": \"1011100111101\" }\nassert my_solution.minimumBeautifulSubstrings(**test_input) == 5\n\ntest_input = { \"s\": \"101110011110111\" }\nassert my_solution.minimumBeautifulSubstrings(**test_input) == 7\n\ntest_input = { \"s\": \"101110011111001\" }\nassert my_solution.minimumBeautifulSubstrings(**test_input) == 5\n\ntest_input = { \"s\": \"10111001111101\" }\nassert my_solution.minimumBeautifulSubstrings(**test_input) == 6\n\ntest_input = { \"s\": \"101110011111011\" }\nassert my_solution.minimumBeautifulSubstrings(**test_input) == 7\n\ntest_input = { \"s\": \"1011100111111\" }\nassert my_solution.minimumBeautifulSubstrings(**test_input) == 7\n\ntest_input = { \"s\": \"10111001111111\" }\nassert my_solution.minimumBeautifulSubstrings(**test_input) == 8\n\ntest_input = { \"s\": \"1011101101\" }\nassert my_solution.minimumBeautifulSubstrings(**test_input) == 4\n\ntest_input = { \"s\": \"10111011011011\" }\nassert my_solution.minimumBeautifulSubstrings(**test_input) == 6\n\ntest_input = { \"s\": \"101110110111\" }\nassert my_solution.minimumBeautifulSubstrings(**test_input) == 6\n\ntest_input = { \"s\": \"101110110111011\" }\nassert my_solution.minimumBeautifulSubstrings(**test_input) == 7\n\ntest_input = { \"s\": \"1011101101111\" }\nassert my_solution.minimumBeautifulSubstrings(**test_input) == 7\n\ntest_input = { \"s\": \"101110111001101\" }\nassert my_solution.minimumBeautifulSubstrings(**test_input) == 5\n\ntest_input = { \"s\": \"101110111001111\" }\nassert my_solution.minimumBeautifulSubstrings(**test_input) == 7\n\ntest_input = { \"s\": \"10111011101\" }\nassert my_solution.minimumBeautifulSubstrings(**test_input) == 5\n\ntest_input = { \"s\": \"10111011101111\" }\nassert my_solution.minimumBeautifulSubstrings(**test_input) == 8\n\ntest_input = { \"s\": \"101110111011111\" }\nassert my_solution.minimumBeautifulSubstrings(**test_input) == 9\n\ntest_input = { \"s\": \"1011101111\" }\nassert my_solution.minimumBeautifulSubstrings(**test_input) == 6\n\ntest_input = { \"s\": \"1011101111001\" }\nassert my_solution.minimumBeautifulSubstrings(**test_input) == 5\n\ntest_input = { \"s\": \"10111011110011\" }\nassert my_solution.minimumBeautifulSubstrings(**test_input) == 6\n\ntest_input = { \"s\": \"101110111101\" }\nassert my_solution.minimumBeautifulSubstrings(**test_input) == 6\n\ntest_input = { \"s\": \"1011101111011\" }\nassert my_solution.minimumBeautifulSubstrings(**test_input) == 7\n\ntest_input = { \"s\": \"10111011111\" }\nassert my_solution.minimumBeautifulSubstrings(**test_input) == 7\n\ntest_input = { \"s\": \"10111011111001\" }\nassert my_solution.minimumBeautifulSubstrings(**test_input) == 6\n\ntest_input = { \"s\": \"10111011111011\" }\nassert my_solution.minimumBeautifulSubstrings(**test_input) == 8\n\ntest_input = { \"s\": \"101110111110111\" }\nassert my_solution.minimumBeautifulSubstrings(**test_input) == 9\n\ntest_input = { \"s\": \"101110111111001\" }\nassert my_solution.minimumBeautifulSubstrings(**test_input) == 7\n\ntest_input = { \"s\": \"101110111111011\" }\nassert my_solution.minimumBeautifulSubstrings(**test_input) == 5\n\ntest_input = { \"s\": \"101110111111101\" }\nassert my_solution.minimumBeautifulSubstrings(**test_input) == 5\n\ntest_input = { \"s\": \"10111011111111\" }\nassert my_solution.minimumBeautifulSubstrings(**test_input) == 10\n\ntest_input = { \"s\": \"101110111111111\" }\nassert my_solution.minimumBeautifulSubstrings(**test_input) == 11\n\ntest_input = { \"s\": \"101111\" }\nassert my_solution.minimumBeautifulSubstrings(**test_input) == 4\n\ntest_input = { \"s\": \"101111001\" }\nassert my_solution.minimumBeautifulSubstrings(**test_input) == 3\n\ntest_input = { \"s\": \"1011110011\" }\nassert my_solution.minimumBeautifulSubstrings(**test_input) == 4\n\ntest_input = { \"s\": \"10111100110111\" }\nassert my_solution.minimumBeautifulSubstrings(**test_input) == 6\n\ntest_input = { \"s\": \"101111001110001\" }\nassert my_solution.minimumBeautifulSubstrings(**test_input) == 4\n\ntest_input = { \"s\": \"101111001111101\" }\nassert my_solution.minimumBeautifulSubstrings(**test_input) == 7\n\ntest_input = { \"s\": \"10111100111111\" }\nassert my_solution.minimumBeautifulSubstrings(**test_input) == 8\n\ntest_input = { \"s\": \"101111011\" }\nassert my_solution.minimumBeautifulSubstrings(**test_input) == 5\n\ntest_input = { \"s\": \"10111101101\" }\nassert my_solution.minimumBeautifulSubstrings(**test_input) == 5\n\ntest_input = { \"s\": \"101111011011\" }\nassert my_solution.minimumBeautifulSubstrings(**test_input) == 6\n\ntest_input = { \"s\": \"10111101101101\" }\nassert my_solution.minimumBeautifulSubstrings(**test_input) == 6\n\ntest_input = { \"s\": \"1011110110111\" }\nassert my_solution.minimumBeautifulSubstrings(**test_input) == 7\n\ntest_input = { \"s\": \"1011110111101\" }\nassert my_solution.minimumBeautifulSubstrings(**test_input) == 7\n\ntest_input = { \"s\": \"101111011110111\" }\nassert my_solution.minimumBeautifulSubstrings(**test_input) == 9\n\ntest_input = { \"s\": \"101111011111\" }\nassert my_solution.minimumBeautifulSubstrings(**test_input) == 8\n\ntest_input = { \"s\": \"1011110111111\" }\nassert my_solution.minimumBeautifulSubstrings(**test_input) == 9\n\ntest_input = { \"s\": \"101111011111101\" }\nassert my_solution.minimumBeautifulSubstrings(**test_input) == 5\n\ntest_input = { \"s\": \"10111101111111\" }\nassert my_solution.minimumBeautifulSubstrings(**test_input) == 10",
+ "test_cases": [
+  {
+   "input": {
+    "args": [
+     "1011"
+    ]
+   },
+   "output": 2,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "111"
+    ]
+   },
+   "output": 3,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "0"
+    ]
+   },
+   "output": -1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "100111000110111"
+    ]
+   },
+   "output": 4,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "100111000111"
+    ]
+   },
+   "output": 3,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "1001110001111"
+    ]
+   },
+   "output": 4,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "100111000111101"
+    ]
+   },
+   "output": 4,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "10110011100011"
+    ]
+   },
+   "output": 3,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "101101"
+    ]
+   },
+   "output": 2,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "101101101"
+    ]
+   },
+   "output": 3,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "101101101101101"
+    ]
+   },
+   "output": 5,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "1011011011101"
+    ]
+   },
+   "output": 5,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "10110110111011"
+    ]
+   },
+   "output": 6,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "101101101111001"
+    ]
+   },
+   "output": 5,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "1011011011111"
+    ]
+   },
+   "output": 7,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "101101110011101"
+    ]
+   },
+   "output": 5,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "10110111001111"
+    ]
+   },
+   "output": 6,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "1011011101101"
+    ]
+   },
+   "output": 5,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "101101110110111"
+    ]
+   },
+   "output": 7,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "101101110111011"
+    ]
+   },
+   "output": 7,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "1011011101111"
+    ]
+   },
+   "output": 7,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "101101110111101"
+    ]
+   },
+   "output": 7,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "10110111011111"
+    ]
+   },
+   "output": 8,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "101101111001101"
+    ]
+   },
+   "output": 5,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "10110111101"
+    ]
+   },
+   "output": 5,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "10110111101101"
+    ]
+   },
+   "output": 6,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "101101111011011"
+    ]
+   },
+   "output": 7,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "101101111011101"
+    ]
+   },
+   "output": 7,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "10110111101111"
+    ]
+   },
+   "output": 8,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "101101111011111"
+    ]
+   },
+   "output": 9,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "1011011111"
+    ]
+   },
+   "output": 6,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "1011011111001"
+    ]
+   },
+   "output": 5,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "101101111101"
+    ]
+   },
+   "output": 6,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "1011011111011"
+    ]
+   },
+   "output": 7,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "10110111110111"
+    ]
+   },
+   "output": 8,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "10110111111001"
+    ]
+   },
+   "output": 6,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "101101111110011"
+    ]
+   },
+   "output": 7,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "10110111111011"
+    ]
+   },
+   "output": 4,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "101101111110111"
+    ]
+   },
+   "output": 5,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "101101111111"
+    ]
+   },
+   "output": 8,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "101101111111101"
+    ]
+   },
+   "output": 5,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "101110011011"
+    ]
+   },
+   "output": 4,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "10111001101101"
+    ]
+   },
+   "output": 4,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "101110011011111"
+    ]
+   },
+   "output": 7,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "1011100111"
+    ]
+   },
+   "output": 4,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "10111001110001"
+    ]
+   },
+   "output": 3,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "10111001110011"
+    ]
+   },
+   "output": 4,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "1011100111011"
+    ]
+   },
+   "output": 5,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "10111001110111"
+    ]
+   },
+   "output": 6,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "10111001111"
+    ]
+   },
+   "output": 5,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "10111001111001"
+    ]
+   },
+   "output": 4,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "1011100111101"
+    ]
+   },
+   "output": 5,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "101110011110111"
+    ]
+   },
+   "output": 7,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "101110011111001"
+    ]
+   },
+   "output": 5,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "10111001111101"
+    ]
+   },
+   "output": 6,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "101110011111011"
+    ]
+   },
+   "output": 7,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "1011100111111"
+    ]
+   },
+   "output": 7,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "10111001111111"
+    ]
+   },
+   "output": 8,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "1011101101"
+    ]
+   },
+   "output": 4,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "10111011011011"
+    ]
+   },
+   "output": 6,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "101110110111"
+    ]
+   },
+   "output": 6,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "101110110111011"
+    ]
+   },
+   "output": 7,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "1011101101111"
+    ]
+   },
+   "output": 7,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "101110111001101"
+    ]
+   },
+   "output": 5,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "101110111001111"
+    ]
+   },
+   "output": 7,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "10111011101"
+    ]
+   },
+   "output": 5,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "10111011101111"
+    ]
+   },
+   "output": 8,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "101110111011111"
+    ]
+   },
+   "output": 9,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "1011101111"
+    ]
+   },
+   "output": 6,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "1011101111001"
+    ]
+   },
+   "output": 5,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "10111011110011"
+    ]
+   },
+   "output": 6,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "101110111101"
+    ]
+   },
+   "output": 6,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "1011101111011"
+    ]
+   },
+   "output": 7,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "10111011111"
+    ]
+   },
+   "output": 7,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "10111011111001"
+    ]
+   },
+   "output": 6,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "10111011111011"
+    ]
+   },
+   "output": 8,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "101110111110111"
+    ]
+   },
+   "output": 9,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "101110111111001"
+    ]
+   },
+   "output": 7,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "101110111111011"
+    ]
+   },
+   "output": 5,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "101110111111101"
+    ]
+   },
+   "output": 5,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "10111011111111"
+    ]
+   },
+   "output": 10,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "101110111111111"
+    ]
+   },
+   "output": 11,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "101111"
+    ]
+   },
+   "output": 4,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "101111001"
+    ]
+   },
+   "output": 3,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "1011110011"
+    ]
+   },
+   "output": 4,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "10111100110111"
+    ]
+   },
+   "output": 6,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "101111001110001"
+    ]
+   },
+   "output": 4,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "101111001111101"
+    ]
+   },
+   "output": 7,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "10111100111111"
+    ]
+   },
+   "output": 8,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "101111011"
+    ]
+   },
+   "output": 5,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "10111101101"
+    ]
+   },
+   "output": 5,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "101111011011"
+    ]
+   },
+   "output": 6,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "10111101101101"
+    ]
+   },
+   "output": 6,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "1011110110111"
+    ]
+   },
+   "output": 7,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "1011110111101"
+    ]
+   },
+   "output": 7,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "101111011110111"
+    ]
+   },
+   "output": 9,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "101111011111"
+    ]
+   },
+   "output": 8,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "1011110111111"
+    ]
+   },
+   "output": 9,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "101111011111101"
+    ]
+   },
+   "output": 5,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "10111101111111"
+    ]
+   },
+   "output": 10,
+   "explanation": ""
+  }
+ ],
+ "original_ilr": "{\n  \"problem_id\": \"minimum_beautiful_substrings\",\n  \"nodes\": [\n    {\n      \"id\": 1,\n      \"type\": \"start\",\n      \"label\": \"Start\",\n      \"next\": 2\n    },\n    {\n      \"id\": 2,\n      \"type\": \"process\",\n      \"label\": \"Input: s (binary string)\",\n      \"action\": \"ctx['s'] = ctx['arg0']; ctx['pow_bank'] = set(); ctx['dp'] = [float('inf')] * (len(ctx['s']) + 1); ctx['dp'][len(ctx['s'])] = 0; ctx['i'] = 0\",\n      \"next\": 3\n    },\n    {\n      \"id\": 3,\n      \"type\": \"decision\",\n      \"label\": \"Is s[i] == '0'?\",\n      \"logic\": \"ctx['s'][ctx['i']] == '0'\",\n      \"true_next\": 9,\n      \"false_next\": 10\n    },\n    {\n      \"id\": 9,\n      \"type\": \"process\",\n      \"label\": \"Continue to next iteration\",\n      \"action\": \"ctx['i'] += 1\",\n      \"next\": 3\n    },\n    {\n      \"id\": 10,\n      \"type\": \"process\",\n      \"label\": \"Loop: for j from i to length of s - 1\",\n      \"action\": \"ctx['j'] = ctx['i']; while ctx['j'] < len(ctx['s']):\",\n      \"next\": 11\n    },\n    {\n      \"id\": 11,\n      \"type\": \"process\",\n      \"label\": \"Convert substring s[i:j+1] to decimal: dec = int(s[i:j+1], 2)\",\n      \"action\": \"ctx['dec'] = int(ctx['s'][ctx['i']:ctx['j']+1], 2)\",\n      \"next\": 12\n    },\n    {\n      \"id\": 12,\n      \"type\": \"decision\",\n      \"label\": \"s dec in pow_bank?\",\n      \"logic\": \"ctx['dec'] in ctx['pow_bank']\",\n      \"true_next\": 13,\n      \"false_next\": 10\n    },\n    {\n      \"id\": 13,\n      \"type\": \"process\",\n      \"label\": \"Update dp[j]: dp[j] = min(dp[j + 1] + 1, dp[j])\",\n      \"action\": \"ctx['dp'][ctx['i']] = min(ctx['dp'][ctx['i'] + 1] + 1, ctx['dp'][ctx['i']])\",\n      \"next\": 7\n    },\n    {\n      \"id\": 7,\n      \"type\": \"decision\",\n      \"label\": \"Is dp[0] == inf?\",\n      \"logic\": \"ctx['dp'][0] == float('inf')\",\n      \"true_next\": 15,\n      \"false_next\": 16\n    },\n    {\n      \"id\": 15,\n      \"type\": \"end\",\n      \"label\": \"Output: -1 (impossible to partition)\",\n      \"output\": \"-1\"\n    },\n    {\n      \"id\": 16,\n      \"type\": \"end\",\n      \"label\": \"Output: dp[0] (minimum number of beautiful substrings)\",\n      \"output\": \"ctx['dp'][0]\"\n    }\n  ]\n}",
+ "original_code": "class Solution:\n    def minimumBeautifulSubstrings(self, s: str) -> int:\n        # Initialize variables as per node 2\n        pow_bank = set()\n        dp = [float('inf')] * (len(s) + 1)\n        dp[len(s)] = 0\n        i = 0\n        \n        # Decision node 3: Is s[i] == '0'?\n        if s[i] == '0':\n            # True branch: continue to next iteration (node 9)\n            i += 1\n            # Go back to decision node 3\n            while i < len(s):\n                if s[i] == '0':\n                    i += 1\n                    continue\n                else:\n                    break\n            # Now process from the point where we have a non-zero character\n            j = i\n            while j < len(s):\n                # Process substring s[i:j+1]\n                dec = int(s[i:j+1], 2)\n                # Check if dec is in pow_bank\n                if dec in pow_bank:\n                    # Update dp[i]\n                    dp[i] = min(dp[i + 1] + 1, dp[i])\n                    j += 1\n                else:\n                    j += 1\n            # After processing all possible substrings starting at i\n            # Move to decision node 7\n            if dp[0] == float('inf'):\n                return -1\n            else:\n                return dp[0]\n        else:\n            # False branch: loop through j from i to end of string (node 10)\n            j = i\n            while j < len(s):\n                # Convert substring s[i:j+1] to decimal\n                dec = int(s[i:j+1], 2)\n                # Check if dec is in pow_bank\n                if dec in pow_bank:\n                    # Update dp[i]\n                    dp[i] = min(dp[i + 1] + 1, dp[i])\n                    j += 1\n                else:\n                    j += 1\n            # After processing all possible substrings starting at i\n            # Move to decision node 7\n            if dp[0] == float('inf'):\n                return -1\n            else:\n                return dp[0]",
+ "ocr_data": {
+  "nodes": [
+   {
+    "node_id": 1,
+    "shape_type": "rectangle",
+    "raw_text": "Start",
+    "position": "top"
+   },
+   {
+    "node_id": 2,
+    "shape_type": "rectangle",
+    "raw_text": "Input: s (binary string)",
+    "position": "middle"
+   },
+   {
+    "node_id": 3,
+    "shape_type": "rectangle",
+    "raw_text": "Initialize pow_bank = set()",
+    "position": "middle"
+   },
+   {
+    "node_id": 4,
+    "shape_type": "rectangle",
+    "raw_text": "Loop: for i from 0 to length of s - 1",
+    "position": "middle"
+   },
+   {
+    "node_id": 5,
+    "shape_type": "rectangle",
+    "raw_text": "Add 5^i to pow_bank",
+    "position": "middle"
+   },
+   {
+    "node_id": 6,
+    "shape_type": "rectangle",
+    "raw_text": "Initialize dp = [inf, inf, ..., inf, 0] (length of s + 1)",
+    "position": "middle"
+   },
+   {
+    "node_id": 7,
+    "shape_type": "rectangle",
+    "raw_text": "Loop: for i from length of s - 1 to 0",
+    "position": "middle"
+   },
+   {
+    "node_id": 8,
+    "shape_type": "diamond",
+    "raw_text": "Is s[i] == '0'?",
+    "position": "middle"
+   },
+   {
+    "node_id": 9,
+    "shape_type": "rectangle",
+    "raw_text": "Continue to next iteration",
+    "position": "middle"
+   },
+   {
+    "node_id": 10,
+    "shape_type": "rectangle",
+    "raw_text": "Loop: for j from i to length of s - 1",
+    "position": "middle"
+   },
+   {
+    "node_id": 11,
+    "shape_type": "rectangle",
+    "raw_text": "Convert substring s[i:j+1] to decimal: dec = int(s[i:j+1], 2)",
+    "position": "middle"
+   },
+   {
+    "node_id": 12,
+    "shape_type": "diamond",
+    "raw_text": "s dec in pow_bank?",
+    "position": "middle"
+   },
+   {
+    "node_id": 13,
+    "shape_type": "rectangle",
+    "raw_text": "Update dp[j]: dp[j] = min(dp[j + 1] + 1, dp[j])",
+    "position": "middle"
+   },
+   {
+    "node_id": 14,
+    "shape_type": "diamond",
+    "raw_text": "Is dp[0] == inf?",
+    "position": "middle"
+   },
+   {
+    "node_id": 15,
+    "shape_type": "rectangle",
+    "raw_text": "Output: -1 (impossible to partition)",
+    "position": "middle"
+   },
+   {
+    "node_id": 16,
+    "shape_type": "rectangle",
+    "raw_text": "Output: dp[0] (minimum number of beautiful substrings)",
+    "position": "middle"
+   }
+  ],
+  "edges": [
+   {
+    "from_node": 1,
+    "to_node": 2,
+    "label": ""
+   },
+   {
+    "from_node": 2,
+    "to_node": 3,
+    "label": ""
+   },
+   {
+    "from_node": 3,
+    "to_node": 4,
+    "label": ""
+   },
+   {
+    "from_node": 4,
+    "to_node": 5,
+    "label": ""
+   },
+   {
+    "from_node": 4,
+    "to_node": 6,
+    "label": ""
+   },
+   {
+    "from_node": 6,
+    "to_node": 7,
+    "label": ""
+   },
+   {
+    "from_node": 7,
+    "to_node": 8,
+    "label": ""
+   },
+   {
+    "from_node": 8,
+    "to_node": 9,
+    "label": "Yes"
+   },
+   {
+    "from_node": 8,
+    "to_node": 10,
+    "label": "No"
+   },
+   {
+    "from_node": 10,
+    "to_node": 11,
+    "label": ""
+   },
+   {
+    "from_node": 11,
+    "to_node": 12,
+    "label": ""
+   },
+   {
+    "from_node": 12,
+    "to_node": 13,
+    "label": "Yes"
+   },
+   {
+    "from_node": 12,
+    "to_node": 10,
+    "label": "No"
+   },
+   {
+    "from_node": 13,
+    "to_node": 7,
+    "label": ""
+   },
+   {
+    "from_node": 7,
+    "to_node": 14,
+    "label": ""
+   },
+   {
+    "from_node": 14,
+    "to_node": 15,
+    "label": "Yes"
+   },
+   {
+    "from_node": 14,
+    "to_node": 16,
+    "label": "No"
+   }
+  ],
+  "other_text": []
+ },
+ "test_result": {},
+ "status": "completed",
+ "fixed_ilr": null,
+ "modified_code": null,
+ "ilr_fix_log": "",
+ "bug_injected": ""
+}

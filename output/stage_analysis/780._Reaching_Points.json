@@ -1,0 +1,105 @@
+{
+  "problem_id": "point_conversion",
+  "nodes": [
+    {
+      "id": 1,
+      "type": "start",
+      "label": "Start",
+      "next": 2
+    },
+    {
+      "id": 2,
+      "type": "process",
+      "label": "Input: sx, sy, tx, ty (integers)",
+      "action": "ctx['sx'] = ctx['arg0']; ctx['sy'] = ctx['arg1']; ctx['tx'] = ctx['arg2']; ctx['ty'] = ctx['arg3'];",
+      "next": 3
+    },
+    {
+      "id": 3,
+      "type": "decision",
+      "label": "Is tx >= sx and ty >= sy?",
+      "logic": "ctx['tx'] >= ctx['sx'] and ctx['ty'] >= ctx['sy']",
+      "true_next": 4,
+      "false_next": 9
+    },
+    {
+      "id": 4,
+      "type": "decision",
+      "label": "Is tx == sx?",
+      "logic": "ctx['tx'] == ctx['sx']",
+      "true_next": 6,
+      "false_next": 5
+    },
+    {
+      "id": 5,
+      "type": "decision",
+      "label": "Is ty == sy?",
+      "logic": "ctx['ty'] == ctx['sy']",
+      "true_next": 6,
+      "false_next": 8
+    },
+    {
+      "id": 6,
+      "type": "decision",
+      "label": "Is (ty - sy) % tx == 0?",
+      "logic": "(ctx['ty'] - ctx['sy']) % ctx['tx'] == 0",
+      "true_next": 10,
+      "false_next": 7
+    },
+    {
+      "id": 7,
+      "type": "decision",
+      "label": "Is (tx - sx) % ty == 0?",
+      "logic": "(ctx['tx'] - ctx['sx']) % ctx['ty'] == 0",
+      "true_next": 10,
+      "false_next": 9
+    },
+    {
+      "id": 8,
+      "type": "decision",
+      "label": "Is ty > tx?",
+      "logic": "ctx['ty'] > ctx['tx']",
+      "true_next": 11,
+      "false_next": 12
+    },
+    {
+      "id": 9,
+      "type": "end",
+      "label": "Output: False",
+      "output": "False"
+    },
+    {
+      "id": 10,
+      "type": "end",
+      "label": "Output: True",
+      "output": "True"
+    },
+    {
+      "id": 11,
+      "type": "process",
+      "label": "Update ty: ty = ty % tx",
+      "action": "ctx['ty'] = ctx['ty'] % ctx['tx'];",
+      "next": 3
+    },
+    {
+      "id": 12,
+      "type": "process",
+      "label": "Update tx: tx = tx % ty",
+      "action": "ctx['tx'] = ctx['tx'] % ctx['ty'];",
+      "next": 3
+    }
+  ],
+  "task_id": "780. Reaching Points",
+  "dataset": "MATH",
+  "result": "failed: ",
+  "code": "def reachingPoints(sx: int, sy: int, tx: int, ty: int) -> bool:\n    while tx >= sx and ty >= sy:\n        if tx == sx:\n            return ty == sy\n        if ty == sy:\n            return tx == sx\n        if tx > ty:\n            if (tx - sx) % ty == 0:\n                return True\n            tx %= ty\n        else:\n            if (ty - sy) % tx == 0:\n                return True\n            ty %= tx\n    return False",
+  "verification": {
+    "md_verdict": "ILR Error",
+    "actual_error_source": "code",
+    "ilr_verdict": "correct",
+    "code_vs_ilr": "deviates",
+    "md_correct": "no",
+    "note": "MD 错。ILR 忠实转写通过全部 9 条测试（对样本口径而言 ILR 正确），失败在代码：生成代码把 ILR 的模检查 (ty-sy)%tx==0/(tx-sx)%ty==0 擅自改成 return ty==sy / return tx==sx，偏离 ILR，导致 (1,1,1,1e9)、(1,1,1e9,1) 误判 False。另注：ILR 有未暴露的潜在缺陷——ty==sy 时节点6恒 0%tx==0→True（如 (2,2,3,2) 真值 False 而 ILR 给 True），但测试全部 sx=sy=1，整套测试通过。",
+    "evidence": "ILR 忠实转写 9/9 全过；生成代码 reachingPoints(1,1,1,1000000000)=False（期望 True），第 4 条 assert 失败（(1,1,1000000000,1) 同样 False），与 result 'failed: ' 一致"
+  }
+}

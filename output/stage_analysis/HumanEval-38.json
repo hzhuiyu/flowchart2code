@@ -1,0 +1,180 @@
+{
+  "problem_id": "encode_cyclic_decode_cyclic",
+  "functions": [
+    {
+      "name": "encode_cyclic",
+      "parameters": [
+        "s"
+      ],
+      "entry_node": 1,
+      "nodes": [
+        {
+          "id": 1,
+          "type": "start",
+          "label": "Input string s",
+          "next": 2
+        },
+        {
+          "id": 2,
+          "type": "process",
+          "label": "Split string into groups of length 3",
+          "action": "ctx['groups'] = [ctx['s'][(3 * i):min((3 * i + 3), len(ctx['s']))] for i in range((len(ctx['s']) + 2) // 3)]",
+          "next": 3
+        },
+        {
+          "id": 3,
+          "type": "decision",
+          "label": "Number of elements in each group",
+          "logic": "len(ctx['group']) == 3",
+          "true_next": 4,
+          "false_next": 5
+        },
+        {
+          "id": 4,
+          "type": "process",
+          "label": "Cycle elements within the group",
+          "action": "ctx['groups'] = [(ctx['group'][1:] + ctx['group'][0]) if len(ctx['group']) == 3 else ctx['group'] for ctx['group'] in ctx['groups']]",
+          "next": 6
+        },
+        {
+          "id": 5,
+          "type": "process",
+          "label": "Keep the original group",
+          "action": "ctx['groups'] = [(ctx['group'][1:] + ctx['group'][0]) if len(ctx['group']) == 3 else ctx['group'] for ctx['group'] in ctx['groups']]",
+          "next": 6
+        },
+        {
+          "id": 6,
+          "type": "process",
+          "label": "Join groups",
+          "action": "ctx['result'] = ''.join(ctx['groups'])",
+          "next": 7
+        },
+        {
+          "id": 7,
+          "type": "return",
+          "label": "Return encoded string",
+          "value": "ctx['result']"
+        }
+      ]
+    },
+    {
+      "name": "decode_cyclic",
+      "parameters": [
+        "s"
+      ],
+      "entry_node": 8,
+      "nodes": [
+        {
+          "id": 8,
+          "type": "start",
+          "label": "Input encoded string s",
+          "next": 9
+        },
+        {
+          "id": 9,
+          "type": "call",
+          "label": "Call encode_cyclic(encode_cyclic(s))",
+          "function_name": "encode_cyclic",
+          "arguments": [
+            "ctx['s']"
+          ],
+          "return_var": "ctx['result']",
+          "next": 10
+        },
+        {
+          "id": 10,
+          "type": "return",
+          "label": "Call encode_cyclic(encode_cyclic(s))",
+          "value": "ctx['result']"
+        }
+      ]
+    }
+  ],
+  "nodes": [
+    {
+      "id": 1,
+      "type": "start",
+      "label": "Input string s",
+      "next": 2
+    },
+    {
+      "id": 2,
+      "type": "process",
+      "label": "Split string into groups of length 3",
+      "action": "ctx['groups'] = [ctx['s'][(3 * i):min((3 * i + 3), len(ctx['s']))] for i in range((len(ctx['s']) + 2) // 3)]",
+      "next": 3
+    },
+    {
+      "id": 3,
+      "type": "decision",
+      "label": "Number of elements in each group",
+      "logic": "len(ctx['group']) == 3",
+      "true_next": 4,
+      "false_next": 5
+    },
+    {
+      "id": 4,
+      "type": "process",
+      "label": "Cycle elements within the group",
+      "action": "ctx['groups'] = [(ctx['group'][1:] + ctx['group'][0]) if len(ctx['group']) == 3 else ctx['group'] for ctx['group'] in ctx['groups']]",
+      "next": 6
+    },
+    {
+      "id": 5,
+      "type": "process",
+      "label": "Keep the original group",
+      "action": "ctx['groups'] = [(ctx['group'][1:] + ctx['group'][0]) if len(ctx['group']) == 3 else ctx['group'] for ctx['group'] in ctx['groups']]",
+      "next": 6
+    },
+    {
+      "id": 6,
+      "type": "process",
+      "label": "Join groups",
+      "action": "ctx['result'] = ''.join(ctx['groups'])",
+      "next": 7
+    },
+    {
+      "id": 7,
+      "type": "return",
+      "label": "Return encoded string",
+      "value": "ctx['result']"
+    },
+    {
+      "id": 8,
+      "type": "start",
+      "label": "Input encoded string s",
+      "next": 9
+    },
+    {
+      "id": 9,
+      "type": "call",
+      "label": "Call encode_cyclic(encode_cyclic(s))",
+      "function_name": "encode_cyclic",
+      "arguments": [
+        "ctx['s']"
+      ],
+      "return_var": "ctx['result']",
+      "next": 10
+    },
+    {
+      "id": 10,
+      "type": "return",
+      "label": "Call encode_cyclic(encode_cyclic(s))",
+      "value": "ctx['result']"
+    }
+  ],
+  "task_id": "HumanEval-38",
+  "dataset": "HumanEval-V",
+  "result": "failed: maximum recursion depth exceeded",
+  "code": "def encode_cyclic(s: str):\n    result = encode_cyclic(encode_cyclic(s))\n    return result",
+  "verification": {
+    "md_verdict": "ILR Error",
+    "actual_error_source": "both",
+    "ilr_verdict": "incorrect",
+    "code_vs_ilr": "deviates",
+    "md_correct": "partial",
+    "note": "MD 根因判对（ILR 子流程不绑定参数→KeyError('s')，encode 子图节点3引用未定义 ctx['group']，且按结构化 arguments decode 只调用一次 encode，decode(encoded)=encode²(原文)≠原文），但漏了代码问题：生成代码把解码逻辑写成 encode_cyclic 调用自身，无限递归崩溃，与 ILR 结构（decode 调 encode）完全不符。",
+    "evidence": "忠实 ILR: KeyError('s')（修复绑定后 decode('abcdefghij') 仅为单次 encode 结果≠原文）；生成代码 def encode_cyclic(s): return encode_cyclic(encode_cyclic(s)) → RecursionError，与 FAILURE RESULT 'maximum recursion depth exceeded' 一致"
+  }
+}

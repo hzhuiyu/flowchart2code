@@ -1,0 +1,40 @@
+{
+  "samples_file": "/home/zhangxu/flowchart/CodeVision/output/MATH/Qwen-Qwen3-VL-30B-A3B-Instruct-Qwen-Qwen3-VL-30B-A3B-Instruct/samples.jsonl",
+  "reflection_dir": "/home/zhangxu/flowchart/CodeVision/output/MATH/Qwen-Qwen3-VL-30B-A3B-Instruct-Qwen-Qwen3-VL-30B-A3B-Instruct/reflection",
+  "output_file": "/home/zhangxu/flowchart/CodeVision/output/MATH/Qwen-Qwen3-VL-30B-A3B-Instruct-Qwen-Qwen3-VL-30B-A3B-Instruct/reflection/samples_reflection_merged.jsonl",
+  "merged_results_file": "/home/zhangxu/flowchart/CodeVision/output/MATH/Qwen-Qwen3-VL-30B-A3B-Instruct-Qwen-Qwen3-VL-30B-A3B-Instruct/reflection/samples_reflection_merged.jsonl_results.jsonl",
+  "results_txt": "/home/zhangxu/flowchart/CodeVision/output/MATH/Qwen-Qwen3-VL-30B-A3B-Instruct-Qwen-Qwen3-VL-30B-A3B-Instruct/reflection/results.txt",
+  "problem_file": "/home/zhangxu/flowchart/CodeVision/data/MATH/MATH.jsonl",
+  "merge_summary": {
+    "total_rows": 125,
+    "replaced_rows": 18,
+    "replaced_by_first_passed": 10,
+    "replaced_by_last_failed": 8,
+    "missing_generated_code": 0,
+    "selection_stats": {
+      "keep_original": 107,
+      "first_passed": 10,
+      "iter_3_failed": 8
+    }
+  },
+  "eval_result": {
+    "pass@1": 0.936
+  },
+  "difficulty_summary": {
+    "Easy": {
+      "passed": 45.0,
+      "total": 45.0,
+      "rate": 1.0
+    },
+    "Medium": {
+      "passed": 40.0,
+      "total": 40.0,
+      "rate": 1.0
+    },
+    "Hard": {
+      "passed": 32.0,
+      "total": 40.0,
+      "rate": 0.8
+    }
+  }
+}

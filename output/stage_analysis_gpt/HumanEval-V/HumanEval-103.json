@@ -1,0 +1,149 @@
+{
+  "task_id": "HumanEval-103",
+  "dataset": "HumanEval-V",
+  "difficulty": null,
+  "title": null,
+  "result": "failed: ",
+  "ilr": "{\n  \"problem_id\": \"rounded_avg_example\",\n  \"nodes\": [\n    {\"id\": 1, \"type\": \"start\", \"label\": \"Start\", \"next\": 2},\n    {\"id\": 2, \"type\": \"process\", \"label\": \"Initialize summation = 0\", \"action\": \"ctx['n']=ctx['arg0']; ctx['m']=ctx['arg1']; ctx['summation']=0; ctx['i']=ctx['n']\", \"next\": 3},\n    {\"id\": 3, \"type\": \"decision\", \"label\": \"Check if m < n\", \"logic\": \"ctx['m'] < ctx['n']\", \"true_next\": 9, \"false_next\": 4},\n    {\"id\": 4, \"type\": \"process\", \"label\": \"For i from n to m\", \"action\": \"for ctx['i'] in range(ctx['n'], ctx['m'] + 1):\", \"next\": 5},\n    {\"id\": 5, \"type\": \"process\", \"label\": \"Add i to summation\", \"action\": \"ctx['summation'] += ctx['i']\", \"next\": 6},\n    {\"id\": 6, \"type\": \"process\", \"label\": \"End For Loop\", \"action\": \"\", \"next\": 7},\n    {\"id\": 7, \"type\": \"process\", \"label\": \"Calculate average: round(summation / (m - n + 1))\", \"action\": \"ctx['average'] = round(ctx['summation'] / (ctx['m'] - ctx['n'] + 1))\", \"next\": 8},\n    {\"id\": 8, \"type\": \"process\", \"label\": \"Convert average to binary\", \"action\": \"ctx['result'] = '0b' + str(ctx['average'])\", \"next\": 10},\n    {\"id\": 9, \"type\": \"return\", \"label\": \"Return -1\", \"value\": \"-1\"},\n    {\"id\": 10, \"type\": \"return\", \"label\": \"Return binary result\", \"value\": \"ctx['result']\"},\n    {\"id\": 11, \"type\": \"end\", \"label\": \"End\", \"output\": \"\"}\n  ]\n}",
+  "code": "def rounded_avg(n, m):\n    summation = 0\n    i = n\n    \n    if m < n:\n        return -1\n    \n    for i in range(n, m + 1):\n        summation += i\n    \n    average = round(summation / (m - n + 1))\n    result = '0b' + str(average)\n    \n    return result",
+  "prompt": "\ndef rounded_avg(n, m):\n    \"\"\"You are given two positive integers n and m, and your task is to compute the\n    average of the integers from n through m (including n and m). \n    Round the answer to the nearest integer and convert that to binary.\n    If n is greater than m, return -1.\n    Example:\n    rounded_avg(1, 5) => \"0b11\"\n    rounded_avg(7, 5) => -1\n    rounded_avg(10, 20) => \"0b1111\"\n    rounded_avg(20, 33) => \"0b11010\"\n    \"\"\"\n",
+  "test": "def check(candidate):\n\n    # Check some simple cases\n    assert candidate(1, 5) == \"0b11\"\n    assert candidate(7, 13) == \"0b1010\"\n    assert candidate(964,977) == \"0b1111001010\"\n    assert candidate(996,997) == \"0b1111100100\"\n    assert candidate(560,851) == \"0b1011000010\"\n    assert candidate(185,546) == \"0b101101110\"\n    assert candidate(362,496) == \"0b110101101\"\n    assert candidate(350,902) == \"0b1001110010\"\n    assert candidate(197,233) == \"0b11010111\"\n\n\n    # Check some edge cases that are easy to work out by hand.\n    assert candidate(7, 5) == -1\n    assert candidate(5, 1) == -1\n    assert candidate(5, 5) == \"0b101\"\n\n",
+  "ocr_data": {
+    "nodes": [
+      {
+        "node_id": 1,
+        "shape_type": "rectangle",
+        "raw_text": "Start",
+        "position": "top"
+      },
+      {
+        "node_id": 2,
+        "shape_type": "rectangle",
+        "raw_text": "Check if m < n",
+        "position": "middle"
+      },
+      {
+        "node_id": 3,
+        "shape_type": "rectangle",
+        "raw_text": "Initialize summation = 0",
+        "position": "middle"
+      },
+      {
+        "node_id": 4,
+        "shape_type": "rectangle",
+        "raw_text": "For i from n to m",
+        "position": "middle"
+      },
+      {
+        "node_id": 5,
+        "shape_type": "rectangle",
+        "raw_text": "Add i to summation",
+        "position": "middle"
+      },
+      {
+        "node_id": 6,
+        "shape_type": "rectangle",
+        "raw_text": "End For Loop",
+        "position": "middle"
+      },
+      {
+        "node_id": 7,
+        "shape_type": "rectangle",
+        "raw_text": "Calculate average: round(summation / (m - n + 1))",
+        "position": "middle"
+      },
+      {
+        "node_id": 8,
+        "shape_type": "rectangle",
+        "raw_text": "Convert average to binary",
+        "position": "middle"
+      },
+      {
+        "node_id": 9,
+        "shape_type": "rectangle",
+        "raw_text": "Return -1",
+        "position": "middle"
+      },
+      {
+        "node_id": 10,
+        "shape_type": "rectangle",
+        "raw_text": "Return binary result",
+        "position": "middle"
+      },
+      {
+        "node_id": 11,
+        "shape_type": "rectangle",
+        "raw_text": "End",
+        "position": "bottom"
+      }
+    ],
+    "edges": [
+      {
+        "from_node": 1,
+        "to_node": 2,
+        "label": ""
+      },
+      {
+        "from_node": 2,
+        "to_node": 3,
+        "label": "No"
+      },
+      {
+        "from_node": 3,
+        "to_node": 4,
+        "label": ""
+      },
+      {
+        "from_node": 4,
+        "to_node": 5,
+        "label": ""
+      },
+      {
+        "from_node": 5,
+        "to_node": 6,
+        "label": ""
+      },
+      {
+        "from_node": 6,
+        "to_node": 7,
+        "label": ""
+      },
+      {
+        "from_node": 7,
+        "to_node": 8,
+        "label": ""
+      },
+      {
+        "from_node": 8,
+        "to_node": 10,
+        "label": ""
+      },
+      {
+        "from_node": 9,
+        "to_node": 10,
+        "label": ""
+      },
+      {
+        "from_node": 10,
+        "to_node": 11,
+        "label": ""
+      },
+      {
+        "from_node": 2,
+        "to_node": 9,
+        "label": "Yes"
+      }
+    ],
+    "other_text": []
+  },
+  "analysis": {
+    "ilr_verdict": "incorrect",
+    "ilr_issues": "节点8的转换公式错误：ctx['result'] = '0b' + str(average) 只是把十进制数前加'0b'前缀，并非二进制转换，应为 bin(average)。",
+    "code_vs_ilr": "faithful",
+    "code_issues": "代码逐句忠实实现了ILR，包括错误的 '0b' + str(average) 转换，忠实执行了错误的ILR。",
+    "error_source": "ilr",
+    "ocr_contribution": "no",
+    "root_cause": "ILR 在'Convert average to binary'节点自行采用了错误的转换实现（十进制加前缀），求和与取平均逻辑均正确，代码也忠实实现，导致输出如 '0b3' 而非 '0b11'。",
+    "evidence": "rounded_avg(1,5)：求和15、平均3，ILR式代码输出 '0b3'，期望 '0b11'（bin(3)）；rounded_avg(7,13) 输出 '0b10'，期望 '0b1010'。OCR 原文仅写 'Convert average to binary'，未提供错误公式，OCR 输入尚可。"
+  }
+}

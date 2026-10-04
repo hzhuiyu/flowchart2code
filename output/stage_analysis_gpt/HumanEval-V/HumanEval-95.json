@@ -1,0 +1,253 @@
+{
+  "task_id": "HumanEval-95",
+  "dataset": "HumanEval-V",
+  "difficulty": null,
+  "title": null,
+  "result": "failed: Fourth test error: True",
+  "ilr": "{\n  \"problem_id\": \"check_dict_case\",\n  \"nodes\": [\n    {\"id\": 1, \"type\": \"start\", \"label\": \"Start\", \"next\": 2},\n    {\"id\": 2, \"type\": \"process\", \"label\": \"Input dictionary 'dict'\", \"action\": \"ctx['dict']=ctx['arg0']; ctx['state']='start';\", \"next\": 3},\n    {\"id\": 3, \"type\": \"decision\", \"label\": \"Is dict empty?\", \"logic\": \"len(ctx['dict']) == 0\", \"true_next\": 4, \"false_next\": 5},\n    {\"id\": 4, \"type\": \"return\", \"label\": \"Return False\", \"value\": \"False\"},\n    {\"id\": 5, \"type\": \"process\", \"label\": \"Initialize state = start\", \"action\": \"\", \"next\": 6},\n    {\"id\": 6, \"type\": \"process\", \"label\": \"Iterate over each key in dict\", \"action\": \"for key in ctx['dict']:\", \"next\": 7},\n    {\"id\": 7, \"type\": \"decision\", \"label\": \"Check if key is a string\", \"logic\": \"isinstance(key, str)\", \"true_next\": 8, \"false_next\": 18},\n    {\"id\": 8, \"type\": \"decision\", \"label\": \"Is state 'start'?\", \"logic\": \"ctx['state'] == 'start'\", \"true_next\": 9, \"false_next\": 14},\n    {\"id\": 9, \"type\": \"process\", \"label\": \"Check if key is upper or lower case\", \"action\": \"if key.isupper(): ctx['state'] = 'upper'; break\\nelif key.islower(): ctx['state'] = 'lower'; break\\nelse: break\", \"next\": 10},\n    {\"id\": 10, \"type\": \"process\", \"label\": \"Set state = upper\", \"action\": \"ctx['state'] = 'upper'\", \"next\": 13},\n    {\"id\": 11, \"type\": \"process\", \"label\": \"Set state = lower\", \"action\": \"ctx['state'] = 'lower'\", \"next\": 13},\n    {\"id\": 12, \"type\": \"process\", \"label\": \"Break\", \"action\": \"break\", \"next\": 13},\n    {\"id\": 13, \"type\": \"process\", \"label\": \"Check if key case matches state\", \"action\": \"\", \"next\": 14},\n    {\"id\": 14, \"type\": \"decision\", \"label\": \"Are state == 'upper' or state == 'lower'?\", \"logic\": \"ctx['state'] == 'upper' or ctx['state'] == 'lower'\", \"true_next\": 17, \"false_next\": 18},\n    {\"id\": 15, \"type\": \"process\", \"label\": \"Set state = 'mixed' and break\", \"action\": \"ctx['state'] = 'mixed'; break\", \"next\": 20},\n    {\"id\": 16, \"type\": \"process\", \"label\": \"Continue to next key\", \"action\": \"\", \"next\": 6},\n    {\"id\": 17, \"type\": \"return\", \"label\": \"Return True\", \"value\": \"True\"},\n    {\"id\": 18, \"type\": \"return\", \"label\": \"Return False\", \"value\": \"False\"},\n    {\"id\": 19, \"type\": \"end\", \"label\": \"End\", \"output\": \"\"},\n    {\"id\": 20, \"type\": \"process\", \"label\": \"Set state = 'mixed' and break\", \"action\": \"ctx['state'] = 'mixed'; break\", \"next\": 19}\n  ]\n}",
+  "code": "def check_dict_case(dict):\n    if len(dict) == 0:\n        return False\n    \n    state = 'start'\n    \n    for key in dict:\n        if isinstance(key, str):\n            if state == 'start':\n                if key.isupper():\n                    state = 'upper'\n                elif key.islower():\n                    state = 'lower'\n                else:\n                    break\n            \n            if state == 'upper' or state == 'lower':\n                if (state == 'upper' and not key.isupper()) or (state == 'lower' and not key.islower()):\n                    return False\n        else:\n            return False\n    \n    return True",
+  "prompt": "\ndef check_dict_case(dict):\n    \"\"\"\n    Given a dictionary, return True if all keys are strings in lower \n    case or all keys are strings in upper case, else return False.\n    The function should return False is the given dictionary is empty.\n    Examples:\n    check_dict_case({\"a\":\"apple\", \"b\":\"banana\"}) should return True.\n    check_dict_case({\"a\":\"apple\", \"A\":\"banana\", \"B\":\"banana\"}) should return False.\n    check_dict_case({\"a\":\"apple\", 8:\"banana\", \"a\":\"apple\"}) should return False.\n    check_dict_case({\"Name\":\"John\", \"Age\":\"36\", \"City\":\"Houston\"}) should return False.\n    check_dict_case({\"STATE\":\"NC\", \"ZIP\":\"12345\" }) should return True.\n    \"\"\"\n",
+  "test": "def check(candidate):\n\n    # Check some simple cases\n    assert candidate({\"p\":\"pineapple\", \"b\":\"banana\"}) == True, \"First test error: \" + str(candidate({\"p\":\"pineapple\", \"b\":\"banana\"}))\n    assert candidate({\"p\":\"pineapple\", \"A\":\"banana\", \"B\":\"banana\"}) == False, \"Second test error: \" + str(candidate({\"p\":\"pineapple\", \"A\":\"banana\", \"B\":\"banana\"}))\n    assert candidate({\"p\":\"pineapple\", 5:\"banana\", \"a\":\"apple\"}) == False, \"Third test error: \" + str(candidate({\"p\":\"pineapple\", 5:\"banana\", \"a\":\"apple\"}))\n    assert candidate({\"Name\":\"John\", \"Age\":\"36\", \"City\":\"Houston\"}) == False, \"Fourth test error: \" + str(candidate({\"Name\":\"John\", \"Age\":\"36\", \"City\":\"Houston\"}))\n    assert candidate({\"STATE\":\"NC\", \"ZIP\":\"12345\" }) == True, \"Fifth test error: \" + str(candidate({\"STATE\":\"NC\", \"ZIP\":\"12345\" }))      \n    assert candidate({\"fruit\":\"Orange\", \"taste\":\"Sweet\" }) == True, \"Fourth test error: \" + str(candidate({\"fruit\":\"Orange\", \"taste\":\"Sweet\" }))      \n\n\n    # Check some edge cases that are easy to work out by hand.\n    assert candidate({}) == False, \"1st edge test error: \" + str(candidate({}))\n\n",
+  "ocr_data": {
+    "nodes": [
+      {
+        "node_id": 1,
+        "shape_type": "rectangle",
+        "raw_text": "Start",
+        "position": "top"
+      },
+      {
+        "node_id": 2,
+        "shape_type": "rectangle",
+        "raw_text": "Input dictionary 'dict'",
+        "position": "middle"
+      },
+      {
+        "node_id": 3,
+        "shape_type": "diamond",
+        "raw_text": "Is dict empty?",
+        "position": "middle"
+      },
+      {
+        "node_id": 4,
+        "shape_type": "rectangle",
+        "raw_text": "Return False",
+        "position": "middle"
+      },
+      {
+        "node_id": 5,
+        "shape_type": "rectangle",
+        "raw_text": "Initialize state = start",
+        "position": "middle"
+      },
+      {
+        "node_id": 6,
+        "shape_type": "rectangle",
+        "raw_text": "Iterate over each key in dict",
+        "position": "middle"
+      },
+      {
+        "node_id": 7,
+        "shape_type": "rectangle",
+        "raw_text": "Check if key is a string",
+        "position": "middle"
+      },
+      {
+        "node_id": 8,
+        "shape_type": "rectangle",
+        "raw_text": "Set state = 'mixed' and break",
+        "position": "middle"
+      },
+      {
+        "node_id": 9,
+        "shape_type": "diamond",
+        "raw_text": "Is state 'start'?",
+        "position": "middle"
+      },
+      {
+        "node_id": 10,
+        "shape_type": "rectangle",
+        "raw_text": "Check if key is upper or lower case",
+        "position": "middle"
+      },
+      {
+        "node_id": 11,
+        "shape_type": "rectangle",
+        "raw_text": "Set state = upper",
+        "position": "bottom"
+      },
+      {
+        "node_id": 12,
+        "shape_type": "rectangle",
+        "raw_text": "Set state = lower",
+        "position": "bottom"
+      },
+      {
+        "node_id": 13,
+        "shape_type": "rectangle",
+        "raw_text": "Break",
+        "position": "bottom"
+      },
+      {
+        "node_id": 14,
+        "shape_type": "rectangle",
+        "raw_text": "Check if key case matches state",
+        "position": "middle"
+      },
+      {
+        "node_id": 15,
+        "shape_type": "rectangle",
+        "raw_text": "Set state = 'mixed' and break",
+        "position": "middle"
+      },
+      {
+        "node_id": 16,
+        "shape_type": "diamond",
+        "raw_text": "Are state == 'upper' or state == 'lower'?",
+        "position": "middle"
+      },
+      {
+        "node_id": 17,
+        "shape_type": "rectangle",
+        "raw_text": "Return True",
+        "position": "middle"
+      },
+      {
+        "node_id": 18,
+        "shape_type": "rectangle",
+        "raw_text": "Return False",
+        "position": "middle"
+      },
+      {
+        "node_id": 19,
+        "shape_type": "rectangle",
+        "raw_text": "End",
+        "position": "bottom"
+      },
+      {
+        "node_id": 20,
+        "shape_type": "rectangle",
+        "raw_text": "Continue to next key",
+        "position": "bottom"
+      }
+    ],
+    "edges": [
+      {
+        "from_node": 1,
+        "to_node": 2,
+        "label": ""
+      },
+      {
+        "from_node": 2,
+        "to_node": 3,
+        "label": ""
+      },
+      {
+        "from_node": 3,
+        "to_node": 4,
+        "label": "Yes"
+      },
+      {
+        "from_node": 3,
+        "to_node": 5,
+        "label": "No"
+      },
+      {
+        "from_node": 5,
+        "to_node": 6,
+        "label": ""
+      },
+      {
+        "from_node": 6,
+        "to_node": 7,
+        "label": "Yes"
+      },
+      {
+        "from_node": 6,
+        "to_node": 16,
+        "label": "No"
+      },
+      {
+        "from_node": 7,
+        "to_node": 8,
+        "label": "No"
+      },
+      {
+        "from_node": 7,
+        "to_node": 9,
+        "label": "Yes"
+      },
+      {
+        "from_node": 9,
+        "to_node": 10,
+        "label": "Yes"
+      },
+      {
+        "from_node": 9,
+        "to_node": 14,
+        "label": "No"
+      },
+      {
+        "from_node": 10,
+        "to_node": 11,
+        "label": "Upper"
+      },
+      {
+        "from_node": 10,
+        "to_node": 12,
+        "label": "Lower"
+      },
+      {
+        "from_node": 10,
+        "to_node": 13,
+        "label": "Neither"
+      },
+      {
+        "from_node": 14,
+        "to_node": 15,
+        "label": "No"
+      },
+      {
+        "from_node": 14,
+        "to_node": 20,
+        "label": "Yes"
+      },
+      {
+        "from_node": 16,
+        "to_node": 17,
+        "label": "Yes"
+      },
+      {
+        "from_node": 16,
+        "to_node": 18,
+        "label": "No"
+      },
+      {
+        "from_node": 17,
+        "to_node": 19,
+        "label": ""
+      },
+      {
+        "from_node": 18,
+        "to_node": 19,
+        "label": ""
+      },
+      {
+        "from_node": 20,
+        "to_node": 6,
+        "label": ""
+      }
+    ],
+    "other_text": []
+  },
+  "analysis": {
+    "ilr_verdict": "incorrect",
+    "ilr_issues": "ILR把'设upper/设lower/Neither'三分支（节点10/11/12）全部连到节点13再连到状态判断14，而14的true直接Return True，且节点9之后无条件执行节点10(state='upper')；结果处理完第一个字符串key后必然state='upper'并立即返回True（如{\"p\",\"A\"}→True，期望False）；节点15/16/20不可达，循环无法正常继续。",
+    "code_vs_ilr": "deviates",
+    "code_issues": "代码偏离了该ILR：完整循环所有key并检查后续key与state的大小写一致性（更接近标准实现），但自带致命bug——start状态下遇到既非全大写也非全小写的key（如'Name'）时break出循环后无条件return True，而此时state仍为'start'应返回False。",
+    "error_source": "both",
+    "ocr_contribution": "yes",
+    "root_cause": "OCR丢失了#8/#11/#12/#13四个节点的出边（这些节点明显需要出边），ILR据此错误接线成'处理一个key即返回True'的流程；代码虽重写为接近正确的状态机（偏离ILR），却在'非大写非小写即break'后错误地return True，第4个测试失败，两边独立致错。",
+    "evidence": "ILR模拟执行{\"Name\":\"John\",...}返回True（期望False）；生成代码在第4个测试{\"Name\":\"John\",\"Age\":\"36\",\"City\":\"Houston\"}上返回True，与FAILURE RESULT'Fourth test error: True'一致。"
+  }
+}

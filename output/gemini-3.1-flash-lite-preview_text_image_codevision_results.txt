@@ -1,0 +1,8 @@
+CodeVision Combined Results
+Experiment: gemini-3.1-flash-lite-preview_text_image
+
+Algorithm    : 138/149
+HumanEval-V  : 160/164
+MATH         : 106/125
+--------------------------------
+Total        : 404/438 = 0.9223744292237442

@@ -1,0 +1,60 @@
+{
+  "problem_id": "numberOfSets",
+  "nodes": [
+    {
+      "id": 1,
+      "type": "start",
+      "label": "Start",
+      "next": 2
+    },
+    {
+      "id": 2,
+      "type": "process",
+      "label": "Input: maxDistance = arg0, n = arg1, roads = arg2; ans = 0",
+      "action": "ctx['maxDistance'] = ctx['arg0']; ctx['n'] = ctx['arg1']; ctx['roads'] = ctx['arg2']; ctx['ans'] = 0",
+      "next": 3
+    },
+    {
+      "id": 3,
+      "type": "process",
+      "label": "Initialize bitmask i = 0",
+      "action": "ctx['i'] = 0",
+      "next": 4
+    },
+    {
+      "id": 4,
+      "type": "decision",
+      "label": "Is i < 2^n?",
+      "logic": "ctx['i'] < (1 << ctx['n'])",
+      "true_next": 5,
+      "false_next": 21
+    },
+    {
+      "id": 5,
+      "type": "process",
+      "label": "Build graph g over active branches (bit 0 in i): diag 0, min edge weight per road pair",
+      "action": "ctx['g'] = [[float('inf')] * ctx['n'] for _ in range(ctx['n'])]\nfor a in range(ctx['n']):\n    ctx['g'][a][a] = 0\nfor r in ctx['roads']:\n    if (ctx['i'] >> r[0] & 1) == 0 and (ctx['i'] >> r[1] & 1) == 0:\n        if r[2] < ctx['g'][r[0]][r[1]]:\n            ctx['g'][r[0]][r[1]] = r[2]\n            ctx['g'][r[1]][r[0]] = r[2]",
+      "next": 9
+    },
+    {
+      "id": 9,
+      "type": "process",
+      "label": "Floyd-Warshall shortest paths on g",
+      "action": "for k in range(ctx['n']):\n    for a in range(ctx['n']):\n        for b in range(ctx['n']):\n            if ctx['g'][a][k] + ctx['g'][k][b] < ctx['g'][a][b]:\n                ctx['g'][a][b] = ctx['g'][a][k] + ctx['g'][k][b]",
+      "next": 11
+    },
+    {
+      "id": 11,
+      "type": "process",
+      "label": "Check all active pairs within maxDistance; if ok increment ans; advance bitmask",
+      "action": "ctx['ok'] = 1\nfor a in range(ctx['n']):\n    for b in range(ctx['n']):\n        if (ctx['i'] >> a & 1) == 0 and (ctx['i'] >> b & 1) == 0 and ctx['g'][a][b] > ctx['maxDistance']:\n            ctx['ok'] = 0\nif ctx['ok'] == 1:\n    ctx['ans'] += 1\nctx['i'] += 1",
+      "next": 4
+    },
+    {
+      "id": 21,
+      "type": "end",
+      "label": "Output: ans (total number of valid sets)",
+      "output": "ctx['ans']"
+    }
+  ]
+}

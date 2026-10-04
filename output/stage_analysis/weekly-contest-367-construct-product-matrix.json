@@ -1,0 +1,142 @@
+{
+  "problem_id": "constructProductMatrix",
+  "nodes": [
+    {
+      "id": 1,
+      "type": "start",
+      "label": "Start",
+      "next": 2
+    },
+    {
+      "id": 2,
+      "type": "process",
+      "label": "Input: grid (2D list of integers)",
+      "action": "ctx['grid'] = ctx['arg0']; ctx['n'] = len(ctx['grid']); ctx['m'] = len(ctx['grid'][0]); ctx['zeroCount'] = 0; ctx['total'] = 1; ctx['i'] = 0",
+      "next": 3
+    },
+    {
+      "id": 3,
+      "type": "decision",
+      "label": "For i in range(n)",
+      "logic": "ctx['i'] < ctx['n']",
+      "true_next": 4,
+      "false_next": 12
+    },
+    {
+      "id": 4,
+      "type": "process",
+      "label": "For j in range(m)",
+      "action": "ctx['j'] = 0",
+      "next": 5
+    },
+    {
+      "id": 5,
+      "type": "decision",
+      "label": "Is grid[i][j] == 0?",
+      "logic": "ctx['grid'][ctx['i']][ctx['j']] == 0",
+      "true_next": 6,
+      "false_next": 7
+    },
+    {
+      "id": 6,
+      "type": "process",
+      "label": "Increment zeroCount",
+      "action": "ctx['zeroCount'] += 1",
+      "next": 4
+    },
+    {
+      "id": 7,
+      "type": "process",
+      "label": "Update total = total * grid[i][j]",
+      "action": "ctx['total'] = (ctx['total'] * ctx['grid'][ctx['i']][ctx['j']]) % 12345",
+      "next": 4
+    },
+    {
+      "id": 8,
+      "type": "decision",
+      "label": "For i in range(n)",
+      "logic": "ctx['i'] < ctx['n']",
+      "true_next": 9,
+      "false_next": 12
+    },
+    {
+      "id": 9,
+      "type": "process",
+      "label": "For j in range(m)",
+      "action": "ctx['j'] = 0",
+      "next": 10
+    },
+    {
+      "id": 10,
+      "type": "decision",
+      "label": "Is zeroCount > 1?",
+      "logic": "ctx['zeroCount'] > 1",
+      "true_next": 11,
+      "false_next": 13
+    },
+    {
+      "id": 11,
+      "type": "process",
+      "label": "Set grid[i][j] = 0",
+      "action": "ctx['grid'][ctx['i']][ctx['j']] = 0",
+      "next": 9
+    },
+    {
+      "id": 12,
+      "type": "decision",
+      "label": "Is zeroCount == 1?",
+      "logic": "ctx['zeroCount'] == 1",
+      "true_next": 14,
+      "false_next": 15
+    },
+    {
+      "id": 13,
+      "type": "decision",
+      "label": "Is grid[i][j] != 0?",
+      "logic": "ctx['grid'][ctx['i']][ctx['j']] != 0",
+      "true_next": 16,
+      "false_next": 17
+    },
+    {
+      "id": 14,
+      "type": "process",
+      "label": "Set grid[i][j] = (total // grid[i][j]) % 12345",
+      "action": "ctx['grid'][ctx['i']][ctx['j']] = (ctx['total'] // ctx['grid'][ctx['i']][ctx['j']]) % 12345",
+      "next": 9
+    },
+    {
+      "id": 15,
+      "type": "process",
+      "label": "Set grid[i][j] = total % 12345",
+      "action": "ctx['grid'][ctx['i']][ctx['j']] = ctx['total'] % 12345",
+      "next": 9
+    },
+    {
+      "id": 16,
+      "type": "process",
+      "label": "Set grid[i][j] = 0",
+      "action": "ctx['grid'][ctx['i']][ctx['j']] = 0",
+      "next": 9
+    },
+    {
+      "id": 17,
+      "type": "process",
+      "label": "Set grid[i][j] = total % 12345",
+      "action": "ctx['grid'][ctx['i']][ctx['j']] = ctx['total'] % 12345",
+      "next": 9
+    }
+  ],
+  "task_id": "weekly-contest-367-construct-product-matrix",
+  "dataset": "Algorithm",
+  "result": "failed: ",
+  "code": "class Solution:\n    def constructProductMatrix(self, grid: List[List[int]]) -> List[List[int]]:\n        n = len(grid)\n        m = len(grid[0])\n        zero_count = 0\n        total = 1\n        i = 0\n        \n        # First pass: count zeros and calculate product of all non-zero elements\n        for i in range(n):\n            for j in range(m):\n                if grid[i][j] == 0:\n                    zero_count += 1\n                else:\n                    total = (total * grid[i][j]) % 12345\n        \n        # Second pass: assign values based on zero count\n        for i in range(n):\n            for j in range(m):\n                if zero_count > 1:\n                    grid[i][j] = 0\n                elif zero_count == 1:\n                    if grid[i][j] == 0:\n                        grid[i][j] = total % 12345\n                    else:\n                        grid[i][j] = (total // grid[i][j]) % 12345\n                else:\n                    grid[i][j] = total % 12345\n        \n        return grid",
+  "verification": {
+    "md_verdict": "ILR Error",
+    "actual_error_source": "ilr",
+    "ilr_verdict": "incorrect",
+    "code_vs_ilr": "deviates",
+    "md_correct": "yes",
+    "note": "ILR 两处内层循环均无 j 递增且 node6/node7 直接指回重置 j=0 的 node4（死循环），也没有任何输出/结束节点；代码补全 for 循环后才可运行，但沿用 ILR 的错误赋值逻辑：无零时把 total 写进每个格子、单零时对已取模的 total 做 total//grid 整除，均为 ILR 自身的算法错误。",
+    "evidence": "忠实执行 ILR：[[1,2],[3,4]] → 死循环。生成代码对 [[1,2],[3,4]] 返回 [[24,24],[24,24]]（期望 [[24,12],[8,6]]），[[12345],[2],[1]] 返回 [[0],[0],[0]]（期望 [[2],[0],[0]]），100 测试 0 过。"
+  }
+}

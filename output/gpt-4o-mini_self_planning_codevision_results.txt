@@ -1,0 +1,8 @@
+CodeVision Combined Results
+Experiment: gpt-4o-mini_self_planning
+
+Algorithm    : 86/149
+HumanEval-V  : 147/164
+MATH         : 87/125
+--------------------------------
+Total        : 320/438 = 0.730593607305936

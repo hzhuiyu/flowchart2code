@@ -1,0 +1,109 @@
+{
+  "problem_id": "anagram_count",
+  "nodes": [
+    {
+      "id": 1,
+      "type": "start",
+      "label": "Start",
+      "next": 2
+    },
+    {
+      "id": 2,
+      "type": "process",
+      "label": "Input: s (string)",
+      "action": "ctx['s'] = ctx['arg0']; ctx['ways'] = 1; ctx['MOD'] = 10**9 + 7",
+      "next": 3
+    },
+    {
+      "id": 3,
+      "type": "process",
+      "label": "Split s into words",
+      "action": "ctx['words'] = ctx['s'].split(' ')",
+      "next": 4
+    },
+    {
+      "id": 4,
+      "type": "decision",
+      "label": "For each word in words",
+      "logic": "len(ctx['words']) > 0",
+      "true_next": 5,
+      "false_next": 13
+    },
+    {
+      "id": 5,
+      "type": "process",
+      "label": "Calculate fact = factorial(len(word))",
+      "action": "ctx['fact'] = 1; for i in range(1, len(ctx['word']) + 1): ctx['fact'] *= i",
+      "next": 6
+    },
+    {
+      "id": 6,
+      "type": "process",
+      "label": "Initialize hashmap = {}",
+      "action": "ctx['hashmap'] = {}",
+      "next": 7
+    },
+    {
+      "id": 7,
+      "type": "decision",
+      "label": "For each character in word",
+      "logic": "len(ctx['word']) > 0",
+      "true_next": 8,
+      "false_next": 10
+    },
+    {
+      "id": 8,
+      "type": "process",
+      "label": "Update hashmap: hashmap[char] = hashmap.get(char, 0) + 1",
+      "action": "ctx['hashmap'][ctx['char']] = ctx['hashmap'].get(ctx['char'], 0) + 1",
+      "next": 7
+    },
+    {
+      "id": 9,
+      "type": "decision",
+      "label": "For each value in hashmap.values()",
+      "logic": "len(ctx['hashmap']) > 0",
+      "true_next": 11,
+      "false_next": 12
+    },
+    {
+      "id": 10,
+      "type": "return",
+      "label": "Return fact",
+      "value": "ctx['fact']"
+    },
+    {
+      "id": 11,
+      "type": "process",
+      "label": "Update fact: fact //= factorial(value)",
+      "action": "ctx['fact'] //= ctx['factorial'](ctx['value'])",
+      "next": 9
+    },
+    {
+      "id": 12,
+      "type": "return",
+      "label": "Return fact",
+      "value": "ctx['fact']"
+    },
+    {
+      "id": 13,
+      "type": "process",
+      "label": "Update ways *= fact",
+      "action": "ctx['ways'] = (ctx['ways'] * ctx['fact']) % ctx['MOD']",
+      "next": 4
+    }
+  ],
+  "task_id": "2514. Count Anagrams",
+  "dataset": "MATH",
+  "result": "timed out",
+  "code": "def countAnagrams(s: str) -> int:\n    s = s\n    ways = 1\n    MOD = 10**9 + 7\n    words = s.split(' ')\n    \n    for word in words:\n        fact = 1\n        for i in range(1, len(word) + 1):\n            fact *= i\n        \n        hashmap = {}\n        for char in word:\n            hashmap[char] = hashmap.get(char, 0) + 1\n        \n        for value in hashmap.values():\n            fact //= factorial(value)\n        \n        ways = (ways * fact) % MOD\n    \n    return ways\n\ndef factorial(n):\n    if n <= 1:\n        return 1\n    result = 1\n    for i in range(2, n + 1):\n        result *= i\n    return result",
+  "verification": {
+    "md_verdict": "ILR Error",
+    "actual_error_source": "code",
+    "ilr_verdict": "incorrect",
+    "code_vs_ilr": "deviates",
+    "md_correct": "no",
+    "note": "真实失败原因是代码超时而非 ILR：生成代码数学上完全正确（len! / 各字符count! 再取模），实跑全部断言通过，但 'a'*100000 一项就要约 8.3 秒（用 Python 循环两次构造 10 万的阶乘再做bigint除法），在原评测时限内 timed out。ILR 图其实也接错了线（节点7 false 边指向节点10 'Return fact'，使除以字符阶乘的 9/11/12 循环环不可达），忠实执行会得 'too hot'→36（期望18），但生成代码没有沿用这个错误而是按流程图意图补全了除法循环，因此 MD 归因为 ILR Error 不成立。",
+    "evidence": "生成代码实跑全部测试 PASS；计时：countAnagrams('a'*100000) 耗时 8.33s、大测试2 耗时 2.14s，合计超时限，与记录的 'timed out' 一致。按 ILR 图忠实执行（7-false→10）：'too hot'→36、'aa'→2，均错——但该错误未被代码继承。"
+  }
+}

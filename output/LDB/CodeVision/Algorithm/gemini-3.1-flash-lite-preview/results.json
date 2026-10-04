@@ -1,0 +1,1050 @@
+{
+  "pass@1": 0.9932885906040269,
+  "passed": 148,
+  "total": 149,
+  "results": [
+    {
+      "task_id": "weekly-contest-381-minimum-number-of-pushes-to-type-word-i",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "biweekly-contest-122-divide-an-array-into-subarrays-with-minimum-cost-i",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "weekly-contest-380-count-elements-with-maximum-frequency",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "weekly-contest-379-maximum-area-of-longest-diagonal-rectangle",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "biweekly-contest-121-smallest-missing-integer-greater-than-sequential-prefix-sum",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "weekly-contest-378-check-if-bitwise-or-has-trailing-zeros",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "weekly-contest-377-minimum-number-game",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "biweekly-contest-120-count-the-number-of-incremovable-subarrays-i",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "weekly-contest-376-find-missing-and-repeated-values",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "weekly-contest-375-count-tested-devices-after-test-operations",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "biweekly-contest-119-find-common-elements-between-two-arrays",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "weekly-contest-374-find-the-peaks",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "weekly-contest-373-matrix-similarity-after-cyclic-shifts",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "biweekly-contest-118-find-words-containing-character",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "weekly-contest-372-make-three-strings-equal",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "weekly-contest-371-maximum-strong-pair-xor-i",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "biweekly-contest-117-distribute-candies-among-children-i",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "weekly-contest-370-find-champion-i",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "weekly-contest-369-find-the-k-or-of-an-array",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "biweekly-contest-116-subarrays-distinct-element-sum-of-squares-i",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "weekly-contest-368-minimum-sum-of-mountain-triplets-i",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "weekly-contest-367-find-indices-with-index-and-value-difference-i",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "biweekly-contest-115-last-visited-integers",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "weekly-contest-366-divisible-and-non-divisible-sums-difference",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "weekly-contest-365-maximum-value-of-an-ordered-triplet-i",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "biweekly-contest-114-minimum-operations-to-collect-elements",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "weekly-contest-364-maximum-odd-binary-number",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "weekly-contest-363-sum-of-values-at-indices-with-k-set-bits",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "biweekly-contest-113-minimum-right-shifts-to-sort-the-array",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "weekly-contest-362-points-that-intersect-with-cars",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "weekly-contest-361-count-symmetric-integers",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "biweekly-contest-112-check-if-strings-can-be-made-equal-with-operations-i",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "weekly-contest-360-furthest-point-from-origin",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "weekly-contest-359-check-if-a-string-is-an-acronym-of-words",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "biweekly-contest-111-count-pairs-whose-sum-is-less-than-target",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "weekly-contest-358-max-pair-sum-in-an-array",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "weekly-contest-357-faulty-keyboard",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "biweekly-contest-110-account-balance-after-rounded-purchase",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "weekly-contest-356-number-of-employees-who-met-the-target",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "weekly-contest-355-split-strings-by-separator",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "biweekly-contest-109-check-if-array-is-good",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "weekly-contest-354-sum-of-squares-of-special-elements",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "weekly-contest-353-find-the-maximum-achievable-number",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "biweekly-contest-108-longest-alternating-subarray",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "weekly-contest-352-longest-even-odd-subarray-with-threshold",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "weekly-contest-381-count-the-number-of-houses-at-a-certain-distance-i",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "weekly-contest-381-minimum-number-of-pushes-to-type-word-ii",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "biweekly-contest-122-find-if-array-can-be-sorted",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "biweekly-contest-122-minimize-length-of-array-using-operations",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "weekly-contest-379-minimum-moves-to-capture-the-queen",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "weekly-contest-379-maximum-size-of-a-set-after-removals",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "biweekly-contest-121-minimum-number-of-operations-to-make-array-xor-equal-to-k",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "biweekly-contest-121-minimum-number-of-operations-to-make-x-and-y-equal",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "weekly-contest-378-find-longest-special-substring-that-occurs-thrice-i",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "weekly-contest-378-find-longest-special-substring-that-occurs-thrice-ii",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "weekly-contest-377-maximum-square-area-by-removing-fences-from-a-field",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "biweekly-contest-120-find-polygon-with-the-largest-perimeter",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "weekly-contest-376-divide-array-into-arrays-with-max-difference",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "weekly-contest-376-minimum-cost-to-make-array-equalindromic",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "weekly-contest-375-double-modular-exponentiation",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "weekly-contest-375-count-subarrays-where-max-element-appears-at-least-k-times",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "biweekly-contest-119-remove-adjacent-almost-equal-characters",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "biweekly-contest-119-length-of-longest-subarray-with-at-most-k-frequency",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "weekly-contest-374-minimum-number-of-coins-to-be-added",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "weekly-contest-373-count-beautiful-substrings-i",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "weekly-contest-373-make-lexicographically-smallest-array-by-swapping-elements",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "biweekly-contest-118-maximize-area-of-square-hole-in-grid",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "biweekly-contest-118-minimum-number-of-coins-for-fruits",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "weekly-contest-372-separate-black-and-white-balls",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "weekly-contest-372-maximum-xor-product",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "weekly-contest-371-minimum-operations-to-maximize-last-elements-in-arrays",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "biweekly-contest-117-distribute-candies-among-children-ii",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "biweekly-contest-117-number-of-strings-which-can-be-rearranged-to-contain-substring",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "weekly-contest-370-find-champion-ii",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "weekly-contest-369-minimum-equal-sum-of-two-arrays-after-replacing-zeros",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "weekly-contest-369-minimum-increment-operations-to-make-array-beautiful",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "biweekly-contest-116-minimum-number-of-changes-to-make-binary-string-beautiful",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "biweekly-contest-116-length-of-the-longest-subsequence-that-sums-to-target",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "weekly-contest-368-minimum-sum-of-mountain-triplets-ii",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "weekly-contest-368-minimum-number-of-groups-to-create-a-valid-assignment",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "weekly-contest-367-construct-product-matrix",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "biweekly-contest-115-longest-unequal-adjacent-groups-subsequence-i",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "weekly-contest-366-minimum-processing-time",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "weekly-contest-365-maximum-value-of-an-ordered-triplet-ii",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "weekly-contest-365-minimum-size-subarray-in-infinite-array",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "biweekly-contest-114-minimum-number-of-operations-to-make-array-empty",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "biweekly-contest-114-split-array-into-maximum-number-of-subarrays",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "weekly-contest-364-beautiful-towers-i",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "weekly-contest-363-happy-students",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "biweekly-contest-113-minimum-array-length-after-pair-removals",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "biweekly-contest-113-count-pairs-of-points-with-distance-k",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "weekly-contest-362-determine-if-a-cell-is-reachable-at-a-given-time",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "weekly-contest-361-minimum-operations-to-make-a-special-number",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "weekly-contest-361-count-of-interesting-subarrays",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "biweekly-contest-112-check-if-strings-can-be-made-equal-with-operations-ii",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "biweekly-contest-112-maximum-sum-of-almost-unique-subarray",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "weekly-contest-360-find-the-minimum-possible-sum-of-a-beautiful-array",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "weekly-contest-359-determine-the-minimum-sum-of-a-k-avoiding-array",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "weekly-contest-359-maximize-the-profit-as-the-salesman",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "weekly-contest-359-find-the-longest-equal-subarray",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "biweekly-contest-111-make-string-a-subsequence-using-cyclic-increments",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "biweekly-contest-111-sorting-three-groups",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "weekly-contest-358-minimum-absolute-difference-between-elements-with-constraint",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "weekly-contest-357-check-if-it-is-possible-to-split-array",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "biweekly-contest-110-minimum-seconds-to-equalize-a-circular-array",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "weekly-contest-356-count-complete-subarrays-in-an-array",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "weekly-contest-355-largest-element-in-an-array-after-merge-operations",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "biweekly-contest-109-sort-vowels-in-a-string",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "biweekly-contest-109-visit-array-positions-to-maximize-score",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "biweekly-contest-109-ways-to-express-an-integer-as-sum-of-powers",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "weekly-contest-354-maximum-beauty-of-an-array-after-applying-operation",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "weekly-contest-354-minimum-index-of-a-valid-split",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "weekly-contest-353-maximum-number-of-jumps-to-reach-the-last-index",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "weekly-contest-353-longest-non-decreasing-subarray-from-two-arrays",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "weekly-contest-353-apply-operations-to-make-all-array-elements-equal-to-zero",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "biweekly-contest-108-relocate-marbles",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "biweekly-contest-108-partition-string-into-minimum-beautiful-substrings",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "biweekly-contest-108-number-of-black-blocks",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "weekly-contest-352-prime-pairs-with-target-sum",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "weekly-contest-352-continuous-subarrays",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "biweekly-contest-122-divide-an-array-into-subarrays-with-minimum-cost-ii",
+      "passed": false,
+      "test_results": "failed: ",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "biweekly-contest-121-count-the-number-of-powerful-integers",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "biweekly-contest-120-count-the-number-of-incremovable-subarrays-ii",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "weekly-contest-376-apply-operations-to-maximize-frequency-score",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "weekly-contest-375-count-the-number-of-good-partitions",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "biweekly-contest-119-number-of-possible-sets-of-closing-branches",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "weekly-contest-374-count-complete-substrings",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "weekly-contest-373-count-beautiful-substrings-ii",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "biweekly-contest-118-find-maximum-non-decreasing-array-length",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "weekly-contest-371-maximum-strong-pair-xor-ii",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "biweekly-contest-117-maximum-spending-after-buying-items",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "weekly-contest-370-maximum-balanced-subsequence-sum",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "weekly-contest-369-maximum-points-after-collecting-coins-from-all-nodes",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "biweekly-contest-115-count-of-sub-multisets-with-bounded-sum",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "weekly-contest-366-apply-operations-on-array-to-maximize-sum-of-squares",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "biweekly-contest-114-maximum-number-of-k-divisible-components",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "weekly-contest-363-maximum-element-sum-of-a-complete-subset-of-indices",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "biweekly-contest-113-minimum-edge-reversals-so-every-node-is-reachable",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "weekly-contest-362-string-transformation",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "biweekly-contest-112-count-k-subsequences-of-a-string-with-maximum-beauty",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "weekly-contest-360-minimum-operations-to-form-subsequence-with-target-sum",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "weekly-contest-360-maximize-value-of-function-in-a-ball-passing-game",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "biweekly-contest-111-number-of-beautiful-integers-in-the-range",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "weekly-contest-357-maximum-elegance-of-a-k-length-subsequence",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "biweekly-contest-110-minimum-time-to-make-array-sum-at-most-x",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "weekly-contest-355-maximum-number-of-groups-with-increasing-length",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "weekly-contest-355-count-paths-that-can-form-a-palindrome-in-a-tree",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "weekly-contest-354-length-of-the-longest-valid-substring",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    },
+    {
+      "task_id": "weekly-contest-352-sum-of-imbalance-numbers-of-all-subarrays",
+      "passed": true,
+      "test_results": "passed",
+      "metadata": {},
+      "difficulty": null
+    }
+  ]
+}

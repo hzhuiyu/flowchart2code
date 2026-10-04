@@ -1,0 +1,40 @@
+{
+  "samples_file": "output/Algorithm/gpt-5-nano-gpt-5-nano/samples.jsonl",
+  "reflection_dir": "output/Algorithm/gpt-5-nano-gpt-5-nano/reflection",
+  "output_file": "output/Algorithm/gpt-5-nano-gpt-5-nano/reflection/samples_reflection_merged.jsonl",
+  "merged_results_file": "output/Algorithm/gpt-5-nano-gpt-5-nano/reflection/samples_reflection_merged.jsonl_results.jsonl",
+  "results_txt": "output/Algorithm/gpt-5-nano-gpt-5-nano/reflection/results.txt",
+  "problem_file": "data/Algorithm/Algorithm.jsonl",
+  "merge_summary": {
+    "total_rows": 149,
+    "replaced_rows": 10,
+    "replaced_by_first_passed": 8,
+    "replaced_by_last_failed": 2,
+    "missing_generated_code": 0,
+    "selection_stats": {
+      "keep_original": 139,
+      "first_passed": 8,
+      "iter_3_failed": 2
+    }
+  },
+  "eval_result": {
+    "pass@1": 0.9865771812080537
+  },
+  "difficulty_summary": {
+    "Easy": {
+      "passed": 45.0,
+      "total": 45.0,
+      "rate": 1.0
+    },
+    "Medium": {
+      "passed": 75.0,
+      "total": 75.0,
+      "rate": 1.0
+    },
+    "Hard": {
+      "passed": 27.0,
+      "total": 29.0,
+      "rate": 0.9310344827586207
+    }
+  }
+}

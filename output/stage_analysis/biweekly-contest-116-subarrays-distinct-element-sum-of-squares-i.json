@@ -1,0 +1,75 @@
+{
+  "problem_id": "sumCounts",
+  "nodes": [
+    {
+      "id": 1,
+      "type": "start",
+      "label": "Start",
+      "next": 2
+    },
+    {
+      "id": 2,
+      "type": "process",
+      "label": "Input: nums (List[int])",
+      "action": "ctx['nums'] = ctx['arg0']; ctx['n'] = len(ctx['nums']); ctx['result'] = 0; ctx['i'] = 0",
+      "next": 3
+    },
+    {
+      "id": 3,
+      "type": "decision",
+      "label": "For i in range(0, n)",
+      "logic": "ctx['i'] < ctx['n']",
+      "true_next": 4,
+      "false_next": 6
+    },
+    {
+      "id": 4,
+      "type": "process",
+      "label": "Initialize set s = {}",
+      "action": "ctx['s'] = set(); ctx['j'] = ctx['i']",
+      "next": 5
+    },
+    {
+      "id": 5,
+      "type": "decision",
+      "label": "For j in range(i, n)",
+      "logic": "ctx['j'] < ctx['n']",
+      "true_next": 7,
+      "false_next": 8
+    },
+    {
+      "id": 7,
+      "type": "process",
+      "label": "Add nums[j] to set s",
+      "action": "ctx['s'].add(ctx['nums'][ctx['j']]); ctx['j'] += 1",
+      "next": 9
+    },
+    {
+      "id": 9,
+      "type": "process",
+      "label": "Update result: result += len(s) ^ 2",
+      "action": "ctx['result'] += len(ctx['s']) ** 2",
+      "next": 5
+    },
+    {
+      "id": 8,
+      "type": "process",
+      "label": "Update result: result += len(s) ^ 2",
+      "action": "ctx['result'] += len(ctx['s']) ** 2",
+      "next": 3
+    }
+  ],
+  "task_id": "biweekly-contest-116-subarrays-distinct-element-sum-of-squares-i",
+  "dataset": "Algorithm",
+  "result": "failed: ",
+  "code": "class Solution:\n    def sumCounts(self, nums: List[int]) -> int:\n        n = len(nums)\n        result = 0\n        i = 0\n        \n        while i < n:\n            s = set()\n            j = i\n            \n            while j < n:\n                s.add(nums[j])\n                j += 1\n            \n            result += len(s) ** 2\n            i += 1\n        \n        return result",
+  "verification": {
+    "md_verdict": "ILR Error",
+    "actual_error_source": "both",
+    "ilr_verdict": "incorrect",
+    "code_vs_ilr": "deviates",
+    "md_correct": "partial",
+    "note": "ILR 自身不可执行：任何节点都没有 i+=1（外层死循环），node3 的 false_next=6 指向不存在的节点（OCR 的 Output: result 丢失）；且 node8 在 j 循环外多加一次 len(s)^2，即使补上 i 自增也每组测试都错（100/100）。生成代码则把 node9 的『每个子数组统计一次』从内层循环里整个删掉，只在每轮 i 结束后算一次后缀去重数的平方（95/100 失败），示例1 输出 9 而期望 15，与修复版 ILR 输出 100 组全不同，MD 漏了代码层偏离。",
+    "evidence": "nums=[1,2,1] 期望 15：生成代码输出 9，补 i+=1 的 ILR 转写输出 24（node8 多加），正确算法 15；nums=[1,1] 期望 3：生成 2、修复版 ILR 5。字面 ILR 无 i 自增将死循环。"
+  }
+}

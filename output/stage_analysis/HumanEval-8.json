@@ -1,0 +1,73 @@
+{
+  "problem_id": "sum_product_example",
+  "nodes": [
+    {
+      "id": 1,
+      "type": "start",
+      "label": "Start",
+      "next": 2
+    },
+    {
+      "id": 2,
+      "type": "process",
+      "label": "Input: numbers (List of integers)",
+      "action": "ctx['numbers'] = ctx['arg0']; ctx['sum_value'] = 0; ctx['prod_value'] = 1",
+      "next": 3
+    },
+    {
+      "id": 3,
+      "type": "decision",
+      "label": "Is numbers empty?",
+      "logic": "len(ctx['numbers']) == 0",
+      "true_next": 4,
+      "false_next": 5
+    },
+    {
+      "id": 4,
+      "type": "end",
+      "label": "Output: (0, 1) (sum = 0, product = 1 for empty list)",
+      "output": "(0, 1)"
+    },
+    {
+      "id": 5,
+      "type": "decision",
+      "label": "For each n in numbers",
+      "logic": "len(ctx['numbers']) > 0",
+      "true_next": 6,
+      "false_next": 8
+    },
+    {
+      "id": 6,
+      "type": "process",
+      "label": "Update sum_value: sum_value += n",
+      "action": "ctx['sum_value'] += ctx['numbers'][ctx['i']] if 'i' not in ctx else ctx['i']",
+      "next": 7
+    },
+    {
+      "id": 7,
+      "type": "process",
+      "label": "Update prod_value: prod_value *= n",
+      "action": "ctx['prod_value'] *= ctx['numbers'][ctx['i']] if 'i' not in ctx else ctx['i']",
+      "next": 5
+    },
+    {
+      "id": 8,
+      "type": "end",
+      "label": "Output: (sum_value, prod_value)",
+      "output": "(ctx['sum_value'], ctx['prod_value'])"
+    }
+  ],
+  "task_id": "HumanEval-8",
+  "dataset": "HumanEval-V",
+  "result": "failed: list index out of range",
+  "code": "from typing import List, Tuple\n\n\ndef sum_product(numbers: List[int]) -> Tuple[int, int]:\n    sum_value = 0\n    prod_value = 1\n    \n    if len(numbers) == 0:\n        return (0, 1)\n    \n    i = 0\n    while len(numbers) > 0:\n        n = numbers[i]\n        sum_value += n\n        prod_value *= n\n        numbers.pop(0)\n        i += 1\n        \n    return (sum_value, prod_value)",
+  "verification": {
+    "md_verdict": "ILR Error",
+    "actual_error_source": "both",
+    "ilr_verdict": "incorrect",
+    "code_vs_ilr": "deviates",
+    "md_correct": "partial",
+    "note": "MD 根因判对（ILR 节点6/7 的 action 自相矛盾：'i' not in ctx 时引用 ctx['i'] 必 KeyError('i')，且循环既不消费元素也不递增 i，忠实实现无法运行），但漏了代码问题：生成代码同时用 numbers[i] 索引（i 递增）和 pop(0) 双重消费元素，任何非空列表都 IndexError。",
+    "evidence": "忠实 ILR: candidate([1,1,1]) → KeyError('i')；生成代码同输入 → IndexError: list index out of range（与 FAILURE RESULT 一致），仅 [] 一条通过"
+  }
+}

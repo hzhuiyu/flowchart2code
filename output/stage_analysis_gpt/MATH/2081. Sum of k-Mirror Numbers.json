@@ -1,0 +1,217 @@
+{
+  "task_id": "2081. Sum of k-Mirror Numbers",
+  "dataset": "MATH",
+  "difficulty": "hard",
+  "title": null,
+  "result": "failed: ",
+  "ilr": "{\n  \"problem_id\": \"k_mirror_numbers\",\n  \"functions\": [\n    {\n      \"name\": \"fn\",\n      \"parameters\": [\"x\"],\n      \"entry_node\": 1,\n      \"nodes\": [\n        {\"id\": 1, \"type\": \"start\", \"label\": \"Start\", \"next\": 2},\n        {\"id\": 2, \"type\": \"process\", \"label\": \"Initialize n = len(x) // 2\", \"action\": \"ctx['n'] = len(ctx['x']) // 2\", \"next\": 3},\n        {\"id\": 3, \"type\": \"process\", \"label\": \"Loop i from n to len(x)\", \"action\": \"for ctx['i'] in range(ctx['n'], len(ctx['x'])):\", \"next\": 4},\n        {\"id\": 4, \"type\": \"decision\", \"label\": \"Is int(x[i]) + 1 < k?\", \"logic\": \"int(ctx['x'][ctx['i']]) + 1 < ctx['k']\", \"true_next\": 5, \"false_next\": 8},\n        {\"id\": 5, \"type\": \"process\", \"label\": \"Update x[i] and x[~i]: x[i] = x[~i] = str(int(x[i]) + 1)\", \"action\": \"ctx['x'][ctx['i']] = ctx['x'][~ctx['i']] = str(int(ctx['x'][ctx['i']]) + 1)\", \"next\": 6},\n        {\"id\": 6, \"type\": \"process\", \"label\": \"Loop ii from n to i\", \"action\": \"for ctx['ii'] in range(ctx['n'], ctx['i']):\", \"next\": 7},\n        {\"id\": 7, \"type\": \"process\", \"label\": \"Update x[ii] and x[~ii]: x[ii] = x[~ii] = '0'\", \"action\": \"ctx['x'][ctx['ii']] = ctx['x'][~ctx['ii']] = '0'\", \"next\": 3},\n        {\"id\": 8, \"type\": \"return\", \"label\": \"Return x\", \"value\": \"ctx['x']\"}\n      ]\n    }\n  ],\n  \"nodes\": [\n    {\"id\": 1, \"type\": \"start\", \"label\": \"Start\", \"next\": 2},\n    {\"id\": 2, \"type\": \"process\", \"label\": \"Input: k (integer), n (integer)\", \"action\": \"ctx['k'] = ctx['arg0']; ctx['n'] = ctx['arg1']\", \"next\": 3},\n    {\"id\": 3, \"type\": \"process\", \"label\": \"Initialize x = ['0'], ans = 0\", \"action\": \"ctx['x'] = ['0']; ctx['ans'] = 0\", \"next\": 4},\n    {\"id\": 4, \"type\": \"process\", \"label\": \"Loop n times\", \"action\": \"for _ in range(ctx['n']):\", \"next\": 5},\n    {\"id\": 5, \"type\": \"call\", \"label\": \"Call fn(x)\", \"function_name\": \"fn\", \"arguments\": [\"ctx['x']\"], \"return_var\": \"result\", \"next\": 6},\n    {\"id\": 6, \"type\": \"process\", \"label\": \"Convert x to integer in base k: val = int(''.join(x), k)\", \"action\": \"ctx['val'] = int(''.join(ctx['x']), ctx['k'])\", \"next\": 7},\n    {\"id\": 7, \"type\": \"decision\", \"label\": \"Is val a palindrome?\", \"logic\": \"str(ctx['val']) == str(ctx['val'])[::-1]\", \"true_next\": 8, \"false_next\": 9},\n    {\"id\": 8, \"type\": \"process\", \"label\": \"Add val to ans: ans += val\", \"action\": \"ctx['ans'] += ctx['val']\", \"next\": 4},\n    {\"id\": 9, \"type\": \"end\", \"label\": \"Output: ans\", \"output\": \"ctx['ans']\"}\n  ]\n}",
+  "code": "def kMirror(k: int, n: int) -> int:\n    def fn(x):\n        n = len(x) // 2\n        for i in range(n, len(x)):\n            if int(x[i]) + 1 < k:\n                x[i] = x[~i] = str(int(x[i]) + 1)\n                for ii in range(n, i):\n                    x[ii] = x[~ii] = '0'\n                i = n - 1  # Reset i to n - 1 to continue the outer loop\n            else:\n                break\n        return x\n\n    x = ['0']\n    ans = 0\n    for _ in range(n):\n        result = fn(x)\n        val = int(''.join(result), k)\n        if str(val) == str(val)[::-1]:\n            ans += val\n    return ans",
+  "prompt": "A k-mirror number is a positive integer without leading zeros that reads the same both forward and backward in base-10 as well as in base-k.\n\nFor example, 9 is a 2-mirror number. The representation of 9 in base-10 and base-2 are 9 and 1001 respectively, which read the same both forward and backward.\nOn the contrary, 4 is not a 2-mirror number. The representation of 4 in base-2 is 100, which does not read the same both forward and backward.\nGiven the base k and the number n, return the sum of the n smallest k-mirror numbers.\n\n\n\nExample 1:\n\nInput: k = 2, n = 5\nOutput: 25\nExplanation:\nThe 5 smallest 2-mirror numbers and their representations in base-2 are listed as follows:\n  base-10    base-2\n    1          1\n    3          11\n    5          101\n    7          111\n    9          1001\nTheir sum = 1 + 3 + 5 + 7 + 9 = 25.\nExample 2:\n\nInput: k = 3, n = 7\nOutput: 499\nExplanation:\nThe 7 smallest 3-mirror numbers are and their representations in base-3 are listed as follows:\n  base-10    base-3\n    1          1\n    2          2\n    4          11\n    8          22\n    121        11111\n    151        12121\n    212        21212\nTheir sum = 1 + 2 + 4 + 8 + 121 + 151 + 212 = 499.\nExample 3:\n\nInput: k = 7, n = 17\nOutput: 20379000\nExplanation: The 17 smallest 7-mirror numbers are:\n1, 2, 3, 4, 5, 6, 8, 121, 171, 242, 292, 16561, 65656, 2137312, 4602064, 6597956, 6958596\n\n\nConstraints:\n\n2 <= k <= 9\n1 <= n <= 30",
+  "test": "assert kMirror(2, 5) == 25  # Example 1\nassert kMirror(3, 7) == 499  # Example 2\nassert kMirror(7, 17) == 20379000  # Example 3\n\n# Boundary test cases\nassert kMirror(2, 1) == 1  # smallest n, smallest k\nassert kMirror(9, 1) == 1  # smallest n, largest k\nassert kMirror(2, 30) == 2609044274  # largest n, smallest k\n\n# Large number test cases\nassert kMirror(9, 30) == 18627530  # hypothetical large number case\nassert kMirror(8, 25) == 1651182  # hypothetical large number case\nassert kMirror(7, 20) == 321578997  # hypothetical large number case",
+  "ocr_data": {
+    "nodes": [
+      {
+        "node_id": 1,
+        "shape_type": "rectangle",
+        "raw_text": "Start",
+        "position": "top"
+      },
+      {
+        "node_id": 2,
+        "shape_type": "rectangle",
+        "raw_text": "Input: k (integer), n (integer)",
+        "position": "middle"
+      },
+      {
+        "node_id": 3,
+        "shape_type": "rectangle",
+        "raw_text": "Initialize x = ['0'], ans = 0",
+        "position": "middle"
+      },
+      {
+        "node_id": 4,
+        "shape_type": "rectangle",
+        "raw_text": "Loop n times",
+        "position": "middle"
+      },
+      {
+        "node_id": 5,
+        "shape_type": "rectangle",
+        "raw_text": "Call fn(x)",
+        "position": "middle"
+      },
+      {
+        "node_id": 6,
+        "shape_type": "rectangle",
+        "raw_text": "Convert x to integer in base k: val = int(''.join(x), k)",
+        "position": "middle"
+      },
+      {
+        "node_id": 7,
+        "shape_type": "diamond",
+        "raw_text": "Is val a palindrome?",
+        "position": "middle"
+      },
+      {
+        "node_id": 8,
+        "shape_type": "rectangle",
+        "raw_text": "Add val to ans: ans += val",
+        "position": "middle"
+      },
+      {
+        "node_id": 9,
+        "shape_type": "rectangle",
+        "raw_text": "Output: ans",
+        "position": "middle"
+      },
+      {
+        "node_id": 10,
+        "shape_type": "rectangle",
+        "raw_text": "Initialize n = len(x) // 2",
+        "position": "top"
+      },
+      {
+        "node_id": 11,
+        "shape_type": "rectangle",
+        "raw_text": "Loop i from n to len(x)",
+        "position": "top"
+      },
+      {
+        "node_id": 12,
+        "shape_type": "diamond",
+        "raw_text": "Is int(x[i]) + 1 < k?",
+        "position": "top"
+      },
+      {
+        "node_id": 13,
+        "shape_type": "rectangle",
+        "raw_text": "Update x[i] and x[~i]: x[i] = x[~i] = str(int(x[i]) + 1)",
+        "position": "top"
+      },
+      {
+        "node_id": 14,
+        "shape_type": "rectangle",
+        "raw_text": "Loop ii from n to i",
+        "position": "top"
+      },
+      {
+        "node_id": 15,
+        "shape_type": "rectangle",
+        "raw_text": "Update x[ii] and x[~ii]: x[ii] = x[~ii] = '0'",
+        "position": "top"
+      },
+      {
+        "node_id": 16,
+        "shape_type": "rectangle",
+        "raw_text": "Return x",
+        "position": "top"
+      },
+      {
+        "node_id": 17,
+        "shape_type": "rectangle",
+        "raw_text": "Return ['1'] + ['0'] * (len(x) - 1) + ['1']",
+        "position": "top"
+      }
+    ],
+    "edges": [
+      {
+        "from_node": 1,
+        "to_node": 2,
+        "label": ""
+      },
+      {
+        "from_node": 2,
+        "to_node": 3,
+        "label": ""
+      },
+      {
+        "from_node": 3,
+        "to_node": 4,
+        "label": ""
+      },
+      {
+        "from_node": 4,
+        "to_node": 5,
+        "label": ""
+      },
+      {
+        "from_node": 5,
+        "to_node": 6,
+        "label": ""
+      },
+      {
+        "from_node": 6,
+        "to_node": 7,
+        "label": ""
+      },
+      {
+        "from_node": 7,
+        "to_node": 8,
+        "label": "Yes"
+      },
+      {
+        "from_node": 7,
+        "to_node": 9,
+        "label": "No"
+      },
+      {
+        "from_node": 8,
+        "to_node": 4,
+        "label": "No"
+      },
+      {
+        "from_node": 10,
+        "to_node": 11,
+        "label": ""
+      },
+      {
+        "from_node": 11,
+        "to_node": 12,
+        "label": ""
+      },
+      {
+        "from_node": 12,
+        "to_node": 13,
+        "label": "Yes"
+      },
+      {
+        "from_node": 12,
+        "to_node": 17,
+        "label": "No"
+      },
+      {
+        "from_node": 13,
+        "to_node": 14,
+        "label": ""
+      },
+      {
+        "from_node": 14,
+        "to_node": 15,
+        "label": ""
+      },
+      {
+        "from_node": 15,
+        "to_node": 16,
+        "label": ""
+      },
+      {
+        "from_node": 16,
+        "to_node": 11,
+        "label": ""
+      }
+    ],
+    "other_text": [
+      "fn(x)"
+    ]
+  },
+  "analysis": {
+    "ilr_verdict": "incorrect",
+    "ilr_issues": "OCR 边 12-No→17 表明流程图有溢出进位出口节点（Return ['1']+['0']*(len-1)+['1']），ILR 的 fn 整个丢掉该节点并把假分支改接 'Return x'，导致 x 到 ['1'] 后永远卡死；fn 清零后经 OCR 的 16→11 边继续外层循环（流程图自身缺陷，被 ILR 镜像为节点7→3）会连续自增多位跳过回文；主流程节点7 假分支接 END 与 OCR 一致（流程图自身缺陷）。",
+    "code_vs_ilr": "faithful",
+    "code_issues": "代码复刻 fn 的全部缺陷（无溢出出口、清零后继续外层循环，i=n-1 为无效语句），主流程仅把'提前 END'改为'不累加继续'，两者在测试输入上行为相同。",
+    "error_source": "ilr",
+    "ocr_contribution": "no",
+    "root_cause": "ILR 丢掉 OCR 中明确存在的进位出口节点是决定性错误，基-k 回文枚举卡死/跳跃；代码忠实实现同样错误。",
+    "evidence": "实测 kMirror(2,5) 代码与 ILR 模拟均输出 5（x 卡在 ['1']，val 恒为 1），期望 25；(3,7) 均为 13，期望 499。"
+  }
+}

@@ -1,0 +1,270 @@
+{
+  "task_id": "2790. Maximum Number of Groups With Increasing Length",
+  "dataset": "MATH",
+  "difficulty": "hard",
+  "title": null,
+  "result": "failed: ",
+  "ilr": "{\n  \"problem_id\": \"max_groups_creation\",\n  \"functions\": [\n    {\n      \"name\": \"poss\",\n      \"parameters\": [\"groups\"],\n      \"entry_node\": 1,\n      \"nodes\": [\n        {\"id\": 1, \"type\": \"start\", \"label\": \"Start\", \"next\": 2},\n        {\"id\": 2, \"type\": \"process\", \"label\": \"Initialize sub with usageLimits[0]\", \"action\": \"ctx['sub'] = [ctx['arg0'][0]]\", \"next\": 3},\n        {\"id\": 3, \"type\": \"process\", \"label\": \"For i in range(1, n)\", \"action\": \"for i in range(1, ctx['n']): ctx['sub'].append(ctx['arg0'][i] - 1)\", \"next\": 4},\n        {\"id\": 4, \"type\": \"decision\", \"label\": \"Is i < n?\", \"logic\": \"ctx['i'] < ctx['n']\", \"true_next\": 5, \"false_next\": 8},\n        {\"id\": 5, \"type\": \"process\", \"label\": \"Append usageLimits[i] - usageLimits[i - 1] to sub\", \"action\": \"ctx['sub'].append(ctx['arg0'][i] - ctx['arg0'][i - 1])\", \"next\": 6},\n        {\"id\": 6, \"type\": \"process\", \"label\": \"Decrement sub[i] by 1\", \"action\": \"ctx['sub'][i] -= 1\", \"next\": 4},\n        {\"id\": 7, \"type\": \"process\", \"label\": \"For i in range(-groups, 0, 1)\", \"action\": \"for i in range(-ctx['groups'], 0, 1): ctx['sub'][i] -= 1\", \"next\": 9},\n        {\"id\": 8, \"type\": \"process\", \"label\": \"For i in accumulate(list(accumulate(sub)))\", \"action\": \"for i in accumulate(list(accumulate(ctx['sub']))):\", \"next\": 10},\n        {\"id\": 9, \"type\": \"decision\", \"label\": \"Is i < 0?\", \"logic\": \"i < 0\", \"true_next\": 11, \"false_next\": 12},\n        {\"id\": 10, \"type\": \"return\", \"label\": \"Return True\", \"value\": \"True\"},\n        {\"id\": 11, \"type\": \"return\", \"label\": \"Return False\", \"value\": \"False\"}\n      ]\n    }\n  ],\n  \"nodes\": [\n    {\"id\": 1, \"type\": \"start\", \"label\": \"Start\", \"next\": 2},\n    {\"id\": 2, \"type\": \"process\", \"label\": \"Input: usageLimits (List[int])\", \"action\": \"ctx['usageLimits'] = ctx['arg0']\", \"next\": 3},\n    {\"id\": 3, \"type\": \"process\", \"label\": \"Sort usageLimits\", \"action\": \"ctx['usageLimits'] = sorted(ctx['usageLimits'])\", \"next\": 4},\n    {\"id\": 4, \"type\": \"process\", \"label\": \"Initialize n = len(usageLimits)\", \"action\": \"ctx['n'] = len(ctx['usageLimits'])\", \"next\": 5},\n    {\"id\": 5, \"type\": \"process\", \"label\": \"Define poss(groups)\", \"action\": \"ctx['poss'] = poss\", \"next\": 6},\n    {\"id\": 6, \"type\": \"process\", \"label\": \"Initialize l = 0, r = len(usageLimits)\", \"action\": \"ctx['l'] = 0; ctx['r'] = ctx['n']\", \"next\": 7},\n    {\"id\": 7, \"type\": \"decision\", \"label\": \"Is l < r?\", \"logic\": \"ctx['l'] < ctx['r']\", \"true_next\": 8, \"false_next\": 12},\n    {\"id\": 8, \"type\": \"process\", \"label\": \"Calculate mid = (l + r + 1) // 2\", \"action\": \"ctx['mid'] = (ctx['l'] + ctx['r'] + 1) // 2\", \"next\": 9},\n    {\"id\": 9, \"type\": \"decision\", \"label\": \"Is poss(mid)?\", \"logic\": \"ctx['poss'](ctx['mid'])\", \"true_next\": 10, \"false_next\": 11},\n    {\"id\": 10, \"type\": \"process\", \"label\": \"Set l = mid\", \"action\": \"ctx['l'] = ctx['mid']\", \"next\": 7},\n    {\"id\": 11, \"type\": \"process\", \"label\": \"Set r = mid - 1\", \"action\": \"ctx['r'] = ctx['mid'] - 1\", \"next\": 7},\n    {\"id\": 12, \"type\": \"end\", \"label\": \"Output: l\", \"output\": \"ctx['l']\"}\n  ]\n}",
+  "code": "from typing import List\nfrom itertools import accumulate\n\ndef maxIncreasingGroups(usageLimits: List[int]) -> int:\n    usageLimits.sort()\n    n = len(usageLimits)\n\n    def poss(groups):\n        sub = [usageLimits[0]]\n        for i in range(1, n):\n            sub.append(usageLimits[i] - 1)\n        \n        for i in range(groups):\n            sub[i] -= 1\n        \n        for i in accumulate(accumulate(sub)):\n            if i < 0:\n                return False\n        return True\n\n    l, r = 0, n\n    while l < r:\n        mid = (l + r + 1) // 2\n        if poss(mid):\n            l = mid\n        else:\n            r = mid - 1\n\n    return l",
+  "prompt": "You are given a 0-indexed array usageLimits of length n.\n\nYour task is to create groups using numbers from 0 to n - 1, ensuring that each number, i, is used no more than usageLimits[i] times in total across all groups. You must also satisfy the following conditions:\n\nEach group must consist of distinct numbers, meaning that no duplicate numbers are allowed within a single group.\nEach group (except the first one) must have a length strictly greater than the previous group.\nReturn an integer denoting the maximum number of groups you can create while satisfying these conditions.\n\n\n\nExample 1:\n\nInput: usageLimits = [1,2,5]\nOutput: 3\nExplanation: In this example, we can use 0 at most once, 1 at most twice, and 2 at most five times.\nOne way of creating the maximum number of groups while satisfying the conditions is:\nGroup 1 contains the number [2].\nGroup 2 contains the numbers [1,2].\nGroup 3 contains the numbers [0,1,2].\nIt can be shown that the maximum number of groups is 3.\nSo, the output is 3.\nExample 2:\n\nInput: usageLimits = [2,1,2]\nOutput: 2\nExplanation: In this example, we can use 0 at most twice, 1 at most once, and 2 at most twice.\nOne way of creating the maximum number of groups while satisfying the conditions is:\nGroup 1 contains the number [0].\nGroup 2 contains the numbers [1,2].\nIt can be shown that the maximum number of groups is 2.\nSo, the output is 2.\nExample 3:\n\nInput: usageLimits = [1,1]\nOutput: 1\nExplanation: In this example, we can use both 0 and 1 at most once.\nOne way of creating the maximum number of groups while satisfying the conditions is:\nGroup 1 contains the number [0].\nIt can be shown that the maximum number of groups is 1.\nSo, the output is 1.\n\n\nConstraints:\n\n1 <= usageLimits.length <= 105\n1 <= usageLimits[i] <= 109",
+  "test": "assert maxIncreasingGroups([1, 2, 5]) == 3  # Example 1\nassert maxIncreasingGroups([2, 1, 2]) == 2  # Example 2\nassert maxIncreasingGroups([1, 1]) == 1  # Example 3\n\n# Boundary test cases\nassert maxIncreasingGroups([1]) == 1  # Single element, smallest case\nassert maxIncreasingGroups([1, 1, 1, 1, 1]) == 2  # All elements are the same, minimal groups\nassert maxIncreasingGroups([1, 2, 3, 4, 5]) == 5  # Each element can form a group\n\n# Large number test cases\nassert maxIncreasingGroups([10**9] * 10**5) == 100000  # All elements are the same large number\nassert maxIncreasingGroups([i for i in range(1, 10**5 + 1)]) == 100000  # Increasing sequence\nassert maxIncreasingGroups([10**9 - i for i in range(10**5)]) == 100000  # Decreasing sequence",
+  "ocr_data": {
+    "nodes": [
+      {
+        "node_id": 1,
+        "shape_type": "rectangle",
+        "raw_text": "Start",
+        "position": "top"
+      },
+      {
+        "node_id": 2,
+        "shape_type": "rectangle",
+        "raw_text": "Input: usageLimits (List[int])",
+        "position": "middle"
+      },
+      {
+        "node_id": 3,
+        "shape_type": "rectangle",
+        "raw_text": "Sort usageLimits",
+        "position": "middle"
+      },
+      {
+        "node_id": 4,
+        "shape_type": "rectangle",
+        "raw_text": "Initialize n = len(usageLimits)",
+        "position": "middle"
+      },
+      {
+        "node_id": 5,
+        "shape_type": "rectangle",
+        "raw_text": "Define poss(groups)",
+        "position": "middle"
+      },
+      {
+        "node_id": 6,
+        "shape_type": "rectangle",
+        "raw_text": "Initialize l = 0, r = len(usageLimits)",
+        "position": "middle"
+      },
+      {
+        "node_id": 7,
+        "shape_type": "diamond",
+        "raw_text": "Is l < r?",
+        "position": "middle"
+      },
+      {
+        "node_id": 8,
+        "shape_type": "rectangle",
+        "raw_text": "Calculate mid = (l + r + 1) // 2",
+        "position": "middle"
+      },
+      {
+        "node_id": 9,
+        "shape_type": "diamond",
+        "raw_text": "Is poss(mid)?",
+        "position": "middle"
+      },
+      {
+        "node_id": 10,
+        "shape_type": "rectangle",
+        "raw_text": "Set l = mid",
+        "position": "middle"
+      },
+      {
+        "node_id": 11,
+        "shape_type": "rectangle",
+        "raw_text": "Set r = mid - 1",
+        "position": "middle"
+      },
+      {
+        "node_id": 12,
+        "shape_type": "rectangle",
+        "raw_text": "Output: l",
+        "position": "middle"
+      },
+      {
+        "node_id": 13,
+        "shape_type": "rectangle",
+        "raw_text": "poss(groups)",
+        "position": "top"
+      },
+      {
+        "node_id": 14,
+        "shape_type": "rectangle",
+        "raw_text": "Initialize sub with usageLimits[0]",
+        "position": "top"
+      },
+      {
+        "node_id": 15,
+        "shape_type": "rectangle",
+        "raw_text": "For i in range(1, n)",
+        "position": "top"
+      },
+      {
+        "node_id": 16,
+        "shape_type": "rectangle",
+        "raw_text": "Append usageLimits[i] - usageLimits[i - 1] to sub",
+        "position": "top"
+      },
+      {
+        "node_id": 17,
+        "shape_type": "rectangle",
+        "raw_text": "Decrement sub[i] by 1",
+        "position": "top"
+      },
+      {
+        "node_id": 18,
+        "shape_type": "rectangle",
+        "raw_text": "For i in range(-groups, 0, 1)",
+        "position": "top"
+      },
+      {
+        "node_id": 19,
+        "shape_type": "rectangle",
+        "raw_text": "For i in accumulate(list(accumulate(sub)))",
+        "position": "top"
+      },
+      {
+        "node_id": 20,
+        "shape_type": "diamond",
+        "raw_text": "Is i < 0?",
+        "position": "top"
+      },
+      {
+        "node_id": 21,
+        "shape_type": "rectangle",
+        "raw_text": "Return True",
+        "position": "top"
+      },
+      {
+        "node_id": 22,
+        "shape_type": "rectangle",
+        "raw_text": "Return False",
+        "position": "top"
+      }
+    ],
+    "edges": [
+      {
+        "from_node": 1,
+        "to_node": 2,
+        "label": ""
+      },
+      {
+        "from_node": 2,
+        "to_node": 3,
+        "label": ""
+      },
+      {
+        "from_node": 3,
+        "to_node": 4,
+        "label": ""
+      },
+      {
+        "from_node": 4,
+        "to_node": 5,
+        "label": ""
+      },
+      {
+        "from_node": 5,
+        "to_node": 6,
+        "label": ""
+      },
+      {
+        "from_node": 6,
+        "to_node": 7,
+        "label": ""
+      },
+      {
+        "from_node": 7,
+        "to_node": 8,
+        "label": "Yes"
+      },
+      {
+        "from_node": 7,
+        "to_node": 12,
+        "label": "No"
+      },
+      {
+        "from_node": 8,
+        "to_node": 9,
+        "label": ""
+      },
+      {
+        "from_node": 9,
+        "to_node": 10,
+        "label": "Yes"
+      },
+      {
+        "from_node": 9,
+        "to_node": 11,
+        "label": "No"
+      },
+      {
+        "from_node": 10,
+        "to_node": 7,
+        "label": ""
+      },
+      {
+        "from_node": 11,
+        "to_node": 7,
+        "label": ""
+      },
+      {
+        "from_node": 13,
+        "to_node": 14,
+        "label": ""
+      },
+      {
+        "from_node": 14,
+        "to_node": 15,
+        "label": ""
+      },
+      {
+        "from_node": 15,
+        "to_node": 16,
+        "label": "Yes"
+      },
+      {
+        "from_node": 15,
+        "to_node": 18,
+        "label": "No"
+      },
+      {
+        "from_node": 16,
+        "to_node": 17,
+        "label": "Yes"
+      },
+      {
+        "from_node": 17,
+        "to_node": 19,
+        "label": ""
+      },
+      {
+        "from_node": 19,
+        "to_node": 20,
+        "label": ""
+      },
+      {
+        "from_node": 20,
+        "to_node": 21,
+        "label": "No"
+      },
+      {
+        "from_node": 20,
+        "to_node": 22,
+        "label": "Yes"
+      }
+    ],
+    "other_text": []
+  },
+  "analysis": {
+    "ilr_verdict": "incorrect",
+    "ilr_issues": "OCR 边中 poss 部分缺所有循环回边（16/17 不回 15、20 不回 19、18 死端、20-No→21），ILR 组装出的图无法执行：节点3 的内嵌 for 把 sub 建成 [a0, a_i-1]（违背 OCR 节点16 文本 'usageLimits[i]-usageLimits[i-1]' 的差分数组），节点4 用残留 i 判断恒真进入 5/6 且 i 永不递增而死循环；节点8 的 next 直连 Return True 绕过检查、节点9 假分支跨函数接到主流程节点12。",
+    "code_vs_ilr": "deviates",
+    "code_issues": "代码照抄节点3 的错误 sub 构造（丢差分数组），并把 ILR 节点7 明确的 range(-groups, 0)（对最后 groups 个元素减 1，与 OCR 节点18 文本一致）改写成 range(groups)（对前 groups 个减 1），可行性判断因此失效；把节点8/9 重接为正常循环属合理修复。",
+    "error_source": "both",
+    "ocr_contribution": "no",
+    "root_cause": "ILR 的 poss 图死循环且 sub 构造违背 OCR 文本（丢差分数组）必错；代码又把减 1 目标从'最后 groups 个元素'改成'前 groups 个'并沿用错误 sub，独立产生错误的可行性判断，两方面各自导致失败。",
+    "evidence": "实测 maxIncreasingGroups([2,1,2]) 代码返回 3（期望 2，总容量 5<6 却判 poss(3) 可行）、[1,1,1,1,1] 返回 1（期望 2）；按 OCR 文本意图重建（差分数组+range(-groups,0)）后全部用例通过；ILR 按图执行 poss 死循环。"
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "problem_id": "countBlackBlocks",
+  "nodes": [
+    {
+      "id": 1,
+      "type": "start",
+      "label": "Start",
+      "next": 2
+    },
+    {
+      "id": 2,
+      "type": "process",
+      "label": "Input: coordinates (arg0), m (arg1), n (arg2); initialize ans and cnt",
+      "action": "ctx['coordinates'] = ctx['arg0']; ctx['m'] = ctx['arg1']; ctx['n'] = ctx['arg2']; ctx['ans'] = [0, 0, 0, 0, 0]; ctx['cnt'] = {}",
+      "next": 3
+    },
+    {
+      "id": 3,
+      "type": "process",
+      "label": "For each black cell, increment the count of every valid 2x2 block (top-left in {i-1, i} x {j-1, j}) containing it",
+      "action": "for c in ctx['coordinates']:\n    for x in (c[0] - 1, c[0]):\n        if 0 <= x < ctx['m'] - 1:\n            for y in (c[1] - 1, c[1]):\n                if 0 <= y < ctx['n'] - 1:\n                    ctx['cnt'][(x, y)] = ctx['cnt'].get((x, y), 0) + 1",
+      "next": 4
+    },
+    {
+      "id": 4,
+      "type": "process",
+      "label": "Fill ans[1..4] from block counts and compute ans[0] = total blocks - filled blocks",
+      "action": "for v in ctx['cnt'].values():\n    ctx['ans'][v] += 1\nctx['ans'][0] = (ctx['m'] - 1) * (ctx['n'] - 1) - (ctx['ans'][1] + ctx['ans'][2] + ctx['ans'][3] + ctx['ans'][4])",
+      "next": 13
+    },
+    {
+      "id": 13,
+      "type": "end",
+      "label": "Output: ans",
+      "output": "ctx['ans']"
+    }
+  ]
+}

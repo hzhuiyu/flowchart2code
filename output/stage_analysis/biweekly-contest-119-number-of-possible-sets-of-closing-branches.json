@@ -1,0 +1,168 @@
+{
+  "problem_id": "numberOfSets",
+  "nodes": [
+    {
+      "id": 1,
+      "type": "start",
+      "label": "Start",
+      "next": 2
+    },
+    {
+      "id": 2,
+      "type": "process",
+      "label": "Input: n (int), maxDistance (int), roads (List of List of int)",
+      "action": "ctx['n'] = ctx['arg0']; ctx['maxDistance'] = ctx['arg1']; ctx['roads'] = ctx['arg2']; ctx['ans'] = 0",
+      "next": 3
+    },
+    {
+      "id": 3,
+      "type": "process",
+      "label": "Iterate over i from 0 to 2^n - 1 (bitmask representing closed branches)",
+      "action": "ctx['i'] = 0; ctx['total_sets'] = 0",
+      "next": 4
+    },
+    {
+      "id": 4,
+      "type": "decision",
+      "label": "Is i < 2^n?",
+      "logic": "ctx['i'] < (1 << ctx['n'])",
+      "true_next": 5,
+      "false_next": 9
+    },
+    {
+      "id": 5,
+      "type": "process",
+      "label": "Initialize g as a matrix with dimensions n x n, filled with infinity",
+      "action": "ctx['g'] = [[float('inf')] * ctx['n'] for _ in range(ctx['n'])]",
+      "next": 6
+    },
+    {
+      "id": 6,
+      "type": "process",
+      "label": "Iterate through each road (x, y, w) in roads",
+      "action": "ctx['road_idx'] = 0",
+      "next": 7
+    },
+    {
+      "id": 7,
+      "type": "decision",
+      "label": "Are both branches x and y active in bitmask i?",
+      "logic": "(ctx['roads'][ctx['road_idx']][0] & ctx['i']) == 0 and (ctx['roads'][ctx['road_idx']][1] & ctx['i']) == 0",
+      "true_next": 8,
+      "false_next": 6
+    },
+    {
+      "id": 8,
+      "type": "process",
+      "label": "Set g[x][y] and g[y][x] to the minimum of their current value and w",
+      "action": "ctx['x'] = ctx['roads'][ctx['road_idx']][0]; ctx['y'] = ctx['roads'][ctx['road_idx']][1]; ctx['w'] = ctx['roads'][ctx['road_idx']][2]; ctx['g'][ctx['x']][ctx['y']] = min(ctx['g'][ctx['x']][ctx['y']], ctx['w']); ctx['g'][ctx['y']][ctx['x']] = min(ctx['g'][ctx['y']][ctx['x']], ctx['w'])",
+      "next": 6
+    },
+    {
+      "id": 9,
+      "type": "process",
+      "label": "Set g[i][i] = 0 for each j in range(n)",
+      "action": "for j in range(ctx['n']): ctx['g'][j][j] = 0",
+      "next": 10
+    },
+    {
+      "id": 10,
+      "type": "process",
+      "label": "Apply Floyd-Warshall algorithm to calculate shortest paths",
+      "action": "for k in range(ctx['n']): for i in range(ctx['n']): for j in range(ctx['n']): ctx['g'][i][j] = min(ctx['g'][i][j], ctx['g'][i][k] + ctx['g'][k][j])",
+      "next": 11
+    },
+    {
+      "id": 11,
+      "type": "process",
+      "label": "Initialize ok = 1 (flag to check maxDistance constraint)",
+      "action": "ctx['ok'] = 1",
+      "next": 12
+    },
+    {
+      "id": 12,
+      "type": "process",
+      "label": "Iterate over each pair of branches (j, k)",
+      "action": "ctx['j'] = 0; ctx['k'] = 0",
+      "next": 13
+    },
+    {
+      "id": 13,
+      "type": "decision",
+      "label": "Are both branches j and k active in bitmask i?",
+      "logic": "(ctx['j'] & ctx['i']) == 0 and (ctx['k'] & ctx['i']) == 0",
+      "true_next": 14,
+      "false_next": 15
+    },
+    {
+      "id": 14,
+      "type": "decision",
+      "label": "Is g[j][k] <= maxDistance?",
+      "logic": "ctx['g'][ctx['j']][ctx['k']] <= ctx['maxDistance']",
+      "true_next": 16,
+      "false_next": 17
+    },
+    {
+      "id": 15,
+      "type": "process",
+      "label": "Do nothing",
+      "action": "pass",
+      "next": 12
+    },
+    {
+      "id": 16,
+      "type": "process",
+      "label": "Keep ok = 1",
+      "action": "ctx['ok'] = 1",
+      "next": 12
+    },
+    {
+      "id": 17,
+      "type": "process",
+      "label": "Set ok = 0",
+      "action": "ctx['ok'] = 0",
+      "next": 12
+    },
+    {
+      "id": 18,
+      "type": "decision",
+      "label": "Is ok == 1?",
+      "logic": "ctx['ok'] == 1",
+      "true_next": 19,
+      "false_next": 20
+    },
+    {
+      "id": 19,
+      "type": "process",
+      "label": "Increment ans by 1",
+      "action": "ctx['ans'] += 1",
+      "next": 12
+    },
+    {
+      "id": 20,
+      "type": "process",
+      "label": "Do nothing",
+      "action": "pass",
+      "next": 12
+    },
+    {
+      "id": 21,
+      "type": "end",
+      "label": "Output: ans (total number of valid sets)",
+      "output": "ctx['ans']"
+    }
+  ],
+  "task_id": "biweekly-contest-119-number-of-possible-sets-of-closing-branches",
+  "dataset": "Algorithm",
+  "result": "failed: ",
+  "code": "class Solution:\n    def numberOfSets(self, n: int, maxDistance: int, roads: List[List[int]]) -> int:\n        ans = 0\n        # Iterate over i from 0 to 2^n - 1 (bitmask representing closed branches)\n        for i in range(1 << n):\n            # Initialize g as a matrix with dimensions n x n, filled with infinity\n            g = [[float('inf')] * n for _ in range(n)]\n            # Set g[i][i] = 0 for each j in range(n)\n            for j in range(n):\n                g[j][j] = 0\n            \n            # Iterate through each road (x, y, w) in roads\n            for road in roads:\n                x, y, w = road\n                # Check if both branches x and y are active in bitmask i\n                if (x & i) == 0 and (y & i) == 0:\n                    # Set g[x][y] and g[y][x] to the minimum of their current value and w\n                    g[x][y] = min(g[x][y], w)\n                    g[y][x] = min(g[y][x], w)\n            \n            # Apply Floyd-Warshall algorithm to calculate shortest paths\n            for k in range(n):\n                for i_idx in range(n):\n                    for j_idx in range(n):\n                        g[i_idx][j_idx] = min(g[i_idx][j_idx], g[i_idx][k] + g[k][j_idx])\n            \n            # Initialize ok = 1 (flag to check maxDistance constraint)\n            ok = 1\n            # Iterate over each pair of branches (j, k)\n            for j in range(n):\n                for k in range(n):\n                    # Check if both branches j and k are active in bitmask i\n                    if (j & i) == 0 and (k & i) == 0:\n                        # Check if distance is within maxDistance\n                        if g[j][k] > maxDistance:\n                            ok = 0\n                            break\n                if not ok:\n                    break\n            \n            # If all pairs satisfy the distance constraint, increment ans\n            if ok:\n                ans += 1\n        \n        return ans",
+  "verification": {
+    "md_verdict": "ILR Error",
+    "actual_error_source": "ilr",
+    "ilr_verdict": "incorrect",
+    "code_vs_ilr": "faithful",
+    "md_correct": "yes",
+    "note": "确认 ILR 错误：一是图结构残缺——road 循环无 road_idx 递增、(j,k) 循环无 j/k 递增，节点18(ok判断)与节点21(end)均不可达，忠实执行会死循环；二是语义错误——节点7/13 用 (x & i)==0 判断分支活跃，把分支编号 x 同时当作位掩码用（应为 (i>>x)&1）。生成代码忠实复刻了 (x & i) 语义并对循环做了必要的可执行化重构，失败完全由 ILR 缺陷导致。",
+    "evidence": "按图模拟在节点 6→7→8 死循环（road_idx 恒为 0）；生成代码在示例1 (n=3, maxD=5) 得 4 而非 5——i=1（关闭分支0）时道路[1,2,10] 因 (1&1)!=0 被错误跳过致 g[1][2]=inf；100 条测试失败 75 条。"
+  }
+}

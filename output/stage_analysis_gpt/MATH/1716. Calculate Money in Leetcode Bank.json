@@ -1,0 +1,143 @@
+{
+  "task_id": "1716. Calculate Money in Leetcode Bank",
+  "dataset": "MATH",
+  "difficulty": "easy",
+  "title": null,
+  "result": "failed: ",
+  "ilr": "{\n  \"problem_id\": \"money_saving_example\",\n  \"nodes\": [\n    {\"id\": 1, \"type\": \"start\", \"label\": \"Start\", \"next\": 2},\n    {\"id\": 2, \"type\": \"process\", \"label\": \"Input: n (integer)\", \"action\": \"ctx['n']=ctx['arg0']; ctx['sum_money']=0; ctx['week']=1; ctx['j']=1\", \"next\": 3},\n    {\"id\": 3, \"type\": \"process\", \"label\": \"For i in range(1, n + 1)\", \"action\": \"\", \"next\": 4},\n    {\"id\": 4, \"type\": \"process\", \"label\": \"sum_money += j\", \"action\": \"ctx['sum_money'] += ctx['j']\", \"next\": 5},\n    {\"id\": 5, \"type\": \"decision\", \"label\": \"Is i % 7 == 0?\", \"logic\": \"ctx['i'] % 7 == 0\", \"true_next\": 6, \"false_next\": 8},\n    {\"id\": 6, \"type\": \"process\", \"label\": \"Increment week: week += 1\", \"action\": \"ctx['week'] += 1\", \"next\": 9},\n    {\"id\": 7, \"type\": \"process\", \"label\": \"Increment j: j += 1\", \"action\": \"ctx['j'] += 1\", \"next\": 9},\n    {\"id\": 8, \"type\": \"process\", \"label\": \"Reset j to week: j = week\", \"action\": \"ctx['j'] = ctx['week']\", \"next\": 9},\n    {\"id\": 9, \"type\": \"process\", \"label\": \"Increment j: j += 1\", \"action\": \"ctx['j'] += 1\", \"next\": 3},\n    {\"id\": 10, \"type\": \"end\", \"label\": \"Output: sum_money\", \"output\": \"ctx['sum_money']\"}\n  ]\n}",
+  "code": "def totalMoney(n: int) -> int:\n    sum_money = 0\n    week = 1\n    j = 1\n    \n    for i in range(1, n + 1):\n        sum_money += j\n        \n        if i % 7 == 0:\n            week += 1\n            j += 1\n        else:\n            j = week\n            j += 1\n            \n    return sum_money",
+  "prompt": "Hercy wants to save money for his first car. He puts money in the Leetcode bank every day.\n\nHe starts by putting in $1 on Monday, the first day. Every day from Tuesday to Sunday, he will put in $1 more than the day before. On every subsequent Monday, he will put in $1 more than the previous Monday.\n\nGiven n, return the total amount of money he will have in the Leetcode bank at the end of the nth day.\n\n\n\nExample 1:\n\nInput: n = 4\nOutput: 10\nExplanation: After the 4th day, the total is 1 + 2 + 3 + 4 = 10.\nExample 2:\n\nInput: n = 10\nOutput: 37\nExplanation: After the 10th day, the total is (1 + 2 + 3 + 4 + 5 + 6 + 7) + (2 + 3 + 4) = 37. Notice that on the 2nd Monday, Hercy only puts in $2.\nExample 3:\n\nInput: n = 20\nOutput: 96\nExplanation: After the 20th day, the total is (1 + 2 + 3 + 4 + 5 + 6 + 7) + (2 + 3 + 4 + 5 + 6 + 7 + 8) + (3 + 4 + 5 + 6 + 7 + 8) = 96.\n\n\nConstraints:\n\n1 <= n <= 1000",
+  "test": "assert totalMoney(4) == 10  # 1 + 2 + 3 + 4 = 10\nassert totalMoney(10) == 37  # (1 + 2 + 3 + 4 + 5 + 6 + 7) + (2 + 3 + 4) = 37\nassert totalMoney(20) == 96  # (1 + 2 + 3 + 4 + 5 + 6 + 7) + (2 + 3 + 4 + 5 + 6 + 7 + 8) + (3 + 4 + 5 + 6 + 7 + 8) = 96\n\n# Boundary test cases\nassert totalMoney(1) == 1  # Only one day, so only $1\nassert totalMoney(7) == 28  # Sum of the first week: 1 + 2 + 3 + 4 + 5 + 6 + 7 = 28\nassert totalMoney(8) == 30  # Sum of the first week + first day of the second week: 28 + 2 + 3 + 4 + 5 + 6 + 7 + 8 = 36\n\n# Large number test cases\nassert totalMoney(100) == 1060  # Sum of money for 100 days\nassert totalMoney(500) == 19602  # Sum of money for 500 days\nassert totalMoney(1000) == 74926  # Sum of money for 1000 days",
+  "ocr_data": {
+    "nodes": [
+      {
+        "node_id": 1,
+        "shape_type": "rectangle",
+        "raw_text": "Start",
+        "position": "top"
+      },
+      {
+        "node_id": 2,
+        "shape_type": "rectangle",
+        "raw_text": "Input: n (integer)",
+        "position": "middle"
+      },
+      {
+        "node_id": 3,
+        "shape_type": "rectangle",
+        "raw_text": "Initialize sum_money = 0, week = 1, j = 1",
+        "position": "middle"
+      },
+      {
+        "node_id": 4,
+        "shape_type": "rectangle",
+        "raw_text": "For i in range(1, n + 1)",
+        "position": "middle"
+      },
+      {
+        "node_id": 5,
+        "shape_type": "rectangle",
+        "raw_text": "sum_money += j",
+        "position": "middle"
+      },
+      {
+        "node_id": 6,
+        "shape_type": "diamond",
+        "raw_text": "Is i % 7 == 0?",
+        "position": "middle"
+      },
+      {
+        "node_id": 7,
+        "shape_type": "rectangle",
+        "raw_text": "Increment week: week += 1",
+        "position": "bottom"
+      },
+      {
+        "node_id": 8,
+        "shape_type": "rectangle",
+        "raw_text": "Increment j: j += 1",
+        "position": "bottom"
+      },
+      {
+        "node_id": 9,
+        "shape_type": "rectangle",
+        "raw_text": "Reset j to week: j = week",
+        "position": "bottom"
+      },
+      {
+        "node_id": 10,
+        "shape_type": "rectangle",
+        "raw_text": "Output: sum_money",
+        "position": "middle"
+      }
+    ],
+    "edges": [
+      {
+        "from_node": 1,
+        "to_node": 2,
+        "label": ""
+      },
+      {
+        "from_node": 2,
+        "to_node": 3,
+        "label": ""
+      },
+      {
+        "from_node": 3,
+        "to_node": 4,
+        "label": ""
+      },
+      {
+        "from_node": 4,
+        "to_node": 5,
+        "label": ""
+      },
+      {
+        "from_node": 5,
+        "to_node": 6,
+        "label": ""
+      },
+      {
+        "from_node": 6,
+        "to_node": 7,
+        "label": "Yes"
+      },
+      {
+        "from_node": 6,
+        "to_node": 8,
+        "label": "No"
+      },
+      {
+        "from_node": 7,
+        "to_node": 9,
+        "label": ""
+      },
+      {
+        "from_node": 8,
+        "to_node": 9,
+        "label": ""
+      },
+      {
+        "from_node": 9,
+        "to_node": 4,
+        "label": ""
+      },
+      {
+        "from_node": 4,
+        "to_node": 10,
+        "label": ""
+      }
+    ],
+    "other_text": []
+  },
+  "analysis": {
+    "ilr_verdict": "incorrect",
+    "ilr_issues": "ILR 把 OCR 节点#8 'Increment j' 与 #9 'Reset j to week' 的角色互换：真分支(周末)变成 week+=1 后仅 j+=1（不重置 j=week），假分支(周中)变成 j=week 后 j+=1，两条分支全错，ILR 节点7 成为不可达节点。",
+    "code_vs_ilr": "faithful",
+    "code_issues": "代码逐句复刻 ILR 的错误分支（true: week+=1;j+=1；else: j=week;j+=1），输出与 ILR 模拟完全一致，无额外偏差。",
+    "error_source": "ilr",
+    "ocr_contribution": "no",
+    "root_cause": "OCR 文本与边显示流程图真分支本正确（6-Yes→7→9 重置 j=week），ILR 生成时互换节点8/9 语义导致两条分支全错，代码忠实实现故同错。",
+    "evidence": "实测代码与 ILR 模拟一致：n=4→7（期望10）、n=10→22（期望37）、n=20→58（期望96）；OCR 边为 6-Yes→7→9→4、6-No→8→9→4。"
+  }
+}

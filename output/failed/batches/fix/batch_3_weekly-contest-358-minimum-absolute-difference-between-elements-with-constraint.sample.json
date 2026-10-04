@@ -1,0 +1,1547 @@
+{
+ "task_id": "weekly-contest-358-minimum-absolute-difference-between-elements-with-constraint",
+ "dataset": "Algorithm",
+ "title": "minimum-absolute-difference-between-elements-with-constraint",
+ "difficulty": "Medium",
+ "prompt": "\"\"\"\nYou are given a 0-indexed integer array nums and an integer x.\n\nFind the minimum absolute difference between two elements in the array that are at least x indices apart.\n\nIn other words, find two indices i and j such that abs(i - j) >= x and abs(nums[i] - nums[j]) is minimized.\n\nReturn an integer denoting the minimum absolute difference between two elements that are at least x indices apart.\n\nExample 1:\n\nInput: nums = [4,3,2,4], x = 2\nOutput: 0\nExplanation: We can select nums[0] = 4 and nums[3] = 4.\nThey are at least 2 indices apart, and their absolute difference is the minimum, 0.\nIt can be shown that 0 is the optimal answer.\n\nExample 2:\n\nInput: nums = [5,3,2,10,15], x = 1\nOutput: 1\nExplanation: We can select nums[1] = 3 and nums[2] = 2.\nThey are at least 1 index apart, and their absolute difference is the minimum, 1.\nIt can be shown that 1 is the optimal answer.\n\nExample 3:\n\nInput: nums = [1,2,3,4], x = 3\nOutput: 3\nExplanation: We can select nums[0] = 1 and nums[3] = 4.\nThey are at least 3 indices apart, and their absolute difference is the minimum, 3.\nIt can be shown that 3 is the optimal answer.\n\n\nConstraints:\n\n * 1 <= nums.length <= 105\n * 1 <= nums[i] <= 109\n * 0 <= x < nums.length\n\"\"\"\nclass Solution:\n    def minAbsoluteDifference(self, nums: List[int], x: int) -> int:\n        ",
+ "starter_code": "class Solution:\n    def minAbsoluteDifference(self, nums: List[int], x: int) -> int:\n        ",
+ "entry_point": "",
+ "test": "\nmy_solution = Solution()\n\ntest_input = { \"nums\": [4,3,2,4], \"x\": 2 }\nassert my_solution.minAbsoluteDifference(**test_input) == 0\n\ntest_input = { \"nums\": [5,3,2,10,15], \"x\": 1 }\nassert my_solution.minAbsoluteDifference(**test_input) == 1\n\ntest_input = { \"nums\": [1,2,3,4], \"x\": 3 }\nassert my_solution.minAbsoluteDifference(**test_input) == 3\n\ntest_input = { \"nums\": [1,67], \"x\": 1 }\nassert my_solution.minAbsoluteDifference(**test_input) == 66\n\ntest_input = { \"nums\": [7,398], \"x\": 1 }\nassert my_solution.minAbsoluteDifference(**test_input) == 391\n\ntest_input = { \"nums\": [12,141], \"x\": 1 }\nassert my_solution.minAbsoluteDifference(**test_input) == 129\n\ntest_input = { \"nums\": [21,75], \"x\": 1 }\nassert my_solution.minAbsoluteDifference(**test_input) == 54\n\ntest_input = { \"nums\": [22,147], \"x\": 1 }\nassert my_solution.minAbsoluteDifference(**test_input) == 125\n\ntest_input = { \"nums\": [25,197], \"x\": 1 }\nassert my_solution.minAbsoluteDifference(**test_input) == 172\n\ntest_input = { \"nums\": [27,275], \"x\": 1 }\nassert my_solution.minAbsoluteDifference(**test_input) == 248\n\ntest_input = { \"nums\": [37,192], \"x\": 1 }\nassert my_solution.minAbsoluteDifference(**test_input) == 155\n\ntest_input = { \"nums\": [41,163], \"x\": 1 }\nassert my_solution.minAbsoluteDifference(**test_input) == 122\n\ntest_input = { \"nums\": [45,49], \"x\": 1 }\nassert my_solution.minAbsoluteDifference(**test_input) == 4\n\ntest_input = { \"nums\": [48,195], \"x\": 1 }\nassert my_solution.minAbsoluteDifference(**test_input) == 147\n\ntest_input = { \"nums\": [68,68], \"x\": 1 }\nassert my_solution.minAbsoluteDifference(**test_input) == 0\n\ntest_input = { \"nums\": [71,4], \"x\": 1 }\nassert my_solution.minAbsoluteDifference(**test_input) == 67\n\ntest_input = { \"nums\": [72,169], \"x\": 1 }\nassert my_solution.minAbsoluteDifference(**test_input) == 97\n\ntest_input = { \"nums\": [74,62], \"x\": 1 }\nassert my_solution.minAbsoluteDifference(**test_input) == 12\n\ntest_input = { \"nums\": [75,1], \"x\": 1 }\nassert my_solution.minAbsoluteDifference(**test_input) == 74\n\ntest_input = { \"nums\": [76,49], \"x\": 1 }\nassert my_solution.minAbsoluteDifference(**test_input) == 27\n\ntest_input = { \"nums\": [88,72], \"x\": 1 }\nassert my_solution.minAbsoluteDifference(**test_input) == 16\n\ntest_input = { \"nums\": [99,370], \"x\": 1 }\nassert my_solution.minAbsoluteDifference(**test_input) == 271\n\ntest_input = { \"nums\": [103,39], \"x\": 1 }\nassert my_solution.minAbsoluteDifference(**test_input) == 64\n\ntest_input = { \"nums\": [109,99], \"x\": 1 }\nassert my_solution.minAbsoluteDifference(**test_input) == 10\n\ntest_input = { \"nums\": [111,161], \"x\": 1 }\nassert my_solution.minAbsoluteDifference(**test_input) == 50\n\ntest_input = { \"nums\": [113,117], \"x\": 1 }\nassert my_solution.minAbsoluteDifference(**test_input) == 4\n\ntest_input = { \"nums\": [119,184], \"x\": 1 }\nassert my_solution.minAbsoluteDifference(**test_input) == 65\n\ntest_input = { \"nums\": [122,118], \"x\": 1 }\nassert my_solution.minAbsoluteDifference(**test_input) == 4\n\ntest_input = { \"nums\": [123,13], \"x\": 1 }\nassert my_solution.minAbsoluteDifference(**test_input) == 110\n\ntest_input = { \"nums\": [123,162], \"x\": 1 }\nassert my_solution.minAbsoluteDifference(**test_input) == 39\n\ntest_input = { \"nums\": [126,69], \"x\": 1 }\nassert my_solution.minAbsoluteDifference(**test_input) == 57\n\ntest_input = { \"nums\": [127,18], \"x\": 1 }\nassert my_solution.minAbsoluteDifference(**test_input) == 109\n\ntest_input = { \"nums\": [127,346], \"x\": 1 }\nassert my_solution.minAbsoluteDifference(**test_input) == 219\n\ntest_input = { \"nums\": [132,110], \"x\": 1 }\nassert my_solution.minAbsoluteDifference(**test_input) == 22\n\ntest_input = { \"nums\": [134,23], \"x\": 1 }\nassert my_solution.minAbsoluteDifference(**test_input) == 111\n\ntest_input = { \"nums\": [136,150], \"x\": 1 }\nassert my_solution.minAbsoluteDifference(**test_input) == 14\n\ntest_input = { \"nums\": [139,215], \"x\": 1 }\nassert my_solution.minAbsoluteDifference(**test_input) == 76\n\ntest_input = { \"nums\": [153,3], \"x\": 1 }\nassert my_solution.minAbsoluteDifference(**test_input) == 150\n\ntest_input = { \"nums\": [156,67], \"x\": 1 }\nassert my_solution.minAbsoluteDifference(**test_input) == 89\n\ntest_input = { \"nums\": [160,168], \"x\": 1 }\nassert my_solution.minAbsoluteDifference(**test_input) == 8\n\ntest_input = { \"nums\": [161,93], \"x\": 1 }\nassert my_solution.minAbsoluteDifference(**test_input) == 68\n\ntest_input = { \"nums\": [164,81], \"x\": 1 }\nassert my_solution.minAbsoluteDifference(**test_input) == 83\n\ntest_input = { \"nums\": [167,83], \"x\": 1 }\nassert my_solution.minAbsoluteDifference(**test_input) == 84\n\ntest_input = { \"nums\": [174,58], \"x\": 1 }\nassert my_solution.minAbsoluteDifference(**test_input) == 116\n\ntest_input = { \"nums\": [174,102], \"x\": 1 }\nassert my_solution.minAbsoluteDifference(**test_input) == 72\n\ntest_input = { \"nums\": [175,137], \"x\": 1 }\nassert my_solution.minAbsoluteDifference(**test_input) == 38\n\ntest_input = { \"nums\": [176,99], \"x\": 1 }\nassert my_solution.minAbsoluteDifference(**test_input) == 77\n\ntest_input = { \"nums\": [178,179], \"x\": 1 }\nassert my_solution.minAbsoluteDifference(**test_input) == 1\n\ntest_input = { \"nums\": [228,359], \"x\": 1 }\nassert my_solution.minAbsoluteDifference(**test_input) == 131\n\ntest_input = { \"nums\": [243,280], \"x\": 1 }\nassert my_solution.minAbsoluteDifference(**test_input) == 37\n\ntest_input = { \"nums\": [283,62], \"x\": 1 }\nassert my_solution.minAbsoluteDifference(**test_input) == 221\n\ntest_input = { \"nums\": [288,149], \"x\": 1 }\nassert my_solution.minAbsoluteDifference(**test_input) == 139\n\ntest_input = { \"nums\": [293,278], \"x\": 1 }\nassert my_solution.minAbsoluteDifference(**test_input) == 15\n\ntest_input = { \"nums\": [327,425], \"x\": 1 }\nassert my_solution.minAbsoluteDifference(**test_input) == 98\n\ntest_input = { \"nums\": [337,187], \"x\": 1 }\nassert my_solution.minAbsoluteDifference(**test_input) == 150\n\ntest_input = { \"nums\": [346,160], \"x\": 1 }\nassert my_solution.minAbsoluteDifference(**test_input) == 186\n\ntest_input = { \"nums\": [347,369], \"x\": 1 }\nassert my_solution.minAbsoluteDifference(**test_input) == 22\n\ntest_input = { \"nums\": [355,199], \"x\": 1 }\nassert my_solution.minAbsoluteDifference(**test_input) == 156\n\ntest_input = { \"nums\": [413,311], \"x\": 1 }\nassert my_solution.minAbsoluteDifference(**test_input) == 102\n\ntest_input = { \"nums\": [417,320], \"x\": 1 }\nassert my_solution.minAbsoluteDifference(**test_input) == 97\n\ntest_input = { \"nums\": [418,131], \"x\": 1 }\nassert my_solution.minAbsoluteDifference(**test_input) == 287\n\ntest_input = { \"nums\": [3274,71], \"x\": 1 }\nassert my_solution.minAbsoluteDifference(**test_input) == 3203\n\ntest_input = { \"nums\": [5,14,81], \"x\": 2 }\nassert my_solution.minAbsoluteDifference(**test_input) == 76\n\ntest_input = { \"nums\": [9,25,15], \"x\": 2 }\nassert my_solution.minAbsoluteDifference(**test_input) == 6\n\ntest_input = { \"nums\": [9,113,136], \"x\": 1 }\nassert my_solution.minAbsoluteDifference(**test_input) == 23\n\ntest_input = { \"nums\": [13,19,12], \"x\": 1 }\nassert my_solution.minAbsoluteDifference(**test_input) == 1\n\ntest_input = { \"nums\": [13,94,59], \"x\": 2 }\nassert my_solution.minAbsoluteDifference(**test_input) == 46\n\ntest_input = { \"nums\": [14,111,16], \"x\": 1 }\nassert my_solution.minAbsoluteDifference(**test_input) == 2\n\ntest_input = { \"nums\": [17,173,69], \"x\": 1 }\nassert my_solution.minAbsoluteDifference(**test_input) == 52\n\ntest_input = { \"nums\": [24,39,28], \"x\": 2 }\nassert my_solution.minAbsoluteDifference(**test_input) == 4\n\ntest_input = { \"nums\": [32,129,93], \"x\": 1 }\nassert my_solution.minAbsoluteDifference(**test_input) == 36\n\ntest_input = { \"nums\": [33,18,131], \"x\": 1 }\nassert my_solution.minAbsoluteDifference(**test_input) == 15\n\ntest_input = { \"nums\": [36,19,27], \"x\": 2 }\nassert my_solution.minAbsoluteDifference(**test_input) == 9\n\ntest_input = { \"nums\": [40,18,17], \"x\": 1 }\nassert my_solution.minAbsoluteDifference(**test_input) == 1\n\ntest_input = { \"nums\": [43,49,20], \"x\": 2 }\nassert my_solution.minAbsoluteDifference(**test_input) == 23\n\ntest_input = { \"nums\": [44,186,163], \"x\": 2 }\nassert my_solution.minAbsoluteDifference(**test_input) == 119\n\ntest_input = { \"nums\": [56,23,158], \"x\": 1 }\nassert my_solution.minAbsoluteDifference(**test_input) == 33\n\ntest_input = { \"nums\": [62,37,182], \"x\": 2 }\nassert my_solution.minAbsoluteDifference(**test_input) == 120\n\ntest_input = { \"nums\": [63,116,12], \"x\": 2 }\nassert my_solution.minAbsoluteDifference(**test_input) == 51\n\ntest_input = { \"nums\": [66,345,278], \"x\": 2 }\nassert my_solution.minAbsoluteDifference(**test_input) == 212\n\ntest_input = { \"nums\": [67,81,165], \"x\": 2 }\nassert my_solution.minAbsoluteDifference(**test_input) == 98\n\ntest_input = { \"nums\": [70,184,70], \"x\": 2 }\nassert my_solution.minAbsoluteDifference(**test_input) == 0\n\ntest_input = { \"nums\": [73,106,172], \"x\": 1 }\nassert my_solution.minAbsoluteDifference(**test_input) == 33\n\ntest_input = { \"nums\": [74,199,57], \"x\": 1 }\nassert my_solution.minAbsoluteDifference(**test_input) == 17\n\ntest_input = { \"nums\": [83,14,14], \"x\": 1 }\nassert my_solution.minAbsoluteDifference(**test_input) == 0\n\ntest_input = { \"nums\": [86,1,129], \"x\": 2 }\nassert my_solution.minAbsoluteDifference(**test_input) == 43\n\ntest_input = { \"nums\": [87,194,107], \"x\": 1 }\nassert my_solution.minAbsoluteDifference(**test_input) == 20\n\ntest_input = { \"nums\": [88,75,122], \"x\": 2 }\nassert my_solution.minAbsoluteDifference(**test_input) == 34\n\ntest_input = { \"nums\": [93,96,28], \"x\": 1 }\nassert my_solution.minAbsoluteDifference(**test_input) == 3\n\ntest_input = { \"nums\": [95,86,132], \"x\": 2 }\nassert my_solution.minAbsoluteDifference(**test_input) == 37\n\ntest_input = { \"nums\": [96,41,24], \"x\": 1 }\nassert my_solution.minAbsoluteDifference(**test_input) == 17\n\ntest_input = { \"nums\": [116,6,3], \"x\": 1 }\nassert my_solution.minAbsoluteDifference(**test_input) == 3\n\ntest_input = { \"nums\": [120,102,184], \"x\": 1 }\nassert my_solution.minAbsoluteDifference(**test_input) == 18\n\ntest_input = { \"nums\": [123,113,20], \"x\": 1 }\nassert my_solution.minAbsoluteDifference(**test_input) == 10\n\ntest_input = { \"nums\": [125,14,141], \"x\": 1 }\nassert my_solution.minAbsoluteDifference(**test_input) == 16\n\ntest_input = { \"nums\": [126,2,180], \"x\": 1 }\nassert my_solution.minAbsoluteDifference(**test_input) == 54\n\ntest_input = { \"nums\": [136,24,114], \"x\": 1 }\nassert my_solution.minAbsoluteDifference(**test_input) == 22\n\ntest_input = { \"nums\": [136,177,98], \"x\": 2 }\nassert my_solution.minAbsoluteDifference(**test_input) == 38\n\ntest_input = { \"nums\": [136,177,123], \"x\": 1 }\nassert my_solution.minAbsoluteDifference(**test_input) == 13\n\ntest_input = { \"nums\": [136,178,18], \"x\": 2 }\nassert my_solution.minAbsoluteDifference(**test_input) == 118",
+ "test_cases": [
+  {
+   "input": {
+    "args": [
+     [
+      4,
+      3,
+      2,
+      4
+     ],
+     2
+    ]
+   },
+   "output": 0,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      5,
+      3,
+      2,
+      10,
+      15
+     ],
+     1
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      1,
+      2,
+      3,
+      4
+     ],
+     3
+    ]
+   },
+   "output": 3,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      1,
+      67
+     ],
+     1
+    ]
+   },
+   "output": 66,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      7,
+      398
+     ],
+     1
+    ]
+   },
+   "output": 391,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      12,
+      141
+     ],
+     1
+    ]
+   },
+   "output": 129,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      21,
+      75
+     ],
+     1
+    ]
+   },
+   "output": 54,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      22,
+      147
+     ],
+     1
+    ]
+   },
+   "output": 125,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      25,
+      197
+     ],
+     1
+    ]
+   },
+   "output": 172,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      27,
+      275
+     ],
+     1
+    ]
+   },
+   "output": 248,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      37,
+      192
+     ],
+     1
+    ]
+   },
+   "output": 155,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      41,
+      163
+     ],
+     1
+    ]
+   },
+   "output": 122,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      45,
+      49
+     ],
+     1
+    ]
+   },
+   "output": 4,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      48,
+      195
+     ],
+     1
+    ]
+   },
+   "output": 147,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      68,
+      68
+     ],
+     1
+    ]
+   },
+   "output": 0,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      71,
+      4
+     ],
+     1
+    ]
+   },
+   "output": 67,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      72,
+      169
+     ],
+     1
+    ]
+   },
+   "output": 97,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      74,
+      62
+     ],
+     1
+    ]
+   },
+   "output": 12,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      75,
+      1
+     ],
+     1
+    ]
+   },
+   "output": 74,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      76,
+      49
+     ],
+     1
+    ]
+   },
+   "output": 27,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      88,
+      72
+     ],
+     1
+    ]
+   },
+   "output": 16,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      99,
+      370
+     ],
+     1
+    ]
+   },
+   "output": 271,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      103,
+      39
+     ],
+     1
+    ]
+   },
+   "output": 64,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      109,
+      99
+     ],
+     1
+    ]
+   },
+   "output": 10,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      111,
+      161
+     ],
+     1
+    ]
+   },
+   "output": 50,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      113,
+      117
+     ],
+     1
+    ]
+   },
+   "output": 4,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      119,
+      184
+     ],
+     1
+    ]
+   },
+   "output": 65,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      122,
+      118
+     ],
+     1
+    ]
+   },
+   "output": 4,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      123,
+      13
+     ],
+     1
+    ]
+   },
+   "output": 110,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      123,
+      162
+     ],
+     1
+    ]
+   },
+   "output": 39,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      126,
+      69
+     ],
+     1
+    ]
+   },
+   "output": 57,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      127,
+      18
+     ],
+     1
+    ]
+   },
+   "output": 109,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      127,
+      346
+     ],
+     1
+    ]
+   },
+   "output": 219,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      132,
+      110
+     ],
+     1
+    ]
+   },
+   "output": 22,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      134,
+      23
+     ],
+     1
+    ]
+   },
+   "output": 111,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      136,
+      150
+     ],
+     1
+    ]
+   },
+   "output": 14,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      139,
+      215
+     ],
+     1
+    ]
+   },
+   "output": 76,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      153,
+      3
+     ],
+     1
+    ]
+   },
+   "output": 150,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      156,
+      67
+     ],
+     1
+    ]
+   },
+   "output": 89,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      160,
+      168
+     ],
+     1
+    ]
+   },
+   "output": 8,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      161,
+      93
+     ],
+     1
+    ]
+   },
+   "output": 68,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      164,
+      81
+     ],
+     1
+    ]
+   },
+   "output": 83,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      167,
+      83
+     ],
+     1
+    ]
+   },
+   "output": 84,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      174,
+      58
+     ],
+     1
+    ]
+   },
+   "output": 116,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      174,
+      102
+     ],
+     1
+    ]
+   },
+   "output": 72,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      175,
+      137
+     ],
+     1
+    ]
+   },
+   "output": 38,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      176,
+      99
+     ],
+     1
+    ]
+   },
+   "output": 77,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      178,
+      179
+     ],
+     1
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      228,
+      359
+     ],
+     1
+    ]
+   },
+   "output": 131,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      243,
+      280
+     ],
+     1
+    ]
+   },
+   "output": 37,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      283,
+      62
+     ],
+     1
+    ]
+   },
+   "output": 221,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      288,
+      149
+     ],
+     1
+    ]
+   },
+   "output": 139,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      293,
+      278
+     ],
+     1
+    ]
+   },
+   "output": 15,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      327,
+      425
+     ],
+     1
+    ]
+   },
+   "output": 98,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      337,
+      187
+     ],
+     1
+    ]
+   },
+   "output": 150,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      346,
+      160
+     ],
+     1
+    ]
+   },
+   "output": 186,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      347,
+      369
+     ],
+     1
+    ]
+   },
+   "output": 22,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      355,
+      199
+     ],
+     1
+    ]
+   },
+   "output": 156,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      413,
+      311
+     ],
+     1
+    ]
+   },
+   "output": 102,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      417,
+      320
+     ],
+     1
+    ]
+   },
+   "output": 97,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      418,
+      131
+     ],
+     1
+    ]
+   },
+   "output": 287,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      3274,
+      71
+     ],
+     1
+    ]
+   },
+   "output": 3203,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      5,
+      14,
+      81
+     ],
+     2
+    ]
+   },
+   "output": 76,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      9,
+      25,
+      15
+     ],
+     2
+    ]
+   },
+   "output": 6,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      9,
+      113,
+      136
+     ],
+     1
+    ]
+   },
+   "output": 23,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      13,
+      19,
+      12
+     ],
+     1
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      13,
+      94,
+      59
+     ],
+     2
+    ]
+   },
+   "output": 46,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      14,
+      111,
+      16
+     ],
+     1
+    ]
+   },
+   "output": 2,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      17,
+      173,
+      69
+     ],
+     1
+    ]
+   },
+   "output": 52,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      24,
+      39,
+      28
+     ],
+     2
+    ]
+   },
+   "output": 4,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      32,
+      129,
+      93
+     ],
+     1
+    ]
+   },
+   "output": 36,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      33,
+      18,
+      131
+     ],
+     1
+    ]
+   },
+   "output": 15,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      36,
+      19,
+      27
+     ],
+     2
+    ]
+   },
+   "output": 9,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      40,
+      18,
+      17
+     ],
+     1
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      43,
+      49,
+      20
+     ],
+     2
+    ]
+   },
+   "output": 23,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      44,
+      186,
+      163
+     ],
+     2
+    ]
+   },
+   "output": 119,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      56,
+      23,
+      158
+     ],
+     1
+    ]
+   },
+   "output": 33,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      62,
+      37,
+      182
+     ],
+     2
+    ]
+   },
+   "output": 120,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      63,
+      116,
+      12
+     ],
+     2
+    ]
+   },
+   "output": 51,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      66,
+      345,
+      278
+     ],
+     2
+    ]
+   },
+   "output": 212,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      67,
+      81,
+      165
+     ],
+     2
+    ]
+   },
+   "output": 98,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      70,
+      184,
+      70
+     ],
+     2
+    ]
+   },
+   "output": 0,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      73,
+      106,
+      172
+     ],
+     1
+    ]
+   },
+   "output": 33,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      74,
+      199,
+      57
+     ],
+     1
+    ]
+   },
+   "output": 17,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      83,
+      14,
+      14
+     ],
+     1
+    ]
+   },
+   "output": 0,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      86,
+      1,
+      129
+     ],
+     2
+    ]
+   },
+   "output": 43,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      87,
+      194,
+      107
+     ],
+     1
+    ]
+   },
+   "output": 20,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      88,
+      75,
+      122
+     ],
+     2
+    ]
+   },
+   "output": 34,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      93,
+      96,
+      28
+     ],
+     1
+    ]
+   },
+   "output": 3,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      95,
+      86,
+      132
+     ],
+     2
+    ]
+   },
+   "output": 37,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      96,
+      41,
+      24
+     ],
+     1
+    ]
+   },
+   "output": 17,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      116,
+      6,
+      3
+     ],
+     1
+    ]
+   },
+   "output": 3,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      120,
+      102,
+      184
+     ],
+     1
+    ]
+   },
+   "output": 18,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      123,
+      113,
+      20
+     ],
+     1
+    ]
+   },
+   "output": 10,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      125,
+      14,
+      141
+     ],
+     1
+    ]
+   },
+   "output": 16,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      126,
+      2,
+      180
+     ],
+     1
+    ]
+   },
+   "output": 54,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      136,
+      24,
+      114
+     ],
+     1
+    ]
+   },
+   "output": 22,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      136,
+      177,
+      98
+     ],
+     2
+    ]
+   },
+   "output": 38,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      136,
+      177,
+      123
+     ],
+     1
+    ]
+   },
+   "output": 13,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      136,
+      178,
+      18
+     ],
+     2
+    ]
+   },
+   "output": 118,
+   "explanation": ""
+  }
+ ],
+ "original_ilr": "```json\n{\n  \"problem_id\": \"min_absolute_difference\",\n  \"nodes\": [\n    {\n      \"id\": 1,\n      \"type\": \"start\",\n      \"label\": \"Start\",\n      \"next\": 2\n    },\n    {\n      \"id\": 2,\n      \"type\": \"process\",\n      \"label\": \"Input: nums (List[int]), x (integer)\",\n      \"action\": \"ctx['nums'] = ctx['arg0']; ctx['x'] = ctx['arg1']; ctx['res'] = float('inf'); ctx['S'] = []\",\n      \"next\": 3\n    },\n    {\n      \"id\": 3,\n      \"type\": \"decision\",\n      \"label\": \"Is x == 0?\",\n      \"logic\": \"ctx['x'] == 0\",\n      \"true_next\": 4,\n      \"false_next\": 5\n    },\n    {\n      \"id\": 4,\n      \"type\": \"return\",\n      \"label\": \"Output: 0 (no indices apart)\",\n      \"value\": \"0\"\n    },\n    {\n      \"id\": 5,\n      \"type\": \"process\",\n      \"label\": \"Initialize res = infinity, S = SortedList()\",\n      \"action\": \"ctx['res'] = float('inf'); ctx['S'] = []\",\n      \"next\": 6\n    },\n    {\n      \"id\": 6,\n      \"type\": \"process\",\n      \"label\": \"Loop over i from 0 to len(nums)-1\",\n      \"action\": \"ctx['i'] = 0\",\n      \"next\": 7\n    },\n    {\n      \"id\": 7,\n      \"type\": \"decision\",\n      \"label\": \"Is i >= x-1?\",\n      \"logic\": \"ctx['i'] >= ctx['x'] - 1\",\n      \"true_next\": 13,\n      \"false_next\": 15\n    },\n    {\n      \"id\": 13,\n      \"type\": \"process\",\n      \"label\": \"Add nums[i - (x-1)] to S\",\n      \"action\": \"ctx['S'].append(ctx['nums'][ctx['i'] - (ctx['x'] - 1)])\",\n      \"next\": 6\n    },\n    {\n      \"id\": 15,\n      \"type\": \"process\",\n      \"label\": \"Set j = S.bisect_left(nums[i])\",\n      \"action\": \"ctx['j'] = ctx['S'].bisect_left(ctx['nums'][ctx['i']])\",\n      \"next\": 8\n    },\n    {\n      \"id\": 8,\n      \"type\": \"decision\",\n      \"label\": \"Is j < len(S)?\",\n      \"logic\": \"ctx['j'] < len(ctx['S'])\",\n      \"true_next\": 9,\n      \"false_next\": 10\n    },\n    {\n      \"id\": 9,\n      \"type\": \"process\",\n      \"label\": \"Update res: res = min(res, abs(S[j] - nums[i]))\",\n      \"action\": \"ctx['res'] = min(ctx['res'], abs(ctx['S'][ctx['j']] - ctx['nums'][ctx['i']]))\",\n      \"next\": 10\n    },\n    {\n      \"id\": 10,\n      \"type\": \"decision\",\n      \"label\": \"Is j > 0?\",\n      \"logic\": \"ctx['j'] > 0\",\n      \"true_next\": 11,\n      \"false_next\": 12\n    },\n    {\n      \"id\": 11,\n      \"type\": \"process\",\n      \"label\": \"Update res: res = min(res, abs(S[j-1] - nums[i]))\",\n      \"action\": \"ctx['res'] = min(ctx['res'], abs(ctx['S'][ctx['j'] - 1] - ctx['nums'][ctx['i']]))\",\n      \"next\": 12\n    },\n    {\n      \"id\": 12,\n      \"type\": \"process\",\n      \"label\": \"End Loop\",\n      \"action\": \"ctx['i'] += 1\",\n      \"next\": 6\n    },\n    {\n      \"id\": 14,\n      \"type\": \"return\",\n      \"label\": \"Output: res (minimum absolute difference)\",\n      \"value\": \"ctx['res']\"\n    }\n  ]\n}\n```",
+ "original_code": "class Solution:\n    def minAbsoluteDifference(self, nums: List[int], x: int) -> int:\n        if x == 0:\n            return 0\n        \n        res = float('inf')\n        S = []\n        \n        i = 0\n        while i < len(nums):\n            if i >= x - 1:\n                S.append(nums[i - (x - 1)])\n            \n            j = bisect.bisect_left(S, nums[i])\n            if j < len(S):\n                res = min(res, abs(S[j] - nums[i]))\n            if j > 0:\n                res = min(res, abs(S[j - 1] - nums[i]))\n            \n            i += 1\n        \n        return res",
+ "ocr_data": {
+  "nodes": [
+   {
+    "node_id": 1,
+    "shape_type": "rectangle",
+    "raw_text": "Start",
+    "position": "top"
+   },
+   {
+    "node_id": 2,
+    "shape_type": "rectangle",
+    "raw_text": "Input: nums (List[int]), x (integer)",
+    "position": "middle"
+   },
+   {
+    "node_id": 3,
+    "shape_type": "diamond",
+    "raw_text": "Is x == 0?",
+    "position": "middle"
+   },
+   {
+    "node_id": 4,
+    "shape_type": "rectangle",
+    "raw_text": "Output: 0 (no indices apart)",
+    "position": "middle"
+   },
+   {
+    "node_id": 5,
+    "shape_type": "rectangle",
+    "raw_text": "Initialize res = infinity, S = SortedList()",
+    "position": "middle"
+   },
+   {
+    "node_id": 6,
+    "shape_type": "rectangle",
+    "raw_text": "Loop over i from 0 to len(nums)-1",
+    "position": "middle"
+   },
+   {
+    "node_id": 7,
+    "shape_type": "rectangle",
+    "raw_text": "Set j = S.bisect_left(nums[i])",
+    "position": "middle"
+   },
+   {
+    "node_id": 8,
+    "shape_type": "diamond",
+    "raw_text": "Is j < len(S)?",
+    "position": "middle"
+   },
+   {
+    "node_id": 9,
+    "shape_type": "rectangle",
+    "raw_text": "Update res: res = min(res, abs(S[j] - nums[i]))",
+    "position": "middle"
+   },
+   {
+    "node_id": 10,
+    "shape_type": "diamond",
+    "raw_text": "Is j > 0?",
+    "position": "middle"
+   },
+   {
+    "node_id": 11,
+    "shape_type": "rectangle",
+    "raw_text": "Update res: res = min(res, abs(S[j-1] - nums[i]))",
+    "position": "middle"
+   },
+   {
+    "node_id": 12,
+    "shape_type": "diamond",
+    "raw_text": "Is i >= x-1?",
+    "position": "middle"
+   },
+   {
+    "node_id": 13,
+    "shape_type": "rectangle",
+    "raw_text": "Add nums[i - (x-1)] to S",
+    "position": "middle"
+   },
+   {
+    "node_id": 14,
+    "shape_type": "rectangle",
+    "raw_text": "Output: res (minimum absolute difference)",
+    "position": "bottom"
+   },
+   {
+    "node_id": 15,
+    "shape_type": "rectangle",
+    "raw_text": "End Loop",
+    "position": "middle"
+   }
+  ],
+  "edges": [
+   {
+    "from_node": 1,
+    "to_node": 2,
+    "label": ""
+   },
+   {
+    "from_node": 2,
+    "to_node": 3,
+    "label": ""
+   },
+   {
+    "from_node": 3,
+    "to_node": 4,
+    "label": "Yes"
+   },
+   {
+    "from_node": 3,
+    "to_node": 5,
+    "label": "No"
+   },
+   {
+    "from_node": 5,
+    "to_node": 6,
+    "label": ""
+   },
+   {
+    "from_node": 6,
+    "to_node": 7,
+    "label": ""
+   },
+   {
+    "from_node": 7,
+    "to_node": 8,
+    "label": ""
+   },
+   {
+    "from_node": 8,
+    "to_node": 9,
+    "label": "Yes"
+   },
+   {
+    "from_node": 8,
+    "to_node": 10,
+    "label": "No"
+   },
+   {
+    "from_node": 9,
+    "to_node": 10,
+    "label": ""
+   },
+   {
+    "from_node": 10,
+    "to_node": 11,
+    "label": "Yes"
+   },
+   {
+    "from_node": 10,
+    "to_node": 12,
+    "label": "No"
+   },
+   {
+    "from_node": 11,
+    "to_node": 12,
+    "label": ""
+   },
+   {
+    "from_node": 12,
+    "to_node": 13,
+    "label": "Yes"
+   },
+   {
+    "from_node": 12,
+    "to_node": 14,
+    "label": "No"
+   },
+   {
+    "from_node": 13,
+    "to_node": 6,
+    "label": ""
+   },
+   {
+    "from_node": 15,
+    "to_node": 14,
+    "label": ""
+   }
+  ],
+  "other_text": []
+ },
+ "test_result": {},
+ "status": "completed",
+ "fixed_ilr": null,
+ "modified_code": null,
+ "ilr_fix_log": "",
+ "bug_injected": ""
+}

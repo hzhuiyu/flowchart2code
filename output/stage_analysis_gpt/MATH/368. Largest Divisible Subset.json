@@ -1,0 +1,176 @@
+{
+  "task_id": "368. Largest Divisible Subset",
+  "dataset": "MATH",
+  "difficulty": "medium",
+  "title": null,
+  "result": "failed: ",
+  "ilr": "{\n  \"problem_id\": \"largest_divisible_subset\",\n  \"nodes\": [\n    {\"id\": 1, \"type\": \"start\", \"label\": \"Start\", \"next\": 2},\n    {\"id\": 2, \"type\": \"process\", \"label\": \"Input: nums (List of distinct positive integers)\", \"action\": \"ctx['nums']=ctx['arg0']; ctx['n']=len(ctx['nums']); ctx['i']=0; ctx['ans']=[]\", \"next\": 3},\n    {\"id\": 3, \"type\": \"process\", \"label\": \"Sort nums\", \"action\": \"ctx['nums'] = sorted(ctx['nums'])\", \"next\": 4},\n    {\"id\": 4, \"type\": \"process\", \"label\": \"Initialize n = len(nums)\", \"action\": \"ctx['n'] = len(ctx['nums'])\", \"next\": 5},\n    {\"id\": 5, \"type\": \"decision\", \"label\": \"Is n < 2?\", \"logic\": \"ctx['n'] < 2\", \"true_next\": 6, \"false_next\": 7},\n    {\"id\": 6, \"type\": \"end\", \"label\": \"Output: nums (List has less than 2 elements)\", \"output\": \"ctx['nums']\"},\n    {\"id\": 7, \"type\": \"process\", \"label\": \"Initialize ans = [[num] for num in nums]\", \"action\": \"ctx['ans'] = [[num] for num in ctx['nums']]\", \"next\": 8},\n    {\"id\": 8, \"type\": \"process\", \"label\": \"Loop i from 0 to n-1\", \"action\": \"for ctx['i'] in range(ctx['n']):\", \"next\": 9},\n    {\"id\": 9, \"type\": \"process\", \"label\": \"Loop j from 0 to i-1\", \"action\": \"for ctx['j'] in range(ctx['i']):\", \"next\": 10},\n    {\"id\": 10, \"type\": \"process\", \"label\": \"Find the maximum subset in ans by length\", \"action\": \"if ctx['nums'][ctx['i']] % ctx['nums'][ctx['j']] == 0 and len(ctx['ans'][ctx['i']]) < len(ctx['ans'][ctx['j']]) + 1:\", \"next\": 11},\n    {\"id\": 11, \"type\": \"decision\", \"label\": \"Is nums[i] % nums[j] == 0 and len(ans[i]) < len(ans[j]) + 1?\", \"logic\": \"ctx['nums'][ctx['i']] % ctx['nums'][ctx['j']] == 0 and len(ctx['ans'][ctx['i']]) < len(ctx['ans'][ctx['j']]) + 1\", \"true_next\": 12, \"false_next\": 9},\n    {\"id\": 12, \"type\": \"process\", \"label\": \"Update ans[i] = ans[i] + [nums[i]]\", \"action\": \"ctx['ans'][ctx['i']] += [ctx['nums'][ctx['i']]]\", \"next\": 9},\n    {\"id\": 13, \"type\": \"end\", \"label\": \"Output: max(ans, key=lambda x: len(x))\", \"output\": \"max(ctx['ans'], key=len)\"}\n  ]\n}",
+  "code": "from typing import List\n\ndef largestDivisibleSubset(nums: List[int]) -> List[int]:\n    n = len(nums)\n    if n < 2:\n        return nums\n    \n    nums.sort()\n    ans = [[num] for num in nums]\n    \n    for i in range(n):\n        for j in range(i):\n            if nums[i] % nums[j] == 0 and len(ans[i]) < len(ans[j]) + 1:\n                ans[i] += [nums[i]]\n    \n    return max(ans, key=len)",
+  "prompt": "Given a set of distinct positive integers nums, return the largest subset answer such that every pair (answer[i], answer[j]) of elements in this subset satisfies:\n\nanswer[i] % answer[j] == 0, or\nanswer[j] % answer[i] == 0\nIf there are multiple solutions, return any of them.\n\n\n\nExample 1:\n\nInput: nums = [1,2,3]\nOutput: [1,2]\nExplanation: [1,3] is also accepted.\nExample 2:\n\nInput: nums = [1,2,4,8]\nOutput: [1,2,4,8]\n\n\nConstraints:\n\n1 <= nums.length <= 1000\n1 <= nums[i] <= 2 * 109\nAll the integers in nums are unique.",
+  "test": "assert largestDivisibleSubset([1, 2, 3]) in [[1, 2], [1, 3]]  # multiple valid outputs\nassert largestDivisibleSubset([1, 2, 4, 8]) == [1, 2, 4, 8]  # single valid output\nassert largestDivisibleSubset([3, 6, 9, 18]) in [[3, 6, 18], [3, 9, 18]]  # multiple valid outputs\n\n# Boundary test cases\nassert largestDivisibleSubset([1]) == [1]  # single element\nassert largestDivisibleSubset([2]) == [2]  # single element\nassert largestDivisibleSubset([1, 2]) == [1, 2]  # two elements, both divisible\n\n# Large number test cases\nassert largestDivisibleSubset([1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024]) == [1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024]  # large sequence\nassert largestDivisibleSubset([1, 3, 9, 27, 81, 243, 729]) == [1, 3, 9, 27, 81, 243, 729]  # large sequence\nassert largestDivisibleSubset([1, 5, 25, 125, 625, 3125, 15625]) == [1, 5, 25, 125, 625, 3125, 15625]  # large sequence",
+  "ocr_data": {
+    "nodes": [
+      {
+        "node_id": 1,
+        "shape_type": "rectangle",
+        "raw_text": "Start",
+        "position": "top"
+      },
+      {
+        "node_id": 2,
+        "shape_type": "rectangle",
+        "raw_text": "Input: nums (List of distinct positive integers)",
+        "position": "middle"
+      },
+      {
+        "node_id": 3,
+        "shape_type": "rectangle",
+        "raw_text": "Sort nums",
+        "position": "middle"
+      },
+      {
+        "node_id": 4,
+        "shape_type": "rectangle",
+        "raw_text": "Initialize n = len(nums)",
+        "position": "middle"
+      },
+      {
+        "node_id": 5,
+        "shape_type": "diamond",
+        "raw_text": "Is n < 2?",
+        "position": "middle"
+      },
+      {
+        "node_id": 6,
+        "shape_type": "rectangle",
+        "raw_text": "Output: nums (List has less than 2 elements)",
+        "position": "middle"
+      },
+      {
+        "node_id": 7,
+        "shape_type": "rectangle",
+        "raw_text": "Initialize ans = [[num] for num in nums]",
+        "position": "middle"
+      },
+      {
+        "node_id": 8,
+        "shape_type": "rectangle",
+        "raw_text": "Loop i from 0 to n-1",
+        "position": "middle"
+      },
+      {
+        "node_id": 9,
+        "shape_type": "rectangle",
+        "raw_text": "Loop j from 0 to i-1",
+        "position": "middle"
+      },
+      {
+        "node_id": 10,
+        "shape_type": "rectangle",
+        "raw_text": "Find the maximum subset in ans by length",
+        "position": "middle"
+      },
+      {
+        "node_id": 11,
+        "shape_type": "diamond",
+        "raw_text": "Is nums[i] % nums[j] == 0 and len(ans[i]) < len(ans[j]) + 1?",
+        "position": "middle"
+      },
+      {
+        "node_id": 12,
+        "shape_type": "rectangle",
+        "raw_text": "Update ans[i] = ans[i] + [nums[i]]",
+        "position": "middle"
+      },
+      {
+        "node_id": 13,
+        "shape_type": "rectangle",
+        "raw_text": "Output: max(ans, key=lambda x: len(x))",
+        "position": "bottom"
+      }
+    ],
+    "edges": [
+      {
+        "from_node": 1,
+        "to_node": 2,
+        "label": ""
+      },
+      {
+        "from_node": 2,
+        "to_node": 3,
+        "label": ""
+      },
+      {
+        "from_node": 3,
+        "to_node": 4,
+        "label": ""
+      },
+      {
+        "from_node": 4,
+        "to_node": 5,
+        "label": ""
+      },
+      {
+        "from_node": 5,
+        "to_node": 6,
+        "label": "Yes"
+      },
+      {
+        "from_node": 5,
+        "to_node": 7,
+        "label": "No"
+      },
+      {
+        "from_node": 7,
+        "to_node": 8,
+        "label": ""
+      },
+      {
+        "from_node": 8,
+        "to_node": 9,
+        "label": "Yes"
+      },
+      {
+        "from_node": 8,
+        "to_node": 10,
+        "label": "No"
+      },
+      {
+        "from_node": 9,
+        "to_node": 11,
+        "label": ""
+      },
+      {
+        "from_node": 11,
+        "to_node": 12,
+        "label": "Yes"
+      },
+      {
+        "from_node": 11,
+        "to_node": 9,
+        "label": "No"
+      },
+      {
+        "from_node": 10,
+        "to_node": 13,
+        "label": ""
+      },
+      {
+        "from_node": 12,
+        "to_node": 13,
+        "label": ""
+      }
+    ],
+    "other_text": []
+  },
+  "analysis": {
+    "ilr_verdict": "incorrect",
+    "ilr_issues": "节点12的更新写成ans[i]+=[nums[i]]（把nums[i]重复追加到ans[i]末尾），正确DP应为ans[i]=ans[j]+[nums[i]]，链式子集信息全部丢失，输出的是重复元素列表；节点10还留下孤立的'if 条件:'悬空语句（无循环体，忠实执行即语法错误）。",
+    "code_vs_ilr": "faithful",
+    "code_issues": "代码逐节点照搬ILR（包括致命的ans[i]+=[nums[i]]，仅省略了无语义的悬空if），输出的是重复元素列表而非整除子集。",
+    "error_source": "ilr",
+    "ocr_contribution": "unclear",
+    "root_cause": "OCR文本#12即为'Update ans[i] = ans[i] + [nums[i]]'，ILR照抄；正确算法应为ans[j]+[nums[i]]，j→i可能是OCR误读也可能是流程图自身缺陷，无法判定，但ILR/代码按此执行必然输出错误子集。",
+    "evidence": "largestDivisibleSubset([1,2,4,8])实际运行返回[8,8,8,8]（期望[1,2,4,8]）；[1,2,3]返回[2,2]，不在[[1,2],[1,3]]中。"
+  }
+}

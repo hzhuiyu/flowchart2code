@@ -1,0 +1,59 @@
+{
+  "total": 110,
+  "processed": 88,
+  "success": 14,
+  "failed": 74,
+  "success_rate": 15.909090909090908,
+  "iteration_stats": {
+    "1": {
+      "count": 88,
+      "avg_duration": 27.95062857324427,
+      "avg_total_tokens": 84358.68181818182,
+      "avg_prompt_tokens": 82407.27272727272,
+      "avg_completion_tokens": 1951.409090909091
+    },
+    "2": {
+      "count": 86,
+      "avg_duration": 11.612008017162944,
+      "avg_total_tokens": 8854.56976744186,
+      "avg_prompt_tokens": 8043.604651162791,
+      "avg_completion_tokens": 810.9651162790698
+    },
+    "3": {
+      "count": 76,
+      "avg_duration": 10.770056153598585,
+      "avg_total_tokens": 9164.631578947368,
+      "avg_prompt_tokens": 8349.28947368421,
+      "avg_completion_tokens": 815.3421052631579
+    }
+  },
+  "avg_duration_by_iteration": {
+    "1": 27.95062857324427,
+    "2": 11.612008017162944,
+    "3": 10.770056153598585
+  },
+  "reflection_mode": "full",
+  "final_merge_eval": {
+    "samples_file": "output\\LiveCodeBench\\gpt-4o-mini-gpt-4o-mini\\samples.jsonl",
+    "reflection_dir": "output\\LiveCodeBench\\gpt-4o-mini-gpt-4o-mini\\reflection",
+    "output_file": "output\\LiveCodeBench\\gpt-4o-mini-gpt-4o-mini\\reflection\\samples_reflection_merged.jsonl",
+    "merged_results_file": "output\\LiveCodeBench\\gpt-4o-mini-gpt-4o-mini\\reflection\\samples_reflection_merged.jsonl_results.jsonl",
+    "results_txt": "output\\LiveCodeBench\\gpt-4o-mini-gpt-4o-mini\\reflection\\results.txt",
+    "problem_file": "data\\LiveCodeBench\\LiveCodeBench_merged.jsonl",
+    "merge_summary": {
+      "total_rows": 148,
+      "replaced_rows": 110,
+      "replaced_by_first_passed": 21,
+      "replaced_by_last_failed": 89,
+      "missing_generated_code": 0,
+      "selection_stats": {
+        "keep_original": 38,
+        "first_passed": 21,
+        "iter_3_failed": 89
+      }
+    },
+    "eval_result": {
+      "pass@1": 0.38513513513513514
+    }
+  }
+}

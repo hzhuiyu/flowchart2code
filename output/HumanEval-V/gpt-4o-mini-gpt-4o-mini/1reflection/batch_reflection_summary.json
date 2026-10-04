@@ -1,0 +1,13 @@
+{
+  "total": 21,
+  "processed": 0,
+  "success": 0,
+  "failed": 0,
+  "success_rate": 0,
+  "iteration_stats": {},
+  "avg_duration_by_iteration": {
+    "1": 0.0,
+    "2": 0.0,
+    "3": 0.0
+  }
+}

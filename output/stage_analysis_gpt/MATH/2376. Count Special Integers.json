@@ -1,0 +1,290 @@
+{
+  "task_id": "2376. Count Special Integers",
+  "dataset": "MATH",
+  "difficulty": "hard",
+  "title": null,
+  "result": "failed: ",
+  "ilr": "{\n  \"problem_id\": \"special_integers_count\",\n  \"functions\": [\n    {\n      \"name\": \"count\",\n      \"parameters\": [\"i\", \"m\"],\n      \"entry_node\": 21,\n      \"nodes\": [\n        {\"id\": 21, \"type\": \"start\", \"label\": \"count(i, m)\", \"next\": 22},\n        {\"id\": 22, \"type\": \"decision\", \"label\": \"Is j == 0?\", \"logic\": \"ctx['j'] == 0\", \"true_next\": 23, \"false_next\": 24},\n        {\"id\": 23, \"type\": \"return\", \"label\": \"Return 1\", \"value\": \"1\"},\n        {\"id\": 24, \"type\": \"return\", \"label\": \"Return (m - i + 1) * count(i - 1, m)\", \"value\": \"(ctx['m'] - ctx['i'] + 1) * ctx['count'](ctx['i'] - 1, ctx['m'])\"}\n      ]\n    },\n    {\n      \"name\": \"dfs\",\n      \"parameters\": [\"i\", \"mask\"],\n      \"entry_node\": 9,\n      \"nodes\": [\n        {\"id\": 9, \"type\": \"start\", \"label\": \"dfs(i, mask)\", \"next\": 10},\n        {\"id\": 10, \"type\": \"decision\", \"label\": \"Is i >= len(n)?\", \"logic\": \"ctx['i'] >= len(ctx['n'])\", \"true_next\": 11, \"false_next\": 12},\n        {\"id\": 11, \"type\": \"return\", \"label\": \"Return 1\", \"value\": \"1\"},\n        {\"id\": 12, \"type\": \"process\", \"label\": \"Calculate cur = ord(n[i]) - ord('0')\", \"action\": \"ctx['cur'] = ord(ctx['n'][ctx['i']]) - ord('0')\", \"next\": 13},\n        {\"id\": 13, \"type\": \"decision\", \"label\": \"Is mask & (1 << cur)?\", \"logic\": \"ctx['mask'] & (1 << ctx['cur'])\", \"true_next\": 14, \"false_next\": 15},\n        {\"id\": 14, \"type\": \"process\", \"label\": \"res = dfs(i + 1, mask + (1 << cur))\", \"action\": \"ctx['res'] = ctx['dfs'](ctx['i'] + 1, ctx['mask'] + (1 << ctx['cur']))\", \"next\": 16},\n        {\"id\": 15, \"type\": \"process\", \"label\": \"res = 0\", \"action\": \"ctx['res'] = 0\", \"next\": 16},\n        {\"id\": 16, \"type\": \"process\", \"label\": \"Loop j from 0 if i > 0 else 1, to cur-1\", \"action\": \"for ctx['j'] in range(0 if ctx['i'] > 0 else 1, ctx['cur']):\", \"next\": 17},\n        {\"id\": 17, \"type\": \"decision\", \"label\": \"Is mask & (1 << j)?\", \"logic\": \"ctx['mask'] & (1 << ctx['j'])\", \"true_next\": 18, \"false_next\": 19},\n        {\"id\": 18, \"type\": \"process\", \"label\": \"res += count(len(n) - i - 1, 9 - j)\", \"action\": \"ctx['res'] += ctx['count'](len(ctx['n']) - ctx['i'] - 1, 9 - ctx['j'])\", \"next\": 19},\n        {\"id\": 19, \"type\": \"process\", \"label\": \"Continue loop\", \"action\": \"\", \"next\": 16},\n        {\"id\": 20, \"type\": \"return\", \"label\": \"Return res\", \"value\": \"ctx['res']\"}\n      ]\n    }\n  ],\n  \"nodes\": [\n    {\"id\": 1, \"type\": \"start\", \"label\": \"Start\", \"next\": 2},\n    {\"id\": 2, \"type\": \"process\", \"label\": \"Input: n (integer)\", \"action\": \"ctx['n']=ctx['arg0']; ctx['i']=0; ctx['sum']=0\", \"next\": 3},\n    {\"id\": 3, \"type\": \"process\", \"label\": \"Convert n to string\", \"action\": \"ctx['n'] = str(ctx['n'])\", \"next\": 4},\n    {\"id\": 4, \"type\": \"process\", \"label\": \"Define count function\", \"action\": \"\", \"next\": 5},\n    {\"id\": 5, \"type\": \"process\", \"label\": \"Define dfs function\", \"action\": \"\", \"next\": 6},\n    {\"id\": 6, \"type\": \"call\", \"label\": \"Call dfs(0, 0)\", \"function_name\": \"dfs\", \"arguments\": [\"0\", \"0\"], \"return_var\": \"result\", \"next\": 7},\n    {\"id\": 7, \"type\": \"process\", \"label\": \"Sum 9 * count(i - 1, 9) for i in range(1, len(n))\", \"action\": \"ctx['sum'] += sum(9 * ctx['count'](ctx['i'] - 1, 9) for ctx['i'] in range(1, len(ctx['n'])))\", \"next\": 8},\n    {\"id\": 8, \"type\": \"return\", \"label\": \"Return dfs(0, 0) + Sum 9 * count(i - 1, 9) for i in range(1, len(n))\", \"value\": \"ctx['result'] + ctx['sum']\"}\n  ]\n}",
+  "code": "def countSpecialNumbers(n: int) -> int:\n    def count(i: int, m: int) -> int:\n        if i == 0:\n            return 1\n        return (m - i + 1) * count(i - 1, m)\n\n    def dfs(i: int, mask: int) -> int:\n        if i >= len(n_str):\n            return 1\n        \n        cur = ord(n_str[i]) - ord('0')\n        if mask & (1 << cur):\n            res = dfs(i + 1, mask + (1 << cur))\n        else:\n            res = 0\n        \n        for j in range(0 if i > 0 else 1, cur):\n            if not (mask & (1 << j)):\n                res += count(len(n_str) - i - 1, 9 - j)\n        \n        return res\n\n    n_str = str(n)\n    total_sum = 0\n    result = dfs(0, 0)\n    \n    for i in range(1, len(n_str)):\n        total_sum += 9 * count(i - 1, 9)\n    \n    return result + total_sum",
+  "prompt": "We call a positive integer special if all of its digits are distinct.\n\nGiven a positive integer n, return the number of special integers that belong to the interval [1, n].\n\n\n\nExample 1:\n\nInput: n = 20\nOutput: 19\nExplanation: All the integers from 1 to 20, except 11, are special. Thus, there are 19 special integers.\nExample 2:\n\nInput: n = 5\nOutput: 5\nExplanation: All the integers from 1 to 5 are special.\nExample 3:\n\nInput: n = 135\nOutput: 110\nExplanation: There are 110 integers from 1 to 135 that are special.\nSome of the integers that are not special are: 22, 114, and 131.\n\n\nConstraints:\n\n1 <= n <= 2 * 109",
+  "test": "assert countSpecialNumbers(20) == 19  # All numbers from 1 to 20 except 11 are special\nassert countSpecialNumbers(5) == 5  # All numbers from 1 to 5 are special\nassert countSpecialNumbers(135) == 110  # 110 special numbers from 1 to 135\n\n# Boundary test cases\nassert countSpecialNumbers(1) == 1  # Smallest positive integer, special\nassert countSpecialNumbers(10) == 10  # All numbers from 1 to 10 are special\nassert countSpecialNumbers(11) == 10  # Only 11 is not special\n\n# Large number test cases\nassert countSpecialNumbers(1000) == 738  # 738 special numbers from 1 to 1000\nassert countSpecialNumbers(9999) == 5274  # 4536 special numbers from 1 to 9999\nassert countSpecialNumbers(100000) == 32490  # 52704 special numbers from 1 to 100000",
+  "ocr_data": {
+    "nodes": [
+      {
+        "node_id": 1,
+        "shape_type": "rectangle",
+        "raw_text": "Start",
+        "position": "top"
+      },
+      {
+        "node_id": 2,
+        "shape_type": "rectangle",
+        "raw_text": "Input: n (integer)",
+        "position": "middle"
+      },
+      {
+        "node_id": 3,
+        "shape_type": "rectangle",
+        "raw_text": "Convert n to string",
+        "position": "middle"
+      },
+      {
+        "node_id": 4,
+        "shape_type": "rectangle",
+        "raw_text": "Define count function",
+        "position": "middle"
+      },
+      {
+        "node_id": 5,
+        "shape_type": "rectangle",
+        "raw_text": "Define dfs function",
+        "position": "middle"
+      },
+      {
+        "node_id": 6,
+        "shape_type": "rectangle",
+        "raw_text": "Call dfs(0, 0)",
+        "position": "middle"
+      },
+      {
+        "node_id": 7,
+        "shape_type": "rectangle",
+        "raw_text": "Sum 9 * count(i - 1, 9) for i in range(1, len(n))",
+        "position": "middle"
+      },
+      {
+        "node_id": 8,
+        "shape_type": "rectangle",
+        "raw_text": "Return dfs(0, 0) + Sum 9 * count(i - 1, 9) for i in range(1, len(n))",
+        "position": "bottom"
+      },
+      {
+        "node_id": 9,
+        "shape_type": "rectangle",
+        "raw_text": "dfs(i, mask)",
+        "position": "top"
+      },
+      {
+        "node_id": 10,
+        "shape_type": "diamond",
+        "raw_text": "Is i >= len(n)?",
+        "position": "middle"
+      },
+      {
+        "node_id": 11,
+        "shape_type": "rectangle",
+        "raw_text": "Return 1",
+        "position": "middle"
+      },
+      {
+        "node_id": 12,
+        "shape_type": "rectangle",
+        "raw_text": "Calculate cur = ord(n[i]) - ord('0')",
+        "position": "middle"
+      },
+      {
+        "node_id": 13,
+        "shape_type": "diamond",
+        "raw_text": "Is mask & (1 << cur)?",
+        "position": "middle"
+      },
+      {
+        "node_id": 14,
+        "shape_type": "rectangle",
+        "raw_text": "res = dfs(i + 1, mask + (1 << cur))",
+        "position": "middle"
+      },
+      {
+        "node_id": 15,
+        "shape_type": "rectangle",
+        "raw_text": "res = 0",
+        "position": "middle"
+      },
+      {
+        "node_id": 16,
+        "shape_type": "rectangle",
+        "raw_text": "Loop j from 0 if i > 0 else 1, to cur-1",
+        "position": "middle"
+      },
+      {
+        "node_id": 17,
+        "shape_type": "diamond",
+        "raw_text": "Is mask & (1 << j)?",
+        "position": "middle"
+      },
+      {
+        "node_id": 18,
+        "shape_type": "rectangle",
+        "raw_text": "res += count(len(n) - i - 1, 9 - j)",
+        "position": "middle"
+      },
+      {
+        "node_id": 19,
+        "shape_type": "rectangle",
+        "raw_text": "Continue loop",
+        "position": "middle"
+      },
+      {
+        "node_id": 20,
+        "shape_type": "rectangle",
+        "raw_text": "Return res",
+        "position": "bottom"
+      },
+      {
+        "node_id": 21,
+        "shape_type": "rectangle",
+        "raw_text": "count(i, m)",
+        "position": "top"
+      },
+      {
+        "node_id": 22,
+        "shape_type": "diamond",
+        "raw_text": "Is j == 0?",
+        "position": "middle"
+      },
+      {
+        "node_id": 23,
+        "shape_type": "rectangle",
+        "raw_text": "Return 1",
+        "position": "middle"
+      },
+      {
+        "node_id": 24,
+        "shape_type": "rectangle",
+        "raw_text": "Return (m - i + 1) * count(i - 1, m)",
+        "position": "middle"
+      }
+    ],
+    "edges": [
+      {
+        "from_node": 1,
+        "to_node": 2,
+        "label": ""
+      },
+      {
+        "from_node": 2,
+        "to_node": 3,
+        "label": ""
+      },
+      {
+        "from_node": 3,
+        "to_node": 4,
+        "label": ""
+      },
+      {
+        "from_node": 4,
+        "to_node": 5,
+        "label": ""
+      },
+      {
+        "from_node": 5,
+        "to_node": 6,
+        "label": ""
+      },
+      {
+        "from_node": 6,
+        "to_node": 7,
+        "label": ""
+      },
+      {
+        "from_node": 7,
+        "to_node": 8,
+        "label": ""
+      },
+      {
+        "from_node": 9,
+        "to_node": 10,
+        "label": ""
+      },
+      {
+        "from_node": 10,
+        "to_node": 11,
+        "label": "Yes"
+      },
+      {
+        "from_node": 10,
+        "to_node": 12,
+        "label": "No"
+      },
+      {
+        "from_node": 12,
+        "to_node": 13,
+        "label": ""
+      },
+      {
+        "from_node": 13,
+        "to_node": 14,
+        "label": "No"
+      },
+      {
+        "from_node": 13,
+        "to_node": 15,
+        "label": "Yes"
+      },
+      {
+        "from_node": 14,
+        "to_node": 16,
+        "label": ""
+      },
+      {
+        "from_node": 15,
+        "to_node": 16,
+        "label": ""
+      },
+      {
+        "from_node": 16,
+        "to_node": 17,
+        "label": ""
+      },
+      {
+        "from_node": 17,
+        "to_node": 18,
+        "label": "No"
+      },
+      {
+        "from_node": 17,
+        "to_node": 19,
+        "label": "Yes"
+      },
+      {
+        "from_node": 18,
+        "to_node": 19,
+        "label": ""
+      },
+      {
+        "from_node": 19,
+        "to_node": 20,
+        "label": ""
+      },
+      {
+        "from_node": 21,
+        "to_node": 22,
+        "label": ""
+      },
+      {
+        "from_node": 22,
+        "to_node": 23,
+        "label": "Yes"
+      },
+      {
+        "from_node": 22,
+        "to_node": 24,
+        "label": "No"
+      }
+    ],
+    "other_text": [
+      "dfs",
+      "count"
+    ]
+  },
+  "analysis": {
+    "ilr_verdict": "incorrect",
+    "ilr_issues": "OCR 边显示两个判断的极性本正确（13-No→14 递归、13-Yes→15 置 0；17-No→18 累加、17-Yes→19 跳过），ILR 全部接反导致紧路径完全丢失；另外节点18 的池大小公式 9-j 是流程图文本自带的缺陷（应为 9-i，剩余可用数字=10-(i+1) 与枚举的数字 j 无关）。",
+    "code_vs_ilr": "deviates",
+    "code_issues": "代码把节点17 的极性纠正回来（if not mask&(1<<j) 才累加），但保留紧路径接反与 9-j 公式错误，仍系统性漏计；失败源自 ILR 逻辑而非这次修正性偏离。",
+    "error_source": "ilr",
+    "ocr_contribution": "no",
+    "root_cause": "ILR 违背清晰的 OCR 边把两处分支极性接反，并继承流程图文本的 9-j 公式缺陷；代码只修复其一，失败根源在 ILR。",
+    "evidence": "实测 20→17（期望19）、5→4（期望5）、135→90（期望110）、1→0（期望1）；按 ILR 原样模拟 20→9、5→0、135→90 同错；即使极性全对而保留 9-j，n=20 也只能得 18。1000→738 正确属两处偏差抵消。"
+  }
+}

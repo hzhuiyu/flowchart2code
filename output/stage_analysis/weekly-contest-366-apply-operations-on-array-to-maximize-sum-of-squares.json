@@ -1,0 +1,110 @@
+{
+  "problem_id": "maxSum",
+  "nodes": [
+    {
+      "id": 1,
+      "type": "start",
+      "label": "Start",
+      "next": 2
+    },
+    {
+      "id": 2,
+      "type": "process",
+      "label": "Input: nums (List[int]), k (int)",
+      "action": "ctx['nums'] = ctx['arg0']; ctx['k'] = ctx['arg1']; ctx['n'] = len(ctx['nums']); ctx['IDX'] = [0] * 32; ctx['ans'] = [0] * ctx['n']; ctx['res'] = 0",
+      "next": 3
+    },
+    {
+      "id": 3,
+      "type": "decision",
+      "label": "For each x in nums",
+      "logic": "True",
+      "true_next": 4,
+      "false_next": 11
+    },
+    {
+      "id": 4,
+      "type": "process",
+      "label": "For each i from 0 to 31",
+      "action": "for i in range(32):",
+      "next": 5
+    },
+    {
+      "id": 5,
+      "type": "decision",
+      "label": "Is (x >> i) & 1 == 1?",
+      "logic": "(ctx['x'] >> i) & 1 == 1",
+      "true_next": 6,
+      "false_next": 7
+    },
+    {
+      "id": 6,
+      "type": "process",
+      "label": "Update ans[IDX[i]] += 1 << i",
+      "action": "ctx['ans'][ctx['IDX'][i]] += (1 << i)",
+      "next": 7
+    },
+    {
+      "id": 7,
+      "type": "process",
+      "label": "Update IDX[i] += 1",
+      "action": "ctx['IDX'][i] += 1",
+      "next": 4
+    },
+    {
+      "id": 11,
+      "type": "process",
+      "label": "End Loop: Initialize res = 0",
+      "action": "ctx['res'] = 0",
+      "next": 12
+    },
+    {
+      "id": 12,
+      "type": "process",
+      "label": "Initialize mod = 10 ** 9 + 7",
+      "action": "ctx['mod'] = 10**9 + 7",
+      "next": 13
+    },
+    {
+      "id": 13,
+      "type": "decision",
+      "label": "For i from 0 to k-1",
+      "logic": "i < ctx['k']",
+      "true_next": 14,
+      "false_next": 16
+    },
+    {
+      "id": 14,
+      "type": "process",
+      "label": "Update res += ans[i] ** 2",
+      "action": "ctx['res'] += ctx['ans'][i] ** 2",
+      "next": 15
+    },
+    {
+      "id": 15,
+      "type": "process",
+      "label": "Update res %= mod",
+      "action": "ctx['res'] %= ctx['mod']",
+      "next": 13
+    },
+    {
+      "id": 16,
+      "type": "end",
+      "label": "Output: res (maximum sum of squares)",
+      "output": "ctx['res']"
+    }
+  ],
+  "task_id": "weekly-contest-366-apply-operations-on-array-to-maximize-sum-of-squares",
+  "dataset": "Algorithm",
+  "result": "failed: ",
+  "code": "class Solution:\n    def maxSum(self, nums: List[int], k: int) -> int:\n        n = len(nums)\n        IDX = [0] * 32\n        ans = [0] * n\n        res = 0\n        \n        for x in nums:\n            for i in range(32):\n                if (x >> i) & 1 == 1:\n                    ans[IDX[i]] += (1 << i)\n                IDX[i] += 1\n        \n        mod = 10**9 + 7\n        for i in range(k):\n            res += ans[i] ** 2\n            res %= mod\n            \n        return res",
+  "verification": {
+    "md_verdict": "ILR Error",
+    "actual_error_source": "ilr",
+    "ilr_verdict": "incorrect",
+    "code_vs_ilr": "faithful",
+    "md_correct": "yes",
+    "note": "ILR 的 node7 对每个元素无条件 IDX[i]+=1（bit 未置位也递增），使 ans[j] 恰好等于原数组第 j 个元素（运算完全失去合并位的效果），且 node3 logic 恒 True 无取元素机制、node4 action 是悬空的 for 头；代码几乎逐句忠实转写，错误完全来自 ILR。",
+    "evidence": "忠实执行 ILR（最宽容解释，即代码的写法）：[2,6,5,8],k=2 → 40（期望 261）；[4,5,4,7],k=3 → 57（期望 90），100 测试 0 过。"
+  }
+}

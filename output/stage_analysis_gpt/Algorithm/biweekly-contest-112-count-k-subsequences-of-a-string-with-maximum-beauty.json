@@ -1,0 +1,220 @@
+{
+  "task_id": "biweekly-contest-112-count-k-subsequences-of-a-string-with-maximum-beauty",
+  "dataset": "Algorithm",
+  "difficulty": "Hard",
+  "title": "count-k-subsequences-of-a-string-with-maximum-beauty",
+  "result": "failed: ",
+  "ilr": "{\n  \"problem_id\": \"count_k_subsequences_with_max_beauty\",\n  \"nodes\": [\n    {\"id\": 1, \"type\": \"start\", \"label\": \"Start\", \"next\": 2},\n    {\"id\": 2, \"type\": \"process\", \"label\": \"Input: s (string), k (integer)\", \"action\": \"ctx['s']=ctx['arg0']; ctx['k']=ctx['arg1']\", \"next\": 3},\n    {\"id\": 3, \"type\": \"process\", \"label\": \"Initialize mod = 10^9 + 7\", \"action\": \"ctx['mod'] = 10**9 + 7\", \"next\": 4},\n    {\"id\": 4, \"type\": \"process\", \"label\": \"Count frequency of characters in s: counter = Counter(s)\", \"action\": \"from collections import Counter; ctx['counter'] = Counter(ctx['s'])\", \"next\": 5},\n    {\"id\": 5, \"type\": \"decision\", \"label\": \"Is len(counter) < k?\", \"logic\": \"len(ctx['counter']) < ctx['k']\", \"true_next\": 6, \"false_next\": 7},\n    {\"id\": 6, \"type\": \"end\", \"label\": \"Output: 0 (not enough unique characters)\", \"output\": \"0\"},\n    {\"id\": 7, \"type\": \"process\", \"label\": \"Count frequency of frequencies: freq = Counter(counter.values())\", \"action\": \"ctx['freq'] = Counter(ctx['counter'].values())\", \"next\": 8},\n    {\"id\": 8, \"type\": \"process\", \"label\": \"Sort pairs: pairs = sorted(freq.items(), reverse=True)\", \"action\": \"ctx['pairs'] = sorted(ctx['freq'].items(), reverse=True)\", \"next\": 9},\n    {\"id\": 9, \"type\": \"process\", \"label\": \"Initialize res = 1\", \"action\": \"ctx['res'] = 1\", \"next\": 10},\n    {\"id\": 10, \"type\": \"decision\", \"label\": \"Is k > 0?\", \"logic\": \"ctx['k'] > 0\", \"true_next\": 11, \"false_next\": 16},\n    {\"id\": 11, \"type\": \"process\", \"label\": \"Get first pair: fc, occ = pairs[0]\", \"action\": \"ctx['fc'], ctx['occ'] = ctx['pairs'][0]\", \"next\": 12},\n    {\"id\": 12, \"type\": \"decision\", \"label\": \"Is occ <= k?\", \"logic\": \"ctx['occ'] <= ctx['k']\", \"true_next\": 13, \"false_next\": 15},\n    {\"id\": 13, \"type\": \"process\", \"label\": \"Update res: res = (res * pow(fc, occ, mod)) % mod\", \"action\": \"ctx['res'] = (ctx['res'] * pow(ctx['fc'], ctx['occ'], ctx['mod'])) % ctx['mod']\", \"next\": 14},\n    {\"id\": 14, \"type\": \"process\", \"label\": \"Update k: k -= occ\", \"action\": \"ctx['k'] -= ctx['occ']\", \"next\": 10},\n    {\"id\": 15, \"type\": \"process\", \"label\": \"Update res: res = (res * comb(occ, k) * pow(fc, k, mod)) % mod\", \"action\": \"from math import comb; ctx['res'] = (ctx['res'] * comb(ctx['occ'], ctx['k']) * pow(ctx['fc'], ctx['k'], ctx['mod'])) % ctx['mod']\", \"next\": 16},\n    {\"id\": 16, \"type\": \"process\", \"label\": \"Break loop\", \"action\": \"\", \"next\": 17},\n    {\"id\": 17, \"type\": \"end\", \"label\": \"Output: res % mod\", \"output\": \"ctx['res'] % ctx['mod']\"}\n  ]\n}",
+  "code": "from collections import Counter\nfrom math import comb\n\nclass Solution:\n    def countKSubsequencesWithMaxBeauty(self, s: str, k: int) -> int:\n        mod = 10**9 + 7\n        counter = Counter(s)\n        \n        if len(counter) < k:\n            return 0\n        \n        freq = Counter(counter.values())\n        pairs = sorted(freq.items(), reverse=True)\n        res = 1\n        \n        if k > 0:\n            fc, occ = pairs[0]\n            if occ <= k:\n                res = (res * pow(fc, occ, mod)) % mod\n                k -= occ\n            else:\n                res = (res * comb(occ, k) * pow(fc, k, mod)) % mod\n        \n        return res % mod",
+  "prompt": "\"\"\"\nYou are given a string s and an integer k.\n\nA k-subsequence is a subsequence of s, having length k, and all its characters are unique, i.e., every character occurs once.\n\nLet f(c) denote the number of times the character c occurs in s.\n\nThe beauty of a k-subsequence is the sum of f(c) for every character c in the k-subsequence.\n\nFor example, consider s = \"abbbdd\" and k = 2:\n\n * f('a') = 1, f('b') = 3, f('d') = 2\n * Some k-subsequences of s are:\n   * \"abbbdd\" -> \"ab\" having a beauty of f('a') + f('b') = 4\n   * \"abbbdd\" -> \"ad\" having a beauty of f('a') + f('d') = 3\n   * \"abbbdd\" -> \"bd\" having a beauty of f('b') + f('d') = 5\n\nReturn an integer denoting the number of k-subsequences whose beauty is the maximum among all k-subsequences. Since the answer may be too large, return it modulo 109 + 7.\n\nA subsequence of a string is a new string formed from the original string by deleting some (possibly none) of the characters without disturbing the relative positions of the remaining characters.\n\nNotes\n\n * f(c) is the number of times a character c occurs in s, not a k-subsequence.\n * Two k-subsequences are considered different if one is formed by an index that is not present in the other. So, two k-subsequences may form the same string.\n\nExample 1:\n\nInput: s = \"bcca\", k = 2\nOutput: 4\nExplanation: From s we have f('a') = 1, f('b') = 1, and f('c') = 2.\nThe k-subsequences of s are:\nbcca having a beauty of f('b') + f('c') = 3\nbcca having a beauty of f('b') + f('c') = 3\nbcca having a beauty of f('b') + f('a') = 2\nbcca having a beauty of f('c') + f('a') = 3\nbcca having a beauty of f('c') + f('a') = 3\nThere are 4 k-subsequences that have the maximum beauty, 3.\nHence, the answer is 4.\n\nExample 2:\n\nInput: s = \"abbcd\", k = 4\nOutput: 2\nExplanation: From s we have f('a') = 1, f('b') = 2, f('c') = 1, and f('d') = 1.\nThe k-subsequences of s are:\nabbcd having a beauty of f('a') + f('b') + f('c') + f('d') = 5\nabbcd having a beauty of f('a') + f('b') + f('c') + f('d') = 5\nThere are 2 k-subsequences that have the maximum beauty, 5.\nHence, the answer is 2.\n\n\nConstraints:\n\n * 1 <= s.length <= 2 * 105\n * 1 <= k <= s.length\n * s consists only of lowercase English letters.\n\"\"\"\nclass Solution:\n    def countKSubsequencesWithMaxBeauty(self, s: str, k: int) -> int:\n        ",
+  "test": "\nmy_solution = Solution()\n\ntest_input = { \"s\": \"bcca\", \"k\": 2 }\nassert my_solution.countKSubsequencesWithMaxBeauty(**test_input) == 4\n\ntest_input = { \"s\": \"abbcd\", \"k\": 4 }\nassert my_solution.countKSubsequencesWithMaxBeauty(**test_input) == 2\n\ntest_input = { \"s\": \"am\", \"k\": 2 }\nassert my_solution.countKSubsequencesWithMaxBeauty(**test_input) == 1\n\ntest_input = { \"s\": \"az\", \"k\": 2 }\nassert my_solution.countKSubsequencesWithMaxBeauty(**test_input) == 1\n\ntest_input = { \"s\": \"ci\", \"k\": 1 }\nassert my_solution.countKSubsequencesWithMaxBeauty(**test_input) == 2\n\ntest_input = { \"s\": \"dd\", \"k\": 2 }\nassert my_solution.countKSubsequencesWithMaxBeauty(**test_input) == 0\n\ntest_input = { \"s\": \"di\", \"k\": 2 }\nassert my_solution.countKSubsequencesWithMaxBeauty(**test_input) == 1\n\ntest_input = { \"s\": \"dw\", \"k\": 2 }\nassert my_solution.countKSubsequencesWithMaxBeauty(**test_input) == 1\n\ntest_input = { \"s\": \"ef\", \"k\": 1 }\nassert my_solution.countKSubsequencesWithMaxBeauty(**test_input) == 2\n\ntest_input = { \"s\": \"gq\", \"k\": 2 }\nassert my_solution.countKSubsequencesWithMaxBeauty(**test_input) == 1\n\ntest_input = { \"s\": \"hj\", \"k\": 1 }\nassert my_solution.countKSubsequencesWithMaxBeauty(**test_input) == 2\n\ntest_input = { \"s\": \"hx\", \"k\": 1 }\nassert my_solution.countKSubsequencesWithMaxBeauty(**test_input) == 2\n\ntest_input = { \"s\": \"ii\", \"k\": 2 }\nassert my_solution.countKSubsequencesWithMaxBeauty(**test_input) == 0\n\ntest_input = { \"s\": \"il\", \"k\": 2 }\nassert my_solution.countKSubsequencesWithMaxBeauty(**test_input) == 1\n\ntest_input = { \"s\": \"jb\", \"k\": 1 }\nassert my_solution.countKSubsequencesWithMaxBeauty(**test_input) == 2\n\ntest_input = { \"s\": \"kx\", \"k\": 1 }\nassert my_solution.countKSubsequencesWithMaxBeauty(**test_input) == 2\n\ntest_input = { \"s\": \"qh\", \"k\": 2 }\nassert my_solution.countKSubsequencesWithMaxBeauty(**test_input) == 1\n\ntest_input = { \"s\": \"qk\", \"k\": 2 }\nassert my_solution.countKSubsequencesWithMaxBeauty(**test_input) == 1\n\ntest_input = { \"s\": \"qr\", \"k\": 2 }\nassert my_solution.countKSubsequencesWithMaxBeauty(**test_input) == 1\n\ntest_input = { \"s\": \"rg\", \"k\": 2 }\nassert my_solution.countKSubsequencesWithMaxBeauty(**test_input) == 1\n\ntest_input = { \"s\": \"rn\", \"k\": 1 }\nassert my_solution.countKSubsequencesWithMaxBeauty(**test_input) == 2\n\ntest_input = { \"s\": \"st\", \"k\": 1 }\nassert my_solution.countKSubsequencesWithMaxBeauty(**test_input) == 2\n\ntest_input = { \"s\": \"tb\", \"k\": 1 }\nassert my_solution.countKSubsequencesWithMaxBeauty(**test_input) == 2\n\ntest_input = { \"s\": \"tl\", \"k\": 2 }\nassert my_solution.countKSubsequencesWithMaxBeauty(**test_input) == 1\n\ntest_input = { \"s\": \"xc\", \"k\": 2 }\nassert my_solution.countKSubsequencesWithMaxBeauty(**test_input) == 1\n\ntest_input = { \"s\": \"auy\", \"k\": 1 }\nassert my_solution.countKSubsequencesWithMaxBeauty(**test_input) == 3\n\ntest_input = { \"s\": \"axm\", \"k\": 3 }\nassert my_solution.countKSubsequencesWithMaxBeauty(**test_input) == 1\n\ntest_input = { \"s\": \"dqc\", \"k\": 1 }\nassert my_solution.countKSubsequencesWithMaxBeauty(**test_input) == 3\n\ntest_input = { \"s\": \"fkp\", \"k\": 2 }\nassert my_solution.countKSubsequencesWithMaxBeauty(**test_input) == 3\n\ntest_input = { \"s\": \"fmk\", \"k\": 2 }\nassert my_solution.countKSubsequencesWithMaxBeauty(**test_input) == 3\n\ntest_input = { \"s\": \"fvl\", \"k\": 3 }\nassert my_solution.countKSubsequencesWithMaxBeauty(**test_input) == 1\n\ntest_input = { \"s\": \"hcx\", \"k\": 3 }\nassert my_solution.countKSubsequencesWithMaxBeauty(**test_input) == 1\n\ntest_input = { \"s\": \"iua\", \"k\": 3 }\nassert my_solution.countKSubsequencesWithMaxBeauty(**test_input) == 1\n\ntest_input = { \"s\": \"kzb\", \"k\": 2 }\nassert my_solution.countKSubsequencesWithMaxBeauty(**test_input) == 3\n\ntest_input = { \"s\": \"mhb\", \"k\": 3 }\nassert my_solution.countKSubsequencesWithMaxBeauty(**test_input) == 1\n\ntest_input = { \"s\": \"nzo\", \"k\": 1 }\nassert my_solution.countKSubsequencesWithMaxBeauty(**test_input) == 3\n\ntest_input = { \"s\": \"oof\", \"k\": 3 }\nassert my_solution.countKSubsequencesWithMaxBeauty(**test_input) == 0\n\ntest_input = { \"s\": \"rfh\", \"k\": 2 }\nassert my_solution.countKSubsequencesWithMaxBeauty(**test_input) == 3\n\ntest_input = { \"s\": \"sty\", \"k\": 1 }\nassert my_solution.countKSubsequencesWithMaxBeauty(**test_input) == 3\n\ntest_input = { \"s\": \"sue\", \"k\": 3 }\nassert my_solution.countKSubsequencesWithMaxBeauty(**test_input) == 1\n\ntest_input = { \"s\": \"tba\", \"k\": 3 }\nassert my_solution.countKSubsequencesWithMaxBeauty(**test_input) == 1\n\ntest_input = { \"s\": \"tmc\", \"k\": 1 }\nassert my_solution.countKSubsequencesWithMaxBeauty(**test_input) == 3\n\ntest_input = { \"s\": \"wes\", \"k\": 2 }\nassert my_solution.countKSubsequencesWithMaxBeauty(**test_input) == 3\n\ntest_input = { \"s\": \"wvl\", \"k\": 1 }\nassert my_solution.countKSubsequencesWithMaxBeauty(**test_input) == 3\n\ntest_input = { \"s\": \"xho\", \"k\": 2 }\nassert my_solution.countKSubsequencesWithMaxBeauty(**test_input) == 3\n\ntest_input = { \"s\": \"xke\", \"k\": 2 }\nassert my_solution.countKSubsequencesWithMaxBeauty(**test_input) == 3\n\ntest_input = { \"s\": \"ysu\", \"k\": 3 }\nassert my_solution.countKSubsequencesWithMaxBeauty(**test_input) == 1\n\ntest_input = { \"s\": \"yxn\", \"k\": 2 }\nassert my_solution.countKSubsequencesWithMaxBeauty(**test_input) == 3\n\ntest_input = { \"s\": \"zco\", \"k\": 1 }\nassert my_solution.countKSubsequencesWithMaxBeauty(**test_input) == 3\n\ntest_input = { \"s\": \"zpq\", \"k\": 3 }\nassert my_solution.countKSubsequencesWithMaxBeauty(**test_input) == 1\n\ntest_input = { \"s\": \"axgn\", \"k\": 4 }\nassert my_solution.countKSubsequencesWithMaxBeauty(**test_input) == 1\n\ntest_input = { \"s\": \"dfyq\", \"k\": 2 }\nassert my_solution.countKSubsequencesWithMaxBeauty(**test_input) == 6\n\ntest_input = { \"s\": \"dogq\", \"k\": 2 }\nassert my_solution.countKSubsequencesWithMaxBeauty(**test_input) == 6\n\ntest_input = { \"s\": \"drbs\", \"k\": 2 }\nassert my_solution.countKSubsequencesWithMaxBeauty(**test_input) == 6\n\ntest_input = { \"s\": \"elex\", \"k\": 4 }\nassert my_solution.countKSubsequencesWithMaxBeauty(**test_input) == 0\n\ntest_input = { \"s\": \"fsaj\", \"k\": 1 }\nassert my_solution.countKSubsequencesWithMaxBeauty(**test_input) == 4\n\ntest_input = { \"s\": \"fxau\", \"k\": 2 }\nassert my_solution.countKSubsequencesWithMaxBeauty(**test_input) == 6\n\ntest_input = { \"s\": \"glbq\", \"k\": 4 }\nassert my_solution.countKSubsequencesWithMaxBeauty(**test_input) == 1\n\ntest_input = { \"s\": \"hzcj\", \"k\": 4 }\nassert my_solution.countKSubsequencesWithMaxBeauty(**test_input) == 1\n\ntest_input = { \"s\": \"minc\", \"k\": 3 }\nassert my_solution.countKSubsequencesWithMaxBeauty(**test_input) == 4\n\ntest_input = { \"s\": \"nkim\", \"k\": 1 }\nassert my_solution.countKSubsequencesWithMaxBeauty(**test_input) == 4\n\ntest_input = { \"s\": \"otpl\", \"k\": 2 }\nassert my_solution.countKSubsequencesWithMaxBeauty(**test_input) == 6\n\ntest_input = { \"s\": \"pvrz\", \"k\": 4 }\nassert my_solution.countKSubsequencesWithMaxBeauty(**test_input) == 1\n\ntest_input = { \"s\": \"qwmy\", \"k\": 4 }\nassert my_solution.countKSubsequencesWithMaxBeauty(**test_input) == 1\n\ntest_input = { \"s\": \"rliu\", \"k\": 4 }\nassert my_solution.countKSubsequencesWithMaxBeauty(**test_input) == 1\n\ntest_input = { \"s\": \"tpig\", \"k\": 2 }\nassert my_solution.countKSubsequencesWithMaxBeauty(**test_input) == 6\n\ntest_input = { \"s\": \"ucvh\", \"k\": 4 }\nassert my_solution.countKSubsequencesWithMaxBeauty(**test_input) == 1\n\ntest_input = { \"s\": \"vevt\", \"k\": 2 }\nassert my_solution.countKSubsequencesWithMaxBeauty(**test_input) == 4\n\ntest_input = { \"s\": \"xstt\", \"k\": 3 }\nassert my_solution.countKSubsequencesWithMaxBeauty(**test_input) == 2\n\ntest_input = { \"s\": \"ypmv\", \"k\": 3 }\nassert my_solution.countKSubsequencesWithMaxBeauty(**test_input) == 4\n\ntest_input = { \"s\": \"znoq\", \"k\": 3 }\nassert my_solution.countKSubsequencesWithMaxBeauty(**test_input) == 4\n\ntest_input = { \"s\": \"bicnt\", \"k\": 1 }\nassert my_solution.countKSubsequencesWithMaxBeauty(**test_input) == 5\n\ntest_input = { \"s\": \"bnhom\", \"k\": 5 }\nassert my_solution.countKSubsequencesWithMaxBeauty(**test_input) == 1\n\ntest_input = { \"s\": \"culhr\", \"k\": 5 }\nassert my_solution.countKSubsequencesWithMaxBeauty(**test_input) == 1\n\ntest_input = { \"s\": \"dpfki\", \"k\": 1 }\nassert my_solution.countKSubsequencesWithMaxBeauty(**test_input) == 5\n\ntest_input = { \"s\": \"dscbu\", \"k\": 2 }\nassert my_solution.countKSubsequencesWithMaxBeauty(**test_input) == 10\n\ntest_input = { \"s\": \"edwlo\", \"k\": 3 }\nassert my_solution.countKSubsequencesWithMaxBeauty(**test_input) == 10\n\ntest_input = { \"s\": \"ggsgo\", \"k\": 3 }\nassert my_solution.countKSubsequencesWithMaxBeauty(**test_input) == 3\n\ntest_input = { \"s\": \"guzzf\", \"k\": 4 }\nassert my_solution.countKSubsequencesWithMaxBeauty(**test_input) == 2\n\ntest_input = { \"s\": \"gzzzl\", \"k\": 3 }\nassert my_solution.countKSubsequencesWithMaxBeauty(**test_input) == 3\n\ntest_input = { \"s\": \"kjojr\", \"k\": 3 }\nassert my_solution.countKSubsequencesWithMaxBeauty(**test_input) == 6\n\ntest_input = { \"s\": \"kvsds\", \"k\": 5 }\nassert my_solution.countKSubsequencesWithMaxBeauty(**test_input) == 0\n\ntest_input = { \"s\": \"ljdvp\", \"k\": 1 }\nassert my_solution.countKSubsequencesWithMaxBeauty(**test_input) == 5\n\ntest_input = { \"s\": \"mdccc\", \"k\": 5 }\nassert my_solution.countKSubsequencesWithMaxBeauty(**test_input) == 0\n\ntest_input = { \"s\": \"mmqny\", \"k\": 4 }\nassert my_solution.countKSubsequencesWithMaxBeauty(**test_input) == 2\n\ntest_input = { \"s\": \"mrbrj\", \"k\": 2 }\nassert my_solution.countKSubsequencesWithMaxBeauty(**test_input) == 6\n\ntest_input = { \"s\": \"pwtbx\", \"k\": 4 }\nassert my_solution.countKSubsequencesWithMaxBeauty(**test_input) == 5\n\ntest_input = { \"s\": \"qcxkr\", \"k\": 3 }\nassert my_solution.countKSubsequencesWithMaxBeauty(**test_input) == 10\n\ntest_input = { \"s\": \"qvauy\", \"k\": 1 }\nassert my_solution.countKSubsequencesWithMaxBeauty(**test_input) == 5\n\ntest_input = { \"s\": \"tzwoq\", \"k\": 3 }\nassert my_solution.countKSubsequencesWithMaxBeauty(**test_input) == 10\n\ntest_input = { \"s\": \"ufxge\", \"k\": 4 }\nassert my_solution.countKSubsequencesWithMaxBeauty(**test_input) == 5\n\ntest_input = { \"s\": \"unzxd\", \"k\": 4 }\nassert my_solution.countKSubsequencesWithMaxBeauty(**test_input) == 5\n\ntest_input = { \"s\": \"vhqqj\", \"k\": 3 }\nassert my_solution.countKSubsequencesWithMaxBeauty(**test_input) == 6\n\ntest_input = { \"s\": \"vnkbt\", \"k\": 1 }\nassert my_solution.countKSubsequencesWithMaxBeauty(**test_input) == 5\n\ntest_input = { \"s\": \"wpbkz\", \"k\": 2 }\nassert my_solution.countKSubsequencesWithMaxBeauty(**test_input) == 10\n\ntest_input = { \"s\": \"xdgvy\", \"k\": 1 }\nassert my_solution.countKSubsequencesWithMaxBeauty(**test_input) == 5\n\ntest_input = { \"s\": \"yelem\", \"k\": 5 }\nassert my_solution.countKSubsequencesWithMaxBeauty(**test_input) == 0\n\ntest_input = { \"s\": \"zwkhq\", \"k\": 3 }\nassert my_solution.countKSubsequencesWithMaxBeauty(**test_input) == 10\n\ntest_input = { \"s\": \"anxnfi\", \"k\": 5 }\nassert my_solution.countKSubsequencesWithMaxBeauty(**test_input) == 2\n\ntest_input = { \"s\": \"cfbyuf\", \"k\": 5 }\nassert my_solution.countKSubsequencesWithMaxBeauty(**test_input) == 2",
+  "ocr_data": {
+    "nodes": [
+      {
+        "node_id": 1,
+        "shape_type": "rectangle",
+        "raw_text": "Start",
+        "position": "top"
+      },
+      {
+        "node_id": 2,
+        "shape_type": "rectangle",
+        "raw_text": "Input: s (string), k (integer)",
+        "position": "middle"
+      },
+      {
+        "node_id": 3,
+        "shape_type": "rectangle",
+        "raw_text": "Initialize mod = 10^9 + 7",
+        "position": "middle"
+      },
+      {
+        "node_id": 4,
+        "shape_type": "rectangle",
+        "raw_text": "Count frequency of characters in s: counter = Counter(s)",
+        "position": "middle"
+      },
+      {
+        "node_id": 5,
+        "shape_type": "diamond",
+        "raw_text": "Is len(counter) < k?",
+        "position": "middle"
+      },
+      {
+        "node_id": 6,
+        "shape_type": "rectangle",
+        "raw_text": "Output: 0 (not enough unique characters)",
+        "position": "middle"
+      },
+      {
+        "node_id": 7,
+        "shape_type": "rectangle",
+        "raw_text": "Count frequency of frequencies: freq = Counter(counter.values())",
+        "position": "middle"
+      },
+      {
+        "node_id": 8,
+        "shape_type": "rectangle",
+        "raw_text": "Sort pairs: pairs = sorted(freq.items(), reverse=True)",
+        "position": "middle"
+      },
+      {
+        "node_id": 9,
+        "shape_type": "rectangle",
+        "raw_text": "Initialize res = 1",
+        "position": "middle"
+      },
+      {
+        "node_id": 10,
+        "shape_type": "diamond",
+        "raw_text": "Is k > 0?",
+        "position": "middle"
+      },
+      {
+        "node_id": 11,
+        "shape_type": "rectangle",
+        "raw_text": "Get first pair: fc, occ = pairs[0]",
+        "position": "middle"
+      },
+      {
+        "node_id": 12,
+        "shape_type": "diamond",
+        "raw_text": "Is occ <= k?",
+        "position": "middle"
+      },
+      {
+        "node_id": 13,
+        "shape_type": "rectangle",
+        "raw_text": "Update res: res = (res * pow(fc, occ, mod)) % mod",
+        "position": "middle"
+      },
+      {
+        "node_id": 14,
+        "shape_type": "rectangle",
+        "raw_text": "Update k: k -= occ",
+        "position": "middle"
+      },
+      {
+        "node_id": 15,
+        "shape_type": "rectangle",
+        "raw_text": "Update res: res = (res * comb(occ, k) * pow(fc, k, mod)) % mod",
+        "position": "middle"
+      },
+      {
+        "node_id": 16,
+        "shape_type": "rectangle",
+        "raw_text": "Break loop",
+        "position": "middle"
+      },
+      {
+        "node_id": 17,
+        "shape_type": "rectangle",
+        "raw_text": "Output: res % mod",
+        "position": "bottom"
+      }
+    ],
+    "edges": [
+      {
+        "from_node": 1,
+        "to_node": 2,
+        "label": ""
+      },
+      {
+        "from_node": 2,
+        "to_node": 3,
+        "label": ""
+      },
+      {
+        "from_node": 3,
+        "to_node": 4,
+        "label": ""
+      },
+      {
+        "from_node": 4,
+        "to_node": 5,
+        "label": ""
+      },
+      {
+        "from_node": 5,
+        "to_node": 6,
+        "label": "Yes"
+      },
+      {
+        "from_node": 5,
+        "to_node": 7,
+        "label": "No"
+      },
+      {
+        "from_node": 7,
+        "to_node": 8,
+        "label": ""
+      },
+      {
+        "from_node": 8,
+        "to_node": 9,
+        "label": ""
+      },
+      {
+        "from_node": 9,
+        "to_node": 10,
+        "label": ""
+      },
+      {
+        "from_node": 10,
+        "to_node": 11,
+        "label": "Yes"
+      },
+      {
+        "from_node": 10,
+        "to_node": 15,
+        "label": "No"
+      },
+      {
+        "from_node": 11,
+        "to_node": 12,
+        "label": ""
+      },
+      {
+        "from_node": 12,
+        "to_node": 13,
+        "label": "Yes"
+      },
+      {
+        "from_node": 12,
+        "to_node": 15,
+        "label": "No"
+      },
+      {
+        "from_node": 13,
+        "to_node": 14,
+        "label": ""
+      },
+      {
+        "from_node": 14,
+        "to_node": 10,
+        "label": ""
+      },
+      {
+        "from_node": 15,
+        "to_node": 16,
+        "label": ""
+      },
+      {
+        "from_node": 16,
+        "to_node": 17,
+        "label": ""
+      }
+    ],
+    "other_text": []
+  },
+  "analysis": {
+    "ilr_verdict": "incorrect",
+    "ilr_issues": "节点10-14 构成的循环缺少'取下一组频次'的步骤：节点11 每轮都取 pairs[0]，节点14 只做 k-=occ 就跳回节点10，pairs 永不前进，导致只反复乘最高频组的贡献（如 s='abbcd',k=4 按此执行得 16，期望 2）。",
+    "code_vs_ilr": "deviates",
+    "code_issues": "代码把 ILR 的循环整个丢掉，只执行一遍循环体（取 pairs[0]、判断 occ<=k、更新一次 res）就直接返回，控制流与 ILR 不对应；即使按 ILR 忠实执行也因缺少 pairs 前进而错误。",
+    "error_source": "both",
+    "ocr_contribution": "no",
+    "root_cause": "流程图本身就不完整（OCR 节点里没有任何前进到下一频次组的步骤，ILR 忠实继承该缺陷），代码又额外把循环删成单次执行，两层错误叠加：ILR 忠实执行在 'abbcd' 上错（16 vs 2），代码在 'bcca' 等用例上错（2 vs 4）。",
+    "evidence": "实际运行：代码第一条断言 s='bcca',k=2 失败（输出 2，期望 4），共错 5 条；按 ILR 忠实模拟错 11 条（如 'abbcd',k=4 得 16，期望 2）；修正后的分组算法 100 条全对。"
+  }
+}

@@ -1,0 +1,67 @@
+{
+  "problem_id": "sum_of_two_squares",
+  "nodes": [
+    {
+      "id": 1,
+      "type": "start",
+      "label": "Start",
+      "next": 2
+    },
+    {
+      "id": 2,
+      "type": "process",
+      "label": "Input: c (non-negative integer)",
+      "action": "ctx['c'] = ctx['arg0']; ctx['s'] = set(); ctx['i'] = 0",
+      "next": 3
+    },
+    {
+      "id": 3,
+      "type": "decision",
+      "label": "For i in range(0, floor(sqrt(c)) + 1)",
+      "logic": "ctx['i'] < int(ctx['c'] ** 0.5) + 1",
+      "true_next": 4,
+      "false_next": 7
+    },
+    {
+      "id": 4,
+      "type": "process",
+      "label": "Add i*i to set s",
+      "action": "ctx['s'].add(ctx['i'] * ctx['i']); ctx['i'] += 1",
+      "next": 3
+    },
+    {
+      "id": 6,
+      "type": "process",
+      "label": "Output: False (no such integers a and b exist)",
+      "action": "ctx['result'] = False",
+      "next": 7
+    },
+    {
+      "id": 7,
+      "type": "decision",
+      "label": "Is c - i*i in s or 2*i*i == c?",
+      "logic": "ctx['c'] - ctx['i'] * ctx['i'] in ctx['s'] or 2 * ctx['i'] * ctx['i'] == ctx['c']",
+      "true_next": 8,
+      "false_next": 6
+    },
+    {
+      "id": 8,
+      "type": "end",
+      "label": "Output: True (such integers a and b exist)",
+      "output": "True"
+    }
+  ],
+  "task_id": "633. Sum of Square Numbers",
+  "dataset": "MATH",
+  "result": "failed: ",
+  "code": "def judgeSquareSum(c: int) -> bool:\n    s = set()\n    i = 0\n    while i <= int(c ** 0.5):\n        s.add(i * i)\n        i += 1\n    return c - i * i in s or 2 * i * i == c",
+  "verification": {
+    "md_verdict": "ILR Error",
+    "actual_error_source": "ilr",
+    "ilr_verdict": "incorrect",
+    "code_vs_ilr": "faithful",
+    "md_correct": "yes",
+    "note": "确认 MD。ILR 把『Is c-i*i in s or 2*i*i==c』放在 for 循环结束之后只判一次（此时 i 已自增到 int(sqrt(c))+1），且 False 时 6<->7 死循环；忠实实现也过不了。生成代码是 ILR 的忠实转写（同样的循环+循环后单次检查），同因失败。",
+    "evidence": "c=5：ILR 循环后 i=3，5-9=-4∉{0,1,4} 且 2*9≠5 → False/挂起，期望 True；ILR 忠实转写在第 1 条 assert 即失败；生成代码 judgeSquareSum(5)=False（0、4 也错），首条 assert 失败，与 result 'failed: ' 一致"
+  }
+}

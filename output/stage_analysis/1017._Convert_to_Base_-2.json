@@ -1,0 +1,89 @@
+{
+  "problem_id": "base_neg2_conversion",
+  "nodes": [
+    {
+      "id": 1,
+      "type": "start",
+      "label": "Start",
+      "next": 2
+    },
+    {
+      "id": 2,
+      "type": "process",
+      "label": "Input: N (integer)",
+      "action": "ctx['n'] = ctx['arg0']; ctx['result'] = ''",
+      "next": 3
+    },
+    {
+      "id": 3,
+      "type": "decision",
+      "label": "Is N in [0, 1]?",
+      "logic": "ctx['n'] <= 1",
+      "true_next": 4,
+      "false_next": 5
+    },
+    {
+      "id": 4,
+      "type": "end",
+      "label": "Output: str(N)",
+      "output": "str(ctx['n'])"
+    },
+    {
+      "id": 5,
+      "type": "decision",
+      "label": "Is N % 2 == 0?",
+      "logic": "ctx['n'] % 2 == 0",
+      "true_next": 6,
+      "false_next": 7
+    },
+    {
+      "id": 6,
+      "type": "call",
+      "label": "Recursive call: baseNeg2(N // -2) + '0'",
+      "function_name": "baseNeg2",
+      "arguments": [
+        "ctx['n'] // -2"
+      ],
+      "return_var": "rec_result",
+      "next": 8
+    },
+    {
+      "id": 7,
+      "type": "call",
+      "label": "Recursive call: baseNeg2((N - 1) // -2) + '1'",
+      "function_name": "baseNeg2",
+      "arguments": [
+        "(ctx['n'] - 1) // -2"
+      ],
+      "return_var": "rec_result",
+      "next": 8
+    },
+    {
+      "id": 8,
+      "type": "process",
+      "label": "Concatenate result",
+      "action": "ctx['result'] = ctx['rec_result'] + ('0' if ctx['n'] % 2 == 0 else '1')",
+      "next": 9
+    },
+    {
+      "id": 9,
+      "type": "end",
+      "label": "Return result",
+      "output": "ctx['result']"
+    }
+  ],
+  "task_id": "1017. Convert to Base -2",
+  "dataset": "MATH",
+  "result": "failed: ",
+  "code": "def baseNeg2(N: int) -> str:\n    if N <= 1:\n        return str(N)\n    \n    if N % 2 == 0:\n        rec_result = baseNeg2(N // -2) + '0'\n    else:\n        rec_result = baseNeg2((N - 1) // -2) + '1'\n    \n    return rec_result",
+  "failed_test": true,
+  "verification": {
+    "md_verdict": "ILR Error",
+    "actual_error_source": "ilr",
+    "ilr_verdict": "incorrect",
+    "code_vs_ilr": "faithful",
+    "md_correct": "yes",
+    "note": "确认 ILR Error：流程图菱形写的是 Is N in [0,1]?，但 ILR 把基例逻辑误写成 ctx['n'] <= 1；递归中会产生负数商（如 2//-2=-1），落入基例返回 '-1' 等字符串。生成代码忠实复刻了该错误逻辑。",
+    "evidence": "按 ILR 忠实转写运行：baseNeg2(2)='-10'（期望 '110'）、baseNeg2(3)='-11'；仅把基例改为 0<=n<=1 后同一算法即全部测试通过。生成代码同样在 baseNeg2(2) 失败。"
+  }
+}

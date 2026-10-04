@@ -1,0 +1,51 @@
+Batch Reflection Summary Report
+==================================================
+
+Total Samples Processed: 15
+Overall Success Rate: 10/15 (66.67%)
+
+Iteration 1:
+--------------------
+Average Duration: 22.20s
+Average Tokens:
+  - Total: 15393.5
+  - Prompt: 13822.3
+  - Completion: 1571.1
+
+Pass Rate Statistics:
+  New Passed: 8 (+53.33%)
+  Cumulative Passed: 8/15 (53.33%)
+
+  Breakdown by Difficulty:
+    - Easy: +8 (53.33%) -> Total: 8/15 (53.33%)
+
+Iteration 2:
+--------------------
+Average Duration: 11.42s
+Average Tokens:
+  - Total: 4772.1
+  - Prompt: 3917.6
+  - Completion: 854.6
+
+Pass Rate Statistics:
+  New Passed: 2 (+13.33%)
+  Cumulative Passed: 10/15 (66.67%)
+
+  Breakdown by Difficulty:
+    - Easy: +2 (13.33%) -> Total: 10/15 (66.67%)
+
+Iteration 3:
+--------------------
+Average Duration: 11.68s
+Average Tokens:
+  - Total: 4870.0
+  - Prompt: 4031.0
+  - Completion: 839.0
+
+Pass Rate Statistics:
+  New Passed: 0 (+0.00%)
+  Cumulative Passed: 10/15 (66.67%)
+
+  Breakdown by Difficulty:
+    - Easy: +0 (0.00%) -> Total: 10/15 (66.67%)
+

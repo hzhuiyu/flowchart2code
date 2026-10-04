@@ -1,0 +1,59 @@
+{
+  "problem_id": "minimumTime",
+  "nodes": [
+    {
+      "id": 1,
+      "type": "start",
+      "label": "Start",
+      "next": 2
+    },
+    {
+      "id": 2,
+      "type": "process",
+      "label": "Input: nums1 (arg0), nums2 (arg1), x (arg2); s = sum(nums1), d = sum(nums2)",
+      "action": "ctx['nums1'] = ctx['arg0']; ctx['nums2'] = ctx['arg1']; ctx['x'] = ctx['arg2']; ctx['n'] = len(ctx['nums1']); ctx['s'] = sum(ctx['nums1']); ctx['d'] = sum(ctx['nums2'])",
+      "next": 8
+    },
+    {
+      "id": 8,
+      "type": "decision",
+      "label": "Is s <= x?",
+      "logic": "ctx['s'] <= ctx['x']",
+      "true_next": 9,
+      "false_next": 10
+    },
+    {
+      "id": 9,
+      "type": "end",
+      "label": "Output: 0 (initial sum is already <= x)",
+      "output": "0"
+    },
+    {
+      "id": 10,
+      "type": "process",
+      "label": "Sort pairs (nums2[i], nums1[i]) ascending by nums2; DP: dp[j] = max reduction using j zero-operations, where the j-th zeroed element saves nums1[i] + j*nums2[i]; then find the smallest t with s + t*d - dp[t] <= x",
+      "action": "pairs = sorted(zip(ctx['nums2'], ctx['nums1']))\ndp = [0] * (ctx['n'] + 1)\nfor k in range(1, ctx['n'] + 1):\n    b, a = pairs[k - 1]\n    for j in range(k, 0, -1):\n        cand = dp[j - 1] + b * j + a\n        if cand > dp[j]:\n            dp[j] = cand\nctx['ans'] = -1\nfor t in range(1, ctx['n'] + 1):\n    if ctx['s'] + t * ctx['d'] - dp[t] <= ctx['x']:\n        ctx['ans'] = t\n        break",
+      "next": 17
+    },
+    {
+      "id": 17,
+      "type": "decision",
+      "label": "Was a feasible time found?",
+      "logic": "ctx['ans'] != -1",
+      "true_next": 18,
+      "false_next": 19
+    },
+    {
+      "id": 18,
+      "type": "end",
+      "label": "Output: minimum time",
+      "output": "ctx['ans']"
+    },
+    {
+      "id": 19,
+      "type": "end",
+      "label": "Output: -1 (not possible)",
+      "output": "-1"
+    }
+  ]
+}

@@ -1,0 +1,108 @@
+{
+  "problem_id": "countBlackBlocks",
+  "nodes": [
+    {
+      "id": 1,
+      "type": "start",
+      "label": "Start",
+      "next": 2
+    },
+    {
+      "id": 2,
+      "type": "process",
+      "label": "Input: m (integer), n (integer), coordinates (list of lists)",
+      "action": "ctx['m'] = ctx['arg0']; ctx['n'] = ctx['arg1']; ctx['coordinates'] = ctx['arg2']; ctx['dict1'] = {}; ctx['dict2'] = {}",
+      "next": 3
+    },
+    {
+      "id": 3,
+      "type": "process",
+      "label": "Initialize dict1 as defaultdict(int)",
+      "action": "ctx['dict1'] = {}",
+      "next": 4
+    },
+    {
+      "id": 4,
+      "type": "process",
+      "label": "For each (i, j) in coordinates",
+      "action": "for coord in ctx['coordinates']: ctx['i'], ctx['j'] = coord[0], coord[1]",
+      "next": 5
+    },
+    {
+      "id": 5,
+      "type": "process",
+      "label": "Loop through x from (i - 1) to (i)",
+      "action": "ctx['x_start'] = ctx['i'] - 1; ctx['x_end'] = ctx['i'] + 1",
+      "next": 6
+    },
+    {
+      "id": 6,
+      "type": "process",
+      "label": "Loop through y from (j - 1) to (j)",
+      "action": "ctx['y_start'] = ctx['j'] - 1; ctx['y_end'] = ctx['j'] + 1",
+      "next": 7
+    },
+    {
+      "id": 7,
+      "type": "decision",
+      "label": "Is 0 <= x < m - 1 and 0 <= y < n - 1?",
+      "logic": "ctx['x'] >= 0 and ctx['x'] < ctx['m'] - 1 and ctx['y'] >= 0 and ctx['y'] < ctx['n'] - 1",
+      "true_next": 8,
+      "false_next": 9
+    },
+    {
+      "id": 8,
+      "type": "process",
+      "label": "Update dict1[(x, y)]: dict1[(x, y)] += 1",
+      "action": "ctx['dict1'][(ctx['x'], ctx['y'])] = ctx['dict1'].get((ctx['x'], ctx['y']), 0) + 1",
+      "next": 6
+    },
+    {
+      "id": 9,
+      "type": "process",
+      "label": "Continue to next iteration",
+      "action": "continue",
+      "next": 6
+    },
+    {
+      "id": 10,
+      "type": "process",
+      "label": "Initialize dict2 as Counter(dict1.values())",
+      "action": "from collections import Counter; ctx['dict2'] = Counter(ctx['dict1'].values())",
+      "next": 11
+    },
+    {
+      "id": 11,
+      "type": "process",
+      "label": "Calculate total_blocks: (m - 1) * (n - 1)",
+      "action": "ctx['total_blocks'] = (ctx['m'] - 1) * (ctx['n'] - 1)",
+      "next": 12
+    },
+    {
+      "id": 12,
+      "type": "process",
+      "label": "Calculate filled_blocks: sum(dict2.values())",
+      "action": "ctx['filled_blocks'] = sum(ctx['dict2'].values())",
+      "next": 13
+    },
+    {
+      "id": 13,
+      "type": "end",
+      "label": "Output: [total_blocks - filled_blocks, dict2[1], dict2[2], dict2[3], dict2[4]]",
+      "output": "[ctx['total_blocks'] - ctx['filled_blocks'], ctx['dict2'][1], ctx['dict2'][2], ctx['dict2'][3], ctx['dict2'][4]]"
+    }
+  ],
+  "task_id": "biweekly-contest-108-number-of-black-blocks",
+  "dataset": "Algorithm",
+  "result": "failed: ",
+  "code": "class Solution:\n    def countBlackBlocks(self, m: int, n: int, coordinates: List[List[int]]) -> List[int]:\n        dict1 = {}\n        dict2 = {}\n        \n        for coord in coordinates:\n            i, j = coord[0], coord[1]\n            x_start = i - 1\n            x_end = i + 1\n            y_start = j - 1\n            y_end = j + 1\n            \n            for x in range(x_start, x_end + 1):\n                for y in range(y_start, y_end + 1):\n                    if 0 <= x < m - 1 and 0 <= y < n - 1:\n                        dict1[(x, y)] = dict1.get((x, y), 0) + 1\n        \n        from collections import Counter\n        dict2 = Counter(dict1.values())\n        \n        total_blocks = (m - 1) * (n - 1)\n        filled_blocks = sum(dict2.values())\n        \n        return [total_blocks - filled_blocks, dict2.get(1, 0), dict2.get(2, 0), dict2.get(3, 0), dict2.get(4, 0)]",
+  "verification": {
+    "md_verdict": "ILR Error",
+    "actual_error_source": "code",
+    "ilr_verdict": "correct",
+    "code_vs_ilr": "deviates",
+    "md_correct": "no",
+    "note": "ILR 描述的算法正确（x/y 从 i-1..i、j-1..j 即 x_end 为开区间端点），忠实转写可通过全部示例；生成代码却写成 range(x_start, x_end+1)，多遍历了 x=i+1、y=j+1，把不含黑格的块也计数，属代码未忠实实现 ILR。",
+    "evidence": "m=3,n=3,coordinates=[[0,0]] 期望[3,1,0,0,0]：忠实 ILR 转写输出 [3,1,0,0,0] 正确；生成代码输出 [0,4,0,0,0] 错误。第二例期望[0,2,2,0,0]，生成代码输出[0,0,2,2,0]也错。"
+  }
+}

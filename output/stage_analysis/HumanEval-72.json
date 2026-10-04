@@ -1,0 +1,74 @@
+{
+  "problem_id": "will_it_fly",
+  "nodes": [
+    {
+      "id": 1,
+      "type": "start",
+      "label": "Start",
+      "next": 2
+    },
+    {
+      "id": 2,
+      "type": "decision",
+      "label": "Is sum(q) > w?",
+      "logic": "sum(ctx['q']) > ctx['w']",
+      "true_next": 7,
+      "false_next": 3
+    },
+    {
+      "id": 3,
+      "type": "process",
+      "label": "Initialize i=0, j=len(q)-1",
+      "action": "ctx['i'] = 0; ctx['j'] = len(ctx['q']) - 1",
+      "next": 4
+    },
+    {
+      "id": 4,
+      "type": "decision",
+      "label": "Is i < j?",
+      "logic": "ctx['i'] < ctx['j']",
+      "true_next": 5,
+      "false_next": 6
+    },
+    {
+      "id": 5,
+      "type": "decision",
+      "label": "Is q[i] != q[j]?",
+      "logic": "ctx['q'][ctx['i']] != ctx['q'][ctx['j']]",
+      "true_next": 6,
+      "false_next": 8
+    },
+    {
+      "id": 6,
+      "type": "return",
+      "label": "Return True",
+      "value": "True"
+    },
+    {
+      "id": 7,
+      "type": "return",
+      "label": "Return False",
+      "value": "False"
+    },
+    {
+      "id": 8,
+      "type": "process",
+      "label": "i += 1, j -= 1",
+      "action": "ctx['i'] += 1; ctx['j'] -= 1",
+      "next": 4
+    }
+  ],
+  "task_id": "HumanEval-72",
+  "dataset": "HumanEval-V",
+  "result": "failed: ",
+  "code": "def will_it_fly(q,w):\n    if sum(q) > w:\n        return False\n    \n    i = 0\n    j = len(q) - 1\n    \n    while i < j:\n        if q[i] != q[j]:\n            return True\n        i += 1\n        j -= 1\n    \n    return False",
+  "verification": {
+    "md_verdict": "ILR Error",
+    "actual_error_source": "both",
+    "ilr_verdict": "incorrect",
+    "code_vs_ilr": "deviates",
+    "md_correct": "partial",
+    "note": "MD 根因判对（ILR 无输入绑定节点且节点5把 q[i]!=q[j] 为真的分支接到 Return True，不平衡输入返回 True），但漏了代码问题：生成代码镜像该反转，还把循环正常结束（回文）后的返回写成 False（ILR 节点4 false→节点6 是 Return True），连回文样例也全错，6 条断言全挂。",
+    "evidence": "严格 ILR: KeyError('q')；补绑定后 candidate([1,2],5)=True≠False；生成代码 candidate([3,2,3],9)=False≠True、([3],5)=False≠True、([1,2],5)=True≠False，0/6（忠实 ILR 挂 2 条）"
+  }
+}

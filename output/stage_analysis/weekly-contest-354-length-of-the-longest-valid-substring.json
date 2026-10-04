@@ -1,0 +1,81 @@
+{
+  "problem_id": "longestValidSubstring",
+  "nodes": [
+    {
+      "id": 1,
+      "type": "start",
+      "label": "Start",
+      "next": 2
+    },
+    {
+      "id": 2,
+      "type": "process",
+      "label": "Input: word (string), forbidden (list of strings)",
+      "action": "ctx['word'] = ctx['arg0']; ctx['forbidden'] = ctx['arg1']; ctx['res'] = 0; ctx['right'] = len(ctx['word']) - 1",
+      "next": 3
+    },
+    {
+      "id": 3,
+      "type": "process",
+      "label": "Create forbidden_set from forbidden: forbidden_set = set(forbidden)",
+      "action": "ctx['forbidden_set'] = set(ctx['forbidden'])",
+      "next": 4
+    },
+    {
+      "id": 4,
+      "type": "process",
+      "label": "Initialize res = 0, right = length of word - 1",
+      "action": "ctx['res'] = 0; ctx['right'] = len(ctx['word']) - 1",
+      "next": 5
+    },
+    {
+      "id": 5,
+      "type": "decision",
+      "label": "Loop left from length of word - 1 to 0",
+      "logic": "ctx['left'] >= 0",
+      "true_next": 6,
+      "false_next": 9
+    },
+    {
+      "id": 6,
+      "type": "process",
+      "label": "For each left, loop k from left to min(left + 10, right + 1)",
+      "action": "ctx['k'] = ctx['left']; while ctx['k'] <= min(ctx['left'] + 10, ctx['right'] + 1):\n    ctx['k'] += 1\n    if ctx['k'] > ctx['right'] + 1:\n        break",
+      "next": 7
+    },
+    {
+      "id": 7,
+      "type": "decision",
+      "label": "Is word[left:k+1] in forbidden_set?",
+      "logic": "ctx['word'][ctx['left']:ctx['k']] in ctx['forbidden_set']",
+      "true_next": 8,
+      "false_next": 6
+    },
+    {
+      "id": 8,
+      "type": "process",
+      "label": "Update right = k - 1",
+      "action": "ctx['right'] = ctx['k'] - 1",
+      "next": 6
+    },
+    {
+      "id": 9,
+      "type": "end",
+      "label": "Output: res (length of longest valid substring)",
+      "output": "ctx['res']"
+    }
+  ],
+  "task_id": "weekly-contest-354-length-of-the-longest-valid-substring",
+  "dataset": "Algorithm",
+  "result": "failed: ",
+  "code": "class Solution:\n    def longestValidSubstring(self, word: str, forbidden: List[str]) -> int:\n        # Initialize variables as per ILR node 2\n        res = 0\n        right = len(word) - 1\n        \n        # Create forbidden_set from forbidden list as per ILR node 3\n        forbidden_set = set(forbidden)\n        \n        # Loop left from length of word - 1 to 0 as per ILR node 5\n        left = len(word) - 1\n        while left >= 0:\n            # For each left, loop k from left to min(left + 10, right + 1) as per ILR node 6\n            k = left\n            while k <= min(left + 10, right + 1):\n                k += 1\n                if k > right + 1:\n                    break\n                \n                # Check if substring word[left:k] is in forbidden_set as per ILR node 7\n                substring = word[left:k]\n                if substring in forbidden_set:\n                    # Update right = k - 1 as per ILR node 8\n                    right = k - 1\n                    break\n            \n            # Update result with max of current res and (right - left + 1)\n            res = max(res, right - left + 1)\n            left -= 1\n        \n        return res",
+  "verification": {
+    "md_verdict": "ILR Error",
+    "actual_error_source": "ilr",
+    "ilr_verdict": "incorrect",
+    "code_vs_ilr": "deviates",
+    "md_correct": "yes",
+    "note": "ILR 结构性错误：left 从未初始化（node5 直接 KeyError）、无 left 递减、node7 false 回到 node6 造成死循环、累加 res 的节点丢失；代码补全了循环结构，但沿用了 ILR 的 word[left:k] + right=k-1 组合造成差一错误，根因在 ILR。",
+    "evidence": "忠实执行 ILR：node5 即 KeyError:'left'（按标签补上 left 初始化后仍 INFINITE_LOOP）；生成代码对 word='leetcode' 返回 5（期望 4），100 个测试仅过 1 个。"
+  }
+}

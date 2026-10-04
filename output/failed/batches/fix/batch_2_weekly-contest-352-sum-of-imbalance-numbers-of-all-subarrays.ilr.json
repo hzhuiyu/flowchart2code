@@ -1,0 +1,15 @@
+{
+  "problem_id": "sumImbalanceNumbers",
+  "nodes": [
+    {"id": 1, "type": "start", "label": "Start", "next": 2},
+    {"id": 2, "type": "process", "label": "Input: nums (List[int])", "action": "ctx['nums'] = ctx['arg0']; ctx['n'] = len(ctx['nums']); ctx['r'] = 0; ctx['i'] = 0", "next": 3},
+    {"id": 3, "type": "decision", "label": "Is i < n? (for each start i)", "logic": "ctx['i'] < ctx['n']", "true_next": 4, "false_next": 13},
+    {"id": 4, "type": "process", "label": "Initialize s = empty set, temp = -1, j = i", "action": "ctx['s'] = set(); ctx['temp'] = -1; ctx['j'] = ctx['i']", "next": 5},
+    {"id": 5, "type": "decision", "label": "Is j < n?", "logic": "ctx['j'] < ctx['n']", "true_next": 6, "false_next": 12},
+    {"id": 6, "type": "decision", "label": "Is nums[j] not in s?", "logic": "ctx['nums'][ctx['j']] not in ctx['s']", "true_next": 7, "false_next": 11},
+    {"id": 7, "type": "process", "label": "temp += 1 - (nums[j]-1 in s) - (nums[j]+1 in s); add nums[j] to s", "action": "ctx['temp'] += 1 - ((ctx['nums'][ctx['j']] - 1) in ctx['s']) - ((ctx['nums'][ctx['j']] + 1) in ctx['s']); ctx['s'].add(ctx['nums'][ctx['j']])", "next": 11},
+    {"id": 11, "type": "process", "label": "r += temp; j += 1", "action": "ctx['r'] += ctx['temp']; ctx['j'] += 1", "next": 5},
+    {"id": 12, "type": "process", "label": "Increment i", "action": "ctx['i'] += 1", "next": 3},
+    {"id": 13, "type": "end", "label": "Output: r (sum of imbalance numbers)", "output": "ctx['r']"}
+  ]
+}

@@ -1,0 +1,148 @@
+{"task_id": "v1_2757", "passed": true, "test_results": [true, true], "metadata": {"execution time": 0.0}, "difficulty": "hard"}
+{"task_id": "v1_2784", "passed": true, "test_results": [true, true], "metadata": {"execution time": 0.0}, "difficulty": "hard"}
+{"task_id": "v1_2808", "passed": true, "test_results": [true, true], "metadata": {"execution time": 0.0}, "difficulty": "hard"}
+{"task_id": "v1_2827", "passed": true, "test_results": [true, true, true], "metadata": {"execution time": 0.0}, "difficulty": "hard"}
+{"task_id": "v1_2839", "passed": true, "test_results": [true, true, true], "metadata": {"execution time": 0.0010080337524414062}, "difficulty": "hard"}
+{"task_id": "v1_2849", "passed": false, "test_results": [false], "metadata": {"output": "4", "inputs": "[[2, 3, 1, 4]]", "expected": "3", "error_code": -2, "error_message": "Wrong Answer"}, "difficulty": "hard"}
+{"task_id": "v1_2879", "passed": true, "test_results": [true, true, true], "metadata": {"execution time": 0.0009980201721191406}, "difficulty": "hard"}
+{"task_id": "v1_2884", "passed": true, "test_results": [true, true], "metadata": {"execution time": 0.0010004043579101562}, "difficulty": "hard"}
+{"task_id": "v1_2921", "passed": false, "test_results": [false], "metadata": {"output": "0", "inputs": "['1', '11']", "expected": "10", "error_code": -2, "error_message": "Wrong Answer"}, "difficulty": "hard"}
+{"task_id": "v1_2952", "passed": false, "test_results": [false], "metadata": {"output": "0", "inputs": "[[1, 2, 3], [1, 2, 3], 4]", "expected": "3", "error_code": -2, "error_message": "Wrong Answer"}, "difficulty": "hard"}
+{"task_id": "v1_3017", "passed": false, "test_results": [false], "metadata": {"output": "4", "inputs": "[10, 20, 3]", "expected": "2", "error_code": -2, "error_message": "Wrong Answer"}, "difficulty": "hard"}
+{"task_id": "v1_3024", "passed": false, "test_results": [-4], "metadata": {"error_code": -4, "error_message": "Error during testing: unterminated string literal (detected at line 52) (<string>, line 52)"}, "difficulty": "hard"}
+{"task_id": "v1_3025", "passed": false, "test_results": [true, -3], "metadata": {"error": "TimeoutException()", "error_code": -3, "error_message": "Time Limit Exceeded", "inputs": "[[1, 32, 1, 2], 12]", "expected": "2"}, "difficulty": "hard"}
+{"task_id": "v1_3032", "passed": true, "test_results": [true, true], "metadata": {"execution time": 0.0}, "difficulty": "hard"}
+{"task_id": "v1_3091", "passed": true, "test_results": [true, true, true], "metadata": {"execution time": 0.0009996891021728516}, "difficulty": "hard"}
+{"task_id": "v1_3153", "passed": false, "test_results": [-4], "metadata": {"error_code": -4, "error_message": "Error during testing: invalid character '→' (U+2192) (<string>, line 67)"}, "difficulty": "hard"}
+{"task_id": "v1_3184", "passed": false, "test_results": [false], "metadata": {"output": "17", "inputs": "[[3, 3, 5, 6]]", "expected": "14", "error_code": -2, "error_message": "Wrong Answer"}, "difficulty": "hard"}
+{"task_id": "v1_3196", "passed": false, "test_results": [-4], "metadata": {"error_code": -4, "error_message": "Error during testing: invalid syntax (<string>, line 38)"}, "difficulty": "hard"}
+{"task_id": "v1_3203", "passed": true, "test_results": [true, true, true], "metadata": {"execution time": 0.0}, "difficulty": "hard"}
+{"task_id": "v1_3211", "passed": false, "test_results": [-4], "metadata": {"error_code": -4, "error_message": "Error during testing: unterminated string literal (detected at line 44) (<string>, line 44)"}, "difficulty": "hard"}
+{"task_id": "v1_3212", "passed": true, "test_results": [true, true, true], "metadata": {"execution time": 0.000545501708984375}, "difficulty": "hard"}
+{"task_id": "v1_3223", "passed": true, "test_results": [true, true], "metadata": {"execution time": 0.0005350112915039062}, "difficulty": "hard"}
+{"task_id": "v1_3224", "passed": false, "test_results": [-4], "metadata": {"error_code": -4, "error_message": "Error during testing: invalid syntax (<string>, line 38)"}, "difficulty": "hard"}
+{"task_id": "v1_3233", "passed": false, "test_results": [false], "metadata": {"output": "2", "inputs": "['accca', 2]", "expected": "3", "error_code": -2, "error_message": "Wrong Answer"}, "difficulty": "hard"}
+{"task_id": "v1_3243", "passed": false, "test_results": [false], "metadata": {"output": "6", "inputs": "[1, 6000, 4, '124']", "expected": "5", "error_code": -2, "error_message": "Wrong Answer"}, "difficulty": "hard"}
+{"task_id": "v1_3298", "passed": false, "test_results": [false], "metadata": {"output": "6", "inputs": "[[2, 1, 5, 1, 1]]", "expected": "3", "error_code": -2, "error_message": "Wrong Answer"}, "difficulty": "hard"}
+{"task_id": "v1_abc301_f", "passed": false, "test_results": [-4], "metadata": {"error_code": -4, "error_message": "Error during testing: expected an indented block after 'if' statement on line 74 (<string>, line 79)"}, "difficulty": "hard"}
+{"task_id": "v1_abc307_e", "passed": true, "test_results": [true, true, true], "metadata": {"execution time": 0.006509542465209961}, "difficulty": "hard"}
+{"task_id": "v1_abc308_e", "passed": true, "test_results": [true, true, true], "metadata": {"execution time": 0.007000446319580078}, "difficulty": "hard"}
+{"task_id": "v1_abc308_f", "passed": false, "test_results": [false], "metadata": {"output": "0", "inputs": "[[3, 3], [4, 3, 1], [4, 4, 2], [2, 3, 1]]", "expected": "4", "error_code": -2, "error_message": "Wrong Answer"}, "difficulty": "hard"}
+{"task_id": "v1_abc310_e", "passed": false, "test_results": [-4], "metadata": {"error_code": -4, "error_message": "Error during testing: invalid syntax (<string>, line 38)"}, "difficulty": "hard"}
+{"task_id": "v1_abc310_f", "passed": false, "test_results": [-4], "metadata": {"error_code": -4, "error_message": "Error during testing: invalid syntax (<string>, line 38)"}, "difficulty": "hard"}
+{"task_id": "v1_abc318_e", "passed": false, "test_results": [-4], "metadata": {"error_code": -4, "error_message": "Error during testing: invalid syntax (<string>, line 38)"}, "difficulty": "hard"}
+{"task_id": "v1_abc323_e", "passed": false, "test_results": [-4], "metadata": {"error_code": -4, "error_message": "Error during testing: invalid character '≤' (U+2264) (<string>, line 41)"}, "difficulty": "hard"}
+{"task_id": "v1_abc324_d", "passed": false, "test_results": [-4], "metadata": {"error": "TypeError(\"'int' object is not subscriptable\")", "error_code": -4, "error_message": "Runtime Error", "inputs": "[4, 4320]", "expected": "2"}, "difficulty": "hard"}
+{"task_id": "v1_abc325_f", "passed": false, "test_results": [false], "metadata": {"output": "16", "inputs": "[3, [3, 5, 10], [4, 3, 3], [2, 2, 6]]", "expected": "17", "error_code": -2, "error_message": "Wrong Answer"}, "difficulty": "hard"}
+{"task_id": "v1_abc327_e", "passed": false, "test_results": [-4], "metadata": {"error_code": -4, "error_message": "Error during testing: unterminated string literal (detected at line 38) (<string>, line 38)"}, "difficulty": "hard"}
+{"task_id": "v1_abc328_d", "passed": true, "test_results": [true, true, true], "metadata": {"execution time": 0.007000446319580078}, "difficulty": "hard"}
+{"task_id": "v1_abc329_e", "passed": false, "test_results": [-4], "metadata": {"error_code": -4, "error_message": "Error during testing: invalid character '≤' (U+2264) (<string>, line 41)"}, "difficulty": "hard"}
+{"task_id": "v1_abc340_e", "passed": false, "test_results": [-4], "metadata": {"error_code": -4, "error_message": "Error during testing: invalid syntax (<string>, line 38)"}, "difficulty": "hard"}
+{"task_id": "v1_abc343_e", "passed": false, "test_results": [-4], "metadata": {"error_code": -4, "error_message": "Error during testing: invalid decimal literal (<string>, line 38)"}, "difficulty": "hard"}
+{"task_id": "v2_3313", "passed": true, "test_results": [true, true, true], "metadata": {"execution time": 0.0}, "difficulty": "hard"}
+{"task_id": "v2_3327", "passed": false, "test_results": [false], "metadata": {"output": "2", "inputs": "[[1, 1, 0, 0, 0, 1, 1, 0, 0, 1], 3, 1]", "expected": "3", "error_code": -2, "error_message": "Wrong Answer"}, "difficulty": "hard"}
+{"task_id": "v2_3376", "passed": false, "test_results": [false], "metadata": {"output": "[1, 1, -1]", "inputs": "[['abcd', 'bcd', 'xbcd'], ['cd', 'bcd', 'xyz']]", "expected": "[1, 1, 1]", "error_code": -2, "error_message": "Wrong Answer"}, "difficulty": "hard"}
+{"task_id": "v2_3344", "passed": false, "test_results": [-4], "metadata": {"error_code": -4, "error_message": "Error during testing: unterminated string literal (detected at line 57) (<string>, line 57)"}, "difficulty": "hard"}
+{"task_id": "v2_3375", "passed": false, "test_results": [true, false], "metadata": {"output": "9", "inputs": "[[5, 2], 7]", "expected": "12", "error_code": -2, "error_message": "Wrong Answer"}, "difficulty": "hard"}
+{"task_id": "v2_3364", "passed": true, "test_results": [true, true, true], "metadata": {"execution time": 0.0}, "difficulty": "hard"}
+{"task_id": "v2_3345", "passed": false, "test_results": [-4], "metadata": {"error_code": -4, "error_message": "Error during testing: unterminated string literal (detected at line 40) (<string>, line 40)"}, "difficulty": "hard"}
+{"task_id": "v2_3316", "passed": true, "test_results": [true, true, true], "metadata": {"execution time": 0.0}, "difficulty": "hard"}
+{"task_id": "v2_3382", "passed": true, "test_results": [true, true, true], "metadata": {"execution time": 0.0}, "difficulty": "hard"}
+{"task_id": "v2_3362", "passed": true, "test_results": [true, true, true], "metadata": {"execution time": 0.0}, "difficulty": "hard"}
+{"task_id": "v2_3402", "passed": false, "test_results": [false], "metadata": {"output": "7", "inputs": "[[4, 1], 5, 2]", "expected": "15", "error_code": -2, "error_message": "Wrong Answer"}, "difficulty": "hard"}
+{"task_id": "v2_3414", "passed": false, "test_results": [-4], "metadata": {"error_code": -4, "error_message": "Error during testing: invalid syntax (<string>, line 38)"}, "difficulty": "hard"}
+{"task_id": "v2_3423", "passed": false, "test_results": [-4], "metadata": {"error_code": -4, "error_message": "Error during testing: invalid syntax (<string>, line 38)"}, "difficulty": "hard"}
+{"task_id": "v2_3411", "passed": false, "test_results": [-4], "metadata": {"error_code": -4, "error_message": "Error during testing: invalid syntax (<string>, line 38)"}, "difficulty": "hard"}
+{"task_id": "v2_abc347_e", "passed": false, "test_results": [-4], "metadata": {"error_code": -4, "error_message": "Error during testing: invalid syntax (<string>, line 38)"}, "difficulty": "hard"}
+{"task_id": "v2_abc349_e", "passed": false, "test_results": [-4], "metadata": {"error_code": -4, "error_message": "Error during testing: invalid syntax (<string>, line 38)"}, "difficulty": "hard"}
+{"task_id": "v2_abc350_e", "passed": false, "test_results": [-4], "metadata": {"error_code": -4, "error_message": "Error during testing: invalid syntax (<string>, line 38)"}, "difficulty": "hard"}
+{"task_id": "v2_abc351_f", "passed": false, "test_results": [-4], "metadata": {"error_code": -4, "error_message": "Error during testing: invalid syntax (<string>, line 38)"}, "difficulty": "hard"}
+{"task_id": "v2_abc351_d", "passed": false, "test_results": [-4], "metadata": {"error_code": -4, "error_message": "Error during testing: invalid syntax (<string>, line 38)"}, "difficulty": "hard"}
+{"task_id": "v2_abc352_d", "passed": false, "test_results": [-4], "metadata": {"error_code": -4, "error_message": "Error during testing: invalid syntax (<string>, line 38)"}, "difficulty": "hard"}
+{"task_id": "v2_abc354_d", "passed": false, "test_results": [-4], "metadata": {"error_code": -4, "error_message": "Error during testing: invalid syntax (<string>, line 38)"}, "difficulty": "hard"}
+{"task_id": "v2_abc355_e", "passed": false, "test_results": [-4], "metadata": {"error_code": -4, "error_message": "Error during testing: invalid syntax (<string>, line 38)"}, "difficulty": "hard"}
+{"task_id": "v3_3436", "passed": false, "test_results": [-4], "metadata": {"error_code": -4, "error_message": "Error during testing: invalid syntax (<string>, line 38)"}, "difficulty": "hard"}
+{"task_id": "v3_3438", "passed": false, "test_results": [-4], "metadata": {"error_code": -4, "error_message": "Error during testing: invalid syntax (<string>, line 38)"}, "difficulty": "hard"}
+{"task_id": "v3_3439", "passed": false, "test_results": [-4], "metadata": {"error_code": -4, "error_message": "Error during testing: invalid syntax (<string>, line 38)"}, "difficulty": "hard"}
+{"task_id": "v3_3482", "passed": false, "test_results": [-4], "metadata": {"error_code": -4, "error_message": "Error during testing: invalid syntax (<string>, line 38)"}, "difficulty": "hard"}
+{"task_id": "v3_3454", "passed": false, "test_results": [-4], "metadata": {"error_code": -4, "error_message": "Error during testing: invalid syntax (<string>, line 38)"}, "difficulty": "hard"}
+{"task_id": "v3_3478", "passed": false, "test_results": [-4], "metadata": {"error_code": -4, "error_message": "Error during testing: invalid syntax (<string>, line 38)"}, "difficulty": "hard"}
+{"task_id": "v3_3535", "passed": false, "test_results": [-4], "metadata": {"error_code": -4, "error_message": "Error during testing: invalid syntax (<string>, line 38)"}, "difficulty": "hard"}
+{"task_id": "v3_3460", "passed": false, "error_code": -1, "error_message": "Missing problem or completion"}
+{"task_id": "v3_3466", "passed": false, "error_code": -1, "error_message": "Missing problem or completion"}
+{"task_id": "v3_3532", "passed": false, "error_code": -1, "error_message": "Missing problem or completion"}
+{"task_id": "v3_abc357_e", "passed": false, "error_code": -1, "error_message": "Missing problem or completion"}
+{"task_id": "v3_abc359_d", "passed": false, "error_code": -1, "error_message": "Missing problem or completion"}
+{"task_id": "v3_abc360_e", "passed": false, "error_code": -1, "error_message": "Missing problem or completion"}
+{"task_id": "v3_abc361_d", "passed": false, "error_code": -1, "error_message": "Missing problem or completion"}
+{"task_id": "v3_abc361_f", "passed": false, "error_code": -1, "error_message": "Missing problem or completion"}
+{"task_id": "v3_abc362_e", "passed": false, "error_code": -1, "error_message": "Missing problem or completion"}
+{"task_id": "v3_abc363_f", "passed": false, "error_code": -1, "error_message": "Missing problem or completion"}
+{"task_id": "v3_abc365_e", "passed": false, "test_results": [false], "metadata": {"output": "None", "inputs": "[3, [1, 3, 2]]", "expected": "3", "error_code": -2, "error_message": "Wrong Answer"}, "difficulty": ""}
+{"task_id": "v4_3552", "passed": false, "test_results": [-4], "metadata": {"error_code": -4, "error_message": "Error during testing: invalid syntax (<string>, line 38)"}, "difficulty": "hard"}
+{"task_id": "v4_3563", "passed": true, "test_results": [true, true], "metadata": {"execution time": 0.000985860824584961}, "difficulty": "hard"}
+{"task_id": "v4_3551", "passed": false, "test_results": [-4], "metadata": {"error_code": -4, "error_message": "Error during testing: cannot unpack non-iterable NoneType object"}, "difficulty": "hard"}
+{"task_id": "v4_3560", "passed": false, "test_results": [-4], "metadata": {"error_code": -4, "error_message": "Error during testing: invalid syntax (<string>, line 38)"}, "difficulty": "hard"}
+{"task_id": "v4_3550", "passed": true, "test_results": [true, true, true], "metadata": {"execution time": 0.0009989738464355469}, "difficulty": "hard"}
+{"task_id": "v4_3548", "passed": false, "test_results": [-4], "metadata": {"error": "TypeError(\"countGoodIntegers() missing 1 required positional argument: 'k'\")", "error_code": -4, "error_message": "Runtime Error", "inputs": "[3, 5]", "expected": "27"}, "difficulty": "hard"}
+{"task_id": "v4_3531", "passed": false, "test_results": [-4], "metadata": {"error_code": -4, "error_message": "Error during testing: unterminated string literal (detected at line 40) (<string>, line 40)"}, "difficulty": "hard"}
+{"task_id": "v4_3575", "passed": true, "test_results": [true, true], "metadata": {"execution time": 0.0}, "difficulty": "hard"}
+{"task_id": "v4_3571", "passed": false, "test_results": [-4], "metadata": {"error_code": -4, "error_message": "Error during testing: unterminated string literal (detected at line 44) (<string>, line 44)"}, "difficulty": "hard"}
+{"task_id": "v4_3583", "passed": true, "test_results": [true, true, true], "metadata": {"execution time": 0.0}, "difficulty": "hard"}
+{"task_id": "v4_3580", "passed": true, "test_results": [true, true, true, true], "metadata": {"execution time": 0.0}, "difficulty": "hard"}
+{"task_id": "v4_abc367_e", "passed": false, "test_results": [-4], "metadata": {"error": "IndexError('list index out of range')", "error_code": -4, "error_message": "Runtime Error", "inputs": "[[7, 3], [5, 2, 6, 3, 1, 4, 6], [1, 2, 3, 5, 7, 9, 11]]", "expected": "[7, 2, 3, 5, 1, 9, 3]"}, "difficulty": ""}
+{"task_id": "v4_abc368_f", "passed": true, "test_results": [true, true], "metadata": {"execution time": 0.00500798225402832}, "difficulty": ""}
+{"task_id": "v4_abc370_g", "passed": false, "test_results": [true, true, true, -4], "metadata": {"error": "RecursionError('maximum recursion depth exceeded in comparison')", "error_code": -4, "error_message": "Runtime Error", "inputs": "[[10000000000, 100000]]", "expected": "447456146"}, "difficulty": ""}
+{"task_id": "v4_abc370_e", "passed": false, "test_results": [true, false], "metadata": {"output": "1", "inputs": "[[5, 0], [0, 0, 0, 0, 0]]", "expected": "0", "error_code": -2, "error_message": "Wrong Answer"}, "difficulty": ""}
+{"task_id": "v4_abc370_f", "passed": false, "test_results": [-4], "metadata": {"error": "TypeError(\"solve() missing 1 required positional argument: 'A'\")", "error_code": -4, "error_message": "Runtime Error", "inputs": "[[5, 2], [3, 6, 8, 6, 4]]", "expected": "[13, 1]"}, "difficulty": ""}
+{"task_id": "v4_abc371_e", "passed": false, "test_results": [-4], "metadata": {"error_code": -4, "error_message": "Error during testing: invalid character '³' (U+00B3) (<string>, line 40)"}, "difficulty": ""}
+{"task_id": "v4_abc373_e", "passed": false, "test_results": [-4], "metadata": {"error": "TypeError(\"solve() missing 2 required positional arguments: 'K' and 'A'\")", "error_code": -4, "error_message": "Runtime Error", "inputs": "[[5, 2, 16], [3, 1, 4, 1, 5]]", "expected": "[2, -1, 1, -1, 0]"}, "difficulty": ""}
+{"task_id": "v4_arc182_e", "passed": false, "test_results": [-4], "metadata": {"error": "TypeError(\"solve() missing 3 required positional arguments: 'C', 'K', and 'A'\")", "error_code": -4, "error_message": "Runtime Error", "inputs": "[[2, 5, 3, 3], [1, 3]]", "expected": "4"}, "difficulty": ""}
+{"task_id": "v4_arc182_c", "passed": false, "test_results": [-4], "metadata": {"error_code": -4, "error_message": "Error during testing: invalid character '∏' (U+220F) (<string>, line 46)"}, "difficulty": ""}
+{"task_id": "v5_3588", "passed": false, "test_results": [false], "metadata": {"output": "10", "inputs": "['FFF']", "expected": "3", "error_code": -2, "error_message": "Wrong Answer"}, "difficulty": "hard"}
+{"task_id": "v5_3603", "passed": true, "test_results": [true, true], "metadata": {"execution time": 0.00099945068359375}, "difficulty": "hard"}
+{"task_id": "v5_3608", "passed": false, "test_results": [false], "metadata": {"output": "11", "inputs": "[[1, 2, 3, 4]]", "expected": "10", "error_code": -2, "error_message": "Wrong Answer"}, "difficulty": "hard"}
+{"task_id": "v5_3637", "passed": false, "test_results": [false], "metadata": {"output": "0", "inputs": "['123']", "expected": "2", "error_code": -2, "error_message": "Wrong Answer"}, "difficulty": "hard"}
+{"task_id": "v5_3646", "passed": false, "test_results": [false], "metadata": {"output": "8", "inputs": "[[1, 2, 1]]", "expected": "14", "error_code": -2, "error_message": "Wrong Answer"}, "difficulty": "hard"}
+{"task_id": "v5_3631", "passed": false, "test_results": [-4], "metadata": {"error_code": -4, "error_message": "Error during testing: invalid character '≤' (U+2264) (<string>, line 43)"}, "difficulty": "hard"}
+{"task_id": "v5_3658", "passed": false, "test_results": [-4], "metadata": {"error_code": -4, "error_message": "Error during testing: invalid syntax (<string>, line 38)"}, "difficulty": "hard"}
+{"task_id": "v5_3675", "passed": true, "test_results": [true, true], "metadata": {"execution time": 0.0}, "difficulty": "hard"}
+{"task_id": "v5_3604", "passed": true, "test_results": [true, true, true], "metadata": {"execution time": 0.0}, "difficulty": "hard"}
+{"task_id": "v5_3648", "passed": false, "test_results": [false], "metadata": {"output": "132", "inputs": "[[[1, 2, 3, 4], [5, 6, 8, 7], [9, 10, 11, 12], [13, 14, 15, 16]]]", "expected": "100", "error_code": -2, "error_message": "Wrong Answer"}, "difficulty": "hard"}
+{"task_id": "v5_3680", "passed": true, "test_results": [true, true], "metadata": {"execution time": 0.0}, "difficulty": "hard"}
+{"task_id": "v5_abc378_e", "passed": true, "test_results": [true, true], "metadata": {"execution time": 0.0035355091094970703}, "difficulty": ""}
+{"task_id": "v5_abc378_g", "passed": false, "test_results": [true, false], "metadata": {"output": "160530982", "inputs": "[[10, 12, 924844033]]", "expected": "623378361", "error_code": -2, "error_message": "Wrong Answer"}, "difficulty": ""}
+{"task_id": "v5_abc379_e", "passed": false, "test_results": [-4], "metadata": {"error": "TypeError(\"'int' object is not subscriptable\")", "error_code": -4, "error_message": "Runtime Error", "inputs": "[3, 379]", "expected": "514"}, "difficulty": ""}
+{"task_id": "v5_abc380_f", "passed": false, "test_results": [-4], "metadata": {"error": "TypeError(\"'int' object is not iterable\")", "error_code": -4, "error_message": "Runtime Error", "inputs": "[[1, 1, 2], 2, 4, [1, 3]]", "expected": "Aoki"}, "difficulty": ""}
+{"task_id": "v5_abc380_g", "passed": false, "test_results": [-4], "metadata": {"error": "TypeError(\"'int' object is not subscriptable\")", "error_code": -4, "error_message": "Runtime Error", "inputs": "[[4, 2], [1, 4, 2, 3]]", "expected": "166374061"}, "difficulty": ""}
+{"task_id": "v5_abc381_d", "passed": false, "test_results": [false], "metadata": {"output": "0", "inputs": "[8, [2, 3, 1, 1, 2, 2, 1, 1]]", "expected": "4", "error_code": -2, "error_message": "Wrong Answer"}, "difficulty": ""}
+{"task_id": "v5_abc386_f", "passed": true, "test_results": [true, true, true], "metadata": {"execution time": 0.006963014602661133}, "difficulty": ""}
+{"task_id": "v5_arc184_c", "passed": false, "test_results": [-4], "metadata": {"error_code": -4, "error_message": "Error during testing: unterminated string literal (detected at line 40) (<string>, line 40)"}, "difficulty": ""}
+{"task_id": "v5_arc185_d", "passed": false, "test_results": [-4], "metadata": {"error_code": -4, "error_message": "Error during testing: invalid character '×' (U+00D7) (<string>, line 41)"}, "difficulty": ""}
+{"task_id": "v5_arc186_e", "passed": false, "test_results": [-4], "metadata": {"error_code": -4, "error_message": "Error during testing: unterminated string literal (detected at line 48) (<string>, line 48)"}, "difficulty": ""}
+{"task_id": "v5_arc187_b", "passed": false, "test_results": [-4], "metadata": {"error_code": -4, "error_message": "Error during testing: unmatched ')' (<string>, line 40)"}, "difficulty": ""}
+{"task_id": "v5_arc189_c", "passed": false, "test_results": [-4], "metadata": {"error_code": -4, "error_message": "Error during testing: unterminated string literal (detected at line 38) (<string>, line 38)"}, "difficulty": ""}
+{"task_id": "v5_arc189_d", "passed": false, "test_results": [false], "metadata": {"output": "[4, -1, 2, -1, 2, -1]", "inputs": "[6, [4, 13, 2, 3, 2, 6]]", "expected": "[4, 30, 2, 13, 2, 13]", "error_code": -2, "error_message": "Wrong Answer"}, "difficulty": ""}
+{"task_id": "v5_arc189_b", "passed": false, "test_results": [-3], "metadata": {"error": "TimeoutException()", "error_code": -3, "error_message": "Time Limit Exceeded", "inputs": "[4, [1, 5, 7, 10]]", "expected": "21"}, "difficulty": ""}
+{"task_id": "v6_abc387_f", "passed": false, "test_results": [-4], "metadata": {"error_code": -4, "error_message": "Error during testing: invalid character '₁' (U+2081) (<string>, line 38)"}, "difficulty": ""}
+{"task_id": "v6_abc389_g", "passed": false, "test_results": [-4], "metadata": {"error_code": -4, "error_message": "Error during testing: unterminated string literal (detected at line 47) (<string>, line 47)"}, "difficulty": ""}
+{"task_id": "v6_abc389_e", "passed": false, "test_results": [-4], "metadata": {"error_code": -4, "error_message": "Error during testing: invalid character '²' (U+00B2) (<string>, line 40)"}, "difficulty": ""}
+{"task_id": "v6_abc390_g", "passed": false, "test_results": [-4], "metadata": {"error_code": -4, "error_message": "Error during testing: invalid character '×' (U+00D7) (<string>, line 42)"}, "difficulty": ""}
+{"task_id": "v6_abc390_f", "passed": false, "test_results": [-4], "metadata": {"error_code": -4, "error_message": "Error during testing: unterminated string literal (detected at line 52) (<string>, line 52)"}, "difficulty": ""}
+{"task_id": "v6_abc391_e", "passed": false, "test_results": [-4], "metadata": {"error_code": -4, "error_message": "Error during testing: unterminated string literal (detected at line 38) (<string>, line 38)"}, "difficulty": ""}
+{"task_id": "v6_abc391_g", "passed": false, "test_results": [-4], "metadata": {"error_code": -4, "error_message": "Error during testing: unterminated string literal (detected at line 64) (<string>, line 64)"}, "difficulty": ""}
+{"task_id": "v6_abc392_f", "passed": true, "test_results": [true, true], "metadata": {"execution time": 0.004002809524536133}, "difficulty": ""}
+{"task_id": "v6_abc393_d", "passed": false, "test_results": [-4], "metadata": {"error": "TypeError(\"'int' object is not subscriptable\")", "error_code": -4, "error_message": "Runtime Error", "inputs": "[7, 101001]", "expected": "3"}, "difficulty": ""}
+{"task_id": "v6_abc397_d", "passed": true, "test_results": [true, true, true], "metadata": {"execution time": 0.019004344940185547}, "difficulty": ""}
+{"task_id": "v6_abc397_f", "passed": true, "test_results": [true, true], "metadata": {"execution time": 0.0020093917846679688}, "difficulty": ""}
+{"task_id": "v6_abc398_f", "passed": false, "test_results": [true, true, false], "metadata": {"output": "TREEERT", "inputs": "['TREE']", "expected": "TREERT", "error_code": -2, "error_message": "Wrong Answer"}, "difficulty": ""}
+{"task_id": "v6_abc398_d", "passed": true, "test_results": [true, true, true], "metadata": {"execution time": 0.003512144088745117}, "difficulty": ""}
+{"task_id": "v6_abc399_e", "passed": false, "test_results": [-4], "metadata": {"error_code": -4, "error_message": "Error during testing: unterminated string literal (detected at line 50) (<string>, line 50)"}, "difficulty": ""}
+{"task_id": "v6_abc399_f", "passed": false, "test_results": [true, -4], "metadata": {"error": "TypeError(\"'int' object is not subscriptable\")", "error_code": -4, "error_message": "Runtime Error", "inputs": "[[1, 10], 0]", "expected": "0"}, "difficulty": ""}
+{"task_id": "v6_arc192_e", "passed": false, "test_results": [false], "metadata": {"output": "1774", "inputs": "[[4, 3, 1, 2, 2, 3]]", "expected": "192", "error_code": -2, "error_message": "Wrong Answer"}, "difficulty": ""}
+{"task_id": "v6_arc192_b", "passed": true, "test_results": [true, true, true], "metadata": {"execution time": 0.004997730255126953}, "difficulty": ""}
+{"task_id": "v6_arc193_b", "passed": false, "test_results": [-4], "metadata": {"error_code": -4, "error_message": "Error during testing: unterminated string literal (detected at line 38) (<string>, line 38)"}, "difficulty": ""}
+{"task_id": "v6_arc194_b", "passed": true, "test_results": [true, true, true], "metadata": {"execution time": 0.0076563358306884766}, "difficulty": ""}
+{"task_id": "v6_arc194_d", "passed": true, "test_results": [true, true], "metadata": {"execution time": 0.0039975643157958984}, "difficulty": ""}
+{"task_id": "v6_arc195_b", "passed": false, "test_results": [-4], "metadata": {"error_code": -4, "error_message": "Error during testing: unterminated string literal (detected at line 38) (<string>, line 38)"}, "difficulty": ""}
+{"task_id": "v6_arc196_a", "passed": false, "test_results": [false], "metadata": {"output": "6", "inputs": "[4, [1, 2, 5, 3]]", "expected": "5", "error_code": -2, "error_message": "Wrong Answer"}, "difficulty": ""}

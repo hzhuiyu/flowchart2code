@@ -1,0 +1,87 @@
+{
+  "problem_id": "longest_example",
+  "nodes": [
+    {
+      "id": 1,
+      "type": "start",
+      "label": "Start",
+      "next": 2
+    },
+    {
+      "id": 2,
+      "type": "process",
+      "label": "Input: strings (List of strings)",
+      "action": "ctx['strings'] = ctx['arg0']; ctx['maxlen'] = 0; ctx['result'] = None",
+      "next": 3
+    },
+    {
+      "id": 3,
+      "type": "decision",
+      "label": "Is strings empty?",
+      "logic": "len(ctx['strings']) == 0",
+      "true_next": 4,
+      "false_next": 5
+    },
+    {
+      "id": 4,
+      "type": "end",
+      "label": "Output: None (no strings to evaluate)",
+      "output": "None"
+    },
+    {
+      "id": 5,
+      "type": "process",
+      "label": "Calculate maxlen = max(length of strings)",
+      "action": "ctx['maxlen'] = max(len(s) for s in ctx['strings'])",
+      "next": 6
+    },
+    {
+      "id": 6,
+      "type": "process",
+      "label": "Iterate over each string in strings",
+      "action": "ctx['i'] = 0",
+      "next": 7
+    },
+    {
+      "id": 7,
+      "type": "decision",
+      "label": "Is length of current string equal to maxlen?",
+      "logic": "len(ctx['strings'][ctx['i']]) == ctx['maxlen']",
+      "true_next": 8,
+      "false_next": 9
+    },
+    {
+      "id": 8,
+      "type": "process",
+      "label": "Output: current string (longest string found)",
+      "action": "ctx['result'] = ctx['strings'][ctx['i']]; ctx['i'] += 1",
+      "next": 10
+    },
+    {
+      "id": 9,
+      "type": "process",
+      "label": "Iterate over each string in strings",
+      "action": "ctx['i'] += 1",
+      "next": 7
+    },
+    {
+      "id": 10,
+      "type": "end",
+      "label": "Return result",
+      "output": "ctx['result']"
+    }
+  ],
+  "task_id": "HumanEval-12",
+  "dataset": "HumanEval-V",
+  "result": "failed: ",
+  "code": "from typing import List, Optional\n\n\ndef longest(strings: List[str]) -> Optional[str]:\n    if len(strings) == 0:\n        return None\n    \n    maxlen = max(len(s) for s in strings)\n    result = None\n    i = 0\n    \n    while i < len(strings):\n        if len(strings[i]) == maxlen:\n            result = strings[i]\n            i += 1\n        else:\n            i += 1\n    \n    return result",
+  "verification": {
+    "md_verdict": "Code Generation Error",
+    "actual_error_source": "code",
+    "ilr_verdict": "correct",
+    "code_vs_ilr": "deviates",
+    "md_correct": "yes",
+    "note": "确认代码错：ILR 中 node8（命中 maxlen）next=10 直接结束，正确返回第一个最长串；生成代码丢掉了这个提前退出，while 循环继续用每个等长串覆盖 result，返回的是最后一个最长串。ILR 转写全部测试通过。",
+    "evidence": "ILR 转写对 ['x','y','z'] 返回 'x'、对 ['x','yyy','zzzz','www','kkkk','abc'] 返回 'zzzz' 全部通过；生成代码分别返回 'z'、'kkkk'（失败），['aa','bb','cc'] 返回 'cc'（期望 'aa'）。"
+  }
+}

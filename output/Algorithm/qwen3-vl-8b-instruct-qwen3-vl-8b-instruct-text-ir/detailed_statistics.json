@@ -1,0 +1,30 @@
+{
+  "dataset": "Algorithm",
+  "model": "qwen3-vl-8b-instruct-qwen3-vl-8b-instruct-text-ir",
+  "total_samples": 149,
+  "use_reflection": false,
+  "max_iterations": 0,
+  "pass_rate": {
+    "iteration_0": {
+      "passed": 95,
+      "total": 149,
+      "rate": 0.6376
+    }
+  },
+  "tokens": {
+    "total": {
+      "prompt_tokens": 740122,
+      "completion_tokens": 95790,
+      "total_tokens": 835912
+    },
+    "average_per_sample": {
+      "prompt_tokens": 4967.26,
+      "completion_tokens": 642.89,
+      "total_tokens": 5610.15
+    }
+  },
+  "time": {
+    "total_time": 1659.81,
+    "average_per_sample": 11.14
+  }
+}

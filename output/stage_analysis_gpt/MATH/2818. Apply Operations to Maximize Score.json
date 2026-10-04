@@ -1,0 +1,405 @@
+{
+  "task_id": "2818. Apply Operations to Maximize Score",
+  "dataset": "MATH",
+  "difficulty": "hard",
+  "title": null,
+  "result": "failed: ",
+  "ilr": "{\n  \"problem_id\": \"maximize_score\",\n  \"nodes\": [\n    {\"id\": 1, \"type\": \"start\", \"label\": \"Start\", \"next\": 2},\n    {\"id\": 2, \"type\": \"process\", \"label\": \"Input: nums (list of integers), k (integer)\", \"action\": \"ctx['nums']=ctx['arg0']; ctx['k']=ctx['arg1']; ctx['n']=len(ctx['nums']); ctx['MOD']=10**9 + 7; ctx['i']=0; ctx['res']=1\", \"next\": 3},\n    {\"id\": 3, \"type\": \"process\", \"label\": \"Initialize upper = max(nums) + 1\", \"action\": \"ctx['upper'] = max(ctx['nums']) + 1\", \"next\": 4},\n    {\"id\": 4, \"type\": \"process\", \"label\": \"Initialize prime = [True] * upper\", \"action\": \"ctx['prime'] = [True] * ctx['upper']\", \"next\": 5},\n    {\"id\": 5, \"type\": \"process\", \"label\": \"Initialize prime[0] = prime[1] = False\", \"action\": \"ctx['prime'][0] = ctx['prime'][1] = False\", \"next\": 6},\n    {\"id\": 6, \"type\": \"process\", \"label\": \"Initialize primeScore = [0] * upper\", \"action\": \"ctx['primeScore'] = [0] * ctx['upper']\", \"next\": 7},\n    {\"id\": 7, \"type\": \"process\", \"label\": \"Loop i from 2 to upper-1\", \"action\": \"for ctx['i'] in range(2, ctx['upper']):\", \"next\": 8},\n    {\"id\": 8, \"type\": \"decision\", \"label\": \"Is prime[i] True?\", \"logic\": \"ctx['prime'][ctx['i']]\", \"true_next\": 9, \"false_next\": 13},\n    {\"id\": 9, \"type\": \"process\", \"label\": \"Loop j from i to upper-1 with step i\", \"action\": \"for ctx['j'] in range(ctx['i'], ctx['upper'], ctx['i']):\", \"next\": 10},\n    {\"id\": 10, \"type\": \"process\", \"label\": \"Increment primeScore[j] by 1\", \"action\": \"ctx['primeScore'][ctx['j']] += 1\", \"next\": 11},\n    {\"id\": 11, \"type\": \"process\", \"label\": \"Set prime[j] = False\", \"action\": \"ctx['prime'][ctx['j']] = False\", \"next\": 12},\n    {\"id\": 12, \"type\": \"process\", \"label\": \"End Loop\", \"action\": \"\", \"next\": 7},\n    {\"id\": 13, \"type\": \"process\", \"label\": \"Initialize nextGreaterElement = [n] * n\", \"action\": \"ctx['nextGreaterElement'] = [ctx['n']] * ctx['n']\", \"next\": 14},\n    {\"id\": 14, \"type\": \"process\", \"label\": \"Initialize stack s = []\", \"action\": \"ctx['s'] = []\", \"next\": 15},\n    {\"id\": 15, \"type\": \"process\", \"label\": \"Loop i from n-1 to 0\", \"action\": \"for ctx['i'] in range(ctx['n'] - 1, -1, -1):\", \"next\": 16},\n    {\"id\": 16, \"type\": \"decision\", \"label\": \"Is stack s not empty and primeScore[nums[i]] >= primeScore[nums[s[-1]]]?\", \"logic\": \"ctx['s'] and ctx['primeScore'][ctx['nums'][ctx['i']]] >= ctx['primeScore'][ctx['nums'][ctx['s'][-1]]]\", \"true_next\": 17, \"false_next\": 18},\n    {\"id\": 17, \"type\": \"process\", \"label\": \"Set nextGreaterElement[i] = s[-1] if s else n\", \"action\": \"ctx['nextGreaterElement'][ctx['i']] = ctx['s'][-1] if ctx['s'] else ctx['n']\", \"next\": 18},\n    {\"id\": 18, \"type\": \"process\", \"label\": \"Append i to stack s\", \"action\": \"ctx['s'].append(ctx['i'])\", \"next\": 15},\n    {\"id\": 19, \"type\": \"process\", \"label\": \"Initialize prevGreaterOrEqualElement = [-1] * n\", \"action\": \"ctx['prevGreaterOrEqualElement'] = [-1] * ctx['n']\", \"next\": 20},\n    {\"id\": 20, \"type\": \"process\", \"label\": \"Initialize stack s = []\", \"action\": \"ctx['s'] = []\", \"next\": 21},\n    {\"id\": 21, \"type\": \"process\", \"label\": \"Loop i from 0 to n-1\", \"action\": \"for ctx['i'] in range(ctx['n']):\", \"next\": 22},\n    {\"id\": 22, \"type\": \"decision\", \"label\": \"Is stack s not empty and primeScore[nums[i]] > primeScore[nums[s[-1]]]?\", \"logic\": \"ctx['s'] and ctx['primeScore'][ctx['nums'][ctx['i']]] > ctx['primeScore'][ctx['nums'][ctx['s'][-1]]]\", \"true_next\": 23, \"false_next\": 24},\n    {\"id\": 23, \"type\": \"process\", \"label\": \"Set prevGreaterOrEqualElement[i] = s[-1] if s else -1\", \"action\": \"ctx['prevGreaterOrEqualElement'][ctx['i']] = ctx['s'][-1] if ctx['s'] else -1\", \"next\": 24},\n    {\"id\": 24, \"type\": \"process\", \"label\": \"Append i to stack s\", \"action\": \"ctx['s'].append(ctx['i'])\", \"next\": 21},\n    {\"id\": 25, \"type\": \"process\", \"label\": \"Initialize res = 1\", \"action\": \"ctx['res'] = 1\", \"next\": 26},\n    {\"id\": 26, \"type\": \"process\", \"label\": \"Sort nums with indices by value in descending order\", \"action\": \"ctx['sorted_nums'] = sorted(enumerate(ctx['nums']), key=lambda x: x[1], reverse=True)\", \"next\": 27},\n    {\"id\": 27, \"type\": \"process\", \"label\": \"Loop through sorted nums with indices\", \"action\": \"for ctx['idx'], ctx['num'] in ctx['sorted_nums']:\", \"next\": 28},\n    {\"id\": 28, \"type\": \"process\", \"label\": \"Calculate operations = min((i - prevGreaterOrEqualElement[i]) * (nextGreaterElement[i] - i), k)\", \"action\": \"ctx['operations'] = min((ctx['idx'] - ctx['prevGreaterOrEqualElement'][ctx['idx']]) * (ctx['nextGreaterElement'][ctx['idx']] - ctx['idx']), ctx['k'])\", \"next\": 29},\n    {\"id\": 29, \"type\": \"process\", \"label\": \"Update res = (res * pow(num, operations, MOD)) % MOD\", \"action\": \"ctx['res'] = (ctx['res'] * pow(ctx['num'], ctx['operations'], ctx['MOD'])) % ctx['MOD']\", \"next\": 30},\n    {\"id\": 30, \"type\": \"process\", \"label\": \"Update k -= operations\", \"action\": \"ctx['k'] -= ctx['operations']\", \"next\": 31},\n    {\"id\": 31, \"type\": \"decision\", \"label\": \"k == 0?\", \"logic\": \"ctx['k'] == 0\", \"true_next\": 32, \"false_next\": 27},\n    {\"id\": 32, \"type\": \"end\", \"label\": \"Output: res\", \"output\": \"ctx['res']\"}\n  ]\n}",
+  "code": "from typing import List\n\ndef maximumScore(nums: List[int], k: int) -> int:\n    n = len(nums)\n    MOD = 10**9 + 7\n    res = 1\n    upper = max(nums) + 1\n    prime = [True] * upper\n    prime[0] = prime[1] = False\n    primeScore = [0] * upper\n\n    for i in range(2, upper):\n        if prime[i]:\n            for j in range(i, upper, i):\n                primeScore[j] += 1\n                prime[j] = False\n\n    nextGreaterElement = [n] * n\n    s = []\n    for i in range(n - 1, -1, -1):\n        while s and primeScore[nums[i]] >= primeScore[nums[s[-1]]]:\n            nextGreaterElement[i] = s[-1]\n            s.pop()\n        s.append(i)\n\n    prevGreaterOrEqualElement = [-1] * n\n    s = []\n    for i in range(n):\n        while s and primeScore[nums[i]] > primeScore[nums[s[-1]]]:\n            prevGreaterOrEqualElement[i] = s[-1]\n            s.pop()\n        s.append(i)\n\n    sorted_nums = sorted(enumerate(nums), key=lambda x: x[1], reverse=True)\n    \n    for idx, num in sorted_nums:\n        operations = min((idx - prevGreaterOrEqualElement[idx]) * (nextGreaterElement[idx] - idx), k)\n        res = (res * pow(num, operations, MOD)) % MOD\n        k -= operations\n        if k == 0:\n            break\n\n    return res",
+  "prompt": "You are given an array nums of n positive integers and an integer k.\n\nInitially, you start with a score of 1. You have to maximize your score by applying the following operation at most k times:\n\nChoose any non-empty subarray nums[l, ..., r] that you haven't chosen previously.\nChoose an element x of nums[l, ..., r] with the highest prime score. If multiple such elements exist, choose the one with the smallest index.\nMultiply your score by x.\nHere, nums[l, ..., r] denotes the subarray of nums starting at index l and ending at the index r, both ends being inclusive.\n\nThe prime score of an integer x is equal to the number of distinct prime factors of x. For example, the prime score of 300 is 3 since 300 = 2 * 2 * 3 * 5 * 5.\n\nReturn the maximum possible score after applying at most k operations.\n\nSince the answer may be large, return it modulo 109 + 7.\n\n\n\nExample 1:\n\nInput: nums = [8,3,9,3,8], k = 2\nOutput: 81\nExplanation: To get a score of 81, we can apply the following operations:\n- Choose subarray nums[2, ..., 2]. nums[2] is the only element in this subarray. Hence, we multiply the score by nums[2]. The score becomes 1 * 9 = 9.\n- Choose subarray nums[2, ..., 3]. Both nums[2] and nums[3] have a prime score of 1, but nums[2] has the smaller index. Hence, we multiply the score by nums[2]. The score becomes 9 * 9 = 81.\nIt can be proven that 81 is the highest score one can obtain.\nExample 2:\n\nInput: nums = [19,12,14,6,10,18], k = 3\nOutput: 4788\nExplanation: To get a score of 4788, we can apply the following operations:\n- Choose subarray nums[0, ..., 0]. nums[0] is the only element in this subarray. Hence, we multiply the score by nums[0]. The score becomes 1 * 19 = 19.\n- Choose subarray nums[5, ..., 5]. nums[5] is the only element in this subarray. Hence, we multiply the score by nums[5]. The score becomes 19 * 18 = 342.\n- Choose subarray nums[2, ..., 3]. Both nums[2] and nums[3] have a prime score of 2, but nums[2] has the smaller index. Hence, we multipy the score by nums[2]. The score becomes 342 * 14 = 4788.\nIt can be proven that 4788 is the highest score one can obtain.\n\n\nConstraints:\n\n1 <= nums.length == n <= 105\n1 <= nums[i] <= 105\n1 <= k <= min(n * (n + 1) / 2, 109)",
+  "test": "assert maximumScore([8, 3, 9, 3, 8], 2) == 81  # Example 1\nassert maximumScore([19, 12, 14, 6, 10, 18], 3) == 4788  # Example 2\nassert maximumScore([2, 3, 5, 7], 1) == 7  # Single operation, highest prime score\n\n# Boundary test cases\nassert maximumScore([1], 1) == 1  # Single element, smallest possible value\nassert maximumScore([2], 1) == 2  # Single element, smallest prime number\nassert maximumScore([1, 1, 1, 1], 4) == 1  # All elements are 1, multiple operations\n\n# Large number test cases\nassert maximumScore([10**5] * 10**5, 10**5) == pow(10**5, 10**5, 10**9 + 7)  # Large array with large values\nassert maximumScore([10**5, 10**5 - 1, 10**5 - 2], 2) == (10**5 * (10**5 - 1)) % (10**9 + 7)  # Large values with multiple operations\nassert maximumScore([2, 3, 5, 7, 11, 13, 17, 19, 23, 29], 5) == 5538101  # Prime numbers with multiple operations",
+  "ocr_data": {
+    "nodes": [
+      {
+        "node_id": 1,
+        "shape_type": "rectangle",
+        "raw_text": "Start",
+        "position": "top"
+      },
+      {
+        "node_id": 2,
+        "shape_type": "rectangle",
+        "raw_text": "Input: nums (list of integers), k (integer)",
+        "position": "middle"
+      },
+      {
+        "node_id": 3,
+        "shape_type": "rectangle",
+        "raw_text": "Initialize n = len(nums)",
+        "position": "middle"
+      },
+      {
+        "node_id": 4,
+        "shape_type": "rectangle",
+        "raw_text": "Initialize upper = max(nums) + 1",
+        "position": "middle"
+      },
+      {
+        "node_id": 5,
+        "shape_type": "rectangle",
+        "raw_text": "Initialize prime = [True] * upper",
+        "position": "middle"
+      },
+      {
+        "node_id": 6,
+        "shape_type": "rectangle",
+        "raw_text": "Initialize prime[0] = prime[1] = False",
+        "position": "middle"
+      },
+      {
+        "node_id": 7,
+        "shape_type": "rectangle",
+        "raw_text": "Initialize primeScore = [0] * upper",
+        "position": "middle"
+      },
+      {
+        "node_id": 8,
+        "shape_type": "rectangle",
+        "raw_text": "Loop i from 2 to upper-1",
+        "position": "middle"
+      },
+      {
+        "node_id": 9,
+        "shape_type": "diamond",
+        "raw_text": "Is prime[i] True?",
+        "position": "middle"
+      },
+      {
+        "node_id": 10,
+        "shape_type": "rectangle",
+        "raw_text": "Loop j from i to upper-1 with step i",
+        "position": "middle"
+      },
+      {
+        "node_id": 11,
+        "shape_type": "rectangle",
+        "raw_text": "Increment primeScore[j] by 1",
+        "position": "middle"
+      },
+      {
+        "node_id": 12,
+        "shape_type": "rectangle",
+        "raw_text": "Set prime[j] = False",
+        "position": "middle"
+      },
+      {
+        "node_id": 13,
+        "shape_type": "rectangle",
+        "raw_text": "Initialize nextGreaterElement = [n] * n",
+        "position": "middle"
+      },
+      {
+        "node_id": 14,
+        "shape_type": "rectangle",
+        "raw_text": "Initialize stack s = []",
+        "position": "middle"
+      },
+      {
+        "node_id": 15,
+        "shape_type": "rectangle",
+        "raw_text": "Loop i from n-1 to 0",
+        "position": "middle"
+      },
+      {
+        "node_id": 16,
+        "shape_type": "diamond",
+        "raw_text": "Is stack s not empty and primeScore[nums[i]] >= primeScore[nums[s[-1]]]?",
+        "position": "middle"
+      },
+      {
+        "node_id": 17,
+        "shape_type": "rectangle",
+        "raw_text": "Set nextGreaterElement[i] = s[-1] if s else n",
+        "position": "middle"
+      },
+      {
+        "node_id": 18,
+        "shape_type": "rectangle",
+        "raw_text": "Append i to stack s",
+        "position": "middle"
+      },
+      {
+        "node_id": 19,
+        "shape_type": "rectangle",
+        "raw_text": "Initialize prevGreaterOrEqualElement = [-1] * n",
+        "position": "middle"
+      },
+      {
+        "node_id": 20,
+        "shape_type": "rectangle",
+        "raw_text": "Initialize stack s = []",
+        "position": "middle"
+      },
+      {
+        "node_id": 21,
+        "shape_type": "rectangle",
+        "raw_text": "Loop i from 0 to n-1",
+        "position": "middle"
+      },
+      {
+        "node_id": 22,
+        "shape_type": "diamond",
+        "raw_text": "Is stack s not empty and primeScore[nums[i]] > primeScore[nums[s[-1]]]?",
+        "position": "middle"
+      },
+      {
+        "node_id": 23,
+        "shape_type": "rectangle",
+        "raw_text": "Set prevGreaterOrEqualElement[i] = s[-1] if s else -1",
+        "position": "middle"
+      },
+      {
+        "node_id": 24,
+        "shape_type": "rectangle",
+        "raw_text": "Append i to stack s",
+        "position": "middle"
+      },
+      {
+        "node_id": 25,
+        "shape_type": "rectangle",
+        "raw_text": "Initialize res = 1",
+        "position": "middle"
+      },
+      {
+        "node_id": 26,
+        "shape_type": "rectangle",
+        "raw_text": "Sort nums with indices by value in descending order",
+        "position": "middle"
+      },
+      {
+        "node_id": 27,
+        "shape_type": "rectangle",
+        "raw_text": "Loop through sorted nums with indices",
+        "position": "middle"
+      },
+      {
+        "node_id": 28,
+        "shape_type": "rectangle",
+        "raw_text": "Calculate operations = min((i - prevGreaterOrEqualElement[i]) * (nextGreaterElement[i] - i), k)",
+        "position": "middle"
+      },
+      {
+        "node_id": 29,
+        "shape_type": "rectangle",
+        "raw_text": "Update res = (res * pow(num, operations, MOD)) % MOD",
+        "position": "middle"
+      },
+      {
+        "node_id": 30,
+        "shape_type": "rectangle",
+        "raw_text": "Update k -= operations",
+        "position": "middle"
+      },
+      {
+        "node_id": 31,
+        "shape_type": "diamond",
+        "raw_text": "k == 0?",
+        "position": "middle"
+      },
+      {
+        "node_id": 32,
+        "shape_type": "rectangle",
+        "raw_text": "Output: res",
+        "position": "bottom"
+      }
+    ],
+    "edges": [
+      {
+        "from_node": 1,
+        "to_node": 2,
+        "label": ""
+      },
+      {
+        "from_node": 2,
+        "to_node": 3,
+        "label": ""
+      },
+      {
+        "from_node": 3,
+        "to_node": 4,
+        "label": ""
+      },
+      {
+        "from_node": 4,
+        "to_node": 5,
+        "label": ""
+      },
+      {
+        "from_node": 5,
+        "to_node": 6,
+        "label": ""
+      },
+      {
+        "from_node": 6,
+        "to_node": 7,
+        "label": ""
+      },
+      {
+        "from_node": 7,
+        "to_node": 8,
+        "label": ""
+      },
+      {
+        "from_node": 8,
+        "to_node": 9,
+        "label": ""
+      },
+      {
+        "from_node": 9,
+        "to_node": 10,
+        "label": "Yes"
+      },
+      {
+        "from_node": 9,
+        "to_node": 13,
+        "label": "No"
+      },
+      {
+        "from_node": 10,
+        "to_node": 11,
+        "label": "Yes"
+      },
+      {
+        "from_node": 11,
+        "to_node": 12,
+        "label": ""
+      },
+      {
+        "from_node": 12,
+        "to_node": 8,
+        "label": ""
+      },
+      {
+        "from_node": 13,
+        "to_node": 14,
+        "label": ""
+      },
+      {
+        "from_node": 14,
+        "to_node": 15,
+        "label": ""
+      },
+      {
+        "from_node": 15,
+        "to_node": 16,
+        "label": ""
+      },
+      {
+        "from_node": 16,
+        "to_node": 17,
+        "label": "Yes"
+      },
+      {
+        "from_node": 16,
+        "to_node": 18,
+        "label": "No"
+      },
+      {
+        "from_node": 17,
+        "to_node": 18,
+        "label": ""
+      },
+      {
+        "from_node": 18,
+        "to_node": 15,
+        "label": ""
+      },
+      {
+        "from_node": 19,
+        "to_node": 20,
+        "label": ""
+      },
+      {
+        "from_node": 20,
+        "to_node": 21,
+        "label": ""
+      },
+      {
+        "from_node": 21,
+        "to_node": 22,
+        "label": ""
+      },
+      {
+        "from_node": 22,
+        "to_node": 23,
+        "label": "Yes"
+      },
+      {
+        "from_node": 22,
+        "to_node": 24,
+        "label": "No"
+      },
+      {
+        "from_node": 23,
+        "to_node": 24,
+        "label": ""
+      },
+      {
+        "from_node": 24,
+        "to_node": 21,
+        "label": ""
+      },
+      {
+        "from_node": 25,
+        "to_node": 26,
+        "label": ""
+      },
+      {
+        "from_node": 26,
+        "to_node": 27,
+        "label": ""
+      },
+      {
+        "from_node": 27,
+        "to_node": 28,
+        "label": ""
+      },
+      {
+        "from_node": 28,
+        "to_node": 29,
+        "label": ""
+      },
+      {
+        "from_node": 29,
+        "to_node": 30,
+        "label": ""
+      },
+      {
+        "from_node": 30,
+        "to_node": 31,
+        "label": ""
+      },
+      {
+        "from_node": 31,
+        "to_node": 32,
+        "label": "Yes"
+      },
+      {
+        "from_node": 27,
+        "to_node": 31,
+        "label": "No"
+      },
+      {
+        "from_node": 28,
+        "to_node": 31,
+        "label": ""
+      },
+      {
+        "from_node": 31,
+        "to_node": 32,
+        "label": ""
+      }
+    ],
+    "other_text": []
+  },
+  "analysis": {
+    "ilr_verdict": "incorrect",
+    "ilr_issues": "OCR 边显示流程图本身就有两处缺陷且被 ILR 忠实镜像：筛法 12→8 回到外层（内层 j 循环只走 j=i 一次，primeScore 统计不出不同质因子个数），两个单调栈是无弹栈的单次 if（16-Yes→17 赋值 s[-1]、18 追加后回 15，从不 pop），导致 nge/pge 系统性错误（例2 按图执行 nge=[6,2,3,4,5,6]、pge=[-1,0,-1,-1,-1,-1]，正确应为 nge=[1,6,6,6,6,6]、pge=[-1,-1,1,2,3,4]）。",
+    "code_vs_ilr": "deviates",
+    "code_issues": "代码把筛法修复为标准内层循环（修正性偏离），但单调栈沿用 ILR 的错误语义（while 内先赋值 s[-1] 再弹出，在本题输入上与'赋值不出栈'结果完全相同），例2 得到与 ILR 按图执行逐元素一致的错误数组。",
+    "error_source": "ilr",
+    "ocr_contribution": "no",
+    "root_cause": "流程图/ILR 的栈结构缺失 while 弹栈语义（赋值后不弹出），左右边界数组全错；代码修复了筛法却忠实继承栈缺陷，失败根源在 ILR 阶段产物。",
+    "evidence": "实测 maximumScore([19,12,14,6,10,18],3)=6859（期望 4788），其 nge/pge 与 ILR 按图执行完全一致；例1 [8,3,9,3,8] 因所有质因子个数同为 1 巧合通过（81）。"
+  }
+}

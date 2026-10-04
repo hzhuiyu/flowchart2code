@@ -1,0 +1,187 @@
+{
+  "task_id": "HumanEval-137",
+  "dataset": "HumanEval-V",
+  "difficulty": null,
+  "title": null,
+  "result": "failed: ",
+  "ilr": "{\n  \"problem_id\": \"compare_one\",\n  \"nodes\": [\n    {\"id\": 1, \"type\": \"start\", \"label\": \"Start\", \"next\": 2},\n    {\"id\": 2, \"type\": \"process\", \"label\": \"Input: a (int/float/str), b (int/float/str)\", \"action\": \"ctx['temp_a']=ctx['arg0']; ctx['temp_b']=ctx['arg1']\", \"next\": 3},\n    {\"id\": 3, \"type\": \"decision\", \"label\": \"Is temp_a a string?\", \"logic\": \"isinstance(ctx['temp_a'], str)\", \"true_next\": 4, \"false_next\": 6},\n    {\"id\": 4, \"type\": \"process\", \"label\": \"Replace ',' with '.' in temp_a\", \"action\": \"ctx['temp_a'] = ctx['temp_a'].replace(',', '.')\", \"next\": 5},\n    {\"id\": 5, \"type\": \"process\", \"label\": \"Skip replacement for temp_a\", \"action\": \"\", \"next\": 6},\n    {\"id\": 6, \"type\": \"decision\", \"label\": \"Is temp_b a string?\", \"logic\": \"isinstance(ctx['temp_b'], str)\", \"true_next\": 7, \"false_next\": 9},\n    {\"id\": 7, \"type\": \"process\", \"label\": \"Replace ',' with '.' in temp_b\", \"action\": \"ctx['temp_b'] = ctx['temp_b'].replace(',', '.')\", \"next\": 8},\n    {\"id\": 8, \"type\": \"process\", \"label\": \"Skip replacement for temp_b\", \"action\": \"\", \"next\": 9},\n    {\"id\": 9, \"type\": \"decision\", \"label\": \"Is float(temp_a) == float(temp_b)?\", \"logic\": \"float(ctx['temp_a']) == float(ctx['temp_b'])\", \"true_next\": 11, \"false_next\": 12},\n    {\"id\": 10, \"type\": \"decision\", \"label\": \"Is float(temp_a) > float(temp_b)?\", \"logic\": \"float(ctx['temp_a']) > float(ctx['temp_b'])\", \"true_next\": 13, \"false_next\": 14},\n    {\"id\": 11, \"type\": \"end\", \"label\": \"Output: None (values are equal)\", \"output\": \"None\"},\n    {\"id\": 12, \"type\": \"decision\", \"label\": \"Is float(temp_a) > float(temp_b)?\", \"logic\": \"float(ctx['temp_a']) > float(ctx['temp_b'])\", \"true_next\": 13, \"false_next\": 14},\n    {\"id\": 13, \"type\": \"end\", \"label\": \"Output: a (larger value)\", \"output\": \"ctx['temp_a']\"},\n    {\"id\": 14, \"type\": \"end\", \"label\": \"Output: b (larger value)\", \"output\": \"ctx['temp_b']\"}\n  ]\n}",
+  "code": "def compare_one(a, b):\n    temp_a = a\n    temp_b = b\n\n    if isinstance(temp_a, str):\n        temp_a = temp_a.replace(',', '.')\n\n    if isinstance(temp_b, str):\n        temp_b = temp_b.replace(',', '.')\n\n    if float(temp_a) == float(temp_b):\n        return None\n\n    if float(temp_a) > float(temp_b):\n        return temp_a\n    else:\n        return temp_b",
+  "prompt": "\ndef compare_one(a, b):\n    \"\"\"\n    Create a function that takes integers, floats, or strings representing\n    real numbers, and returns the larger variable in its given variable type.\n    Return None if the values are equal.\n    Note: If a real number is represented as a string, the floating point might be . or ,\n\n    compare_one(1, 2.5) ➞ 2.5\n    compare_one(1, \"2,3\") ➞ \"2,3\"\n    compare_one(\"5,1\", \"6\") ➞ \"6\"\n    compare_one(\"1\", 1) ➞ None\n    \"\"\"\n",
+  "test": "def check(candidate):\n\n    # Check some simple cases\n    assert candidate(1, 2) == 2\n    assert candidate(1, 2.5) == 2.5\n    assert candidate(2, 3) == 3\n    assert candidate(5, 6) == 6\n    assert candidate(1, \"2,3\") == \"2,3\"\n    assert candidate(\"5,1\", \"6\") == \"6\"\n    assert candidate(\"1\", \"2\") == \"2\"\n    assert candidate(\"1\", 1) == None\n\n    # Check some edge cases that are easy to work out by hand.\n    assert True\n\n",
+  "ocr_data": {
+    "nodes": [
+      {
+        "node_id": 1,
+        "shape_type": "rectangle",
+        "raw_text": "Start",
+        "position": "top"
+      },
+      {
+        "node_id": 2,
+        "shape_type": "rectangle",
+        "raw_text": "Input: a (int/float/str), b (int/float/str)",
+        "position": "middle"
+      },
+      {
+        "node_id": 3,
+        "shape_type": "rectangle",
+        "raw_text": "Initialize temp_a = a, temp_b = b",
+        "position": "middle"
+      },
+      {
+        "node_id": 4,
+        "shape_type": "diamond",
+        "raw_text": "Is temp_a a string?",
+        "position": "middle"
+      },
+      {
+        "node_id": 5,
+        "shape_type": "rectangle",
+        "raw_text": "Replace ',' with '.' in temp_a",
+        "position": "middle"
+      },
+      {
+        "node_id": 6,
+        "shape_type": "rectangle",
+        "raw_text": "Skip replacement for temp_a",
+        "position": "middle"
+      },
+      {
+        "node_id": 7,
+        "shape_type": "diamond",
+        "raw_text": "Is temp_b a string?",
+        "position": "middle"
+      },
+      {
+        "node_id": 8,
+        "shape_type": "rectangle",
+        "raw_text": "Replace ',' with '.' in temp_b",
+        "position": "middle"
+      },
+      {
+        "node_id": 9,
+        "shape_type": "rectangle",
+        "raw_text": "Skip replacement for temp_b",
+        "position": "middle"
+      },
+      {
+        "node_id": 10,
+        "shape_type": "diamond",
+        "raw_text": "Is float(temp_a) == float(temp_b)?",
+        "position": "middle"
+      },
+      {
+        "node_id": 11,
+        "shape_type": "rectangle",
+        "raw_text": "Output: None (values are equal)",
+        "position": "bottom"
+      },
+      {
+        "node_id": 12,
+        "shape_type": "diamond",
+        "raw_text": "Is float(temp_a) > float(temp_b)?",
+        "position": "bottom"
+      },
+      {
+        "node_id": 13,
+        "shape_type": "rectangle",
+        "raw_text": "Output: a (larger value)",
+        "position": "bottom"
+      },
+      {
+        "node_id": 14,
+        "shape_type": "rectangle",
+        "raw_text": "Output: b (larger value)",
+        "position": "bottom"
+      }
+    ],
+    "edges": [
+      {
+        "from_node": 1,
+        "to_node": 2,
+        "label": ""
+      },
+      {
+        "from_node": 2,
+        "to_node": 3,
+        "label": ""
+      },
+      {
+        "from_node": 3,
+        "to_node": 4,
+        "label": ""
+      },
+      {
+        "from_node": 4,
+        "to_node": 5,
+        "label": "Yes"
+      },
+      {
+        "from_node": 4,
+        "to_node": 6,
+        "label": "No"
+      },
+      {
+        "from_node": 5,
+        "to_node": 7,
+        "label": ""
+      },
+      {
+        "from_node": 6,
+        "to_node": 7,
+        "label": ""
+      },
+      {
+        "from_node": 7,
+        "to_node": 8,
+        "label": "Yes"
+      },
+      {
+        "from_node": 7,
+        "to_node": 9,
+        "label": "No"
+      },
+      {
+        "from_node": 8,
+        "to_node": 10,
+        "label": ""
+      },
+      {
+        "from_node": 9,
+        "to_node": 10,
+        "label": ""
+      },
+      {
+        "from_node": 10,
+        "to_node": 11,
+        "label": "Yes"
+      },
+      {
+        "from_node": 10,
+        "to_node": 12,
+        "label": "No"
+      },
+      {
+        "from_node": 12,
+        "to_node": 13,
+        "label": "Yes"
+      },
+      {
+        "from_node": 12,
+        "to_node": 14,
+        "label": "No"
+      }
+    ],
+    "other_text": []
+  },
+  "analysis": {
+    "ilr_verdict": "incorrect",
+    "ilr_issues": "节点13/14的输出写成了 ctx['temp_a']/ctx['temp_b']（已把逗号替换成点后的临时值），而流程图OCR节点明确是 'Output: a (larger value)'/'Output: b'，应返回原始输入a/b；导致 compare_one(1, \"2,3\") 返回 '2.3' 而非 '2,3'，违反'以原类型原样返回'的要求。",
+    "code_vs_ilr": "faithful",
+    "code_issues": "代码逐句忠实实现了ILR（比较用temp、返回也用temp），忠实执行了错误的ILR。",
+    "error_source": "ilr",
+    "ocr_contribution": "no",
+    "root_cause": "ILR 在转录输出节点时把'返回原始a/b'误写成'返回替换后的temp_a/temp_b'，代码忠实实现，导致字符串型结果丢失原格式（'2,3'变'2.3'）；OCR原文清晰区分temp替换节点与输出a/b节点，OCR无误。",
+    "evidence": "compare_one(1, \"2,3\") 实际返回 '2.3'，期望 '2,3'（该用例必失败）；其余7个用例均通过。OCR节点5/8为\"Replace ',' with '.' in temp_a\"（只改temp），节点13为'Output: a (larger value)'（输出原始a），ILR输出节点与OCR矛盾。"
+  }
+}

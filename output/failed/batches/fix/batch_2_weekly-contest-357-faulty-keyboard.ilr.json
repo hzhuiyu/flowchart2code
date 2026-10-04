@@ -1,0 +1,12 @@
+{
+  "problem_id": "finalString",
+  "nodes": [
+    {"id": 1, "type": "start", "label": "Start", "next": 2},
+    {"id": 2, "type": "process", "label": "Input: s (string); init result = [], i = 0", "action": "ctx['s'] = ctx['arg0']; ctx['result'] = []; ctx['i'] = 0", "next": 3},
+    {"id": 3, "type": "decision", "label": "i < len(s)? (for each char in s)", "logic": "ctx['i'] < len(ctx['s'])", "true_next": 4, "false_next": 6},
+    {"id": 4, "type": "decision", "label": "Is s[i] == 'i'?", "logic": "ctx['s'][ctx['i']] == 'i'", "true_next": 7, "false_next": 5},
+    {"id": 5, "type": "process", "label": "Append char to result; i += 1", "action": "ctx['result'].append(ctx['s'][ctx['i']]); ctx['i'] += 1", "next": 3},
+    {"id": 7, "type": "process", "label": "Reverse result; i += 1", "action": "ctx['result'] = ctx['result'][::-1]; ctx['i'] += 1", "next": 3},
+    {"id": 6, "type": "end", "label": "Output: ''.join(result)", "output": "''.join(ctx['result'])"}
+  ]
+}

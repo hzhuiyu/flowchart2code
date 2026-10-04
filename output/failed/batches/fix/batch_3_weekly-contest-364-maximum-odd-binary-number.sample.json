@@ -1,0 +1,1064 @@
+{
+ "task_id": "weekly-contest-364-maximum-odd-binary-number",
+ "dataset": "Algorithm",
+ "title": "maximum-odd-binary-number",
+ "difficulty": "Easy",
+ "prompt": "\"\"\"\nYou are given a binary string s that contains at least one '1'.\n\nYou have to rearrange the bits in such a way that the resulting binary number is the maximum odd binary number that can be created from this combination.\n\nReturn a string representing the maximum odd binary number that can be created from the given combination.\n\nNote that the resulting string can have leading zeros.\n\nExample 1:\n\nInput: s = \"010\"\nOutput: \"001\"\nExplanation: Because there is just one '1', it must be in the last position. So the answer is \"001\".\n\nExample 2:\n\nInput: s = \"0101\"\nOutput: \"1001\"\nExplanation: One of the '1's must be in the last position. The maximum number that can be made with the remaining digits is \"100\". So the answer is \"1001\".\n\n\nConstraints:\n\n * 1 <= s.length <= 100\n * s consists only of '0' and '1'.\n * s contains at least one '1'.\n\"\"\"\nclass Solution:\n    def maximumOddBinaryNumber(self, s: str) -> str:\n        ",
+ "starter_code": "class Solution:\n    def maximumOddBinaryNumber(self, s: str) -> str:\n        ",
+ "entry_point": "",
+ "test": "\nmy_solution = Solution()\n\ntest_input = { \"s\": \"010\" }\nassert my_solution.maximumOddBinaryNumber(**test_input) == \"001\"\n\ntest_input = { \"s\": \"0101\" }\nassert my_solution.maximumOddBinaryNumber(**test_input) == \"1001\"\n\ntest_input = { \"s\": \"1\" }\nassert my_solution.maximumOddBinaryNumber(**test_input) == \"1\"\n\ntest_input = { \"s\": \"01\" }\nassert my_solution.maximumOddBinaryNumber(**test_input) == \"01\"\n\ntest_input = { \"s\": \"10\" }\nassert my_solution.maximumOddBinaryNumber(**test_input) == \"01\"\n\ntest_input = { \"s\": \"11\" }\nassert my_solution.maximumOddBinaryNumber(**test_input) == \"11\"\n\ntest_input = { \"s\": \"001\" }\nassert my_solution.maximumOddBinaryNumber(**test_input) == \"001\"\n\ntest_input = { \"s\": \"011\" }\nassert my_solution.maximumOddBinaryNumber(**test_input) == \"101\"\n\ntest_input = { \"s\": \"100\" }\nassert my_solution.maximumOddBinaryNumber(**test_input) == \"001\"\n\ntest_input = { \"s\": \"101\" }\nassert my_solution.maximumOddBinaryNumber(**test_input) == \"101\"\n\ntest_input = { \"s\": \"110\" }\nassert my_solution.maximumOddBinaryNumber(**test_input) == \"101\"\n\ntest_input = { \"s\": \"111\" }\nassert my_solution.maximumOddBinaryNumber(**test_input) == \"111\"\n\ntest_input = { \"s\": \"0010\" }\nassert my_solution.maximumOddBinaryNumber(**test_input) == \"0001\"\n\ntest_input = { \"s\": \"0011\" }\nassert my_solution.maximumOddBinaryNumber(**test_input) == \"1001\"\n\ntest_input = { \"s\": \"0100\" }\nassert my_solution.maximumOddBinaryNumber(**test_input) == \"0001\"\n\ntest_input = { \"s\": \"0111\" }\nassert my_solution.maximumOddBinaryNumber(**test_input) == \"1101\"\n\ntest_input = { \"s\": \"1000\" }\nassert my_solution.maximumOddBinaryNumber(**test_input) == \"0001\"\n\ntest_input = { \"s\": \"1001\" }\nassert my_solution.maximumOddBinaryNumber(**test_input) == \"1001\"\n\ntest_input = { \"s\": \"1011\" }\nassert my_solution.maximumOddBinaryNumber(**test_input) == \"1101\"\n\ntest_input = { \"s\": \"1100\" }\nassert my_solution.maximumOddBinaryNumber(**test_input) == \"1001\"\n\ntest_input = { \"s\": \"1101\" }\nassert my_solution.maximumOddBinaryNumber(**test_input) == \"1101\"\n\ntest_input = { \"s\": \"1111\" }\nassert my_solution.maximumOddBinaryNumber(**test_input) == \"1111\"\n\ntest_input = { \"s\": \"00001\" }\nassert my_solution.maximumOddBinaryNumber(**test_input) == \"00001\"\n\ntest_input = { \"s\": \"00011\" }\nassert my_solution.maximumOddBinaryNumber(**test_input) == \"10001\"\n\ntest_input = { \"s\": \"00100\" }\nassert my_solution.maximumOddBinaryNumber(**test_input) == \"00001\"\n\ntest_input = { \"s\": \"00101\" }\nassert my_solution.maximumOddBinaryNumber(**test_input) == \"10001\"\n\ntest_input = { \"s\": \"00111\" }\nassert my_solution.maximumOddBinaryNumber(**test_input) == \"11001\"\n\ntest_input = { \"s\": \"01011\" }\nassert my_solution.maximumOddBinaryNumber(**test_input) == \"11001\"\n\ntest_input = { \"s\": \"01100\" }\nassert my_solution.maximumOddBinaryNumber(**test_input) == \"10001\"\n\ntest_input = { \"s\": \"01110\" }\nassert my_solution.maximumOddBinaryNumber(**test_input) == \"11001\"\n\ntest_input = { \"s\": \"01111\" }\nassert my_solution.maximumOddBinaryNumber(**test_input) == \"11101\"\n\ntest_input = { \"s\": \"10000\" }\nassert my_solution.maximumOddBinaryNumber(**test_input) == \"00001\"\n\ntest_input = { \"s\": \"10100\" }\nassert my_solution.maximumOddBinaryNumber(**test_input) == \"10001\"\n\ntest_input = { \"s\": \"11010\" }\nassert my_solution.maximumOddBinaryNumber(**test_input) == \"11001\"\n\ntest_input = { \"s\": \"11011\" }\nassert my_solution.maximumOddBinaryNumber(**test_input) == \"11101\"\n\ntest_input = { \"s\": \"11110\" }\nassert my_solution.maximumOddBinaryNumber(**test_input) == \"11101\"\n\ntest_input = { \"s\": \"000001\" }\nassert my_solution.maximumOddBinaryNumber(**test_input) == \"000001\"\n\ntest_input = { \"s\": \"000100\" }\nassert my_solution.maximumOddBinaryNumber(**test_input) == \"000001\"\n\ntest_input = { \"s\": \"000101\" }\nassert my_solution.maximumOddBinaryNumber(**test_input) == \"100001\"\n\ntest_input = { \"s\": \"000110\" }\nassert my_solution.maximumOddBinaryNumber(**test_input) == \"100001\"\n\ntest_input = { \"s\": \"000111\" }\nassert my_solution.maximumOddBinaryNumber(**test_input) == \"110001\"\n\ntest_input = { \"s\": \"001100\" }\nassert my_solution.maximumOddBinaryNumber(**test_input) == \"100001\"\n\ntest_input = { \"s\": \"001110\" }\nassert my_solution.maximumOddBinaryNumber(**test_input) == \"110001\"\n\ntest_input = { \"s\": \"001111\" }\nassert my_solution.maximumOddBinaryNumber(**test_input) == \"111001\"\n\ntest_input = { \"s\": \"010001\" }\nassert my_solution.maximumOddBinaryNumber(**test_input) == \"100001\"\n\ntest_input = { \"s\": \"010101\" }\nassert my_solution.maximumOddBinaryNumber(**test_input) == \"110001\"\n\ntest_input = { \"s\": \"010111\" }\nassert my_solution.maximumOddBinaryNumber(**test_input) == \"111001\"\n\ntest_input = { \"s\": \"011010\" }\nassert my_solution.maximumOddBinaryNumber(**test_input) == \"110001\"\n\ntest_input = { \"s\": \"011100\" }\nassert my_solution.maximumOddBinaryNumber(**test_input) == \"110001\"\n\ntest_input = { \"s\": \"011111\" }\nassert my_solution.maximumOddBinaryNumber(**test_input) == \"111101\"\n\ntest_input = { \"s\": \"100100\" }\nassert my_solution.maximumOddBinaryNumber(**test_input) == \"100001\"\n\ntest_input = { \"s\": \"100101\" }\nassert my_solution.maximumOddBinaryNumber(**test_input) == \"110001\"\n\ntest_input = { \"s\": \"100111\" }\nassert my_solution.maximumOddBinaryNumber(**test_input) == \"111001\"\n\ntest_input = { \"s\": \"101010\" }\nassert my_solution.maximumOddBinaryNumber(**test_input) == \"110001\"\n\ntest_input = { \"s\": \"101100\" }\nassert my_solution.maximumOddBinaryNumber(**test_input) == \"110001\"\n\ntest_input = { \"s\": \"101101\" }\nassert my_solution.maximumOddBinaryNumber(**test_input) == \"111001\"\n\ntest_input = { \"s\": \"110000\" }\nassert my_solution.maximumOddBinaryNumber(**test_input) == \"100001\"\n\ntest_input = { \"s\": \"110010\" }\nassert my_solution.maximumOddBinaryNumber(**test_input) == \"110001\"\n\ntest_input = { \"s\": \"110011\" }\nassert my_solution.maximumOddBinaryNumber(**test_input) == \"111001\"\n\ntest_input = { \"s\": \"110100\" }\nassert my_solution.maximumOddBinaryNumber(**test_input) == \"110001\"\n\ntest_input = { \"s\": \"110101\" }\nassert my_solution.maximumOddBinaryNumber(**test_input) == \"111001\"\n\ntest_input = { \"s\": \"110110\" }\nassert my_solution.maximumOddBinaryNumber(**test_input) == \"111001\"\n\ntest_input = { \"s\": \"111000\" }\nassert my_solution.maximumOddBinaryNumber(**test_input) == \"110001\"\n\ntest_input = { \"s\": \"111010\" }\nassert my_solution.maximumOddBinaryNumber(**test_input) == \"111001\"\n\ntest_input = { \"s\": \"111101\" }\nassert my_solution.maximumOddBinaryNumber(**test_input) == \"111101\"\n\ntest_input = { \"s\": \"111111\" }\nassert my_solution.maximumOddBinaryNumber(**test_input) == \"111111\"\n\ntest_input = { \"s\": \"0000010\" }\nassert my_solution.maximumOddBinaryNumber(**test_input) == \"0000001\"\n\ntest_input = { \"s\": \"0000100\" }\nassert my_solution.maximumOddBinaryNumber(**test_input) == \"0000001\"\n\ntest_input = { \"s\": \"0001001\" }\nassert my_solution.maximumOddBinaryNumber(**test_input) == \"1000001\"\n\ntest_input = { \"s\": \"0001110\" }\nassert my_solution.maximumOddBinaryNumber(**test_input) == \"1100001\"\n\ntest_input = { \"s\": \"0010000\" }\nassert my_solution.maximumOddBinaryNumber(**test_input) == \"0000001\"\n\ntest_input = { \"s\": \"0010101\" }\nassert my_solution.maximumOddBinaryNumber(**test_input) == \"1100001\"\n\ntest_input = { \"s\": \"0010110\" }\nassert my_solution.maximumOddBinaryNumber(**test_input) == \"1100001\"\n\ntest_input = { \"s\": \"0010111\" }\nassert my_solution.maximumOddBinaryNumber(**test_input) == \"1110001\"\n\ntest_input = { \"s\": \"0011101\" }\nassert my_solution.maximumOddBinaryNumber(**test_input) == \"1110001\"\n\ntest_input = { \"s\": \"0011111\" }\nassert my_solution.maximumOddBinaryNumber(**test_input) == \"1111001\"\n\ntest_input = { \"s\": \"0100100\" }\nassert my_solution.maximumOddBinaryNumber(**test_input) == \"1000001\"\n\ntest_input = { \"s\": \"0101001\" }\nassert my_solution.maximumOddBinaryNumber(**test_input) == \"1100001\"\n\ntest_input = { \"s\": \"0110010\" }\nassert my_solution.maximumOddBinaryNumber(**test_input) == \"1100001\"\n\ntest_input = { \"s\": \"0110110\" }\nassert my_solution.maximumOddBinaryNumber(**test_input) == \"1110001\"\n\ntest_input = { \"s\": \"0110111\" }\nassert my_solution.maximumOddBinaryNumber(**test_input) == \"1111001\"\n\ntest_input = { \"s\": \"0111011\" }\nassert my_solution.maximumOddBinaryNumber(**test_input) == \"1111001\"\n\ntest_input = { \"s\": \"0111101\" }\nassert my_solution.maximumOddBinaryNumber(**test_input) == \"1111001\"\n\ntest_input = { \"s\": \"1000011\" }\nassert my_solution.maximumOddBinaryNumber(**test_input) == \"1100001\"\n\ntest_input = { \"s\": \"1000100\" }\nassert my_solution.maximumOddBinaryNumber(**test_input) == \"1000001\"\n\ntest_input = { \"s\": \"1000101\" }\nassert my_solution.maximumOddBinaryNumber(**test_input) == \"1100001\"\n\ntest_input = { \"s\": \"1000111\" }\nassert my_solution.maximumOddBinaryNumber(**test_input) == \"1110001\"\n\ntest_input = { \"s\": \"1001100\" }\nassert my_solution.maximumOddBinaryNumber(**test_input) == \"1100001\"\n\ntest_input = { \"s\": \"1001101\" }\nassert my_solution.maximumOddBinaryNumber(**test_input) == \"1110001\"\n\ntest_input = { \"s\": \"1010000\" }\nassert my_solution.maximumOddBinaryNumber(**test_input) == \"1000001\"\n\ntest_input = { \"s\": \"1010100\" }\nassert my_solution.maximumOddBinaryNumber(**test_input) == \"1100001\"\n\ntest_input = { \"s\": \"1010111\" }\nassert my_solution.maximumOddBinaryNumber(**test_input) == \"1111001\"\n\ntest_input = { \"s\": \"1011000\" }\nassert my_solution.maximumOddBinaryNumber(**test_input) == \"1100001\"\n\ntest_input = { \"s\": \"1011010\" }\nassert my_solution.maximumOddBinaryNumber(**test_input) == \"1110001\"\n\ntest_input = { \"s\": \"1011011\" }\nassert my_solution.maximumOddBinaryNumber(**test_input) == \"1111001\"\n\ntest_input = { \"s\": \"1100100\" }\nassert my_solution.maximumOddBinaryNumber(**test_input) == \"1100001\"\n\ntest_input = { \"s\": \"1100101\" }\nassert my_solution.maximumOddBinaryNumber(**test_input) == \"1110001\"\n\ntest_input = { \"s\": \"1101010\" }\nassert my_solution.maximumOddBinaryNumber(**test_input) == \"1110001\"\n\ntest_input = { \"s\": \"1101011\" }\nassert my_solution.maximumOddBinaryNumber(**test_input) == \"1111001\"\n\ntest_input = { \"s\": \"1101110\" }\nassert my_solution.maximumOddBinaryNumber(**test_input) == \"1111001\"",
+ "test_cases": [
+  {
+   "input": {
+    "args": [
+     "010"
+    ]
+   },
+   "output": "001",
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "0101"
+    ]
+   },
+   "output": "1001",
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "1"
+    ]
+   },
+   "output": "1",
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "01"
+    ]
+   },
+   "output": "01",
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "10"
+    ]
+   },
+   "output": "01",
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "11"
+    ]
+   },
+   "output": "11",
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "001"
+    ]
+   },
+   "output": "001",
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "011"
+    ]
+   },
+   "output": "101",
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "100"
+    ]
+   },
+   "output": "001",
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "101"
+    ]
+   },
+   "output": "101",
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "110"
+    ]
+   },
+   "output": "101",
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "111"
+    ]
+   },
+   "output": "111",
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "0010"
+    ]
+   },
+   "output": "0001",
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "0011"
+    ]
+   },
+   "output": "1001",
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "0100"
+    ]
+   },
+   "output": "0001",
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "0111"
+    ]
+   },
+   "output": "1101",
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "1000"
+    ]
+   },
+   "output": "0001",
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "1001"
+    ]
+   },
+   "output": "1001",
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "1011"
+    ]
+   },
+   "output": "1101",
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "1100"
+    ]
+   },
+   "output": "1001",
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "1101"
+    ]
+   },
+   "output": "1101",
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "1111"
+    ]
+   },
+   "output": "1111",
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "00001"
+    ]
+   },
+   "output": "00001",
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "00011"
+    ]
+   },
+   "output": "10001",
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "00100"
+    ]
+   },
+   "output": "00001",
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "00101"
+    ]
+   },
+   "output": "10001",
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "00111"
+    ]
+   },
+   "output": "11001",
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "01011"
+    ]
+   },
+   "output": "11001",
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "01100"
+    ]
+   },
+   "output": "10001",
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "01110"
+    ]
+   },
+   "output": "11001",
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "01111"
+    ]
+   },
+   "output": "11101",
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "10000"
+    ]
+   },
+   "output": "00001",
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "10100"
+    ]
+   },
+   "output": "10001",
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "11010"
+    ]
+   },
+   "output": "11001",
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "11011"
+    ]
+   },
+   "output": "11101",
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "11110"
+    ]
+   },
+   "output": "11101",
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "000001"
+    ]
+   },
+   "output": "000001",
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "000100"
+    ]
+   },
+   "output": "000001",
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "000101"
+    ]
+   },
+   "output": "100001",
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "000110"
+    ]
+   },
+   "output": "100001",
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "000111"
+    ]
+   },
+   "output": "110001",
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "001100"
+    ]
+   },
+   "output": "100001",
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "001110"
+    ]
+   },
+   "output": "110001",
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "001111"
+    ]
+   },
+   "output": "111001",
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "010001"
+    ]
+   },
+   "output": "100001",
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "010101"
+    ]
+   },
+   "output": "110001",
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "010111"
+    ]
+   },
+   "output": "111001",
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "011010"
+    ]
+   },
+   "output": "110001",
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "011100"
+    ]
+   },
+   "output": "110001",
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "011111"
+    ]
+   },
+   "output": "111101",
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "100100"
+    ]
+   },
+   "output": "100001",
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "100101"
+    ]
+   },
+   "output": "110001",
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "100111"
+    ]
+   },
+   "output": "111001",
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "101010"
+    ]
+   },
+   "output": "110001",
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "101100"
+    ]
+   },
+   "output": "110001",
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "101101"
+    ]
+   },
+   "output": "111001",
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "110000"
+    ]
+   },
+   "output": "100001",
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "110010"
+    ]
+   },
+   "output": "110001",
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "110011"
+    ]
+   },
+   "output": "111001",
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "110100"
+    ]
+   },
+   "output": "110001",
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "110101"
+    ]
+   },
+   "output": "111001",
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "110110"
+    ]
+   },
+   "output": "111001",
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "111000"
+    ]
+   },
+   "output": "110001",
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "111010"
+    ]
+   },
+   "output": "111001",
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "111101"
+    ]
+   },
+   "output": "111101",
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "111111"
+    ]
+   },
+   "output": "111111",
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "0000010"
+    ]
+   },
+   "output": "0000001",
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "0000100"
+    ]
+   },
+   "output": "0000001",
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "0001001"
+    ]
+   },
+   "output": "1000001",
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "0001110"
+    ]
+   },
+   "output": "1100001",
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "0010000"
+    ]
+   },
+   "output": "0000001",
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "0010101"
+    ]
+   },
+   "output": "1100001",
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "0010110"
+    ]
+   },
+   "output": "1100001",
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "0010111"
+    ]
+   },
+   "output": "1110001",
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "0011101"
+    ]
+   },
+   "output": "1110001",
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "0011111"
+    ]
+   },
+   "output": "1111001",
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "0100100"
+    ]
+   },
+   "output": "1000001",
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "0101001"
+    ]
+   },
+   "output": "1100001",
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "0110010"
+    ]
+   },
+   "output": "1100001",
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "0110110"
+    ]
+   },
+   "output": "1110001",
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "0110111"
+    ]
+   },
+   "output": "1111001",
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "0111011"
+    ]
+   },
+   "output": "1111001",
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "0111101"
+    ]
+   },
+   "output": "1111001",
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "1000011"
+    ]
+   },
+   "output": "1100001",
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "1000100"
+    ]
+   },
+   "output": "1000001",
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "1000101"
+    ]
+   },
+   "output": "1100001",
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "1000111"
+    ]
+   },
+   "output": "1110001",
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "1001100"
+    ]
+   },
+   "output": "1100001",
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "1001101"
+    ]
+   },
+   "output": "1110001",
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "1010000"
+    ]
+   },
+   "output": "1000001",
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "1010100"
+    ]
+   },
+   "output": "1100001",
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "1010111"
+    ]
+   },
+   "output": "1111001",
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "1011000"
+    ]
+   },
+   "output": "1100001",
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "1011010"
+    ]
+   },
+   "output": "1110001",
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "1011011"
+    ]
+   },
+   "output": "1111001",
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "1100100"
+    ]
+   },
+   "output": "1100001",
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "1100101"
+    ]
+   },
+   "output": "1110001",
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "1101010"
+    ]
+   },
+   "output": "1110001",
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "1101011"
+    ]
+   },
+   "output": "1111001",
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "1101110"
+    ]
+   },
+   "output": "1111001",
+   "explanation": ""
+  }
+ ],
+ "original_ilr": "```json\n{\n  \"problem_id\": \"maximum_odd_binary_number\",\n  \"nodes\": [\n    {\n      \"id\": 1,\n      \"type\": \"start\",\n      \"label\": \"Start\",\n      \"next\": 2\n    },\n    {\n      \"id\": 2,\n      \"type\": \"process\",\n      \"label\": \"Input: s (string)\",\n      \"action\": \"ctx['s'] = ctx['arg0']; ctx['res'] = \\\"\\\"; ctx['c'] = ctx['s'].count('1')\",\n      \"next\": 3\n    },\n    {\n      \"id\": 3,\n      \"type\": \"decision\",\n      \"label\": \"Is c == 1?\",\n      \"logic\": \"ctx['c'] == 1\",\n      \"true_next\": 4,\n      \"false_next\": 5\n    },\n    {\n      \"id\": 4,\n      \"type\": \"decision\",\n      \"label\": \"Is len(res) == len(s) - 1?\",\n      \"logic\": \"len(ctx['res']) == len(ctx['s']) - 1\",\n      \"true_next\": 6,\n      \"false_next\": 5\n    },\n    {\n      \"id\": 5,\n      \"type\": \"process\",\n      \"label\": \"Append '1' to res\",\n      \"action\": \"ctx['res'] += '1'\",\n      \"next\": 7\n    },\n    {\n      \"id\": 6,\n      \"type\": \"end\",\n      \"label\": \"Output: res\",\n      \"output\": \"ctx['res']\"\n    },\n    {\n      \"id\": 7,\n      \"type\": \"decision\",\n      \"label\": \"Is c > 1?\",\n      \"logic\": \"ctx['c'] > 1\",\n      \"true_next\": 8,\n      \"false_next\": 9\n    },\n    {\n      \"id\": 8,\n      \"type\": \"process\",\n      \"label\": \"Append '1' to res\",\n      \"action\": \"ctx['res'] += '1'\",\n      \"next\": 10\n    },\n    {\n      \"id\": 9,\n      \"type\": \"process\",\n      \"label\": \"Append '0' to res\",\n      \"action\": \"ctx['res'] += '0'\",\n      \"next\": 10\n    },\n    {\n      \"id\": 10,\n      \"type\": \"process\",\n      \"label\": \"Decrement c by 1\",\n      \"action\": \"ctx['c'] -= 1\",\n      \"next\": 3\n    }\n  ]\n}\n```",
+ "original_code": "class Solution:\n    def maximumOddBinaryNumber(self, s: str) -> str:\n        res = \"\"\n        c = s.count('1')\n        \n        if c == 1:\n            res += '1'\n            return res\n        \n        while len(res) < len(s) - 1:\n            if c > 1:\n                res += '1'\n                c -= 1\n            else:\n                res += '0'\n        \n        res += '1'\n        return res",
+ "ocr_data": {
+  "nodes": [
+   {
+    "node_id": 1,
+    "shape_type": "rectangle",
+    "raw_text": "Start",
+    "position": "top"
+   },
+   {
+    "node_id": 2,
+    "shape_type": "rectangle",
+    "raw_text": "Input: s (string)",
+    "position": "middle"
+   },
+   {
+    "node_id": 3,
+    "shape_type": "rectangle",
+    "raw_text": "Initialize res = \"",
+    "position": "middle"
+   },
+   {
+    "node_id": 4,
+    "shape_type": "rectangle",
+    "raw_text": "Count '1's: c = s.count('1')",
+    "position": "middle"
+   },
+   {
+    "node_id": 5,
+    "shape_type": "diamond",
+    "raw_text": "Is c == 1?",
+    "position": "middle"
+   },
+   {
+    "node_id": 6,
+    "shape_type": "diamond",
+    "raw_text": "Is len(res) == len(s) - 1?",
+    "position": "middle"
+   },
+   {
+    "node_id": 7,
+    "shape_type": "diamond",
+    "raw_text": "Is c > 1?",
+    "position": "middle"
+   },
+   {
+    "node_id": 8,
+    "shape_type": "rectangle",
+    "raw_text": "Append '1' to res",
+    "position": "bottom"
+   },
+   {
+    "node_id": 9,
+    "shape_type": "rectangle",
+    "raw_text": "Output: res",
+    "position": "bottom"
+   },
+   {
+    "node_id": 10,
+    "shape_type": "rectangle",
+    "raw_text": "Append '1' to res",
+    "position": "bottom"
+   },
+   {
+    "node_id": 11,
+    "shape_type": "rectangle",
+    "raw_text": "Append '0' to res",
+    "position": "bottom"
+   },
+   {
+    "node_id": 12,
+    "shape_type": "rectangle",
+    "raw_text": "Decrement c by 1",
+    "position": "bottom"
+   }
+  ],
+  "edges": [
+   {
+    "from_node": 1,
+    "to_node": 2,
+    "label": ""
+   },
+   {
+    "from_node": 2,
+    "to_node": 3,
+    "label": ""
+   },
+   {
+    "from_node": 3,
+    "to_node": 4,
+    "label": ""
+   },
+   {
+    "from_node": 4,
+    "to_node": 5,
+    "label": ""
+   },
+   {
+    "from_node": 5,
+    "to_node": 6,
+    "label": "Yes"
+   },
+   {
+    "from_node": 6,
+    "to_node": 8,
+    "label": "Yes"
+   },
+   {
+    "from_node": 6,
+    "to_node": 7,
+    "label": "No"
+   },
+   {
+    "from_node": 7,
+    "to_node": 10,
+    "label": "Yes"
+   },
+   {
+    "from_node": 7,
+    "to_node": 11,
+    "label": "No"
+   },
+   {
+    "from_node": 10,
+    "to_node": 12,
+    "label": ""
+   },
+   {
+    "from_node": 11,
+    "to_node": 12,
+    "label": ""
+   },
+   {
+    "from_node": 12,
+    "to_node": 5,
+    "label": ""
+   },
+   {
+    "from_node": 8,
+    "to_node": 9,
+    "label": ""
+   }
+  ],
+  "other_text": []
+ },
+ "test_result": {},
+ "status": "completed",
+ "fixed_ilr": null,
+ "modified_code": null,
+ "ilr_fix_log": "",
+ "bug_injected": ""
+}

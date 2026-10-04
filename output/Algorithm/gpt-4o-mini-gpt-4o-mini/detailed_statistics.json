@@ -1,0 +1,30 @@
+{
+  "dataset": "Algorithm",
+  "model": "gpt-4o-mini-gpt-4o-mini",
+  "total_samples": 149,
+  "use_reflection": false,
+  "max_iterations": 0,
+  "pass_rate": {
+    "iteration_0": {
+      "passed": 112,
+      "total": 149,
+      "rate": 0.7517
+    }
+  },
+  "tokens": {
+    "total": {
+      "prompt_tokens": 6455853,
+      "completion_tokens": 124729,
+      "total_tokens": 6580582
+    },
+    "average_per_sample": {
+      "prompt_tokens": 43327.87,
+      "completion_tokens": 837.11,
+      "total_tokens": 44164.98
+    }
+  },
+  "time": {
+    "total_time": 2397.49,
+    "average_per_sample": 16.09
+  }
+}

@@ -1,0 +1,165 @@
+{
+  "problem_id": "traverse_pairs_with_gcd",
+  "nodes": [
+    {
+      "id": 1,
+      "type": "start",
+      "label": "Start",
+      "next": 2
+    },
+    {
+      "id": 2,
+      "type": "process",
+      "label": "Input: nums (List[int])",
+      "action": "ctx['nums'] = ctx['arg0']; ctx['n'] = len(ctx['nums']); ctx['i'] = 0; ctx['result'] = True",
+      "next": 3
+    },
+    {
+      "id": 3,
+      "type": "decision",
+      "label": "Is len(nums) == 1?",
+      "logic": "ctx['n'] == 1",
+      "true_next": 4,
+      "false_next": 5
+    },
+    {
+      "id": 4,
+      "type": "return",
+      "label": "Output: True (only one element)",
+      "value": "True"
+    },
+    {
+      "id": 5,
+      "type": "process",
+      "label": "Convert nums to set",
+      "action": "ctx['nums'] = set(ctx['nums'])",
+      "next": 6
+    },
+    {
+      "id": 6,
+      "type": "decision",
+      "label": "Is 1 in nums?",
+      "logic": "1 in ctx['nums']",
+      "true_next": 7,
+      "false_next": 8
+    },
+    {
+      "id": 7,
+      "type": "return",
+      "label": "Output: False (contains 1)",
+      "value": "False"
+    },
+    {
+      "id": 8,
+      "type": "decision",
+      "label": "Is len(nums) == 1?",
+      "logic": "len(ctx['nums']) == 1",
+      "true_next": 9,
+      "false_next": 10
+    },
+    {
+      "id": 9,
+      "type": "return",
+      "label": "Output: True (all elements are the same)",
+      "value": "True"
+    },
+    {
+      "id": 10,
+      "type": "process",
+      "label": "Sort nums in descending order",
+      "action": "ctx['nums'] = sorted(ctx['nums'], reverse=True)",
+      "next": 11
+    },
+    {
+      "id": 11,
+      "type": "process",
+      "label": "Initialize i = 0",
+      "action": "ctx['i'] = 0",
+      "next": 12
+    },
+    {
+      "id": 12,
+      "type": "decision",
+      "label": "Is i < len(nums) - 1?",
+      "logic": "ctx['i'] < ctx['n'] - 1",
+      "true_next": 14,
+      "false_next": 13
+    },
+    {
+      "id": 13,
+      "type": "return",
+      "label": "Output: True (all pairs can traverse)",
+      "value": "True"
+    },
+    {
+      "id": 14,
+      "type": "process",
+      "label": "Initialize j = i + 1",
+      "action": "ctx['j'] = ctx['i'] + 1",
+      "next": 15
+    },
+    {
+      "id": 15,
+      "type": "decision",
+      "label": "Is j < len(nums)?",
+      "logic": "ctx['j'] < ctx['n']",
+      "true_next": 17,
+      "false_next": 16
+    },
+    {
+      "id": 16,
+      "type": "return",
+      "label": "Output: Return False",
+      "value": "False"
+    },
+    {
+      "id": 17,
+      "type": "decision",
+      "label": "Is gcd(nums[i], nums[j]) > 1?",
+      "logic": "gcd(ctx['nums'][ctx['i']], ctx['nums'][ctx['j']]) > 1",
+      "true_next": 18,
+      "false_next": 20
+    },
+    {
+      "id": 18,
+      "type": "process",
+      "label": "Update nums[i] *= nums[j]",
+      "action": "ctx['nums'][ctx['i']] *= ctx['nums'][ctx['j']]",
+      "next": 19
+    },
+    {
+      "id": 19,
+      "type": "process",
+      "label": "Break inner loop",
+      "action": "ctx['j'] = ctx['n']",
+      "next": 21
+    },
+    {
+      "id": 20,
+      "type": "process",
+      "label": "Increment j by 1",
+      "action": "ctx['j'] += 1",
+      "next": 15
+    },
+    {
+      "id": 21,
+      "type": "process",
+      "label": "Increment i by 1",
+      "action": "ctx['i'] += 1",
+      "next": 12
+    }
+  ],
+  "task_id": "2709. Greatest Common Divisor Traversal",
+  "dataset": "MATH",
+  "result": "failed: ",
+  "code": "from math import gcd\nfrom typing import List\n\ndef canTraverseAllPairs(nums: List[int]) -> bool:\n    n = len(nums)\n    if n == 1:\n        return True\n    \n    nums = set(nums)\n    if 1 in nums:\n        return False\n    \n    if len(nums) == 1:\n        return True\n    \n    nums = sorted(nums, reverse=True)\n    i = 0\n    \n    while i < n - 1:\n        j = i + 1\n        while j < n:\n            if gcd(nums[i], nums[j]) > 1:\n                nums[i] *= nums[j]\n                j = n\n            else:\n                j += 1\n        i += 1\n    \n    return True",
+  "verification": {
+    "md_verdict": "ILR Error",
+    "actual_error_source": "both",
+    "ilr_verdict": "incorrect",
+    "code_vs_ilr": "deviates",
+    "md_correct": "partial",
+    "note": "ILR 的贪心算法本身不成立：按降序对每个 i 找第一个 gcd>1 的 j 合并、内层耗尽即返回 False，无法通过合并过的大数回连后续元素，忠实执行在 [2,3,6]→False（期望True）、[4,3,12,8]→False（期望True）就失败（该题正确解法需要质因子并查集）。生成代码又额外偏离 ILR：删掉了节点15 false→16 的'内层耗尽返回 False'，一律落到结尾 return True，导致 [3,9,5]、[100000,50001,25000]、[99991,99989,99971] 都错判为 True，故 both。",
+    "evidence": "按 ILR 接线忠实执行：[2,3,6]→False、[4,3,12,8]→False（均期望True）；生成代码实跑：[3,9,5]→True、[100000,50001,25000]→True、[99991,99989,99971]→True（均期望False），第二条断言即失败。"
+  }
+}

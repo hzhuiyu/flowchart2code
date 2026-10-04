@@ -1,0 +1,111 @@
+{
+  "task_id": "553. Optimal Division",
+  "dataset": "MATH",
+  "difficulty": "medium",
+  "title": null,
+  "result": "failed: ",
+  "ilr": "{\n  \"problem_id\": \"max_expression_division\",\n  \"nodes\": [\n    {\"id\": 1, \"type\": \"start\", \"label\": \"Start\", \"next\": 2},\n    {\"id\": 2, \"type\": \"process\", \"label\": \"Input: nums (List[int])\", \"action\": \"ctx['nums']=ctx['arg0']\", \"next\": 3},\n    {\"id\": 3, \"type\": \"decision\", \"label\": \"Is length of nums == 1?\", \"logic\": \"len(ctx['nums']) == 1\", \"true_next\": 4, \"false_next\": 5},\n    {\"id\": 4, \"type\": \"return\", \"label\": \"Output: str(nums[0])\", \"value\": \"str(ctx['nums'][0])\"},\n    {\"id\": 5, \"type\": \"decision\", \"label\": \"Is length of nums == 2?\", \"logic\": \"len(ctx['nums']) == 2\", \"true_next\": 6, \"false_next\": 7},\n    {\"id\": 6, \"type\": \"return\", \"label\": \"Output: str(nums[0]) + '/' + str(nums[1])\", \"value\": \"str(ctx['nums'][0]) + '/' + str(ctx['nums'][1])\"},\n    {\"id\": 7, \"type\": \"process\", \"label\": \"Convert nums to strings: nums_str = list(map(str, nums))\", \"action\": \"ctx['nums_str'] = list(map(str, ctx['nums']))\", \"next\": 8},\n    {\"id\": 8, \"type\": \"return\", \"label\": \"Output: str(nums[0]) + '/' + '/' .join(nums_str[1:]) + '/'\", \"value\": \"str(ctx['nums'][0]) + '/' + '/'.join(ctx['nums_str'][1:])\"}\n  ]\n}",
+  "code": "from typing import List\n\ndef optimalDivision(nums: List[int]) -> str:\n    if len(nums) == 1:\n        return str(nums[0])\n    elif len(nums) == 2:\n        return str(nums[0]) + '/' + str(nums[1])\n    else:\n        nums_str = list(map(str, nums))\n        return str(nums[0]) + '/' + '/'.join(nums_str[1:])",
+  "prompt": "You are given an integer array nums. The adjacent integers in nums will perform the float division.\n\nFor example, for nums = [2,3,4], we will evaluate the expression \"2/3/4\".\nHowever, you can add any number of parenthesis at any position to change the priority of operations. You want to add these parentheses such the value of the expression after the evaluation is maximum.\n\nReturn the corresponding expression that has the maximum value in string format.\n\nNote: your expression should not contain redundant parenthesis.\n\n\n\nExample 1:\n\nInput: nums = [1000,100,10,2]\nOutput: \"1000/(100/10/2)\"\nExplanation: 1000/(100/10/2) = 1000/((100/10)/2) = 200\nHowever, the bold parenthesis in \"1000/((100/10)/2)\" are redundant since they do not influence the operation priority.\nSo you should return \"1000/(100/10/2)\".\nOther cases:\n1000/(100/10)/2 = 50\n1000/(100/(10/2)) = 50\n1000/100/10/2 = 0.5\n1000/100/(10/2) = 2\nExample 2:\n\nInput: nums = [2,3,4]\nOutput: \"2/(3/4)\"\nExplanation: (2/(3/4)) = 8/3 = 2.667\nIt can be shown that after trying all possibilities, we cannot get an expression with evaluation greater than 2.667\n\n\nConstraints:\n\n1 <= nums.length <= 10\n2 <= nums[i] <= 1000\nThere is only one optimal division for the given input.",
+  "test": "assert optimalDivision([1000, 100, 10, 2]) == \"1000/(100/10/2)\"  # optimal division\nassert optimalDivision([2, 3, 4]) == \"2/(3/4)\"  # optimal division\nassert optimalDivision([6, 2, 3]) == \"6/(2/3)\"  # optimal division\n\n# Boundary test cases\nassert optimalDivision([1]) == \"1\"  # single element\nassert optimalDivision([5, 2]) == \"5/2\"  # two elements\nassert optimalDivision([10, 5, 2]) == \"10/(5/2)\"  # three elements\n\n# Large number test cases\nassert optimalDivision([1000, 100, 10, 2, 1]) == \"1000/(100/10/2/1)\"  # large list\nassert optimalDivision([999, 888, 777, 666, 555, 444, 333, 222, 111, 1]) == \"999/(888/777/666/555/444/333/222/111/1)\"  # maximum length list\nassert optimalDivision([1000, 100, 10, 2, 1, 1, 1, 1, 1, 1]) == \"1000/(100/10/2/1/1/1/1/1/1)\"  # large list with ones",
+  "ocr_data": {
+    "nodes": [
+      {
+        "node_id": 1,
+        "shape_type": "rectangle",
+        "raw_text": "Start",
+        "position": "top"
+      },
+      {
+        "node_id": 2,
+        "shape_type": "rectangle",
+        "raw_text": "Input: nums (List[int])",
+        "position": "middle"
+      },
+      {
+        "node_id": 3,
+        "shape_type": "diamond",
+        "raw_text": "Is length of nums == 1?",
+        "position": "middle"
+      },
+      {
+        "node_id": 4,
+        "shape_type": "rectangle",
+        "raw_text": "Output: str(nums[0])",
+        "position": "bottom"
+      },
+      {
+        "node_id": 5,
+        "shape_type": "diamond",
+        "raw_text": "Is length of nums == 2?",
+        "position": "bottom"
+      },
+      {
+        "node_id": 6,
+        "shape_type": "rectangle",
+        "raw_text": "Output: str(nums[0]) + '/' + str(nums[1])",
+        "position": "bottom"
+      },
+      {
+        "node_id": 7,
+        "shape_type": "rectangle",
+        "raw_text": "Convert nums to strings: nums_str = list(map(str, nums))",
+        "position": "bottom"
+      },
+      {
+        "node_id": 8,
+        "shape_type": "rectangle",
+        "raw_text": "Output: str(nums[0]) + '/' + '/' .join(nums_str[1:]) + '/'",
+        "position": "bottom"
+      }
+    ],
+    "edges": [
+      {
+        "from_node": 1,
+        "to_node": 2,
+        "label": ""
+      },
+      {
+        "from_node": 2,
+        "to_node": 3,
+        "label": ""
+      },
+      {
+        "from_node": 3,
+        "to_node": 4,
+        "label": "Yes"
+      },
+      {
+        "from_node": 3,
+        "to_node": 5,
+        "label": "No"
+      },
+      {
+        "from_node": 5,
+        "to_node": 6,
+        "label": "Yes"
+      },
+      {
+        "from_node": 5,
+        "to_node": 7,
+        "label": "No"
+      },
+      {
+        "from_node": 7,
+        "to_node": 8,
+        "label": ""
+      }
+    ],
+    "other_text": []
+  },
+  "analysis": {
+    "ilr_verdict": "incorrect",
+    "ilr_issues": "节点8的返回值表达式漏掉了括号：str(nums[0])+'/'+ '/'.join(nums_str[1:])，缺少把第2..n个数括起来的'(...)'，n>=3时输出无括号连除式而非最优表达；OCR文本本身也没有括号且末尾多出一个可疑的\"+ '/'\"。",
+    "code_vs_ilr": "faithful",
+    "code_issues": "代码与ILR逐字一致（len==1、len==2两个分支本身正确），n>=3时同样缺括号，输出非最优表达式。",
+    "error_source": "ilr",
+    "ocr_contribution": "unclear",
+    "root_cause": "按OCR文本流程图的输出表达式本就缺括号（也可能是OCR把'/('与')'误读成'/'），ILR与代码忠实照抄，n>=3时全部输出无括号连除式。",
+    "evidence": "optimalDivision([1000,100,10,2])实际运行返回'1000/100/10/2'，期望'1000/(100/10/2)'。"
+  }
+}

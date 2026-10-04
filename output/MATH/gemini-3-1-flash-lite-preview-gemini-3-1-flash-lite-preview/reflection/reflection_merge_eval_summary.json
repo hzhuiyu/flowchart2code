@@ -1,0 +1,40 @@
+{
+  "samples_file": "../output/MATH/gemini-3-1-flash-lite-preview-gemini-3-1-flash-lite-preview/samples.jsonl",
+  "reflection_dir": "../output/MATH/gemini-3-1-flash-lite-preview-gemini-3-1-flash-lite-preview/reflection",
+  "output_file": "../output/MATH/gemini-3-1-flash-lite-preview-gemini-3-1-flash-lite-preview/reflection/samples_reflection_merged.jsonl",
+  "merged_results_file": "../output/MATH/gemini-3-1-flash-lite-preview-gemini-3-1-flash-lite-preview/reflection/samples_reflection_merged.jsonl_results.jsonl",
+  "results_txt": "../output/MATH/gemini-3-1-flash-lite-preview-gemini-3-1-flash-lite-preview/reflection/results.txt",
+  "problem_file": "../data/MATH/MATH.jsonl",
+  "merge_summary": {
+    "total_rows": 125,
+    "replaced_rows": 6,
+    "replaced_by_first_passed": 4,
+    "replaced_by_last_failed": 2,
+    "missing_generated_code": 0,
+    "selection_stats": {
+      "keep_original": 119,
+      "iter_3_failed": 2,
+      "first_passed": 4
+    }
+  },
+  "eval_result": {
+    "pass@1": 0.976
+  },
+  "difficulty_summary": {
+    "Easy": {
+      "passed": 44.0,
+      "total": 45.0,
+      "rate": 0.9777777777777777
+    },
+    "Medium": {
+      "passed": 40.0,
+      "total": 40.0,
+      "rate": 1.0
+    },
+    "Hard": {
+      "passed": 38.0,
+      "total": 40.0,
+      "rate": 0.95
+    }
+  }
+}

@@ -1,0 +1,96 @@
+{
+  "problem_id": "findChampion",
+  "nodes": [
+    {
+      "id": 1,
+      "type": "start",
+      "label": "Start",
+      "next": 2
+    },
+    {
+      "id": 2,
+      "type": "process",
+      "label": "Input: grid (2D boolean matrix)",
+      "action": "ctx['grid'] = ctx['arg0']; ctx['n'] = len(ctx['grid']); ctx['i'] = 0; ctx['isChampion'] = True",
+      "next": 3
+    },
+    {
+      "id": 3,
+      "type": "decision",
+      "label": "Is i < n?",
+      "logic": "ctx['i'] < ctx['n']",
+      "true_next": 4,
+      "false_next": 11
+    },
+    {
+      "id": 4,
+      "type": "process",
+      "label": "Initialize isChampion = True",
+      "action": "ctx['isChampion'] = True",
+      "next": 5
+    },
+    {
+      "id": 5,
+      "type": "decision",
+      "label": "Is i != j?",
+      "logic": "ctx['i'] != ctx['j']",
+      "true_next": 6,
+      "false_next": 8
+    },
+    {
+      "id": 6,
+      "type": "decision",
+      "label": "Is grid[i][i] == 1?",
+      "logic": "ctx['grid'][ctx['i']][ctx['i']] == 1",
+      "true_next": 7,
+      "false_next": 8
+    },
+    {
+      "id": 7,
+      "type": "process",
+      "label": "Set isChampion = False",
+      "action": "ctx['isChampion'] = False",
+      "next": 9
+    },
+    {
+      "id": 8,
+      "type": "process",
+      "label": "Break the inner loop",
+      "action": "break",
+      "next": 4
+    },
+    {
+      "id": 9,
+      "type": "decision",
+      "label": "Is isChampion == True?",
+      "logic": "ctx['isChampion'] == True",
+      "true_next": 10,
+      "false_next": 4
+    },
+    {
+      "id": 10,
+      "type": "end",
+      "label": "Output: i (team i is the champion)",
+      "output": "ctx['i']"
+    },
+    {
+      "id": 11,
+      "type": "end",
+      "label": "Output: -1 (no champion found)",
+      "output": "-1"
+    }
+  ],
+  "task_id": "weekly-contest-370-find-champion-i",
+  "dataset": "Algorithm",
+  "result": "failed: ",
+  "code": "class Solution:\n    def findChampion(self, grid: List[List[int]]) -> int:\n        n = len(grid)\n        i = 0\n        isChampion = True\n        \n        while i < n:\n            isChampion = True\n            j = 0\n            while j < n:\n                if i != j:\n                    if grid[i][j] == 1:\n                        isChampion = False\n                        break\n                j += 1\n            \n            if isChampion:\n                return i\n            \n            i += 1\n        \n        return -1",
+  "verification": {
+    "md_verdict": "ILR Error",
+    "actual_error_source": "both",
+    "ilr_verdict": "incorrect",
+    "code_vs_ilr": "deviates",
+    "md_correct": "partial",
+    "note": "ILR 确实错误（j 未定义且从不递增 → KeyError，node8 break 指回 node4 死循环，且检查恒为 0 的 grid[i][i]）；但代码还自行把判断改成 grid[i][j]==1 就置 isChampion=False（方向反了，等价于选最弱队伍），即使 ILR 正确这段代码也过不了，属于代码生成阶段的独立错误，MD 只归因 ILR 不完整。",
+    "evidence": "忠实执行 ILR：KeyError:'j'。生成代码对 [[0,1],[0,0]] 返回 1（期望 0）、[[0,0],[1,0]] 返回 0（期望 1），100 测试 0 过。"
+  }
+}

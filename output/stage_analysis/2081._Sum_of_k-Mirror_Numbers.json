@@ -1,0 +1,154 @@
+{
+  "problem_id": "k_mirror_number_sum",
+  "functions": [
+    {
+      "name": "fn",
+      "parameters": [
+        "x"
+      ],
+      "entry_node": 10,
+      "nodes": [
+        {
+          "id": 10,
+          "type": "start",
+          "label": "Initialize n = len(x) // 2",
+          "next": 11
+        },
+        {
+          "id": 11,
+          "type": "process",
+          "label": "Loop i from n to len(x)",
+          "action": "ctx['i'] = ctx['n']; ctx['len_x'] = len(ctx['x']); while ctx['i'] <= ctx['len_x']: pass",
+          "next": 12
+        },
+        {
+          "id": 12,
+          "type": "decision",
+          "label": "Is int(x[i]) + 1 < k?",
+          "logic": "int(ctx['x'][ctx['i']]) + 1 < ctx['k']",
+          "true_next": 13,
+          "false_next": 17
+        },
+        {
+          "id": 13,
+          "type": "process",
+          "label": "Update x[i] and x[~i]: x[i] = x[~i] = str(int(x[i]) + 1)",
+          "action": "ctx['x'][ctx['i']] = ctx['x'][~ctx['i']] = str(int(ctx['x'][ctx['i']]) + 1)",
+          "next": 14
+        },
+        {
+          "id": 14,
+          "type": "process",
+          "label": "Loop ii from n to i",
+          "action": "ctx['ii'] = ctx['n']; while ctx['ii'] <= ctx['i']: pass",
+          "next": 15
+        },
+        {
+          "id": 15,
+          "type": "process",
+          "label": "Update x[ii] and x[~ii]: x[ii] = x[~ii] = '0'",
+          "action": "ctx['x'][ctx['ii']] = ctx['x'][~ctx['ii']] = '0'",
+          "next": 16
+        },
+        {
+          "id": 16,
+          "type": "return",
+          "label": "Return x",
+          "value": "ctx['x']"
+        },
+        {
+          "id": 17,
+          "type": "return",
+          "label": "Return ['1'] + ['0'] * (len(x) - 1) + ['1']",
+          "value": "['1'] + ['0'] * (len(ctx['x']) - 1) + ['1']"
+        }
+      ]
+    }
+  ],
+  "nodes": [
+    {
+      "id": 1,
+      "type": "start",
+      "label": "Start",
+      "next": 2
+    },
+    {
+      "id": 2,
+      "type": "process",
+      "label": "Input: k (integer), n (integer)",
+      "action": "ctx['k'] = ctx['arg0']; ctx['n'] = ctx['arg1'];",
+      "next": 3
+    },
+    {
+      "id": 3,
+      "type": "process",
+      "label": "Initialize x = ['0'], ans = 0",
+      "action": "ctx['x'] = ['0']; ctx['ans'] = 0;",
+      "next": 4
+    },
+    {
+      "id": 4,
+      "type": "process",
+      "label": "Loop n times",
+      "action": "ctx['loop_count'] = 0; while ctx['loop_count'] < ctx['n']: pass",
+      "next": 5
+    },
+    {
+      "id": 5,
+      "type": "call",
+      "label": "Call fn(x)",
+      "function_name": "fn",
+      "arguments": "[ctx['x']]",
+      "return_var": "result_x",
+      "next": 6
+    },
+    {
+      "id": 6,
+      "type": "process",
+      "label": "Convert x to integer in base k: val = int(''.join(x), k)",
+      "action": "ctx['val'] = int(''.join(ctx['x']), ctx['k']);",
+      "next": 7
+    },
+    {
+      "id": 7,
+      "type": "decision",
+      "label": "Is val a palindrome?",
+      "logic": "str(ctx['val']) == str(ctx['val'])[::-1]",
+      "true_next": 8,
+      "false_next": 9
+    },
+    {
+      "id": 8,
+      "type": "process",
+      "label": "Add val to ans: ans += val",
+      "action": "ctx['ans'] += ctx['val'];",
+      "next": 4
+    },
+    {
+      "id": 9,
+      "type": "process",
+      "label": "Output: ans",
+      "action": "ctx['output'] = ctx['ans'];",
+      "next": 10
+    },
+    {
+      "id": 10,
+      "type": "end",
+      "label": "End",
+      "output": "ctx['output']"
+    }
+  ],
+  "task_id": "2081. Sum of k-Mirror Numbers",
+  "dataset": "MATH",
+  "result": "failed: name 'k' is not defined",
+  "code": "def kMirror(k: int, n: int) -> int:\n    x = ['0']\n    ans = 0\n    loop_count = 0\n    while loop_count < n:\n        result_x = fn(x)\n        val = int(''.join(result_x), k)\n        if str(val) == str(val)[::-1]:\n            ans += val\n        loop_count += 1\n    return ans\n\ndef fn(x):\n    n = len(x) // 2\n    i = n\n    len_x = len(x)\n    while i <= len_x:\n        if int(x[i]) + 1 < k:\n            x[i] = x[~i] = str(int(x[i]) + 1)\n            ii = n\n            while ii <= i:\n                x[ii] = x[~ii] = '0'\n                ii += 1\n            break\n        else:\n            x = ['1'] + ['0'] * (len_x - 1) + ['1']\n            break\n    return x",
+  "verification": {
+    "md_verdict": "ILR Error",
+    "actual_error_source": "both",
+    "ilr_verdict": "incorrect",
+    "code_vs_ilr": "deviates",
+    "md_correct": "partial",
+    "note": "ILR 确实根本性错误：fn 节点13先把 x[i] 加1，节点14/15 又把 x[n..i]（含 i 本身）全部清零，增量被撤销，fn 永远停在 ['0']，主循环 n 次全加 val=0，任何输入都得 0；且主循环仅迭代 n 次、并非枚举前 n 小的 k-mirror 数。但代码还额外偏离 ILR：ILR 的 fn 逻辑用共享上下文的 ctx['k']（作用域内可解析），生成代码把 fn 写成独立函数却引用裸名 k，直接 NameError 崩溃（即记录的失败原因），故为 both。",
+    "evidence": "生成代码实跑：NameError: name 'k' is not defined；仅把 k 注入为全局后仍 kMirror(2,5)→0（期望25）、kMirror(3,7)→0（期望499）；按 ILR 共享 ctx 忠实转写（k 作用域正常）同样 kMirror(2,5)→0、kMirror(3,7)→0。"
+  }
+}

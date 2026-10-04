@@ -1,0 +1,45 @@
+{
+  "problem_id": "maxSubarrays",
+  "nodes": [
+    {
+      "id": 1,
+      "type": "start",
+      "label": "Start",
+      "next": 2
+    },
+    {
+      "id": 2,
+      "type": "process",
+      "label": "Input: nums (List[int]); cur = -1 (all-ones AND accumulator), c = 0 (completed zero-score segments)",
+      "action": "ctx['nums'] = ctx['arg0']; ctx['cur'] = -1; ctx['c'] = 0",
+      "next": 3
+    },
+    {
+      "id": 3,
+      "type": "process",
+      "label": "Sweep: AND each element into cur; whenever cur becomes 0, a zero-score subarray is completed: increment c and reset cur to -1",
+      "action": "for x in ctx['nums']:\n    ctx['cur'] = ctx['cur'] & x\n    if ctx['cur'] == 0:\n        ctx['c'] += 1\n        ctx['cur'] = -1",
+      "next": 4
+    },
+    {
+      "id": 4,
+      "type": "decision",
+      "label": "No zero-score segment possible (total AND > 0)?",
+      "logic": "ctx['c'] == 0",
+      "true_next": 12,
+      "false_next": 11
+    },
+    {
+      "id": 11,
+      "type": "end",
+      "label": "Output: c (maximum number of subarrays)",
+      "output": "ctx['c']"
+    },
+    {
+      "id": 12,
+      "type": "end",
+      "label": "Output: 1 (whole array is the single subarray)",
+      "output": "1"
+    }
+  ]
+}

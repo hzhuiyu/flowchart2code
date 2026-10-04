@@ -1,0 +1,201 @@
+{
+  "task_id": "1330. Reverse Subarray To Maximize Array Value",
+  "dataset": "MATH",
+  "difficulty": "hard",
+  "title": null,
+  "result": "failed: ",
+  "ilr": "{\n  \"problem_id\": \"max_value_after_reverse_subarray\",\n  \"nodes\": [\n    {\"id\": 1, \"type\": \"start\", \"label\": \"Start\", \"next\": 2},\n    {\"id\": 2, \"type\": \"process\", \"label\": \"Input: nums (List[int])\", \"action\": \"ctx['nums']=ctx['arg0']; ctx['n']=len(ctx['nums']); ctx['total']=0; ctx['reverselnc']=0; ctx['min2']=float('inf'); ctx['max2']=-float('inf'); ctx['i']=0\", \"next\": 3},\n    {\"id\": 3, \"type\": \"process\", \"label\": \"Calculate total = sum(abs(nums[i + 1] - nums[i]) for i in range(n - 1))\", \"action\": \"ctx['total'] = sum(abs(ctx['nums'][i + 1] - ctx['nums'][i]) for i in range(ctx['n'] - 1))\", \"next\": 4},\n    {\"id\": 4, \"type\": \"decision\", \"label\": \"For i in range(1, n - 1)\", \"logic\": \"ctx['i'] < ctx['n'] - 1\", \"true_next\": 5, \"false_next\": 10},\n    {\"id\": 5, \"type\": \"process\", \"label\": \"Calculate reverselnc = max(reverselnc, abs(nums[0] - nums[i + 1]) - abs(nums[i] - nums[i + 1]))\", \"action\": \"ctx['reverselnc'] = max(ctx['reverselnc'], abs(ctx['nums'][0] - ctx['nums'][ctx['i'] + 1]) - abs(ctx['nums'][ctx['i']] - ctx['nums'][ctx['i'] + 1]))\", \"next\": 6},\n    {\"id\": 6, \"type\": \"process\", \"label\": \"Calculate reverselnc = max(reverselnc, abs(nums[-1] - nums[i - 1]) - abs(nums[i] - nums[i - 1]))\", \"action\": \"ctx['reverselnc'] = max(ctx['reverselnc'], abs(ctx['nums'][-1] - ctx['nums'][ctx['i'] - 1]) - abs(ctx['nums'][ctx['i']] - ctx['nums'][ctx['i'] - 1]))\", \"next\": 7},\n    {\"id\": 7, \"type\": \"process\", \"label\": \"Update min2 = min(min2, max(nums[i - 1], nums[i]))\", \"action\": \"ctx['min2'] = min(ctx['min2'], max(ctx['nums'][ctx['i'] - 1], ctx['nums'][ctx['i']]))\", \"next\": 8},\n    {\"id\": 8, \"type\": \"process\", \"label\": \"Update max2 = max(max2, min(nums[i - 1], nums[i]))\", \"action\": \"ctx['max2'] = max(ctx['max2'], min(ctx['nums'][ctx['i'] - 1], ctx['nums'][ctx['i']]))\", \"next\": 9},\n    {\"id\": 9, \"type\": \"process\", \"label\": \"Update reverselnc = max(reverselnc, 2 * (max2 - min2))\", \"action\": \"ctx['reverselnc'] = max(ctx['reverselnc'], 2 * (ctx['max2'] - ctx['min2']))\", \"next\": 4},\n    {\"id\": 10, \"type\": \"process\", \"label\": \"Calculate result = total + reverselnc\", \"action\": \"ctx['result'] = ctx['total'] + ctx['reverselnc']\", \"next\": 11},\n    {\"id\": 11, \"type\": \"end\", \"label\": \"Output: result\", \"output\": \"ctx['result']\"}\n  ]\n}",
+  "code": "from typing import List\n\ndef maxValueAfterReverse(nums: List[int]) -> int:\n    n = len(nums)\n    total = sum(abs(nums[i + 1] - nums[i]) for i in range(n - 1))\n    reverselnc = 0\n    min2 = float('inf')\n    max2 = -float('inf')\n\n    for i in range(1, n - 1):\n        reverselnc = max(reverselnc, abs(nums[0] - nums[i + 1]) - abs(nums[i] - nums[i + 1]))\n        reverselnc = max(reverselnc, abs(nums[-1] - nums[i - 1]) - abs(nums[i] - nums[i - 1]))\n        min2 = min(min2, max(nums[i - 1], nums[i]))\n        max2 = max(max2, min(nums[i - 1], nums[i]))\n        reverselnc = max(reverselnc, 2 * (max2 - min2))\n\n    result = total + reverselnc\n    return result",
+  "prompt": "You are given an integer array nums. The value of this array is defined as the sum of |nums[i] - nums[i + 1]| for all 0 <= i < nums.length - 1.\n\nYou are allowed to select any subarray of the given array and reverse it. You can perform this operation only once.\n\nFind maximum possible value of the final array.\n\n\n\nExample 1:\n\nInput: nums = [2,3,1,5,4]\nOutput: 10\nExplanation: By reversing the subarray [3,1,5] the array becomes [2,5,1,3,4] whose value is 10.\nExample 2:\n\nInput: nums = [2,4,9,24,2,1,10]\nOutput: 68\n\n\nConstraints:\n\n2 <= nums.length <= 3 * 104\n-105 <= nums[i] <= 105\nThe answer is guaranteed to fit in a 32-bit integer.",
+  "test": "assert maxValueAfterReverse([2, 3, 1, 5, 4]) == 10  # reversing subarray [3, 1, 5]\nassert maxValueAfterReverse([2, 4, 9, 24, 2, 1, 10]) == 68  # reversing subarray [24, 2, 1]\n\n# Boundary test cases\nassert maxValueAfterReverse([1, 2]) == 1  # smallest array, no reversal needed\nassert maxValueAfterReverse([1, 100000]) == 99999  # large difference, no reversal needed\nassert maxValueAfterReverse([100000, 1]) == 99999  # large difference, no reversal needed\n\n# Large number test cases\nassert maxValueAfterReverse([i for i in range(1, 10001)]) == 29993  # large array, no reversal needed\nassert maxValueAfterReverse([i for i in range(10000, 0, -1)]) == 29993  # large array in reverse order\nassert maxValueAfterReverse([1] * 10000) == 0  # large array with all elements the same",
+  "ocr_data": {
+    "nodes": [
+      {
+        "node_id": 1,
+        "shape_type": "rectangle",
+        "raw_text": "Start",
+        "position": "top"
+      },
+      {
+        "node_id": 2,
+        "shape_type": "rectangle",
+        "raw_text": "Input: nums (List[int])",
+        "position": "top"
+      },
+      {
+        "node_id": 3,
+        "shape_type": "rectangle",
+        "raw_text": "Initialize n = len(nums)",
+        "position": "middle"
+      },
+      {
+        "node_id": 4,
+        "shape_type": "rectangle",
+        "raw_text": "Calculate total = sum(abs(nums[i + 1] - nums[i]) for i in range(n - 1))",
+        "position": "middle"
+      },
+      {
+        "node_id": 5,
+        "shape_type": "rectangle",
+        "raw_text": "Initialize reverselnc = 0",
+        "position": "middle"
+      },
+      {
+        "node_id": 6,
+        "shape_type": "rectangle",
+        "raw_text": "For i in range(1, n - 1)",
+        "position": "middle"
+      },
+      {
+        "node_id": 7,
+        "shape_type": "rectangle",
+        "raw_text": "Calculate reverselnc = max(reverselnc, abs(nums[0] - nums[i + 1]) - abs(nums[i] - nums[i + 1]))",
+        "position": "middle"
+      },
+      {
+        "node_id": 8,
+        "shape_type": "rectangle",
+        "raw_text": "Calculate reverselnc = max(reverselnc, abs(nums[-1] - nums[i - 1]) - abs(nums[i] - nums[i - 1]))",
+        "position": "middle"
+      },
+      {
+        "node_id": 9,
+        "shape_type": "rectangle",
+        "raw_text": "Initialize min2 = inf, max2 = -inf",
+        "position": "middle"
+      },
+      {
+        "node_id": 10,
+        "shape_type": "rectangle",
+        "raw_text": "For i in range(1, n)",
+        "position": "middle"
+      },
+      {
+        "node_id": 11,
+        "shape_type": "rectangle",
+        "raw_text": "Update min2 = min(min2, max(nums[i - 1], nums[i]))",
+        "position": "middle"
+      },
+      {
+        "node_id": 12,
+        "shape_type": "rectangle",
+        "raw_text": "Update max2 = max(max2, min(nums[i - 1], nums[i]))",
+        "position": "middle"
+      },
+      {
+        "node_id": 13,
+        "shape_type": "rectangle",
+        "raw_text": "Update reverselnc = max(reverselnc, 2 * (max2 - min2))",
+        "position": "middle"
+      },
+      {
+        "node_id": 14,
+        "shape_type": "rectangle",
+        "raw_text": "Calculate result = total + reverselnc",
+        "position": "bottom"
+      },
+      {
+        "node_id": 15,
+        "shape_type": "rectangle",
+        "raw_text": "Output: result",
+        "position": "bottom"
+      }
+    ],
+    "edges": [
+      {
+        "from_node": 1,
+        "to_node": 2,
+        "label": ""
+      },
+      {
+        "from_node": 2,
+        "to_node": 3,
+        "label": ""
+      },
+      {
+        "from_node": 3,
+        "to_node": 4,
+        "label": ""
+      },
+      {
+        "from_node": 4,
+        "to_node": 5,
+        "label": ""
+      },
+      {
+        "from_node": 5,
+        "to_node": 6,
+        "label": ""
+      },
+      {
+        "from_node": 6,
+        "to_node": 7,
+        "label": "Yes"
+      },
+      {
+        "from_node": 6,
+        "to_node": 8,
+        "label": "No"
+      },
+      {
+        "from_node": 7,
+        "to_node": 8,
+        "label": ""
+      },
+      {
+        "from_node": 8,
+        "to_node": 13,
+        "label": ""
+      },
+      {
+        "from_node": 13,
+        "to_node": 14,
+        "label": ""
+      },
+      {
+        "from_node": 14,
+        "to_node": 15,
+        "label": ""
+      },
+      {
+        "from_node": 9,
+        "to_node": 10,
+        "label": ""
+      },
+      {
+        "from_node": 10,
+        "to_node": 11,
+        "label": "Yes"
+      },
+      {
+        "from_node": 10,
+        "to_node": 12,
+        "label": "No"
+      },
+      {
+        "from_node": 11,
+        "to_node": 12,
+        "label": ""
+      },
+      {
+        "from_node": 12,
+        "to_node": 9,
+        "label": ""
+      }
+    ],
+    "other_text": [
+      "Edge Case Calculation",
+      "Case Calculation"
+    ]
+  },
+  "analysis": {
+    "ilr_verdict": "incorrect",
+    "ilr_issues": "ILR 把 OCR 流程图的两个循环（#6 'For i in range(1, n-1)' 边界候选、#10 'For i in range(1, n)' 求 min2/max2）错误地合并成一个 i in 1..n-2 的循环，导致 min2/max2 只统计到相邻对 (nums[n-3],nums[n-2])，丢失最后一对 (nums[n-2],nums[n-1])，2*(max2-min2) 候选被低估；且图内没有任何 i 递增的节点（节点2 置 i=0 后节点9 直接回节点4），按图执行 i 恒为 0 死循环。",
+    "code_vs_ilr": "faithful",
+    "code_issues": "代码按节点4 标签补上 for i in range(1, n-1) 使循环终止（必要修复，与 ILR 图仅差 i 递增），其余逐句对应，完整继承了合并循环导致的 min2/max2 缺最后一对问题，无其他偏差。",
+    "error_source": "ilr",
+    "ocr_contribution": "no",
+    "root_cause": "OCR 流程图的两个循环范围本正确（合并才是对的算法），ILR 转写时合并两循环并丢失 i 递增，min2/max2 缺最后一对使内部翻转增益被低估；代码忠实实现该错误结构。",
+    "evidence": "实测 maxValueAfterReverse([2,3,1,5,4]) 代码返回 9（期望 10：最后一对 (5,4) 的 min=4 本应把 max2 提到 4，得增益 2*(4-3)=2）；[3,1,2,100,101] 代码返回 201 而正确答案 298；按 OCR 两循环结构重写后示例 1 得 10。ILR 按图执行 i 永不递增死循环。"
+  }
+}

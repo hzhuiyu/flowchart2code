@@ -1,0 +1,197 @@
+{
+  "task_id": "weekly-contest-359-determine-the-minimum-sum-of-a-k-avoiding-array",
+  "dataset": "Algorithm",
+  "difficulty": "Medium",
+  "title": "determine-the-minimum-sum-of-a-k-avoiding-array",
+  "result": "failed: ",
+  "ilr": "{\n  \"problem_id\": \"k_avoiding_array\",\n  \"nodes\": [\n    {\"id\": 1, \"type\": \"start\", \"label\": \"Start\", \"next\": 2},\n    {\"id\": 2, \"type\": \"process\", \"label\": \"Input: n (integer), k (integer)\", \"action\": \"ctx['n']=ctx['arg0']; ctx['k']=ctx['arg1']; ctx['ans']=0\", \"next\": 3},\n    {\"id\": 3, \"type\": \"decision\", \"label\": \"Is n > k // 2?\", \"logic\": \"ctx['n'] > ctx['k'] // 2\", \"true_next\": 4, \"false_next\": 11},\n    {\"id\": 4, \"type\": \"process\", \"label\": \"Loop: i from 1 to k // 2\", \"action\": \"for ctx['i'] in range(1, ctx['k'] // 2 + 1): ctx['ans'] += ctx['i']\", \"next\": 5},\n    {\"id\": 5, \"type\": \"process\", \"label\": \"Print i\", \"action\": \"ctx['print_i'] = ctx['i']\", \"next\": 6},\n    {\"id\": 6, \"type\": \"decision\", \"label\": \"Continue Loop?\", \"logic\": \"ctx['i'] < ctx['k'] // 2\", \"true_next\": 4, \"false_next\": 8},\n    {\"id\": 7, \"type\": \"process\", \"label\": \"Loop: i from 1 to n - (k // 2) - 1\", \"action\": \"for ctx['i'] in range(1, ctx['n'] - (ctx['k'] // 2)): ctx['ans'] += (ctx['i'] + ctx['k'])\", \"next\": 9},\n    {\"id\": 8, \"type\": \"end\", \"label\": \"Output: ans\", \"output\": \"ctx['ans']\"},\n    {\"id\": 9, \"type\": \"process\", \"label\": \"Print i\", \"action\": \"ctx['print_i'] = ctx['i']\", \"next\": 10},\n    {\"id\": 10, \"type\": \"decision\", \"label\": \"Continue Loop?\", \"logic\": \"ctx['i'] < ctx['n']\", \"true_next\": 9, \"false_next\": 12},\n    {\"id\": 11, \"type\": \"process\", \"label\": \"Loop: i from 1 to n\", \"action\": \"for ctx['i'] in range(1, ctx['n'] + 1): ctx['ans'] += ctx['i']\", \"next\": 12},\n    {\"id\": 12, \"type\": \"process\", \"label\": \"Print i\", \"action\": \"ctx['print_i'] = ctx['i']\", \"next\": 13},\n    {\"id\": 13, \"type\": \"end\", \"label\": \"Print (i + k)\", \"output\": \"ctx['i'] + ctx['k']\"}\n  ]\n}",
+  "code": "class Solution:\n    def minimumSum(self, n: int, k: int) -> int:\n        ans = 0\n        \n        if n > k // 2:\n            for i in range(1, k // 2 + 1):\n                ans += i\n            \n            for i in range(1, n - (k // 2)):\n                ans += (i + k)\n        else:\n            for i in range(1, n + 1):\n                ans += i\n        \n        return ans",
+  "prompt": "\"\"\"\nYou are given two integers, n and k.\n\nAn array of distinct positive integers is called a k-avoiding array if there does not exist any pair of distinct elements that sum to k.\n\nReturn the minimum possible sum of a k-avoiding array of length n.\n\nExample 1:\n\nInput: n = 5, k = 4\nOutput: 18\nExplanation: Consider the k-avoiding array [1,2,4,5,6], which has a sum of 18.\nIt can be proven that there is no k-avoiding array with a sum less than 18.\n\nExample 2:\n\nInput: n = 2, k = 6\nOutput: 3\nExplanation: We can construct the array [1,2], which has a sum of 3.\nIt can be proven that there is no k-avoiding array with a sum less than 3.\n\n\nConstraints:\n\n * 1 <= n, k <= 50\n\"\"\"\nclass Solution:\n    def minimumSum(self, n: int, k: int) -> int:\n        ",
+  "test": "\nmy_solution = Solution()\n\ntest_input = { \"n\": 5, \"k\": 4 }\nassert my_solution.minimumSum(**test_input) == 18\n\ntest_input = { \"n\": 2, \"k\": 6 }\nassert my_solution.minimumSum(**test_input) == 3\n\ntest_input = { \"n\": 1, \"k\": 1 }\nassert my_solution.minimumSum(**test_input) == 1\n\ntest_input = { \"n\": 1, \"k\": 2 }\nassert my_solution.minimumSum(**test_input) == 1\n\ntest_input = { \"n\": 1, \"k\": 3 }\nassert my_solution.minimumSum(**test_input) == 1\n\ntest_input = { \"n\": 1, \"k\": 4 }\nassert my_solution.minimumSum(**test_input) == 1\n\ntest_input = { \"n\": 1, \"k\": 5 }\nassert my_solution.minimumSum(**test_input) == 1\n\ntest_input = { \"n\": 1, \"k\": 6 }\nassert my_solution.minimumSum(**test_input) == 1\n\ntest_input = { \"n\": 1, \"k\": 7 }\nassert my_solution.minimumSum(**test_input) == 1\n\ntest_input = { \"n\": 1, \"k\": 8 }\nassert my_solution.minimumSum(**test_input) == 1\n\ntest_input = { \"n\": 1, \"k\": 9 }\nassert my_solution.minimumSum(**test_input) == 1\n\ntest_input = { \"n\": 1, \"k\": 10 }\nassert my_solution.minimumSum(**test_input) == 1\n\ntest_input = { \"n\": 1, \"k\": 11 }\nassert my_solution.minimumSum(**test_input) == 1\n\ntest_input = { \"n\": 1, \"k\": 12 }\nassert my_solution.minimumSum(**test_input) == 1\n\ntest_input = { \"n\": 1, \"k\": 13 }\nassert my_solution.minimumSum(**test_input) == 1\n\ntest_input = { \"n\": 1, \"k\": 14 }\nassert my_solution.minimumSum(**test_input) == 1\n\ntest_input = { \"n\": 1, \"k\": 15 }\nassert my_solution.minimumSum(**test_input) == 1\n\ntest_input = { \"n\": 1, \"k\": 16 }\nassert my_solution.minimumSum(**test_input) == 1\n\ntest_input = { \"n\": 1, \"k\": 17 }\nassert my_solution.minimumSum(**test_input) == 1\n\ntest_input = { \"n\": 1, \"k\": 18 }\nassert my_solution.minimumSum(**test_input) == 1\n\ntest_input = { \"n\": 1, \"k\": 19 }\nassert my_solution.minimumSum(**test_input) == 1\n\ntest_input = { \"n\": 1, \"k\": 20 }\nassert my_solution.minimumSum(**test_input) == 1\n\ntest_input = { \"n\": 1, \"k\": 21 }\nassert my_solution.minimumSum(**test_input) == 1\n\ntest_input = { \"n\": 1, \"k\": 22 }\nassert my_solution.minimumSum(**test_input) == 1\n\ntest_input = { \"n\": 1, \"k\": 23 }\nassert my_solution.minimumSum(**test_input) == 1\n\ntest_input = { \"n\": 1, \"k\": 24 }\nassert my_solution.minimumSum(**test_input) == 1\n\ntest_input = { \"n\": 1, \"k\": 25 }\nassert my_solution.minimumSum(**test_input) == 1\n\ntest_input = { \"n\": 1, \"k\": 26 }\nassert my_solution.minimumSum(**test_input) == 1\n\ntest_input = { \"n\": 1, \"k\": 27 }\nassert my_solution.minimumSum(**test_input) == 1\n\ntest_input = { \"n\": 1, \"k\": 28 }\nassert my_solution.minimumSum(**test_input) == 1\n\ntest_input = { \"n\": 1, \"k\": 29 }\nassert my_solution.minimumSum(**test_input) == 1\n\ntest_input = { \"n\": 1, \"k\": 30 }\nassert my_solution.minimumSum(**test_input) == 1\n\ntest_input = { \"n\": 1, \"k\": 31 }\nassert my_solution.minimumSum(**test_input) == 1\n\ntest_input = { \"n\": 1, \"k\": 32 }\nassert my_solution.minimumSum(**test_input) == 1\n\ntest_input = { \"n\": 1, \"k\": 33 }\nassert my_solution.minimumSum(**test_input) == 1\n\ntest_input = { \"n\": 1, \"k\": 34 }\nassert my_solution.minimumSum(**test_input) == 1\n\ntest_input = { \"n\": 1, \"k\": 35 }\nassert my_solution.minimumSum(**test_input) == 1\n\ntest_input = { \"n\": 1, \"k\": 36 }\nassert my_solution.minimumSum(**test_input) == 1\n\ntest_input = { \"n\": 1, \"k\": 37 }\nassert my_solution.minimumSum(**test_input) == 1\n\ntest_input = { \"n\": 1, \"k\": 38 }\nassert my_solution.minimumSum(**test_input) == 1\n\ntest_input = { \"n\": 1, \"k\": 39 }\nassert my_solution.minimumSum(**test_input) == 1\n\ntest_input = { \"n\": 1, \"k\": 40 }\nassert my_solution.minimumSum(**test_input) == 1\n\ntest_input = { \"n\": 1, \"k\": 41 }\nassert my_solution.minimumSum(**test_input) == 1\n\ntest_input = { \"n\": 1, \"k\": 42 }\nassert my_solution.minimumSum(**test_input) == 1\n\ntest_input = { \"n\": 1, \"k\": 43 }\nassert my_solution.minimumSum(**test_input) == 1\n\ntest_input = { \"n\": 1, \"k\": 44 }\nassert my_solution.minimumSum(**test_input) == 1\n\ntest_input = { \"n\": 1, \"k\": 45 }\nassert my_solution.minimumSum(**test_input) == 1\n\ntest_input = { \"n\": 1, \"k\": 46 }\nassert my_solution.minimumSum(**test_input) == 1\n\ntest_input = { \"n\": 1, \"k\": 47 }\nassert my_solution.minimumSum(**test_input) == 1\n\ntest_input = { \"n\": 1, \"k\": 48 }\nassert my_solution.minimumSum(**test_input) == 1\n\ntest_input = { \"n\": 1, \"k\": 49 }\nassert my_solution.minimumSum(**test_input) == 1\n\ntest_input = { \"n\": 1, \"k\": 50 }\nassert my_solution.minimumSum(**test_input) == 1\n\ntest_input = { \"n\": 2, \"k\": 1 }\nassert my_solution.minimumSum(**test_input) == 3\n\ntest_input = { \"n\": 2, \"k\": 2 }\nassert my_solution.minimumSum(**test_input) == 3\n\ntest_input = { \"n\": 2, \"k\": 3 }\nassert my_solution.minimumSum(**test_input) == 4\n\ntest_input = { \"n\": 2, \"k\": 4 }\nassert my_solution.minimumSum(**test_input) == 3\n\ntest_input = { \"n\": 2, \"k\": 5 }\nassert my_solution.minimumSum(**test_input) == 3\n\ntest_input = { \"n\": 2, \"k\": 7 }\nassert my_solution.minimumSum(**test_input) == 3\n\ntest_input = { \"n\": 2, \"k\": 8 }\nassert my_solution.minimumSum(**test_input) == 3\n\ntest_input = { \"n\": 2, \"k\": 9 }\nassert my_solution.minimumSum(**test_input) == 3\n\ntest_input = { \"n\": 2, \"k\": 10 }\nassert my_solution.minimumSum(**test_input) == 3\n\ntest_input = { \"n\": 2, \"k\": 11 }\nassert my_solution.minimumSum(**test_input) == 3\n\ntest_input = { \"n\": 2, \"k\": 12 }\nassert my_solution.minimumSum(**test_input) == 3\n\ntest_input = { \"n\": 2, \"k\": 13 }\nassert my_solution.minimumSum(**test_input) == 3\n\ntest_input = { \"n\": 2, \"k\": 14 }\nassert my_solution.minimumSum(**test_input) == 3\n\ntest_input = { \"n\": 2, \"k\": 15 }\nassert my_solution.minimumSum(**test_input) == 3\n\ntest_input = { \"n\": 2, \"k\": 16 }\nassert my_solution.minimumSum(**test_input) == 3\n\ntest_input = { \"n\": 2, \"k\": 17 }\nassert my_solution.minimumSum(**test_input) == 3\n\ntest_input = { \"n\": 2, \"k\": 18 }\nassert my_solution.minimumSum(**test_input) == 3\n\ntest_input = { \"n\": 2, \"k\": 19 }\nassert my_solution.minimumSum(**test_input) == 3\n\ntest_input = { \"n\": 2, \"k\": 20 }\nassert my_solution.minimumSum(**test_input) == 3\n\ntest_input = { \"n\": 2, \"k\": 21 }\nassert my_solution.minimumSum(**test_input) == 3\n\ntest_input = { \"n\": 2, \"k\": 22 }\nassert my_solution.minimumSum(**test_input) == 3\n\ntest_input = { \"n\": 2, \"k\": 23 }\nassert my_solution.minimumSum(**test_input) == 3\n\ntest_input = { \"n\": 2, \"k\": 24 }\nassert my_solution.minimumSum(**test_input) == 3\n\ntest_input = { \"n\": 2, \"k\": 25 }\nassert my_solution.minimumSum(**test_input) == 3\n\ntest_input = { \"n\": 2, \"k\": 26 }\nassert my_solution.minimumSum(**test_input) == 3\n\ntest_input = { \"n\": 2, \"k\": 27 }\nassert my_solution.minimumSum(**test_input) == 3\n\ntest_input = { \"n\": 2, \"k\": 28 }\nassert my_solution.minimumSum(**test_input) == 3\n\ntest_input = { \"n\": 2, \"k\": 29 }\nassert my_solution.minimumSum(**test_input) == 3\n\ntest_input = { \"n\": 2, \"k\": 30 }\nassert my_solution.minimumSum(**test_input) == 3\n\ntest_input = { \"n\": 2, \"k\": 31 }\nassert my_solution.minimumSum(**test_input) == 3\n\ntest_input = { \"n\": 2, \"k\": 32 }\nassert my_solution.minimumSum(**test_input) == 3\n\ntest_input = { \"n\": 2, \"k\": 33 }\nassert my_solution.minimumSum(**test_input) == 3\n\ntest_input = { \"n\": 2, \"k\": 34 }\nassert my_solution.minimumSum(**test_input) == 3\n\ntest_input = { \"n\": 2, \"k\": 35 }\nassert my_solution.minimumSum(**test_input) == 3\n\ntest_input = { \"n\": 2, \"k\": 36 }\nassert my_solution.minimumSum(**test_input) == 3\n\ntest_input = { \"n\": 2, \"k\": 37 }\nassert my_solution.minimumSum(**test_input) == 3\n\ntest_input = { \"n\": 2, \"k\": 38 }\nassert my_solution.minimumSum(**test_input) == 3\n\ntest_input = { \"n\": 2, \"k\": 39 }\nassert my_solution.minimumSum(**test_input) == 3\n\ntest_input = { \"n\": 2, \"k\": 40 }\nassert my_solution.minimumSum(**test_input) == 3\n\ntest_input = { \"n\": 2, \"k\": 41 }\nassert my_solution.minimumSum(**test_input) == 3\n\ntest_input = { \"n\": 2, \"k\": 42 }\nassert my_solution.minimumSum(**test_input) == 3\n\ntest_input = { \"n\": 2, \"k\": 43 }\nassert my_solution.minimumSum(**test_input) == 3\n\ntest_input = { \"n\": 2, \"k\": 44 }\nassert my_solution.minimumSum(**test_input) == 3\n\ntest_input = { \"n\": 2, \"k\": 45 }\nassert my_solution.minimumSum(**test_input) == 3\n\ntest_input = { \"n\": 2, \"k\": 46 }\nassert my_solution.minimumSum(**test_input) == 3\n\ntest_input = { \"n\": 2, \"k\": 47 }\nassert my_solution.minimumSum(**test_input) == 3\n\ntest_input = { \"n\": 2, \"k\": 48 }\nassert my_solution.minimumSum(**test_input) == 3\n\ntest_input = { \"n\": 2, \"k\": 49 }\nassert my_solution.minimumSum(**test_input) == 3",
+  "ocr_data": {
+    "nodes": [
+      {
+        "node_id": 1,
+        "shape_type": "rectangle",
+        "raw_text": "Start",
+        "position": "top"
+      },
+      {
+        "node_id": 2,
+        "shape_type": "rectangle",
+        "raw_text": "Input: n (integer), k (integer)",
+        "position": "middle"
+      },
+      {
+        "node_id": 3,
+        "shape_type": "rectangle",
+        "raw_text": "Initialize ans = 0",
+        "position": "middle"
+      },
+      {
+        "node_id": 4,
+        "shape_type": "diamond",
+        "raw_text": "Is n > k // 2?",
+        "position": "middle"
+      },
+      {
+        "node_id": 5,
+        "shape_type": "rectangle",
+        "raw_text": "Loop: i from 1 to k // 2",
+        "position": "bottom"
+      },
+      {
+        "node_id": 6,
+        "shape_type": "rectangle",
+        "raw_text": "Add i to ans",
+        "position": "bottom"
+      },
+      {
+        "node_id": 7,
+        "shape_type": "rectangle",
+        "raw_text": "Print i",
+        "position": "bottom"
+      },
+      {
+        "node_id": 8,
+        "shape_type": "rectangle",
+        "raw_text": "Loop: i from 1 to n - (k // 2) - 1",
+        "position": "bottom"
+      },
+      {
+        "node_id": 9,
+        "shape_type": "rectangle",
+        "raw_text": "Add (i + k) to ans",
+        "position": "bottom"
+      },
+      {
+        "node_id": 10,
+        "shape_type": "rectangle",
+        "raw_text": "Output: ans",
+        "position": "bottom"
+      },
+      {
+        "node_id": 11,
+        "shape_type": "rectangle",
+        "raw_text": "Loop: i from 1 to n",
+        "position": "bottom"
+      },
+      {
+        "node_id": 12,
+        "shape_type": "rectangle",
+        "raw_text": "Add i to ans",
+        "position": "bottom"
+      },
+      {
+        "node_id": 13,
+        "shape_type": "rectangle",
+        "raw_text": "Print i",
+        "position": "bottom"
+      },
+      {
+        "node_id": 14,
+        "shape_type": "rectangle",
+        "raw_text": "Print (i + k)",
+        "position": "bottom"
+      }
+    ],
+    "edges": [
+      {
+        "from_node": 1,
+        "to_node": 2,
+        "label": ""
+      },
+      {
+        "from_node": 2,
+        "to_node": 3,
+        "label": ""
+      },
+      {
+        "from_node": 3,
+        "to_node": 4,
+        "label": ""
+      },
+      {
+        "from_node": 4,
+        "to_node": 5,
+        "label": "Yes"
+      },
+      {
+        "from_node": 4,
+        "to_node": 11,
+        "label": "No"
+      },
+      {
+        "from_node": 5,
+        "to_node": 6,
+        "label": "Yes"
+      },
+      {
+        "from_node": 5,
+        "to_node": 8,
+        "label": "No"
+      },
+      {
+        "from_node": 6,
+        "to_node": 7,
+        "label": ""
+      },
+      {
+        "from_node": 7,
+        "to_node": 5,
+        "label": ""
+      },
+      {
+        "from_node": 8,
+        "to_node": 9,
+        "label": "Yes"
+      },
+      {
+        "from_node": 8,
+        "to_node": 10,
+        "label": "No"
+      },
+      {
+        "from_node": 9,
+        "to_node": 14,
+        "label": ""
+      },
+      {
+        "from_node": 10,
+        "to_node": 14,
+        "label": ""
+      },
+      {
+        "from_node": 11,
+        "to_node": 12,
+        "label": "Yes"
+      },
+      {
+        "from_node": 11,
+        "to_node": 13,
+        "label": "No"
+      },
+      {
+        "from_node": 12,
+        "to_node": 13,
+        "label": ""
+      },
+      {
+        "from_node": 13,
+        "to_node": 14,
+        "label": ""
+      }
+    ],
+    "other_text": []
+  },
+  "analysis": {
+    "ilr_verdict": "incorrect",
+    "ilr_issues": "三处错误：(1) true分支中节点6('Continue Loop?')的false边指向节点8(输出ans)而不是节点7(第二段累加i+k的循环)，节点7成为孤儿节点，导致n>k//2时只累加1..k//2；(2) false分支的终止节点13把OCR的杂讯节点'Print (i+k)'当成了返回值，输出i+k而非ans；(3) 节点4/6把for循环拆成完整for动作加冗余continue判断，按字面执行语义混乱。另外ILR继承自流程图的循环定义'i从1到n-k//2-1累加i+k'本身就漏掉了k这一项（只选n-1个数），算法不完整。",
+    "code_vs_ilr": "deviates",
+    "code_issues": "代码修复了ILR的输出错误（两个分支都正确返回ans、删除杂讯Print与冗余continue节点），但原样保留流程图/ILR的第二段循环range(1, n-k//2)累加i+k，从k+1开始漏掉k本身，且k//2=0时首段循环也为空，答案偏小。",
+    "error_source": "ilr",
+    "ocr_contribution": "no",
+    "root_cause": "ILR阶段出错：除自身接线错误（第二段循环不可达、false分支返回i+k）外，还继承了流程图本身不完整的算法（第二段循环从1开始漏加k，仅选n-1个数）；代码虽然修复了ILR的输出与控制流问题，但保留了漏加k的循环定义，答案偏小。",
+    "evidence": "忠实执行ILR：n=5,k=4输出3（期望18，因第二段循环不可达）；n=2,k=6输出8（期望3，因false分支返回i+k）。生成代码100个测试错5个：n=5,k=4得14（漏加k=4这一项，3+5+6=14）、n=1,k=1得0、n=2,k=2得1。OCR文本清晰且本身显示循环起点为1，OCR非主因。"
+  }
+}

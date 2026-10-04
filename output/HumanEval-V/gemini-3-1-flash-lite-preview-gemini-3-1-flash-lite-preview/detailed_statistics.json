@@ -1,0 +1,30 @@
+{
+  "dataset": "HumanEval-V",
+  "model": "gemini-3-1-flash-lite-preview-gemini-3-1-flash-lite-preview",
+  "total_samples": 164,
+  "use_reflection": false,
+  "max_iterations": 0,
+  "pass_rate": {
+    "iteration_0": {
+      "passed": 158,
+      "total": 164,
+      "rate": 0.9634
+    }
+  },
+  "tokens": {
+    "total": {
+      "prompt_tokens": 942409,
+      "completion_tokens": 134806,
+      "total_tokens": 1077215
+    },
+    "average_per_sample": {
+      "prompt_tokens": 5746.4,
+      "completion_tokens": 821.99,
+      "total_tokens": 6568.38
+    }
+  },
+  "time": {
+    "total_time": 1373.36,
+    "average_per_sample": 8.37
+  }
+}

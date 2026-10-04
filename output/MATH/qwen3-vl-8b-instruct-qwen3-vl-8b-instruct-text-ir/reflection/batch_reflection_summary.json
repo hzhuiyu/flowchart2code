@@ -1,0 +1,76 @@
+{
+  "total": 27,
+  "processed": 27,
+  "success": 7,
+  "failed": 20,
+  "success_rate": 25.925925925925924,
+  "iteration_stats": {
+    "1": {
+      "count": 27,
+      "avg_duration": 24.582866589228313,
+      "avg_total_tokens": 11916.0,
+      "avg_prompt_tokens": 10266.444444444445,
+      "avg_completion_tokens": 1649.5555555555557
+    },
+    "2": {
+      "count": 22,
+      "avg_duration": 26.11080929366025,
+      "avg_total_tokens": 6140.409090909091,
+      "avg_prompt_tokens": 4176.318181818182,
+      "avg_completion_tokens": 1964.090909090909
+    },
+    "3": {
+      "count": 21,
+      "avg_duration": 21.585725296111335,
+      "avg_total_tokens": 5500.714285714285,
+      "avg_prompt_tokens": 3896.0476190476193,
+      "avg_completion_tokens": 1604.6666666666667
+    }
+  },
+  "avg_duration_by_iteration": {
+    "1": 24.582866589228313,
+    "2": 26.11080929366025,
+    "3": 21.585725296111335
+  },
+  "reflection_mode": "full",
+  "final_merge_eval": {
+    "samples_file": "output/MATH/qwen3-vl-8b-instruct-qwen3-vl-8b-instruct-text-ir/samples.jsonl",
+    "reflection_dir": "output/MATH/qwen3-vl-8b-instruct-qwen3-vl-8b-instruct-text-ir/reflection",
+    "output_file": "output/MATH/qwen3-vl-8b-instruct-qwen3-vl-8b-instruct-text-ir/reflection/samples_reflection_merged.jsonl",
+    "merged_results_file": "output/MATH/qwen3-vl-8b-instruct-qwen3-vl-8b-instruct-text-ir/reflection/samples_reflection_merged.jsonl_results.jsonl",
+    "results_txt": "output/MATH/qwen3-vl-8b-instruct-qwen3-vl-8b-instruct-text-ir/reflection/results.txt",
+    "problem_file": "data/MATH/MATH.jsonl",
+    "merge_summary": {
+      "total_rows": 125,
+      "replaced_rows": 27,
+      "replaced_by_first_passed": 7,
+      "replaced_by_last_failed": 20,
+      "missing_generated_code": 0,
+      "selection_stats": {
+        "keep_original": 98,
+        "first_passed": 7,
+        "iter_3_failed": 20
+      }
+    },
+    "eval_result": {
+      "pass@1": 0.84
+    },
+    "difficulty_summary": {
+      "Easy": {
+        "passed": 44.0,
+        "total": 45.0,
+        "rate": 0.9777777777777777
+      },
+      "Medium": {
+        "passed": 35.0,
+        "total": 40.0,
+        "rate": 0.875
+      },
+      "Hard": {
+        "passed": 26.0,
+        "total": 40.0,
+        "rate": 0.65
+      }
+    }
+  }
+}

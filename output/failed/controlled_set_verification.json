@@ -1,0 +1,502 @@
+[
+ {
+  "fixed_ilr_passed": 100,
+  "fixed_ilr_total": 100,
+  "fixed_ilr_error": null,
+  "modified_code_passed": 0,
+  "modified_code_total": 100,
+  "original_ilr_passed": 0,
+  "original_ilr_total": 100,
+  "task_id": "biweekly-contest-108-number-of-black-blocks"
+ },
+ {
+  "fixed_ilr_passed": 100,
+  "fixed_ilr_total": 100,
+  "fixed_ilr_error": null,
+  "modified_code_passed": 0,
+  "modified_code_total": 100,
+  "original_ilr_passed": 0,
+  "original_ilr_total": 100,
+  "task_id": "biweekly-contest-108-partition-string-into-minimum-beautiful-substrings"
+ },
+ {
+  "task_id": "HumanEval-19",
+  "fixed_ilr_passed": 5,
+  "fixed_ilr_total": 5,
+  "fixed_ilr_error": null,
+  "modified_code_passed": 0,
+  "modified_code_total": 5,
+  "original_ilr_passed": 2,
+  "original_ilr_total": 5
+ },
+ {
+  "fixed_ilr_passed": 100,
+  "fixed_ilr_total": 100,
+  "fixed_ilr_error": null,
+  "modified_code_passed": 0,
+  "modified_code_total": 100,
+  "original_ilr_passed": 0,
+  "original_ilr_total": 100,
+  "task_id": "biweekly-contest-109-visit-array-positions-to-maximize-score"
+ },
+ {
+  "fixed_ilr_passed": 100,
+  "fixed_ilr_total": 100,
+  "fixed_ilr_error": null,
+  "modified_code_passed": 0,
+  "modified_code_total": 100,
+  "original_ilr_passed": 0,
+  "original_ilr_total": 100,
+  "task_id": "biweekly-contest-110-minimum-time-to-make-array-sum-at-most-x"
+ },
+ {
+  "fixed_ilr_passed": 100,
+  "fixed_ilr_total": 100,
+  "fixed_ilr_error": null,
+  "modified_code_passed": 0,
+  "modified_code_total": 100,
+  "original_ilr_passed": 11,
+  "original_ilr_total": 100,
+  "task_id": "biweekly-contest-111-count-pairs-whose-sum-is-less-than-target"
+ },
+ {
+  "fixed_ilr_passed": 100,
+  "fixed_ilr_total": 100,
+  "fixed_ilr_error": null,
+  "modified_code_passed": 0,
+  "modified_code_total": 100,
+  "original_ilr_passed": 0,
+  "original_ilr_total": 100,
+  "task_id": "biweekly-contest-111-number-of-beautiful-integers-in-the-range"
+ },
+ {
+  "fixed_ilr_passed": 100,
+  "fixed_ilr_total": 100,
+  "fixed_ilr_error": null,
+  "modified_code_passed": 0,
+  "modified_code_total": 100,
+  "original_ilr_passed": 0,
+  "original_ilr_total": 100,
+  "task_id": "biweekly-contest-113-minimum-right-shifts-to-sort-the-array"
+ },
+ {
+  "fixed_ilr_passed": 100,
+  "fixed_ilr_total": 100,
+  "fixed_ilr_error": null,
+  "modified_code_passed": 0,
+  "modified_code_total": 100,
+  "original_ilr_passed": 0,
+  "original_ilr_total": 100,
+  "task_id": "biweekly-contest-114-minimum-operations-to-collect-elements"
+ },
+ {
+  "fixed_ilr_passed": 100,
+  "fixed_ilr_total": 100,
+  "fixed_ilr_error": null,
+  "modified_code_passed": 0,
+  "modified_code_total": 100,
+  "original_ilr_passed": 0,
+  "original_ilr_total": 100,
+  "task_id": "biweekly-contest-114-split-array-into-maximum-number-of-subarrays"
+ },
+ {
+  "fixed_ilr_passed": 100,
+  "fixed_ilr_total": 100,
+  "fixed_ilr_error": null,
+  "modified_code_passed": 0,
+  "modified_code_total": 100,
+  "original_ilr_passed": 1,
+  "original_ilr_total": 100,
+  "task_id": "biweekly-contest-115-last-visited-integers"
+ },
+ {
+  "fixed_ilr_passed": 100,
+  "fixed_ilr_total": 100,
+  "fixed_ilr_error": null,
+  "modified_code_passed": 0,
+  "modified_code_total": 100,
+  "original_ilr_passed": 6,
+  "original_ilr_total": 100,
+  "task_id": "biweekly-contest-116-minimum-number-of-changes-to-make-binary-string-beautiful"
+ },
+ {
+  "fixed_ilr_passed": 100,
+  "fixed_ilr_total": 100,
+  "fixed_ilr_error": null,
+  "modified_code_passed": 0,
+  "modified_code_total": 100,
+  "original_ilr_passed": 0,
+  "original_ilr_total": 100,
+  "task_id": "biweekly-contest-116-subarrays-distinct-element-sum-of-squares-i"
+ },
+ {
+  "fixed_ilr_passed": 100,
+  "fixed_ilr_total": 100,
+  "fixed_ilr_error": null,
+  "modified_code_passed": 0,
+  "modified_code_total": 100,
+  "original_ilr_passed": 0,
+  "original_ilr_total": 100,
+  "task_id": "biweekly-contest-117-maximum-spending-after-buying-items"
+ },
+ {
+  "fixed_ilr_passed": 100,
+  "fixed_ilr_total": 100,
+  "fixed_ilr_error": null,
+  "modified_code_passed": 0,
+  "modified_code_total": 100,
+  "original_ilr_passed": 35,
+  "original_ilr_total": 100,
+  "task_id": "biweekly-contest-118-find-maximum-non-decreasing-array-length"
+ },
+ {
+  "fixed_ilr_passed": 100,
+  "fixed_ilr_total": 100,
+  "fixed_ilr_error": null,
+  "modified_code_passed": 0,
+  "modified_code_total": 100,
+  "original_ilr_passed": 0,
+  "original_ilr_total": 100,
+  "task_id": "biweekly-contest-118-maximize-area-of-square-hole-in-grid"
+ },
+ {
+  "fixed_ilr_passed": 100,
+  "fixed_ilr_total": 100,
+  "fixed_ilr_error": null,
+  "modified_code_passed": 0,
+  "modified_code_total": 100,
+  "original_ilr_passed": 0,
+  "original_ilr_total": 100,
+  "task_id": "biweekly-contest-118-minimum-number-of-coins-for-fruits"
+ },
+ {
+  "fixed_ilr_passed": 100,
+  "fixed_ilr_total": 100,
+  "fixed_ilr_error": null,
+  "modified_code_passed": 0,
+  "modified_code_total": 100,
+  "original_ilr_passed": 0,
+  "original_ilr_total": 100,
+  "task_id": "biweekly-contest-119-number-of-possible-sets-of-closing-branches"
+ },
+ {
+  "fixed_ilr_passed": 100,
+  "fixed_ilr_total": 100,
+  "fixed_ilr_error": null,
+  "modified_code_passed": 0,
+  "modified_code_total": 100,
+  "original_ilr_passed": 0,
+  "original_ilr_total": 100,
+  "task_id": "biweekly-contest-120-count-the-number-of-incremovable-subarrays-i"
+ },
+ {
+  "fixed_ilr_passed": 100,
+  "fixed_ilr_total": 100,
+  "fixed_ilr_error": null,
+  "modified_code_passed": 0,
+  "modified_code_total": 100,
+  "original_ilr_passed": 0,
+  "original_ilr_total": 100,
+  "task_id": "biweekly-contest-120-count-the-number-of-incremovable-subarrays-ii"
+ },
+ {
+  "fixed_ilr_passed": 100,
+  "fixed_ilr_total": 100,
+  "fixed_ilr_error": null,
+  "modified_code_passed": 0,
+  "modified_code_total": 100,
+  "original_ilr_passed": 0,
+  "original_ilr_total": 100,
+  "task_id": "biweekly-contest-120-find-polygon-with-the-largest-perimeter"
+ },
+ {
+  "fixed_ilr_passed": 100,
+  "fixed_ilr_total": 100,
+  "fixed_ilr_error": null,
+  "modified_code_passed": 0,
+  "modified_code_total": 100,
+  "original_ilr_passed": 0,
+  "original_ilr_total": 100,
+  "task_id": "biweekly-contest-122-find-if-array-can-be-sorted"
+ },
+ {
+  "fixed_ilr_passed": 100,
+  "fixed_ilr_total": 100,
+  "fixed_ilr_error": null,
+  "modified_code_passed": 0,
+  "modified_code_total": 100,
+  "original_ilr_passed": 0,
+  "original_ilr_total": 100,
+  "task_id": "weekly-contest-352-continuous-subarrays"
+ },
+ {
+  "fixed_ilr_passed": 100,
+  "fixed_ilr_total": 100,
+  "fixed_ilr_error": null,
+  "modified_code_passed": 0,
+  "modified_code_total": 100,
+  "original_ilr_passed": 0,
+  "original_ilr_total": 100,
+  "task_id": "weekly-contest-352-longest-even-odd-subarray-with-threshold"
+ },
+ {
+  "fixed_ilr_passed": 100,
+  "fixed_ilr_total": 100,
+  "fixed_ilr_error": null,
+  "modified_code_passed": 0,
+  "modified_code_total": 100,
+  "original_ilr_passed": 0,
+  "original_ilr_total": 100,
+  "task_id": "weekly-contest-352-sum-of-imbalance-numbers-of-all-subarrays"
+ },
+ {
+  "fixed_ilr_passed": 100,
+  "fixed_ilr_total": 100,
+  "fixed_ilr_error": null,
+  "modified_code_passed": 0,
+  "modified_code_total": 100,
+  "original_ilr_passed": 0,
+  "original_ilr_total": 100,
+  "task_id": "weekly-contest-353-apply-operations-to-make-all-array-elements-equal-to-zero"
+ },
+ {
+  "fixed_ilr_passed": 100,
+  "fixed_ilr_total": 100,
+  "fixed_ilr_error": null,
+  "modified_code_passed": 0,
+  "modified_code_total": 100,
+  "original_ilr_passed": 0,
+  "original_ilr_total": 100,
+  "task_id": "weekly-contest-354-length-of-the-longest-valid-substring"
+ },
+ {
+  "fixed_ilr_passed": 100,
+  "fixed_ilr_total": 100,
+  "fixed_ilr_error": null,
+  "modified_code_passed": 0,
+  "modified_code_total": 100,
+  "original_ilr_passed": 0,
+  "original_ilr_total": 100,
+  "task_id": "weekly-contest-354-minimum-index-of-a-valid-split"
+ },
+ {
+  "fixed_ilr_passed": 100,
+  "fixed_ilr_total": 100,
+  "fixed_ilr_error": null,
+  "modified_code_passed": 0,
+  "modified_code_total": 100,
+  "original_ilr_passed": 0,
+  "original_ilr_total": 100,
+  "task_id": "weekly-contest-357-faulty-keyboard"
+ },
+ {
+  "fixed_ilr_passed": 100,
+  "fixed_ilr_total": 100,
+  "fixed_ilr_error": null,
+  "modified_code_passed": 0,
+  "modified_code_total": 100,
+  "original_ilr_passed": 47,
+  "original_ilr_total": 100,
+  "task_id": "weekly-contest-357-maximum-elegance-of-a-k-length-subsequence"
+ },
+ {
+  "fixed_ilr_passed": 100,
+  "fixed_ilr_total": 100,
+  "fixed_ilr_error": null,
+  "modified_code_passed": 0,
+  "modified_code_total": 100,
+  "original_ilr_passed": 0,
+  "original_ilr_total": 100,
+  "task_id": "weekly-contest-358-minimum-absolute-difference-between-elements-with-constraint"
+ },
+ {
+  "fixed_ilr_passed": 100,
+  "fixed_ilr_total": 100,
+  "fixed_ilr_error": null,
+  "modified_code_passed": 0,
+  "modified_code_total": 100,
+  "original_ilr_passed": 1,
+  "original_ilr_total": 100,
+  "task_id": "weekly-contest-359-determine-the-minimum-sum-of-a-k-avoiding-array"
+ },
+ {
+  "fixed_ilr_passed": 100,
+  "fixed_ilr_total": 100,
+  "fixed_ilr_error": null,
+  "modified_code_passed": 0,
+  "modified_code_total": 100,
+  "original_ilr_passed": 0,
+  "original_ilr_total": 100,
+  "task_id": "weekly-contest-360-furthest-point-from-origin"
+ },
+ {
+  "fixed_ilr_passed": 100,
+  "fixed_ilr_total": 100,
+  "fixed_ilr_error": null,
+  "modified_code_passed": 0,
+  "modified_code_total": 100,
+  "original_ilr_passed": 0,
+  "original_ilr_total": 100,
+  "task_id": "weekly-contest-360-maximize-value-of-function-in-a-ball-passing-game"
+ },
+ {
+  "fixed_ilr_passed": 100,
+  "fixed_ilr_total": 100,
+  "fixed_ilr_error": null,
+  "modified_code_passed": 0,
+  "modified_code_total": 100,
+  "original_ilr_passed": 20,
+  "original_ilr_total": 100,
+  "task_id": "weekly-contest-360-minimum-operations-to-form-subsequence-with-target-sum"
+ },
+ {
+  "fixed_ilr_passed": 100,
+  "fixed_ilr_total": 100,
+  "fixed_ilr_error": null,
+  "modified_code_passed": 0,
+  "modified_code_total": 100,
+  "original_ilr_passed": 0,
+  "original_ilr_total": 100,
+  "task_id": "weekly-contest-364-maximum-odd-binary-number"
+ },
+ {
+  "fixed_ilr_passed": 100,
+  "fixed_ilr_total": 100,
+  "fixed_ilr_error": null,
+  "modified_code_passed": 0,
+  "modified_code_total": 100,
+  "original_ilr_passed": 0,
+  "original_ilr_total": 100,
+  "task_id": "weekly-contest-366-apply-operations-on-array-to-maximize-sum-of-squares"
+ },
+ {
+  "fixed_ilr_passed": 100,
+  "fixed_ilr_total": 100,
+  "fixed_ilr_error": null,
+  "modified_code_passed": 0,
+  "modified_code_total": 100,
+  "original_ilr_passed": 0,
+  "original_ilr_total": 100,
+  "task_id": "weekly-contest-367-construct-product-matrix"
+ },
+ {
+  "fixed_ilr_passed": 100,
+  "fixed_ilr_total": 100,
+  "fixed_ilr_error": null,
+  "modified_code_passed": 0,
+  "modified_code_total": 100,
+  "original_ilr_passed": 0,
+  "original_ilr_total": 100,
+  "task_id": "weekly-contest-370-find-champion-i"
+ },
+ {
+  "fixed_ilr_passed": 100,
+  "fixed_ilr_total": 100,
+  "fixed_ilr_error": null,
+  "modified_code_passed": 0,
+  "modified_code_total": 100,
+  "original_ilr_passed": 0,
+  "original_ilr_total": 100,
+  "task_id": "weekly-contest-370-maximum-balanced-subsequence-sum"
+ },
+ {
+  "fixed_ilr_passed": 100,
+  "fixed_ilr_total": 100,
+  "fixed_ilr_error": null,
+  "modified_code_passed": 0,
+  "modified_code_total": 100,
+  "original_ilr_passed": 0,
+  "original_ilr_total": 100,
+  "task_id": "weekly-contest-371-maximum-strong-pair-xor-ii"
+ },
+ {
+  "fixed_ilr_passed": 100,
+  "fixed_ilr_total": 100,
+  "fixed_ilr_error": null,
+  "modified_code_passed": 0,
+  "modified_code_total": 100,
+  "original_ilr_passed": 0,
+  "original_ilr_total": 100,
+  "task_id": "weekly-contest-371-minimum-operations-to-maximize-last-elements-in-arrays"
+ },
+ {
+  "fixed_ilr_passed": 100,
+  "fixed_ilr_total": 100,
+  "fixed_ilr_error": null,
+  "modified_code_passed": 0,
+  "modified_code_total": 100,
+  "original_ilr_passed": 0,
+  "original_ilr_total": 100,
+  "task_id": "weekly-contest-373-count-beautiful-substrings-i"
+ },
+ {
+  "fixed_ilr_passed": 100,
+  "fixed_ilr_total": 100,
+  "fixed_ilr_error": null,
+  "modified_code_passed": 0,
+  "modified_code_total": 100,
+  "original_ilr_passed": 0,
+  "original_ilr_total": 100,
+  "task_id": "weekly-contest-373-make-lexicographically-smallest-array-by-swapping-elements"
+ },
+ {
+  "fixed_ilr_passed": 100,
+  "fixed_ilr_total": 100,
+  "fixed_ilr_error": null,
+  "modified_code_passed": 0,
+  "modified_code_total": 100,
+  "original_ilr_passed": 0,
+  "original_ilr_total": 100,
+  "task_id": "weekly-contest-374-find-the-peaks"
+ },
+ {
+  "fixed_ilr_passed": 100,
+  "fixed_ilr_total": 100,
+  "fixed_ilr_error": null,
+  "modified_code_passed": 0,
+  "modified_code_total": 100,
+  "original_ilr_passed": 6,
+  "original_ilr_total": 100,
+  "task_id": "weekly-contest-374-minimum-number-of-coins-to-be-added"
+ },
+ {
+  "fixed_ilr_passed": 100,
+  "fixed_ilr_total": 100,
+  "fixed_ilr_error": null,
+  "modified_code_passed": 0,
+  "modified_code_total": 100,
+  "original_ilr_passed": 0,
+  "original_ilr_total": 100,
+  "task_id": "weekly-contest-375-count-subarrays-where-max-element-appears-at-least-k-times"
+ },
+ {
+  "fixed_ilr_passed": 100,
+  "fixed_ilr_total": 100,
+  "fixed_ilr_error": null,
+  "modified_code_passed": 0,
+  "modified_code_total": 100,
+  "original_ilr_passed": 0,
+  "original_ilr_total": 100,
+  "task_id": "weekly-contest-376-apply-operations-to-maximize-frequency-score"
+ },
+ {
+  "fixed_ilr_passed": 100,
+  "fixed_ilr_total": 100,
+  "fixed_ilr_error": null,
+  "modified_code_passed": 0,
+  "modified_code_total": 100,
+  "original_ilr_passed": 0,
+  "original_ilr_total": 100,
+  "task_id": "weekly-contest-376-find-missing-and-repeated-values"
+ },
+ {
+  "fixed_ilr_passed": 100,
+  "fixed_ilr_total": 100,
+  "fixed_ilr_error": null,
+  "modified_code_passed": 0,
+  "modified_code_total": 100,
+  "original_ilr_passed": 5,
+  "original_ilr_total": 100,
+  "task_id": "weekly-contest-378-find-longest-special-substring-that-occurs-thrice-i"
+ }
+]

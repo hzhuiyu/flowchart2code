@@ -1,0 +1,128 @@
+{
+  "problem_id": "incremovableSubarrayCount",
+  "nodes": [
+    {
+      "id": 1,
+      "type": "start",
+      "label": "Start",
+      "next": 2
+    },
+    {
+      "id": 2,
+      "type": "process",
+      "label": "Input: nums (list of integers)",
+      "action": "ctx['nums'] = ctx['arg0']; ctx['ans'] = 0; ctx['n'] = len(ctx['nums']); ctx['i'] = 0",
+      "next": 3
+    },
+    {
+      "id": 3,
+      "type": "decision",
+      "label": "Loop: for i from 0 to n-1",
+      "logic": "ctx['i'] < ctx['n']",
+      "true_next": 4,
+      "false_next": 14
+    },
+    {
+      "id": 4,
+      "type": "process",
+      "label": "Initialize j = i",
+      "action": "ctx['j'] = ctx['i']",
+      "next": 5
+    },
+    {
+      "id": 5,
+      "type": "decision",
+      "label": "Loop: for j from i to n-1",
+      "logic": "ctx['j'] < ctx['n']",
+      "true_next": 12,
+      "false_next": 15
+    },
+    {
+      "id": 12,
+      "type": "process",
+      "label": "Initialize ok = 1, lst = -1, k = 0",
+      "action": "ctx['ok'] = 1; ctx['lst'] = -1; ctx['k'] = 0",
+      "next": 6
+    },
+    {
+      "id": 6,
+      "type": "decision",
+      "label": "Loop: for k from 0 to n-1",
+      "logic": "ctx['k'] < ctx['n']",
+      "true_next": 7,
+      "false_next": 8
+    },
+    {
+      "id": 7,
+      "type": "decision",
+      "label": "Is k inside removed range [i, j]?",
+      "logic": "ctx['k'] >= ctx['i'] and ctx['k'] <= ctx['j']",
+      "true_next": 16,
+      "false_next": 9
+    },
+    {
+      "id": 16,
+      "type": "process",
+      "label": "Skip removed element: k += 1",
+      "action": "ctx['k'] += 1",
+      "next": 6
+    },
+    {
+      "id": 9,
+      "type": "decision",
+      "label": "Is lst < nums[k] (still strictly increasing)?",
+      "logic": "ctx['lst'] < ctx['nums'][ctx['k']]",
+      "true_next": 11,
+      "false_next": 13
+    },
+    {
+      "id": 11,
+      "type": "process",
+      "label": "Update lst = nums[k], advance k",
+      "action": "ctx['lst'] = ctx['nums'][ctx['k']]; ctx['k'] += 1",
+      "next": 6
+    },
+    {
+      "id": 13,
+      "type": "process",
+      "label": "Mark not increasing: ok = 0, advance k",
+      "action": "ctx['ok'] = 0; ctx['k'] += 1",
+      "next": 6
+    },
+    {
+      "id": 8,
+      "type": "decision",
+      "label": "End Loop: Is ok still true?",
+      "logic": "ctx['ok'] == 1",
+      "true_next": 10,
+      "false_next": 17
+    },
+    {
+      "id": 10,
+      "type": "process",
+      "label": "Increment ans by 1",
+      "action": "ctx['ans'] += 1",
+      "next": 17
+    },
+    {
+      "id": 17,
+      "type": "process",
+      "label": "Advance j: j += 1",
+      "action": "ctx['j'] += 1",
+      "next": 5
+    },
+    {
+      "id": 15,
+      "type": "process",
+      "label": "Advance i: i += 1",
+      "action": "ctx['i'] += 1",
+      "next": 3
+    },
+    {
+      "id": 14,
+      "type": "end",
+      "label": "Output: ans",
+      "output": "ctx['ans']"
+    }
+  ]
+}

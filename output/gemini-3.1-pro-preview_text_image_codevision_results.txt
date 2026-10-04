@@ -1,0 +1,8 @@
+CodeVision Combined Results
+Experiment: gemini-3.1-pro-preview_text_image
+
+Algorithm    : 149/149
+HumanEval-V  : 164/164
+MATH         : 125/125
+--------------------------------
+Total        : 438/438 = 1.0

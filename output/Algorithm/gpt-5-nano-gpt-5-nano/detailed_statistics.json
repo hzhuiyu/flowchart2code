@@ -1,0 +1,30 @@
+{
+  "dataset": "Algorithm",
+  "model": "gpt-5-nano-gpt-5-nano",
+  "total_samples": 149,
+  "use_reflection": false,
+  "max_iterations": 0,
+  "pass_rate": {
+    "iteration_0": {
+      "passed": 139,
+      "total": 149,
+      "rate": 0.9329
+    }
+  },
+  "tokens": {
+    "total": {
+      "prompt_tokens": 925199,
+      "completion_tokens": 1865158,
+      "total_tokens": 2790357
+    },
+    "average_per_sample": {
+      "prompt_tokens": 6209.39,
+      "completion_tokens": 12517.84,
+      "total_tokens": 18727.23
+    }
+  },
+  "time": {
+    "total_time": 10664.99,
+    "average_per_sample": 71.58
+  }
+}

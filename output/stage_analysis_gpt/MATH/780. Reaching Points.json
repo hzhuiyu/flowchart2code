@@ -1,0 +1,180 @@
+{
+  "task_id": "780. Reaching Points",
+  "dataset": "MATH",
+  "difficulty": "hard",
+  "title": null,
+  "result": "failed: ",
+  "ilr": "{\n  \"problem_id\": \"convert_point_example\",\n  \"nodes\": [\n    {\"id\": 1, \"type\": \"start\", \"label\": \"Start\", \"next\": 2},\n    {\"id\": 2, \"type\": \"process\", \"label\": \"Input: sx, sy, tx, ty (integers)\", \"action\": \"ctx['sx']=ctx['arg0']; ctx['sy']=ctx['arg1']; ctx['tx']=ctx['arg2']; ctx['ty']=ctx['arg3']\", \"next\": 3},\n    {\"id\": 3, \"type\": \"decision\", \"label\": \"Is tx >= sx and ty >= sy?\", \"logic\": \"ctx['tx'] >= ctx['sx'] and ctx['ty'] >= ctx['sy']\", \"true_next\": 4, \"false_next\": 9},\n    {\"id\": 4, \"type\": \"decision\", \"label\": \"Is tx == sx?\", \"logic\": \"ctx['tx'] == ctx['sx']\", \"true_next\": 10, \"false_next\": 5},\n    {\"id\": 5, \"type\": \"decision\", \"label\": \"Is ty == sy?\", \"logic\": \"ctx['ty'] == ctx['sy']\", \"true_next\": 10, \"false_next\": 6},\n    {\"id\": 6, \"type\": \"decision\", \"label\": \"Is (ty - sy) % tx == 0?\", \"logic\": \"(ctx['ty'] - ctx['sy']) % ctx['tx'] == 0\", \"true_next\": 10, \"false_next\": 9},\n    {\"id\": 7, \"type\": \"decision\", \"label\": \"Is (tx - sx) % ty == 0?\", \"logic\": \"(ctx['tx'] - ctx['sx']) % ctx['ty'] == 0\", \"true_next\": 10, \"false_next\": 9},\n    {\"id\": 8, \"type\": \"decision\", \"label\": \"Is ty > tx?\", \"logic\": \"ctx['ty'] > ctx['tx']\", \"true_next\": 11, \"false_next\": 12},\n    {\"id\": 9, \"type\": \"end\", \"label\": \"Output: False\", \"output\": \"False\"},\n    {\"id\": 10, \"type\": \"end\", \"label\": \"Output: True\", \"output\": \"True\"},\n    {\"id\": 11, \"type\": \"process\", \"label\": \"Update ty: ty = ty % tx\", \"action\": \"ctx['ty'] = ctx['ty'] % ctx['tx']\", \"next\": 3},\n    {\"id\": 12, \"type\": \"process\", \"label\": \"Update tx: tx = tx % ty\", \"action\": \"ctx['tx'] = ctx['tx'] % ctx['ty']\", \"next\": 3}\n  ]\n}",
+  "code": "def reachingPoints(sx: int, sy: int, tx: int, ty: int) -> bool:\n    while tx >= sx and ty >= sy:\n        if tx == sx and ty == sy:\n            return True\n        if tx > ty:\n            tx %= ty\n        else:\n            ty %= tx\n    return False",
+  "prompt": "Given four integers sx, sy, tx, and ty, return true if it is possible to convert the point (sx, sy) to the point (tx, ty) through some operations, or false otherwise.\n\nThe allowed operation on some point (x, y) is to convert it to either (x, x + y) or (x + y, y).\n\n\n\nExample 1:\n\nInput: sx = 1, sy = 1, tx = 3, ty = 5\nOutput: true\nExplanation:\nOne series of moves that transforms the starting point to the target is:\n(1, 1) -> (1, 2)\n(1, 2) -> (3, 2)\n(3, 2) -> (3, 5)\nExample 2:\n\nInput: sx = 1, sy = 1, tx = 2, ty = 2\nOutput: false\nExample 3:\n\nInput: sx = 1, sy = 1, tx = 1, ty = 1\nOutput: true\n\n\nConstraints:\n\n1 <= sx, sy, tx, ty <= 109",
+  "test": "assert reachingPoints(1, 1, 3, 5) == True  # Can reach (3, 5) from (1, 1)\nassert reachingPoints(1, 1, 2, 2) == False  # Cannot reach (2, 2) from (1, 1)\nassert reachingPoints(1, 1, 1, 1) == True  # Already at the target\n\n# Boundary test cases\nassert reachingPoints(1, 1, 1, 1000000000) == True  # Can reach (1, 1000000000) from (1, 1)\nassert reachingPoints(1, 1, 1000000000, 1) == True  # Can reach (1000000000, 1) from (1, 1)\nassert reachingPoints(1, 1, 1000000000, 1000000000) == False  # Cannot reach (1000000000, 1000000000) from (1, 1)\n\n# Large number test cases\nassert reachingPoints(1, 1, 999999937, 999999937) == False  # Large non-reachable point\nassert reachingPoints(1, 1, 999999937, 1999999874) == False  # Large reachable point\nassert reachingPoints(1, 1, 999999937, 999999938) == True  # Large reachable point with one step difference\n\n",
+  "ocr_data": {
+    "nodes": [
+      {
+        "node_id": 1,
+        "shape_type": "rectangle",
+        "raw_text": "Start",
+        "position": "top"
+      },
+      {
+        "node_id": 2,
+        "shape_type": "rectangle",
+        "raw_text": "Input: sx, sy, tx, ty (integers)",
+        "position": "middle"
+      },
+      {
+        "node_id": 3,
+        "shape_type": "diamond",
+        "raw_text": "Is tx >= sx and ty >= sy?",
+        "position": "middle"
+      },
+      {
+        "node_id": 4,
+        "shape_type": "diamond",
+        "raw_text": "Is tx == sx?",
+        "position": "middle"
+      },
+      {
+        "node_id": 5,
+        "shape_type": "diamond",
+        "raw_text": "Is ty == sy?",
+        "position": "middle"
+      },
+      {
+        "node_id": 6,
+        "shape_type": "diamond",
+        "raw_text": "Is (ty - sy) % tx == 0?",
+        "position": "bottom"
+      },
+      {
+        "node_id": 7,
+        "shape_type": "diamond",
+        "raw_text": "Is (tx - sx) % ty == 0?",
+        "position": "bottom"
+      },
+      {
+        "node_id": 8,
+        "shape_type": "diamond",
+        "raw_text": "Is ty > tx?",
+        "position": "bottom"
+      },
+      {
+        "node_id": 9,
+        "shape_type": "rectangle",
+        "raw_text": "Output: False",
+        "position": "bottom"
+      },
+      {
+        "node_id": 10,
+        "shape_type": "rectangle",
+        "raw_text": "Output: True",
+        "position": "bottom"
+      },
+      {
+        "node_id": 11,
+        "shape_type": "rectangle",
+        "raw_text": "Update ty: ty = ty % tx",
+        "position": "bottom"
+      },
+      {
+        "node_id": 12,
+        "shape_type": "rectangle",
+        "raw_text": "Update tx: tx = tx % ty",
+        "position": "bottom"
+      }
+    ],
+    "edges": [
+      {
+        "from_node": 1,
+        "to_node": 2,
+        "label": ""
+      },
+      {
+        "from_node": 2,
+        "to_node": 3,
+        "label": ""
+      },
+      {
+        "from_node": 3,
+        "to_node": 4,
+        "label": "Yes"
+      },
+      {
+        "from_node": 3,
+        "to_node": 5,
+        "label": "No"
+      },
+      {
+        "from_node": 4,
+        "to_node": 6,
+        "label": "Yes"
+      },
+      {
+        "from_node": 4,
+        "to_node": 7,
+        "label": "No"
+      },
+      {
+        "from_node": 5,
+        "to_node": 6,
+        "label": "Yes"
+      },
+      {
+        "from_node": 5,
+        "to_node": 8,
+        "label": "No"
+      },
+      {
+        "from_node": 6,
+        "to_node": 9,
+        "label": "No"
+      },
+      {
+        "from_node": 6,
+        "to_node": 10,
+        "label": "Yes"
+      },
+      {
+        "from_node": 7,
+        "to_node": 10,
+        "label": "Yes"
+      },
+      {
+        "from_node": 7,
+        "to_node": 9,
+        "label": "No"
+      },
+      {
+        "from_node": 8,
+        "to_node": 11,
+        "label": "Yes"
+      },
+      {
+        "from_node": 8,
+        "to_node": 12,
+        "label": "No"
+      },
+      {
+        "from_node": 11,
+        "to_node": 3,
+        "label": ""
+      },
+      {
+        "from_node": 12,
+        "to_node": 3,
+        "label": ""
+      }
+    ],
+    "other_text": []
+  },
+  "analysis": {
+    "ilr_verdict": "incorrect",
+    "ilr_issues": "整个ILR没有循环：节点4(tx==sx)为真、节点5(ty==sy)为真都直接输出True（未做模整除检查，如(2,1,2,4)不可达却返回True），节点7、8、11、12全部不可达，取模更新与回边全被丢弃；(1,1,3,5)经节点6判False。正确流程图连线应为4-Yes→6、5-Yes→7、5/4-No→8循环。",
+    "code_vs_ilr": "deviates",
+    "code_issues": "代码是按正确算法的部分重建（有while取模循环），与ILR的无循环直线结构完全不同；但缺少关键特判——tx==sx或ty==sy时应停止取模并检查(tx-sx)%ty==0/(ty-sy)%tx==0，盲目取模会跌破sy/sx，如(1,1,3,5)迭代后ty=2%1=0退出返回False。",
+    "error_source": "both",
+    "ocr_contribution": "unclear",
+    "root_cause": "OCR边本身呈交叉/矛盾连线（3-No→5、4-No→7、5-Yes→6，均非正确连法），真实流程图连线无法确定；ILR按自己的方式错接成无循环直线结构，代码又另行重建但缺特判，两者独立造成失败。",
+    "evidence": "忠实模拟ILR对(1,1,3,5)返回False（期望True，实测复现），对(2,1,2,4)返回True（实际不可达）；生成代码对(1,1,3,5)也返回False（实测复现），对(1,1,1,1000000000)同样False（期望True）。"
+  }
+}

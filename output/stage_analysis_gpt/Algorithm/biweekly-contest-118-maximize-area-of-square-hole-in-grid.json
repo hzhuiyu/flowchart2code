@@ -1,0 +1,263 @@
+{
+  "task_id": "biweekly-contest-118-maximize-area-of-square-hole-in-grid",
+  "dataset": "Algorithm",
+  "difficulty": "Medium",
+  "title": "maximize-area-of-square-hole-in-grid",
+  "result": "failed: ",
+  "ilr": "{\n  \"problem_id\": \"maximize_square_hole_area\",\n  \"nodes\": [\n    {\"id\": 1, \"type\": \"start\", \"label\": \"Start\", \"next\": 2},\n    {\"id\": 2, \"type\": \"process\", \"label\": \"Input: n (integer), m (integer), hBars (list), vBars (list)\", \"action\": \"ctx['n']=ctx['arg0']; ctx['m']=ctx['arg1']; ctx['hBars']=ctx['arg2']; ctx['vBars']=ctx['arg3']\", \"next\": 3},\n    {\"id\": 3, \"type\": \"process\", \"label\": \"Sort hBars\", \"action\": \"ctx['hBars'] = sorted(ctx['hBars'])\", \"next\": 4},\n    {\"id\": 4, \"type\": \"process\", \"label\": \"Sort vBars\", \"action\": \"ctx['vBars'] = sorted(ctx['vBars'])\", \"next\": 5},\n    {\"id\": 5, \"type\": \"process\", \"label\": \"Initialize hmax = 1, gmax = 1\", \"action\": \"ctx['hmax'] = 1; ctx['gmax'] = 1\", \"next\": 6},\n    {\"id\": 6, \"type\": \"process\", \"label\": \"Initialize prev = hBars[0]\", \"action\": \"ctx['prev'] = ctx['hBars'][0]\", \"next\": 7},\n    {\"id\": 7, \"type\": \"decision\", \"label\": \"Is i < len(hBars)?\", \"logic\": \"ctx['i'] < len(ctx['hBars'])\", \"true_next\": 8, \"false_next\": 12},\n    {\"id\": 8, \"type\": \"decision\", \"label\": \"Check if hBars[i] - 1 != hBars[i-1]\", \"logic\": \"ctx['hBars'][ctx['i']] - 1 != ctx['hBars'][ctx['i'] - 1]\", \"true_next\": 9, \"false_next\": 10},\n    {\"id\": 9, \"type\": \"process\", \"label\": \"Update hmax: hmax = max(hmax, hBars[i-1] - prev + 2)\", \"action\": \"ctx['hmax'] = max(ctx['hmax'], ctx['hBars'][ctx['i'] - 1] - ctx['prev'] + 2)\", \"next\": 11},\n    {\"id\": 10, \"type\": \"process\", \"label\": \"Continue to next iteration\", \"action\": \"\", \"next\": 11},\n    {\"id\": 11, \"type\": \"process\", \"label\": \"Update prev: prev = hBars[i]\", \"action\": \"ctx['prev'] = ctx['hBars'][ctx['i']]\", \"next\": 7},\n    {\"id\": 12, \"type\": \"process\", \"label\": \"Update hmax: hmax = max(hmax, hBars[-1] - prev + 2)\", \"action\": \"ctx['hmax'] = max(ctx['hmax'], ctx['hBars'][-1] - ctx['prev'] + 2)\", \"next\": 13},\n    {\"id\": 13, \"type\": \"process\", \"label\": \"Initialize prev = vBars[0]\", \"action\": \"ctx['prev'] = ctx['vBars'][0]\", \"next\": 14},\n    {\"id\": 14, \"type\": \"decision\", \"label\": \"Is i < len(vBars)?\", \"logic\": \"ctx['i'] < len(ctx['vBars'])\", \"true_next\": 15, \"false_next\": 19},\n    {\"id\": 15, \"type\": \"decision\", \"label\": \"Check if vBars[i] - 1 != vBars[i-1]\", \"logic\": \"ctx['vBars'][ctx['i']] - 1 != ctx['vBars'][ctx['i'] - 1]\", \"true_next\": 16, \"false_next\": 17},\n    {\"id\": 16, \"type\": \"process\", \"label\": \"Update gmax: gmax = max(gmax, vBars[i-1] - prev + 2)\", \"action\": \"ctx['gmax'] = max(ctx['gmax'], ctx['vBars'][ctx['i'] - 1] - ctx['prev'] + 2)\", \"next\": 18},\n    {\"id\": 17, \"type\": \"process\", \"label\": \"Continue to next iteration\", \"action\": \"\", \"next\": 18},\n    {\"id\": 18, \"type\": \"process\", \"label\": \"Update prev: prev = vBars[i]\", \"action\": \"ctx['prev'] = ctx['vBars'][ctx['i']]\", \"next\": 14},\n    {\"id\": 19, \"type\": \"process\", \"label\": \"Update gmax: gmax = max(gmax, vBars[-1] - prev + 2)\", \"action\": \"ctx['gmax'] = max(ctx['gmax'], ctx['vBars'][-1] - ctx['prev'] + 2)\", \"next\": 20},\n    {\"id\": 20, \"type\": \"return\", \"label\": \"Return min(hmax, gmax) ^ 2\", \"value\": \"min(ctx['hmax'], ctx['gmax']) ** 2\"}\n  ]\n}",
+  "code": "from typing import List\n\nclass Solution:\n    def maximizeSquareHoleArea(self, n: int, m: int, hBars: List[int], vBars: List[int]) -> int:\n        hBars = sorted(hBars)\n        vBars = sorted(vBars)\n        \n        hmax = 1\n        gmax = 1\n        \n        prev = hBars[0]\n        i = 1\n        while i < len(hBars):\n            if hBars[i] - 1 != hBars[i - 1]:\n                hmax = max(hmax, hBars[i - 1] - prev + 2)\n            prev = hBars[i]\n            i += 1\n        \n        hmax = max(hmax, hBars[-1] - prev + 2)\n        \n        prev = vBars[0]\n        i = 1\n        while i < len(vBars):\n            if vBars[i] - 1 != vBars[i - 1]:\n                gmax = max(gmax, vBars[i - 1] - prev + 2)\n            prev = vBars[i]\n            i += 1\n        \n        gmax = max(gmax, vBars[-1] - prev + 2)\n        \n        return min(hmax, gmax) ** 2",
+  "prompt": "\"\"\"\nThere is a grid with n + 2 horizontal bars and m + 2 vertical bars, and initially containing 1 x 1 unit cells.\nThe bars are 1-indexed.\nYou are given the two integers, n and m.\nYou are also given two integer arrays: hBars and vBars.\n\nhBars contains distinct horizontal bars in the range [2, n + 1].\nvBars contains distinct vertical bars in the range [2, m + 1].\n\nYou are allowed to remove bars that satisfy any of the following conditions:\n\nIf it is a horizontal bar, it must correspond to a value in hBars.\nIf it is a vertical bar, it must correspond to a value in vBars.\n\nReturn an integer denoting the maximum area of a square-shaped hole in the grid after removing some bars (possibly none).\n\nExample 1:\n\n\nInput: n = 2, m = 1, hBars = [2,3], vBars = [2]\nOutput: 4\nExplanation: The left image shows the initial grid formed by the bars.\nThe horizontal bars are in the range [1,4], and the vertical bars are in the range [1,3].\nIt is allowed to remove horizontal bars [2,3] and the vertical bar [2].\nOne way to get the maximum square-shaped hole is by removing horizontal bar 2 and vertical bar 2.\nThe resulting grid is shown on the right.\nThe hole has an area of 4.\nIt can be shown that it is not possible to get a square hole with an area more than 4.\nHence, the answer is 4.\n\nExample 2:\n\n\nInput: n = 1, m = 1, hBars = [2], vBars = [2]\nOutput: 4\nExplanation: The left image shows the initial grid formed by the bars.\nThe horizontal bars are in the range [1,3], and the vertical bars are in the range [1,3].\nIt is allowed to remove the horizontal bar [2] and the vertical bar [2].\nTo get the maximum square-shaped hole, we remove horizontal bar 2 and vertical bar 2.\nThe resulting grid is shown on the right.\nThe hole has an area of 4.\nHence, the answer is 4, and it is the maximum possible.\n\nExample 3:\n\n\nInput: n = 2, m = 3, hBars = [2,3], vBars = [2,3,4]\nOutput: 9\nExplanation: The left image shows the initial grid formed by the bars.\nThe horizontal bars are in the range [1,4], and the vertical bars are in the range [1,5].\nIt is allowed to remove horizontal bars [2,3] and vertical bars [2,3,4].\nOne way to get the maximum square-shaped hole is by removing horizontal bars 2 and 3, and vertical bars 3 and 4.\nThe resulting grid is shown on the right.\nThe hole has an area of 9.\nIt can be shown that it is not possible to get a square hole with an area more than 9.\nHence, the answer is 9.\n\n\nConstraints:\n\n1 <= n <= 109\n1 <= m <= 109\n1 <= hBars.length <= 100\n2 <= hBars[i] <= n + 1\n1 <= vBars.length <= 100\n2 <= vBars[i] <= m + 1\nAll values in hBars are distinct.\nAll values in vBars are distinct.\n\"\"\"\nclass Solution:\n    def maximizeSquareHoleArea(self, n: int, m: int, hBars: List[int], vBars: List[int]) -> int:\n        ",
+  "test": "\nmy_solution = Solution()\n\ntest_input = { \"n\": 2, \"m\": 1, \"hBars\": [2,3], \"vBars\": [2] }\nassert my_solution.maximizeSquareHoleArea(**test_input) == 4\n\ntest_input = { \"n\": 1, \"m\": 1, \"hBars\": [2], \"vBars\": [2] }\nassert my_solution.maximizeSquareHoleArea(**test_input) == 4\n\ntest_input = { \"n\": 2, \"m\": 3, \"hBars\": [2,3], \"vBars\": [2,3,4] }\nassert my_solution.maximizeSquareHoleArea(**test_input) == 9\n\ntest_input = { \"n\": 1, \"m\": 5, \"hBars\": [2], \"vBars\": [2,3] }\nassert my_solution.maximizeSquareHoleArea(**test_input) == 4\n\ntest_input = { \"n\": 2, \"m\": 4, \"hBars\": [3,2], \"vBars\": [4,2] }\nassert my_solution.maximizeSquareHoleArea(**test_input) == 4\n\ntest_input = { \"n\": 1, \"m\": 4, \"hBars\": [2], \"vBars\": [2,3,5,4] }\nassert my_solution.maximizeSquareHoleArea(**test_input) == 4\n\ntest_input = { \"n\": 1, \"m\": 4, \"hBars\": [2], \"vBars\": [4,3,2,5] }\nassert my_solution.maximizeSquareHoleArea(**test_input) == 4\n\ntest_input = { \"n\": 3, \"m\": 2, \"hBars\": [3,2,4], \"vBars\": [3,2] }\nassert my_solution.maximizeSquareHoleArea(**test_input) == 9\n\ntest_input = { \"n\": 3, \"m\": 2, \"hBars\": [4,2,3], \"vBars\": [3,2] }\nassert my_solution.maximizeSquareHoleArea(**test_input) == 9\n\ntest_input = { \"n\": 14, \"m\": 4, \"hBars\": [13], \"vBars\": [3,4,5,2] }\nassert my_solution.maximizeSquareHoleArea(**test_input) == 4\n\ntest_input = { \"n\": 19, \"m\": 7, \"hBars\": [6,12,4], \"vBars\": [6,3] }\nassert my_solution.maximizeSquareHoleArea(**test_input) == 4\n\ntest_input = { \"n\": 2, \"m\": 4, \"hBars\": [2,3], \"vBars\": [4,2,3,5] }\nassert my_solution.maximizeSquareHoleArea(**test_input) == 9\n\ntest_input = { \"n\": 4, \"m\": 2, \"hBars\": [2,5,4,3], \"vBars\": [3,2] }\nassert my_solution.maximizeSquareHoleArea(**test_input) == 9\n\ntest_input = { \"n\": 5, \"m\": 1, \"hBars\": [2,4,3,6,5], \"vBars\": [2] }\nassert my_solution.maximizeSquareHoleArea(**test_input) == 4\n\ntest_input = { \"n\": 1, \"m\": 6, \"hBars\": [2], \"vBars\": [3,2,7,4,6,5] }\nassert my_solution.maximizeSquareHoleArea(**test_input) == 4\n\ntest_input = { \"n\": 1, \"m\": 13, \"hBars\": [2], \"vBars\": [4,14,2,12,11,3] }\nassert my_solution.maximizeSquareHoleArea(**test_input) == 4\n\ntest_input = { \"n\": 2, \"m\": 5, \"hBars\": [2,3], \"vBars\": [6,2,5,4,3] }\nassert my_solution.maximizeSquareHoleArea(**test_input) == 9\n\ntest_input = { \"n\": 5, \"m\": 2, \"hBars\": [2,3,6,4,5], \"vBars\": [2,3] }\nassert my_solution.maximizeSquareHoleArea(**test_input) == 9\n\ntest_input = { \"n\": 6, \"m\": 1, \"hBars\": [7,4,3,2,5,6], \"vBars\": [2] }\nassert my_solution.maximizeSquareHoleArea(**test_input) == 4\n\ntest_input = { \"n\": 4, \"m\": 4, \"hBars\": [2,3,4,5], \"vBars\": [5,4,3,2] }\nassert my_solution.maximizeSquareHoleArea(**test_input) == 25\n\ntest_input = { \"n\": 4, \"m\": 4, \"hBars\": [3,4,2,5], \"vBars\": [2,5,3,4] }\nassert my_solution.maximizeSquareHoleArea(**test_input) == 25\n\ntest_input = { \"n\": 6, \"m\": 2, \"hBars\": [7,3,5,4,6,2], \"vBars\": [3,2] }\nassert my_solution.maximizeSquareHoleArea(**test_input) == 9\n\ntest_input = { \"n\": 7, \"m\": 11, \"hBars\": [7,4,5,2,8,6,3], \"vBars\": [4] }\nassert my_solution.maximizeSquareHoleArea(**test_input) == 4\n\ntest_input = { \"n\": 1, \"m\": 8, \"hBars\": [2], \"vBars\": [9,7,8,2,5,6,4,3] }\nassert my_solution.maximizeSquareHoleArea(**test_input) == 4\n\ntest_input = { \"n\": 1, \"m\": 9, \"hBars\": [2], \"vBars\": [5,2,10,4,3,6,8,7] }\nassert my_solution.maximizeSquareHoleArea(**test_input) == 4\n\ntest_input = { \"n\": 2, \"m\": 7, \"hBars\": [2,3], \"vBars\": [2,5,6,8,7,3,4] }\nassert my_solution.maximizeSquareHoleArea(**test_input) == 9\n\ntest_input = { \"n\": 2, \"m\": 7, \"hBars\": [2,3], \"vBars\": [2,8,6,7,5,3,4] }\nassert my_solution.maximizeSquareHoleArea(**test_input) == 9\n\ntest_input = { \"n\": 4, \"m\": 5, \"hBars\": [3,2,4,5], \"vBars\": [4,3,6,5,2] }\nassert my_solution.maximizeSquareHoleArea(**test_input) == 25\n\ntest_input = { \"n\": 4, \"m\": 5, \"hBars\": [5,3,4,2], \"vBars\": [5,3,6,4,2] }\nassert my_solution.maximizeSquareHoleArea(**test_input) == 25\n\ntest_input = { \"n\": 4, \"m\": 40, \"hBars\": [5,3,2,4], \"vBars\": [36,41,6,34,33] }\nassert my_solution.maximizeSquareHoleArea(**test_input) == 9\n\ntest_input = { \"n\": 8, \"m\": 1, \"hBars\": [4,7,9,8,6,2,3,5], \"vBars\": [2] }\nassert my_solution.maximizeSquareHoleArea(**test_input) == 4\n\ntest_input = { \"n\": 11, \"m\": 6, \"hBars\": [8,9,6], \"vBars\": [5,3,6,4,2,7] }\nassert my_solution.maximizeSquareHoleArea(**test_input) == 9\n\ntest_input = { \"n\": 22, \"m\": 50, \"hBars\": [6,19,8,17,23], \"vBars\": [51,3,32,44] }\nassert my_solution.maximizeSquareHoleArea(**test_input) == 4\n\ntest_input = { \"n\": 27, \"m\": 2, \"hBars\": [2,26,28,22,4,8,23], \"vBars\": [3,2] }\nassert my_solution.maximizeSquareHoleArea(**test_input) == 9\n\ntest_input = { \"n\": 1, \"m\": 9, \"hBars\": [2], \"vBars\": [3,6,10,4,8,5,9,7,2] }\nassert my_solution.maximizeSquareHoleArea(**test_input) == 4\n\ntest_input = { \"n\": 1, \"m\": 9, \"hBars\": [2], \"vBars\": [3,7,5,9,10,2,4,8,6] }\nassert my_solution.maximizeSquareHoleArea(**test_input) == 4\n\ntest_input = { \"n\": 3, \"m\": 7, \"hBars\": [2,4,3], \"vBars\": [5,4,2,3,7,6,8] }\nassert my_solution.maximizeSquareHoleArea(**test_input) == 16\n\ntest_input = { \"n\": 3, \"m\": 7, \"hBars\": [4,3,2], \"vBars\": [2,7,3,6,5,4,8] }\nassert my_solution.maximizeSquareHoleArea(**test_input) == 16\n\ntest_input = { \"n\": 3, \"m\": 7, \"hBars\": [4,3,2], \"vBars\": [3,7,5,2,6,4,8] }\nassert my_solution.maximizeSquareHoleArea(**test_input) == 16\n\ntest_input = { \"n\": 3, \"m\": 7, \"hBars\": [4,3,2], \"vBars\": [8,2,5,3,6,4,7] }\nassert my_solution.maximizeSquareHoleArea(**test_input) == 16\n\ntest_input = { \"n\": 3, \"m\": 13, \"hBars\": [2,4,3], \"vBars\": [4,6,7,12,10,13,2] }\nassert my_solution.maximizeSquareHoleArea(**test_input) == 9\n\ntest_input = { \"n\": 4, \"m\": 6, \"hBars\": [2,3,4,5], \"vBars\": [7,2,4,6,3,5] }\nassert my_solution.maximizeSquareHoleArea(**test_input) == 25\n\ntest_input = { \"n\": 5, \"m\": 5, \"hBars\": [4,6,5,2,3], \"vBars\": [2,4,5,6,3] }\nassert my_solution.maximizeSquareHoleArea(**test_input) == 36\n\ntest_input = { \"n\": 7, \"m\": 3, \"hBars\": [8,6,4,5,7,2,3], \"vBars\": [4,3,2] }\nassert my_solution.maximizeSquareHoleArea(**test_input) == 16\n\ntest_input = { \"n\": 8, \"m\": 2, \"hBars\": [4,2,6,8,7,5,3,9], \"vBars\": [3,2] }\nassert my_solution.maximizeSquareHoleArea(**test_input) == 9\n\ntest_input = { \"n\": 9, \"m\": 1, \"hBars\": [2,9,3,10,4,6,7,8,5], \"vBars\": [2] }\nassert my_solution.maximizeSquareHoleArea(**test_input) == 4\n\ntest_input = { \"n\": 9, \"m\": 1, \"hBars\": [9,5,4,8,7,10,3,2,6], \"vBars\": [2] }\nassert my_solution.maximizeSquareHoleArea(**test_input) == 4\n\ntest_input = { \"n\": 12, \"m\": 5, \"hBars\": [10,9,13,6,3], \"vBars\": [3,4,2,5,6] }\nassert my_solution.maximizeSquareHoleArea(**test_input) == 9\n\ntest_input = { \"n\": 29, \"m\": 2, \"hBars\": [25,14,11,29,7,10,16,8], \"vBars\": [2,3] }\nassert my_solution.maximizeSquareHoleArea(**test_input) == 9\n\ntest_input = { \"n\": 1, \"m\": 10, \"hBars\": [2], \"vBars\": [3,4,6,8,5,7,9,10,11,2] }\nassert my_solution.maximizeSquareHoleArea(**test_input) == 4\n\ntest_input = { \"n\": 1, \"m\": 10, \"hBars\": [2], \"vBars\": [10,6,5,7,4,3,11,8,9,2] }\nassert my_solution.maximizeSquareHoleArea(**test_input) == 4\n\ntest_input = { \"n\": 2, \"m\": 9, \"hBars\": [2,3], \"vBars\": [6,7,9,3,10,2,5,4,8] }\nassert my_solution.maximizeSquareHoleArea(**test_input) == 9\n\ntest_input = { \"n\": 2, \"m\": 9, \"hBars\": [3,2], \"vBars\": [4,8,2,6,7,3,5,9,10] }\nassert my_solution.maximizeSquareHoleArea(**test_input) == 9\n\ntest_input = { \"n\": 4, \"m\": 7, \"hBars\": [5,4,3,2], \"vBars\": [8,7,5,2,4,3,6] }\nassert my_solution.maximizeSquareHoleArea(**test_input) == 25\n\ntest_input = { \"n\": 5, \"m\": 6, \"hBars\": [2,6,5,3,4], \"vBars\": [4,2,5,3,7,6] }\nassert my_solution.maximizeSquareHoleArea(**test_input) == 36\n\ntest_input = { \"n\": 5, \"m\": 6, \"hBars\": [5,3,6,2,4], \"vBars\": [5,7,2,4,3,6] }\nassert my_solution.maximizeSquareHoleArea(**test_input) == 36\n\ntest_input = { \"n\": 5, \"m\": 6, \"hBars\": [6,4,3,5,2], \"vBars\": [2,4,5,7,6,3] }\nassert my_solution.maximizeSquareHoleArea(**test_input) == 36\n\ntest_input = { \"n\": 5, \"m\": 11, \"hBars\": [4,2,6,3,5], \"vBars\": [8,11,10,12,6,2] }\nassert my_solution.maximizeSquareHoleArea(**test_input) == 16\n\ntest_input = { \"n\": 6, \"m\": 5, \"hBars\": [4,5,3,2,7,6], \"vBars\": [6,3,5,4,2] }\nassert my_solution.maximizeSquareHoleArea(**test_input) == 36\n\ntest_input = { \"n\": 6, \"m\": 5, \"hBars\": [5,2,3,7,4,6], \"vBars\": [6,2,4,3,5] }\nassert my_solution.maximizeSquareHoleArea(**test_input) == 36\n\ntest_input = { \"n\": 6, \"m\": 5, \"hBars\": [6,3,4,2,7,5], \"vBars\": [2,5,4,3,6] }\nassert my_solution.maximizeSquareHoleArea(**test_input) == 36\n\ntest_input = { \"n\": 6, \"m\": 5, \"hBars\": [7,2,3,4,5,6], \"vBars\": [6,5,4,2,3] }\nassert my_solution.maximizeSquareHoleArea(**test_input) == 36\n\ntest_input = { \"n\": 8, \"m\": 3, \"hBars\": [4,6,9,3,8,2,7,5], \"vBars\": [2,4,3] }\nassert my_solution.maximizeSquareHoleArea(**test_input) == 16\n\ntest_input = { \"n\": 8, \"m\": 3, \"hBars\": [5,6,9,3,2,4,8,7], \"vBars\": [2,4,3] }\nassert my_solution.maximizeSquareHoleArea(**test_input) == 16\n\ntest_input = { \"n\": 8, \"m\": 3, \"hBars\": [8,6,4,3,7,2,9,5], \"vBars\": [4,2,3] }\nassert my_solution.maximizeSquareHoleArea(**test_input) == 16\n\ntest_input = { \"n\": 8, \"m\": 3, \"hBars\": [9,2,7,6,8,3,4,5], \"vBars\": [4,2,3] }\nassert my_solution.maximizeSquareHoleArea(**test_input) == 16\n\ntest_input = { \"n\": 9, \"m\": 2, \"hBars\": [5,4,6,8,9,10,2,3,7], \"vBars\": [3,2] }\nassert my_solution.maximizeSquareHoleArea(**test_input) == 9\n\ntest_input = { \"n\": 9, \"m\": 2, \"hBars\": [6,3,5,4,8,9,2,10,7], \"vBars\": [3,2] }\nassert my_solution.maximizeSquareHoleArea(**test_input) == 9\n\ntest_input = { \"n\": 10, \"m\": 1, \"hBars\": [4,3,10,2,11,5,6,9,8,7], \"vBars\": [2] }\nassert my_solution.maximizeSquareHoleArea(**test_input) == 4\n\ntest_input = { \"n\": 1, \"m\": 11, \"hBars\": [2], \"vBars\": [7,12,6,3,4,9,5,10,11,2,8] }\nassert my_solution.maximizeSquareHoleArea(**test_input) == 4\n\ntest_input = { \"n\": 2, \"m\": 10, \"hBars\": [2,3], \"vBars\": [11,10,2,8,7,5,6,9,3,4] }\nassert my_solution.maximizeSquareHoleArea(**test_input) == 9\n\ntest_input = { \"n\": 4, \"m\": 8, \"hBars\": [5,2,3,4], \"vBars\": [8,7,5,9,4,2,3,6] }\nassert my_solution.maximizeSquareHoleArea(**test_input) == 25\n\ntest_input = { \"n\": 5, \"m\": 7, \"hBars\": [2,3,6,4,5], \"vBars\": [6,8,4,5,3,7,2] }\nassert my_solution.maximizeSquareHoleArea(**test_input) == 36\n\ntest_input = { \"n\": 6, \"m\": 10, \"hBars\": [2,4,3,6,5,7], \"vBars\": [11,3,9,6,10,4] }\nassert my_solution.maximizeSquareHoleArea(**test_input) == 16\n\ntest_input = { \"n\": 10, \"m\": 2, \"hBars\": [8,5,4,3,10,2,11,9,6,7], \"vBars\": [3,2] }\nassert my_solution.maximizeSquareHoleArea(**test_input) == 9\n\ntest_input = { \"n\": 11, \"m\": 1, \"hBars\": [2,6,9,7,5,11,3,10,4,12,8], \"vBars\": [2] }\nassert my_solution.maximizeSquareHoleArea(**test_input) == 4\n\ntest_input = { \"n\": 44, \"m\": 2, \"hBars\": [5,16,18,28,3,9,6,35,14,10], \"vBars\": [3,2] }\nassert my_solution.maximizeSquareHoleArea(**test_input) == 9\n\ntest_input = { \"n\": 1, \"m\": 12, \"hBars\": [2], \"vBars\": [12,9,3,13,7,2,6,11,10,8,4,5] }\nassert my_solution.maximizeSquareHoleArea(**test_input) == 4\n\ntest_input = { \"n\": 2, \"m\": 11, \"hBars\": [2,3], \"vBars\": [3,7,2,5,12,9,10,4,8,11,6] }\nassert my_solution.maximizeSquareHoleArea(**test_input) == 9\n\ntest_input = { \"n\": 2, \"m\": 11, \"hBars\": [2,3], \"vBars\": [12,10,6,7,2,3,5,11,4,8,9] }\nassert my_solution.maximizeSquareHoleArea(**test_input) == 9\n\ntest_input = { \"n\": 5, \"m\": 8, \"hBars\": [2,4,6,3,5], \"vBars\": [8,7,9,4,2,5,6,3] }\nassert my_solution.maximizeSquareHoleArea(**test_input) == 36\n\ntest_input = { \"n\": 6, \"m\": 7, \"hBars\": [5,4,6,3,2,7], \"vBars\": [4,7,6,5,2,8,3] }\nassert my_solution.maximizeSquareHoleArea(**test_input) == 49\n\ntest_input = { \"n\": 6, \"m\": 7, \"hBars\": [6,3,2,7,4,5], \"vBars\": [6,7,5,2,3,4,8] }\nassert my_solution.maximizeSquareHoleArea(**test_input) == 49\n\ntest_input = { \"n\": 8, \"m\": 5, \"hBars\": [7,4,3,9,2,8,6,5], \"vBars\": [5,2,6,3,4] }\nassert my_solution.maximizeSquareHoleArea(**test_input) == 36\n\ntest_input = { \"n\": 9, \"m\": 4, \"hBars\": [4,5,6,10,7,2,3,9,8], \"vBars\": [5,3,2,4] }\nassert my_solution.maximizeSquareHoleArea(**test_input) == 25\n\ntest_input = { \"n\": 9, \"m\": 4, \"hBars\": [9,6,3,10,2,8,4,5,7], \"vBars\": [4,3,2,5] }\nassert my_solution.maximizeSquareHoleArea(**test_input) == 25\n\ntest_input = { \"n\": 10, \"m\": 3, \"hBars\": [5,4,9,8,3,6,11,2,10,7], \"vBars\": [4,3,2] }\nassert my_solution.maximizeSquareHoleArea(**test_input) == 16\n\ntest_input = { \"n\": 10, \"m\": 6, \"hBars\": [6,2,8,3,11,9,10,7,4,5], \"vBars\": [6,2,5] }\nassert my_solution.maximizeSquareHoleArea(**test_input) == 9\n\ntest_input = { \"n\": 11, \"m\": 2, \"hBars\": [8,12,9,3,5,2,10,6,7,4,11], \"vBars\": [3,2] }\nassert my_solution.maximizeSquareHoleArea(**test_input) == 9\n\ntest_input = { \"n\": 28, \"m\": 31, \"hBars\": [29,24,4], \"vBars\": [22,24,2,14,26,4,29,13,15,25] }\nassert my_solution.maximizeSquareHoleArea(**test_input) == 4\n\ntest_input = { \"n\": 1, \"m\": 13, \"hBars\": [2], \"vBars\": [9,5,2,6,8,11,7,10,3,13,14,4,12] }\nassert my_solution.maximizeSquareHoleArea(**test_input) == 4\n\ntest_input = { \"n\": 2, \"m\": 12, \"hBars\": [3,2], \"vBars\": [13,2,7,4,12,9,10,3,6,5,8,11] }\nassert my_solution.maximizeSquareHoleArea(**test_input) == 9\n\ntest_input = { \"n\": 2, \"m\": 12, \"hBars\": [3,2], \"vBars\": [13,4,7,8,3,2,11,12,5,9,6,10] }\nassert my_solution.maximizeSquareHoleArea(**test_input) == 9\n\ntest_input = { \"n\": 5, \"m\": 9, \"hBars\": [2,5,6,3,4], \"vBars\": [2,7,3,9,4,10,8,6,5] }\nassert my_solution.maximizeSquareHoleArea(**test_input) == 36\n\ntest_input = { \"n\": 6, \"m\": 9, \"hBars\": [4,2,5,7,6,3], \"vBars\": [4,2,6,8,10,3,7,5] }\nassert my_solution.maximizeSquareHoleArea(**test_input) == 49\n\ntest_input = { \"n\": 8, \"m\": 6, \"hBars\": [4,8,6,7,2,9,3,5], \"vBars\": [4,7,6,3,2,5] }\nassert my_solution.maximizeSquareHoleArea(**test_input) == 49\n\ntest_input = { \"n\": 9, \"m\": 5, \"hBars\": [2,5,4,8,3,7,6,10,9], \"vBars\": [6,3,5,2,4] }\nassert my_solution.maximizeSquareHoleArea(**test_input) == 36\n\ntest_input = { \"n\": 9, \"m\": 5, \"hBars\": [8,9,5,2,6,7,4,10,3], \"vBars\": [6,2,3,4,5] }\nassert my_solution.maximizeSquareHoleArea(**test_input) == 36\n\ntest_input = { \"n\": 10, \"m\": 4, \"hBars\": [4,8,6,3,10,2,7,9,5,11], \"vBars\": [5,4,3,2] }\nassert my_solution.maximizeSquareHoleArea(**test_input) == 25\n\ntest_input = { \"n\": 11, \"m\": 3, \"hBars\": [2,8,5,3,12,10,4,11,6,7,9], \"vBars\": [3,4,2] }\nassert my_solution.maximizeSquareHoleArea(**test_input) == 16",
+  "ocr_data": {
+    "nodes": [
+      {
+        "node_id": 1,
+        "shape_type": "rectangle",
+        "raw_text": "Start",
+        "position": "top"
+      },
+      {
+        "node_id": 2,
+        "shape_type": "rectangle",
+        "raw_text": "Input: n (integer), m (integer), hBars (list), vBars (list)",
+        "position": "middle"
+      },
+      {
+        "node_id": 3,
+        "shape_type": "rectangle",
+        "raw_text": "Sort hBars",
+        "position": "middle"
+      },
+      {
+        "node_id": 4,
+        "shape_type": "rectangle",
+        "raw_text": "Sort vBars",
+        "position": "middle"
+      },
+      {
+        "node_id": 5,
+        "shape_type": "rectangle",
+        "raw_text": "Initialize hmax = 1, gmax = 1",
+        "position": "middle"
+      },
+      {
+        "node_id": 6,
+        "shape_type": "rectangle",
+        "raw_text": "Initialize prev = hBars[0]",
+        "position": "middle"
+      },
+      {
+        "node_id": 7,
+        "shape_type": "diamond",
+        "raw_text": "Is i < len(hBars)?",
+        "position": "middle"
+      },
+      {
+        "node_id": 8,
+        "shape_type": "rectangle",
+        "raw_text": "Check if hBars[i] - 1 != hBars[i-1]",
+        "position": "middle"
+      },
+      {
+        "node_id": 9,
+        "shape_type": "rectangle",
+        "raw_text": "Update hmax: hmax = max(hmax, hBars[i-1] - prev + 2)",
+        "position": "middle"
+      },
+      {
+        "node_id": 10,
+        "shape_type": "rectangle",
+        "raw_text": "Continue to next iteration",
+        "position": "middle"
+      },
+      {
+        "node_id": 11,
+        "shape_type": "rectangle",
+        "raw_text": "Update prev: prev = hBars[i]",
+        "position": "middle"
+      },
+      {
+        "node_id": 12,
+        "shape_type": "rectangle",
+        "raw_text": "Update hmax: hmax = max(hmax, hBars[-1] - prev + 2)",
+        "position": "middle"
+      },
+      {
+        "node_id": 13,
+        "shape_type": "rectangle",
+        "raw_text": "Initialize prev = vBars[0]",
+        "position": "middle"
+      },
+      {
+        "node_id": 14,
+        "shape_type": "diamond",
+        "raw_text": "Is i < len(vBars)?",
+        "position": "middle"
+      },
+      {
+        "node_id": 15,
+        "shape_type": "rectangle",
+        "raw_text": "Check if vBars[i] - 1 != vBars[i-1]",
+        "position": "middle"
+      },
+      {
+        "node_id": 16,
+        "shape_type": "rectangle",
+        "raw_text": "Update gmax: gmax = max(gmax, vBars[i-1] - prev + 2)",
+        "position": "middle"
+      },
+      {
+        "node_id": 17,
+        "shape_type": "rectangle",
+        "raw_text": "Continue to next iteration",
+        "position": "middle"
+      },
+      {
+        "node_id": 18,
+        "shape_type": "rectangle",
+        "raw_text": "Update prev: prev = vBars[i]",
+        "position": "middle"
+      },
+      {
+        "node_id": 19,
+        "shape_type": "rectangle",
+        "raw_text": "Update gmax: gmax = max(gmax, vBars[-1] - prev + 2)",
+        "position": "middle"
+      },
+      {
+        "node_id": 20,
+        "shape_type": "rectangle",
+        "raw_text": "Return min(hmax, gmax) ^ 2",
+        "position": "bottom"
+      }
+    ],
+    "edges": [
+      {
+        "from_node": 1,
+        "to_node": 2,
+        "label": ""
+      },
+      {
+        "from_node": 2,
+        "to_node": 3,
+        "label": ""
+      },
+      {
+        "from_node": 3,
+        "to_node": 4,
+        "label": ""
+      },
+      {
+        "from_node": 4,
+        "to_node": 5,
+        "label": ""
+      },
+      {
+        "from_node": 5,
+        "to_node": 6,
+        "label": ""
+      },
+      {
+        "from_node": 6,
+        "to_node": 7,
+        "label": ""
+      },
+      {
+        "from_node": 7,
+        "to_node": 8,
+        "label": "Yes"
+      },
+      {
+        "from_node": 8,
+        "to_node": 9,
+        "label": "Yes"
+      },
+      {
+        "from_node": 9,
+        "to_node": 11,
+        "label": ""
+      },
+      {
+        "from_node": 11,
+        "to_node": 7,
+        "label": ""
+      },
+      {
+        "from_node": 8,
+        "to_node": 10,
+        "label": "No"
+      },
+      {
+        "from_node": 10,
+        "to_node": 7,
+        "label": ""
+      },
+      {
+        "from_node": 7,
+        "to_node": 12,
+        "label": "No"
+      },
+      {
+        "from_node": 12,
+        "to_node": 13,
+        "label": ""
+      },
+      {
+        "from_node": 13,
+        "to_node": 14,
+        "label": ""
+      },
+      {
+        "from_node": 14,
+        "to_node": 15,
+        "label": "Yes"
+      },
+      {
+        "from_node": 15,
+        "to_node": 16,
+        "label": "Yes"
+      },
+      {
+        "from_node": 16,
+        "to_node": 18,
+        "label": ""
+      },
+      {
+        "from_node": 18,
+        "to_node": 14,
+        "label": ""
+      },
+      {
+        "from_node": 15,
+        "to_node": 17,
+        "label": "No"
+      },
+      {
+        "from_node": 17,
+        "to_node": 14,
+        "label": ""
+      },
+      {
+        "from_node": 14,
+        "to_node": 19,
+        "label": "No"
+      },
+      {
+        "from_node": 19,
+        "to_node": 20,
+        "label": ""
+      }
+    ],
+    "other_text": []
+  },
+  "analysis": {
+    "ilr_verdict": "incorrect",
+    "ilr_issues": "节点11 每轮无条件执行 prev = hBars[i]（流程图边 9→11、10→11 亦如此），导致节点9 的 hBars[i-1] - prev + 2 中 prev 恒等于 hBars[i-1]、结果恒为 2，无法记录连续段的真实长度（应为段起点到段终点的跨度+2，prev 只应在连续段断裂时更新）；同理节点12 的收尾更新 hBars[-1] - prev + 2 也恒为 2。整个算法退化成恒返回 min(2,2)^2 = 4。",
+    "code_vs_ilr": "faithful",
+    "code_issues": "代码逐句忠实翻译了 ILR/流程图：循环内每轮 prev=hBars[i]、仅在与前值不连续时用 hBars[i-1]-prev+2 更新、收尾用 hBars[-1]-prev+2，因此任何输入都算出 hmax=gmax=2、返回 4。",
+    "error_source": "ilr",
+    "ocr_contribution": "no",
+    "root_cause": "流程图自身的 prev 更新时机就错了（每轮覆盖而非段断裂时更新），ILR 忠实继承、代码忠实翻译，算法退化为恒等于 4，失败源于流程图/ILR 算法本身。",
+    "evidence": "示例3 n=2,m=3,hBars=[2,3],vBars=[2,3,4] 期望 9，代码返回 4（实际运行确认第42行断言失败）；100 条测试错 71 条，全部输出 4；正确算法（最长连续段+1 取 min 后平方）100 条全对。"
+  }
+}

@@ -1,0 +1,211 @@
+{
+  "problem_id": "count_special_integers",
+  "functions": [
+    {
+      "name": "count",
+      "parameters": [
+        "i",
+        "m"
+      ],
+      "entry_node": 21,
+      "nodes": [
+        {
+          "id": 21,
+          "type": "start",
+          "label": "count(i, m)",
+          "next": 22
+        },
+        {
+          "id": 22,
+          "type": "decision",
+          "label": "Is j == 0?",
+          "logic": "ctx['j'] == 0",
+          "true_next": 23,
+          "false_next": 24
+        },
+        {
+          "id": 23,
+          "type": "return",
+          "label": "Return 1",
+          "value": "1"
+        },
+        {
+          "id": 24,
+          "type": "process",
+          "label": "Return (m - i + 1) * count(i - 1, m)",
+          "action": "ctx['result'] = (ctx['m'] - ctx['i'] + 1) * ctx['count'](ctx['i'] - 1, ctx['m'])",
+          "next": 25
+        },
+        {
+          "id": 25,
+          "type": "return",
+          "label": "Return result",
+          "value": "ctx['result']"
+        }
+      ]
+    },
+    {
+      "name": "dfs",
+      "parameters": [
+        "i",
+        "mask"
+      ],
+      "entry_node": 9,
+      "nodes": [
+        {
+          "id": 9,
+          "type": "start",
+          "label": "dfs(i, mask)",
+          "next": 10
+        },
+        {
+          "id": 10,
+          "type": "decision",
+          "label": "Is i >= len(n)?",
+          "logic": "ctx['i'] >= len(ctx['n'])",
+          "true_next": 11,
+          "false_next": 12
+        },
+        {
+          "id": 11,
+          "type": "return",
+          "label": "Return 1",
+          "value": "1"
+        },
+        {
+          "id": 12,
+          "type": "process",
+          "label": "Calculate cur = ord(n[i]) - ord('0')",
+          "action": "ctx['cur'] = ord(ctx['n'][ctx['i']]) - ord('0')",
+          "next": 13
+        },
+        {
+          "id": 13,
+          "type": "decision",
+          "label": "Is mask & (1 << cur)?",
+          "logic": "ctx['mask'] & (1 << ctx['cur'])",
+          "true_next": 15,
+          "false_next": 14
+        },
+        {
+          "id": 14,
+          "type": "process",
+          "label": "res = dfs(i + 1, mask + (1 << cur))",
+          "action": "ctx['res'] = ctx['dfs'](ctx['i'] + 1, ctx['mask'] + (1 << ctx['cur']))",
+          "next": 16
+        },
+        {
+          "id": 15,
+          "type": "process",
+          "label": "res = 0",
+          "action": "ctx['res'] = 0",
+          "next": 16
+        },
+        {
+          "id": 16,
+          "type": "process",
+          "label": "Loop j from 0 if i > 0 else 1, to cur-1",
+          "action": "if ctx['i'] > 0:\n    start_j = 0\nelse:\n    start_j = 1\nfor ctx['j'] in range(start_j, ctx['cur']):",
+          "next": 17
+        },
+        {
+          "id": 17,
+          "type": "decision",
+          "label": "Is mask & (1 << j)?",
+          "logic": "ctx['mask'] & (1 << ctx['j'])",
+          "true_next": 19,
+          "false_next": 18
+        },
+        {
+          "id": 18,
+          "type": "process",
+          "label": "res += count(len(n) - i - 1, 9 - j)",
+          "action": "ctx['res'] += ctx['count'](len(ctx['n']) - ctx['i'] - 1, 9 - ctx['j'])",
+          "next": 19
+        },
+        {
+          "id": 19,
+          "type": "process",
+          "label": "Continue loop",
+          "action": "continue",
+          "next": 20
+        },
+        {
+          "id": 20,
+          "type": "return",
+          "label": "Return res",
+          "value": "ctx['res']"
+        }
+      ]
+    }
+  ],
+  "nodes": [
+    {
+      "id": 1,
+      "type": "start",
+      "label": "Start",
+      "next": 2
+    },
+    {
+      "id": 2,
+      "type": "process",
+      "label": "Input: n (integer)",
+      "action": "ctx['n'] = ctx['arg0']; ctx['sum'] = 0; ctx['i'] = 0",
+      "next": 3
+    },
+    {
+      "id": 3,
+      "type": "process",
+      "label": "Convert n to string",
+      "action": "ctx['n_str'] = str(ctx['n'])",
+      "next": 4
+    },
+    {
+      "id": 4,
+      "type": "process",
+      "label": "Define count function",
+      "action": "ctx['count'] = lambda i, m: ctx['count'](i, m)",
+      "next": 5
+    },
+    {
+      "id": 5,
+      "type": "process",
+      "label": "Define dfs function",
+      "action": "ctx['dfs'] = lambda i, mask: ctx['dfs'](i, mask)",
+      "next": 6
+    },
+    {
+      "id": 6,
+      "type": "process",
+      "label": "Call dfs(0, 0)",
+      "action": "ctx['result'] = ctx['dfs'](0, 0)",
+      "next": 7
+    },
+    {
+      "id": 7,
+      "type": "process",
+      "label": "Sum 9 * count(i - 1, 9) for i in range(1, len(n))",
+      "action": "for i in range(1, len(ctx['n_str'])):\n    ctx['sum'] += 9 * ctx['count'](i - 1, 9)",
+      "next": 8
+    },
+    {
+      "id": 8,
+      "type": "return",
+      "label": "Return dfs(0, 0) + Sum 9 * count(i - 1, 9) for i in range(1, len(n))",
+      "value": "ctx['result'] + ctx['sum']"
+    }
+  ],
+  "task_id": "2376. Count Special Integers",
+  "dataset": "MATH",
+  "result": "failed: ",
+  "code": "def countSpecialNumbers(n: int) -> int:\n    n_str = str(n)\n    result = 0\n    \n    def count(i, m):\n        if i == 0:\n            return 1\n        return (m - i + 1) * count(i - 1, m)\n    \n    def dfs(i, mask):\n        if i >= len(n_str):\n            return 1\n        cur = ord(n_str[i]) - ord('0')\n        if mask & (1 << cur):\n            res = 0\n        else:\n            res = dfs(i + 1, mask + (1 << cur))\n        \n        start_j = 0 if i > 0 else 1\n        for j in range(start_j, cur):\n            if mask & (1 << j):\n                continue\n            res += count(len(n_str) - i - 1, 9 - j)\n        \n        return res\n    \n    result = dfs(0, 0)\n    for i in range(1, len(n_str)):\n        result += 9 * count(i - 1, 9)\n    \n    return result",
+  "verification": {
+    "md_verdict": "ILR Error",
+    "actual_error_source": "ilr",
+    "ilr_verdict": "incorrect",
+    "code_vs_ilr": "faithful",
+    "md_correct": "yes",
+    "note": "确认 ILR Error：dfs 节点18 的公式 count(len-i-1, 9-j) 错误——在位置 i 放下数字 j 后剩余可用数字应为 9-i 个（10 减去已用的 i+1 个），写成 9-j 导致逐项多算/少算（如 '10d' 应 8 种算成 9，'12d' 应 8 种算成 7），仅在部分输入上恰好抵消。生成代码忠实转写该公式（另把 count 基例 ctx['j']==0 合理地读作 i==0，与 ILR 自身参数命名一致）。",
+    "evidence": "生成代码实跑：countSpecialNumbers(20)=18（期望19，第一条断言即失败），5/10/11/135/1000 恰好正确；仅把 9-j 改为 9-i 后全部测试通过（9999→5274、100000→32490）。"
+  }
+}

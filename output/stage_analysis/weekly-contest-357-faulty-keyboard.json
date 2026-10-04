@@ -1,0 +1,104 @@
+{
+  "problem_id": "finalString",
+  "nodes": [
+    {
+      "id": 1,
+      "type": "start",
+      "label": "Start",
+      "next": 2
+    },
+    {
+      "id": 2,
+      "type": "process",
+      "label": "Input: s (string)",
+      "action": "ctx['s'] = ctx['arg0']; ctx['result'] = []; ctx['reverse'] = False",
+      "next": 3
+    },
+    {
+      "id": 3,
+      "type": "decision",
+      "label": "For each char in s",
+      "logic": "True",
+      "true_next": 4,
+      "false_next": 13
+    },
+    {
+      "id": 4,
+      "type": "decision",
+      "label": "Check if char == 'i'",
+      "logic": "ctx['char'] == 'i'",
+      "true_next": 7,
+      "false_next": 5
+    },
+    {
+      "id": 5,
+      "type": "decision",
+      "label": "Is reverse True?",
+      "logic": "ctx['reverse']",
+      "true_next": 8,
+      "false_next": 9
+    },
+    {
+      "id": 6,
+      "type": "process",
+      "label": "Toggle reverse: reverse = not reverse",
+      "action": "ctx['reverse'] = not ctx['reverse']",
+      "next": 3
+    },
+    {
+      "id": 7,
+      "type": "process",
+      "label": "Insert char at the beginning of result",
+      "action": "ctx['result'].insert(0, ctx['char'])",
+      "next": 3
+    },
+    {
+      "id": 8,
+      "type": "process",
+      "label": "Append char to result",
+      "action": "ctx['result'].append(ctx['char'])",
+      "next": 3
+    },
+    {
+      "id": 9,
+      "type": "decision",
+      "label": "Is reverse True?",
+      "logic": "ctx['reverse']",
+      "true_next": 11,
+      "false_next": 12
+    },
+    {
+      "id": 10,
+      "type": "process",
+      "label": "Reverse result",
+      "action": "ctx['result'] = ctx['result'][::-1]",
+      "next": 13
+    },
+    {
+      "id": 11,
+      "type": "process",
+      "label": "Do nothing",
+      "action": "",
+      "next": 13
+    },
+    {
+      "id": 12,
+      "type": "end",
+      "label": "Output: \" .join(result)",
+      "output": "ctx['result']"
+    }
+  ],
+  "task_id": "weekly-contest-357-faulty-keyboard",
+  "dataset": "Algorithm",
+  "result": "failed: ",
+  "code": "class Solution:\n    def finalString(self, s: str) -> str:\n        result = []\n        reverse = False\n        \n        for char in s:\n            if char == 'i':\n                # Insert at beginning (reverse effect)\n                result.insert(0, char)\n                reverse = not reverse\n            else:\n                if reverse:\n                    result.insert(0, char)\n                else:\n                    result.append(char)\n        \n        if reverse:\n            result.reverse()\n        \n        return ''.join(result)",
+  "verification": {
+    "md_verdict": "ILR Error",
+    "actual_error_source": "ilr",
+    "ilr_verdict": "incorrect",
+    "code_vs_ilr": "deviates",
+    "md_correct": "yes",
+    "note": "ILR 中 char 未定义且永不推进（node3 logic 恒 True 死循环），char=='i' 的真分支错误地指向'插入队首'而非'翻转标志'（翻转节点 6 不可达），还会提前经 node12 返回；代码补全了迭代和翻转逻辑，但保留了 ILR 的致命错误——遇到 'i' 时把字符 'i' 本身插入结果。",
+    "evidence": "忠实执行 ILR：s='string' → KeyError:'char'。生成代码输出 'rtsing'（期望 'rtsng'，多出一个 'i'），100 测试 0 过。"
+  }
+}

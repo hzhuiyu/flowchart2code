@@ -1,0 +1,2185 @@
+{
+ "task_id": "biweekly-contest-115-last-visited-integers",
+ "dataset": "Algorithm",
+ "title": "last-visited-integers",
+ "difficulty": "Easy",
+ "prompt": "\"\"\"\nGiven a 0-indexed array of strings words where words[i] is either a positive integer represented as a string or the string \"prev\".\n\nStart iterating from the beginning of the array; for every \"prev\" string seen in words, find the last visited integer in words which is defined as follows:\n\n * Let k be the number of consecutive \"prev\" strings seen so far (containing the current string). Let nums be the 0-indexed array of integers seen so far and nums_reverse be the reverse of nums, then the integer at (k - 1)th index of nums_reverse will be the last visited integer for this \"prev\".\n * If k is greater than the total visited integers, then the last visited integer will be -1.\n\nReturn an integer array containing the last visited integers.\n\nExample 1:\n\nInput: words = [\"1\",\"2\",\"prev\",\"prev\",\"prev\"]\nOutput: [2,1,-1]\nExplanation:\nFor \"prev\" at index = 2, last visited integer will be 2 as here the number of consecutive \"prev\" strings is 1, and in the array reverse_nums, 2 will be the first element.\nFor \"prev\" at index = 3, last visited integer will be 1 as there are a total of two consecutive \"prev\" strings including this \"prev\" which are visited, and 1 is the second last visited integer.\nFor \"prev\" at index = 4, last visited integer will be -1 as there are a total of three consecutive \"prev\" strings including this \"prev\" which are visited, but the total number of integers visited is two.\n\nExample 2:\n\nInput: words = [\"1\",\"prev\",\"2\",\"prev\",\"prev\"]\nOutput: [1,2,1]\nExplanation:\nFor \"prev\" at index = 1, last visited integer will be 1.\nFor \"prev\" at index = 3, last visited integer will be 2.\nFor \"prev\" at index = 4, last visited integer will be 1 as there are a total of two consecutive \"prev\" strings including this \"prev\" which are visited, and 1 is the second last visited integer.\n\n\nConstraints:\n\n * 1 <= words.length <= 100\n * words[i] == \"prev\" or 1 <= int(words[i]) <= 100\n\"\"\"\nclass Solution:\n    def lastVisitedIntegers(self, words: List[str]) -> List[int]:\n        ",
+ "starter_code": "class Solution:\n    def lastVisitedIntegers(self, words: List[str]) -> List[int]:\n        ",
+ "entry_point": "",
+ "test": "\nmy_solution = Solution()\n\ntest_input = { \"words\": [\"1\",\"2\",\"prev\",\"prev\",\"prev\"] }\nassert my_solution.lastVisitedIntegers(**test_input) == [2,1,-1]\n\ntest_input = { \"words\": [\"1\",\"prev\",\"2\",\"prev\",\"prev\"] }\nassert my_solution.lastVisitedIntegers(**test_input) == [1,2,1]\n\ntest_input = { \"words\": [\"prev\",\"prev\",\"prev\",\"27\"] }\nassert my_solution.lastVisitedIntegers(**test_input) == [-1,-1,-1]\n\ntest_input = { \"words\": [\"17\",\"42\"] }\nassert my_solution.lastVisitedIntegers(**test_input) == []\n\ntest_input = { \"words\": [\"prev\"] }\nassert my_solution.lastVisitedIntegers(**test_input) == [-1]\n\ntest_input = { \"words\": [\"prev\",\"prev\",\"prev\",\"52\",\"prev\"] }\nassert my_solution.lastVisitedIntegers(**test_input) == [-1,-1,-1,52]\n\ntest_input = { \"words\": [\"prev\",\"prev\",\"68\",\"prev\",\"prev\",\"53\",\"40\",\"23\",\"prev\"] }\nassert my_solution.lastVisitedIntegers(**test_input) == [-1,-1,68,-1,23]\n\ntest_input = { \"words\": [\"99\",\"23\",\"prev\"] }\nassert my_solution.lastVisitedIntegers(**test_input) == [23]\n\ntest_input = { \"words\": [\"prev\",\"prev\",\"prev\",\"58\",\"99\",\"prev\",\"10\",\"prev\"] }\nassert my_solution.lastVisitedIntegers(**test_input) == [-1,-1,-1,99,10]\n\ntest_input = { \"words\": [\"prev\",\"51\",\"prev\",\"prev\"] }\nassert my_solution.lastVisitedIntegers(**test_input) == [-1,51,-1]\n\ntest_input = { \"words\": [\"prev\",\"46\",\"9\",\"prev\"] }\nassert my_solution.lastVisitedIntegers(**test_input) == [-1,9]\n\ntest_input = { \"words\": [\"prev\",\"prev\",\"prev\",\"prev\",\"prev\",\"26\"] }\nassert my_solution.lastVisitedIntegers(**test_input) == [-1,-1,-1,-1,-1]\n\ntest_input = { \"words\": [\"prev\",\"21\",\"prev\",\"76\",\"82\",\"prev\",\"96\",\"prev\",\"57\",\"prev\"] }\nassert my_solution.lastVisitedIntegers(**test_input) == [-1,21,82,96,57]\n\ntest_input = { \"words\": [\"52\",\"4\",\"prev\",\"prev\",\"prev\",\"69\"] }\nassert my_solution.lastVisitedIntegers(**test_input) == [4,52,-1]\n\ntest_input = { \"words\": [\"24\",\"prev\"] }\nassert my_solution.lastVisitedIntegers(**test_input) == [24]\n\ntest_input = { \"words\": [\"46\",\"prev\",\"78\",\"prev\",\"83\",\"21\",\"prev\",\"94\",\"50\"] }\nassert my_solution.lastVisitedIntegers(**test_input) == [46,78,21]\n\ntest_input = { \"words\": [\"14\",\"66\",\"prev\",\"prev\",\"46\",\"prev\"] }\nassert my_solution.lastVisitedIntegers(**test_input) == [66,14,46]\n\ntest_input = { \"words\": [\"35\",\"90\"] }\nassert my_solution.lastVisitedIntegers(**test_input) == []\n\ntest_input = { \"words\": [\"prev\",\"9\",\"prev\",\"8\",\"prev\"] }\nassert my_solution.lastVisitedIntegers(**test_input) == [-1,9,8]\n\ntest_input = { \"words\": [\"prev\",\"prev\",\"88\",\"71\",\"47\",\"65\",\"24\",\"39\"] }\nassert my_solution.lastVisitedIntegers(**test_input) == [-1,-1]\n\ntest_input = { \"words\": [\"45\",\"73\",\"78\",\"2\",\"54\",\"prev\",\"85\",\"62\",\"prev\"] }\nassert my_solution.lastVisitedIntegers(**test_input) == [54,62]\n\ntest_input = { \"words\": [\"prev\",\"prev\",\"80\",\"9\",\"prev\"] }\nassert my_solution.lastVisitedIntegers(**test_input) == [-1,-1,9]\n\ntest_input = { \"words\": [\"79\",\"19\",\"prev\",\"prev\",\"prev\",\"67\",\"prev\",\"16\",\"2\"] }\nassert my_solution.lastVisitedIntegers(**test_input) == [19,79,-1,67]\n\ntest_input = { \"words\": [\"94\",\"prev\",\"prev\",\"prev\",\"prev\",\"prev\",\"prev\"] }\nassert my_solution.lastVisitedIntegers(**test_input) == [94,-1,-1,-1,-1,-1]\n\ntest_input = { \"words\": [\"prev\",\"prev\",\"prev\",\"82\",\"prev\"] }\nassert my_solution.lastVisitedIntegers(**test_input) == [-1,-1,-1,82]\n\ntest_input = { \"words\": [\"94\",\"14\",\"81\",\"43\",\"prev\",\"43\",\"prev\"] }\nassert my_solution.lastVisitedIntegers(**test_input) == [43,43]\n\ntest_input = { \"words\": [\"prev\",\"prev\",\"94\",\"56\",\"prev\",\"32\",\"prev\",\"prev\",\"prev\"] }\nassert my_solution.lastVisitedIntegers(**test_input) == [-1,-1,56,32,56,94]\n\ntest_input = { \"words\": [\"93\"] }\nassert my_solution.lastVisitedIntegers(**test_input) == []\n\ntest_input = { \"words\": [\"46\",\"91\",\"3\",\"40\",\"31\",\"prev\"] }\nassert my_solution.lastVisitedIntegers(**test_input) == [31]\n\ntest_input = { \"words\": [\"41\",\"prev\",\"17\",\"58\",\"78\"] }\nassert my_solution.lastVisitedIntegers(**test_input) == [41]\n\ntest_input = { \"words\": [\"prev\",\"prev\",\"82\",\"41\",\"96\",\"89\",\"71\"] }\nassert my_solution.lastVisitedIntegers(**test_input) == [-1,-1]\n\ntest_input = { \"words\": [\"4\",\"prev\",\"50\",\"prev\",\"prev\"] }\nassert my_solution.lastVisitedIntegers(**test_input) == [4,50,4]\n\ntest_input = { \"words\": [\"59\",\"76\",\"prev\",\"29\",\"prev\"] }\nassert my_solution.lastVisitedIntegers(**test_input) == [76,29]\n\ntest_input = { \"words\": [\"prev\",\"62\"] }\nassert my_solution.lastVisitedIntegers(**test_input) == [-1]\n\ntest_input = { \"words\": [\"6\",\"prev\"] }\nassert my_solution.lastVisitedIntegers(**test_input) == [6]\n\ntest_input = { \"words\": [\"prev\",\"prev\",\"prev\",\"prev\",\"prev\"] }\nassert my_solution.lastVisitedIntegers(**test_input) == [-1,-1,-1,-1,-1]\n\ntest_input = { \"words\": [\"28\",\"5\",\"35\",\"prev\",\"41\",\"27\",\"70\",\"65\",\"84\"] }\nassert my_solution.lastVisitedIntegers(**test_input) == [35]\n\ntest_input = { \"words\": [\"94\",\"45\",\"prev\",\"61\"] }\nassert my_solution.lastVisitedIntegers(**test_input) == [45]\n\ntest_input = { \"words\": [\"prev\",\"34\",\"prev\",\"prev\",\"prev\",\"prev\",\"21\",\"prev\"] }\nassert my_solution.lastVisitedIntegers(**test_input) == [-1,34,-1,-1,-1,21]\n\ntest_input = { \"words\": [\"prev\",\"12\",\"100\",\"33\",\"prev\",\"85\",\"93\"] }\nassert my_solution.lastVisitedIntegers(**test_input) == [-1,33]\n\ntest_input = { \"words\": [\"26\"] }\nassert my_solution.lastVisitedIntegers(**test_input) == []\n\ntest_input = { \"words\": [\"27\",\"prev\",\"prev\",\"prev\"] }\nassert my_solution.lastVisitedIntegers(**test_input) == [27,-1,-1]\n\ntest_input = { \"words\": [\"prev\",\"prev\",\"22\",\"33\",\"prev\",\"prev\",\"prev\"] }\nassert my_solution.lastVisitedIntegers(**test_input) == [-1,-1,33,22,-1]\n\ntest_input = { \"words\": [\"30\",\"prev\",\"87\",\"prev\",\"19\",\"prev\",\"8\",\"prev\",\"81\"] }\nassert my_solution.lastVisitedIntegers(**test_input) == [30,87,19,8]\n\ntest_input = { \"words\": [\"35\",\"prev\",\"47\",\"82\",\"86\",\"84\",\"prev\",\"76\",\"prev\"] }\nassert my_solution.lastVisitedIntegers(**test_input) == [35,84,76]\n\ntest_input = { \"words\": [\"prev\",\"87\"] }\nassert my_solution.lastVisitedIntegers(**test_input) == [-1]\n\ntest_input = { \"words\": [\"prev\",\"69\",\"78\",\"prev\",\"prev\",\"16\"] }\nassert my_solution.lastVisitedIntegers(**test_input) == [-1,78,69]\n\ntest_input = { \"words\": [\"22\",\"97\",\"prev\",\"2\"] }\nassert my_solution.lastVisitedIntegers(**test_input) == [97]\n\ntest_input = { \"words\": [\"72\",\"74\"] }\nassert my_solution.lastVisitedIntegers(**test_input) == []\n\ntest_input = { \"words\": [\"84\",\"prev\",\"prev\",\"21\"] }\nassert my_solution.lastVisitedIntegers(**test_input) == [84,-1]\n\ntest_input = { \"words\": [\"64\",\"24\"] }\nassert my_solution.lastVisitedIntegers(**test_input) == []\n\ntest_input = { \"words\": [\"17\",\"prev\",\"59\",\"prev\",\"51\",\"11\",\"prev\",\"prev\"] }\nassert my_solution.lastVisitedIntegers(**test_input) == [17,59,11,51]\n\ntest_input = { \"words\": [\"57\",\"prev\",\"27\",\"30\",\"prev\",\"prev\",\"75\"] }\nassert my_solution.lastVisitedIntegers(**test_input) == [57,30,27]\n\ntest_input = { \"words\": [\"65\",\"prev\",\"prev\"] }\nassert my_solution.lastVisitedIntegers(**test_input) == [65,-1]\n\ntest_input = { \"words\": [\"prev\",\"53\",\"76\",\"54\",\"94\",\"77\"] }\nassert my_solution.lastVisitedIntegers(**test_input) == [-1]\n\ntest_input = { \"words\": [\"89\",\"51\",\"prev\",\"prev\",\"12\",\"prev\",\"prev\"] }\nassert my_solution.lastVisitedIntegers(**test_input) == [51,89,12,51]\n\ntest_input = { \"words\": [\"prev\",\"28\",\"25\",\"prev\",\"prev\",\"prev\"] }\nassert my_solution.lastVisitedIntegers(**test_input) == [-1,25,28,-1]\n\ntest_input = { \"words\": [\"51\",\"prev\",\"prev\",\"76\"] }\nassert my_solution.lastVisitedIntegers(**test_input) == [51,-1]\n\ntest_input = { \"words\": [\"2\",\"24\",\"63\",\"prev\",\"43\",\"19\",\"prev\"] }\nassert my_solution.lastVisitedIntegers(**test_input) == [63,19]\n\ntest_input = { \"words\": [\"prev\",\"38\",\"1\"] }\nassert my_solution.lastVisitedIntegers(**test_input) == [-1]\n\ntest_input = { \"words\": [\"56\",\"75\",\"prev\",\"prev\",\"94\"] }\nassert my_solution.lastVisitedIntegers(**test_input) == [75,56]\n\ntest_input = { \"words\": [\"prev\",\"prev\",\"prev\"] }\nassert my_solution.lastVisitedIntegers(**test_input) == [-1,-1,-1]\n\ntest_input = { \"words\": [\"prev\",\"37\",\"25\",\"31\",\"prev\",\"prev\",\"42\"] }\nassert my_solution.lastVisitedIntegers(**test_input) == [-1,31,25]\n\ntest_input = { \"words\": [\"73\",\"30\",\"prev\",\"20\",\"prev\",\"prev\"] }\nassert my_solution.lastVisitedIntegers(**test_input) == [30,20,30]\n\ntest_input = { \"words\": [\"85\",\"prev\",\"prev\",\"78\",\"prev\",\"100\",\"8\",\"17\",\"prev\"] }\nassert my_solution.lastVisitedIntegers(**test_input) == [85,-1,78,17]\n\ntest_input = { \"words\": [\"prev\",\"55\",\"prev\",\"87\",\"19\",\"prev\",\"13\",\"prev\",\"prev\"] }\nassert my_solution.lastVisitedIntegers(**test_input) == [-1,55,19,13,19]\n\ntest_input = { \"words\": [\"prev\",\"prev\",\"5\",\"prev\",\"prev\",\"prev\",\"80\",\"17\"] }\nassert my_solution.lastVisitedIntegers(**test_input) == [-1,-1,5,-1,-1]\n\ntest_input = { \"words\": [\"100\",\"3\",\"prev\",\"prev\",\"93\",\"35\",\"prev\",\"prev\"] }\nassert my_solution.lastVisitedIntegers(**test_input) == [3,100,35,93]\n\ntest_input = { \"words\": [\"75\",\"7\"] }\nassert my_solution.lastVisitedIntegers(**test_input) == []\n\ntest_input = { \"words\": [\"prev\",\"prev\",\"prev\",\"prev\",\"prev\",\"prev\",\"71\",\"prev\",\"27\"] }\nassert my_solution.lastVisitedIntegers(**test_input) == [-1,-1,-1,-1,-1,-1,71]\n\ntest_input = { \"words\": [\"prev\",\"prev\",\"prev\",\"91\",\"44\",\"prev\"] }\nassert my_solution.lastVisitedIntegers(**test_input) == [-1,-1,-1,44]\n\ntest_input = { \"words\": [\"prev\",\"prev\"] }\nassert my_solution.lastVisitedIntegers(**test_input) == [-1,-1]\n\ntest_input = { \"words\": [\"11\",\"prev\",\"87\",\"prev\",\"prev\",\"94\",\"prev\",\"68\"] }\nassert my_solution.lastVisitedIntegers(**test_input) == [11,87,11,94]\n\ntest_input = { \"words\": [\"78\"] }\nassert my_solution.lastVisitedIntegers(**test_input) == []\n\ntest_input = { \"words\": [\"prev\",\"prev\",\"73\",\"prev\",\"prev\",\"27\",\"prev\"] }\nassert my_solution.lastVisitedIntegers(**test_input) == [-1,-1,73,-1,27]\n\ntest_input = { \"words\": [\"prev\",\"70\",\"prev\",\"prev\"] }\nassert my_solution.lastVisitedIntegers(**test_input) == [-1,70,-1]\n\ntest_input = { \"words\": [\"68\",\"prev\",\"38\",\"prev\",\"prev\"] }\nassert my_solution.lastVisitedIntegers(**test_input) == [68,38,68]\n\ntest_input = { \"words\": [\"prev\",\"prev\",\"36\"] }\nassert my_solution.lastVisitedIntegers(**test_input) == [-1,-1]\n\ntest_input = { \"words\": [\"prev\",\"prev\",\"36\",\"prev\"] }\nassert my_solution.lastVisitedIntegers(**test_input) == [-1,-1,36]\n\ntest_input = { \"words\": [\"18\",\"58\",\"41\",\"prev\",\"prev\"] }\nassert my_solution.lastVisitedIntegers(**test_input) == [41,58]\n\ntest_input = { \"words\": [\"prev\",\"prev\",\"35\"] }\nassert my_solution.lastVisitedIntegers(**test_input) == [-1,-1]\n\ntest_input = { \"words\": [\"prev\",\"72\",\"prev\",\"96\",\"9\",\"50\",\"prev\",\"52\"] }\nassert my_solution.lastVisitedIntegers(**test_input) == [-1,72,50]\n\ntest_input = { \"words\": [\"92\",\"95\",\"47\",\"48\",\"prev\",\"50\",\"34\",\"prev\",\"prev\",\"46\"] }\nassert my_solution.lastVisitedIntegers(**test_input) == [48,34,50]\n\ntest_input = { \"words\": [\"36\",\"88\",\"15\",\"99\",\"48\"] }\nassert my_solution.lastVisitedIntegers(**test_input) == []\n\ntest_input = { \"words\": [\"93\",\"prev\",\"2\",\"58\",\"83\",\"90\",\"prev\"] }\nassert my_solution.lastVisitedIntegers(**test_input) == [93,90]\n\ntest_input = { \"words\": [\"prev\",\"68\",\"prev\"] }\nassert my_solution.lastVisitedIntegers(**test_input) == [-1,68]\n\ntest_input = { \"words\": [\"prev\",\"56\",\"prev\",\"prev\",\"36\",\"prev\"] }\nassert my_solution.lastVisitedIntegers(**test_input) == [-1,56,-1,36]\n\ntest_input = { \"words\": [\"53\",\"prev\"] }\nassert my_solution.lastVisitedIntegers(**test_input) == [53]\n\ntest_input = { \"words\": [\"5\",\"29\",\"94\",\"3\",\"48\",\"prev\",\"59\",\"90\",\"prev\",\"69\"] }\nassert my_solution.lastVisitedIntegers(**test_input) == [48,90]\n\ntest_input = { \"words\": [\"89\",\"prev\",\"prev\",\"75\",\"prev\",\"98\",\"80\",\"prev\",\"68\",\"33\"] }\nassert my_solution.lastVisitedIntegers(**test_input) == [89,-1,75,80]\n\ntest_input = { \"words\": [\"prev\",\"93\",\"prev\",\"74\",\"33\"] }\nassert my_solution.lastVisitedIntegers(**test_input) == [-1,93]\n\ntest_input = { \"words\": [\"prev\",\"prev\",\"10\",\"25\",\"prev\",\"54\",\"prev\",\"prev\",\"prev\",\"76\"] }\nassert my_solution.lastVisitedIntegers(**test_input) == [-1,-1,25,54,25,10]\n\ntest_input = { \"words\": [\"9\",\"prev\",\"14\",\"prev\"] }\nassert my_solution.lastVisitedIntegers(**test_input) == [9,14]\n\ntest_input = { \"words\": [\"prev\",\"prev\",\"prev\",\"18\",\"66\",\"92\",\"prev\",\"87\",\"85\",\"25\"] }\nassert my_solution.lastVisitedIntegers(**test_input) == [-1,-1,-1,92]\n\ntest_input = { \"words\": [\"prev\",\"prev\",\"prev\",\"16\",\"prev\"] }\nassert my_solution.lastVisitedIntegers(**test_input) == [-1,-1,-1,16]\n\ntest_input = { \"words\": [\"prev\",\"prev\",\"99\",\"prev\",\"82\",\"prev\",\"prev\"] }\nassert my_solution.lastVisitedIntegers(**test_input) == [-1,-1,99,82,99]\n\ntest_input = { \"words\": [\"prev\",\"5\",\"90\",\"71\",\"prev\",\"prev\",\"61\"] }\nassert my_solution.lastVisitedIntegers(**test_input) == [-1,71,90]\n\ntest_input = { \"words\": [\"prev\",\"prev\",\"71\",\"54\",\"prev\",\"20\",\"65\",\"prev\",\"prev\"] }\nassert my_solution.lastVisitedIntegers(**test_input) == [-1,-1,54,65,20]\n\ntest_input = { \"words\": [\"prev\",\"85\",\"prev\",\"93\",\"prev\",\"98\",\"prev\"] }\nassert my_solution.lastVisitedIntegers(**test_input) == [-1,85,93,98]\n\ntest_input = { \"words\": [\"prev\",\"prev\",\"34\",\"prev\"] }\nassert my_solution.lastVisitedIntegers(**test_input) == [-1,-1,34]",
+ "test_cases": [
+  {
+   "input": {
+    "args": [
+     [
+      "1",
+      "2",
+      "prev",
+      "prev",
+      "prev"
+     ]
+    ]
+   },
+   "output": [
+    2,
+    1,
+    -1
+   ],
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      "1",
+      "prev",
+      "2",
+      "prev",
+      "prev"
+     ]
+    ]
+   },
+   "output": [
+    1,
+    2,
+    1
+   ],
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      "prev",
+      "prev",
+      "prev",
+      "27"
+     ]
+    ]
+   },
+   "output": [
+    -1,
+    -1,
+    -1
+   ],
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      "17",
+      "42"
+     ]
+    ]
+   },
+   "output": [],
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      "prev"
+     ]
+    ]
+   },
+   "output": [
+    -1
+   ],
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      "prev",
+      "prev",
+      "prev",
+      "52",
+      "prev"
+     ]
+    ]
+   },
+   "output": [
+    -1,
+    -1,
+    -1,
+    52
+   ],
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      "prev",
+      "prev",
+      "68",
+      "prev",
+      "prev",
+      "53",
+      "40",
+      "23",
+      "prev"
+     ]
+    ]
+   },
+   "output": [
+    -1,
+    -1,
+    68,
+    -1,
+    23
+   ],
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      "99",
+      "23",
+      "prev"
+     ]
+    ]
+   },
+   "output": [
+    23
+   ],
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      "prev",
+      "prev",
+      "prev",
+      "58",
+      "99",
+      "prev",
+      "10",
+      "prev"
+     ]
+    ]
+   },
+   "output": [
+    -1,
+    -1,
+    -1,
+    99,
+    10
+   ],
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      "prev",
+      "51",
+      "prev",
+      "prev"
+     ]
+    ]
+   },
+   "output": [
+    -1,
+    51,
+    -1
+   ],
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      "prev",
+      "46",
+      "9",
+      "prev"
+     ]
+    ]
+   },
+   "output": [
+    -1,
+    9
+   ],
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      "prev",
+      "prev",
+      "prev",
+      "prev",
+      "prev",
+      "26"
+     ]
+    ]
+   },
+   "output": [
+    -1,
+    -1,
+    -1,
+    -1,
+    -1
+   ],
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      "prev",
+      "21",
+      "prev",
+      "76",
+      "82",
+      "prev",
+      "96",
+      "prev",
+      "57",
+      "prev"
+     ]
+    ]
+   },
+   "output": [
+    -1,
+    21,
+    82,
+    96,
+    57
+   ],
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      "52",
+      "4",
+      "prev",
+      "prev",
+      "prev",
+      "69"
+     ]
+    ]
+   },
+   "output": [
+    4,
+    52,
+    -1
+   ],
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      "24",
+      "prev"
+     ]
+    ]
+   },
+   "output": [
+    24
+   ],
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      "46",
+      "prev",
+      "78",
+      "prev",
+      "83",
+      "21",
+      "prev",
+      "94",
+      "50"
+     ]
+    ]
+   },
+   "output": [
+    46,
+    78,
+    21
+   ],
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      "14",
+      "66",
+      "prev",
+      "prev",
+      "46",
+      "prev"
+     ]
+    ]
+   },
+   "output": [
+    66,
+    14,
+    46
+   ],
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      "35",
+      "90"
+     ]
+    ]
+   },
+   "output": [],
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      "prev",
+      "9",
+      "prev",
+      "8",
+      "prev"
+     ]
+    ]
+   },
+   "output": [
+    -1,
+    9,
+    8
+   ],
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      "prev",
+      "prev",
+      "88",
+      "71",
+      "47",
+      "65",
+      "24",
+      "39"
+     ]
+    ]
+   },
+   "output": [
+    -1,
+    -1
+   ],
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      "45",
+      "73",
+      "78",
+      "2",
+      "54",
+      "prev",
+      "85",
+      "62",
+      "prev"
+     ]
+    ]
+   },
+   "output": [
+    54,
+    62
+   ],
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      "prev",
+      "prev",
+      "80",
+      "9",
+      "prev"
+     ]
+    ]
+   },
+   "output": [
+    -1,
+    -1,
+    9
+   ],
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      "79",
+      "19",
+      "prev",
+      "prev",
+      "prev",
+      "67",
+      "prev",
+      "16",
+      "2"
+     ]
+    ]
+   },
+   "output": [
+    19,
+    79,
+    -1,
+    67
+   ],
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      "94",
+      "prev",
+      "prev",
+      "prev",
+      "prev",
+      "prev",
+      "prev"
+     ]
+    ]
+   },
+   "output": [
+    94,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1
+   ],
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      "prev",
+      "prev",
+      "prev",
+      "82",
+      "prev"
+     ]
+    ]
+   },
+   "output": [
+    -1,
+    -1,
+    -1,
+    82
+   ],
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      "94",
+      "14",
+      "81",
+      "43",
+      "prev",
+      "43",
+      "prev"
+     ]
+    ]
+   },
+   "output": [
+    43,
+    43
+   ],
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      "prev",
+      "prev",
+      "94",
+      "56",
+      "prev",
+      "32",
+      "prev",
+      "prev",
+      "prev"
+     ]
+    ]
+   },
+   "output": [
+    -1,
+    -1,
+    56,
+    32,
+    56,
+    94
+   ],
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      "93"
+     ]
+    ]
+   },
+   "output": [],
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      "46",
+      "91",
+      "3",
+      "40",
+      "31",
+      "prev"
+     ]
+    ]
+   },
+   "output": [
+    31
+   ],
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      "41",
+      "prev",
+      "17",
+      "58",
+      "78"
+     ]
+    ]
+   },
+   "output": [
+    41
+   ],
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      "prev",
+      "prev",
+      "82",
+      "41",
+      "96",
+      "89",
+      "71"
+     ]
+    ]
+   },
+   "output": [
+    -1,
+    -1
+   ],
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      "4",
+      "prev",
+      "50",
+      "prev",
+      "prev"
+     ]
+    ]
+   },
+   "output": [
+    4,
+    50,
+    4
+   ],
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      "59",
+      "76",
+      "prev",
+      "29",
+      "prev"
+     ]
+    ]
+   },
+   "output": [
+    76,
+    29
+   ],
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      "prev",
+      "62"
+     ]
+    ]
+   },
+   "output": [
+    -1
+   ],
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      "6",
+      "prev"
+     ]
+    ]
+   },
+   "output": [
+    6
+   ],
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      "prev",
+      "prev",
+      "prev",
+      "prev",
+      "prev"
+     ]
+    ]
+   },
+   "output": [
+    -1,
+    -1,
+    -1,
+    -1,
+    -1
+   ],
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      "28",
+      "5",
+      "35",
+      "prev",
+      "41",
+      "27",
+      "70",
+      "65",
+      "84"
+     ]
+    ]
+   },
+   "output": [
+    35
+   ],
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      "94",
+      "45",
+      "prev",
+      "61"
+     ]
+    ]
+   },
+   "output": [
+    45
+   ],
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      "prev",
+      "34",
+      "prev",
+      "prev",
+      "prev",
+      "prev",
+      "21",
+      "prev"
+     ]
+    ]
+   },
+   "output": [
+    -1,
+    34,
+    -1,
+    -1,
+    -1,
+    21
+   ],
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      "prev",
+      "12",
+      "100",
+      "33",
+      "prev",
+      "85",
+      "93"
+     ]
+    ]
+   },
+   "output": [
+    -1,
+    33
+   ],
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      "26"
+     ]
+    ]
+   },
+   "output": [],
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      "27",
+      "prev",
+      "prev",
+      "prev"
+     ]
+    ]
+   },
+   "output": [
+    27,
+    -1,
+    -1
+   ],
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      "prev",
+      "prev",
+      "22",
+      "33",
+      "prev",
+      "prev",
+      "prev"
+     ]
+    ]
+   },
+   "output": [
+    -1,
+    -1,
+    33,
+    22,
+    -1
+   ],
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      "30",
+      "prev",
+      "87",
+      "prev",
+      "19",
+      "prev",
+      "8",
+      "prev",
+      "81"
+     ]
+    ]
+   },
+   "output": [
+    30,
+    87,
+    19,
+    8
+   ],
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      "35",
+      "prev",
+      "47",
+      "82",
+      "86",
+      "84",
+      "prev",
+      "76",
+      "prev"
+     ]
+    ]
+   },
+   "output": [
+    35,
+    84,
+    76
+   ],
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      "prev",
+      "87"
+     ]
+    ]
+   },
+   "output": [
+    -1
+   ],
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      "prev",
+      "69",
+      "78",
+      "prev",
+      "prev",
+      "16"
+     ]
+    ]
+   },
+   "output": [
+    -1,
+    78,
+    69
+   ],
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      "22",
+      "97",
+      "prev",
+      "2"
+     ]
+    ]
+   },
+   "output": [
+    97
+   ],
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      "72",
+      "74"
+     ]
+    ]
+   },
+   "output": [],
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      "84",
+      "prev",
+      "prev",
+      "21"
+     ]
+    ]
+   },
+   "output": [
+    84,
+    -1
+   ],
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      "64",
+      "24"
+     ]
+    ]
+   },
+   "output": [],
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      "17",
+      "prev",
+      "59",
+      "prev",
+      "51",
+      "11",
+      "prev",
+      "prev"
+     ]
+    ]
+   },
+   "output": [
+    17,
+    59,
+    11,
+    51
+   ],
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      "57",
+      "prev",
+      "27",
+      "30",
+      "prev",
+      "prev",
+      "75"
+     ]
+    ]
+   },
+   "output": [
+    57,
+    30,
+    27
+   ],
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      "65",
+      "prev",
+      "prev"
+     ]
+    ]
+   },
+   "output": [
+    65,
+    -1
+   ],
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      "prev",
+      "53",
+      "76",
+      "54",
+      "94",
+      "77"
+     ]
+    ]
+   },
+   "output": [
+    -1
+   ],
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      "89",
+      "51",
+      "prev",
+      "prev",
+      "12",
+      "prev",
+      "prev"
+     ]
+    ]
+   },
+   "output": [
+    51,
+    89,
+    12,
+    51
+   ],
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      "prev",
+      "28",
+      "25",
+      "prev",
+      "prev",
+      "prev"
+     ]
+    ]
+   },
+   "output": [
+    -1,
+    25,
+    28,
+    -1
+   ],
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      "51",
+      "prev",
+      "prev",
+      "76"
+     ]
+    ]
+   },
+   "output": [
+    51,
+    -1
+   ],
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      "2",
+      "24",
+      "63",
+      "prev",
+      "43",
+      "19",
+      "prev"
+     ]
+    ]
+   },
+   "output": [
+    63,
+    19
+   ],
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      "prev",
+      "38",
+      "1"
+     ]
+    ]
+   },
+   "output": [
+    -1
+   ],
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      "56",
+      "75",
+      "prev",
+      "prev",
+      "94"
+     ]
+    ]
+   },
+   "output": [
+    75,
+    56
+   ],
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      "prev",
+      "prev",
+      "prev"
+     ]
+    ]
+   },
+   "output": [
+    -1,
+    -1,
+    -1
+   ],
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      "prev",
+      "37",
+      "25",
+      "31",
+      "prev",
+      "prev",
+      "42"
+     ]
+    ]
+   },
+   "output": [
+    -1,
+    31,
+    25
+   ],
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      "73",
+      "30",
+      "prev",
+      "20",
+      "prev",
+      "prev"
+     ]
+    ]
+   },
+   "output": [
+    30,
+    20,
+    30
+   ],
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      "85",
+      "prev",
+      "prev",
+      "78",
+      "prev",
+      "100",
+      "8",
+      "17",
+      "prev"
+     ]
+    ]
+   },
+   "output": [
+    85,
+    -1,
+    78,
+    17
+   ],
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      "prev",
+      "55",
+      "prev",
+      "87",
+      "19",
+      "prev",
+      "13",
+      "prev",
+      "prev"
+     ]
+    ]
+   },
+   "output": [
+    -1,
+    55,
+    19,
+    13,
+    19
+   ],
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      "prev",
+      "prev",
+      "5",
+      "prev",
+      "prev",
+      "prev",
+      "80",
+      "17"
+     ]
+    ]
+   },
+   "output": [
+    -1,
+    -1,
+    5,
+    -1,
+    -1
+   ],
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      "100",
+      "3",
+      "prev",
+      "prev",
+      "93",
+      "35",
+      "prev",
+      "prev"
+     ]
+    ]
+   },
+   "output": [
+    3,
+    100,
+    35,
+    93
+   ],
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      "75",
+      "7"
+     ]
+    ]
+   },
+   "output": [],
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      "prev",
+      "prev",
+      "prev",
+      "prev",
+      "prev",
+      "prev",
+      "71",
+      "prev",
+      "27"
+     ]
+    ]
+   },
+   "output": [
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    71
+   ],
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      "prev",
+      "prev",
+      "prev",
+      "91",
+      "44",
+      "prev"
+     ]
+    ]
+   },
+   "output": [
+    -1,
+    -1,
+    -1,
+    44
+   ],
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      "prev",
+      "prev"
+     ]
+    ]
+   },
+   "output": [
+    -1,
+    -1
+   ],
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      "11",
+      "prev",
+      "87",
+      "prev",
+      "prev",
+      "94",
+      "prev",
+      "68"
+     ]
+    ]
+   },
+   "output": [
+    11,
+    87,
+    11,
+    94
+   ],
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      "78"
+     ]
+    ]
+   },
+   "output": [],
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      "prev",
+      "prev",
+      "73",
+      "prev",
+      "prev",
+      "27",
+      "prev"
+     ]
+    ]
+   },
+   "output": [
+    -1,
+    -1,
+    73,
+    -1,
+    27
+   ],
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      "prev",
+      "70",
+      "prev",
+      "prev"
+     ]
+    ]
+   },
+   "output": [
+    -1,
+    70,
+    -1
+   ],
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      "68",
+      "prev",
+      "38",
+      "prev",
+      "prev"
+     ]
+    ]
+   },
+   "output": [
+    68,
+    38,
+    68
+   ],
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      "prev",
+      "prev",
+      "36"
+     ]
+    ]
+   },
+   "output": [
+    -1,
+    -1
+   ],
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      "prev",
+      "prev",
+      "36",
+      "prev"
+     ]
+    ]
+   },
+   "output": [
+    -1,
+    -1,
+    36
+   ],
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      "18",
+      "58",
+      "41",
+      "prev",
+      "prev"
+     ]
+    ]
+   },
+   "output": [
+    41,
+    58
+   ],
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      "prev",
+      "prev",
+      "35"
+     ]
+    ]
+   },
+   "output": [
+    -1,
+    -1
+   ],
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      "prev",
+      "72",
+      "prev",
+      "96",
+      "9",
+      "50",
+      "prev",
+      "52"
+     ]
+    ]
+   },
+   "output": [
+    -1,
+    72,
+    50
+   ],
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      "92",
+      "95",
+      "47",
+      "48",
+      "prev",
+      "50",
+      "34",
+      "prev",
+      "prev",
+      "46"
+     ]
+    ]
+   },
+   "output": [
+    48,
+    34,
+    50
+   ],
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      "36",
+      "88",
+      "15",
+      "99",
+      "48"
+     ]
+    ]
+   },
+   "output": [],
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      "93",
+      "prev",
+      "2",
+      "58",
+      "83",
+      "90",
+      "prev"
+     ]
+    ]
+   },
+   "output": [
+    93,
+    90
+   ],
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      "prev",
+      "68",
+      "prev"
+     ]
+    ]
+   },
+   "output": [
+    -1,
+    68
+   ],
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      "prev",
+      "56",
+      "prev",
+      "prev",
+      "36",
+      "prev"
+     ]
+    ]
+   },
+   "output": [
+    -1,
+    56,
+    -1,
+    36
+   ],
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      "53",
+      "prev"
+     ]
+    ]
+   },
+   "output": [
+    53
+   ],
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      "5",
+      "29",
+      "94",
+      "3",
+      "48",
+      "prev",
+      "59",
+      "90",
+      "prev",
+      "69"
+     ]
+    ]
+   },
+   "output": [
+    48,
+    90
+   ],
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      "89",
+      "prev",
+      "prev",
+      "75",
+      "prev",
+      "98",
+      "80",
+      "prev",
+      "68",
+      "33"
+     ]
+    ]
+   },
+   "output": [
+    89,
+    -1,
+    75,
+    80
+   ],
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      "prev",
+      "93",
+      "prev",
+      "74",
+      "33"
+     ]
+    ]
+   },
+   "output": [
+    -1,
+    93
+   ],
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      "prev",
+      "prev",
+      "10",
+      "25",
+      "prev",
+      "54",
+      "prev",
+      "prev",
+      "prev",
+      "76"
+     ]
+    ]
+   },
+   "output": [
+    -1,
+    -1,
+    25,
+    54,
+    25,
+    10
+   ],
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      "9",
+      "prev",
+      "14",
+      "prev"
+     ]
+    ]
+   },
+   "output": [
+    9,
+    14
+   ],
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      "prev",
+      "prev",
+      "prev",
+      "18",
+      "66",
+      "92",
+      "prev",
+      "87",
+      "85",
+      "25"
+     ]
+    ]
+   },
+   "output": [
+    -1,
+    -1,
+    -1,
+    92
+   ],
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      "prev",
+      "prev",
+      "prev",
+      "16",
+      "prev"
+     ]
+    ]
+   },
+   "output": [
+    -1,
+    -1,
+    -1,
+    16
+   ],
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      "prev",
+      "prev",
+      "99",
+      "prev",
+      "82",
+      "prev",
+      "prev"
+     ]
+    ]
+   },
+   "output": [
+    -1,
+    -1,
+    99,
+    82,
+    99
+   ],
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      "prev",
+      "5",
+      "90",
+      "71",
+      "prev",
+      "prev",
+      "61"
+     ]
+    ]
+   },
+   "output": [
+    -1,
+    71,
+    90
+   ],
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      "prev",
+      "prev",
+      "71",
+      "54",
+      "prev",
+      "20",
+      "65",
+      "prev",
+      "prev"
+     ]
+    ]
+   },
+   "output": [
+    -1,
+    -1,
+    54,
+    65,
+    20
+   ],
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      "prev",
+      "85",
+      "prev",
+      "93",
+      "prev",
+      "98",
+      "prev"
+     ]
+    ]
+   },
+   "output": [
+    -1,
+    85,
+    93,
+    98
+   ],
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      "prev",
+      "prev",
+      "34",
+      "prev"
+     ]
+    ]
+   },
+   "output": [
+    -1,
+    -1,
+    34
+   ],
+   "explanation": ""
+  }
+ ],
+ "original_ilr": "```json\n{\n  \"problem_id\": \"lastVisitedIntegers\",\n  \"nodes\": [\n    {\n      \"id\": 1,\n      \"type\": \"start\",\n      \"label\": \"Start\",\n      \"next\": 2\n    },\n    {\n      \"id\": 2,\n      \"type\": \"process\",\n      \"label\": \"Input: words (List[str])\",\n      \"action\": \"ctx['words'] = ctx['arg0']; ctx['ov'] = []; ctx['ans'] = []; ctx['ci'] = -1\",\n      \"next\": 3\n    },\n    {\n      \"id\": 3,\n      \"type\": \"decision\",\n      \"label\": \"More strings in words?\",\n      \"logic\": \"len(ctx['words']) > 0\",\n      \"true_next\": 4,\n      \"false_next\": 11\n    },\n    {\n      \"id\": 4,\n      \"type\": \"process\",\n      \"label\": \"Get current string: s = words[i]\",\n      \"action\": \"ctx['s'] = ctx['words'][0]; ctx['words'] = ctx['words'][1:]\",\n      \"next\": 5\n    },\n    {\n      \"id\": 5,\n      \"type\": \"decision\",\n      \"label\": \"Is s == 'prev'?\",\n      \"logic\": \"ctx['s'] == 'prev'\",\n      \"true_next\": 6,\n      \"false_next\": 13\n    },\n    {\n      \"id\": 6,\n      \"type\": \"decision\",\n      \"label\": \"Is ci == -1?\",\n      \"logic\": \"ctx['ci'] == -1\",\n      \"true_next\": 8,\n      \"false_next\": 9\n    },\n    {\n      \"id\": 8,\n      \"type\": \"process\",\n      \"label\": \"Append -1 to ans\",\n      \"action\": \"ctx['ans'].append(-1)\",\n      \"next\": 10\n    },\n    {\n      \"id\": 9,\n      \"type\": \"process\",\n      \"label\": \"Append ov[ci] to ans\",\n      \"action\": \"ctx['ans'].append(ctx['ov'][ctx['ci']])\",\n      \"next\": 10\n    },\n    {\n      \"id\": 10,\n      \"type\": \"process\",\n      \"label\": \"Decrement ci: ci = ci - 1\",\n      \"action\": \"ctx['ci'] -= 1\",\n      \"next\": 3\n    },\n    {\n      \"id\": 13,\n      \"type\": \"process\",\n      \"label\": \"Convert s to integer: vv = 0\",\n      \"action\": \"ctx['vv'] = 0\",\n      \"next\": 14\n    },\n    {\n      \"id\": 14,\n      \"type\": \"decision\",\n      \"label\": \"More characters in s?\",\n      \"logic\": \"len(ctx['s']) > 0\",\n      \"true_next\": 15,\n      \"false_next\": 17\n    },\n    {\n      \"id\": 15,\n      \"type\": \"process\",\n      \"label\": \"Get current character: c = s[i]\",\n      \"action\": \"ctx['c'] = ctx['s'][0]; ctx['s'] = ctx['s'][1:]\",\n      \"next\": 16\n    },\n    {\n      \"id\": 16,\n      \"type\": \"process\",\n      \"label\": \"Update vv: vv = vv * 10 + int(c)\",\n      \"action\": \"ctx['vv'] = ctx['vv'] * 10 + int(ctx['c'])\",\n      \"next\": 19\n    },\n    {\n      \"id\": 17,\n      \"type\": \"process\",\n      \"label\": \"Update ci: ci = len(ov)\",\n      \"action\": \"ctx['ci'] = len(ctx['ov'])\",\n      \"next\": 18\n    },\n    {\n      \"id\": 18,\n      \"type\": \"process\",\n      \"label\": \"Append vv to ov\",\n      \"action\": \"ctx['ov'].append(ctx['vv'])\",\n      \"next\": 19\n    },\n    {\n      \"id\": 19,\n      \"type\": \"process\",\n      \"label\": \"Go to next character in s\",\n      \"action\": \"ctx['s'] = ctx['s'][1:] if len(ctx['s']) > 0 else ''\",\n      \"next\": 14\n    },\n    {\n      \"id\": 11,\n      \"type\": \"end\",\n      \"label\": \"End\",\n      \"output\": \"ctx['ans']\"\n    }\n  ]\n}\n```",
+ "original_code": "class Solution:\n    def lastVisitedIntegers(self, words: List[str]) -> List[int]:\n        ov = []\n        ans = []\n        ci = -1\n        \n        while len(words) > 0:\n            s = words[0]\n            words = words[1:]\n            \n            if s == 'prev':\n                if ci == -1:\n                    ans.append(-1)\n                else:\n                    ans.append(ov[ci])\n                ci -= 1\n            else:\n                vv = 0\n                while len(s) > 0:\n                    c = s[0]\n                    s = s[1:]\n                    vv = vv * 10 + int(c)\n                ci = len(ov)\n                ov.append(vv)\n                \n        return ans",
+ "ocr_data": {
+  "nodes": [
+   {
+    "node_id": 1,
+    "shape_type": "rectangle",
+    "raw_text": "Start",
+    "position": "top"
+   },
+   {
+    "node_id": 2,
+    "shape_type": "rectangle",
+    "raw_text": "Input: words (List[str])",
+    "position": "top"
+   },
+   {
+    "node_id": 3,
+    "shape_type": "rectangle",
+    "raw_text": "Initialize: ov = [], ans = [], ci = -1",
+    "position": "top"
+   },
+   {
+    "node_id": 4,
+    "shape_type": "diamond",
+    "raw_text": "More strings in words?",
+    "position": "middle"
+   },
+   {
+    "node_id": 5,
+    "shape_type": "rectangle",
+    "raw_text": "Get current string: s = words[i]",
+    "position": "middle"
+   },
+   {
+    "node_id": 6,
+    "shape_type": "diamond",
+    "raw_text": "Is s == 'prev'?",
+    "position": "middle"
+   },
+   {
+    "node_id": 7,
+    "shape_type": "diamond",
+    "raw_text": "Is ci == -1?",
+    "position": "middle"
+   },
+   {
+    "node_id": 8,
+    "shape_type": "rectangle",
+    "raw_text": "Append -1 to ans",
+    "position": "middle"
+   },
+   {
+    "node_id": 9,
+    "shape_type": "rectangle",
+    "raw_text": "Append ov[ci] to ans",
+    "position": "middle"
+   },
+   {
+    "node_id": 10,
+    "shape_type": "rectangle",
+    "raw_text": "Decrement ci: ci = ci - 1",
+    "position": "middle"
+   },
+   {
+    "node_id": 11,
+    "shape_type": "rectangle",
+    "raw_text": "Output: ans (List[int])",
+    "position": "middle"
+   },
+   {
+    "node_id": 12,
+    "shape_type": "rectangle",
+    "raw_text": "End",
+    "position": "middle"
+   },
+   {
+    "node_id": 13,
+    "shape_type": "rectangle",
+    "raw_text": "Convert s to integer: vv = 0",
+    "position": "bottom"
+   },
+   {
+    "node_id": 14,
+    "shape_type": "diamond",
+    "raw_text": "More characters in s?",
+    "position": "bottom"
+   },
+   {
+    "node_id": 15,
+    "shape_type": "rectangle",
+    "raw_text": "Get current character: c = s[i]",
+    "position": "bottom"
+   },
+   {
+    "node_id": 16,
+    "shape_type": "rectangle",
+    "raw_text": "Update vv: vv = vv * 10 + int(c)",
+    "position": "bottom"
+   },
+   {
+    "node_id": 17,
+    "shape_type": "rectangle",
+    "raw_text": "Update ci: ci = len(ov)",
+    "position": "bottom"
+   },
+   {
+    "node_id": 18,
+    "shape_type": "rectangle",
+    "raw_text": "Append vv to ov",
+    "position": "bottom"
+   },
+   {
+    "node_id": 19,
+    "shape_type": "rectangle",
+    "raw_text": "Go to next character in s",
+    "position": "bottom"
+   }
+  ],
+  "edges": [
+   {
+    "from_node": 1,
+    "to_node": 2,
+    "label": ""
+   },
+   {
+    "from_node": 2,
+    "to_node": 3,
+    "label": ""
+   },
+   {
+    "from_node": 3,
+    "to_node": 4,
+    "label": ""
+   },
+   {
+    "from_node": 4,
+    "to_node": 5,
+    "label": "Yes"
+   },
+   {
+    "from_node": 4,
+    "to_node": 11,
+    "label": "No"
+   },
+   {
+    "from_node": 5,
+    "to_node": 6,
+    "label": ""
+   },
+   {
+    "from_node": 6,
+    "to_node": 7,
+    "label": "Yes"
+   },
+   {
+    "from_node": 6,
+    "to_node": 13,
+    "label": "No"
+   },
+   {
+    "from_node": 7,
+    "to_node": 8,
+    "label": "Yes"
+   },
+   {
+    "from_node": 7,
+    "to_node": 9,
+    "label": "No"
+   },
+   {
+    "from_node": 8,
+    "to_node": 10,
+    "label": ""
+   },
+   {
+    "from_node": 9,
+    "to_node": 10,
+    "label": ""
+   },
+   {
+    "from_node": 10,
+    "to_node": 4,
+    "label": ""
+   },
+   {
+    "from_node": 11,
+    "to_node": 12,
+    "label": ""
+   },
+   {
+    "from_node": 13,
+    "to_node": 14,
+    "label": ""
+   },
+   {
+    "from_node": 14,
+    "to_node": 15,
+    "label": "Yes"
+   },
+   {
+    "from_node": 14,
+    "to_node": 17,
+    "label": "No"
+   },
+   {
+    "from_node": 15,
+    "to_node": 16,
+    "label": ""
+   },
+   {
+    "from_node": 16,
+    "to_node": 19,
+    "label": ""
+   },
+   {
+    "from_node": 17,
+    "to_node": 18,
+    "label": ""
+   },
+   {
+    "from_node": 18,
+    "to_node": 19,
+    "label": ""
+   },
+   {
+    "from_node": 19,
+    "to_node": 14,
+    "label": ""
+   }
+  ],
+  "other_text": []
+ },
+ "test_result": {},
+ "status": "completed",
+ "fixed_ilr": null,
+ "modified_code": null,
+ "ilr_fix_log": "",
+ "bug_injected": ""
+}

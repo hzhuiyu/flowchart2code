@@ -1,0 +1,130 @@
+{
+  "problem_id": "largest_palindromic_product",
+  "nodes": [
+    {
+      "id": 1,
+      "type": "start",
+      "label": "Start",
+      "next": 2
+    },
+    {
+      "id": 2,
+      "type": "process",
+      "label": "Input: n (integer)",
+      "action": "ctx['n'] = ctx['arg0']; ctx['upper'] = None; ctx['lower'] = None; ctx['pal'] = None; ctx['found'] = False; ctx['result'] = -1",
+      "next": 3
+    },
+    {
+      "id": 3,
+      "type": "decision",
+      "label": "Is n == 1?",
+      "logic": "ctx['n'] == 1",
+      "true_next": 4,
+      "false_next": 5
+    },
+    {
+      "id": 4,
+      "type": "end",
+      "label": "Output: 9",
+      "output": "9"
+    },
+    {
+      "id": 5,
+      "type": "process",
+      "label": "Initialize upper = 10^n - 1, lower = 10^(n-1)",
+      "action": "ctx['upper'] = pow(10, ctx['n']) - 1; ctx['lower'] = pow(10, ctx['n'] - 1)",
+      "next": 6
+    },
+    {
+      "id": 6,
+      "type": "process",
+      "label": "Loop: i from upper to lower",
+      "action": "ctx['i'] = ctx['upper']; ctx['found'] = False",
+      "next": 7
+    },
+    {
+      "id": 7,
+      "type": "decision",
+      "label": "Is i >= lower?",
+      "logic": "ctx['i'] >= ctx['lower']",
+      "true_next": 8,
+      "false_next": 9
+    },
+    {
+      "id": 8,
+      "type": "process",
+      "label": "Convert i to string: s = str(i)",
+      "action": "ctx['s'] = str(ctx['i'])",
+      "next": 10
+    },
+    {
+      "id": 9,
+      "type": "end",
+      "label": "Output: -1 (No palindrome found)",
+      "output": "-1"
+    },
+    {
+      "id": 10,
+      "type": "process",
+      "label": "Create palindrome: pal = int(s + s[::-1])",
+      "action": "ctx['pal'] = int(ctx['s'] + ctx['s'][::-1])",
+      "next": 11
+    },
+    {
+      "id": 11,
+      "type": "process",
+      "label": "Loop: j from upper to sqrt(pal)",
+      "action": "ctx['j'] = ctx['upper']; ctx['sqrt_pal'] = int(ctx['pal'] ** 0.5)",
+      "next": 12
+    },
+    {
+      "id": 12,
+      "type": "decision",
+      "label": "Is pal % j == 0 and len(str(pal//j)) == n?",
+      "logic": "ctx['pal'] % ctx['j'] == 0 and len(str(ctx['pal'] // ctx['j'])) == ctx['n']",
+      "true_next": 13,
+      "false_next": 14
+    },
+    {
+      "id": 13,
+      "type": "process",
+      "label": "Output: pal % 1337",
+      "action": "ctx['result'] = ctx['pal'] % 1337; ctx['found'] = True",
+      "next": 15
+    },
+    {
+      "id": 14,
+      "type": "process",
+      "label": "Loop: j from upper to sqrt(pal)",
+      "action": "ctx['j'] += 1",
+      "next": 12
+    },
+    {
+      "id": 15,
+      "type": "decision",
+      "label": "Is i < upper?",
+      "logic": "ctx['i'] < ctx['upper']",
+      "true_next": 6,
+      "false_next": 16
+    },
+    {
+      "id": 16,
+      "type": "end",
+      "label": "Return result",
+      "output": "ctx['result']"
+    }
+  ],
+  "task_id": "479. Largest Palindrome Product",
+  "dataset": "MATH",
+  "result": "failed: ",
+  "code": "def largestPalindrome(n: int) -> int:\n    if n == 1:\n        return 9\n    \n    upper = pow(10, n) - 1\n    lower = pow(10, n - 1)\n    pal = None\n    found = False\n    result = -1\n    \n    i = upper\n    while i >= lower:\n        s = str(i)\n        pal = int(s + s[::-1])\n        \n        j = upper\n        sqrt_pal = int(pal ** 0.5)\n        \n        while j <= sqrt_pal:\n            if pal % j == 0 and len(str(pal // j)) == n:\n                result = pal % 1337\n                found = True\n                break\n            j += 1\n        \n        if found:\n            break\n        i -= 1\n    \n    return result",
+  "verification": {
+    "md_verdict": "ILR Error",
+    "actual_error_source": "both",
+    "ilr_verdict": "incorrect",
+    "code_vs_ilr": "deviates",
+    "md_correct": "partial",
+    "note": "ILR确有错：内层循环标称'j从upper到sqrt(pal)'但node14是j+=1（应递减），且全程无i-=1、外层无法推进，还缺少j本身必须是n位数的守卫——n=3时i=999,pal=999999会接受j=1001(4位数)这一非法因子，输出1260而非123。代码额外偏离ILR：加了while j<=sqrt_pal上界但j从upper递增，upper>sqrt(pal)循环体永不执行，n=2/3都返回-1。",
+    "evidence": "ILR忠实模拟n=3：j从999递增到1001即命中非法因子，result=1260(期望123)；生成代码 largestPalindrome(2)=-1(期望987)、largestPalindrome(3)=-1(期望123)。"
+  }
+}

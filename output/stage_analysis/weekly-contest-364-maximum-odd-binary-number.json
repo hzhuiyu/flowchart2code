@@ -1,0 +1,89 @@
+{
+  "problem_id": "maximum_odd_binary_number",
+  "nodes": [
+    {
+      "id": 1,
+      "type": "start",
+      "label": "Start",
+      "next": 2
+    },
+    {
+      "id": 2,
+      "type": "process",
+      "label": "Input: s (string)",
+      "action": "ctx['s'] = ctx['arg0']; ctx['res'] = \"\"; ctx['c'] = ctx['s'].count('1')",
+      "next": 3
+    },
+    {
+      "id": 3,
+      "type": "decision",
+      "label": "Is c == 1?",
+      "logic": "ctx['c'] == 1",
+      "true_next": 4,
+      "false_next": 5
+    },
+    {
+      "id": 4,
+      "type": "decision",
+      "label": "Is len(res) == len(s) - 1?",
+      "logic": "len(ctx['res']) == len(ctx['s']) - 1",
+      "true_next": 6,
+      "false_next": 5
+    },
+    {
+      "id": 5,
+      "type": "process",
+      "label": "Append '1' to res",
+      "action": "ctx['res'] += '1'",
+      "next": 7
+    },
+    {
+      "id": 6,
+      "type": "end",
+      "label": "Output: res",
+      "output": "ctx['res']"
+    },
+    {
+      "id": 7,
+      "type": "decision",
+      "label": "Is c > 1?",
+      "logic": "ctx['c'] > 1",
+      "true_next": 8,
+      "false_next": 9
+    },
+    {
+      "id": 8,
+      "type": "process",
+      "label": "Append '1' to res",
+      "action": "ctx['res'] += '1'",
+      "next": 10
+    },
+    {
+      "id": 9,
+      "type": "process",
+      "label": "Append '0' to res",
+      "action": "ctx['res'] += '0'",
+      "next": 10
+    },
+    {
+      "id": 10,
+      "type": "process",
+      "label": "Decrement c by 1",
+      "action": "ctx['c'] -= 1",
+      "next": 3
+    }
+  ],
+  "task_id": "weekly-contest-364-maximum-odd-binary-number",
+  "dataset": "Algorithm",
+  "result": "failed: ",
+  "code": "class Solution:\n    def maximumOddBinaryNumber(self, s: str) -> str:\n        res = \"\"\n        c = s.count('1')\n        \n        if c == 1:\n            res += '1'\n            return res\n        \n        while len(res) < len(s) - 1:\n            if c > 1:\n                res += '1'\n                c -= 1\n            else:\n                res += '0'\n        \n        res += '1'\n        return res",
+  "verification": {
+    "md_verdict": "ILR Error",
+    "actual_error_source": "both",
+    "ilr_verdict": "incorrect",
+    "code_vs_ilr": "deviates",
+    "md_correct": "partial",
+    "note": "ILR 确实错误（c==1 且 len(s)>1 时在 node3/5/7/9/10 间死循环，s='1' 时输出空串）；但代码还额外自行偏离：把 c==1 分支错误简化为直接返回 '1'，丢掉'前面补 0'的逻辑，在所有 c==1 且长度>1 的用例上失败——这部分是代码生成阶段的独立错误，MD 只归因 ILR 不完整。",
+    "evidence": "忠实执行 ILR：'010' → 死循环，'1' → ''（期望 '1'）。生成代码对 '010' 返回 '1'（期望 '001'）、'01' 返回 '1'（期望 '01'），100 测试 0 过。"
+  }
+}

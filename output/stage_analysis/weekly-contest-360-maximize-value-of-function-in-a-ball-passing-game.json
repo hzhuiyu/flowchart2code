@@ -1,0 +1,197 @@
+{
+  "problem_id": "getMaxFunctionValue",
+  "nodes": [
+    {
+      "id": 1,
+      "type": "start",
+      "label": "Start",
+      "next": 2
+    },
+    {
+      "id": 2,
+      "type": "process",
+      "label": "Input: receiver (list of integers), k (integer)",
+      "action": "ctx['receiver'] = ctx['arg0']; ctx['k'] = ctx['arg1']; ctx['n'] = len(ctx['receiver']); ctx['up'] = [[0] * 40 for _ in range(ctx['n'])]; ctx['dp'] = [[0] * 40 for _ in range(ctx['n'])]",
+      "next": 3
+    },
+    {
+      "id": 3,
+      "type": "process",
+      "label": "Initialize n = length of receiver",
+      "action": "ctx['n'] = len(ctx['receiver'])",
+      "next": 4
+    },
+    {
+      "id": 4,
+      "type": "process",
+      "label": "Initialize up as a 2D list of size n x 40 with 0",
+      "action": "ctx['up'] = [[0] * 40 for _ in range(ctx['n'])]",
+      "next": 5
+    },
+    {
+      "id": 5,
+      "type": "process",
+      "label": "Initialize dp as a 2D list of size n x 40 with 0",
+      "action": "ctx['dp'] = [[0] * 40 for _ in range(ctx['n'])]",
+      "next": 6
+    },
+    {
+      "id": 6,
+      "type": "decision",
+      "label": "For i from 0 to n-1",
+      "logic": "ctx['i'] < ctx['n']",
+      "true_next": 7,
+      "false_next": 16
+    },
+    {
+      "id": 7,
+      "type": "process",
+      "label": "Set j = receiver[i]",
+      "action": "ctx['j'] = ctx['receiver'][ctx['i']]",
+      "next": 8
+    },
+    {
+      "id": 8,
+      "type": "process",
+      "label": "Set up[i][0] = j",
+      "action": "ctx['up'][ctx['i']][0] = ctx['j']",
+      "next": 9
+    },
+    {
+      "id": 9,
+      "type": "process",
+      "label": "Set dp[i][0] = j",
+      "action": "ctx['dp'][ctx['i']][0] = ctx['j']",
+      "next": 6
+    },
+    {
+      "id": 10,
+      "type": "decision",
+      "label": "For j from 1 to 39",
+      "logic": "ctx['j'] <= 39",
+      "true_next": 11,
+      "false_next": 16
+    },
+    {
+      "id": 11,
+      "type": "decision",
+      "label": "For i from 0 to n-1",
+      "logic": "ctx['i'] < ctx['n']",
+      "true_next": 12,
+      "false_next": 15
+    },
+    {
+      "id": 12,
+      "type": "process",
+      "label": "Set j1 = up[i][j - 1]",
+      "action": "ctx['j1'] = ctx['up'][ctx['i']][ctx['j'] - 1]",
+      "next": 13
+    },
+    {
+      "id": 13,
+      "type": "process",
+      "label": "Set j2 = up[i][j - 1]",
+      "action": "ctx['j2'] = ctx['up'][ctx['i']][ctx['j'] - 1]",
+      "next": 14
+    },
+    {
+      "id": 14,
+      "type": "process",
+      "label": "Set up[i][j] = j1",
+      "action": "ctx['up'][ctx['i']][ctx['j']] = ctx['j1']",
+      "next": 15
+    },
+    {
+      "id": 15,
+      "type": "process",
+      "label": "Set dp[i][j] = dp[i][j - 1] + dp[j2][j - 1]",
+      "action": "ctx['dp'][ctx['i']][ctx['j']] = ctx['dp'][ctx['i']][ctx['j'] - 1] + ctx['dp'][ctx['j2']][ctx['j'] - 1]",
+      "next": 11
+    },
+    {
+      "id": 16,
+      "type": "process",
+      "label": "Initialize ans = 0",
+      "action": "ctx['ans'] = 0",
+      "next": 17
+    },
+    {
+      "id": 17,
+      "type": "decision",
+      "label": "For i from 0 to n-1",
+      "logic": "ctx['i'] < ctx['n']",
+      "true_next": 18,
+      "false_next": 25
+    },
+    {
+      "id": 18,
+      "type": "process",
+      "label": "Set tot = i",
+      "action": "ctx['tot'] = ctx['i']",
+      "next": 19
+    },
+    {
+      "id": 19,
+      "type": "process",
+      "label": "Set u = i",
+      "action": "ctx['u'] = ctx['i']",
+      "next": 20
+    },
+    {
+      "id": 20,
+      "type": "decision",
+      "label": "For j from 0 to 39",
+      "logic": "ctx['j'] <= 39",
+      "true_next": 21,
+      "false_next": 24
+    },
+    {
+      "id": 21,
+      "type": "decision",
+      "label": "Is k & (1 << j) != 0?",
+      "logic": "ctx['k'] & (1 << ctx['j']) != 0",
+      "true_next": 22,
+      "false_next": 23
+    },
+    {
+      "id": 22,
+      "type": "process",
+      "label": "Set tot += dp[u][j]",
+      "action": "ctx['tot'] += ctx['dp'][ctx['u']][ctx['j']]",
+      "next": 23
+    },
+    {
+      "id": 23,
+      "type": "process",
+      "label": "Set u = up[u][j]",
+      "action": "ctx['u'] = ctx['up'][ctx['u']][ctx['j']]",
+      "next": 20
+    },
+    {
+      "id": 24,
+      "type": "process",
+      "label": "End Loop: Set ans = max(ans, tot)",
+      "action": "ctx['ans'] = max(ctx['ans'], ctx['tot'])",
+      "next": 17
+    },
+    {
+      "id": 25,
+      "type": "end",
+      "label": "Output: ans (maximum value of the function)",
+      "output": "ctx['ans']"
+    }
+  ],
+  "task_id": "weekly-contest-360-maximize-value-of-function-in-a-ball-passing-game",
+  "dataset": "Algorithm",
+  "result": "failed: ",
+  "code": "class Solution:\n    def getMaxFunctionValue(self, receiver: List[int], k: int) -> int:\n        n = len(receiver)\n        up = [[0] * 40 for _ in range(n)]\n        dp = [[0] * 40 for _ in range(n)]\n        \n        for i in range(n):\n            j = receiver[i]\n            up[i][0] = j\n            dp[i][0] = j\n        \n        for j in range(1, 40):\n            for i in range(n):\n                j1 = up[i][j - 1]\n                j2 = up[i][j - 1]\n                up[i][j] = j1\n                dp[i][j] = dp[i][j - 1] + dp[j2][j - 1]\n        \n        ans = 0\n        for i in range(n):\n            tot = i\n            u = i\n            for j in range(40):\n                if k & (1 << j):\n                    tot += dp[u][j]\n                    u = up[u][j]\n            ans = max(ans, tot)\n        \n        return ans",
+  "verification": {
+    "md_verdict": "ILR Error",
+    "actual_error_source": "ilr",
+    "ilr_verdict": "incorrect",
+    "code_vs_ilr": "deviates",
+    "md_correct": "yes",
+    "note": "ILR 的倍增表构造循环（node10-15）不可达、i 从未初始化也从不递增，且 up[i][j]=up[i][j-1]（应为 up[j1][j-1]）、node23 无条件执行 u=up[u][j]；代码修复了循环结构并把 u 更新放回位判断内，但原样保留致命的 up 递推错误，k>=4 时结果全错。",
+    "evidence": "忠实执行 ILR：node6 即 KeyError:'i'。生成代码（修复结构后的同一公式）在 receiver=[1,2,0],k=8 返回 11（期望 9），100 测试过 48 个。"
+  }
+}

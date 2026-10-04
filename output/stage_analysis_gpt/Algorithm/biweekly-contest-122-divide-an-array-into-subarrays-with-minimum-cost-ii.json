@@ -1,0 +1,225 @@
+{
+  "task_id": "biweekly-contest-122-divide-an-array-into-subarrays-with-minimum-cost-ii",
+  "dataset": "Algorithm",
+  "difficulty": "Hard",
+  "title": "divide-an-array-into-subarrays-with-minimum-cost-ii",
+  "result": "failed: use ``sl.add(value)`` instead",
+  "ilr": "{\n  \"problem_id\": \"minimum_cost_subarrays\",\n  \"nodes\": [\n    {\"id\": 1, \"type\": \"start\", \"label\": \"Start\", \"next\": 2},\n    {\"id\": 2, \"type\": \"process\", \"label\": \"Input: nums (list of integers), k (integer), dist (integer)\", \"action\": \"ctx['nums']=ctx['arg0']; ctx['k']=ctx['arg1']; ctx['dist']=ctx['arg2']; ctx['n']=len(ctx['nums']); ctx['i']=0; ctx['cursum']=0; ctx['minsum']=float('inf')\", \"next\": 3},\n    {\"id\": 3, \"type\": \"process\", \"label\": \"Initialize sl = SortedList(nums[1 : 1 + dist])\", \"action\": \"ctx['sl'] = sorted(ctx['nums'][1:1 + ctx['dist']])\", \"next\": 4},\n    {\"id\": 4, \"type\": \"process\", \"label\": \"Initialize cursum = sum(sl[: k - 2])\", \"action\": \"ctx['cursum'] = sum(ctx['sl'][: ctx['k'] - 2])\", \"next\": 5},\n    {\"id\": 5, \"type\": \"process\", \"label\": \"Initialize minsum = infinity\", \"action\": \"ctx['minsum'] = float('inf')\", \"next\": 6},\n    {\"id\": 6, \"type\": \"process\", \"label\": \"For i from 1 + dist to n - 1\", \"action\": \"for ctx['i'] in range(1 + ctx['dist'], ctx['n']):\", \"next\": 7},\n    {\"id\": 7, \"type\": \"decision\", \"label\": \"Is sl.bisect(nums[i]) <= k - 2?\", \"logic\": \"ctx['sl'].bisect(ctx['nums'][ctx['i']]) <= ctx['k'] - 2\", \"true_next\": 8, \"false_next\": 10},\n    {\"id\": 8, \"type\": \"process\", \"label\": \"Update cursum: cursum += nums[i]\", \"action\": \"ctx['cursum'] += ctx['nums'][ctx['i']]\", \"next\": 9},\n    {\"id\": 9, \"type\": \"process\", \"label\": \"Update minsum: minsum = min(minsum, cursum)\", \"action\": \"ctx['minsum'] = min(ctx['minsum'], ctx['cursum'])\", \"next\": 12},\n    {\"id\": 10, \"type\": \"process\", \"label\": \"Update cursum: cursum += sl[k - 2]\", \"action\": \"ctx['cursum'] += ctx['sl'][ctx['k'] - 2]\", \"next\": 11},\n    {\"id\": 11, \"type\": \"process\", \"label\": \"Update minsum: minsum = min(minsum, cursum)\", \"action\": \"ctx['minsum'] = min(ctx['minsum'], ctx['cursum'])\", \"next\": 12},\n    {\"id\": 12, \"type\": \"process\", \"label\": \"Update sl: sl.add(nums[i])\", \"action\": \"ctx['sl'].append(ctx['nums'][ctx['i']])\", \"next\": 13},\n    {\"id\": 13, \"type\": \"decision\", \"label\": \"Is sl.bisect(nums[i - dist]) <= k - 2?\", \"logic\": \"ctx['sl'].bisect(ctx['nums'][ctx['i'] - ctx['dist']]) <= ctx['k'] - 2\", \"true_next\": 14, \"false_next\": 16},\n    {\"id\": 14, \"type\": \"process\", \"label\": \"Update cursum: cursum -= nums[i - dist]\", \"action\": \"ctx['cursum'] -= ctx['nums'][ctx['i'] - ctx['dist']]\", \"next\": 15},\n    {\"id\": 15, \"type\": \"process\", \"label\": \"Update cursum: cursum -= sl[k - 2]\", \"action\": \"ctx['cursum'] -= ctx['sl'][ctx['k'] - 2]\", \"next\": 16},\n    {\"id\": 16, \"type\": \"process\", \"label\": \"Remove nums[i - dist] from sl\", \"action\": \"ctx['sl'].remove(ctx['nums'][ctx['i'] - ctx['dist']])\", \"next\": 6},\n    {\"id\": 17, \"type\": \"return\", \"label\": \"Return nums[0] + minsum\", \"value\": \"ctx['nums'][0] + ctx['minsum']\"}\n  ]\n}",
+  "code": "from typing import List\nfrom sortedcontainers import SortedList\n\nclass Solution:\n    def minimumCost(self, nums: List[int], k: int, dist: int) -> int:\n        n = len(nums)\n        sl = SortedList(nums[1:1 + dist])\n        cursum = sum(sl[:k - 2])\n        minsum = float('inf')\n\n        for i in range(1 + dist, n):\n            if sl.bisect(nums[i]) <= k - 2:\n                cursum += nums[i]\n                minsum = min(minsum, cursum)\n            else:\n                cursum += sl[k - 2]\n                minsum = min(minsum, cursum)\n\n            sl.append(nums[i])\n\n            if sl.bisect(nums[i - dist]) <= k - 2:\n                cursum -= nums[i - dist]\n                cursum -= sl[k - 2]\n\n            sl.remove(nums[i - dist])\n\n        return nums[0] + minsum",
+  "prompt": "\"\"\"\nYou are given a 0-indexed array of integers nums of length n, and two positive integers k and dist.\nThe cost of an array is the value of its first element. For example, the cost of [1,2,3] is 1 while the cost of [3,4,1] is 3.\nYou need to divide nums into k disjoint contiguous subarrays, such that the difference between the starting index of the second subarray and the starting index of the kth subarray should be less than or equal to dist. In other words, if you divide nums into the subarrays nums[0..(i1 - 1)], nums[i1..(i2 - 1)], ..., nums[ik-1..(n - 1)], then ik-1 - i1 <= dist.\nReturn the minimum possible sum of the cost of these subarrays.\n\nExample 1:\n\nInput: nums = [1,3,2,6,4,2], k = 3, dist = 3\nOutput: 5\nExplanation: The best possible way to divide nums into 3 subarrays is: [1,3], [2,6,4], and [2]. This choice is valid because ik-1 - i1 is 5 - 2 = 3 which is equal to dist. The total cost is nums[0] + nums[2] + nums[5] which is 1 + 2 + 2 = 5.\nIt can be shown that there is no possible way to divide nums into 3 subarrays at a cost lower than 5.\n\nExample 2:\n\nInput: nums = [10,1,2,2,2,1], k = 4, dist = 3\nOutput: 15\nExplanation: The best possible way to divide nums into 4 subarrays is: [10], [1], [2], and [2,2,1]. This choice is valid because ik-1 - i1 is 3 - 1 = 2 which is less than dist. The total cost is nums[0] + nums[1] + nums[2] + nums[3] which is 10 + 1 + 2 + 2 = 15.\nThe division [10], [1], [2,2,2], and [1] is not valid, because the difference between ik-1 and i1 is 5 - 1 = 4, which is greater than dist.\nIt can be shown that there is no possible way to divide nums into 4 subarrays at a cost lower than 15.\n\nExample 3:\n\nInput: nums = [10,8,18,9], k = 3, dist = 1\nOutput: 36\nExplanation: The best possible way to divide nums into 4 subarrays is: [10], [8], and [18,9]. This choice is valid because ik-1 - i1 is 2 - 1 = 1 which is equal to dist.The total cost is nums[0] + nums[1] + nums[2] which is 10 + 8 + 18 = 36.\nThe division [10], [8,18], and [9] is not valid, because the difference between ik-1 and i1 is 3 - 1 = 2, which is greater than dist.\nIt can be shown that there is no possible way to divide nums into 3 subarrays at a cost lower than 36.\n\n\nConstraints:\n\n3 <= n <= 105\n1 <= nums[i] <= 109\n3 <= k <= n\nk - 2 <= dist <= n - 2\n\"\"\"\nclass Solution:\n    def minimumCost(self, nums: List[int], k: int, dist: int) -> int:\n        ",
+  "test": "\nmy_solution = Solution()\n\ntest_input = { \"nums\": [1,3,2,6,4,2], \"k\": 3, \"dist\": 3 }\nassert my_solution.minimumCost(**test_input) == 5\n\ntest_input = { \"nums\": [10,1,2,2,2,1], \"k\": 4, \"dist\": 3 }\nassert my_solution.minimumCost(**test_input) == 15\n\ntest_input = { \"nums\": [10,8,18,9], \"k\": 3, \"dist\": 1 }\nassert my_solution.minimumCost(**test_input) == 36\n\ntest_input = { \"nums\": [1,1,1], \"k\": 3, \"dist\": 1 }\nassert my_solution.minimumCost(**test_input) == 3\n\ntest_input = { \"nums\": [1,1,3], \"k\": 3, \"dist\": 1 }\nassert my_solution.minimumCost(**test_input) == 5\n\ntest_input = { \"nums\": [1,2,2], \"k\": 3, \"dist\": 1 }\nassert my_solution.minimumCost(**test_input) == 5\n\ntest_input = { \"nums\": [1,2,5], \"k\": 3, \"dist\": 1 }\nassert my_solution.minimumCost(**test_input) == 8\n\ntest_input = { \"nums\": [1,4,4], \"k\": 3, \"dist\": 1 }\nassert my_solution.minimumCost(**test_input) == 9\n\ntest_input = { \"nums\": [2,2,1], \"k\": 3, \"dist\": 1 }\nassert my_solution.minimumCost(**test_input) == 5\n\ntest_input = { \"nums\": [2,3,2], \"k\": 3, \"dist\": 1 }\nassert my_solution.minimumCost(**test_input) == 7\n\ntest_input = { \"nums\": [2,5,4], \"k\": 3, \"dist\": 1 }\nassert my_solution.minimumCost(**test_input) == 11\n\ntest_input = { \"nums\": [3,1,2], \"k\": 3, \"dist\": 1 }\nassert my_solution.minimumCost(**test_input) == 6\n\ntest_input = { \"nums\": [3,1,3], \"k\": 3, \"dist\": 1 }\nassert my_solution.minimumCost(**test_input) == 7\n\ntest_input = { \"nums\": [3,2,2], \"k\": 3, \"dist\": 1 }\nassert my_solution.minimumCost(**test_input) == 7\n\ntest_input = { \"nums\": [3,3,2], \"k\": 3, \"dist\": 1 }\nassert my_solution.minimumCost(**test_input) == 8\n\ntest_input = { \"nums\": [3,4,1], \"k\": 3, \"dist\": 1 }\nassert my_solution.minimumCost(**test_input) == 8\n\ntest_input = { \"nums\": [3,5,3], \"k\": 3, \"dist\": 1 }\nassert my_solution.minimumCost(**test_input) == 11\n\ntest_input = { \"nums\": [4,1,4], \"k\": 3, \"dist\": 1 }\nassert my_solution.minimumCost(**test_input) == 9\n\ntest_input = { \"nums\": [4,1,5], \"k\": 3, \"dist\": 1 }\nassert my_solution.minimumCost(**test_input) == 10\n\ntest_input = { \"nums\": [4,2,1], \"k\": 3, \"dist\": 1 }\nassert my_solution.minimumCost(**test_input) == 7\n\ntest_input = { \"nums\": [4,2,2], \"k\": 3, \"dist\": 1 }\nassert my_solution.minimumCost(**test_input) == 8\n\ntest_input = { \"nums\": [4,2,4], \"k\": 3, \"dist\": 1 }\nassert my_solution.minimumCost(**test_input) == 10\n\ntest_input = { \"nums\": [4,2,5], \"k\": 3, \"dist\": 1 }\nassert my_solution.minimumCost(**test_input) == 11\n\ntest_input = { \"nums\": [4,3,1], \"k\": 3, \"dist\": 1 }\nassert my_solution.minimumCost(**test_input) == 8\n\ntest_input = { \"nums\": [4,3,2], \"k\": 3, \"dist\": 1 }\nassert my_solution.minimumCost(**test_input) == 9\n\ntest_input = { \"nums\": [4,5,3], \"k\": 3, \"dist\": 1 }\nassert my_solution.minimumCost(**test_input) == 12\n\ntest_input = { \"nums\": [5,2,1], \"k\": 3, \"dist\": 1 }\nassert my_solution.minimumCost(**test_input) == 8\n\ntest_input = { \"nums\": [5,3,5], \"k\": 3, \"dist\": 1 }\nassert my_solution.minimumCost(**test_input) == 13\n\ntest_input = { \"nums\": [50,50,50], \"k\": 3, \"dist\": 1 }\nassert my_solution.minimumCost(**test_input) == 150\n\ntest_input = { \"nums\": [1,5,3,6], \"k\": 3, \"dist\": 2 }\nassert my_solution.minimumCost(**test_input) == 9\n\ntest_input = { \"nums\": [1,5,3,7], \"k\": 3, \"dist\": 1 }\nassert my_solution.minimumCost(**test_input) == 9\n\ntest_input = { \"nums\": [1,5,3,7], \"k\": 3, \"dist\": 2 }\nassert my_solution.minimumCost(**test_input) == 9\n\ntest_input = { \"nums\": [1,5,3,8], \"k\": 3, \"dist\": 1 }\nassert my_solution.minimumCost(**test_input) == 9\n\ntest_input = { \"nums\": [1,5,3,8], \"k\": 3, \"dist\": 2 }\nassert my_solution.minimumCost(**test_input) == 9\n\ntest_input = { \"nums\": [1,5,4,6], \"k\": 4, \"dist\": 2 }\nassert my_solution.minimumCost(**test_input) == 16\n\ntest_input = { \"nums\": [1,6,3,5], \"k\": 3, \"dist\": 2 }\nassert my_solution.minimumCost(**test_input) == 9\n\ntest_input = { \"nums\": [1,6,3,8], \"k\": 3, \"dist\": 2 }\nassert my_solution.minimumCost(**test_input) == 10\n\ntest_input = { \"nums\": [1,6,4,5], \"k\": 4, \"dist\": 2 }\nassert my_solution.minimumCost(**test_input) == 16\n\ntest_input = { \"nums\": [1,7,4,6], \"k\": 4, \"dist\": 2 }\nassert my_solution.minimumCost(**test_input) == 18\n\ntest_input = { \"nums\": [1,7,4,8], \"k\": 4, \"dist\": 2 }\nassert my_solution.minimumCost(**test_input) == 20\n\ntest_input = { \"nums\": [1,8,3,8], \"k\": 3, \"dist\": 1 }\nassert my_solution.minimumCost(**test_input) == 12\n\ntest_input = { \"nums\": [1,8,4,7], \"k\": 4, \"dist\": 2 }\nassert my_solution.minimumCost(**test_input) == 20\n\ntest_input = { \"nums\": [2,5,3,8], \"k\": 3, \"dist\": 2 }\nassert my_solution.minimumCost(**test_input) == 10\n\ntest_input = { \"nums\": [2,5,4,7], \"k\": 4, \"dist\": 2 }\nassert my_solution.minimumCost(**test_input) == 18\n\ntest_input = { \"nums\": [2,5,4,8], \"k\": 4, \"dist\": 2 }\nassert my_solution.minimumCost(**test_input) == 19\n\ntest_input = { \"nums\": [2,6,3,5], \"k\": 3, \"dist\": 1 }\nassert my_solution.minimumCost(**test_input) == 10\n\ntest_input = { \"nums\": [2,6,3,6], \"k\": 3, \"dist\": 1 }\nassert my_solution.minimumCost(**test_input) == 11\n\ntest_input = { \"nums\": [2,6,4,5], \"k\": 4, \"dist\": 2 }\nassert my_solution.minimumCost(**test_input) == 17\n\ntest_input = { \"nums\": [2,6,4,7], \"k\": 4, \"dist\": 2 }\nassert my_solution.minimumCost(**test_input) == 19\n\ntest_input = { \"nums\": [2,6,4,8], \"k\": 4, \"dist\": 2 }\nassert my_solution.minimumCost(**test_input) == 20\n\ntest_input = { \"nums\": [2,7,3,5], \"k\": 3, \"dist\": 2 }\nassert my_solution.minimumCost(**test_input) == 10\n\ntest_input = { \"nums\": [2,7,3,8], \"k\": 3, \"dist\": 2 }\nassert my_solution.minimumCost(**test_input) == 12\n\ntest_input = { \"nums\": [2,7,4,6], \"k\": 4, \"dist\": 2 }\nassert my_solution.minimumCost(**test_input) == 19\n\ntest_input = { \"nums\": [2,8,3,5], \"k\": 3, \"dist\": 1 }\nassert my_solution.minimumCost(**test_input) == 10\n\ntest_input = { \"nums\": [2,8,4,5], \"k\": 4, \"dist\": 2 }\nassert my_solution.minimumCost(**test_input) == 19\n\ntest_input = { \"nums\": [3,5,3,5], \"k\": 3, \"dist\": 1 }\nassert my_solution.minimumCost(**test_input) == 11\n\ntest_input = { \"nums\": [3,5,3,5], \"k\": 3, \"dist\": 2 }\nassert my_solution.minimumCost(**test_input) == 11\n\ntest_input = { \"nums\": [3,5,3,8], \"k\": 3, \"dist\": 2 }\nassert my_solution.minimumCost(**test_input) == 11\n\ntest_input = { \"nums\": [3,5,4,7], \"k\": 4, \"dist\": 2 }\nassert my_solution.minimumCost(**test_input) == 19\n\ntest_input = { \"nums\": [3,6,3,5], \"k\": 3, \"dist\": 1 }\nassert my_solution.minimumCost(**test_input) == 11\n\ntest_input = { \"nums\": [3,6,3,7], \"k\": 3, \"dist\": 2 }\nassert my_solution.minimumCost(**test_input) == 12\n\ntest_input = { \"nums\": [3,6,3,8], \"k\": 3, \"dist\": 1 }\nassert my_solution.minimumCost(**test_input) == 12\n\ntest_input = { \"nums\": [3,6,4,5], \"k\": 4, \"dist\": 2 }\nassert my_solution.minimumCost(**test_input) == 18\n\ntest_input = { \"nums\": [3,7,3,5], \"k\": 3, \"dist\": 1 }\nassert my_solution.minimumCost(**test_input) == 11\n\ntest_input = { \"nums\": [3,7,3,5], \"k\": 3, \"dist\": 2 }\nassert my_solution.minimumCost(**test_input) == 11\n\ntest_input = { \"nums\": [3,7,3,6], \"k\": 3, \"dist\": 1 }\nassert my_solution.minimumCost(**test_input) == 12\n\ntest_input = { \"nums\": [3,7,3,8], \"k\": 3, \"dist\": 2 }\nassert my_solution.minimumCost(**test_input) == 13\n\ntest_input = { \"nums\": [3,7,4,7], \"k\": 4, \"dist\": 2 }\nassert my_solution.minimumCost(**test_input) == 21\n\ntest_input = { \"nums\": [3,8,3,5], \"k\": 3, \"dist\": 1 }\nassert my_solution.minimumCost(**test_input) == 11\n\ntest_input = { \"nums\": [3,8,4,6], \"k\": 4, \"dist\": 2 }\nassert my_solution.minimumCost(**test_input) == 21\n\ntest_input = { \"nums\": [4,5,3,5], \"k\": 3, \"dist\": 2 }\nassert my_solution.minimumCost(**test_input) == 12\n\ntest_input = { \"nums\": [4,5,3,6], \"k\": 3, \"dist\": 2 }\nassert my_solution.minimumCost(**test_input) == 12\n\ntest_input = { \"nums\": [4,5,3,8], \"k\": 3, \"dist\": 2 }\nassert my_solution.minimumCost(**test_input) == 12\n\ntest_input = { \"nums\": [4,5,4,5], \"k\": 4, \"dist\": 2 }\nassert my_solution.minimumCost(**test_input) == 18\n\ntest_input = { \"nums\": [4,6,3,6], \"k\": 3, \"dist\": 1 }\nassert my_solution.minimumCost(**test_input) == 13\n\ntest_input = { \"nums\": [4,6,3,7], \"k\": 3, \"dist\": 1 }\nassert my_solution.minimumCost(**test_input) == 13\n\ntest_input = { \"nums\": [4,6,4,5], \"k\": 4, \"dist\": 2 }\nassert my_solution.minimumCost(**test_input) == 19\n\ntest_input = { \"nums\": [4,6,4,8], \"k\": 4, \"dist\": 2 }\nassert my_solution.minimumCost(**test_input) == 22\n\ntest_input = { \"nums\": [4,7,3,6], \"k\": 3, \"dist\": 2 }\nassert my_solution.minimumCost(**test_input) == 13\n\ntest_input = { \"nums\": [4,7,4,5], \"k\": 4, \"dist\": 2 }\nassert my_solution.minimumCost(**test_input) == 20\n\ntest_input = { \"nums\": [4,7,4,7], \"k\": 4, \"dist\": 2 }\nassert my_solution.minimumCost(**test_input) == 22\n\ntest_input = { \"nums\": [4,8,3,5], \"k\": 3, \"dist\": 2 }\nassert my_solution.minimumCost(**test_input) == 12\n\ntest_input = { \"nums\": [4,8,3,6], \"k\": 3, \"dist\": 1 }\nassert my_solution.minimumCost(**test_input) == 13\n\ntest_input = { \"nums\": [4,8,3,7], \"k\": 3, \"dist\": 2 }\nassert my_solution.minimumCost(**test_input) == 14\n\ntest_input = { \"nums\": [4,8,4,6], \"k\": 4, \"dist\": 2 }\nassert my_solution.minimumCost(**test_input) == 22\n\ntest_input = { \"nums\": [4,8,4,8], \"k\": 4, \"dist\": 2 }\nassert my_solution.minimumCost(**test_input) == 24\n\ntest_input = { \"nums\": [1,5,6,6,3,7,2], \"k\": 6, \"dist\": 5 }\nassert my_solution.minimumCost(**test_input) == 23\n\ntest_input = { \"nums\": [1,6,4,6,2,9,11], \"k\": 4, \"dist\": 3 }\nassert my_solution.minimumCost(**test_input) == 13\n\ntest_input = { \"nums\": [1,6,4,7,9,6,1], \"k\": 4, \"dist\": 4 }\nassert my_solution.minimumCost(**test_input) == 12\n\ntest_input = { \"nums\": [1,6,5,6,4,9,11], \"k\": 5, \"dist\": 5 }\nassert my_solution.minimumCost(**test_input) == 22\n\ntest_input = { \"nums\": [1,6,5,7,8,7,5], \"k\": 5, \"dist\": 4 }\nassert my_solution.minimumCost(**test_input) == 25\n\ntest_input = { \"nums\": [1,6,5,8,11,10,6], \"k\": 5, \"dist\": 3 }\nassert my_solution.minimumCost(**test_input) == 31\n\ntest_input = { \"nums\": [1,6,6,8,4,8,7], \"k\": 6, \"dist\": 4 }\nassert my_solution.minimumCost(**test_input) == 33\n\ntest_input = { \"nums\": [1,7,6,8,5,10,10], \"k\": 6, \"dist\": 5 }\nassert my_solution.minimumCost(**test_input) == 37\n\ntest_input = { \"nums\": [1,8,3,8,11,11,10], \"k\": 3, \"dist\": 5 }\nassert my_solution.minimumCost(**test_input) == 12\n\ntest_input = { \"nums\": [1,8,4,7,11,1,8], \"k\": 4, \"dist\": 4 }\nassert my_solution.minimumCost(**test_input) == 13\n\ntest_input = { \"nums\": [1,8,6,5,6,12,12], \"k\": 6, \"dist\": 5 }\nassert my_solution.minimumCost(**test_input) == 38\n\ntest_input = { \"nums\": [1,8,6,6,12,5,2], \"k\": 6, \"dist\": 5 }\nassert my_solution.minimumCost(**test_input) == 28\n\ntest_input = { \"nums\": [2,5,3,5,7,4,3], \"k\": 3, \"dist\": 3 }\nassert my_solution.minimumCost(**test_input) == 9\n\ntest_input = { \"nums\": [2,5,4,6,6,1,3], \"k\": 4, \"dist\": 5 }\nassert my_solution.minimumCost(**test_input) == 10",
+  "ocr_data": {
+    "nodes": [
+      {
+        "node_id": 1,
+        "shape_type": "rectangle",
+        "raw_text": "Start",
+        "position": "top"
+      },
+      {
+        "node_id": 2,
+        "shape_type": "rectangle",
+        "raw_text": "Input: nums (list of integers), k (integer), dist (integer)",
+        "position": "middle"
+      },
+      {
+        "node_id": 3,
+        "shape_type": "rectangle",
+        "raw_text": "Initialize n = length of nums",
+        "position": "middle"
+      },
+      {
+        "node_id": 4,
+        "shape_type": "rectangle",
+        "raw_text": "Initialize sl = SortedList(nums[1 : 1 + dist])",
+        "position": "middle"
+      },
+      {
+        "node_id": 5,
+        "shape_type": "rectangle",
+        "raw_text": "Initialize cursum = sum(sl[: k - 2])",
+        "position": "middle"
+      },
+      {
+        "node_id": 6,
+        "shape_type": "rectangle",
+        "raw_text": "Initialize minsum = infinity",
+        "position": "middle"
+      },
+      {
+        "node_id": 7,
+        "shape_type": "rectangle",
+        "raw_text": "For i from 1 + dist to n - 1",
+        "position": "middle"
+      },
+      {
+        "node_id": 8,
+        "shape_type": "diamond",
+        "raw_text": "Is sl.bisect(nums[i]) <= k - 2?",
+        "position": "middle"
+      },
+      {
+        "node_id": 9,
+        "shape_type": "rectangle",
+        "raw_text": "Update cursum: cursum += nums[i]",
+        "position": "middle"
+      },
+      {
+        "node_id": 10,
+        "shape_type": "rectangle",
+        "raw_text": "Update cursum: cursum += sl[k - 2]",
+        "position": "middle"
+      },
+      {
+        "node_id": 11,
+        "shape_type": "rectangle",
+        "raw_text": "Update minsum: minsum = min(minsum, cursum)",
+        "position": "middle"
+      },
+      {
+        "node_id": 12,
+        "shape_type": "rectangle",
+        "raw_text": "Update sl: sl.add(nums[i])",
+        "position": "middle"
+      },
+      {
+        "node_id": 13,
+        "shape_type": "diamond",
+        "raw_text": "Is sl.bisect(nums[i - dist]) <= k - 2?",
+        "position": "middle"
+      },
+      {
+        "node_id": 14,
+        "shape_type": "rectangle",
+        "raw_text": "Update cursum: cursum -= nums[i - dist]",
+        "position": "middle"
+      },
+      {
+        "node_id": 15,
+        "shape_type": "rectangle",
+        "raw_text": "Update cursum: cursum -= sl[k - 2]",
+        "position": "middle"
+      },
+      {
+        "node_id": 16,
+        "shape_type": "rectangle",
+        "raw_text": "Remove nums[i - dist] from sl",
+        "position": "middle"
+      },
+      {
+        "node_id": 17,
+        "shape_type": "rectangle",
+        "raw_text": "Return nums[0] + minsum",
+        "position": "bottom"
+      }
+    ],
+    "edges": [
+      {
+        "from_node": 1,
+        "to_node": 2,
+        "label": ""
+      },
+      {
+        "from_node": 2,
+        "to_node": 3,
+        "label": ""
+      },
+      {
+        "from_node": 3,
+        "to_node": 4,
+        "label": ""
+      },
+      {
+        "from_node": 4,
+        "to_node": 5,
+        "label": ""
+      },
+      {
+        "from_node": 5,
+        "to_node": 6,
+        "label": ""
+      },
+      {
+        "from_node": 6,
+        "to_node": 7,
+        "label": ""
+      },
+      {
+        "from_node": 7,
+        "to_node": 8,
+        "label": ""
+      },
+      {
+        "from_node": 8,
+        "to_node": 9,
+        "label": "Yes"
+      },
+      {
+        "from_node": 8,
+        "to_node": 10,
+        "label": "No"
+      },
+      {
+        "from_node": 9,
+        "to_node": 11,
+        "label": ""
+      },
+      {
+        "from_node": 10,
+        "to_node": 11,
+        "label": ""
+      },
+      {
+        "from_node": 11,
+        "to_node": 12,
+        "label": ""
+      },
+      {
+        "from_node": 12,
+        "to_node": 13,
+        "label": ""
+      },
+      {
+        "from_node": 13,
+        "to_node": 14,
+        "label": "Yes"
+      },
+      {
+        "from_node": 13,
+        "to_node": 15,
+        "label": "No"
+      },
+      {
+        "from_node": 14,
+        "to_node": 16,
+        "label": ""
+      },
+      {
+        "from_node": 15,
+        "to_node": 16,
+        "label": ""
+      },
+      {
+        "from_node": 16,
+        "to_node": 7,
+        "label": ""
+      },
+      {
+        "from_node": 7,
+        "to_node": 17,
+        "label": ""
+      }
+    ],
+    "other_text": []
+  },
+  "analysis": {
+    "ilr_verdict": "incorrect",
+    "ilr_issues": "ILR 动作与自身标签/流程图矛盾：节点12 标签是 'sl.add(nums[i])'（OCR 同为 sl.add），动作却写成 sl.append(nums[i])，SortedList 没有 append 方法，忠实执行必然抛 'use sl.add(value) instead'；节点3 动作用 sorted() 初始化但后续调用 bisect 等 SortedList 方法，类型自相矛盾。此外算法本身也是错的：cursum 的增量式维护（进元素时 +=nums[i] 或 +=sl[k-2]、出窗口时连减两项）并不能维护'窗口内 k-2 个最小值之和'这一不变量，且枚举的是右端点而非第一个分割点，无法正确处理 i_{k-1}-i1<=dist 的约束。",
+    "code_vs_ilr": "faithful",
+    "code_issues": "代码逐句忠实照抄 ILR：init 用 SortedList（随标签）、sl.append(nums[i]) 原样保留（随动作）导致运行即崩；即使把 append 改成 add，算法仍与 ILR 同错（示例1 输出 6，期望 5，100 条测试错 15 条）。",
+    "error_source": "ilr",
+    "ocr_contribution": "no",
+    "root_cause": "流程图/ILR 的算法本身就是错的（cursum 维护逻辑不成立），ILR 又在动作层把 sl.add 误写成 sl.append（与自身标签和 OCR 文本矛盾），代码忠实继承后首个测试即抛 NotImplementedError，失败源于 ILR 阶段。",
+    "evidence": "实际运行：代码在 prices=[1,3,2,6,4,2],k=3,dist=3 上抛 NotImplementedError('use sl.add(value) instead')（与 FAILURE RESULT 一致）；将 append 改为 add 后输出 6（期望 5），100 条测试错 15 条；暴力枚举合法分割方案确认期望值（如 nums=[4,6,4,4,8,5,1],k=6,dist=4 的合法最小值为 26，修补后代码给 18，违反间隔约束）。"
+  }
+}

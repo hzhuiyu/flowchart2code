@@ -1,0 +1,148 @@
+{"task_id": "v1_2757", "passed": true, "test_results": [true, true], "metadata": {"execution time": 0.004400491714477539}, "difficulty": "hard"}
+{"task_id": "v1_2784", "passed": true, "test_results": [true, true], "metadata": {"execution time": 0.003661632537841797}, "difficulty": "hard"}
+{"task_id": "v1_2808", "passed": true, "test_results": [true, true], "metadata": {"execution time": 0.0046405792236328125}, "difficulty": "hard"}
+{"task_id": "v1_2827", "passed": true, "test_results": [true, true, true], "metadata": {"execution time": 0.004019975662231445}, "difficulty": "hard"}
+{"task_id": "v1_2839", "passed": false, "test_results": [-4], "metadata": {"error": "TypeError('Node() takes no arguments')", "error_code": -4, "error_message": "Runtime Error", "inputs": "[[4, 3, 1, 2], [2, 4, 9, 5], [[4, 1], [1, 3], [2, 5]]]", "expected": "[6, 10, 7]"}, "difficulty": "hard"}
+{"task_id": "v1_2849", "passed": true, "test_results": [true, true], "metadata": {"execution time": 0.0027692317962646484}, "difficulty": "hard"}
+{"task_id": "v1_2879", "passed": true, "test_results": [true, true, true], "metadata": {"execution time": 0.03518176078796387}, "difficulty": "hard"}
+{"task_id": "v1_2884", "passed": true, "test_results": [true, true], "metadata": {"execution time": 0.0029861927032470703}, "difficulty": "hard"}
+{"task_id": "v1_2921", "passed": true, "test_results": [true, true], "metadata": {"execution time": 0.003934144973754883}, "difficulty": "hard"}
+{"task_id": "v1_2952", "passed": true, "test_results": [true, true], "metadata": {"execution time": 0.002981901168823242}, "difficulty": "hard"}
+{"task_id": "v1_3017", "passed": true, "test_results": [true, true, true], "metadata": {"execution time": 0.004519939422607422}, "difficulty": "hard"}
+{"task_id": "v1_3024", "passed": true, "test_results": [true, true], "metadata": {"execution time": 0.0037338733673095703}, "difficulty": "hard"}
+{"task_id": "v1_3025", "passed": true, "test_results": [true, true, true], "metadata": {"execution time": 0.004395008087158203}, "difficulty": "hard"}
+{"task_id": "v1_3032", "passed": true, "test_results": [true, true], "metadata": {"execution time": 0.0029718875885009766}, "difficulty": "hard"}
+{"task_id": "v1_3091", "passed": true, "test_results": [true, true, true], "metadata": {"execution time": 0.005097389221191406}, "difficulty": "hard"}
+{"task_id": "v1_3153", "passed": true, "test_results": [true, true], "metadata": {"execution time": 0.0018601417541503906}, "difficulty": "hard"}
+{"task_id": "v1_3184", "passed": true, "test_results": [true, true, true], "metadata": {"execution time": 0.005965709686279297}, "difficulty": "hard"}
+{"task_id": "v1_3196", "passed": true, "test_results": [true, true], "metadata": {"execution time": 0.002967357635498047}, "difficulty": "hard"}
+{"task_id": "v1_3203", "passed": false, "test_results": [false], "metadata": {"output": "[False, False]", "inputs": "['abcabc', [[1, 1, 3, 5], [0, 2, 5, 5]]]", "expected": "[True, True]", "error_code": -2, "error_message": "Wrong Answer"}, "difficulty": "hard"}
+{"task_id": "v1_3211", "passed": true, "test_results": [true, true, true], "metadata": {"execution time": 0.004474639892578125}, "difficulty": "hard"}
+{"task_id": "v1_3212", "passed": true, "test_results": [true, true, true], "metadata": {"execution time": 0.004058837890625}, "difficulty": "hard"}
+{"task_id": "v1_3223", "passed": true, "test_results": [true, true], "metadata": {"execution time": 0.0035164356231689453}, "difficulty": "hard"}
+{"task_id": "v1_3224", "passed": true, "test_results": [true, true], "metadata": {"execution time": 0.0029299259185791016}, "difficulty": "hard"}
+{"task_id": "v1_3233", "passed": true, "test_results": [true, true, true], "metadata": {"execution time": 0.005887508392333984}, "difficulty": "hard"}
+{"task_id": "v1_3243", "passed": true, "test_results": [true, true, true], "metadata": {"execution time": 0.004678010940551758}, "difficulty": "hard"}
+{"task_id": "v1_3298", "passed": true, "test_results": [true, true], "metadata": {"execution time": 0.0032052993774414062}, "difficulty": "hard"}
+{"task_id": "v1_abc301_f", "passed": true, "test_results": [true, true, true], "metadata": {"execution time": 0.004128456115722656}, "difficulty": "hard"}
+{"task_id": "v1_abc307_e", "passed": true, "test_results": [true, true, true], "metadata": {"execution time": 0.17036986351013184}, "difficulty": "hard"}
+{"task_id": "v1_abc308_e", "passed": true, "test_results": [true, true, true], "metadata": {"execution time": 0.0040743350982666016}, "difficulty": "hard"}
+{"task_id": "v1_abc308_f", "passed": true, "test_results": [true, true], "metadata": {"execution time": 0.0018496513366699219}, "difficulty": "hard"}
+{"task_id": "v1_abc310_e", "passed": false, "test_results": [false], "metadata": {"output": "3", "inputs": "[5, '110']", "expected": "9", "error_code": -2, "error_message": "Wrong Answer"}, "difficulty": "hard"}
+{"task_id": "v1_abc310_f", "passed": true, "test_results": [true, true], "metadata": {"execution time": 0.02026844024658203}, "difficulty": "hard"}
+{"task_id": "v1_abc318_e", "passed": true, "test_results": [true, true, true], "metadata": {"execution time": 0.0029516220092773438}, "difficulty": "hard"}
+{"task_id": "v1_abc323_e", "passed": true, "test_results": [true, true, true], "metadata": {"execution time": 0.03356623649597168}, "difficulty": "hard"}
+{"task_id": "v1_abc324_d", "passed": true, "test_results": [true, true, true], "metadata": {"execution time": 2.1406030654907227}, "difficulty": "hard"}
+{"task_id": "v1_abc325_f", "passed": true, "test_results": [true, true, true], "metadata": {"execution time": 0.008598089218139648}, "difficulty": "hard"}
+{"task_id": "v1_abc327_e", "passed": false, "test_results": [true, true, -4], "metadata": {"error": "TypeError(\"'int' object is not iterable\")", "error_code": -4, "error_message": "Runtime Error", "inputs": "[1, 100]", "expected": "-1100.0"}, "difficulty": "hard"}
+{"task_id": "v1_abc328_d", "passed": true, "test_results": [true, true, true], "metadata": {"execution time": 0.003291606903076172}, "difficulty": "hard"}
+{"task_id": "v1_abc329_e", "passed": true, "test_results": [true, true, true], "metadata": {"execution time": 0.002712726593017578}, "difficulty": "hard"}
+{"task_id": "v1_abc340_e", "passed": false, "test_results": [true, true, -4], "metadata": {"error": "TypeError(\"'int' object is not subscriptable\")", "error_code": -4, "error_message": "Runtime Error", "inputs": "[[1, 4], 1, [0, 0, 0, 0]]", "expected": "1"}, "difficulty": "hard"}
+{"task_id": "v1_abc343_e", "passed": false, "test_results": [-3], "metadata": {"error": "TimeoutException()", "error_code": -3, "error_message": "Time Limit Exceeded", "inputs": "[[840, 84, 7]]", "expected": "[['Yes'], [0, 0, 0, 0, 6, 0, 6, 0, 0]]"}, "difficulty": "hard"}
+{"task_id": "v2_3313", "passed": true, "test_results": [true, true, true], "metadata": {"execution time": 0.0032918453216552734}, "difficulty": "hard"}
+{"task_id": "v2_3316", "passed": true, "test_results": [true, true, true], "metadata": {"execution time": 0.004442453384399414}, "difficulty": "hard"}
+{"task_id": "v2_3327", "passed": true, "test_results": [true, true], "metadata": {"execution time": 0.0020236968994140625}, "difficulty": "hard"}
+{"task_id": "v2_3344", "passed": true, "test_results": [true, true], "metadata": {"execution time": 0.0020546913146972656}, "difficulty": "hard"}
+{"task_id": "v2_3345", "passed": true, "test_results": [true, true, true], "metadata": {"execution time": 0.004063606262207031}, "difficulty": "hard"}
+{"task_id": "v2_3362", "passed": true, "test_results": [true, true, true], "metadata": {"execution time": 0.002866983413696289}, "difficulty": "hard"}
+{"task_id": "v2_3364", "passed": true, "test_results": [true, true, true], "metadata": {"execution time": 0.003663301467895508}, "difficulty": "hard"}
+{"task_id": "v2_3375", "passed": true, "test_results": [true, true], "metadata": {"execution time": 0.0019674301147460938}, "difficulty": "hard"}
+{"task_id": "v2_3376", "passed": true, "test_results": [true, true], "metadata": {"execution time": 0.0021631717681884766}, "difficulty": "hard"}
+{"task_id": "v2_3382", "passed": true, "test_results": [true, true, true], "metadata": {"execution time": 0.003696918487548828}, "difficulty": "hard"}
+{"task_id": "v2_3402", "passed": true, "test_results": [true, true, true], "metadata": {"execution time": 0.0030012130737304688}, "difficulty": "hard"}
+{"task_id": "v2_3411", "passed": true, "test_results": [true, true], "metadata": {"execution time": 0.002402067184448242}, "difficulty": "hard"}
+{"task_id": "v2_3414", "passed": true, "test_results": [true, true], "metadata": {"execution time": 0.0019183158874511719}, "difficulty": "hard"}
+{"task_id": "v2_3423", "passed": false, "test_results": [-4], "metadata": {"error": "TypeError('SegmentTree() takes no arguments')", "error_code": -4, "error_message": "Runtime Error", "inputs": "[[3, 5, 9], [[1, -2], [0, -3]]]", "expected": "21"}, "difficulty": "hard"}
+{"task_id": "v2_abc347_e", "passed": true, "test_results": [true, true], "metadata": {"execution time": 0.002545595169067383}, "difficulty": "hard"}
+{"task_id": "v2_abc349_e", "passed": true, "test_results": [true, true], "metadata": {"execution time": 0.017581462860107422}, "difficulty": "hard"}
+{"task_id": "v2_abc350_e", "passed": false, "test_results": [true, true, false], "metadata": {"output": "6418410657.740834", "inputs": "[[314159265358979323, 4, 223606797, 173205080]]", "expected": "6418410657.740838", "error_code": -2, "error_message": "Wrong Answer"}, "difficulty": "hard"}
+{"task_id": "v2_abc351_d", "passed": false, "test_results": [-4], "metadata": {"error": "TypeError(\"'str' object cannot be interpreted as an integer\")", "error_code": -4, "error_message": "Runtime Error", "inputs": "[[3, 5], '.#...', '.....', '.#..#']", "expected": "9"}, "difficulty": "hard"}
+{"task_id": "v2_abc351_f", "passed": true, "test_results": [true, true], "metadata": {"execution time": 0.0021419525146484375}, "difficulty": "hard"}
+{"task_id": "v2_abc352_d", "passed": true, "test_results": [true, true, true], "metadata": {"execution time": 0.002989053726196289}, "difficulty": "hard"}
+{"task_id": "v2_abc354_d", "passed": false, "test_results": [true, false], "metadata": {"output": "10", "inputs": "[[-1, -2, 1, 3]]", "expected": "11", "error_code": -2, "error_message": "Wrong Answer"}, "difficulty": "hard"}
+{"task_id": "v2_abc355_e", "passed": false, "test_results": [-4], "metadata": {"error": "IndexError('list assignment index out of range')", "error_code": -4, "error_message": "Runtime Error", "inputs": "[[3, 1, 5], [31, 41, 59, 26, 53, 58, 97, 93], 3]", "expected": "37"}, "difficulty": "hard"}
+{"task_id": "v3_3436", "passed": true, "test_results": [true, true, true], "metadata": {"execution time": 0.0028655529022216797}, "difficulty": "hard"}
+{"task_id": "v3_3438", "passed": true, "test_results": [true, true], "metadata": {"execution time": 0.0025017261505126953}, "difficulty": "hard"}
+{"task_id": "v3_3439", "passed": true, "test_results": [true, true], "metadata": {"execution time": 0.0018477439880371094}, "difficulty": "hard"}
+{"task_id": "v3_3454", "passed": true, "test_results": [true, true], "metadata": {"execution time": 0.00185394287109375}, "difficulty": "hard"}
+{"task_id": "v3_3460", "passed": true, "test_results": [true, true, true], "metadata": {"execution time": 0.00328826904296875}, "difficulty": "hard"}
+{"task_id": "v3_3466", "passed": true, "test_results": [true, true, true], "metadata": {"execution time": 0.0026865005493164062}, "difficulty": "hard"}
+{"task_id": "v3_3478", "passed": false, "test_results": [true, true, true, false], "metadata": {"output": "False", "inputs": "[4, 4, [[5, 5, 1]]]", "expected": "True", "error_code": -2, "error_message": "Wrong Answer"}, "difficulty": "hard"}
+{"task_id": "v3_3482", "passed": true, "test_results": [true, true], "metadata": {"execution time": 0.002325773239135742}, "difficulty": "hard"}
+{"task_id": "v3_3532", "passed": true, "test_results": [true, true, true], "metadata": {"execution time": 0.00439453125}, "difficulty": "hard"}
+{"task_id": "v3_3535", "passed": true, "test_results": [true, true], "metadata": {"execution time": 0.0020558834075927734}, "difficulty": "hard"}
+{"task_id": "v3_abc357_e", "passed": true, "test_results": [true, true, true], "metadata": {"execution time": 0.004267454147338867}, "difficulty": ""}
+{"task_id": "v3_abc359_d", "passed": true, "test_results": [true, true, true, true], "metadata": {"execution time": 0.0061511993408203125}, "difficulty": ""}
+{"task_id": "v3_abc360_e", "passed": true, "test_results": [true, true, true], "metadata": {"execution time": 0.004302263259887695}, "difficulty": ""}
+{"task_id": "v3_abc361_d", "passed": false, "test_results": [false], "metadata": {"output": "-1", "inputs": "[6, 'BWBWBW', 'WWWBBB']", "expected": "4", "error_code": -2, "error_message": "Wrong Answer"}, "difficulty": ""}
+{"task_id": "v3_abc361_f", "passed": true, "test_results": [true, true], "metadata": {"execution time": 0.004796504974365234}, "difficulty": ""}
+{"task_id": "v3_abc362_e", "passed": false, "test_results": [true, true, false], "metadata": {"output": "[1]", "inputs": "[1, 100]", "expected": "1", "error_code": -2, "error_message": "Wrong Answer"}, "difficulty": ""}
+{"task_id": "v3_abc363_f", "passed": false, "test_results": [true, false], "metadata": {"output": "101", "inputs": "[101]", "expected": "-1", "error_code": -2, "error_message": "Wrong Answer"}, "difficulty": ""}
+{"task_id": "v3_abc365_e", "passed": true, "test_results": [true, true], "metadata": {"execution time": 0.0021109580993652344}, "difficulty": ""}
+{"task_id": "v4_3531", "passed": true, "test_results": [true, true, true], "metadata": {"execution time": 0.0042879581451416016}, "difficulty": "hard"}
+{"task_id": "v4_3548", "passed": true, "test_results": [true, true, true], "metadata": {"execution time": 0.004503965377807617}, "difficulty": "hard"}
+{"task_id": "v4_3550", "passed": true, "test_results": [true, true, true], "metadata": {"execution time": 0.004843711853027344}, "difficulty": "hard"}
+{"task_id": "v4_3551", "passed": true, "test_results": [true, true], "metadata": {"execution time": 0.0024671554565429688}, "difficulty": "hard"}
+{"task_id": "v4_3552", "passed": true, "test_results": [true, true, true], "metadata": {"execution time": 0.00466465950012207}, "difficulty": "hard"}
+{"task_id": "v4_3560", "passed": true, "test_results": [true, true, true], "metadata": {"execution time": 0.00426030158996582}, "difficulty": "hard"}
+{"task_id": "v4_3563", "passed": true, "test_results": [true, true], "metadata": {"execution time": 0.030833005905151367}, "difficulty": "hard"}
+{"task_id": "v4_3571", "passed": true, "test_results": [true, true], "metadata": {"execution time": 0.0026166439056396484}, "difficulty": "hard"}
+{"task_id": "v4_3575", "passed": true, "test_results": [true, true], "metadata": {"execution time": 0.002531290054321289}, "difficulty": "hard"}
+{"task_id": "v4_3580", "passed": true, "test_results": [true, true, true, true], "metadata": {"execution time": 0.005742073059082031}, "difficulty": "hard"}
+{"task_id": "v4_3583", "passed": true, "test_results": [true, true, true], "metadata": {"execution time": 0.0033991336822509766}, "difficulty": "hard"}
+{"task_id": "v4_abc367_e", "passed": true, "test_results": [true, true, true], "metadata": {"execution time": 0.006569623947143555}, "difficulty": ""}
+{"task_id": "v4_abc368_f", "passed": true, "test_results": [true, true], "metadata": {"execution time": 4.562026739120483}, "difficulty": ""}
+{"task_id": "v4_abc370_e", "passed": true, "test_results": [true, true, true], "metadata": {"execution time": 0.005722522735595703}, "difficulty": ""}
+{"task_id": "v4_abc370_f", "passed": false, "test_results": [false], "metadata": {"output": "[13, 4]", "inputs": "[[5, 2], [3, 6, 8, 6, 4]]", "expected": "[13, 1]", "error_code": -2, "error_message": "Wrong Answer"}, "difficulty": ""}
+{"task_id": "v4_abc370_g", "passed": false, "test_results": [false], "metadata": {"output": "8", "inputs": "[[10, 1]]", "expected": "5", "error_code": -2, "error_message": "Wrong Answer"}, "difficulty": ""}
+{"task_id": "v4_abc371_e", "passed": true, "test_results": [true, true], "metadata": {"execution time": 0.003178119659423828}, "difficulty": ""}
+{"task_id": "v4_abc373_e", "passed": false, "test_results": [false], "metadata": {"output": "[1, -1, 0, -1, 0]", "inputs": "[[5, 2, 16], [3, 1, 4, 1, 5]]", "expected": "[2, -1, 1, -1, 0]", "error_code": -2, "error_message": "Wrong Answer"}, "difficulty": ""}
+{"task_id": "v4_arc182_c", "passed": false, "test_results": [false], "metadata": {"output": "1", "inputs": "[[1, 7]]", "expected": "16", "error_code": -2, "error_message": "Wrong Answer"}, "difficulty": ""}
+{"task_id": "v4_arc182_e", "passed": true, "test_results": [true, true, true], "metadata": {"execution time": 0.0042264461517333984}, "difficulty": ""}
+{"task_id": "v5_3588", "passed": true, "test_results": [true, true], "metadata": {"execution time": 0.0024213790893554688}, "difficulty": "hard"}
+{"task_id": "v5_3603", "passed": true, "test_results": [true, true], "metadata": {"execution time": 0.0026044845581054688}, "difficulty": "hard"}
+{"task_id": "v5_3604", "passed": true, "test_results": [true, true, true], "metadata": {"execution time": 0.0027718544006347656}, "difficulty": "hard"}
+{"task_id": "v5_3608", "passed": true, "test_results": [true, true, true], "metadata": {"execution time": 0.003448486328125}, "difficulty": "hard"}
+{"task_id": "v5_3631", "passed": true, "test_results": [true, true, true], "metadata": {"execution time": 0.002714395523071289}, "difficulty": "hard"}
+{"task_id": "v5_3637", "passed": true, "test_results": [true, true, true], "metadata": {"execution time": 0.003605365753173828}, "difficulty": "hard"}
+{"task_id": "v5_3646", "passed": true, "test_results": [true, true], "metadata": {"execution time": 0.0017843246459960938}, "difficulty": "hard"}
+{"task_id": "v5_3648", "passed": true, "test_results": [true, true], "metadata": {"execution time": 0.0020668506622314453}, "difficulty": "hard"}
+{"task_id": "v5_3658", "passed": true, "test_results": [true, true, true], "metadata": {"execution time": 0.0034825801849365234}, "difficulty": "hard"}
+{"task_id": "v5_3675", "passed": true, "test_results": [true, true], "metadata": {"execution time": 0.0017857551574707031}, "difficulty": "hard"}
+{"task_id": "v5_3680", "passed": true, "test_results": [true, true], "metadata": {"execution time": 0.002324819564819336}, "difficulty": "hard"}
+{"task_id": "v5_abc378_e", "passed": true, "test_results": [true, true], "metadata": {"execution time": 0.0018002986907958984}, "difficulty": ""}
+{"task_id": "v5_abc378_g", "passed": false, "test_results": [false], "metadata": {"output": "25", "inputs": "[[3, 2, 998244353]]", "expected": "10", "error_code": -2, "error_message": "Wrong Answer"}, "difficulty": ""}
+{"task_id": "v5_abc379_e", "passed": true, "test_results": [true, true], "metadata": {"execution time": 0.001917123794555664}, "difficulty": ""}
+{"task_id": "v5_abc380_f", "passed": false, "test_results": [-4], "metadata": {"error": "TypeError(\"'int' object is not iterable\")", "error_code": -4, "error_message": "Runtime Error", "inputs": "[[1, 1, 2], 2, 4, [1, 3]]", "expected": "Aoki"}, "difficulty": ""}
+{"task_id": "v5_abc380_g", "passed": false, "test_results": [true, -4], "metadata": {"error": "TypeError(\"'int' object is not iterable\")", "error_code": -4, "error_message": "Runtime Error", "inputs": "[[1, 1], 1]", "expected": "0"}, "difficulty": ""}
+{"task_id": "v5_abc381_d", "passed": false, "test_results": [true, true, -4], "metadata": {"error": "TypeError(\"object of type 'int' has no len()\")", "error_code": -4, "error_message": "Runtime Error", "inputs": "[1, 1]", "expected": "0"}, "difficulty": ""}
+{"task_id": "v5_abc386_f", "passed": true, "test_results": [true, true, true], "metadata": {"execution time": 0.029535770416259766}, "difficulty": ""}
+{"task_id": "v5_arc184_c", "passed": true, "test_results": [true, true], "metadata": {"execution time": 0.0024781227111816406}, "difficulty": ""}
+{"task_id": "v5_arc185_d", "passed": false, "test_results": [true, false], "metadata": {"output": "716451949", "inputs": "[[123456, 185185]]", "expected": "69292914", "error_code": -2, "error_message": "Wrong Answer"}, "difficulty": ""}
+{"task_id": "v5_arc186_e", "passed": false, "test_results": [false], "metadata": {"output": "88", "inputs": "[[5, 2, 3], [1, 1]]", "expected": "4", "error_code": -2, "error_message": "Wrong Answer"}, "difficulty": ""}
+{"task_id": "v5_arc187_b", "passed": false, "test_results": [true, false], "metadata": {"output": "262245", "inputs": "[[10, 8], [-1, 7, -1, -1, -1, 2, -1, 1, -1, 2]]", "expected": "329785", "error_code": -2, "error_message": "Wrong Answer"}, "difficulty": ""}
+{"task_id": "v5_arc189_b", "passed": true, "test_results": [true, true], "metadata": {"execution time": 0.0021805763244628906}, "difficulty": ""}
+{"task_id": "v5_arc189_c", "passed": false, "test_results": [-4], "metadata": {"error": "NameError(\"name 'find_path' is not defined\")", "error_code": -4, "error_message": "Runtime Error", "inputs": "[[5, 3], [0, 1, 0, 1, 0], [0, 0, 1, 0, 1], [4, 1, 2, 3, 5], [3, 4, 5, 2, 1]]", "expected": "4"}, "difficulty": ""}
+{"task_id": "v5_arc189_d", "passed": false, "test_results": [false], "metadata": {"output": "[4, 13, 2, 3, 2, 6]", "inputs": "[6, [4, 13, 2, 3, 2, 6]]", "expected": "[4, 30, 2, 13, 2, 13]", "error_code": -2, "error_message": "Wrong Answer"}, "difficulty": ""}
+{"task_id": "v6_abc387_f", "passed": true, "test_results": [true, true, true], "metadata": {"execution time": 0.00315093994140625}, "difficulty": ""}
+{"task_id": "v6_abc389_e", "passed": true, "test_results": [true, true], "metadata": {"execution time": 0.002982616424560547}, "difficulty": ""}
+{"task_id": "v6_abc389_g", "passed": false, "test_results": [false], "metadata": {"output": "[16, 16, 0, 0]", "inputs": "[[4, 998244353]]", "expected": "[12, 9, 3, 0]", "error_code": -2, "error_message": "Wrong Answer"}, "difficulty": ""}
+{"task_id": "v6_abc390_f", "passed": false, "test_results": [false], "metadata": {"output": "18", "inputs": "[4, [1, 3, 1, 4]]", "expected": "16", "error_code": -2, "error_message": "Wrong Answer"}, "difficulty": ""}
+{"task_id": "v6_abc390_g", "passed": true, "test_results": [true, true, true], "metadata": {"execution time": 2.108074903488159}, "difficulty": ""}
+{"task_id": "v6_abc391_e", "passed": false, "test_results": [-4], "metadata": {"error": "TypeError(\"'int' object is not subscriptable\")", "error_code": -4, "error_message": "Runtime Error", "inputs": "[2, 10011101]", "expected": "1"}, "difficulty": ""}
+{"task_id": "v6_abc391_g", "passed": true, "test_results": [true, true, true], "metadata": {"execution time": 0.15371489524841309}, "difficulty": ""}
+{"task_id": "v6_abc392_f", "passed": true, "test_results": [true, true], "metadata": {"execution time": 0.0031087398529052734}, "difficulty": ""}
+{"task_id": "v6_abc393_d", "passed": true, "test_results": [true, true, true], "metadata": {"execution time": 0.005888938903808594}, "difficulty": ""}
+{"task_id": "v6_abc397_d", "passed": true, "test_results": [true, true, true], "metadata": {"execution time": 1.3614821434020996}, "difficulty": ""}
+{"task_id": "v6_abc397_f", "passed": false, "test_results": [-4], "metadata": {"error": "TypeError('SegmentTree() takes no arguments')", "error_code": -4, "error_message": "Runtime Error", "inputs": "[5, [3, 1, 4, 1, 5]]", "expected": "5"}, "difficulty": ""}
+{"task_id": "v6_abc398_d", "passed": true, "test_results": [true, true, true], "metadata": {"execution time": 0.004736661911010742}, "difficulty": ""}
+{"task_id": "v6_abc398_f", "passed": true, "test_results": [true, true, true], "metadata": {"execution time": 0.003077983856201172}, "difficulty": ""}
+{"task_id": "v6_abc399_e", "passed": true, "test_results": [true, true, true, true], "metadata": {"execution time": 0.004568576812744141}, "difficulty": ""}
+{"task_id": "v6_abc399_f", "passed": false, "test_results": [true, -4], "metadata": {"error": "TypeError(\"'int' object is not iterable\")", "error_code": -4, "error_message": "Runtime Error", "inputs": "[[1, 10], 0]", "expected": "0"}, "difficulty": ""}
+{"task_id": "v6_arc192_b", "passed": true, "test_results": [true, true, true], "metadata": {"execution time": 0.0033054351806640625}, "difficulty": ""}
+{"task_id": "v6_arc192_e", "passed": false, "test_results": [false], "metadata": {"output": "21", "inputs": "[[4, 3, 1, 2, 2, 3]]", "expected": "192", "error_code": -2, "error_message": "Wrong Answer"}, "difficulty": ""}
+{"task_id": "v6_arc193_b", "passed": false, "test_results": [-4], "metadata": {"error": "IndexError('string index out of range')", "error_code": -4, "error_message": "Runtime Error", "inputs": "[3, 10]", "expected": "14"}, "difficulty": ""}
+{"task_id": "v6_arc194_b", "passed": true, "test_results": [true, true, true], "metadata": {"execution time": 0.0033445358276367188}, "difficulty": ""}
+{"task_id": "v6_arc194_d", "passed": true, "test_results": [true, true], "metadata": {"execution time": 0.03999519348144531}, "difficulty": ""}
+{"task_id": "v6_arc195_b", "passed": true, "test_results": [true, true, true], "metadata": {"execution time": 0.005200386047363281}, "difficulty": ""}
+{"task_id": "v6_arc196_a", "passed": true, "test_results": [true, true, true], "metadata": {"execution time": 0.0031440258026123047}, "difficulty": ""}

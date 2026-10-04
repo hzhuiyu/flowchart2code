@@ -1,0 +1,245 @@
+{
+  "problem_id": "max_score_with_operations",
+  "nodes": [
+    {
+      "id": 1,
+      "type": "start",
+      "label": "Start",
+      "next": 2
+    },
+    {
+      "id": 2,
+      "type": "process",
+      "label": "Input: nums (list of integers), k (integer)",
+      "action": "ctx['nums'] = ctx['arg0']; ctx['k'] = ctx['arg1']; ctx['MOD'] = 10**9 + 7",
+      "next": 3
+    },
+    {
+      "id": 3,
+      "type": "process",
+      "label": "Initialize n = len(nums)",
+      "action": "ctx['n'] = len(ctx['nums'])",
+      "next": 4
+    },
+    {
+      "id": 4,
+      "type": "process",
+      "label": "Initialize upper = max(nums) + 1",
+      "action": "ctx['upper'] = max(ctx['nums']) + 1 if ctx['nums'] else 1",
+      "next": 5
+    },
+    {
+      "id": 5,
+      "type": "process",
+      "label": "Initialize prime = [True] * upper",
+      "action": "ctx['prime'] = [True] * ctx['upper']",
+      "next": 6
+    },
+    {
+      "id": 6,
+      "type": "process",
+      "label": "Initialize prime[0] = prime[1] = False",
+      "action": "ctx['prime'][0] = False; ctx['prime'][1] = False",
+      "next": 7
+    },
+    {
+      "id": 7,
+      "type": "process",
+      "label": "Initialize primeScore = [0] * upper",
+      "action": "ctx['primeScore'] = [0] * ctx['upper']",
+      "next": 8
+    },
+    {
+      "id": 8,
+      "type": "process",
+      "label": "Loop i from 2 to upper-1",
+      "action": "ctx['i'] = 2",
+      "next": 9
+    },
+    {
+      "id": 9,
+      "type": "decision",
+      "label": "Is prime[i] True?",
+      "logic": "ctx['prime'][ctx['i']]",
+      "true_next": 10,
+      "false_next": 13
+    },
+    {
+      "id": 10,
+      "type": "process",
+      "label": "Loop j from i to upper-1 with step i",
+      "action": "ctx['j'] = ctx['i']; while ctx['j'] < ctx['upper']: ctx['primeScore'][ctx['j']] += 1; ctx['j'] += ctx['i']",
+      "next": 11
+    },
+    {
+      "id": 11,
+      "type": "process",
+      "label": "Set prime[j] = False",
+      "action": "ctx['prime'][ctx['j']] = False",
+      "next": 8
+    },
+    {
+      "id": 12,
+      "type": "process",
+      "label": "Initialize nextGreaterElement = [n] * n",
+      "action": "ctx['nextGreaterElement'] = [ctx['n']] * ctx['n']",
+      "next": 14
+    },
+    {
+      "id": 13,
+      "type": "process",
+      "label": "Initialize stack s = []",
+      "action": "ctx['s'] = []",
+      "next": 14
+    },
+    {
+      "id": 14,
+      "type": "process",
+      "label": "Loop i from n-1 to 0",
+      "action": "ctx['i'] = ctx['n'] - 1",
+      "next": 15
+    },
+    {
+      "id": 15,
+      "type": "decision",
+      "label": "Is stack s not empty and primeScore[nums[i]] >= primeScore[nums[s[-1]]]?",
+      "logic": "len(ctx['s']) > 0 and ctx['primeScore'][ctx['nums'][ctx['i']]] >= ctx['primeScore'][ctx['nums'][ctx['s'][-1]]]",
+      "true_next": 16,
+      "false_next": 17
+    },
+    {
+      "id": 16,
+      "type": "process",
+      "label": "Set nextGreaterElement[i] = s[-1] if s else n",
+      "action": "ctx['nextGreaterElement'][ctx['i']] = ctx['s'][-1] if ctx['s'] else ctx['n']",
+      "next": 18
+    },
+    {
+      "id": 17,
+      "type": "process",
+      "label": "Append i to stack s",
+      "action": "ctx['s'].append(ctx['i'])",
+      "next": 18
+    },
+    {
+      "id": 18,
+      "type": "process",
+      "label": "Initialize prevGreaterOrEqualElement = [-1] * n",
+      "action": "ctx['prevGreaterOrEqualElement'] = [-1] * ctx['n']",
+      "next": 20
+    },
+    {
+      "id": 19,
+      "type": "process",
+      "label": "Initialize stack s = []",
+      "action": "ctx['s'] = []",
+      "next": 20
+    },
+    {
+      "id": 20,
+      "type": "process",
+      "label": "Loop i from 0 to n-1",
+      "action": "ctx['i'] = 0",
+      "next": 21
+    },
+    {
+      "id": 21,
+      "type": "decision",
+      "label": "Is stack s not empty and primeScore[nums[i]] > primeScore[nums[s[-1]]]?",
+      "logic": "len(ctx['s']) > 0 and ctx['primeScore'][ctx['nums'][ctx['i']]] > ctx['primeScore'][ctx['nums'][ctx['s'][-1]]]",
+      "true_next": 22,
+      "false_next": 23
+    },
+    {
+      "id": 22,
+      "type": "process",
+      "label": "Set prevGreaterOrEqualElement[i] = s[-1] if s else -1",
+      "action": "ctx['prevGreaterOrEqualElement'][ctx['i']] = ctx['s'][-1] if ctx['s'] else -1",
+      "next": 24
+    },
+    {
+      "id": 23,
+      "type": "process",
+      "label": "Append i to stack s",
+      "action": "ctx['s'].append(ctx['i'])",
+      "next": 24
+    },
+    {
+      "id": 24,
+      "type": "process",
+      "label": "Initialize res = 1",
+      "action": "ctx['res'] = 1",
+      "next": 25
+    },
+    {
+      "id": 25,
+      "type": "process",
+      "label": "Sort nums with indices by value in descending order",
+      "action": "ctx['sorted_indices'] = sorted(range(ctx['n']), key=lambda i: ctx['nums'][i], reverse=True)",
+      "next": 26
+    },
+    {
+      "id": 26,
+      "type": "process",
+      "label": "Loop through sorted nums with indices",
+      "action": "ctx['i'] = 0",
+      "next": 27
+    },
+    {
+      "id": 27,
+      "type": "decision",
+      "label": "k == 0?",
+      "logic": "ctx['k'] == 0",
+      "true_next": 32,
+      "false_next": 28
+    },
+    {
+      "id": 28,
+      "type": "process",
+      "label": "Calculate operations = min((i - prevGreaterOrEqualElement[i]) * (nextGreaterElement[i] - i), k)",
+      "action": "ctx['operations'] = min((ctx['i'] - ctx['prevGreaterOrEqualElement'][ctx['i']]) * (ctx['nextGreaterElement'][ctx['i']] - ctx['i']), ctx['k'])",
+      "next": 29
+    },
+    {
+      "id": 29,
+      "type": "process",
+      "label": "Update res = (res * pow(num, operations, MOD)) % MOD",
+      "action": "ctx['res'] = (ctx['res'] * pow(ctx['nums'][ctx['i']], ctx['operations'], ctx['MOD'])) % ctx['MOD']",
+      "next": 30
+    },
+    {
+      "id": 30,
+      "type": "process",
+      "label": "Update k -= operations",
+      "action": "ctx['k'] -= ctx['operations']",
+      "next": 31
+    },
+    {
+      "id": 31,
+      "type": "decision",
+      "label": "k == 0?",
+      "logic": "ctx['k'] == 0",
+      "true_next": 32,
+      "false_next": 26
+    },
+    {
+      "id": 32,
+      "type": "end",
+      "label": "Output: res",
+      "output": "ctx['res']"
+    }
+  ],
+  "task_id": "2818. Apply Operations to Maximize Score",
+  "dataset": "MATH",
+  "result": "failed: ",
+  "code": "def maximumScore(nums: List[int], k: int) -> int:\n    MOD = 10**9 + 7\n    n = len(nums)\n    upper = max(nums) + 1 if nums else 1\n    prime = [True] * upper\n    prime[0] = False\n    prime[1] = False\n    primeScore = [0] * upper\n    \n    i = 2\n    while i < upper:\n        if prime[i]:\n            j = i\n            while j < upper:\n                primeScore[j] += 1\n                j += i\n            prime[i] = False\n        i += 1\n    \n    nextGreaterElement = [n] * n\n    s = []\n    i = n - 1\n    while i >= 0:\n        while s and primeScore[nums[i]] >= primeScore[nums[s[-1]]]:\n            nextGreaterElement[i] = s[-1]\n            s.pop()\n        s.append(i)\n        i -= 1\n    \n    prevGreaterOrEqualElement = [-1] * n\n    s = []\n    i = 0\n    while i < n:\n        while s and primeScore[nums[i]] > primeScore[nums[s[-1]]]:\n            prevGreaterOrEqualElement[i] = s[-1]\n            s.pop()\n        s.append(i)\n        i += 1\n    \n    res = 1\n    sorted_indices = sorted(range(n), key=lambda i: nums[i], reverse=True)\n    \n    for i in sorted_indices:\n        operations = min((i - prevGreaterOrEqualElement[i]) * (nextGreaterElement[i] - i), k)\n        res = (res * pow(nums[i], operations, MOD)) % MOD\n        k -= operations\n        if k == 0:\n            break\n    \n    return res",
+  "verification": {
+    "md_verdict": "ILR Error",
+    "actual_error_source": "both",
+    "ilr_verdict": "incorrect",
+    "code_vs_ilr": "deviates",
+    "md_correct": "partial",
+    "note": "ILR确有错：sieve外层回边指回node8会重置i=2，且node11在内层循环结束后执行prime[j]=False，j>=upper必越界(IndexError)。但代码也没忠实实现ILR：改成prime[i]=False且不标记合数，导致primeScore对合数重复计数（如nums[8]的primeScore算成3而非1），test1输出64≠81。",
+    "evidence": "ILR忠实转写运行 maximumScore([8,3,9,3,8],2) -> IndexError: list assignment index out of range；生成代码同输入返回64，期望81。"
+  }
+}

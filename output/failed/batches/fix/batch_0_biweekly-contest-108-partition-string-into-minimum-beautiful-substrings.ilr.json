@@ -1,0 +1,45 @@
+{
+  "problem_id": "minimum_beautiful_substrings",
+  "nodes": [
+    {
+      "id": 1,
+      "type": "start",
+      "label": "Start",
+      "next": 2
+    },
+    {
+      "id": 2,
+      "type": "process",
+      "label": "Input: s (binary string); build pow_bank of powers of 5 and init dp",
+      "action": "ctx['s'] = ctx['arg0']; ctx['pow_bank'] = set(); ctx['p'] = 1\nwhile ctx['p'] < (1 << len(ctx['s'])):\n    ctx['pow_bank'].add(ctx['p'])\n    ctx['p'] *= 5\nctx['dp'] = [float('inf')] * (len(ctx['s']) + 1)\nctx['dp'][len(ctx['s'])] = 0",
+      "next": 3
+    },
+    {
+      "id": 3,
+      "type": "process",
+      "label": "DP over suffixes: for each start i with s[i] != '0', try every substring s[i:j+1] that is a power of 5 and relax dp[i] = min(dp[i], dp[j+1] + 1)",
+      "action": "for i in range(len(ctx['s']) - 1, -1, -1):\n    if ctx['s'][i] == '0':\n        continue\n    for j in range(i, len(ctx['s'])):\n        dec = int(ctx['s'][i:j + 1], 2)\n        if dec in ctx['pow_bank']:\n            ctx['dp'][i] = min(ctx['dp'][i], ctx['dp'][j + 1] + 1)",
+      "next": 7
+    },
+    {
+      "id": 7,
+      "type": "decision",
+      "label": "Is dp[0] == inf?",
+      "logic": "ctx['dp'][0] == float('inf')",
+      "true_next": 15,
+      "false_next": 16
+    },
+    {
+      "id": 15,
+      "type": "end",
+      "label": "Output: -1 (impossible to partition)",
+      "output": "-1"
+    },
+    {
+      "id": 16,
+      "type": "end",
+      "label": "Output: dp[0] (minimum number of beautiful substrings)",
+      "output": "ctx['dp'][0]"
+    }
+  ]
+}

@@ -1,0 +1,134 @@
+{
+  "problem_id": "maxScore",
+  "nodes": [
+    {
+      "id": 1,
+      "type": "start",
+      "label": "Start",
+      "next": 2
+    },
+    {
+      "id": 2,
+      "type": "process",
+      "label": "Input: nums (list of integers), x (integer)",
+      "action": "ctx['nums'] = ctx['arg0']; ctx['x'] = ctx['arg1']; ctx['n'] = len(ctx['nums']); ctx['pref'] = [0] * ctx['n']; ctx['lastEven'] = 0; ctx['lastOdd'] = 0",
+      "next": 3
+    },
+    {
+      "id": 3,
+      "type": "process",
+      "label": "Set pref[0] = nums[0]",
+      "action": "ctx['pref'][0] = ctx['nums'][0]",
+      "next": 4
+    },
+    {
+      "id": 4,
+      "type": "decision",
+      "label": "Is nums[i] % 2 == 1?",
+      "logic": "ctx['i'] < ctx['n'] - 1",
+      "true_next": 5,
+      "false_next": 6
+    },
+    {
+      "id": 5,
+      "type": "process",
+      "label": "Calculate pref[i] = pref[lastEven] + nums[i] - (((nums[lastEven] + nums[i]) % 2) * x)",
+      "action": "ctx['pref'][ctx['i']] = ctx['pref'][ctx['lastEven']] + ctx['nums'][ctx['i']] - ((ctx['nums'][ctx['lastEven']] + ctx['nums'][ctx['i']]) % 2) * ctx['x']",
+      "next": 7
+    },
+    {
+      "id": 6,
+      "type": "process",
+      "label": "Calculate pref[i] = max(pref[i], pref[lastOdd] + nums[i] - (((nums[lastOdd] + nums[i]) % 2) * x))",
+      "action": "ctx['pref'][ctx['i']] = max(ctx['pref'][ctx['i']], ctx['pref'][ctx['lastOdd']] + ctx['nums'][ctx['i']] - ((ctx['nums'][ctx['lastOdd']] + ctx['nums'][ctx['i']]) % 2) * ctx['x'])",
+      "next": 7
+    },
+    {
+      "id": 7,
+      "type": "decision",
+      "label": "Is nums[i] % 2 == 1?",
+      "logic": "ctx['nums'][ctx['i']] % 2 == 1",
+      "true_next": 8,
+      "false_next": 9
+    },
+    {
+      "id": 8,
+      "type": "process",
+      "label": "Set lastOdd = i",
+      "action": "ctx['lastOdd'] = ctx['i']",
+      "next": 4
+    },
+    {
+      "id": 9,
+      "type": "process",
+      "label": "Set lastEven = i",
+      "action": "ctx['lastEven'] = ctx['i']",
+      "next": 4
+    },
+    {
+      "id": 10,
+      "type": "return",
+      "label": "Return max(pref)",
+      "value": "max(ctx['pref'])"
+    }
+  ],
+  "edges": [
+    {
+      "from_node": 1,
+      "to_node": 2
+    },
+    {
+      "from_node": 2,
+      "to_node": 3
+    },
+    {
+      "from_node": 3,
+      "to_node": 4
+    },
+    {
+      "from_node": 4,
+      "to_node": 5
+    },
+    {
+      "from_node": 5,
+      "to_node": 6
+    },
+    {
+      "from_node": 6,
+      "to_node": 7
+    },
+    {
+      "from_node": 7,
+      "to_node": 8
+    },
+    {
+      "from_node": 8,
+      "to_node": 4
+    },
+    {
+      "from_node": 7,
+      "to_node": 9
+    },
+    {
+      "from_node": 9,
+      "to_node": 4
+    },
+    {
+      "from_node": 4,
+      "to_node": 10
+    }
+  ],
+  "task_id": "biweekly-contest-109-visit-array-positions-to-maximize-score",
+  "dataset": "Algorithm",
+  "result": "failed: ",
+  "code": "class Solution:\n    def maxScore(self, nums: List[int], x: int) -> int:\n        n = len(nums)\n        pref = [0] * n\n        lastEven = 0\n        lastOdd = 0\n        \n        pref[0] = nums[0]\n        \n        i = 0\n        while i < n - 1:\n            if nums[i] % 2 == 1:\n                pref[i + 1] = pref[lastEven] + nums[i + 1] - ((nums[lastEven] + nums[i + 1]) % 2) * x\n            else:\n                pref[i + 1] = max(pref[i + 1], pref[lastOdd] + nums[i + 1] - ((nums[lastOdd] + nums[i + 1]) % 2) * x)\n            \n            if nums[i + 1] % 2 == 1:\n                lastOdd = i + 1\n            else:\n                lastEven = i + 1\n            \n            i += 1\n        \n        return max(pref)",
+  "verification": {
+    "md_verdict": "ILR Error",
+    "actual_error_source": "both",
+    "ilr_verdict": "incorrect",
+    "code_vs_ilr": "deviates",
+    "md_correct": "partial",
+    "note": "根因确在 ILR：它丢失了 OCR 的 'For i from 1 to N-1' 循环语义，i 从未初始化/自增，条件 i<n-1 漏掉最后一个下标，且 node4 的 false_next(6) 与边 4->10 自相矛盾，任何忠实字面实现都过不了（示例2 [2,4,6,8] 得 12/16 而非 20）。但生成代码还额外偏离 ILR：把顺序执行的 node5、node6（两种转移取 max）改成了按 nums[i] 奇偶二选一，导致示例1 也错，MD 漏掉了这一层。",
+    "evidence": "按 OCR 意图转写（i=1..n-1，两式顺序取 max）100/100 通过；ILR 字面实现（i 从 0 或 1，while i<n-1）示例2 输出 16/12 而期望 20；生成代码 95/100 失败，示例1 输出 12 而期望 13。"
+  }
+}

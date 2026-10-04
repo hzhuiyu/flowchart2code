@@ -1,0 +1,1140 @@
+{
+ "task_id": "weekly-contest-378-find-longest-special-substring-that-occurs-thrice-i",
+ "dataset": "Algorithm",
+ "title": "find-longest-special-substring-that-occurs-thrice-i",
+ "difficulty": "Medium",
+ "prompt": "\"\"\"\nYou are given a string s that consists of lowercase English letters.\nA string is called special if it is made up of only a single character. For example, the string \"abc\" is not special, whereas the strings \"ddd\", \"zz\", and \"f\" are special.\nReturn the length of the longest special substring of s which occurs at least thrice, or -1 if no special substring occurs at least thrice.\nA substring is a contiguous non-empty sequence of characters within a string.\n\nExample 1:\n\nInput: s = \"aaaa\"\nOutput: 2\nExplanation: The longest special substring which occurs thrice is \"aa\": substrings \"aaaa\", \"aaaa\", and \"aaaa\".\nIt can be shown that the maximum length achievable is 2.\n\nExample 2:\n\nInput: s = \"abcdef\"\nOutput: -1\nExplanation: There exists no special substring which occurs at least thrice. Hence return -1.\n\nExample 3:\n\nInput: s = \"abcaba\"\nOutput: 1\nExplanation: The longest special substring which occurs thrice is \"a\": substrings \"abcaba\", \"abcaba\", and \"abcaba\".\nIt can be shown that the maximum length achievable is 1.\n\n\nConstraints:\n\n3 <= s.length <= 50\ns consists of only lowercase English letters.\n\"\"\"\nclass Solution:\n    def maximumLength(self, s: str) -> int:\n        ",
+ "starter_code": "class Solution:\n    def maximumLength(self, s: str) -> int:\n        ",
+ "entry_point": "",
+ "test": "\nmy_solution = Solution()\n\ntest_input = { \"s\": \"aaaa\" }\nassert my_solution.maximumLength(**test_input) == 2\n\ntest_input = { \"s\": \"abcdef\" }\nassert my_solution.maximumLength(**test_input) == -1\n\ntest_input = { \"s\": \"abcaba\" }\nassert my_solution.maximumLength(**test_input) == 1\n\ntest_input = { \"s\": \"abcccccdddd\" }\nassert my_solution.maximumLength(**test_input) == 3\n\ntest_input = { \"s\": \"aaa\" }\nassert my_solution.maximumLength(**test_input) == 1\n\ntest_input = { \"s\": \"acc\" }\nassert my_solution.maximumLength(**test_input) == -1\n\ntest_input = { \"s\": \"cab\" }\nassert my_solution.maximumLength(**test_input) == -1\n\ntest_input = { \"s\": \"cad\" }\nassert my_solution.maximumLength(**test_input) == -1\n\ntest_input = { \"s\": \"cbc\" }\nassert my_solution.maximumLength(**test_input) == -1\n\ntest_input = { \"s\": \"ccc\" }\nassert my_solution.maximumLength(**test_input) == 1\n\ntest_input = { \"s\": \"dca\" }\nassert my_solution.maximumLength(**test_input) == -1\n\ntest_input = { \"s\": \"ddd\" }\nassert my_solution.maximumLength(**test_input) == 1\n\ntest_input = { \"s\": \"fff\" }\nassert my_solution.maximumLength(**test_input) == 1\n\ntest_input = { \"s\": \"ggg\" }\nassert my_solution.maximumLength(**test_input) == 1\n\ntest_input = { \"s\": \"hhh\" }\nassert my_solution.maximumLength(**test_input) == 1\n\ntest_input = { \"s\": \"kkk\" }\nassert my_solution.maximumLength(**test_input) == 1\n\ntest_input = { \"s\": \"lll\" }\nassert my_solution.maximumLength(**test_input) == 1\n\ntest_input = { \"s\": \"ooo\" }\nassert my_solution.maximumLength(**test_input) == 1\n\ntest_input = { \"s\": \"ppp\" }\nassert my_solution.maximumLength(**test_input) == 1\n\ntest_input = { \"s\": \"qqq\" }\nassert my_solution.maximumLength(**test_input) == 1\n\ntest_input = { \"s\": \"rrr\" }\nassert my_solution.maximumLength(**test_input) == 1\n\ntest_input = { \"s\": \"xxx\" }\nassert my_solution.maximumLength(**test_input) == 1\n\ntest_input = { \"s\": \"yyy\" }\nassert my_solution.maximumLength(**test_input) == 1\n\ntest_input = { \"s\": \"aaau\" }\nassert my_solution.maximumLength(**test_input) == 1\n\ntest_input = { \"s\": \"affe\" }\nassert my_solution.maximumLength(**test_input) == -1\n\ntest_input = { \"s\": \"agae\" }\nassert my_solution.maximumLength(**test_input) == -1\n\ntest_input = { \"s\": \"aiii\" }\nassert my_solution.maximumLength(**test_input) == 1\n\ntest_input = { \"s\": \"bbbb\" }\nassert my_solution.maximumLength(**test_input) == 2\n\ntest_input = { \"s\": \"bbbz\" }\nassert my_solution.maximumLength(**test_input) == 1\n\ntest_input = { \"s\": \"bddd\" }\nassert my_solution.maximumLength(**test_input) == 1\n\ntest_input = { \"s\": \"beee\" }\nassert my_solution.maximumLength(**test_input) == 1\n\ntest_input = { \"s\": \"bnnn\" }\nassert my_solution.maximumLength(**test_input) == 1\n\ntest_input = { \"s\": \"bsss\" }\nassert my_solution.maximumLength(**test_input) == 1\n\ntest_input = { \"s\": \"bxxx\" }\nassert my_solution.maximumLength(**test_input) == 1\n\ntest_input = { \"s\": \"cafc\" }\nassert my_solution.maximumLength(**test_input) == -1\n\ntest_input = { \"s\": \"ccag\" }\nassert my_solution.maximumLength(**test_input) == -1\n\ntest_input = { \"s\": \"cfff\" }\nassert my_solution.maximumLength(**test_input) == 1\n\ntest_input = { \"s\": \"dddd\" }\nassert my_solution.maximumLength(**test_input) == 2\n\ntest_input = { \"s\": \"dsss\" }\nassert my_solution.maximumLength(**test_input) == 1\n\ntest_input = { \"s\": \"eccc\" }\nassert my_solution.maximumLength(**test_input) == 1\n\ntest_input = { \"s\": \"eeew\" }\nassert my_solution.maximumLength(**test_input) == 1\n\ntest_input = { \"s\": \"gfdc\" }\nassert my_solution.maximumLength(**test_input) == -1\n\ntest_input = { \"s\": \"giii\" }\nassert my_solution.maximumLength(**test_input) == 1\n\ntest_input = { \"s\": \"hhhn\" }\nassert my_solution.maximumLength(**test_input) == 1\n\ntest_input = { \"s\": \"hyyy\" }\nassert my_solution.maximumLength(**test_input) == 1\n\ntest_input = { \"s\": \"iiii\" }\nassert my_solution.maximumLength(**test_input) == 2\n\ntest_input = { \"s\": \"jiii\" }\nassert my_solution.maximumLength(**test_input) == 1\n\ntest_input = { \"s\": \"jjjj\" }\nassert my_solution.maximumLength(**test_input) == 2\n\ntest_input = { \"s\": \"kbbb\" }\nassert my_solution.maximumLength(**test_input) == 1\n\ntest_input = { \"s\": \"kddd\" }\nassert my_solution.maximumLength(**test_input) == 1\n\ntest_input = { \"s\": \"looo\" }\nassert my_solution.maximumLength(**test_input) == 1\n\ntest_input = { \"s\": \"nnnn\" }\nassert my_solution.maximumLength(**test_input) == 2\n\ntest_input = { \"s\": \"oaaa\" }\nassert my_solution.maximumLength(**test_input) == 1\n\ntest_input = { \"s\": \"osss\" }\nassert my_solution.maximumLength(**test_input) == 1\n\ntest_input = { \"s\": \"pppp\" }\nassert my_solution.maximumLength(**test_input) == 2\n\ntest_input = { \"s\": \"pppw\" }\nassert my_solution.maximumLength(**test_input) == 1\n\ntest_input = { \"s\": \"qqqc\" }\nassert my_solution.maximumLength(**test_input) == 1\n\ntest_input = { \"s\": \"qqqo\" }\nassert my_solution.maximumLength(**test_input) == 1\n\ntest_input = { \"s\": \"qqqq\" }\nassert my_solution.maximumLength(**test_input) == 2\n\ntest_input = { \"s\": \"reee\" }\nassert my_solution.maximumLength(**test_input) == 1\n\ntest_input = { \"s\": \"rzzz\" }\nassert my_solution.maximumLength(**test_input) == 1\n\ntest_input = { \"s\": \"thhh\" }\nassert my_solution.maximumLength(**test_input) == 1\n\ntest_input = { \"s\": \"tttt\" }\nassert my_solution.maximumLength(**test_input) == 2\n\ntest_input = { \"s\": \"unnn\" }\nassert my_solution.maximumLength(**test_input) == 1\n\ntest_input = { \"s\": \"uuuu\" }\nassert my_solution.maximumLength(**test_input) == 2\n\ntest_input = { \"s\": \"uyyy\" }\nassert my_solution.maximumLength(**test_input) == 1\n\ntest_input = { \"s\": \"vddd\" }\nassert my_solution.maximumLength(**test_input) == 1\n\ntest_input = { \"s\": \"vfff\" }\nassert my_solution.maximumLength(**test_input) == 1\n\ntest_input = { \"s\": \"vvvv\" }\nassert my_solution.maximumLength(**test_input) == 2\n\ntest_input = { \"s\": \"wbbb\" }\nassert my_solution.maximumLength(**test_input) == 1\n\ntest_input = { \"s\": \"wqqq\" }\nassert my_solution.maximumLength(**test_input) == 1\n\ntest_input = { \"s\": \"wwwg\" }\nassert my_solution.maximumLength(**test_input) == 1\n\ntest_input = { \"s\": \"xxxk\" }\nassert my_solution.maximumLength(**test_input) == 1\n\ntest_input = { \"s\": \"xxxx\" }\nassert my_solution.maximumLength(**test_input) == 2\n\ntest_input = { \"s\": \"zfff\" }\nassert my_solution.maximumLength(**test_input) == 1\n\ntest_input = { \"s\": \"ammmm\" }\nassert my_solution.maximumLength(**test_input) == 2\n\ntest_input = { \"s\": \"aqqqu\" }\nassert my_solution.maximumLength(**test_input) == 1\n\ntest_input = { \"s\": \"axxxx\" }\nassert my_solution.maximumLength(**test_input) == 2\n\ntest_input = { \"s\": \"bahhh\" }\nassert my_solution.maximumLength(**test_input) == 1\n\ntest_input = { \"s\": \"bbbbz\" }\nassert my_solution.maximumLength(**test_input) == 2\n\ntest_input = { \"s\": \"bbccc\" }\nassert my_solution.maximumLength(**test_input) == 1\n\ntest_input = { \"s\": \"biaei\" }\nassert my_solution.maximumLength(**test_input) == -1\n\ntest_input = { \"s\": \"bjjjj\" }\nassert my_solution.maximumLength(**test_input) == 2\n\ntest_input = { \"s\": \"cccll\" }\nassert my_solution.maximumLength(**test_input) == 1\n\ntest_input = { \"s\": \"ceaaa\" }\nassert my_solution.maximumLength(**test_input) == 1\n\ntest_input = { \"s\": \"cjlll\" }\nassert my_solution.maximumLength(**test_input) == 1\n\ntest_input = { \"s\": \"crqqq\" }\nassert my_solution.maximumLength(**test_input) == 1\n\ntest_input = { \"s\": \"cyyyy\" }\nassert my_solution.maximumLength(**test_input) == 2\n\ntest_input = { \"s\": \"ddddj\" }\nassert my_solution.maximumLength(**test_input) == 2\n\ntest_input = { \"s\": \"ddddt\" }\nassert my_solution.maximumLength(**test_input) == 2\n\ntest_input = { \"s\": \"dkkkk\" }\nassert my_solution.maximumLength(**test_input) == 2\n\ntest_input = { \"s\": \"eefff\" }\nassert my_solution.maximumLength(**test_input) == 1\n\ntest_input = { \"s\": \"efage\" }\nassert my_solution.maximumLength(**test_input) == -1\n\ntest_input = { \"s\": \"epppp\" }\nassert my_solution.maximumLength(**test_input) == 2\n\ntest_input = { \"s\": \"fafff\" }\nassert my_solution.maximumLength(**test_input) == 1\n\ntest_input = { \"s\": \"ffbbb\" }\nassert my_solution.maximumLength(**test_input) == 1\n\ntest_input = { \"s\": \"ffffr\" }\nassert my_solution.maximumLength(**test_input) == 2\n\ntest_input = { \"s\": \"gcgbf\" }\nassert my_solution.maximumLength(**test_input) == -1\n\ntest_input = { \"s\": \"gcooo\" }\nassert my_solution.maximumLength(**test_input) == 1\n\ntest_input = { \"s\": \"gfgec\" }\nassert my_solution.maximumLength(**test_input) == -1",
+ "test_cases": [
+  {
+   "input": {
+    "args": [
+     "aaaa"
+    ]
+   },
+   "output": 2,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "abcdef"
+    ]
+   },
+   "output": -1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "abcaba"
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "abcccccdddd"
+    ]
+   },
+   "output": 3,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "aaa"
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "acc"
+    ]
+   },
+   "output": -1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "cab"
+    ]
+   },
+   "output": -1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "cad"
+    ]
+   },
+   "output": -1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "cbc"
+    ]
+   },
+   "output": -1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "ccc"
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "dca"
+    ]
+   },
+   "output": -1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "ddd"
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "fff"
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "ggg"
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "hhh"
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "kkk"
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "lll"
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "ooo"
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "ppp"
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "qqq"
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "rrr"
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "xxx"
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "yyy"
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "aaau"
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "affe"
+    ]
+   },
+   "output": -1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "agae"
+    ]
+   },
+   "output": -1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "aiii"
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "bbbb"
+    ]
+   },
+   "output": 2,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "bbbz"
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "bddd"
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "beee"
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "bnnn"
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "bsss"
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "bxxx"
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "cafc"
+    ]
+   },
+   "output": -1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "ccag"
+    ]
+   },
+   "output": -1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "cfff"
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "dddd"
+    ]
+   },
+   "output": 2,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "dsss"
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "eccc"
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "eeew"
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "gfdc"
+    ]
+   },
+   "output": -1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "giii"
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "hhhn"
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "hyyy"
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "iiii"
+    ]
+   },
+   "output": 2,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "jiii"
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "jjjj"
+    ]
+   },
+   "output": 2,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "kbbb"
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "kddd"
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "looo"
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "nnnn"
+    ]
+   },
+   "output": 2,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "oaaa"
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "osss"
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "pppp"
+    ]
+   },
+   "output": 2,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "pppw"
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "qqqc"
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "qqqo"
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "qqqq"
+    ]
+   },
+   "output": 2,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "reee"
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "rzzz"
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "thhh"
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "tttt"
+    ]
+   },
+   "output": 2,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "unnn"
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "uuuu"
+    ]
+   },
+   "output": 2,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "uyyy"
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "vddd"
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "vfff"
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "vvvv"
+    ]
+   },
+   "output": 2,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "wbbb"
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "wqqq"
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "wwwg"
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "xxxk"
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "xxxx"
+    ]
+   },
+   "output": 2,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "zfff"
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "ammmm"
+    ]
+   },
+   "output": 2,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "aqqqu"
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "axxxx"
+    ]
+   },
+   "output": 2,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "bahhh"
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "bbbbz"
+    ]
+   },
+   "output": 2,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "bbccc"
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "biaei"
+    ]
+   },
+   "output": -1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "bjjjj"
+    ]
+   },
+   "output": 2,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "cccll"
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "ceaaa"
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "cjlll"
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "crqqq"
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "cyyyy"
+    ]
+   },
+   "output": 2,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "ddddj"
+    ]
+   },
+   "output": 2,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "ddddt"
+    ]
+   },
+   "output": 2,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "dkkkk"
+    ]
+   },
+   "output": 2,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "eefff"
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "efage"
+    ]
+   },
+   "output": -1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "epppp"
+    ]
+   },
+   "output": 2,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "fafff"
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "ffbbb"
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "ffffr"
+    ]
+   },
+   "output": 2,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "gcgbf"
+    ]
+   },
+   "output": -1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "gcooo"
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "gfgec"
+    ]
+   },
+   "output": -1,
+   "explanation": ""
+  }
+ ],
+ "original_ilr": "```json\n{\n  \"problem_id\": \"maximumLength\",\n  \"nodes\": [\n    {\n      \"id\": 1,\n      \"type\": \"start\",\n      \"label\": \"Start\",\n      \"next\": 2\n    },\n    {\n      \"id\": 2,\n      \"type\": \"process\",\n      \"label\": \"Input: s (string)\",\n      \"action\": \"ctx['s'] = ctx['arg0']; ctx['n'] = len(ctx['s']); ctx['result'] = -1; ctx['i'] = ctx['n'] - 3; ctx['d'] = {}; ctx['count'] = 0; ctx['j'] = 0\",\n      \"next\": 3\n    },\n    {\n      \"id\": 3,\n      \"type\": \"decision\",\n      \"label\": \"Is the length of unique characters in s equal to the length of s?\",\n      \"logic\": \"len(set(ctx['s'])) == len(ctx['s'])\",\n      \"true_next\": 4,\n      \"false_next\": 5\n    },\n    {\n      \"id\": 4,\n      \"type\": \"end\",\n      \"label\": \"Output: -1 (no special substring occurs at least thrice)\",\n      \"output\": \"-1\"\n    },\n    {\n      \"id\": 5,\n      \"type\": \"process\",\n      \"label\": \"Initialize i = len(s) - 3\",\n      \"action\": \"ctx['i'] = ctx['n'] - 3\",\n      \"next\": 6\n    },\n    {\n      \"id\": 6,\n      \"type\": \"decision\",\n      \"label\": \"Is i >= 0?\",\n      \"logic\": \"ctx['i'] >= 0\",\n      \"true_next\": 7,\n      \"false_next\": 8\n    },\n    {\n      \"id\": 7,\n      \"type\": \"process\",\n      \"label\": \"Initialize d = {}, count = 0\",\n      \"action\": \"ctx['d'] = {}; ctx['count'] = 0\",\n      \"next\": 9\n    },\n    {\n      \"id\": 8,\n      \"type\": \"end\",\n      \"label\": \"Output: -1 (no special substring occurs at least thrice)\",\n      \"output\": \"-1\"\n    },\n    {\n      \"id\": 9,\n      \"type\": \"process\",\n      \"label\": \"Initialize j = i\",\n      \"action\": \"ctx['j'] = ctx['i']\",\n      \"next\": 10\n    },\n    {\n      \"id\": 10,\n      \"type\": \"decision\",\n      \"label\": \"Is j < len(s)?\",\n      \"logic\": \"ctx['j'] < ctx['n']\",\n      \"true_next\": 11,\n      \"false_next\": 12\n    },\n    {\n      \"id\": 11,\n      \"type\": \"decision\",\n      \"label\": \"Is the set of characters in s[count] + 1] of length 1?\",\n      \"logic\": \"len(set(ctx['s'][ctx['count']:ctx['count']+1])) == 1\",\n      \"true_next\": 13,\n      \"false_next\": 14\n    },\n    {\n      \"id\": 12,\n      \"type\": \"process\",\n      \"label\": \"Decrement i: i -= 1\",\n      \"action\": \"ctx['i'] -= 1\",\n      \"next\": 6\n    },\n    {\n      \"id\": 13,\n      \"type\": \"decision\",\n      \"label\": \"Is s[count] + 1] in d?\",\n      \"logic\": \"ctx['s'][ctx['count']] in ctx['d']\",\n      \"true_next\": 15,\n      \"false_next\": 16\n    },\n    {\n      \"id\": 14,\n      \"type\": \"process\",\n      \"label\": \"d[s[count] + 1]] += 1\",\n      \"action\": \"ctx['d'][ctx['s'][ctx['count']]] += 1\",\n      \"next\": 17\n    },\n    {\n      \"id\": 15,\n      \"type\": \"process\",\n      \"label\": \"d[s[count] + 1]] += 1\",\n      \"action\": \"ctx['d'][ctx['s'][ctx['count']]] += 1\",\n      \"next\": 18\n    },\n    {\n      \"id\": 16,\n      \"type\": \"decision\",\n      \"label\": \"Is d[s[count] + 1]] == 3?\",\n      \"logic\": \"ctx['d'][ctx['s'][ctx['count']]] == 3\",\n      \"true_next\": 19,\n      \"false_next\": 20\n    },\n    {\n      \"id\": 17,\n      \"type\": \"process\",\n      \"label\": \"Increment count: count += 1\",\n      \"action\": \"ctx['count'] += 1\",\n      \"next\": 10\n    },\n    {\n      \"id\": 18,\n      \"type\": \"process\",\n      \"label\": \"Increment j: j += 1\",\n      \"action\": \"ctx['j'] += 1\",\n      \"next\": 10\n    },\n    {\n      \"id\": 19,\n      \"type\": \"end\",\n      \"label\": \"Output: length of s[count] + 1] (special substring found)\",\n      \"output\": \"ctx['count'] + 1\"\n    },\n    {\n      \"id\": 20,\n      \"type\": \"process\",\n      \"label\": \"Increment count: count += 1\",\n      \"action\": \"ctx['count'] += 1\",\n      \"next\": 10\n    }\n  ]\n}\n```",
+ "original_code": "class Solution:\n    def maximumLength(self, s: str) -> int:\n        n = len(s)\n        result = -1\n        \n        # Check if all characters are the same\n        if len(set(s)) == len(s):\n            return -1\n        \n        i = n - 3\n        d = {}\n        count = 0\n        j = 0\n        \n        while i >= 0:\n            d = {}\n            count = 0\n            j = i\n            \n            while j < n:\n                # Check if current character forms a special substring of length 1\n                if len(set(s[count:count+1])) == 1:\n                    char = s[count]\n                    if char in d:\n                        d[char] += 1\n                        if d[char] == 3:\n                            result = max(result, count + 1)\n                    else:\n                        d[char] = 1\n                count += 1\n                j += 1\n            \n            i -= 1\n        \n        return result",
+ "ocr_data": {
+  "nodes": [
+   {
+    "node_id": 1,
+    "shape_type": "rectangle",
+    "raw_text": "Start",
+    "position": "top"
+   },
+   {
+    "node_id": 2,
+    "shape_type": "rectangle",
+    "raw_text": "Input: s (string)",
+    "position": "top"
+   },
+   {
+    "node_id": 3,
+    "shape_type": "diamond",
+    "raw_text": "Is the length of unique characters in s equal to the length of s?",
+    "position": "middle"
+   },
+   {
+    "node_id": 4,
+    "shape_type": "rectangle",
+    "raw_text": "Output: -1 (no special substring occurs at least thrice)",
+    "position": "middle"
+   },
+   {
+    "node_id": 5,
+    "shape_type": "rectangle",
+    "raw_text": "Initialize i = len(s) - 3",
+    "position": "middle"
+   },
+   {
+    "node_id": 6,
+    "shape_type": "diamond",
+    "raw_text": "Is i >= 0?",
+    "position": "middle"
+   },
+   {
+    "node_id": 7,
+    "shape_type": "rectangle",
+    "raw_text": "Output: -1 (no special substring occurs at least thrice)",
+    "position": "middle"
+   },
+   {
+    "node_id": 8,
+    "shape_type": "rectangle",
+    "raw_text": "Initialize d = {}, count = 0",
+    "position": "middle"
+   },
+   {
+    "node_id": 9,
+    "shape_type": "rectangle",
+    "raw_text": "Initialize j = i",
+    "position": "middle"
+   },
+   {
+    "node_id": 10,
+    "shape_type": "diamond",
+    "raw_text": "Is j < len(s)?",
+    "position": "middle"
+   },
+   {
+    "node_id": 11,
+    "shape_type": "diamond",
+    "raw_text": "Is the set of characters in s[count] + 1] of length 1?",
+    "position": "middle"
+   },
+   {
+    "node_id": 12,
+    "shape_type": "diamond",
+    "raw_text": "Is s[count] + 1] in d?",
+    "position": "middle"
+   },
+   {
+    "node_id": 13,
+    "shape_type": "rectangle",
+    "raw_text": "d[s[count] + 1]] += 1",
+    "position": "middle"
+   },
+   {
+    "node_id": 14,
+    "shape_type": "rectangle",
+    "raw_text": "d[s[count] + 1]] += 1",
+    "position": "middle"
+   },
+   {
+    "node_id": 15,
+    "shape_type": "diamond",
+    "raw_text": "Is d[s[count] + 1]] == 3?",
+    "position": "middle"
+   },
+   {
+    "node_id": 16,
+    "shape_type": "rectangle",
+    "raw_text": "Output: length of s[count] + 1] (special substring found)",
+    "position": "middle"
+   },
+   {
+    "node_id": 17,
+    "shape_type": "rectangle",
+    "raw_text": "Increment count: count += 1",
+    "position": "middle"
+   },
+   {
+    "node_id": 18,
+    "shape_type": "rectangle",
+    "raw_text": "Increment j: j += 1",
+    "position": "bottom"
+   }
+  ],
+  "edges": [
+   {
+    "from_node": 1,
+    "to_node": 2,
+    "label": ""
+   },
+   {
+    "from_node": 2,
+    "to_node": 3,
+    "label": ""
+   },
+   {
+    "from_node": 3,
+    "to_node": 4,
+    "label": "Yes"
+   },
+   {
+    "from_node": 3,
+    "to_node": 5,
+    "label": "No"
+   },
+   {
+    "from_node": 5,
+    "to_node": 6,
+    "label": ""
+   },
+   {
+    "from_node": 6,
+    "to_node": 7,
+    "label": "No"
+   },
+   {
+    "from_node": 6,
+    "to_node": 8,
+    "label": "Yes"
+   },
+   {
+    "from_node": 8,
+    "to_node": 9,
+    "label": ""
+   },
+   {
+    "from_node": 9,
+    "to_node": 10,
+    "label": ""
+   },
+   {
+    "from_node": 10,
+    "to_node": 11,
+    "label": "Yes"
+   },
+   {
+    "from_node": 10,
+    "to_node": 13,
+    "label": "No"
+   },
+   {
+    "from_node": 11,
+    "to_node": 12,
+    "label": ""
+   },
+   {
+    "from_node": 12,
+    "to_node": 13,
+    "label": "No"
+   },
+   {
+    "from_node": 13,
+    "to_node": 14,
+    "label": ""
+   },
+   {
+    "from_node": 14,
+    "to_node": 15,
+    "label": ""
+   },
+   {
+    "from_node": 15,
+    "to_node": 16,
+    "label": "Yes"
+   },
+   {
+    "from_node": 15,
+    "to_node": 17,
+    "label": "No"
+   },
+   {
+    "from_node": 17,
+    "to_node": 18,
+    "label": ""
+   },
+   {
+    "from_node": 18,
+    "to_node": 10,
+    "label": ""
+   },
+   {
+    "from_node": 13,
+    "to_node": 10,
+    "label": ""
+   },
+   {
+    "from_node": 14,
+    "to_node": 10,
+    "label": ""
+   }
+  ],
+  "other_text": []
+ },
+ "test_result": {},
+ "status": "completed",
+ "fixed_ilr": null,
+ "modified_code": null,
+ "ilr_fix_log": "",
+ "bug_injected": ""
+}

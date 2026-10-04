@@ -1,0 +1,125 @@
+{
+  "problem_id": "minimum_coins",
+  "nodes": [
+    {
+      "id": 1,
+      "type": "start",
+      "label": "Start",
+      "next": 2
+    },
+    {
+      "id": 2,
+      "type": "process",
+      "label": "Input: prices (List[int])",
+      "action": "ctx['prices'] = ctx['arg0']; ctx['temp'] = [(0, 0)]; ctx['i'] = 0",
+      "next": 3
+    },
+    {
+      "id": 3,
+      "type": "decision",
+      "label": "For i in range(len(prices))",
+      "logic": "ctx['i'] < len(ctx['prices'])",
+      "true_next": 4,
+      "false_next": 15
+    },
+    {
+      "id": 4,
+      "type": "process",
+      "label": "Calculate pos = 2 * i + 2",
+      "action": "ctx['pos'] = 2 * ctx['i'] + 2",
+      "next": 5
+    },
+    {
+      "id": 5,
+      "type": "process",
+      "label": "Calculate new = temp[0][1] + prices[i]",
+      "action": "ctx['new'] = ctx['temp'][0][1] + ctx['prices'][ctx['i']]",
+      "next": 6
+    },
+    {
+      "id": 6,
+      "type": "decision",
+      "label": "Is i == temp[0][0]?",
+      "logic": "ctx['i'] == ctx['temp'][0][0]",
+      "true_next": 7,
+      "false_next": 8
+    },
+    {
+      "id": 7,
+      "type": "process",
+      "label": "Remove first element from temp",
+      "action": "ctx['temp'].pop(0)",
+      "next": 9
+    },
+    {
+      "id": 8,
+      "type": "process",
+      "label": "Continue",
+      "action": "",
+      "next": 9
+    },
+    {
+      "id": 9,
+      "type": "decision",
+      "label": "While temp is not empty?",
+      "logic": "len(ctx['temp']) > 0",
+      "true_next": 10,
+      "false_next": 14
+    },
+    {
+      "id": 10,
+      "type": "decision",
+      "label": "Is temp[-1][1] >= new?",
+      "logic": "ctx['temp'][-1][1] >= ctx['new']",
+      "true_next": 11,
+      "false_next": 12
+    },
+    {
+      "id": 11,
+      "type": "process",
+      "label": "Remove last element from temp",
+      "action": "ctx['temp'].pop()",
+      "next": 9
+    },
+    {
+      "id": 12,
+      "type": "process",
+      "label": "Append (pos, new) to temp",
+      "action": "ctx['temp'].append((ctx['pos'], ctx['new']))",
+      "next": 14
+    },
+    {
+      "id": 13,
+      "type": "process",
+      "label": "Break loop",
+      "action": "",
+      "next": 14
+    },
+    {
+      "id": 14,
+      "type": "process",
+      "label": "Append (pos, new) to temp",
+      "action": "ctx['temp'].append((ctx['pos'], ctx['new']))",
+      "next": 3
+    },
+    {
+      "id": 15,
+      "type": "end",
+      "label": "Return temp[0][1]",
+      "output": "ctx['temp'][0][1]"
+    }
+  ],
+  "task_id": "biweekly-contest-118-minimum-number-of-coins-for-fruits",
+  "dataset": "Algorithm",
+  "result": "failed: list index out of range",
+  "code": "class Solution:\n    def minimumCoins(self, prices: List[int]) -> int:\n        temp = [(0, 0)]\n        i = 0\n        \n        while i < len(prices):\n            pos = 2 * i + 2\n            new = temp[0][1] + prices[i]\n            \n            if i == temp[0][0]:\n                temp.pop(0)\n            else:\n                while temp and temp[-1][1] >= new:\n                    temp.pop()\n                temp.append((pos, new))\n            \n            i += 1\n        \n        return temp[0][1]",
+  "verification": {
+    "md_verdict": "ILR Error",
+    "actual_error_source": "both",
+    "ilr_verdict": "incorrect",
+    "code_vs_ilr": "deviates",
+    "md_correct": "partial",
+    "note": "MD 只说对一半：ILR 确实有错——节点12 和节点14 都执行 append（12 的 next 指向 14），else 路径会把 (pos,new) 入队两次，污染单调队列导致答案偏小。但代码还额外偏离了 ILR：它把 while 弹尾+append 挪进了 if i==temp[0][0] 的 else 分支，而 ILR/流程图两条分支都必须经过弹尾和节点14 的 append，导致弹出队首后不再入队、temp 变空后下一次迭代崩溃。",
+    "evidence": "ILR 图模拟：[3,1,2,1,1] 得 4（参考 DP 为 5）、[27,17,29,45,3,39,42,26] 得 44（应为 47）、[1,37,19,...] 得 31（应为 37）；生成代码实跑 [3,1,2] 即 IndexError: list index out of range，与 FAILURE RESULT 'failed: list index out of range' 一致。"
+  }
+}

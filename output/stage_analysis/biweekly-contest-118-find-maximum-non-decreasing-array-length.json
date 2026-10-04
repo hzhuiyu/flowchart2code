@@ -1,0 +1,138 @@
+{
+  "problem_id": "findMaximumLength",
+  "nodes": [
+    {
+      "id": 1,
+      "type": "start",
+      "label": "Start",
+      "next": 2
+    },
+    {
+      "id": 2,
+      "type": "process",
+      "label": "Input: nums (list of integers)",
+      "action": "ctx['nums'] = ctx['arg0']; ctx['n'] = len(ctx['nums']); ctx['pre'] = [0]; ctx['dp'] = {}; ctx['i'] = 0; ctx['j'] = 0",
+      "next": 3
+    },
+    {
+      "id": 3,
+      "type": "process",
+      "label": "Extend pre with nums",
+      "action": "ctx['pre'].extend(ctx['nums'])",
+      "next": 4
+    },
+    {
+      "id": 4,
+      "type": "process",
+      "label": "Initialize dp = defaultdict(lambda: (0, 0))",
+      "action": "ctx['dp'] = {}",
+      "next": 5
+    },
+    {
+      "id": 5,
+      "type": "process",
+      "label": "Set dp[0] = (0, 0)",
+      "action": "ctx['dp'][0] = (0, 0)",
+      "next": 6
+    },
+    {
+      "id": 6,
+      "type": "decision",
+      "label": "Is i <= n?",
+      "logic": "ctx['i'] <= ctx['n']",
+      "true_next": 7,
+      "false_next": 10
+    },
+    {
+      "id": 7,
+      "type": "process",
+      "label": "Set length, x = dp[i - 1]",
+      "action": "ctx['length'], ctx['x'] = ctx['dp'].get(ctx['i'] - 1, (0, 0))",
+      "next": 8
+    },
+    {
+      "id": 8,
+      "type": "process",
+      "label": "Set x = -1 * x",
+      "action": "ctx['x'] = -1 * ctx['x']",
+      "next": 9
+    },
+    {
+      "id": 9,
+      "type": "decision",
+      "label": "Is x <= nums[i - 1]?",
+      "logic": "ctx['x'] <= ctx['nums'][ctx['i'] - 1]",
+      "true_next": 11,
+      "false_next": 12
+    },
+    {
+      "id": 11,
+      "type": "process",
+      "label": "Update dp[i] = max(dp[i], (length + 1, -1 * nums[i - 1]))",
+      "action": "ctx['dp'][ctx['i']] = max(ctx['dp'].get(ctx['i'], (0, 0)), (ctx['length'] + 1, -1 * ctx['nums'][ctx['i'] - 1]))",
+      "next": 13
+    },
+    {
+      "id": 12,
+      "type": "process",
+      "label": "Update dp[i] = max(dp[i], (length, -1 * (x + nums[i - 1])))",
+      "action": "ctx['dp'][ctx['i']] = max(ctx['dp'].get(ctx['i'], (0, 0)), (ctx['length'], -1 * (ctx['x'] + ctx['nums'][ctx['i'] - 1])))",
+      "next": 13
+    },
+    {
+      "id": 13,
+      "type": "process",
+      "label": "Calculate lb_need = pre[i] - nums[i - 1] + x",
+      "action": "ctx['lb_need'] = ctx['pre'][ctx['i']] - ctx['nums'][ctx['i'] - 1] + ctx['x']",
+      "next": 14
+    },
+    {
+      "id": 14,
+      "type": "process",
+      "label": "Find id = next index where pre[id] >= lb_need",
+      "action": "ctx['id'] = None\nfor j in range(ctx['i'] + 1, ctx['n'] + 1):\n    if ctx['pre'][j] >= ctx['lb_need']:\n        ctx['id'] = j\n        break",
+      "next": 15
+    },
+    {
+      "id": 15,
+      "type": "decision",
+      "label": "Is id <= N?",
+      "logic": "ctx['id'] is not None and ctx['id'] <= ctx['n']",
+      "true_next": 16,
+      "false_next": 17
+    },
+    {
+      "id": 16,
+      "type": "process",
+      "label": "Update dp[id] = max(dp[id], (length + 1, -1 * (x + pre[id] - lb_need)))",
+      "action": "ctx['dp'][ctx['id']] = max(ctx['dp'].get(ctx['id'], (0, 0)), (ctx['length'] + 1, -1 * (ctx['x'] + ctx['pre'][ctx['id']] - ctx['lb_need'])))",
+      "next": 17
+    },
+    {
+      "id": 17,
+      "type": "process",
+      "label": "Continue to next iteration",
+      "action": "ctx['i'] += 1",
+      "next": 6
+    },
+    {
+      "id": 10,
+      "type": "end",
+      "label": "Return dp[N][0] as output",
+      "output": "ctx['dp'][ctx['n']][0]"
+    }
+  ],
+  "task_id": "biweekly-contest-118-find-maximum-non-decreasing-array-length",
+  "dataset": "Algorithm",
+  "result": "failed: ",
+  "code": "class Solution:\n    def findMaximumLength(self, nums: List[int]) -> int:\n        n = len(nums)\n        pre = [0]\n        pre.extend(nums)\n        dp = {}\n        dp[0] = (0, 0)\n        i = 0\n        \n        while i <= n:\n            length, x = dp.get(i - 1, (0, 0))\n            x = -x\n            \n            if x <= nums[i - 1]:\n                dp[i] = max(dp.get(i, (0, 0)), (length + 1, -nums[i - 1]))\n            else:\n                dp[i] = max(dp.get(i, (0, 0)), (length, -(x + nums[i - 1])))\n            \n            lb_need = pre[i] - nums[i - 1] + x\n            id_val = None\n            for j in range(i + 1, n + 1):\n                if pre[j] >= lb_need:\n                    id_val = j\n                    break\n            \n            if id_val is not None and id_val <= n:\n                dp[id_val] = max(dp.get(id_val, (0, 0)), (length + 1, -(x + pre[id_val] - lb_need)))\n            \n            i += 1\n        \n        return dp[n][0]",
+  "verification": {
+    "md_verdict": "ILR Error",
+    "actual_error_source": "ilr",
+    "ilr_verdict": "incorrect",
+    "code_vs_ilr": "faithful",
+    "md_correct": "yes",
+    "note": "确认 ILR 错误：OCR 流程图中计算前缀和的节点（pre[i]=pre[i]+pre[i-1]）在 ILR 中被丢失，pre 仅是 [0]+nums；且循环从 i=0 开始，节点 9/13 访问 nums[i-1]=nums[-1] 并污染 dp[0]。生成代码逐行忠实复刻了这两个缺陷。",
+    "evidence": "按 ILR 逐句转写运行：solve([5,2,2])=3(期望1)、solve([1,2,3,4])=2(期望4)、solve([32])=2(期望1)；生成代码实跑在第一个断言 nums=[5,2,2] 期望 1 处 AssertionError。"
+  }
+}

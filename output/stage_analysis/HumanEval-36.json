@@ -1,0 +1,95 @@
+{
+  "problem_id": "fizz_buzz",
+  "nodes": [
+    {
+      "id": 1,
+      "type": "start",
+      "label": "Start",
+      "next": 2
+    },
+    {
+      "id": 2,
+      "type": "process",
+      "label": "Input: n (integer)",
+      "action": "ctx['n'] = ctx['arg0']; ctx['i'] = 0; ctx['ns'] = []; ctx['ans'] = 0",
+      "next": 3
+    },
+    {
+      "id": 3,
+      "type": "process",
+      "label": "Loop through i from 0 to n-1",
+      "action": "ctx['i'] += 1",
+      "next": 4
+    },
+    {
+      "id": 4,
+      "type": "decision",
+      "label": "Is i divisible by 11 or 13?",
+      "logic": "ctx['i'] % 11 == 0 or ctx['i'] % 13 == 0",
+      "true_next": 5,
+      "false_next": 7
+    },
+    {
+      "id": 5,
+      "type": "process",
+      "label": "Append i to ns",
+      "action": "ctx['ns'].append(ctx['i'])",
+      "next": 3
+    },
+    {
+      "id": 7,
+      "type": "process",
+      "label": "Join all elements of ns into a string: s",
+      "action": "ctx['s'] = ''.join(map(str, ctx['ns']))",
+      "next": 8
+    },
+    {
+      "id": 8,
+      "type": "process",
+      "label": "Initialize ans = 0",
+      "action": "ctx['ans'] = 0",
+      "next": 9
+    },
+    {
+      "id": 9,
+      "type": "process",
+      "label": "Loop through each character c in s",
+      "action": "for ctx['c'] in ctx['s']: pass",
+      "next": 10
+    },
+    {
+      "id": 10,
+      "type": "decision",
+      "label": "Is c == '7'?",
+      "logic": "ctx['c'] == '7'",
+      "true_next": 11,
+      "false_next": 12
+    },
+    {
+      "id": 11,
+      "type": "process",
+      "label": "Increment ans by 1",
+      "action": "ctx['ans'] += 1",
+      "next": 9
+    },
+    {
+      "id": 12,
+      "type": "end",
+      "label": "Output: ans (count of '7's in the string)",
+      "output": "ctx['ans']"
+    }
+  ],
+  "task_id": "HumanEval-36",
+  "dataset": "HumanEval-V",
+  "result": "failed: ",
+  "code": "def fizz_buzz(n: int):\n    i = 0\n    ns = []\n    ans = 0\n    \n    while i < n:\n        i += 1\n        if i % 11 == 0 or i % 13 == 0:\n            ns.append(i)\n        else:\n            continue\n    \n    s = ''.join(map(str, ns))\n    \n    for c in s:\n        if c == '7':\n            ans += 1\n    \n    return ans",
+  "verification": {
+    "md_verdict": "ILR Error",
+    "actual_error_source": "both",
+    "ilr_verdict": "incorrect",
+    "code_vs_ilr": "deviates",
+    "md_correct": "partial",
+    "note": "MD 根因判对（ILR 循环无边界条件且非整除分支直接退出到 join，忠实执行 s 恒为空而 KeyError('c')），但漏了代码问题：生成代码补边界时写成 while i<n 先自增后判断，把 n 本身也计入循环，78 可被13整除导致 candidate(78)=3≠2；若边界写对其余断言本可全过。",
+    "evidence": "忠实 ILR: 任何输入 i=1 即退出→s=''→KeyError('c')；生成代码 gen(78)=3(期望2)，gen(50)=0、gen(79)=3、gen(100)=3、gen(200)=6 均对，仅 78 一条挂"
+  }
+}

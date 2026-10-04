@@ -1,0 +1,4237 @@
+{
+ "task_id": "weekly-contest-370-find-champion-i",
+ "dataset": "Algorithm",
+ "title": "find-champion-i",
+ "difficulty": "Easy",
+ "prompt": "\"\"\"\nThere are n teams numbered from 0 to n - 1 in a tournament.\n\nGiven a 0-indexed 2D boolean matrix grid of size n * n. For all i, j that 0 <= i, j <= n - 1 and i != j team i is stronger than team j if grid[i][j] == 1, otherwise, team j is stronger than team i.\n\nTeam a will be the champion of the tournament if there is no team b that is stronger than team a.\n\nReturn the team that will be the champion of the tournament.\n\nExample 1:\n\nInput: grid = [[0,1],[0,0]]\nOutput: 0\nExplanation: There are two teams in this tournament.\ngrid[0][1] == 1 means that team 0 is stronger than team 1. So team 0 will be the champion.\n\nExample 2:\n\nInput: grid = [[0,0,1],[1,0,1],[0,0,0]]\nOutput: 1\nExplanation: There are three teams in this tournament.\ngrid[1][0] == 1 means that team 1 is stronger than team 0.\ngrid[1][2] == 1 means that team 1 is stronger than team 2.\nSo team 1 will be the champion.\n\n\nConstraints:\n\n * n == grid.length\n * n == grid[i].length\n * 2 <= n <= 100\n * grid[i][j] is either 0 or 1.\n * For all i grid[i][i] is 0.\n * For all i, j that i != j, grid[i][j] != grid[j][i].\n * The input is generated such that if team a is stronger than team b and team b is stronger than team c, then team a is stronger than team c.\n\"\"\"\nclass Solution:\n    def findChampion(self, grid: List[List[int]]) -> int:\n        ",
+ "starter_code": "class Solution:\n    def findChampion(self, grid: List[List[int]]) -> int:\n        ",
+ "entry_point": "",
+ "test": "\nmy_solution = Solution()\n\ntest_input = { \"grid\": [[0,1],[0,0]] }\nassert my_solution.findChampion(**test_input) == 0\n\ntest_input = { \"grid\": [[0,0,1],[1,0,1],[0,0,0]] }\nassert my_solution.findChampion(**test_input) == 1\n\ntest_input = { \"grid\": [[0,0],[1,0]] }\nassert my_solution.findChampion(**test_input) == 1\n\ntest_input = { \"grid\": [[0,0,0],[1,0,0],[1,1,0]] }\nassert my_solution.findChampion(**test_input) == 2\n\ntest_input = { \"grid\": [[0,0,0],[1,0,1],[1,0,0]] }\nassert my_solution.findChampion(**test_input) == 1\n\ntest_input = { \"grid\": [[0,1,0],[0,0,0],[1,1,0]] }\nassert my_solution.findChampion(**test_input) == 2\n\ntest_input = { \"grid\": [[0,1,1],[0,0,0],[0,1,0]] }\nassert my_solution.findChampion(**test_input) == 0\n\ntest_input = { \"grid\": [[0,1,1],[0,0,1],[0,0,0]] }\nassert my_solution.findChampion(**test_input) == 0\n\ntest_input = { \"grid\": [[0,0,0,0],[1,0,0,0],[1,1,0,0],[1,1,1,0]] }\nassert my_solution.findChampion(**test_input) == 3\n\ntest_input = { \"grid\": [[0,0,0,0],[1,0,0,0],[1,1,0,1],[1,1,0,0]] }\nassert my_solution.findChampion(**test_input) == 2\n\ntest_input = { \"grid\": [[0,0,0,0],[1,0,0,1],[1,1,0,1],[1,0,0,0]] }\nassert my_solution.findChampion(**test_input) == 2\n\ntest_input = { \"grid\": [[0,0,0,0],[1,0,1,0],[1,0,0,0],[1,1,1,0]] }\nassert my_solution.findChampion(**test_input) == 3\n\ntest_input = { \"grid\": [[0,0,0,0],[1,0,1,1],[1,0,0,0],[1,0,1,0]] }\nassert my_solution.findChampion(**test_input) == 1\n\ntest_input = { \"grid\": [[0,0,0,0],[1,0,1,1],[1,0,0,1],[1,0,0,0]] }\nassert my_solution.findChampion(**test_input) == 1\n\ntest_input = { \"grid\": [[0,0,0,1],[1,0,0,1],[1,1,0,1],[0,0,0,0]] }\nassert my_solution.findChampion(**test_input) == 2\n\ntest_input = { \"grid\": [[0,0,0,1],[1,0,1,1],[1,0,0,1],[0,0,0,0]] }\nassert my_solution.findChampion(**test_input) == 1\n\ntest_input = { \"grid\": [[0,0,1,0],[1,0,1,0],[0,0,0,0],[1,1,1,0]] }\nassert my_solution.findChampion(**test_input) == 3\n\ntest_input = { \"grid\": [[0,0,1,0],[1,0,1,1],[0,0,0,0],[1,0,1,0]] }\nassert my_solution.findChampion(**test_input) == 1\n\ntest_input = { \"grid\": [[0,0,1,1],[1,0,1,1],[0,0,0,0],[0,0,1,0]] }\nassert my_solution.findChampion(**test_input) == 1\n\ntest_input = { \"grid\": [[0,0,1,1],[1,0,1,1],[0,0,0,1],[0,0,0,0]] }\nassert my_solution.findChampion(**test_input) == 1\n\ntest_input = { \"grid\": [[0,1,0,0],[0,0,0,0],[1,1,0,0],[1,1,1,0]] }\nassert my_solution.findChampion(**test_input) == 3\n\ntest_input = { \"grid\": [[0,1,0,0],[0,0,0,0],[1,1,0,1],[1,1,0,0]] }\nassert my_solution.findChampion(**test_input) == 2\n\ntest_input = { \"grid\": [[0,1,0,1],[0,0,0,0],[1,1,0,1],[0,1,0,0]] }\nassert my_solution.findChampion(**test_input) == 2\n\ntest_input = { \"grid\": [[0,1,0,1],[0,0,0,1],[1,1,0,1],[0,0,0,0]] }\nassert my_solution.findChampion(**test_input) == 2\n\ntest_input = { \"grid\": [[0,1,1,0],[0,0,0,0],[0,1,0,0],[1,1,1,0]] }\nassert my_solution.findChampion(**test_input) == 3\n\ntest_input = { \"grid\": [[0,1,1,0],[0,0,1,0],[0,0,0,0],[1,1,1,0]] }\nassert my_solution.findChampion(**test_input) == 3\n\ntest_input = { \"grid\": [[0,1,1,1],[0,0,0,0],[0,1,0,0],[0,1,1,0]] }\nassert my_solution.findChampion(**test_input) == 0\n\ntest_input = { \"grid\": [[0,1,1,1],[0,0,0,0],[0,1,0,1],[0,1,0,0]] }\nassert my_solution.findChampion(**test_input) == 0\n\ntest_input = { \"grid\": [[0,1,1,1],[0,0,0,1],[0,1,0,1],[0,0,0,0]] }\nassert my_solution.findChampion(**test_input) == 0\n\ntest_input = { \"grid\": [[0,1,1,1],[0,0,1,0],[0,0,0,0],[0,1,1,0]] }\nassert my_solution.findChampion(**test_input) == 0\n\ntest_input = { \"grid\": [[0,1,1,1],[0,0,1,1],[0,0,0,0],[0,0,1,0]] }\nassert my_solution.findChampion(**test_input) == 0\n\ntest_input = { \"grid\": [[0,1,1,1],[0,0,1,1],[0,0,0,1],[0,0,0,0]] }\nassert my_solution.findChampion(**test_input) == 0\n\ntest_input = { \"grid\": [[0,0,0,0,0],[1,0,0,0,0],[1,1,0,0,0],[1,1,1,0,1],[1,1,1,0,0]] }\nassert my_solution.findChampion(**test_input) == 3\n\ntest_input = { \"grid\": [[0,0,0,0,0],[1,0,0,0,0],[1,1,0,1,0],[1,1,0,0,0],[1,1,1,1,0]] }\nassert my_solution.findChampion(**test_input) == 4\n\ntest_input = { \"grid\": [[0,0,0,0,0],[1,0,0,0,0],[1,1,0,1,1],[1,1,0,0,0],[1,1,0,1,0]] }\nassert my_solution.findChampion(**test_input) == 2\n\ntest_input = { \"grid\": [[0,0,0,0,0],[1,0,0,0,0],[1,1,0,1,1],[1,1,0,0,1],[1,1,0,0,0]] }\nassert my_solution.findChampion(**test_input) == 2\n\ntest_input = { \"grid\": [[0,0,0,0,0],[1,0,0,0,1],[1,1,0,0,1],[1,1,1,0,1],[1,0,0,0,0]] }\nassert my_solution.findChampion(**test_input) == 3\n\ntest_input = { \"grid\": [[0,0,0,0,0],[1,0,0,0,1],[1,1,0,1,1],[1,1,0,0,1],[1,0,0,0,0]] }\nassert my_solution.findChampion(**test_input) == 2\n\ntest_input = { \"grid\": [[0,0,0,0,0],[1,0,0,1,0],[1,1,0,1,0],[1,0,0,0,0],[1,1,1,1,0]] }\nassert my_solution.findChampion(**test_input) == 4\n\ntest_input = { \"grid\": [[0,0,0,0,0],[1,0,0,1,0],[1,1,0,1,1],[1,0,0,0,0],[1,1,0,1,0]] }\nassert my_solution.findChampion(**test_input) == 2\n\ntest_input = { \"grid\": [[0,0,0,0,0],[1,0,0,1,1],[1,1,0,1,1],[1,0,0,0,1],[1,0,0,0,0]] }\nassert my_solution.findChampion(**test_input) == 2\n\ntest_input = { \"grid\": [[0,0,0,0,0],[1,0,1,0,1],[1,0,0,0,0],[1,1,1,0,1],[1,0,1,0,0]] }\nassert my_solution.findChampion(**test_input) == 3\n\ntest_input = { \"grid\": [[0,0,0,0,0],[1,0,1,1,0],[1,0,0,0,0],[1,0,1,0,0],[1,1,1,1,0]] }\nassert my_solution.findChampion(**test_input) == 4\n\ntest_input = { \"grid\": [[0,0,0,0,0],[1,0,1,1,0],[1,0,0,1,0],[1,0,0,0,0],[1,1,1,1,0]] }\nassert my_solution.findChampion(**test_input) == 4\n\ntest_input = { \"grid\": [[0,0,0,0,0],[1,0,1,1,1],[1,0,0,0,0],[1,0,1,0,1],[1,0,1,0,0]] }\nassert my_solution.findChampion(**test_input) == 1\n\ntest_input = { \"grid\": [[0,0,0,0,0],[1,0,1,1,1],[1,0,0,0,1],[1,0,1,0,1],[1,0,0,0,0]] }\nassert my_solution.findChampion(**test_input) == 1\n\ntest_input = { \"grid\": [[0,0,0,0,0],[1,0,1,1,1],[1,0,0,1,1],[1,0,0,0,1],[1,0,0,0,0]] }\nassert my_solution.findChampion(**test_input) == 1\n\ntest_input = { \"grid\": [[0,0,0,0,1],[1,0,0,0,1],[1,1,0,0,1],[1,1,1,0,1],[0,0,0,0,0]] }\nassert my_solution.findChampion(**test_input) == 3\n\ntest_input = { \"grid\": [[0,0,0,0,1],[1,0,0,0,1],[1,1,0,1,1],[1,1,0,0,1],[0,0,0,0,0]] }\nassert my_solution.findChampion(**test_input) == 2\n\ntest_input = { \"grid\": [[0,0,0,0,1],[1,0,0,1,1],[1,1,0,1,1],[1,0,0,0,1],[0,0,0,0,0]] }\nassert my_solution.findChampion(**test_input) == 2\n\ntest_input = { \"grid\": [[0,0,0,0,1],[1,0,1,1,1],[1,0,0,0,1],[1,0,1,0,1],[0,0,0,0,0]] }\nassert my_solution.findChampion(**test_input) == 1\n\ntest_input = { \"grid\": [[0,0,0,1,0],[1,0,0,1,0],[1,1,0,1,0],[0,0,0,0,0],[1,1,1,1,0]] }\nassert my_solution.findChampion(**test_input) == 4\n\ntest_input = { \"grid\": [[0,0,0,1,0],[1,0,0,1,0],[1,1,0,1,1],[0,0,0,0,0],[1,1,0,1,0]] }\nassert my_solution.findChampion(**test_input) == 2\n\ntest_input = { \"grid\": [[0,0,0,1,0],[1,0,0,1,1],[1,1,0,1,1],[0,0,0,0,0],[1,0,0,1,0]] }\nassert my_solution.findChampion(**test_input) == 2\n\ntest_input = { \"grid\": [[0,0,0,1,0],[1,0,1,1,0],[1,0,0,1,0],[0,0,0,0,0],[1,1,1,1,0]] }\nassert my_solution.findChampion(**test_input) == 4\n\ntest_input = { \"grid\": [[0,0,0,1,0],[1,0,1,1,1],[1,0,0,1,0],[0,0,0,0,0],[1,0,1,1,0]] }\nassert my_solution.findChampion(**test_input) == 1\n\ntest_input = { \"grid\": [[0,0,0,1,0],[1,0,1,1,1],[1,0,0,1,1],[0,0,0,0,0],[1,0,0,1,0]] }\nassert my_solution.findChampion(**test_input) == 1\n\ntest_input = { \"grid\": [[0,0,0,1,1],[1,0,0,1,1],[1,1,0,1,1],[0,0,0,0,0],[0,0,0,1,0]] }\nassert my_solution.findChampion(**test_input) == 2\n\ntest_input = { \"grid\": [[0,0,0,1,1],[1,0,0,1,1],[1,1,0,1,1],[0,0,0,0,1],[0,0,0,0,0]] }\nassert my_solution.findChampion(**test_input) == 2\n\ntest_input = { \"grid\": [[0,0,0,1,1],[1,0,1,1,1],[1,0,0,1,1],[0,0,0,0,0],[0,0,0,1,0]] }\nassert my_solution.findChampion(**test_input) == 1\n\ntest_input = { \"grid\": [[0,0,0,1,1],[1,0,1,1,1],[1,0,0,1,1],[0,0,0,0,1],[0,0,0,0,0]] }\nassert my_solution.findChampion(**test_input) == 1\n\ntest_input = { \"grid\": [[0,0,1,0,0],[1,0,1,0,0],[0,0,0,0,0],[1,1,1,0,0],[1,1,1,1,0]] }\nassert my_solution.findChampion(**test_input) == 4\n\ntest_input = { \"grid\": [[0,0,1,0,0],[1,0,1,1,0],[0,0,0,0,0],[1,0,1,0,0],[1,1,1,1,0]] }\nassert my_solution.findChampion(**test_input) == 4\n\ntest_input = { \"grid\": [[0,0,1,0,0],[1,0,1,1,1],[0,0,0,0,0],[1,0,1,0,1],[1,0,1,0,0]] }\nassert my_solution.findChampion(**test_input) == 1\n\ntest_input = { \"grid\": [[0,0,1,0,1],[1,0,1,0,1],[0,0,0,0,1],[1,1,1,0,1],[0,0,0,0,0]] }\nassert my_solution.findChampion(**test_input) == 3\n\ntest_input = { \"grid\": [[0,0,1,1,0],[1,0,1,1,0],[0,0,0,1,0],[0,0,0,0,0],[1,1,1,1,0]] }\nassert my_solution.findChampion(**test_input) == 4\n\ntest_input = { \"grid\": [[0,0,1,1,0],[1,0,1,1,1],[0,0,0,0,0],[0,0,1,0,0],[1,0,1,1,0]] }\nassert my_solution.findChampion(**test_input) == 1\n\ntest_input = { \"grid\": [[0,0,1,1,1],[1,0,1,1,1],[0,0,0,1,0],[0,0,0,0,0],[0,0,1,1,0]] }\nassert my_solution.findChampion(**test_input) == 1\n\ntest_input = { \"grid\": [[0,0,1,1,1],[1,0,1,1,1],[0,0,0,1,1],[0,0,0,0,1],[0,0,0,0,0]] }\nassert my_solution.findChampion(**test_input) == 1\n\ntest_input = { \"grid\": [[0,1,0,0,0],[0,0,0,0,0],[1,1,0,0,0],[1,1,1,0,1],[1,1,1,0,0]] }\nassert my_solution.findChampion(**test_input) == 3\n\ntest_input = { \"grid\": [[0,1,0,0,0],[0,0,0,0,0],[1,1,0,1,1],[1,1,0,0,0],[1,1,0,1,0]] }\nassert my_solution.findChampion(**test_input) == 2\n\ntest_input = { \"grid\": [[0,1,0,0,1],[0,0,0,0,0],[1,1,0,0,1],[1,1,1,0,1],[0,1,0,0,0]] }\nassert my_solution.findChampion(**test_input) == 3\n\ntest_input = { \"grid\": [[0,1,0,0,1],[0,0,0,0,0],[1,1,0,1,1],[1,1,0,0,1],[0,1,0,0,0]] }\nassert my_solution.findChampion(**test_input) == 2\n\ntest_input = { \"grid\": [[0,1,0,1,0],[0,0,0,0,0],[1,1,0,1,0],[0,1,0,0,0],[1,1,1,1,0]] }\nassert my_solution.findChampion(**test_input) == 4\n\ntest_input = { \"grid\": [[0,1,0,1,0],[0,0,0,0,0],[1,1,0,1,1],[0,1,0,0,0],[1,1,0,1,0]] }\nassert my_solution.findChampion(**test_input) == 2\n\ntest_input = { \"grid\": [[0,1,0,1,0],[0,0,0,1,0],[1,1,0,1,0],[0,0,0,0,0],[1,1,1,1,0]] }\nassert my_solution.findChampion(**test_input) == 4\n\ntest_input = { \"grid\": [[0,1,0,1,0],[0,0,0,1,0],[1,1,0,1,1],[0,0,0,0,0],[1,1,0,1,0]] }\nassert my_solution.findChampion(**test_input) == 2\n\ntest_input = { \"grid\": [[0,1,0,1,1],[0,0,0,0,0],[1,1,0,1,1],[0,1,0,0,1],[0,1,0,0,0]] }\nassert my_solution.findChampion(**test_input) == 2\n\ntest_input = { \"grid\": [[0,1,0,1,1],[0,0,0,1,1],[1,1,0,1,1],[0,0,0,0,0],[0,0,0,1,0]] }\nassert my_solution.findChampion(**test_input) == 2\n\ntest_input = { \"grid\": [[0,1,1,0,0],[0,0,0,0,0],[0,1,0,0,0],[1,1,1,0,0],[1,1,1,1,0]] }\nassert my_solution.findChampion(**test_input) == 4\n\ntest_input = { \"grid\": [[0,1,1,0,0],[0,0,1,0,0],[0,0,0,0,0],[1,1,1,0,1],[1,1,1,0,0]] }\nassert my_solution.findChampion(**test_input) == 3\n\ntest_input = { \"grid\": [[0,1,1,0,1],[0,0,0,0,0],[0,1,0,0,1],[1,1,1,0,1],[0,1,0,0,0]] }\nassert my_solution.findChampion(**test_input) == 3\n\ntest_input = { \"grid\": [[0,1,1,0,1],[0,0,0,0,1],[0,1,0,0,1],[1,1,1,0,1],[0,0,0,0,0]] }\nassert my_solution.findChampion(**test_input) == 3\n\ntest_input = { \"grid\": [[0,1,1,0,1],[0,0,1,0,0],[0,0,0,0,0],[1,1,1,0,1],[0,1,1,0,0]] }\nassert my_solution.findChampion(**test_input) == 3\n\ntest_input = { \"grid\": [[0,1,1,0,1],[0,0,1,0,1],[0,0,0,0,0],[1,1,1,0,1],[0,0,1,0,0]] }\nassert my_solution.findChampion(**test_input) == 3\n\ntest_input = { \"grid\": [[0,1,1,0,1],[0,0,1,0,1],[0,0,0,0,1],[1,1,1,0,1],[0,0,0,0,0]] }\nassert my_solution.findChampion(**test_input) == 3\n\ntest_input = { \"grid\": [[0,1,1,1,0],[0,0,0,1,0],[0,1,0,1,0],[0,0,0,0,0],[1,1,1,1,0]] }\nassert my_solution.findChampion(**test_input) == 4\n\ntest_input = { \"grid\": [[0,1,1,1,0],[0,0,1,0,0],[0,0,0,0,0],[0,1,1,0,0],[1,1,1,1,0]] }\nassert my_solution.findChampion(**test_input) == 4\n\ntest_input = { \"grid\": [[0,1,1,1,0],[0,0,1,1,0],[0,0,0,0,0],[0,0,1,0,0],[1,1,1,1,0]] }\nassert my_solution.findChampion(**test_input) == 4\n\ntest_input = { \"grid\": [[0,1,1,1,1],[0,0,0,0,0],[0,1,0,0,0],[0,1,1,0,0],[0,1,1,1,0]] }\nassert my_solution.findChampion(**test_input) == 0\n\ntest_input = { \"grid\": [[0,1,1,1,1],[0,0,0,0,0],[0,1,0,0,0],[0,1,1,0,1],[0,1,1,0,0]] }\nassert my_solution.findChampion(**test_input) == 0\n\ntest_input = { \"grid\": [[0,1,1,1,1],[0,0,0,0,0],[0,1,0,0,1],[0,1,1,0,1],[0,1,0,0,0]] }\nassert my_solution.findChampion(**test_input) == 0\n\ntest_input = { \"grid\": [[0,1,1,1,1],[0,0,0,0,0],[0,1,0,1,0],[0,1,0,0,0],[0,1,1,1,0]] }\nassert my_solution.findChampion(**test_input) == 0\n\ntest_input = { \"grid\": [[0,1,1,1,1],[0,0,0,0,0],[0,1,0,1,1],[0,1,0,0,0],[0,1,0,1,0]] }\nassert my_solution.findChampion(**test_input) == 0\n\ntest_input = { \"grid\": [[0,1,1,1,1],[0,0,0,0,0],[0,1,0,1,1],[0,1,0,0,1],[0,1,0,0,0]] }\nassert my_solution.findChampion(**test_input) == 0\n\ntest_input = { \"grid\": [[0,1,1,1,1],[0,0,0,0,1],[0,1,0,0,1],[0,1,1,0,1],[0,0,0,0,0]] }\nassert my_solution.findChampion(**test_input) == 0\n\ntest_input = { \"grid\": [[0,1,1,1,1],[0,0,1,0,0],[0,0,0,0,0],[0,1,1,0,0],[0,1,1,1,0]] }\nassert my_solution.findChampion(**test_input) == 0\n\ntest_input = { \"grid\": [[0,1,1,1,1],[0,0,1,0,0],[0,0,0,0,0],[0,1,1,0,1],[0,1,1,0,0]] }\nassert my_solution.findChampion(**test_input) == 0\n\ntest_input = { \"grid\": [[0,1,1,1,1],[0,0,1,0,1],[0,0,0,0,1],[0,1,1,0,1],[0,0,0,0,0]] }\nassert my_solution.findChampion(**test_input) == 0\n\ntest_input = { \"grid\": [[0,1,1,1,1],[0,0,1,1,0],[0,0,0,0,0],[0,0,1,0,0],[0,1,1,1,0]] }\nassert my_solution.findChampion(**test_input) == 0",
+ "test_cases": [
+  {
+   "input": {
+    "args": [
+     [
+      [
+       0,
+       1
+      ],
+      [
+       0,
+       0
+      ]
+     ]
+    ]
+   },
+   "output": 0,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      [
+       0,
+       0,
+       1
+      ],
+      [
+       1,
+       0,
+       1
+      ],
+      [
+       0,
+       0,
+       0
+      ]
+     ]
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      [
+       0,
+       0
+      ],
+      [
+       1,
+       0
+      ]
+     ]
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      [
+       0,
+       0,
+       0
+      ],
+      [
+       1,
+       0,
+       0
+      ],
+      [
+       1,
+       1,
+       0
+      ]
+     ]
+    ]
+   },
+   "output": 2,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      [
+       0,
+       0,
+       0
+      ],
+      [
+       1,
+       0,
+       1
+      ],
+      [
+       1,
+       0,
+       0
+      ]
+     ]
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      [
+       0,
+       1,
+       0
+      ],
+      [
+       0,
+       0,
+       0
+      ],
+      [
+       1,
+       1,
+       0
+      ]
+     ]
+    ]
+   },
+   "output": 2,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      [
+       0,
+       1,
+       1
+      ],
+      [
+       0,
+       0,
+       0
+      ],
+      [
+       0,
+       1,
+       0
+      ]
+     ]
+    ]
+   },
+   "output": 0,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      [
+       0,
+       1,
+       1
+      ],
+      [
+       0,
+       0,
+       1
+      ],
+      [
+       0,
+       0,
+       0
+      ]
+     ]
+    ]
+   },
+   "output": 0,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      [
+       0,
+       0,
+       0,
+       0
+      ],
+      [
+       1,
+       0,
+       0,
+       0
+      ],
+      [
+       1,
+       1,
+       0,
+       0
+      ],
+      [
+       1,
+       1,
+       1,
+       0
+      ]
+     ]
+    ]
+   },
+   "output": 3,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      [
+       0,
+       0,
+       0,
+       0
+      ],
+      [
+       1,
+       0,
+       0,
+       0
+      ],
+      [
+       1,
+       1,
+       0,
+       1
+      ],
+      [
+       1,
+       1,
+       0,
+       0
+      ]
+     ]
+    ]
+   },
+   "output": 2,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      [
+       0,
+       0,
+       0,
+       0
+      ],
+      [
+       1,
+       0,
+       0,
+       1
+      ],
+      [
+       1,
+       1,
+       0,
+       1
+      ],
+      [
+       1,
+       0,
+       0,
+       0
+      ]
+     ]
+    ]
+   },
+   "output": 2,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      [
+       0,
+       0,
+       0,
+       0
+      ],
+      [
+       1,
+       0,
+       1,
+       0
+      ],
+      [
+       1,
+       0,
+       0,
+       0
+      ],
+      [
+       1,
+       1,
+       1,
+       0
+      ]
+     ]
+    ]
+   },
+   "output": 3,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      [
+       0,
+       0,
+       0,
+       0
+      ],
+      [
+       1,
+       0,
+       1,
+       1
+      ],
+      [
+       1,
+       0,
+       0,
+       0
+      ],
+      [
+       1,
+       0,
+       1,
+       0
+      ]
+     ]
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      [
+       0,
+       0,
+       0,
+       0
+      ],
+      [
+       1,
+       0,
+       1,
+       1
+      ],
+      [
+       1,
+       0,
+       0,
+       1
+      ],
+      [
+       1,
+       0,
+       0,
+       0
+      ]
+     ]
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      [
+       0,
+       0,
+       0,
+       1
+      ],
+      [
+       1,
+       0,
+       0,
+       1
+      ],
+      [
+       1,
+       1,
+       0,
+       1
+      ],
+      [
+       0,
+       0,
+       0,
+       0
+      ]
+     ]
+    ]
+   },
+   "output": 2,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      [
+       0,
+       0,
+       0,
+       1
+      ],
+      [
+       1,
+       0,
+       1,
+       1
+      ],
+      [
+       1,
+       0,
+       0,
+       1
+      ],
+      [
+       0,
+       0,
+       0,
+       0
+      ]
+     ]
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      [
+       0,
+       0,
+       1,
+       0
+      ],
+      [
+       1,
+       0,
+       1,
+       0
+      ],
+      [
+       0,
+       0,
+       0,
+       0
+      ],
+      [
+       1,
+       1,
+       1,
+       0
+      ]
+     ]
+    ]
+   },
+   "output": 3,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      [
+       0,
+       0,
+       1,
+       0
+      ],
+      [
+       1,
+       0,
+       1,
+       1
+      ],
+      [
+       0,
+       0,
+       0,
+       0
+      ],
+      [
+       1,
+       0,
+       1,
+       0
+      ]
+     ]
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      [
+       0,
+       0,
+       1,
+       1
+      ],
+      [
+       1,
+       0,
+       1,
+       1
+      ],
+      [
+       0,
+       0,
+       0,
+       0
+      ],
+      [
+       0,
+       0,
+       1,
+       0
+      ]
+     ]
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      [
+       0,
+       0,
+       1,
+       1
+      ],
+      [
+       1,
+       0,
+       1,
+       1
+      ],
+      [
+       0,
+       0,
+       0,
+       1
+      ],
+      [
+       0,
+       0,
+       0,
+       0
+      ]
+     ]
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      [
+       0,
+       1,
+       0,
+       0
+      ],
+      [
+       0,
+       0,
+       0,
+       0
+      ],
+      [
+       1,
+       1,
+       0,
+       0
+      ],
+      [
+       1,
+       1,
+       1,
+       0
+      ]
+     ]
+    ]
+   },
+   "output": 3,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      [
+       0,
+       1,
+       0,
+       0
+      ],
+      [
+       0,
+       0,
+       0,
+       0
+      ],
+      [
+       1,
+       1,
+       0,
+       1
+      ],
+      [
+       1,
+       1,
+       0,
+       0
+      ]
+     ]
+    ]
+   },
+   "output": 2,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      [
+       0,
+       1,
+       0,
+       1
+      ],
+      [
+       0,
+       0,
+       0,
+       0
+      ],
+      [
+       1,
+       1,
+       0,
+       1
+      ],
+      [
+       0,
+       1,
+       0,
+       0
+      ]
+     ]
+    ]
+   },
+   "output": 2,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      [
+       0,
+       1,
+       0,
+       1
+      ],
+      [
+       0,
+       0,
+       0,
+       1
+      ],
+      [
+       1,
+       1,
+       0,
+       1
+      ],
+      [
+       0,
+       0,
+       0,
+       0
+      ]
+     ]
+    ]
+   },
+   "output": 2,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      [
+       0,
+       1,
+       1,
+       0
+      ],
+      [
+       0,
+       0,
+       0,
+       0
+      ],
+      [
+       0,
+       1,
+       0,
+       0
+      ],
+      [
+       1,
+       1,
+       1,
+       0
+      ]
+     ]
+    ]
+   },
+   "output": 3,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      [
+       0,
+       1,
+       1,
+       0
+      ],
+      [
+       0,
+       0,
+       1,
+       0
+      ],
+      [
+       0,
+       0,
+       0,
+       0
+      ],
+      [
+       1,
+       1,
+       1,
+       0
+      ]
+     ]
+    ]
+   },
+   "output": 3,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      [
+       0,
+       1,
+       1,
+       1
+      ],
+      [
+       0,
+       0,
+       0,
+       0
+      ],
+      [
+       0,
+       1,
+       0,
+       0
+      ],
+      [
+       0,
+       1,
+       1,
+       0
+      ]
+     ]
+    ]
+   },
+   "output": 0,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      [
+       0,
+       1,
+       1,
+       1
+      ],
+      [
+       0,
+       0,
+       0,
+       0
+      ],
+      [
+       0,
+       1,
+       0,
+       1
+      ],
+      [
+       0,
+       1,
+       0,
+       0
+      ]
+     ]
+    ]
+   },
+   "output": 0,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      [
+       0,
+       1,
+       1,
+       1
+      ],
+      [
+       0,
+       0,
+       0,
+       1
+      ],
+      [
+       0,
+       1,
+       0,
+       1
+      ],
+      [
+       0,
+       0,
+       0,
+       0
+      ]
+     ]
+    ]
+   },
+   "output": 0,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      [
+       0,
+       1,
+       1,
+       1
+      ],
+      [
+       0,
+       0,
+       1,
+       0
+      ],
+      [
+       0,
+       0,
+       0,
+       0
+      ],
+      [
+       0,
+       1,
+       1,
+       0
+      ]
+     ]
+    ]
+   },
+   "output": 0,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      [
+       0,
+       1,
+       1,
+       1
+      ],
+      [
+       0,
+       0,
+       1,
+       1
+      ],
+      [
+       0,
+       0,
+       0,
+       0
+      ],
+      [
+       0,
+       0,
+       1,
+       0
+      ]
+     ]
+    ]
+   },
+   "output": 0,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      [
+       0,
+       1,
+       1,
+       1
+      ],
+      [
+       0,
+       0,
+       1,
+       1
+      ],
+      [
+       0,
+       0,
+       0,
+       1
+      ],
+      [
+       0,
+       0,
+       0,
+       0
+      ]
+     ]
+    ]
+   },
+   "output": 0,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      [
+       0,
+       0,
+       0,
+       0,
+       0
+      ],
+      [
+       1,
+       0,
+       0,
+       0,
+       0
+      ],
+      [
+       1,
+       1,
+       0,
+       0,
+       0
+      ],
+      [
+       1,
+       1,
+       1,
+       0,
+       1
+      ],
+      [
+       1,
+       1,
+       1,
+       0,
+       0
+      ]
+     ]
+    ]
+   },
+   "output": 3,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      [
+       0,
+       0,
+       0,
+       0,
+       0
+      ],
+      [
+       1,
+       0,
+       0,
+       0,
+       0
+      ],
+      [
+       1,
+       1,
+       0,
+       1,
+       0
+      ],
+      [
+       1,
+       1,
+       0,
+       0,
+       0
+      ],
+      [
+       1,
+       1,
+       1,
+       1,
+       0
+      ]
+     ]
+    ]
+   },
+   "output": 4,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      [
+       0,
+       0,
+       0,
+       0,
+       0
+      ],
+      [
+       1,
+       0,
+       0,
+       0,
+       0
+      ],
+      [
+       1,
+       1,
+       0,
+       1,
+       1
+      ],
+      [
+       1,
+       1,
+       0,
+       0,
+       0
+      ],
+      [
+       1,
+       1,
+       0,
+       1,
+       0
+      ]
+     ]
+    ]
+   },
+   "output": 2,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      [
+       0,
+       0,
+       0,
+       0,
+       0
+      ],
+      [
+       1,
+       0,
+       0,
+       0,
+       0
+      ],
+      [
+       1,
+       1,
+       0,
+       1,
+       1
+      ],
+      [
+       1,
+       1,
+       0,
+       0,
+       1
+      ],
+      [
+       1,
+       1,
+       0,
+       0,
+       0
+      ]
+     ]
+    ]
+   },
+   "output": 2,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      [
+       0,
+       0,
+       0,
+       0,
+       0
+      ],
+      [
+       1,
+       0,
+       0,
+       0,
+       1
+      ],
+      [
+       1,
+       1,
+       0,
+       0,
+       1
+      ],
+      [
+       1,
+       1,
+       1,
+       0,
+       1
+      ],
+      [
+       1,
+       0,
+       0,
+       0,
+       0
+      ]
+     ]
+    ]
+   },
+   "output": 3,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      [
+       0,
+       0,
+       0,
+       0,
+       0
+      ],
+      [
+       1,
+       0,
+       0,
+       0,
+       1
+      ],
+      [
+       1,
+       1,
+       0,
+       1,
+       1
+      ],
+      [
+       1,
+       1,
+       0,
+       0,
+       1
+      ],
+      [
+       1,
+       0,
+       0,
+       0,
+       0
+      ]
+     ]
+    ]
+   },
+   "output": 2,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      [
+       0,
+       0,
+       0,
+       0,
+       0
+      ],
+      [
+       1,
+       0,
+       0,
+       1,
+       0
+      ],
+      [
+       1,
+       1,
+       0,
+       1,
+       0
+      ],
+      [
+       1,
+       0,
+       0,
+       0,
+       0
+      ],
+      [
+       1,
+       1,
+       1,
+       1,
+       0
+      ]
+     ]
+    ]
+   },
+   "output": 4,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      [
+       0,
+       0,
+       0,
+       0,
+       0
+      ],
+      [
+       1,
+       0,
+       0,
+       1,
+       0
+      ],
+      [
+       1,
+       1,
+       0,
+       1,
+       1
+      ],
+      [
+       1,
+       0,
+       0,
+       0,
+       0
+      ],
+      [
+       1,
+       1,
+       0,
+       1,
+       0
+      ]
+     ]
+    ]
+   },
+   "output": 2,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      [
+       0,
+       0,
+       0,
+       0,
+       0
+      ],
+      [
+       1,
+       0,
+       0,
+       1,
+       1
+      ],
+      [
+       1,
+       1,
+       0,
+       1,
+       1
+      ],
+      [
+       1,
+       0,
+       0,
+       0,
+       1
+      ],
+      [
+       1,
+       0,
+       0,
+       0,
+       0
+      ]
+     ]
+    ]
+   },
+   "output": 2,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      [
+       0,
+       0,
+       0,
+       0,
+       0
+      ],
+      [
+       1,
+       0,
+       1,
+       0,
+       1
+      ],
+      [
+       1,
+       0,
+       0,
+       0,
+       0
+      ],
+      [
+       1,
+       1,
+       1,
+       0,
+       1
+      ],
+      [
+       1,
+       0,
+       1,
+       0,
+       0
+      ]
+     ]
+    ]
+   },
+   "output": 3,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      [
+       0,
+       0,
+       0,
+       0,
+       0
+      ],
+      [
+       1,
+       0,
+       1,
+       1,
+       0
+      ],
+      [
+       1,
+       0,
+       0,
+       0,
+       0
+      ],
+      [
+       1,
+       0,
+       1,
+       0,
+       0
+      ],
+      [
+       1,
+       1,
+       1,
+       1,
+       0
+      ]
+     ]
+    ]
+   },
+   "output": 4,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      [
+       0,
+       0,
+       0,
+       0,
+       0
+      ],
+      [
+       1,
+       0,
+       1,
+       1,
+       0
+      ],
+      [
+       1,
+       0,
+       0,
+       1,
+       0
+      ],
+      [
+       1,
+       0,
+       0,
+       0,
+       0
+      ],
+      [
+       1,
+       1,
+       1,
+       1,
+       0
+      ]
+     ]
+    ]
+   },
+   "output": 4,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      [
+       0,
+       0,
+       0,
+       0,
+       0
+      ],
+      [
+       1,
+       0,
+       1,
+       1,
+       1
+      ],
+      [
+       1,
+       0,
+       0,
+       0,
+       0
+      ],
+      [
+       1,
+       0,
+       1,
+       0,
+       1
+      ],
+      [
+       1,
+       0,
+       1,
+       0,
+       0
+      ]
+     ]
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      [
+       0,
+       0,
+       0,
+       0,
+       0
+      ],
+      [
+       1,
+       0,
+       1,
+       1,
+       1
+      ],
+      [
+       1,
+       0,
+       0,
+       0,
+       1
+      ],
+      [
+       1,
+       0,
+       1,
+       0,
+       1
+      ],
+      [
+       1,
+       0,
+       0,
+       0,
+       0
+      ]
+     ]
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      [
+       0,
+       0,
+       0,
+       0,
+       0
+      ],
+      [
+       1,
+       0,
+       1,
+       1,
+       1
+      ],
+      [
+       1,
+       0,
+       0,
+       1,
+       1
+      ],
+      [
+       1,
+       0,
+       0,
+       0,
+       1
+      ],
+      [
+       1,
+       0,
+       0,
+       0,
+       0
+      ]
+     ]
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      [
+       0,
+       0,
+       0,
+       0,
+       1
+      ],
+      [
+       1,
+       0,
+       0,
+       0,
+       1
+      ],
+      [
+       1,
+       1,
+       0,
+       0,
+       1
+      ],
+      [
+       1,
+       1,
+       1,
+       0,
+       1
+      ],
+      [
+       0,
+       0,
+       0,
+       0,
+       0
+      ]
+     ]
+    ]
+   },
+   "output": 3,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      [
+       0,
+       0,
+       0,
+       0,
+       1
+      ],
+      [
+       1,
+       0,
+       0,
+       0,
+       1
+      ],
+      [
+       1,
+       1,
+       0,
+       1,
+       1
+      ],
+      [
+       1,
+       1,
+       0,
+       0,
+       1
+      ],
+      [
+       0,
+       0,
+       0,
+       0,
+       0
+      ]
+     ]
+    ]
+   },
+   "output": 2,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      [
+       0,
+       0,
+       0,
+       0,
+       1
+      ],
+      [
+       1,
+       0,
+       0,
+       1,
+       1
+      ],
+      [
+       1,
+       1,
+       0,
+       1,
+       1
+      ],
+      [
+       1,
+       0,
+       0,
+       0,
+       1
+      ],
+      [
+       0,
+       0,
+       0,
+       0,
+       0
+      ]
+     ]
+    ]
+   },
+   "output": 2,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      [
+       0,
+       0,
+       0,
+       0,
+       1
+      ],
+      [
+       1,
+       0,
+       1,
+       1,
+       1
+      ],
+      [
+       1,
+       0,
+       0,
+       0,
+       1
+      ],
+      [
+       1,
+       0,
+       1,
+       0,
+       1
+      ],
+      [
+       0,
+       0,
+       0,
+       0,
+       0
+      ]
+     ]
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      [
+       0,
+       0,
+       0,
+       1,
+       0
+      ],
+      [
+       1,
+       0,
+       0,
+       1,
+       0
+      ],
+      [
+       1,
+       1,
+       0,
+       1,
+       0
+      ],
+      [
+       0,
+       0,
+       0,
+       0,
+       0
+      ],
+      [
+       1,
+       1,
+       1,
+       1,
+       0
+      ]
+     ]
+    ]
+   },
+   "output": 4,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      [
+       0,
+       0,
+       0,
+       1,
+       0
+      ],
+      [
+       1,
+       0,
+       0,
+       1,
+       0
+      ],
+      [
+       1,
+       1,
+       0,
+       1,
+       1
+      ],
+      [
+       0,
+       0,
+       0,
+       0,
+       0
+      ],
+      [
+       1,
+       1,
+       0,
+       1,
+       0
+      ]
+     ]
+    ]
+   },
+   "output": 2,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      [
+       0,
+       0,
+       0,
+       1,
+       0
+      ],
+      [
+       1,
+       0,
+       0,
+       1,
+       1
+      ],
+      [
+       1,
+       1,
+       0,
+       1,
+       1
+      ],
+      [
+       0,
+       0,
+       0,
+       0,
+       0
+      ],
+      [
+       1,
+       0,
+       0,
+       1,
+       0
+      ]
+     ]
+    ]
+   },
+   "output": 2,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      [
+       0,
+       0,
+       0,
+       1,
+       0
+      ],
+      [
+       1,
+       0,
+       1,
+       1,
+       0
+      ],
+      [
+       1,
+       0,
+       0,
+       1,
+       0
+      ],
+      [
+       0,
+       0,
+       0,
+       0,
+       0
+      ],
+      [
+       1,
+       1,
+       1,
+       1,
+       0
+      ]
+     ]
+    ]
+   },
+   "output": 4,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      [
+       0,
+       0,
+       0,
+       1,
+       0
+      ],
+      [
+       1,
+       0,
+       1,
+       1,
+       1
+      ],
+      [
+       1,
+       0,
+       0,
+       1,
+       0
+      ],
+      [
+       0,
+       0,
+       0,
+       0,
+       0
+      ],
+      [
+       1,
+       0,
+       1,
+       1,
+       0
+      ]
+     ]
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      [
+       0,
+       0,
+       0,
+       1,
+       0
+      ],
+      [
+       1,
+       0,
+       1,
+       1,
+       1
+      ],
+      [
+       1,
+       0,
+       0,
+       1,
+       1
+      ],
+      [
+       0,
+       0,
+       0,
+       0,
+       0
+      ],
+      [
+       1,
+       0,
+       0,
+       1,
+       0
+      ]
+     ]
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      [
+       0,
+       0,
+       0,
+       1,
+       1
+      ],
+      [
+       1,
+       0,
+       0,
+       1,
+       1
+      ],
+      [
+       1,
+       1,
+       0,
+       1,
+       1
+      ],
+      [
+       0,
+       0,
+       0,
+       0,
+       0
+      ],
+      [
+       0,
+       0,
+       0,
+       1,
+       0
+      ]
+     ]
+    ]
+   },
+   "output": 2,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      [
+       0,
+       0,
+       0,
+       1,
+       1
+      ],
+      [
+       1,
+       0,
+       0,
+       1,
+       1
+      ],
+      [
+       1,
+       1,
+       0,
+       1,
+       1
+      ],
+      [
+       0,
+       0,
+       0,
+       0,
+       1
+      ],
+      [
+       0,
+       0,
+       0,
+       0,
+       0
+      ]
+     ]
+    ]
+   },
+   "output": 2,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      [
+       0,
+       0,
+       0,
+       1,
+       1
+      ],
+      [
+       1,
+       0,
+       1,
+       1,
+       1
+      ],
+      [
+       1,
+       0,
+       0,
+       1,
+       1
+      ],
+      [
+       0,
+       0,
+       0,
+       0,
+       0
+      ],
+      [
+       0,
+       0,
+       0,
+       1,
+       0
+      ]
+     ]
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      [
+       0,
+       0,
+       0,
+       1,
+       1
+      ],
+      [
+       1,
+       0,
+       1,
+       1,
+       1
+      ],
+      [
+       1,
+       0,
+       0,
+       1,
+       1
+      ],
+      [
+       0,
+       0,
+       0,
+       0,
+       1
+      ],
+      [
+       0,
+       0,
+       0,
+       0,
+       0
+      ]
+     ]
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      [
+       0,
+       0,
+       1,
+       0,
+       0
+      ],
+      [
+       1,
+       0,
+       1,
+       0,
+       0
+      ],
+      [
+       0,
+       0,
+       0,
+       0,
+       0
+      ],
+      [
+       1,
+       1,
+       1,
+       0,
+       0
+      ],
+      [
+       1,
+       1,
+       1,
+       1,
+       0
+      ]
+     ]
+    ]
+   },
+   "output": 4,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      [
+       0,
+       0,
+       1,
+       0,
+       0
+      ],
+      [
+       1,
+       0,
+       1,
+       1,
+       0
+      ],
+      [
+       0,
+       0,
+       0,
+       0,
+       0
+      ],
+      [
+       1,
+       0,
+       1,
+       0,
+       0
+      ],
+      [
+       1,
+       1,
+       1,
+       1,
+       0
+      ]
+     ]
+    ]
+   },
+   "output": 4,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      [
+       0,
+       0,
+       1,
+       0,
+       0
+      ],
+      [
+       1,
+       0,
+       1,
+       1,
+       1
+      ],
+      [
+       0,
+       0,
+       0,
+       0,
+       0
+      ],
+      [
+       1,
+       0,
+       1,
+       0,
+       1
+      ],
+      [
+       1,
+       0,
+       1,
+       0,
+       0
+      ]
+     ]
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      [
+       0,
+       0,
+       1,
+       0,
+       1
+      ],
+      [
+       1,
+       0,
+       1,
+       0,
+       1
+      ],
+      [
+       0,
+       0,
+       0,
+       0,
+       1
+      ],
+      [
+       1,
+       1,
+       1,
+       0,
+       1
+      ],
+      [
+       0,
+       0,
+       0,
+       0,
+       0
+      ]
+     ]
+    ]
+   },
+   "output": 3,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      [
+       0,
+       0,
+       1,
+       1,
+       0
+      ],
+      [
+       1,
+       0,
+       1,
+       1,
+       0
+      ],
+      [
+       0,
+       0,
+       0,
+       1,
+       0
+      ],
+      [
+       0,
+       0,
+       0,
+       0,
+       0
+      ],
+      [
+       1,
+       1,
+       1,
+       1,
+       0
+      ]
+     ]
+    ]
+   },
+   "output": 4,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      [
+       0,
+       0,
+       1,
+       1,
+       0
+      ],
+      [
+       1,
+       0,
+       1,
+       1,
+       1
+      ],
+      [
+       0,
+       0,
+       0,
+       0,
+       0
+      ],
+      [
+       0,
+       0,
+       1,
+       0,
+       0
+      ],
+      [
+       1,
+       0,
+       1,
+       1,
+       0
+      ]
+     ]
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      [
+       0,
+       0,
+       1,
+       1,
+       1
+      ],
+      [
+       1,
+       0,
+       1,
+       1,
+       1
+      ],
+      [
+       0,
+       0,
+       0,
+       1,
+       0
+      ],
+      [
+       0,
+       0,
+       0,
+       0,
+       0
+      ],
+      [
+       0,
+       0,
+       1,
+       1,
+       0
+      ]
+     ]
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      [
+       0,
+       0,
+       1,
+       1,
+       1
+      ],
+      [
+       1,
+       0,
+       1,
+       1,
+       1
+      ],
+      [
+       0,
+       0,
+       0,
+       1,
+       1
+      ],
+      [
+       0,
+       0,
+       0,
+       0,
+       1
+      ],
+      [
+       0,
+       0,
+       0,
+       0,
+       0
+      ]
+     ]
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      [
+       0,
+       1,
+       0,
+       0,
+       0
+      ],
+      [
+       0,
+       0,
+       0,
+       0,
+       0
+      ],
+      [
+       1,
+       1,
+       0,
+       0,
+       0
+      ],
+      [
+       1,
+       1,
+       1,
+       0,
+       1
+      ],
+      [
+       1,
+       1,
+       1,
+       0,
+       0
+      ]
+     ]
+    ]
+   },
+   "output": 3,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      [
+       0,
+       1,
+       0,
+       0,
+       0
+      ],
+      [
+       0,
+       0,
+       0,
+       0,
+       0
+      ],
+      [
+       1,
+       1,
+       0,
+       1,
+       1
+      ],
+      [
+       1,
+       1,
+       0,
+       0,
+       0
+      ],
+      [
+       1,
+       1,
+       0,
+       1,
+       0
+      ]
+     ]
+    ]
+   },
+   "output": 2,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      [
+       0,
+       1,
+       0,
+       0,
+       1
+      ],
+      [
+       0,
+       0,
+       0,
+       0,
+       0
+      ],
+      [
+       1,
+       1,
+       0,
+       0,
+       1
+      ],
+      [
+       1,
+       1,
+       1,
+       0,
+       1
+      ],
+      [
+       0,
+       1,
+       0,
+       0,
+       0
+      ]
+     ]
+    ]
+   },
+   "output": 3,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      [
+       0,
+       1,
+       0,
+       0,
+       1
+      ],
+      [
+       0,
+       0,
+       0,
+       0,
+       0
+      ],
+      [
+       1,
+       1,
+       0,
+       1,
+       1
+      ],
+      [
+       1,
+       1,
+       0,
+       0,
+       1
+      ],
+      [
+       0,
+       1,
+       0,
+       0,
+       0
+      ]
+     ]
+    ]
+   },
+   "output": 2,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      [
+       0,
+       1,
+       0,
+       1,
+       0
+      ],
+      [
+       0,
+       0,
+       0,
+       0,
+       0
+      ],
+      [
+       1,
+       1,
+       0,
+       1,
+       0
+      ],
+      [
+       0,
+       1,
+       0,
+       0,
+       0
+      ],
+      [
+       1,
+       1,
+       1,
+       1,
+       0
+      ]
+     ]
+    ]
+   },
+   "output": 4,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      [
+       0,
+       1,
+       0,
+       1,
+       0
+      ],
+      [
+       0,
+       0,
+       0,
+       0,
+       0
+      ],
+      [
+       1,
+       1,
+       0,
+       1,
+       1
+      ],
+      [
+       0,
+       1,
+       0,
+       0,
+       0
+      ],
+      [
+       1,
+       1,
+       0,
+       1,
+       0
+      ]
+     ]
+    ]
+   },
+   "output": 2,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      [
+       0,
+       1,
+       0,
+       1,
+       0
+      ],
+      [
+       0,
+       0,
+       0,
+       1,
+       0
+      ],
+      [
+       1,
+       1,
+       0,
+       1,
+       0
+      ],
+      [
+       0,
+       0,
+       0,
+       0,
+       0
+      ],
+      [
+       1,
+       1,
+       1,
+       1,
+       0
+      ]
+     ]
+    ]
+   },
+   "output": 4,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      [
+       0,
+       1,
+       0,
+       1,
+       0
+      ],
+      [
+       0,
+       0,
+       0,
+       1,
+       0
+      ],
+      [
+       1,
+       1,
+       0,
+       1,
+       1
+      ],
+      [
+       0,
+       0,
+       0,
+       0,
+       0
+      ],
+      [
+       1,
+       1,
+       0,
+       1,
+       0
+      ]
+     ]
+    ]
+   },
+   "output": 2,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      [
+       0,
+       1,
+       0,
+       1,
+       1
+      ],
+      [
+       0,
+       0,
+       0,
+       0,
+       0
+      ],
+      [
+       1,
+       1,
+       0,
+       1,
+       1
+      ],
+      [
+       0,
+       1,
+       0,
+       0,
+       1
+      ],
+      [
+       0,
+       1,
+       0,
+       0,
+       0
+      ]
+     ]
+    ]
+   },
+   "output": 2,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      [
+       0,
+       1,
+       0,
+       1,
+       1
+      ],
+      [
+       0,
+       0,
+       0,
+       1,
+       1
+      ],
+      [
+       1,
+       1,
+       0,
+       1,
+       1
+      ],
+      [
+       0,
+       0,
+       0,
+       0,
+       0
+      ],
+      [
+       0,
+       0,
+       0,
+       1,
+       0
+      ]
+     ]
+    ]
+   },
+   "output": 2,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      [
+       0,
+       1,
+       1,
+       0,
+       0
+      ],
+      [
+       0,
+       0,
+       0,
+       0,
+       0
+      ],
+      [
+       0,
+       1,
+       0,
+       0,
+       0
+      ],
+      [
+       1,
+       1,
+       1,
+       0,
+       0
+      ],
+      [
+       1,
+       1,
+       1,
+       1,
+       0
+      ]
+     ]
+    ]
+   },
+   "output": 4,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      [
+       0,
+       1,
+       1,
+       0,
+       0
+      ],
+      [
+       0,
+       0,
+       1,
+       0,
+       0
+      ],
+      [
+       0,
+       0,
+       0,
+       0,
+       0
+      ],
+      [
+       1,
+       1,
+       1,
+       0,
+       1
+      ],
+      [
+       1,
+       1,
+       1,
+       0,
+       0
+      ]
+     ]
+    ]
+   },
+   "output": 3,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      [
+       0,
+       1,
+       1,
+       0,
+       1
+      ],
+      [
+       0,
+       0,
+       0,
+       0,
+       0
+      ],
+      [
+       0,
+       1,
+       0,
+       0,
+       1
+      ],
+      [
+       1,
+       1,
+       1,
+       0,
+       1
+      ],
+      [
+       0,
+       1,
+       0,
+       0,
+       0
+      ]
+     ]
+    ]
+   },
+   "output": 3,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      [
+       0,
+       1,
+       1,
+       0,
+       1
+      ],
+      [
+       0,
+       0,
+       0,
+       0,
+       1
+      ],
+      [
+       0,
+       1,
+       0,
+       0,
+       1
+      ],
+      [
+       1,
+       1,
+       1,
+       0,
+       1
+      ],
+      [
+       0,
+       0,
+       0,
+       0,
+       0
+      ]
+     ]
+    ]
+   },
+   "output": 3,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      [
+       0,
+       1,
+       1,
+       0,
+       1
+      ],
+      [
+       0,
+       0,
+       1,
+       0,
+       0
+      ],
+      [
+       0,
+       0,
+       0,
+       0,
+       0
+      ],
+      [
+       1,
+       1,
+       1,
+       0,
+       1
+      ],
+      [
+       0,
+       1,
+       1,
+       0,
+       0
+      ]
+     ]
+    ]
+   },
+   "output": 3,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      [
+       0,
+       1,
+       1,
+       0,
+       1
+      ],
+      [
+       0,
+       0,
+       1,
+       0,
+       1
+      ],
+      [
+       0,
+       0,
+       0,
+       0,
+       0
+      ],
+      [
+       1,
+       1,
+       1,
+       0,
+       1
+      ],
+      [
+       0,
+       0,
+       1,
+       0,
+       0
+      ]
+     ]
+    ]
+   },
+   "output": 3,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      [
+       0,
+       1,
+       1,
+       0,
+       1
+      ],
+      [
+       0,
+       0,
+       1,
+       0,
+       1
+      ],
+      [
+       0,
+       0,
+       0,
+       0,
+       1
+      ],
+      [
+       1,
+       1,
+       1,
+       0,
+       1
+      ],
+      [
+       0,
+       0,
+       0,
+       0,
+       0
+      ]
+     ]
+    ]
+   },
+   "output": 3,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      [
+       0,
+       1,
+       1,
+       1,
+       0
+      ],
+      [
+       0,
+       0,
+       0,
+       1,
+       0
+      ],
+      [
+       0,
+       1,
+       0,
+       1,
+       0
+      ],
+      [
+       0,
+       0,
+       0,
+       0,
+       0
+      ],
+      [
+       1,
+       1,
+       1,
+       1,
+       0
+      ]
+     ]
+    ]
+   },
+   "output": 4,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      [
+       0,
+       1,
+       1,
+       1,
+       0
+      ],
+      [
+       0,
+       0,
+       1,
+       0,
+       0
+      ],
+      [
+       0,
+       0,
+       0,
+       0,
+       0
+      ],
+      [
+       0,
+       1,
+       1,
+       0,
+       0
+      ],
+      [
+       1,
+       1,
+       1,
+       1,
+       0
+      ]
+     ]
+    ]
+   },
+   "output": 4,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      [
+       0,
+       1,
+       1,
+       1,
+       0
+      ],
+      [
+       0,
+       0,
+       1,
+       1,
+       0
+      ],
+      [
+       0,
+       0,
+       0,
+       0,
+       0
+      ],
+      [
+       0,
+       0,
+       1,
+       0,
+       0
+      ],
+      [
+       1,
+       1,
+       1,
+       1,
+       0
+      ]
+     ]
+    ]
+   },
+   "output": 4,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      [
+       0,
+       1,
+       1,
+       1,
+       1
+      ],
+      [
+       0,
+       0,
+       0,
+       0,
+       0
+      ],
+      [
+       0,
+       1,
+       0,
+       0,
+       0
+      ],
+      [
+       0,
+       1,
+       1,
+       0,
+       0
+      ],
+      [
+       0,
+       1,
+       1,
+       1,
+       0
+      ]
+     ]
+    ]
+   },
+   "output": 0,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      [
+       0,
+       1,
+       1,
+       1,
+       1
+      ],
+      [
+       0,
+       0,
+       0,
+       0,
+       0
+      ],
+      [
+       0,
+       1,
+       0,
+       0,
+       0
+      ],
+      [
+       0,
+       1,
+       1,
+       0,
+       1
+      ],
+      [
+       0,
+       1,
+       1,
+       0,
+       0
+      ]
+     ]
+    ]
+   },
+   "output": 0,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      [
+       0,
+       1,
+       1,
+       1,
+       1
+      ],
+      [
+       0,
+       0,
+       0,
+       0,
+       0
+      ],
+      [
+       0,
+       1,
+       0,
+       0,
+       1
+      ],
+      [
+       0,
+       1,
+       1,
+       0,
+       1
+      ],
+      [
+       0,
+       1,
+       0,
+       0,
+       0
+      ]
+     ]
+    ]
+   },
+   "output": 0,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      [
+       0,
+       1,
+       1,
+       1,
+       1
+      ],
+      [
+       0,
+       0,
+       0,
+       0,
+       0
+      ],
+      [
+       0,
+       1,
+       0,
+       1,
+       0
+      ],
+      [
+       0,
+       1,
+       0,
+       0,
+       0
+      ],
+      [
+       0,
+       1,
+       1,
+       1,
+       0
+      ]
+     ]
+    ]
+   },
+   "output": 0,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      [
+       0,
+       1,
+       1,
+       1,
+       1
+      ],
+      [
+       0,
+       0,
+       0,
+       0,
+       0
+      ],
+      [
+       0,
+       1,
+       0,
+       1,
+       1
+      ],
+      [
+       0,
+       1,
+       0,
+       0,
+       0
+      ],
+      [
+       0,
+       1,
+       0,
+       1,
+       0
+      ]
+     ]
+    ]
+   },
+   "output": 0,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      [
+       0,
+       1,
+       1,
+       1,
+       1
+      ],
+      [
+       0,
+       0,
+       0,
+       0,
+       0
+      ],
+      [
+       0,
+       1,
+       0,
+       1,
+       1
+      ],
+      [
+       0,
+       1,
+       0,
+       0,
+       1
+      ],
+      [
+       0,
+       1,
+       0,
+       0,
+       0
+      ]
+     ]
+    ]
+   },
+   "output": 0,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      [
+       0,
+       1,
+       1,
+       1,
+       1
+      ],
+      [
+       0,
+       0,
+       0,
+       0,
+       1
+      ],
+      [
+       0,
+       1,
+       0,
+       0,
+       1
+      ],
+      [
+       0,
+       1,
+       1,
+       0,
+       1
+      ],
+      [
+       0,
+       0,
+       0,
+       0,
+       0
+      ]
+     ]
+    ]
+   },
+   "output": 0,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      [
+       0,
+       1,
+       1,
+       1,
+       1
+      ],
+      [
+       0,
+       0,
+       1,
+       0,
+       0
+      ],
+      [
+       0,
+       0,
+       0,
+       0,
+       0
+      ],
+      [
+       0,
+       1,
+       1,
+       0,
+       0
+      ],
+      [
+       0,
+       1,
+       1,
+       1,
+       0
+      ]
+     ]
+    ]
+   },
+   "output": 0,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      [
+       0,
+       1,
+       1,
+       1,
+       1
+      ],
+      [
+       0,
+       0,
+       1,
+       0,
+       0
+      ],
+      [
+       0,
+       0,
+       0,
+       0,
+       0
+      ],
+      [
+       0,
+       1,
+       1,
+       0,
+       1
+      ],
+      [
+       0,
+       1,
+       1,
+       0,
+       0
+      ]
+     ]
+    ]
+   },
+   "output": 0,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      [
+       0,
+       1,
+       1,
+       1,
+       1
+      ],
+      [
+       0,
+       0,
+       1,
+       0,
+       1
+      ],
+      [
+       0,
+       0,
+       0,
+       0,
+       1
+      ],
+      [
+       0,
+       1,
+       1,
+       0,
+       1
+      ],
+      [
+       0,
+       0,
+       0,
+       0,
+       0
+      ]
+     ]
+    ]
+   },
+   "output": 0,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      [
+       0,
+       1,
+       1,
+       1,
+       1
+      ],
+      [
+       0,
+       0,
+       1,
+       1,
+       0
+      ],
+      [
+       0,
+       0,
+       0,
+       0,
+       0
+      ],
+      [
+       0,
+       0,
+       1,
+       0,
+       0
+      ],
+      [
+       0,
+       1,
+       1,
+       1,
+       0
+      ]
+     ]
+    ]
+   },
+   "output": 0,
+   "explanation": ""
+  }
+ ],
+ "original_ilr": "```json\n{\n  \"problem_id\": \"findChampion\",\n  \"nodes\": [\n    {\n      \"id\": 1,\n      \"type\": \"start\",\n      \"label\": \"Start\",\n      \"next\": 2\n    },\n    {\n      \"id\": 2,\n      \"type\": \"process\",\n      \"label\": \"Input: grid (2D boolean matrix)\",\n      \"action\": \"ctx['grid'] = ctx['arg0']; ctx['n'] = len(ctx['grid']); ctx['i'] = 0; ctx['isChampion'] = True\",\n      \"next\": 3\n    },\n    {\n      \"id\": 3,\n      \"type\": \"decision\",\n      \"label\": \"Is i < n?\",\n      \"logic\": \"ctx['i'] < ctx['n']\",\n      \"true_next\": 4,\n      \"false_next\": 11\n    },\n    {\n      \"id\": 4,\n      \"type\": \"process\",\n      \"label\": \"Initialize isChampion = True\",\n      \"action\": \"ctx['isChampion'] = True\",\n      \"next\": 5\n    },\n    {\n      \"id\": 5,\n      \"type\": \"decision\",\n      \"label\": \"Is i != j?\",\n      \"logic\": \"ctx['i'] != ctx['j']\",\n      \"true_next\": 6,\n      \"false_next\": 8\n    },\n    {\n      \"id\": 6,\n      \"type\": \"decision\",\n      \"label\": \"Is grid[i][i] == 1?\",\n      \"logic\": \"ctx['grid'][ctx['i']][ctx['i']] == 1\",\n      \"true_next\": 7,\n      \"false_next\": 8\n    },\n    {\n      \"id\": 7,\n      \"type\": \"process\",\n      \"label\": \"Set isChampion = False\",\n      \"action\": \"ctx['isChampion'] = False\",\n      \"next\": 9\n    },\n    {\n      \"id\": 8,\n      \"type\": \"process\",\n      \"label\": \"Break the inner loop\",\n      \"action\": \"break\",\n      \"next\": 4\n    },\n    {\n      \"id\": 9,\n      \"type\": \"decision\",\n      \"label\": \"Is isChampion == True?\",\n      \"logic\": \"ctx['isChampion'] == True\",\n      \"true_next\": 10,\n      \"false_next\": 4\n    },\n    {\n      \"id\": 10,\n      \"type\": \"end\",\n      \"label\": \"Output: i (team i is the champion)\",\n      \"output\": \"ctx['i']\"\n    },\n    {\n      \"id\": 11,\n      \"type\": \"end\",\n      \"label\": \"Output: -1 (no champion found)\",\n      \"output\": \"-1\"\n    }\n  ]\n}\n```",
+ "original_code": "class Solution:\n    def findChampion(self, grid: List[List[int]]) -> int:\n        n = len(grid)\n        i = 0\n        isChampion = True\n        \n        while i < n:\n            isChampion = True\n            j = 0\n            while j < n:\n                if i != j:\n                    if grid[i][j] == 1:\n                        isChampion = False\n                        break\n                j += 1\n            \n            if isChampion:\n                return i\n            \n            i += 1\n        \n        return -1",
+ "ocr_data": {
+  "nodes": [
+   {
+    "node_id": 1,
+    "shape_type": "rectangle",
+    "raw_text": "Start",
+    "position": "top"
+   },
+   {
+    "node_id": 2,
+    "shape_type": "rectangle",
+    "raw_text": "Input: grid (2D boolean matrix)",
+    "position": "middle"
+   },
+   {
+    "node_id": 3,
+    "shape_type": "rectangle",
+    "raw_text": "Initialize n = length of grid",
+    "position": "middle"
+   },
+   {
+    "node_id": 4,
+    "shape_type": "rectangle",
+    "raw_text": "Loop i from 0 to n-1",
+    "position": "middle"
+   },
+   {
+    "node_id": 5,
+    "shape_type": "rectangle",
+    "raw_text": "Initialize isChampion = True",
+    "position": "middle"
+   },
+   {
+    "node_id": 6,
+    "shape_type": "rectangle",
+    "raw_text": "Loop j from 0 to n-1",
+    "position": "middle"
+   },
+   {
+    "node_id": 7,
+    "shape_type": "diamond",
+    "raw_text": "Is i != j?",
+    "position": "middle"
+   },
+   {
+    "node_id": 8,
+    "shape_type": "diamond",
+    "raw_text": "Is grid[i][i] == 1?",
+    "position": "middle"
+   },
+   {
+    "node_id": 9,
+    "shape_type": "rectangle",
+    "raw_text": "Set isChampion = False",
+    "position": "middle"
+   },
+   {
+    "node_id": 10,
+    "shape_type": "rectangle",
+    "raw_text": "Break the inner loop",
+    "position": "middle"
+   },
+   {
+    "node_id": 11,
+    "shape_type": "rectangle",
+    "raw_text": "Output: -1 (no champion found)",
+    "position": "middle"
+   },
+   {
+    "node_id": 12,
+    "shape_type": "diamond",
+    "raw_text": "Is isChampion == True?",
+    "position": "middle"
+   },
+   {
+    "node_id": 13,
+    "shape_type": "rectangle",
+    "raw_text": "Output: i (team i is the champion)",
+    "position": "bottom"
+   }
+  ],
+  "edges": [
+   {
+    "from_node": 1,
+    "to_node": 2,
+    "label": ""
+   },
+   {
+    "from_node": 2,
+    "to_node": 3,
+    "label": ""
+   },
+   {
+    "from_node": 3,
+    "to_node": 4,
+    "label": ""
+   },
+   {
+    "from_node": 4,
+    "to_node": 5,
+    "label": ""
+   },
+   {
+    "from_node": 5,
+    "to_node": 6,
+    "label": ""
+   },
+   {
+    "from_node": 6,
+    "to_node": 7,
+    "label": ""
+   },
+   {
+    "from_node": 7,
+    "to_node": 8,
+    "label": "Yes"
+   },
+   {
+    "from_node": 8,
+    "to_node": 9,
+    "label": "Yes"
+   },
+   {
+    "from_node": 9,
+    "to_node": 10,
+    "label": ""
+   },
+   {
+    "from_node": 10,
+    "to_node": 6,
+    "label": ""
+   },
+   {
+    "from_node": 7,
+    "to_node": 6,
+    "label": "No"
+   },
+   {
+    "from_node": 8,
+    "to_node": 6,
+    "label": "No"
+   },
+   {
+    "from_node": 4,
+    "to_node": 11,
+    "label": "No"
+   },
+   {
+    "from_node": 12,
+    "to_node": 13,
+    "label": "Yes"
+   }
+  ],
+  "other_text": []
+ },
+ "test_result": {},
+ "status": "completed",
+ "fixed_ilr": null,
+ "modified_code": null,
+ "ilr_fix_log": "",
+ "bug_injected": ""
+}

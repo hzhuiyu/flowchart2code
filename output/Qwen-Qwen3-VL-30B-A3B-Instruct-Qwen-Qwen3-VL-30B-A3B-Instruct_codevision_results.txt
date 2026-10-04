@@ -1,0 +1,8 @@
+CodeVision Combined Results
+Experiment: Qwen-Qwen3-VL-30B-A3B-Instruct-Qwen-Qwen3-VL-30B-A3B-Instruct
+
+Algorithm    : 124/149
+HumanEval-V  : 149/164
+MATH         : 107/125
+--------------------------------
+Total        : 380/438 = 0.867579908675799

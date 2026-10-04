@@ -1,0 +1,138 @@
+{
+  "problem_id": "is_nested",
+  "nodes": [
+    {
+      "id": 1,
+      "type": "start",
+      "label": "Start",
+      "next": 2
+    },
+    {
+      "id": 2,
+      "type": "process",
+      "label": "Input: string (only square brackets)",
+      "action": "ctx['string'] = ctx['arg0']; ctx['opening_bracket_index'] = []; ctx['closing_bracket_index'] = []; ctx['cnt'] = 0; ctx['i'] = 0",
+      "next": 3
+    },
+    {
+      "id": 3,
+      "type": "decision",
+      "label": "Is the string empty?",
+      "logic": "len(ctx['string']) == 0",
+      "true_next": 4,
+      "false_next": 5
+    },
+    {
+      "id": 4,
+      "type": "end",
+      "label": "Output: False (no brackets present)",
+      "output": "False"
+    },
+    {
+      "id": 5,
+      "type": "process",
+      "label": "Iterate through each character in the string",
+      "action": "for idx, char in enumerate(ctx['string']):",
+      "next": 6
+    },
+    {
+      "id": 6,
+      "type": "decision",
+      "label": "Is the character '['?",
+      "logic": "char == '['",
+      "true_next": 7,
+      "false_next": 8
+    },
+    {
+      "id": 7,
+      "type": "process",
+      "label": "Append index to opening_bracket_index",
+      "action": "ctx['opening_bracket_index'].append(idx)",
+      "next": 5
+    },
+    {
+      "id": 8,
+      "type": "process",
+      "label": "Append index to closing_bracket_index",
+      "action": "ctx['closing_bracket_index'].append(idx)",
+      "next": 9
+    },
+    {
+      "id": 9,
+      "type": "process",
+      "label": "Reverse closing_bracket_index",
+      "action": "ctx['closing_bracket_index'].reverse()",
+      "next": 10
+    },
+    {
+      "id": 10,
+      "type": "process",
+      "label": "Initialize count (cnt) = 0 and index (i) = 0",
+      "action": "ctx['cnt'] = 0; ctx['i'] = 0",
+      "next": 11
+    },
+    {
+      "id": 11,
+      "type": "decision",
+      "label": "Iterate through opening_bracket_index",
+      "logic": "ctx['i'] < len(ctx['opening_bracket_index'])",
+      "true_next": 12,
+      "false_next": 16
+    },
+    {
+      "id": 12,
+      "type": "decision",
+      "label": "Is index < length of closing_bracket_index and idx < closing_bracket_index[i]?",
+      "logic": "ctx['i'] < len(ctx['closing_bracket_index']) and ctx['i'] < ctx['closing_bracket_index'][ctx['i']]",
+      "true_next": 13,
+      "false_next": 15
+    },
+    {
+      "id": 13,
+      "type": "process",
+      "label": "Increment count (cnt) by 1 and index (i) by 1",
+      "action": "ctx['cnt'] += 1; ctx['i'] += 1",
+      "next": 11
+    },
+    {
+      "id": 15,
+      "type": "process",
+      "label": "Break iteration",
+      "action": "pass",
+      "next": 16
+    },
+    {
+      "id": 16,
+      "type": "decision",
+      "label": "Is cnt >= 2?",
+      "logic": "ctx['cnt'] >= 2",
+      "true_next": 17,
+      "false_next": 18
+    },
+    {
+      "id": 17,
+      "type": "end",
+      "label": "Output: True (nested brackets present)",
+      "output": "True"
+    },
+    {
+      "id": 18,
+      "type": "end",
+      "label": "Output: False (no nested brackets found)",
+      "output": "False"
+    }
+  ],
+  "task_id": "HumanEval-132",
+  "dataset": "HumanEval-V",
+  "result": "failed: ",
+  "code": "def is_nested(string):\n    opening_bracket_index = []\n    closing_bracket_index = []\n    cnt = 0\n    i = 0\n    \n    if len(string) == 0:\n        return False\n    \n    for idx, char in enumerate(string):\n        if char == '[':\n            opening_bracket_index.append(idx)\n        else:\n            closing_bracket_index.append(idx)\n    \n    closing_bracket_index.reverse()\n    \n    cnt = 0\n    i = 0\n    \n    while i < len(opening_bracket_index):\n        if i < len(closing_bracket_index) and i < closing_bracket_index[i]:\n            cnt += 1\n            i += 1\n        else:\n            break\n    \n    return cnt >= 2",
+  "verification": {
+    "md_verdict": "ILR Error",
+    "actual_error_source": "ilr",
+    "ilr_verdict": "incorrect",
+    "code_vs_ilr": "faithful",
+    "md_correct": "yes",
+    "note": "确认 ILR 错：node12 的 logic 写成 ctx['i'] < closing_bracket_index[i]（用循环计数器 i 与闭括号位置比较），与其自身标签 'idx < closing_bracket_index[i]'（应比较第 i 个 '[' 的位置）不符，导致 '[]]]]]]][[[[[]' 误判为 True。生成代码原样照抄该条件（含 break），属忠实转换。",
+    "evidence": "以逐位置匹配的参考实现为期望，ILR 转写与生成代码对 '[]]]]]]][[[[[]' 均输出 True（cnt 累到 4），期望 False；其余 13 个测试两者与参考一致。"
+  }
+}

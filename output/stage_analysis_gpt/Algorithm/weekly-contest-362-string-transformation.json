@@ -1,0 +1,296 @@
+{
+  "task_id": "weekly-contest-362-string-transformation",
+  "dataset": "Algorithm",
+  "difficulty": "Hard",
+  "title": "string-transformation",
+  "result": "failed: ",
+  "ilr": "{\n  \"problem_id\": \"number_of_ways_to_transform\",\n  \"nodes\": [\n    {\"id\": 1, \"type\": \"start\", \"label\": \"Start\", \"next\": 2},\n    {\"id\": 2, \"type\": \"process\", \"label\": \"Input: s (string), t (string), k (integer)\", \"action\": \"ctx['s']=ctx['arg0']; ctx['t']=ctx['arg1']; ctx['k']=ctx['arg2']; ctx['mod']=10**9 + 7\", \"next\": 3},\n    {\"id\": 3, \"type\": \"process\", \"label\": \"Concatenate s with itself: ss = s + s\", \"action\": \"ctx['ss'] = ctx['s'] + ctx['s']\", \"next\": 4},\n    {\"id\": 4, \"type\": \"decision\", \"label\": \"Is t in ss?\", \"logic\": \"ctx['t'] in ctx['ss']\", \"true_next\": 6, \"false_next\": 5},\n    {\"id\": 5, \"type\": \"return\", \"label\": \"Output: 0 (s cannot be transformed into t)\", \"value\": \"0\"},\n    {\"id\": 6, \"type\": \"process\", \"label\": \"Set n = length of s\", \"action\": \"ctx['n'] = len(ctx['s'])\", \"next\": 7},\n    {\"id\": 7, \"type\": \"decision\", \"label\": \"Is s == t?\", \"logic\": \"ctx['s'] == ctx['t']\", \"true_next\": 10, \"false_next\": 8},\n    {\"id\": 8, \"type\": \"process\", \"label\": \"Set f0 = 0 (no initial match)\", \"action\": \"ctx['f0'] = 0\", \"next\": 9},\n    {\"id\": 9, \"type\": \"process\", \"label\": \"Set f0 = 1 (initial match)\", \"action\": \"ctx['f0'] = 1\", \"next\": 11},\n    {\"id\": 10, \"type\": \"process\", \"label\": \"Set r = n // ss.find(s, 1)\", \"action\": \"ctx['r'] = ctx['n'] // ctx['ss'].find(ctx['s'], 1)\", \"next\": 12},\n    {\"id\": 11, \"type\": \"process\", \"label\": \"Set f1 = r - f0\", \"action\": \"ctx['f1'] = ctx['r'] - ctx['f0']\", \"next\": 13},\n    {\"id\": 12, \"type\": \"decision\", \"label\": \"Is k % 2 == 0?\", \"logic\": \"ctx['k'] % 2 == 0\", \"true_next\": 14, \"false_next\": 15},\n    {\"id\": 13, \"type\": \"process\", \"label\": \"Set left = f0\", \"action\": \"ctx['left'] = ctx['f0']\", \"next\": 16},\n    {\"id\": 14, \"type\": \"process\", \"label\": \"Set left = f1\", \"action\": \"ctx['left'] = ctx['f1']\", \"next\": 16},\n    {\"id\": 15, \"type\": \"decision\", \"label\": \"Is k % 2 == 0?\", \"logic\": \"ctx['k'] % 2 == 0\", \"true_next\": 17, \"false_next\": 18},\n    {\"id\": 16, \"type\": \"process\", \"label\": \"Set a1 = (n - 2) * r\", \"action\": \"ctx['a1'] = (ctx['n'] - 2) * ctx['r']\", \"next\": 19},\n    {\"id\": 17, \"type\": \"process\", \"label\": \"Set a1 = (n - 2) * (n - 1) * r\", \"action\": \"ctx['a1'] = (ctx['n'] - 2) * (ctx['n'] - 1) * ctx['r']\", \"next\": 19},\n    {\"id\": 18, \"type\": \"process\", \"label\": \"Set q = (n - 1) ** 2\", \"action\": \"ctx['q'] = (ctx['n'] - 1) ** 2\", \"next\": 20},\n    {\"id\": 19, \"type\": \"decision\", \"label\": \"Is q == 1?\", \"logic\": \"ctx['q'] == 1\", \"true_next\": 22, \"false_next\": 21},\n    {\"id\": 20, \"type\": \"process\", \"label\": \"Set ans = a1 * (pow(q, k // 2, mod * (q - 1)) - 1) / (q - 1) + left\", \"action\": \"ctx['ans'] = ctx['a1'] * (pow(ctx['q'], ctx['k'] // 2, ctx['mod'] * (ctx['q'] - 1)) - 1) / (ctx['q'] - 1) + ctx['left']\", \"next\": 23},\n    {\"id\": 21, \"type\": \"process\", \"label\": \"Set ans = (a1 * (k // 2) + left) % mod\", \"action\": \"ctx['ans'] = (ctx['a1'] * (ctx['k'] // 2) + ctx['left']) % ctx['mod']\", \"next\": 23},\n    {\"id\": 22, \"type\": \"return\", \"label\": \"Return ans % mod\", \"value\": \"ctx['ans'] % ctx['mod']\"}\n  ]\n}",
+  "code": "class Solution:\n    def numberOfWays(self, s: str, t: str, k: int) -> int:\n        mod = 10**9 + 7\n        ss = s + s\n        \n        if t not in ss:\n            return 0\n        \n        n = len(s)\n        \n        if s == t:\n            f0 = 1\n            r = n // ss.find(s, 1)\n        else:\n            f0 = 0\n            r = n // ss.find(s, 1)\n        \n        f1 = r - f0\n        \n        if k % 2 == 0:\n            left = f1\n        else:\n            left = f0\n        \n        if k % 2 == 0:\n            a1 = (n - 2) * r\n        else:\n            a1 = (n - 2) * (n - 1) * r\n        \n        q = (n - 1) ** 2\n        \n        if q == 1:\n            ans = (a1 * (k // 2) + left) % mod\n        else:\n            ans = a1 * (pow(q, k // 2, mod * (q - 1)) - 1) // (q - 1) + left\n        \n        return ans % mod",
+  "prompt": "\"\"\"\nYou are given two strings s and t of equal length n. You can perform the following operation on the string s:\n\n * Remove a suffix of s of length l where 0 < l < n and append it at the start of s.\n   For example, let s = 'abcd' then in one operation you can remove the suffix 'cd' and append it in front of s making s = 'cdab'.\n\nYou are also given an integer k. Return the number of ways in which s can be transformed into t in exactly k operations.\n\nSince the answer can be large, return it modulo 109 + 7.\n\nExample 1:\n\nInput: s = \"abcd\", t = \"cdab\", k = 2\nOutput: 2\nExplanation:\nFirst way:\nIn first operation, choose suffix from index = 3, so resulting s = \"dabc\".\nIn second operation, choose suffix from index = 3, so resulting s = \"cdab\".\n\nSecond way:\nIn first operation, choose suffix from index = 1, so resulting s = \"bcda\".\nIn second operation, choose suffix from index = 1, so resulting s = \"cdab\".\n\nExample 2:\n\nInput: s = \"ababab\", t = \"ababab\", k = 1\nOutput: 2\nExplanation:\nFirst way:\nChoose suffix from index = 2, so resulting s = \"ababab\".\n\nSecond way:\nChoose suffix from index = 4, so resulting s = \"ababab\".\n\n\nConstraints:\n\n * 2 <= s.length <= 5 * 105\n * 1 <= k <= 1015\n * s.length == t.length\n * s and t consist of only lowercase English alphabets.\n\"\"\"\nclass Solution:\n    def numberOfWays(self, s: str, t: str, k: int) -> int:\n        ",
+  "test": "\nmy_solution = Solution()\n\ntest_input = { \"s\": \"abcd\", \"t\": \"cdab\", \"k\": 2 }\nassert my_solution.numberOfWays(**test_input) == 2\n\ntest_input = { \"s\": \"ababab\", \"t\": \"ababab\", \"k\": 1 }\nassert my_solution.numberOfWays(**test_input) == 2\n\ntest_input = { \"s\": \"goxoq\", \"t\": \"dfqgl\", \"k\": 244326024901249 }\nassert my_solution.numberOfWays(**test_input) == 0\n\ntest_input = { \"s\": \"ceoceo\", \"t\": \"eoceoc\", \"k\": 4 }\nassert my_solution.numberOfWays(**test_input) == 208\n\ntest_input = { \"s\": \"ib\", \"t\": \"ib\", \"k\": 10 }\nassert my_solution.numberOfWays(**test_input) == 1\n\ntest_input = { \"s\": \"ttttttt\", \"t\": \"ttttttt\", \"k\": 5 }\nassert my_solution.numberOfWays(**test_input) == 7776\n\ntest_input = { \"s\": \"aaaa\", \"t\": \"aaaa\", \"k\": 8 }\nassert my_solution.numberOfWays(**test_input) == 6561\n\ntest_input = { \"s\": \"meplrmeplr\", \"t\": \"eplrmeplrm\", \"k\": 7 }\nassert my_solution.numberOfWays(**test_input) == 956594\n\ntest_input = { \"s\": \"dsmn\", \"t\": \"smnd\", \"k\": 3 }\nassert my_solution.numberOfWays(**test_input) == 7\n\ntest_input = { \"s\": \"jjj\", \"t\": \"jjj\", \"k\": 10 }\nassert my_solution.numberOfWays(**test_input) == 1024\n\ntest_input = { \"s\": \"rrrrr\", \"t\": \"rrrrr\", \"k\": 1 }\nassert my_solution.numberOfWays(**test_input) == 4\n\ntest_input = { \"s\": \"fefe\", \"t\": \"fefe\", \"k\": 9 }\nassert my_solution.numberOfWays(**test_input) == 9841\n\ntest_input = { \"s\": \"pfly\", \"t\": \"wvqr\", \"k\": 840550364246523 }\nassert my_solution.numberOfWays(**test_input) == 0\n\ntest_input = { \"s\": \"ltjwwltjww\", \"t\": \"jwwltjwwlt\", \"k\": 1 }\nassert my_solution.numberOfWays(**test_input) == 2\n\ntest_input = { \"s\": \"mb\", \"t\": \"mb\", \"k\": 3 }\nassert my_solution.numberOfWays(**test_input) == 0\n\ntest_input = { \"s\": \"jjjjjjjjjj\", \"t\": \"jjjjjjjjjj\", \"k\": 3 }\nassert my_solution.numberOfWays(**test_input) == 729\n\ntest_input = { \"s\": \"oqytlmi\", \"t\": \"lmioqyt\", \"k\": 8 }\nassert my_solution.numberOfWays(**test_input) == 239945\n\ntest_input = { \"s\": \"hpcg\", \"t\": \"pcgh\", \"k\": 5 }\nassert my_solution.numberOfWays(**test_input) == 61\n\ntest_input = { \"s\": \"bqbqbqbqbq\", \"t\": \"bqbqbqbqbq\", \"k\": 9 }\nassert my_solution.numberOfWays(**test_input) == 193710244\n\ntest_input = { \"s\": \"ccccccccc\", \"t\": \"ccccccccc\", \"k\": 7 }\nassert my_solution.numberOfWays(**test_input) == 2097152\n\ntest_input = { \"s\": \"jjjjjjjjjj\", \"t\": \"jjjjjjjjjj\", \"k\": 9 }\nassert my_solution.numberOfWays(**test_input) == 387420489\n\ntest_input = { \"s\": \"qqqq\", \"t\": \"qqqq\", \"k\": 9 }\nassert my_solution.numberOfWays(**test_input) == 19683\n\ntest_input = { \"s\": \"loppaqg\", \"t\": \"nvbxtmh\", \"k\": 104865546226045 }\nassert my_solution.numberOfWays(**test_input) == 0\n\ntest_input = { \"s\": \"qqqqqqqqqq\", \"t\": \"qqqqqqqqqq\", \"k\": 3 }\nassert my_solution.numberOfWays(**test_input) == 729\n\ntest_input = { \"s\": \"qsqsqsqsqs\", \"t\": \"qsqsqsqsqs\", \"k\": 2 }\nassert my_solution.numberOfWays(**test_input) == 41\n\ntest_input = { \"s\": \"nnnnn\", \"t\": \"nnnnn\", \"k\": 5 }\nassert my_solution.numberOfWays(**test_input) == 1024\n\ntest_input = { \"s\": \"klncccd\", \"t\": \"klncccd\", \"k\": 1 }\nassert my_solution.numberOfWays(**test_input) == 0\n\ntest_input = { \"s\": \"qqqqq\", \"t\": \"qqqqq\", \"k\": 9 }\nassert my_solution.numberOfWays(**test_input) == 262144\n\ntest_input = { \"s\": \"qvxrlh\", \"t\": \"hqvxrl\", \"k\": 6 }\nassert my_solution.numberOfWays(**test_input) == 2604\n\ntest_input = { \"s\": \"uuuu\", \"t\": \"uuuu\", \"k\": 9 }\nassert my_solution.numberOfWays(**test_input) == 19683\n\ntest_input = { \"s\": \"sss\", \"t\": \"sss\", \"k\": 7 }\nassert my_solution.numberOfWays(**test_input) == 128\n\ntest_input = { \"s\": \"gggggggggg\", \"t\": \"gggggggggg\", \"k\": 1 }\nassert my_solution.numberOfWays(**test_input) == 9\n\ntest_input = { \"s\": \"ks\", \"t\": \"cj\", \"k\": 400700574233583 }\nassert my_solution.numberOfWays(**test_input) == 0\n\ntest_input = { \"s\": \"lllllllll\", \"t\": \"lllllllll\", \"k\": 5 }\nassert my_solution.numberOfWays(**test_input) == 32768\n\ntest_input = { \"s\": \"uhixx\", \"t\": \"xxuhi\", \"k\": 3 }\nassert my_solution.numberOfWays(**test_input) == 13\n\ntest_input = { \"s\": \"vkrvkrvkr\", \"t\": \"rvkrvkrvk\", \"k\": 2 }\nassert my_solution.numberOfWays(**test_input) == 21\n\ntest_input = { \"s\": \"xtxtxtxt\", \"t\": \"xtxtxtxt\", \"k\": 8 }\nassert my_solution.numberOfWays(**test_input) == 2882401\n\ntest_input = { \"s\": \"nzybrhi\", \"t\": \"rhinzyb\", \"k\": 6 }\nassert my_solution.numberOfWays(**test_input) == 6665\n\ntest_input = { \"s\": \"ff\", \"t\": \"ff\", \"k\": 4 }\nassert my_solution.numberOfWays(**test_input) == 1\n\ntest_input = { \"s\": \"ubagdasws\", \"t\": \"aswsubagd\", \"k\": 9 }\nassert my_solution.numberOfWays(**test_input) == 14913081\n\ntest_input = { \"s\": \"aaaaa\", \"t\": \"aaaaa\", \"k\": 10 }\nassert my_solution.numberOfWays(**test_input) == 1048576\n\ntest_input = { \"s\": \"iiiiiiiiii\", \"t\": \"iiiiiiiiii\", \"k\": 4 }\nassert my_solution.numberOfWays(**test_input) == 6561\n\ntest_input = { \"s\": \"nnjqjmgome\", \"t\": \"gbfuecwlqc\", \"k\": 359221508193514 }\nassert my_solution.numberOfWays(**test_input) == 0\n\ntest_input = { \"s\": \"slmzyj\", \"t\": \"slmzyj\", \"k\": 4 }\nassert my_solution.numberOfWays(**test_input) == 105\n\ntest_input = { \"s\": \"vfyxl\", \"t\": \"vfyxl\", \"k\": 10 }\nassert my_solution.numberOfWays(**test_input) == 209716\n\ntest_input = { \"s\": \"sxzfvsxzfv\", \"t\": \"vsxzfvsxzf\", \"k\": 2 }\nassert my_solution.numberOfWays(**test_input) == 16\n\ntest_input = { \"s\": \"kalt\", \"t\": \"ltka\", \"k\": 7 }\nassert my_solution.numberOfWays(**test_input) == 547\n\ntest_input = { \"s\": \"jj\", \"t\": \"jj\", \"k\": 7 }\nassert my_solution.numberOfWays(**test_input) == 1\n\ntest_input = { \"s\": \"bcriunp\", \"t\": \"criunpb\", \"k\": 2 }\nassert my_solution.numberOfWays(**test_input) == 5\n\ntest_input = { \"s\": \"rutmzyj\", \"t\": \"zyjrutm\", \"k\": 6 }\nassert my_solution.numberOfWays(**test_input) == 6665\n\ntest_input = { \"s\": \"vvvvv\", \"t\": \"vvvvv\", \"k\": 3 }\nassert my_solution.numberOfWays(**test_input) == 64\n\ntest_input = { \"s\": \"hlld\", \"t\": \"hlld\", \"k\": 9 }\nassert my_solution.numberOfWays(**test_input) == 4920\n\ntest_input = { \"s\": \"kctcsgswa\", \"t\": \"qfyyjeohe\", \"k\": 966836940319300 }\nassert my_solution.numberOfWays(**test_input) == 0\n\ntest_input = { \"s\": \"otwqxmpktt\", \"t\": \"totwqxmpkt\", \"k\": 7 }\nassert my_solution.numberOfWays(**test_input) == 478297\n\ntest_input = { \"s\": \"kkkkkkk\", \"t\": \"kkkkkkk\", \"k\": 7 }\nassert my_solution.numberOfWays(**test_input) == 279936\n\ntest_input = { \"s\": \"iyl\", \"t\": \"iyl\", \"k\": 6 }\nassert my_solution.numberOfWays(**test_input) == 22\n\ntest_input = { \"s\": \"glao\", \"t\": \"ogla\", \"k\": 10 }\nassert my_solution.numberOfWays(**test_input) == 14762\n\ntest_input = { \"s\": \"jp\", \"t\": \"jp\", \"k\": 8 }\nassert my_solution.numberOfWays(**test_input) == 1\n\ntest_input = { \"s\": \"uuuuuu\", \"t\": \"uuuuuu\", \"k\": 7 }\nassert my_solution.numberOfWays(**test_input) == 78125\n\ntest_input = { \"s\": \"achach\", \"t\": \"achach\", \"k\": 10 }\nassert my_solution.numberOfWays(**test_input) == 3255209\n\ntest_input = { \"s\": \"uuuuuuuu\", \"t\": \"uuuuuuuu\", \"k\": 7 }\nassert my_solution.numberOfWays(**test_input) == 823543\n\ntest_input = { \"s\": \"gjh\", \"t\": \"jhg\", \"k\": 9 }\nassert my_solution.numberOfWays(**test_input) == 171\n\ntest_input = { \"s\": \"cliuw\", \"t\": \"fphcn\", \"k\": 647756904366432 }\nassert my_solution.numberOfWays(**test_input) == 0\n\ntest_input = { \"s\": \"zmcum\", \"t\": \"mzmcu\", \"k\": 1 }\nassert my_solution.numberOfWays(**test_input) == 1\n\ntest_input = { \"s\": \"ll\", \"t\": \"ll\", \"k\": 5 }\nassert my_solution.numberOfWays(**test_input) == 1\n\ntest_input = { \"s\": \"ccccc\", \"t\": \"ccccc\", \"k\": 1 }\nassert my_solution.numberOfWays(**test_input) == 4\n\ntest_input = { \"s\": \"rrrr\", \"t\": \"rrrr\", \"k\": 1 }\nassert my_solution.numberOfWays(**test_input) == 3\n\ntest_input = { \"s\": \"ih\", \"t\": \"hi\", \"k\": 8 }\nassert my_solution.numberOfWays(**test_input) == 0\n\ntest_input = { \"s\": \"qfgihqrw\", \"t\": \"rwqfgihq\", \"k\": 8 }\nassert my_solution.numberOfWays(**test_input) == 720600\n\ntest_input = { \"s\": \"cd\", \"t\": \"cd\", \"k\": 2 }\nassert my_solution.numberOfWays(**test_input) == 1\n\ntest_input = { \"s\": \"oooooooooo\", \"t\": \"oooooooooo\", \"k\": 4 }\nassert my_solution.numberOfWays(**test_input) == 6561\n\ntest_input = { \"s\": \"wp\", \"t\": \"wp\", \"k\": 6 }\nassert my_solution.numberOfWays(**test_input) == 1\n\ntest_input = { \"s\": \"rqq\", \"t\": \"nln\", \"k\": 776508964349618 }\nassert my_solution.numberOfWays(**test_input) == 0\n\ntest_input = { \"s\": \"rr\", \"t\": \"rr\", \"k\": 9 }\nassert my_solution.numberOfWays(**test_input) == 1\n\ntest_input = { \"s\": \"knwppsd\", \"t\": \"psdknwp\", \"k\": 2 }\nassert my_solution.numberOfWays(**test_input) == 5\n\ntest_input = { \"s\": \"epfeepfe\", \"t\": \"feepfeep\", \"k\": 9 }\nassert my_solution.numberOfWays(**test_input) == 10088402\n\ntest_input = { \"s\": \"wwwww\", \"t\": \"wwwww\", \"k\": 9 }\nassert my_solution.numberOfWays(**test_input) == 262144\n\ntest_input = { \"s\": \"cdcdcdcd\", \"t\": \"cdcdcdcd\", \"k\": 6 }\nassert my_solution.numberOfWays(**test_input) == 58825\n\ntest_input = { \"s\": \"uphfr\", \"t\": \"fruph\", \"k\": 7 }\nassert my_solution.numberOfWays(**test_input) == 3277\n\ntest_input = { \"s\": \"cocococo\", \"t\": \"cocococo\", \"k\": 3 }\nassert my_solution.numberOfWays(**test_input) == 171\n\ntest_input = { \"s\": \"vhzjo\", \"t\": \"jovhz\", \"k\": 1 }\nassert my_solution.numberOfWays(**test_input) == 1\n\ntest_input = { \"s\": \"bbbbbbbbbb\", \"t\": \"bbbbbbbbbb\", \"k\": 1 }\nassert my_solution.numberOfWays(**test_input) == 9\n\ntest_input = { \"s\": \"pgnrstuh\", \"t\": \"yjzhldlg\", \"k\": 618648276258027 }\nassert my_solution.numberOfWays(**test_input) == 0\n\ntest_input = { \"s\": \"cccccc\", \"t\": \"cccccc\", \"k\": 5 }\nassert my_solution.numberOfWays(**test_input) == 3125\n\ntest_input = { \"s\": \"kkkkkkk\", \"t\": \"kkkkkkk\", \"k\": 3 }\nassert my_solution.numberOfWays(**test_input) == 216\n\ntest_input = { \"s\": \"lxqqzsvej\", \"t\": \"svejlxqqz\", \"k\": 3 }\nassert my_solution.numberOfWays(**test_input) == 57\n\ntest_input = { \"s\": \"lllll\", \"t\": \"lllll\", \"k\": 3 }\nassert my_solution.numberOfWays(**test_input) == 64\n\ntest_input = { \"s\": \"hhhhhhhhhh\", \"t\": \"hhhhhhhhhh\", \"k\": 8 }\nassert my_solution.numberOfWays(**test_input) == 43046721\n\ntest_input = { \"s\": \"gggg\", \"t\": \"gggg\", \"k\": 5 }\nassert my_solution.numberOfWays(**test_input) == 243\n\ntest_input = { \"s\": \"jj\", \"t\": \"jj\", \"k\": 6 }\nassert my_solution.numberOfWays(**test_input) == 1\n\ntest_input = { \"s\": \"uuuuuuuuu\", \"t\": \"uuuuuuuuu\", \"k\": 10 }\nassert my_solution.numberOfWays(**test_input) == 73741817\n\ntest_input = { \"s\": \"qvx\", \"t\": \"vxq\", \"k\": 8 }\nassert my_solution.numberOfWays(**test_input) == 85\n\ntest_input = { \"s\": \"nolnqlgqcs\", \"t\": \"jkguybcfcu\", \"k\": 179216079747558 }\nassert my_solution.numberOfWays(**test_input) == 0\n\ntest_input = { \"s\": \"xpk\", \"t\": \"xpk\", \"k\": 6 }\nassert my_solution.numberOfWays(**test_input) == 22\n\ntest_input = { \"s\": \"xzoyb\", \"t\": \"bxzoy\", \"k\": 5 }\nassert my_solution.numberOfWays(**test_input) == 205\n\ntest_input = { \"s\": \"krxjvvg\", \"t\": \"krxjvvg\", \"k\": 2 }\nassert my_solution.numberOfWays(**test_input) == 6\n\ntest_input = { \"s\": \"ks\", \"t\": \"sk\", \"k\": 2 }\nassert my_solution.numberOfWays(**test_input) == 0\n\ntest_input = { \"s\": \"ty\", \"t\": \"ty\", \"k\": 6 }\nassert my_solution.numberOfWays(**test_input) == 1\n\ntest_input = { \"s\": \"otototot\", \"t\": \"totototo\", \"k\": 7 }\nassert my_solution.numberOfWays(**test_input) == 411772\n\ntest_input = { \"s\": \"uoaowbdznp\", \"t\": \"npuoaowbdz\", \"k\": 10 }\nassert my_solution.numberOfWays(**test_input) == 348678440",
+  "ocr_data": {
+    "nodes": [
+      {
+        "node_id": 1,
+        "shape_type": "rectangle",
+        "raw_text": "Start",
+        "position": "top"
+      },
+      {
+        "node_id": 2,
+        "shape_type": "rectangle",
+        "raw_text": "Input: s (string), t (string), k (integer)",
+        "position": "middle"
+      },
+      {
+        "node_id": 3,
+        "shape_type": "rectangle",
+        "raw_text": "Concatenate s with itself: ss = s + s",
+        "position": "middle"
+      },
+      {
+        "node_id": 4,
+        "shape_type": "diamond",
+        "raw_text": "Is t in ss?",
+        "position": "middle"
+      },
+      {
+        "node_id": 5,
+        "shape_type": "rectangle",
+        "raw_text": "Output: 0 (s cannot be transformed into t)",
+        "position": "middle"
+      },
+      {
+        "node_id": 6,
+        "shape_type": "rectangle",
+        "raw_text": "Initialize mod = 10^9 + 7",
+        "position": "middle"
+      },
+      {
+        "node_id": 7,
+        "shape_type": "rectangle",
+        "raw_text": "Set n = length of s",
+        "position": "middle"
+      },
+      {
+        "node_id": 8,
+        "shape_type": "diamond",
+        "raw_text": "Is s == t?",
+        "position": "middle"
+      },
+      {
+        "node_id": 9,
+        "shape_type": "rectangle",
+        "raw_text": "Set f0 = 0 (no initial match)",
+        "position": "middle"
+      },
+      {
+        "node_id": 10,
+        "shape_type": "rectangle",
+        "raw_text": "Set f0 = 1 (initial match)",
+        "position": "middle"
+      },
+      {
+        "node_id": 11,
+        "shape_type": "rectangle",
+        "raw_text": "Set r = n // ss.find(s, 1)",
+        "position": "middle"
+      },
+      {
+        "node_id": 12,
+        "shape_type": "rectangle",
+        "raw_text": "Set f1 = r - f0",
+        "position": "middle"
+      },
+      {
+        "node_id": 13,
+        "shape_type": "diamond",
+        "raw_text": "Is k % 2 == 0?",
+        "position": "middle"
+      },
+      {
+        "node_id": 14,
+        "shape_type": "rectangle",
+        "raw_text": "Set left = f0",
+        "position": "middle"
+      },
+      {
+        "node_id": 15,
+        "shape_type": "rectangle",
+        "raw_text": "Set left = f1",
+        "position": "middle"
+      },
+      {
+        "node_id": 16,
+        "shape_type": "diamond",
+        "raw_text": "Is k % 2 == 0?",
+        "position": "middle"
+      },
+      {
+        "node_id": 17,
+        "shape_type": "rectangle",
+        "raw_text": "Set a1 = (n - 2) * r",
+        "position": "middle"
+      },
+      {
+        "node_id": 18,
+        "shape_type": "rectangle",
+        "raw_text": "Set a1 = (n - 2) * (n - 1) * r",
+        "position": "middle"
+      },
+      {
+        "node_id": 19,
+        "shape_type": "rectangle",
+        "raw_text": "Set q = (n - 1) ** 2",
+        "position": "middle"
+      },
+      {
+        "node_id": 20,
+        "shape_type": "diamond",
+        "raw_text": "Is q == 1?",
+        "position": "middle"
+      },
+      {
+        "node_id": 21,
+        "shape_type": "rectangle",
+        "raw_text": "Set ans = a1 * (pow(q, k // 2, mod * (q - 1)) - 1) / (q - 1) + left",
+        "position": "middle"
+      },
+      {
+        "node_id": 22,
+        "shape_type": "rectangle",
+        "raw_text": "Set ans = (a1 * (k // 2) + left) % mod",
+        "position": "middle"
+      },
+      {
+        "node_id": 23,
+        "shape_type": "rectangle",
+        "raw_text": "Return ans % mod",
+        "position": "bottom"
+      }
+    ],
+    "edges": [
+      {
+        "from_node": 1,
+        "to_node": 2,
+        "label": ""
+      },
+      {
+        "from_node": 2,
+        "to_node": 3,
+        "label": ""
+      },
+      {
+        "from_node": 3,
+        "to_node": 4,
+        "label": ""
+      },
+      {
+        "from_node": 4,
+        "to_node": 5,
+        "label": "No"
+      },
+      {
+        "from_node": 4,
+        "to_node": 6,
+        "label": "Yes"
+      },
+      {
+        "from_node": 6,
+        "to_node": 7,
+        "label": ""
+      },
+      {
+        "from_node": 7,
+        "to_node": 8,
+        "label": ""
+      },
+      {
+        "from_node": 8,
+        "to_node": 9,
+        "label": "No"
+      },
+      {
+        "from_node": 8,
+        "to_node": 10,
+        "label": "Yes"
+      },
+      {
+        "from_node": 9,
+        "to_node": 11,
+        "label": ""
+      },
+      {
+        "from_node": 10,
+        "to_node": 11,
+        "label": ""
+      },
+      {
+        "from_node": 11,
+        "to_node": 12,
+        "label": ""
+      },
+      {
+        "from_node": 12,
+        "to_node": 13,
+        "label": ""
+      },
+      {
+        "from_node": 13,
+        "to_node": 14,
+        "label": "Yes"
+      },
+      {
+        "from_node": 13,
+        "to_node": 15,
+        "label": "No"
+      },
+      {
+        "from_node": 14,
+        "to_node": 16,
+        "label": ""
+      },
+      {
+        "from_node": 15,
+        "to_node": 16,
+        "label": ""
+      },
+      {
+        "from_node": 16,
+        "to_node": 17,
+        "label": "Yes"
+      },
+      {
+        "from_node": 16,
+        "to_node": 18,
+        "label": "No"
+      },
+      {
+        "from_node": 17,
+        "to_node": 19,
+        "label": ""
+      },
+      {
+        "from_node": 18,
+        "to_node": 19,
+        "label": ""
+      },
+      {
+        "from_node": 19,
+        "to_node": 20,
+        "label": ""
+      },
+      {
+        "from_node": 20,
+        "to_node": 21,
+        "label": "No"
+      },
+      {
+        "from_node": 20,
+        "to_node": 22,
+        "label": "Yes"
+      },
+      {
+        "from_node": 21,
+        "to_node": 23,
+        "label": ""
+      },
+      {
+        "from_node": 22,
+        "to_node": 23,
+        "label": ""
+      }
+    ],
+    "other_text": []
+  },
+  "analysis": {
+    "ilr_verdict": "incorrect",
+    "ilr_issues": "ILR把正确流程图的分支大量接错：(1) s==t时(节点7-true)直接跳到r的计算，f0=1节点被接到s!=t路径上（7-false->8(f0=0)->9(f0=1)覆盖为1），且该路径的r未定义；(2) 节点12(偶数k)的true接到了left=f1（应为left=f0），left=f0节点13成为孤儿，奇数k路径left根本未赋值；(3) 节点19(q==1?)true直接return未定义的ans、false走线性公式节点21，几何级数公式节点20只挂在left未定义的路径上，多条路径存在未定义变量。正确公式应为偶数k用left=f0、奇数k用left=f1。",
+    "code_vs_ilr": "faithful",
+    "code_issues": "代码为使程序可运行补齐了ILR中未定义的r/f0/f1/q/left（必要修复），但原样继承了致命的left奇偶颠倒：偶数k取left=f1、奇数k取left=f0（与正确算法正好相反），其余公式与代码结构忠实对应ILR节点内容。",
+    "error_source": "ilr",
+    "ocr_contribution": "no",
+    "root_cause": "OCR流程图本身是完全正确的闭式解（8-Yes->10即s==t->f0=1、13-Yes->14即偶数k->left=f0、20-No->21几何公式），ILR生成阶段把各菱形分支接反打乱（f0赋值落到错误路径、left奇偶颠倒、公式节点挂错分支并引用未定义变量）；代码补齐变量后忠实继承了left颠倒的缺陷，绝大多数测试答案错误。",
+    "evidence": "生成代码100个测试错83个：s='abcd',t='cdab',k=2期望2实得3（正确应加left=f0=0，代码加了f1=1）；s='ababab',k=1期望2实得1；s='ttttttt',k=5期望7776实得7771（差5恰为f1-f0=6-1）。OCR边(13-Yes->14、16-Yes->17、20-No->21)显示原图接线正确，OCR非主因。"
+  }
+}

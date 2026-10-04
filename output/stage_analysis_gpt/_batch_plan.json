@@ -1,0 +1,103 @@
+{
+  "Algorithm": [
+    [
+      "Algorithm/biweekly-contest-108-longest-alternating-subarray.json",
+      "Algorithm/biweekly-contest-108-partition-string-into-minimum-beautiful-substrings.json",
+      "Algorithm/biweekly-contest-109-check-if-array-is-good.json",
+      "Algorithm/biweekly-contest-110-minimum-time-to-make-array-sum-at-most-x.json",
+      "Algorithm/biweekly-contest-111-number-of-beautiful-integers-in-the-range.json",
+      "Algorithm/biweekly-contest-112-count-k-subsequences-of-a-string-with-maximum-beauty.json",
+      "Algorithm/biweekly-contest-114-minimum-operations-to-collect-elements.json",
+      "Algorithm/biweekly-contest-114-split-array-into-maximum-number-of-subarrays.json",
+      "Algorithm/biweekly-contest-115-last-visited-integers.json",
+      "Algorithm/biweekly-contest-118-maximize-area-of-square-hole-in-grid.json",
+      "Algorithm/biweekly-contest-118-minimum-number-of-coins-for-fruits.json",
+      "Algorithm/biweekly-contest-120-count-the-number-of-incremovable-subarrays-i.json",
+      "Algorithm/biweekly-contest-122-divide-an-array-into-subarrays-with-minimum-cost-ii.json"
+    ],
+    [
+      "Algorithm/weekly-contest-352-continuous-subarrays.json",
+      "Algorithm/weekly-contest-354-length-of-the-longest-valid-substring.json",
+      "Algorithm/weekly-contest-357-maximum-elegance-of-a-k-length-subsequence.json",
+      "Algorithm/weekly-contest-359-determine-the-minimum-sum-of-a-k-avoiding-array.json",
+      "Algorithm/weekly-contest-360-furthest-point-from-origin.json",
+      "Algorithm/weekly-contest-360-maximize-value-of-function-in-a-ball-passing-game.json",
+      "Algorithm/weekly-contest-360-minimum-operations-to-form-subsequence-with-target-sum.json",
+      "Algorithm/weekly-contest-361-count-symmetric-integers.json",
+      "Algorithm/weekly-contest-362-determine-if-a-cell-is-reachable-at-a-given-time.json",
+      "Algorithm/weekly-contest-362-string-transformation.json",
+      "Algorithm/weekly-contest-364-maximum-odd-binary-number.json",
+      "Algorithm/weekly-contest-365-minimum-size-subarray-in-infinite-array.json"
+    ],
+    [
+      "Algorithm/weekly-contest-366-apply-operations-on-array-to-maximize-sum-of-squares.json",
+      "Algorithm/weekly-contest-368-minimum-number-of-groups-to-create-a-valid-assignment.json",
+      "Algorithm/weekly-contest-368-minimum-sum-of-mountain-triplets-ii.json",
+      "Algorithm/weekly-contest-370-maximum-balanced-subsequence-sum.json",
+      "Algorithm/weekly-contest-371-maximum-strong-pair-xor-ii.json",
+      "Algorithm/weekly-contest-373-count-beautiful-substrings-ii.json",
+      "Algorithm/weekly-contest-373-make-lexicographically-smallest-array-by-swapping-elements.json",
+      "Algorithm/weekly-contest-375-count-subarrays-where-max-element-appears-at-least-k-times.json",
+      "Algorithm/weekly-contest-375-count-tested-devices-after-test-operations.json",
+      "Algorithm/weekly-contest-376-apply-operations-to-maximize-frequency-score.json",
+      "Algorithm/weekly-contest-378-find-longest-special-substring-that-occurs-thrice-i.json",
+      "Algorithm/weekly-contest-379-minimum-moves-to-capture-the-queen.json"
+    ]
+  ],
+  "HumanEval-V": [
+    [
+      "HumanEval-V/HumanEval-101.json",
+      "HumanEval-V/HumanEval-103.json",
+      "HumanEval-V/HumanEval-108.json",
+      "HumanEval-V/HumanEval-111.json",
+      "HumanEval-V/HumanEval-114.json",
+      "HumanEval-V/HumanEval-12.json",
+      "HumanEval-V/HumanEval-123.json",
+      "HumanEval-V/HumanEval-124.json",
+      "HumanEval-V/HumanEval-125.json",
+      "HumanEval-V/HumanEval-132.json",
+      "HumanEval-V/HumanEval-137.json"
+    ],
+    [
+      "HumanEval-V/HumanEval-140.json",
+      "HumanEval-V/HumanEval-155.json",
+      "HumanEval-V/HumanEval-156.json",
+      "HumanEval-V/HumanEval-20.json",
+      "HumanEval-V/HumanEval-37.json",
+      "HumanEval-V/HumanEval-39.json",
+      "HumanEval-V/HumanEval-62.json",
+      "HumanEval-V/HumanEval-91.json",
+      "HumanEval-V/HumanEval-95.json",
+      "HumanEval-V/HumanEval-99.json"
+    ]
+  ],
+  "MATH": [
+    [
+      "MATH/1330. Reverse Subarray To Maximize Array Value.json",
+      "MATH/1399. Count Largest Group.json",
+      "MATH/1716. Calculate Money in Leetcode Bank.json",
+      "MATH/1994. The Number of Good Subsets.json",
+      "MATH/2081. Sum of k-Mirror Numbers.json",
+      "MATH/2117. Abbreviating the Product of a Range.json",
+      "MATH/227. Basic Calculator II.json",
+      "MATH/233. Number of Digit One.json",
+      "MATH/2376. Count Special Integers.json",
+      "MATH/2709. Greatest Common Divisor Traversal.json",
+      "MATH/2790. Maximum Number of Groups With Increasing Length.json",
+      "MATH/2818. Apply Operations to Maximize Score.json"
+    ],
+    [
+      "MATH/282. Expression Add Operators.json",
+      "MATH/2949. Count Beautiful Substrings II.json",
+      "MATH/3102. Minimize Manhattan Distances.json",
+      "MATH/3116. Kth Smallest Amount With Single Denomination Combination.json",
+      "MATH/3307. Find the K-th Character in String Game II.json",
+      "MATH/3312. Sorted GCD Pair Queries.json",
+      "MATH/368. Largest Divisible Subset.json",
+      "MATH/50. Pow(x, n).json",
+      "MATH/553. Optimal Division.json",
+      "MATH/780. Reaching Points.json",
+      "MATH/805. Split Array With Same Average.json"
+    ]
+  ]
+}

@@ -1,0 +1,92 @@
+[
+  {
+    "task_id": "biweekly-contest-120-find-polygon-with-the-largest-perimeter",
+    "ilr_passed": 100,
+    "ilr_total": 100,
+    "ilr_error": null,
+    "code_passed": 0,
+    "code_total": 100,
+    "code_error": null
+  },
+  {
+    "task_id": "biweekly-contest-122-find-if-array-can-be-sorted",
+    "ilr_passed": 100,
+    "ilr_total": 100,
+    "ilr_error": null,
+    "code_passed": 0,
+    "code_total": 100,
+    "code_error": null
+  },
+  {
+    "task_id": "weekly-contest-352-continuous-subarrays",
+    "ilr_passed": 100,
+    "ilr_total": 100,
+    "ilr_error": null,
+    "code_passed": 0,
+    "code_total": 100,
+    "code_error": null
+  },
+  {
+    "task_id": "weekly-contest-352-longest-even-odd-subarray-with-threshold",
+    "ilr_passed": 100,
+    "ilr_total": 100,
+    "ilr_error": null,
+    "code_passed": 0,
+    "code_total": 100,
+    "code_error": null
+  },
+  {
+    "task_id": "weekly-contest-352-sum-of-imbalance-numbers-of-all-subarrays",
+    "ilr_passed": 100,
+    "ilr_total": 100,
+    "ilr_error": null,
+    "code_passed": 0,
+    "code_total": 100,
+    "code_error": null
+  },
+  {
+    "task_id": "weekly-contest-353-apply-operations-to-make-all-array-elements-equal-to-zero",
+    "ilr_passed": 100,
+    "ilr_total": 100,
+    "ilr_error": null,
+    "code_passed": 0,
+    "code_total": 100,
+    "code_error": null
+  },
+  {
+    "task_id": "weekly-contest-354-length-of-the-longest-valid-substring",
+    "ilr_passed": 100,
+    "ilr_total": 100,
+    "ilr_error": null,
+    "code_passed": 0,
+    "code_total": 100,
+    "code_error": null
+  },
+  {
+    "task_id": "weekly-contest-354-minimum-index-of-a-valid-split",
+    "ilr_passed": 100,
+    "ilr_total": 100,
+    "ilr_error": null,
+    "code_passed": 0,
+    "code_total": 100,
+    "code_error": null
+  },
+  {
+    "task_id": "weekly-contest-357-faulty-keyboard",
+    "ilr_passed": 100,
+    "ilr_total": 100,
+    "ilr_error": null,
+    "code_passed": 0,
+    "code_total": 100,
+    "code_error": null
+  },
+  {
+    "task_id": "weekly-contest-357-maximum-elegance-of-a-k-length-subsequence",
+    "ilr_passed": 100,
+    "ilr_total": 100,
+    "ilr_error": null,
+    "code_passed": 0,
+    "code_total": 100,
+    "code_error": null
+  }
+]

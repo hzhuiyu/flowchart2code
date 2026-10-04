@@ -1,0 +1,151 @@
+{
+  "problem_id": "",
+  "nodes": [
+    {
+      "id": 1,
+      "type": "start",
+      "label": "Start",
+      "next": 2
+    },
+    {
+      "id": 2,
+      "type": "process",
+      "label": "Input: s (string)",
+      "action": "ctx['s'] = ctx['arg0']; ctx['MOD'] = 1000000007",
+      "next": 3
+    },
+    {
+      "id": 3,
+      "type": "process",
+      "label": "Initialize cnt = [0]*26, ans = 0, tot = 0, comb_tot = 1",
+      "action": "ctx['cnt'] = [0] * 26; ctx['ans'] = 0; ctx['tot'] = 0; ctx['comb_tot'] = 1",
+      "next": 4
+    },
+    {
+      "id": 4,
+      "type": "decision",
+      "label": "Is there another letter in s?",
+      "logic": "ctx['i'] < len(ctx['s'])",
+      "true_next": 5,
+      "false_next": 11
+    },
+    {
+      "id": 5,
+      "type": "process",
+      "label": "Convert cur_letter to num: num = ord(cur_letter) - ord('a')",
+      "action": "ctx['cur_letter'] = ctx['s'][ctx['i']]; ctx['num'] = ord(ctx['cur_letter']) - ord('a')",
+      "next": 6
+    },
+    {
+      "id": 6,
+      "type": "process",
+      "label": "Increment cnt[num]",
+      "action": "ctx['cnt'][ctx['num']] += 1",
+      "next": 7
+    },
+    {
+      "id": 7,
+      "type": "process",
+      "label": "Increment tot",
+      "action": "ctx['tot'] += 1",
+      "next": 8
+    },
+    {
+      "id": 8,
+      "type": "process",
+      "label": "Update comb_tot: comb_tot = (comb_tot * tot) // cnt[num]",
+      "action": "ctx['comb_tot'] = (ctx['comb_tot'] * ctx['tot']) // ctx['cnt'][ctx['num']]",
+      "next": 9
+    },
+    {
+      "id": 9,
+      "type": "process",
+      "label": "Update ans: ans = ans + (comb_tot * sum(cnt[:num])) // tot",
+      "action": "ctx['ans'] = (ctx['ans'] + (ctx['comb_tot'] * sum(ctx['cnt'][:ctx['num']])) // ctx['tot']) % ctx['MOD']",
+      "next": 4
+    },
+    {
+      "id": 11,
+      "type": "return",
+      "label": "Return ans % 1_000_000_007",
+      "value": "ctx['ans']"
+    },
+    {
+      "id": 12,
+      "type": "end",
+      "label": "End",
+      "output": "ctx['ans']"
+    }
+  ],
+  "edges": [
+    {
+      "from_node": 1,
+      "to_node": 2,
+      "label": ""
+    },
+    {
+      "from_node": 2,
+      "to_node": 3,
+      "label": ""
+    },
+    {
+      "from_node": 3,
+      "to_node": 4,
+      "label": ""
+    },
+    {
+      "from_node": 4,
+      "to_node": 5,
+      "label": ""
+    },
+    {
+      "from_node": 5,
+      "to_node": 6,
+      "label": ""
+    },
+    {
+      "from_node": 6,
+      "to_node": 7,
+      "label": ""
+    },
+    {
+      "from_node": 7,
+      "to_node": 8,
+      "label": ""
+    },
+    {
+      "from_node": 8,
+      "to_node": 9,
+      "label": ""
+    },
+    {
+      "from_node": 9,
+      "to_node": 4,
+      "label": ""
+    },
+    {
+      "from_node": 4,
+      "to_node": 11,
+      "label": "No"
+    },
+    {
+      "from_node": 11,
+      "to_node": 12,
+      "label": ""
+    }
+  ],
+  "task_id": "1830. Minimum Number of Operations to Make String Sorted",
+  "dataset": "MATH",
+  "result": "failed: ",
+  "code": "def makeStringSorted(s: str) -> int:\n    MOD = 1000000007\n    cnt = [0] * 26\n    ans = 0\n    tot = 0\n    comb_tot = 1\n    \n    i = 0\n    while i < len(s):\n        cur_letter = s[i]\n        num = ord(cur_letter) - ord('a')\n        cnt[num] += 1\n        tot += 1\n        comb_tot = (comb_tot * tot) // cnt[num]\n        ans = (ans + (comb_tot * sum(cnt[:num])) // tot) % MOD\n        i += 1\n    \n    return ans",
+  "failed_test": true,
+  "verification": {
+    "md_verdict": "ILR Error",
+    "actual_error_source": "ilr",
+    "ilr_verdict": "incorrect",
+    "code_vs_ilr": "faithful",
+    "md_correct": "yes",
+    "note": "确认 ILR Error：ILR 丢失了流程图'Loop over s from end to start'的方向信息，且节点4判定 ctx['i']<len(ctx['s']) 中的 i 从未初始化、循环体也无 i 更新，按 ILR 字面执行直接 KeyError，补上 i 增量后按 i<len(s) 只能正向遍历，而该公式必须从串尾向串首累计后缀计数才正确。生成代码按 ILR 条件自然补全为正向遍历，忠实于残缺的 ILR。",
+    "evidence": "ILR 字面转写：makeStringSorted('cba') 抛 KeyError 'i'；按 ILR 骨架补全为正向循环（同生成代码）：'cba'->0（期望 5）、'ba'->0（期望 1）、'abc'->5（期望 0）；改成流程图所述从尾到头遍历则全部测试通过。生成代码在 'cba' 即失败。"
+  }
+}

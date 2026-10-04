@@ -1,0 +1,1080 @@
+{
+ "task_id": "weekly-contest-357-faulty-keyboard",
+ "dataset": "Algorithm",
+ "title": "faulty-keyboard",
+ "difficulty": "Easy",
+ "prompt": "\"\"\"\nYour laptop keyboard is faulty, and whenever you type a character 'i' on it, it reverses the string that you have written. Typing other characters works as expected.\n\nYou are given a 0-indexed string s, and you type each character of s using your faulty keyboard.\n\nReturn the final string that will be present on your laptop screen.\n\nExample 1:\n\nInput: s = \"string\"\nOutput: \"rtsng\"\nExplanation:\nAfter typing first character, the text on the screen is \"s\".\nAfter the second character, the text is \"st\".\nAfter the third character, the text is \"str\".\nSince the fourth character is an 'i', the text gets reversed and becomes \"rts\".\nAfter the fifth character, the text is \"rtsn\".\nAfter the sixth character, the text is \"rtsng\".\nTherefore, we return \"rtsng\".\n\nExample 2:\n\nInput: s = \"poiinter\"\nOutput: \"ponter\"\nExplanation:\nAfter the first character, the text on the screen is \"p\".\nAfter the second character, the text is \"po\".\nSince the third character you type is an 'i', the text gets reversed and becomes \"op\".\nSince the fourth character you type is an 'i', the text gets reversed and becomes \"po\".\nAfter the fifth character, the text is \"pon\".\nAfter the sixth character, the text is \"pont\".\nAfter the seventh character, the text is \"ponte\".\nAfter the eighth character, the text is \"ponter\".\nTherefore, we return \"ponter\".\n\nConstraints:\n\n * 1 <= s.length <= 100\n * s consists of lowercase English letters.\n * s[0] != 'i'\n\"\"\"\nclass Solution:\n    def finalString(self, s: str) -> str:\n        ",
+ "starter_code": "class Solution:\n    def finalString(self, s: str) -> str:\n        ",
+ "entry_point": "",
+ "test": "\nmy_solution = Solution()\n\ntest_input = { \"s\": \"string\" }\nassert my_solution.finalString(**test_input) == \"rtsng\"\n\ntest_input = { \"s\": \"poiinter\" }\nassert my_solution.finalString(**test_input) == \"ponter\"\n\ntest_input = { \"s\": \"goci\" }\nassert my_solution.finalString(**test_input) == \"cog\"\n\ntest_input = { \"s\": \"ksi\" }\nassert my_solution.finalString(**test_input) == \"sk\"\n\ntest_input = { \"s\": \"fii\" }\nassert my_solution.finalString(**test_input) == \"f\"\n\ntest_input = { \"s\": \"qskyviiiii\" }\nassert my_solution.finalString(**test_input) == \"vyksq\"\n\ntest_input = { \"s\": \"pft\" }\nassert my_solution.finalString(**test_input) == \"pft\"\n\ntest_input = { \"s\": \"viwif\" }\nassert my_solution.finalString(**test_input) == \"wvf\"\n\ntest_input = { \"s\": \"wiie\" }\nassert my_solution.finalString(**test_input) == \"we\"\n\ntest_input = { \"s\": \"kiis\" }\nassert my_solution.finalString(**test_input) == \"ks\"\n\ntest_input = { \"s\": \"xihbosxitx\" }\nassert my_solution.finalString(**test_input) == \"xsobhxtx\"\n\ntest_input = { \"s\": \"uwioili\" }\nassert my_solution.finalString(**test_input) == \"lwuo\"\n\ntest_input = { \"s\": \"aapziai\" }\nassert my_solution.finalString(**test_input) == \"aaapz\"\n\ntest_input = { \"s\": \"pviist\" }\nassert my_solution.finalString(**test_input) == \"pvst\"\n\ntest_input = { \"s\": \"miiuiei\" }\nassert my_solution.finalString(**test_input) == \"emu\"\n\ntest_input = { \"s\": \"diiiiq\" }\nassert my_solution.finalString(**test_input) == \"dq\"\n\ntest_input = { \"s\": \"eirov\" }\nassert my_solution.finalString(**test_input) == \"erov\"\n\ntest_input = { \"s\": \"niiiiisiii\" }\nassert my_solution.finalString(**test_input) == \"sn\"\n\ntest_input = { \"s\": \"siiuii\" }\nassert my_solution.finalString(**test_input) == \"su\"\n\ntest_input = { \"s\": \"piijciivq\" }\nassert my_solution.finalString(**test_input) == \"pjcvq\"\n\ntest_input = { \"s\": \"tidtwitik\" }\nassert my_solution.finalString(**test_input) == \"ttdtwk\"\n\ntest_input = { \"s\": \"z\" }\nassert my_solution.finalString(**test_input) == \"z\"\n\ntest_input = { \"s\": \"ffyuidnn\" }\nassert my_solution.finalString(**test_input) == \"uyffdnn\"\n\ntest_input = { \"s\": \"xitiiinix\" }\nassert my_solution.finalString(**test_input) == \"nxtx\"\n\ntest_input = { \"s\": \"ciiiuifab\" }\nassert my_solution.finalString(**test_input) == \"ucfab\"\n\ntest_input = { \"s\": \"x\" }\nassert my_solution.finalString(**test_input) == \"x\"\n\ntest_input = { \"s\": \"v\" }\nassert my_solution.finalString(**test_input) == \"v\"\n\ntest_input = { \"s\": \"liinii\" }\nassert my_solution.finalString(**test_input) == \"ln\"\n\ntest_input = { \"s\": \"ziii\" }\nassert my_solution.finalString(**test_input) == \"z\"\n\ntest_input = { \"s\": \"ei\" }\nassert my_solution.finalString(**test_input) == \"e\"\n\ntest_input = { \"s\": \"tidiiiii\" }\nassert my_solution.finalString(**test_input) == \"dt\"\n\ntest_input = { \"s\": \"krjiqjii\" }\nassert my_solution.finalString(**test_input) == \"jrkqj\"\n\ntest_input = { \"s\": \"mxczii\" }\nassert my_solution.finalString(**test_input) == \"mxcz\"\n\ntest_input = { \"s\": \"bz\" }\nassert my_solution.finalString(**test_input) == \"bz\"\n\ntest_input = { \"s\": \"zbwri\" }\nassert my_solution.finalString(**test_input) == \"rwbz\"\n\ntest_input = { \"s\": \"biiq\" }\nassert my_solution.finalString(**test_input) == \"bq\"\n\ntest_input = { \"s\": \"mmiiliir\" }\nassert my_solution.finalString(**test_input) == \"mmlr\"\n\ntest_input = { \"s\": \"plibeici\" }\nassert my_solution.finalString(**test_input) == \"clpbe\"\n\ntest_input = { \"s\": \"cii\" }\nassert my_solution.finalString(**test_input) == \"c\"\n\ntest_input = { \"s\": \"wiilg\" }\nassert my_solution.finalString(**test_input) == \"wlg\"\n\ntest_input = { \"s\": \"cdidi\" }\nassert my_solution.finalString(**test_input) == \"dcd\"\n\ntest_input = { \"s\": \"fsq\" }\nassert my_solution.finalString(**test_input) == \"fsq\"\n\ntest_input = { \"s\": \"hkjciaiii\" }\nassert my_solution.finalString(**test_input) == \"ahkjc\"\n\ntest_input = { \"s\": \"l\" }\nassert my_solution.finalString(**test_input) == \"l\"\n\ntest_input = { \"s\": \"vilcoizi\" }\nassert my_solution.finalString(**test_input) == \"zvlco\"\n\ntest_input = { \"s\": \"tgigivipx\" }\nassert my_solution.finalString(**test_input) == \"vgtgpx\"\n\ntest_input = { \"s\": \"ri\" }\nassert my_solution.finalString(**test_input) == \"r\"\n\ntest_input = { \"s\": \"kficiiioiy\" }\nassert my_solution.finalString(**test_input) == \"ofkcy\"\n\ntest_input = { \"s\": \"o\" }\nassert my_solution.finalString(**test_input) == \"o\"\n\ntest_input = { \"s\": \"piifwiiit\" }\nassert my_solution.finalString(**test_input) == \"wfpt\"\n\ntest_input = { \"s\": \"sifsiui\" }\nassert my_solution.finalString(**test_input) == \"usfs\"\n\ntest_input = { \"s\": \"sxiuiiiii\" }\nassert my_solution.finalString(**test_input) == \"usx\"\n\ntest_input = { \"s\": \"tiiiihiw\" }\nassert my_solution.finalString(**test_input) == \"htw\"\n\ntest_input = { \"s\": \"ko\" }\nassert my_solution.finalString(**test_input) == \"ko\"\n\ntest_input = { \"s\": \"gagi\" }\nassert my_solution.finalString(**test_input) == \"gag\"\n\ntest_input = { \"s\": \"yyigiir\" }\nassert my_solution.finalString(**test_input) == \"yygr\"\n\ntest_input = { \"s\": \"jimiiaci\" }\nassert my_solution.finalString(**test_input) == \"camj\"\n\ntest_input = { \"s\": \"xiiiei\" }\nassert my_solution.finalString(**test_input) == \"ex\"\n\ntest_input = { \"s\": \"hwi\" }\nassert my_solution.finalString(**test_input) == \"wh\"\n\ntest_input = { \"s\": \"ji\" }\nassert my_solution.finalString(**test_input) == \"j\"\n\ntest_input = { \"s\": \"heii\" }\nassert my_solution.finalString(**test_input) == \"he\"\n\ntest_input = { \"s\": \"zitjcq\" }\nassert my_solution.finalString(**test_input) == \"ztjcq\"\n\ntest_input = { \"s\": \"upmipaw\" }\nassert my_solution.finalString(**test_input) == \"mpupaw\"\n\ntest_input = { \"s\": \"fiixkgp\" }\nassert my_solution.finalString(**test_input) == \"fxkgp\"\n\ntest_input = { \"s\": \"ldr\" }\nassert my_solution.finalString(**test_input) == \"ldr\"\n\ntest_input = { \"s\": \"kiboiithi\" }\nassert my_solution.finalString(**test_input) == \"htobk\"\n\ntest_input = { \"s\": \"svcii\" }\nassert my_solution.finalString(**test_input) == \"svc\"\n\ntest_input = { \"s\": \"d\" }\nassert my_solution.finalString(**test_input) == \"d\"\n\ntest_input = { \"s\": \"edgijwiua\" }\nassert my_solution.finalString(**test_input) == \"wjedgua\"\n\ntest_input = { \"s\": \"wiidqoiwov\" }\nassert my_solution.finalString(**test_input) == \"oqdwwov\"\n\ntest_input = { \"s\": \"zimxiiqqi\" }\nassert my_solution.finalString(**test_input) == \"qqxmz\"\n\ntest_input = { \"s\": \"githpgiini\" }\nassert my_solution.finalString(**test_input) == \"ngphtg\"\n\ntest_input = { \"s\": \"fy\" }\nassert my_solution.finalString(**test_input) == \"fy\"\n\ntest_input = { \"s\": \"hesi\" }\nassert my_solution.finalString(**test_input) == \"seh\"\n\ntest_input = { \"s\": \"eiiii\" }\nassert my_solution.finalString(**test_input) == \"e\"\n\ntest_input = { \"s\": \"be\" }\nassert my_solution.finalString(**test_input) == \"be\"\n\ntest_input = { \"s\": \"rpi\" }\nassert my_solution.finalString(**test_input) == \"pr\"\n\ntest_input = { \"s\": \"mi\" }\nassert my_solution.finalString(**test_input) == \"m\"\n\ntest_input = { \"s\": \"wiiiiii\" }\nassert my_solution.finalString(**test_input) == \"w\"\n\ntest_input = { \"s\": \"rbiiiii\" }\nassert my_solution.finalString(**test_input) == \"br\"\n\ntest_input = { \"s\": \"diiii\" }\nassert my_solution.finalString(**test_input) == \"d\"\n\ntest_input = { \"s\": \"poiiifl\" }\nassert my_solution.finalString(**test_input) == \"opfl\"\n\ntest_input = { \"s\": \"loifiicii\" }\nassert my_solution.finalString(**test_input) == \"olfc\"\n\ntest_input = { \"s\": \"bii\" }\nassert my_solution.finalString(**test_input) == \"b\"\n\ntest_input = { \"s\": \"nirii\" }\nassert my_solution.finalString(**test_input) == \"nr\"\n\ntest_input = { \"s\": \"wiigipio\" }\nassert my_solution.finalString(**test_input) == \"pwgo\"\n\ntest_input = { \"s\": \"gimliibin\" }\nassert my_solution.finalString(**test_input) == \"blmgn\"\n\ntest_input = { \"s\": \"zi\" }\nassert my_solution.finalString(**test_input) == \"z\"\n\ntest_input = { \"s\": \"tjn\" }\nassert my_solution.finalString(**test_input) == \"tjn\"\n\ntest_input = { \"s\": \"ly\" }\nassert my_solution.finalString(**test_input) == \"ly\"\n\ntest_input = { \"s\": \"sqzviyiimi\" }\nassert my_solution.finalString(**test_input) == \"mysqzv\"\n\ntest_input = { \"s\": \"jhmaxm\" }\nassert my_solution.finalString(**test_input) == \"jhmaxm\"\n\ntest_input = { \"s\": \"py\" }\nassert my_solution.finalString(**test_input) == \"py\"\n\ntest_input = { \"s\": \"yyilwiib\" }\nassert my_solution.finalString(**test_input) == \"yylwb\"\n\ntest_input = { \"s\": \"ryjiilj\" }\nassert my_solution.finalString(**test_input) == \"ryjlj\"\n\ntest_input = { \"s\": \"tnokpgfii\" }\nassert my_solution.finalString(**test_input) == \"tnokpgf\"\n\ntest_input = { \"s\": \"niihiliiv\" }\nassert my_solution.finalString(**test_input) == \"hnlv\"\n\ntest_input = { \"s\": \"gvhms\" }\nassert my_solution.finalString(**test_input) == \"gvhms\"\n\ntest_input = { \"s\": \"yg\" }\nassert my_solution.finalString(**test_input) == \"yg\"\n\ntest_input = { \"s\": \"eiiiuizgi\" }\nassert my_solution.finalString(**test_input) == \"gzeu\"",
+ "test_cases": [
+  {
+   "input": {
+    "args": [
+     "string"
+    ]
+   },
+   "output": "rtsng",
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "poiinter"
+    ]
+   },
+   "output": "ponter",
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "goci"
+    ]
+   },
+   "output": "cog",
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "ksi"
+    ]
+   },
+   "output": "sk",
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "fii"
+    ]
+   },
+   "output": "f",
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "qskyviiiii"
+    ]
+   },
+   "output": "vyksq",
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "pft"
+    ]
+   },
+   "output": "pft",
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "viwif"
+    ]
+   },
+   "output": "wvf",
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "wiie"
+    ]
+   },
+   "output": "we",
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "kiis"
+    ]
+   },
+   "output": "ks",
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "xihbosxitx"
+    ]
+   },
+   "output": "xsobhxtx",
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "uwioili"
+    ]
+   },
+   "output": "lwuo",
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "aapziai"
+    ]
+   },
+   "output": "aaapz",
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "pviist"
+    ]
+   },
+   "output": "pvst",
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "miiuiei"
+    ]
+   },
+   "output": "emu",
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "diiiiq"
+    ]
+   },
+   "output": "dq",
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "eirov"
+    ]
+   },
+   "output": "erov",
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "niiiiisiii"
+    ]
+   },
+   "output": "sn",
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "siiuii"
+    ]
+   },
+   "output": "su",
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "piijciivq"
+    ]
+   },
+   "output": "pjcvq",
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "tidtwitik"
+    ]
+   },
+   "output": "ttdtwk",
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "z"
+    ]
+   },
+   "output": "z",
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "ffyuidnn"
+    ]
+   },
+   "output": "uyffdnn",
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "xitiiinix"
+    ]
+   },
+   "output": "nxtx",
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "ciiiuifab"
+    ]
+   },
+   "output": "ucfab",
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "x"
+    ]
+   },
+   "output": "x",
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "v"
+    ]
+   },
+   "output": "v",
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "liinii"
+    ]
+   },
+   "output": "ln",
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "ziii"
+    ]
+   },
+   "output": "z",
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "ei"
+    ]
+   },
+   "output": "e",
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "tidiiiii"
+    ]
+   },
+   "output": "dt",
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "krjiqjii"
+    ]
+   },
+   "output": "jrkqj",
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "mxczii"
+    ]
+   },
+   "output": "mxcz",
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "bz"
+    ]
+   },
+   "output": "bz",
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "zbwri"
+    ]
+   },
+   "output": "rwbz",
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "biiq"
+    ]
+   },
+   "output": "bq",
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "mmiiliir"
+    ]
+   },
+   "output": "mmlr",
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "plibeici"
+    ]
+   },
+   "output": "clpbe",
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "cii"
+    ]
+   },
+   "output": "c",
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "wiilg"
+    ]
+   },
+   "output": "wlg",
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "cdidi"
+    ]
+   },
+   "output": "dcd",
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "fsq"
+    ]
+   },
+   "output": "fsq",
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "hkjciaiii"
+    ]
+   },
+   "output": "ahkjc",
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "l"
+    ]
+   },
+   "output": "l",
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "vilcoizi"
+    ]
+   },
+   "output": "zvlco",
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "tgigivipx"
+    ]
+   },
+   "output": "vgtgpx",
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "ri"
+    ]
+   },
+   "output": "r",
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "kficiiioiy"
+    ]
+   },
+   "output": "ofkcy",
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "o"
+    ]
+   },
+   "output": "o",
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "piifwiiit"
+    ]
+   },
+   "output": "wfpt",
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "sifsiui"
+    ]
+   },
+   "output": "usfs",
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "sxiuiiiii"
+    ]
+   },
+   "output": "usx",
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "tiiiihiw"
+    ]
+   },
+   "output": "htw",
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "ko"
+    ]
+   },
+   "output": "ko",
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "gagi"
+    ]
+   },
+   "output": "gag",
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "yyigiir"
+    ]
+   },
+   "output": "yygr",
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "jimiiaci"
+    ]
+   },
+   "output": "camj",
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "xiiiei"
+    ]
+   },
+   "output": "ex",
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "hwi"
+    ]
+   },
+   "output": "wh",
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "ji"
+    ]
+   },
+   "output": "j",
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "heii"
+    ]
+   },
+   "output": "he",
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "zitjcq"
+    ]
+   },
+   "output": "ztjcq",
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "upmipaw"
+    ]
+   },
+   "output": "mpupaw",
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "fiixkgp"
+    ]
+   },
+   "output": "fxkgp",
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "ldr"
+    ]
+   },
+   "output": "ldr",
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "kiboiithi"
+    ]
+   },
+   "output": "htobk",
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "svcii"
+    ]
+   },
+   "output": "svc",
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "d"
+    ]
+   },
+   "output": "d",
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "edgijwiua"
+    ]
+   },
+   "output": "wjedgua",
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "wiidqoiwov"
+    ]
+   },
+   "output": "oqdwwov",
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "zimxiiqqi"
+    ]
+   },
+   "output": "qqxmz",
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "githpgiini"
+    ]
+   },
+   "output": "ngphtg",
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "fy"
+    ]
+   },
+   "output": "fy",
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "hesi"
+    ]
+   },
+   "output": "seh",
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "eiiii"
+    ]
+   },
+   "output": "e",
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "be"
+    ]
+   },
+   "output": "be",
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "rpi"
+    ]
+   },
+   "output": "pr",
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "mi"
+    ]
+   },
+   "output": "m",
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "wiiiiii"
+    ]
+   },
+   "output": "w",
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "rbiiiii"
+    ]
+   },
+   "output": "br",
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "diiii"
+    ]
+   },
+   "output": "d",
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "poiiifl"
+    ]
+   },
+   "output": "opfl",
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "loifiicii"
+    ]
+   },
+   "output": "olfc",
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "bii"
+    ]
+   },
+   "output": "b",
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "nirii"
+    ]
+   },
+   "output": "nr",
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "wiigipio"
+    ]
+   },
+   "output": "pwgo",
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "gimliibin"
+    ]
+   },
+   "output": "blmgn",
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "zi"
+    ]
+   },
+   "output": "z",
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "tjn"
+    ]
+   },
+   "output": "tjn",
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "ly"
+    ]
+   },
+   "output": "ly",
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "sqzviyiimi"
+    ]
+   },
+   "output": "mysqzv",
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "jhmaxm"
+    ]
+   },
+   "output": "jhmaxm",
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "py"
+    ]
+   },
+   "output": "py",
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "yyilwiib"
+    ]
+   },
+   "output": "yylwb",
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "ryjiilj"
+    ]
+   },
+   "output": "ryjlj",
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "tnokpgfii"
+    ]
+   },
+   "output": "tnokpgf",
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "niihiliiv"
+    ]
+   },
+   "output": "hnlv",
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "gvhms"
+    ]
+   },
+   "output": "gvhms",
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "yg"
+    ]
+   },
+   "output": "yg",
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     "eiiiuizgi"
+    ]
+   },
+   "output": "gzeu",
+   "explanation": ""
+  }
+ ],
+ "original_ilr": "```json\n{\n  \"problem_id\": \"finalString\",\n  \"nodes\": [\n    {\n      \"id\": 1,\n      \"type\": \"start\",\n      \"label\": \"Start\",\n      \"next\": 2\n    },\n    {\n      \"id\": 2,\n      \"type\": \"process\",\n      \"label\": \"Input: s (string)\",\n      \"action\": \"ctx['s'] = ctx['arg0']; ctx['result'] = []; ctx['reverse'] = False\",\n      \"next\": 3\n    },\n    {\n      \"id\": 3,\n      \"type\": \"decision\",\n      \"label\": \"For each char in s\",\n      \"logic\": \"True\",\n      \"true_next\": 4,\n      \"false_next\": 13\n    },\n    {\n      \"id\": 4,\n      \"type\": \"decision\",\n      \"label\": \"Check if char == 'i'\",\n      \"logic\": \"ctx['char'] == 'i'\",\n      \"true_next\": 7,\n      \"false_next\": 5\n    },\n    {\n      \"id\": 5,\n      \"type\": \"decision\",\n      \"label\": \"Is reverse True?\",\n      \"logic\": \"ctx['reverse']\",\n      \"true_next\": 8,\n      \"false_next\": 9\n    },\n    {\n      \"id\": 6,\n      \"type\": \"process\",\n      \"label\": \"Toggle reverse: reverse = not reverse\",\n      \"action\": \"ctx['reverse'] = not ctx['reverse']\",\n      \"next\": 3\n    },\n    {\n      \"id\": 7,\n      \"type\": \"process\",\n      \"label\": \"Insert char at the beginning of result\",\n      \"action\": \"ctx['result'].insert(0, ctx['char'])\",\n      \"next\": 3\n    },\n    {\n      \"id\": 8,\n      \"type\": \"process\",\n      \"label\": \"Append char to result\",\n      \"action\": \"ctx['result'].append(ctx['char'])\",\n      \"next\": 3\n    },\n    {\n      \"id\": 9,\n      \"type\": \"decision\",\n      \"label\": \"Is reverse True?\",\n      \"logic\": \"ctx['reverse']\",\n      \"true_next\": 11,\n      \"false_next\": 12\n    },\n    {\n      \"id\": 10,\n      \"type\": \"process\",\n      \"label\": \"Reverse result\",\n      \"action\": \"ctx['result'] = ctx['result'][::-1]\",\n      \"next\": 13\n    },\n    {\n      \"id\": 11,\n      \"type\": \"process\",\n      \"label\": \"Do nothing\",\n      \"action\": \"\",\n      \"next\": 13\n    },\n    {\n      \"id\": 12,\n      \"type\": \"end\",\n      \"label\": \"Output: \\\" .join(result)\",\n      \"output\": \"ctx['result']\"\n    }\n  ]\n}\n```",
+ "original_code": "class Solution:\n    def finalString(self, s: str) -> str:\n        result = []\n        reverse = False\n        \n        for char in s:\n            if char == 'i':\n                # Insert at beginning (reverse effect)\n                result.insert(0, char)\n                reverse = not reverse\n            else:\n                if reverse:\n                    result.insert(0, char)\n                else:\n                    result.append(char)\n        \n        if reverse:\n            result.reverse()\n        \n        return ''.join(result)",
+ "ocr_data": {
+  "nodes": [
+   {
+    "node_id": 1,
+    "shape_type": "rectangle",
+    "raw_text": "Start",
+    "position": "top"
+   },
+   {
+    "node_id": 2,
+    "shape_type": "rectangle",
+    "raw_text": "Input: s (string)",
+    "position": "middle"
+   },
+   {
+    "node_id": 3,
+    "shape_type": "rectangle",
+    "raw_text": "Initialize result = [], reverse = False",
+    "position": "middle"
+   },
+   {
+    "node_id": 4,
+    "shape_type": "diamond",
+    "raw_text": "For each char in s",
+    "position": "middle"
+   },
+   {
+    "node_id": 5,
+    "shape_type": "rectangle",
+    "raw_text": "Check if char == '!?",
+    "position": "bottom"
+   },
+   {
+    "node_id": 6,
+    "shape_type": "diamond",
+    "raw_text": "Is reverse True?",
+    "position": "bottom"
+   },
+   {
+    "node_id": 7,
+    "shape_type": "rectangle",
+    "raw_text": "Toggle reverse: reverse = not reverse",
+    "position": "bottom"
+   },
+   {
+    "node_id": 8,
+    "shape_type": "rectangle",
+    "raw_text": "Insert char at the beginning of result",
+    "position": "bottom"
+   },
+   {
+    "node_id": 9,
+    "shape_type": "rectangle",
+    "raw_text": "Append char to result",
+    "position": "bottom"
+   },
+   {
+    "node_id": 10,
+    "shape_type": "diamond",
+    "raw_text": "Is reverse True?",
+    "position": "bottom"
+   },
+   {
+    "node_id": 11,
+    "shape_type": "rectangle",
+    "raw_text": "Reverse result",
+    "position": "bottom"
+   },
+   {
+    "node_id": 12,
+    "shape_type": "rectangle",
+    "raw_text": "Do nothing",
+    "position": "bottom"
+   },
+   {
+    "node_id": 13,
+    "shape_type": "rectangle",
+    "raw_text": "Output: \" .join(result)",
+    "position": "bottom"
+   }
+  ],
+  "edges": [
+   {
+    "from_node": 1,
+    "to_node": 2,
+    "label": ""
+   },
+   {
+    "from_node": 2,
+    "to_node": 3,
+    "label": ""
+   },
+   {
+    "from_node": 3,
+    "to_node": 4,
+    "label": ""
+   },
+   {
+    "from_node": 4,
+    "to_node": 5,
+    "label": "Yes"
+   },
+   {
+    "from_node": 5,
+    "to_node": 7,
+    "label": "Yes"
+   },
+   {
+    "from_node": 5,
+    "to_node": 6,
+    "label": "No"
+   },
+   {
+    "from_node": 6,
+    "to_node": 8,
+    "label": "Yes"
+   },
+   {
+    "from_node": 6,
+    "to_node": 9,
+    "label": "No"
+   },
+   {
+    "from_node": 7,
+    "to_node": 4,
+    "label": ""
+   },
+   {
+    "from_node": 8,
+    "to_node": 4,
+    "label": ""
+   },
+   {
+    "from_node": 9,
+    "to_node": 4,
+    "label": ""
+   },
+   {
+    "from_node": 10,
+    "to_node": 11,
+    "label": "Yes"
+   },
+   {
+    "from_node": 10,
+    "to_node": 12,
+    "label": "No"
+   },
+   {
+    "from_node": 11,
+    "to_node": 13,
+    "label": ""
+   },
+   {
+    "from_node": 12,
+    "to_node": 13,
+    "label": ""
+   }
+  ],
+  "other_text": []
+ },
+ "test_result": {},
+ "status": "completed",
+ "fixed_ilr": null,
+ "modified_code": null,
+ "ilr_fix_log": "",
+ "bug_injected": ""
+}

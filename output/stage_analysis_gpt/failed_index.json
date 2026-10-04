@@ -1,0 +1,569 @@
+[
+  {
+    "dataset": "Algorithm",
+    "task_id": "biweekly-contest-108-longest-alternating-subarray",
+    "file": "Algorithm/biweekly-contest-108-longest-alternating-subarray.json",
+    "difficulty": "Easy",
+    "result": "failed: "
+  },
+  {
+    "dataset": "Algorithm",
+    "task_id": "biweekly-contest-108-partition-string-into-minimum-beautiful-substrings",
+    "file": "Algorithm/biweekly-contest-108-partition-string-into-minimum-beautiful-substrings.json",
+    "difficulty": "Medium",
+    "result": "failed: "
+  },
+  {
+    "dataset": "Algorithm",
+    "task_id": "biweekly-contest-109-check-if-array-is-good",
+    "file": "Algorithm/biweekly-contest-109-check-if-array-is-good.json",
+    "difficulty": "Easy",
+    "result": "failed: "
+  },
+  {
+    "dataset": "Algorithm",
+    "task_id": "biweekly-contest-110-minimum-time-to-make-array-sum-at-most-x",
+    "file": "Algorithm/biweekly-contest-110-minimum-time-to-make-array-sum-at-most-x.json",
+    "difficulty": "Hard",
+    "result": "failed: "
+  },
+  {
+    "dataset": "Algorithm",
+    "task_id": "biweekly-contest-111-number-of-beautiful-integers-in-the-range",
+    "file": "Algorithm/biweekly-contest-111-number-of-beautiful-integers-in-the-range.json",
+    "difficulty": "Hard",
+    "result": "failed: "
+  },
+  {
+    "dataset": "Algorithm",
+    "task_id": "biweekly-contest-112-count-k-subsequences-of-a-string-with-maximum-beauty",
+    "file": "Algorithm/biweekly-contest-112-count-k-subsequences-of-a-string-with-maximum-beauty.json",
+    "difficulty": "Hard",
+    "result": "failed: "
+  },
+  {
+    "dataset": "Algorithm",
+    "task_id": "biweekly-contest-114-minimum-operations-to-collect-elements",
+    "file": "Algorithm/biweekly-contest-114-minimum-operations-to-collect-elements.json",
+    "difficulty": "Easy",
+    "result": "failed: "
+  },
+  {
+    "dataset": "Algorithm",
+    "task_id": "biweekly-contest-114-split-array-into-maximum-number-of-subarrays",
+    "file": "Algorithm/biweekly-contest-114-split-array-into-maximum-number-of-subarrays.json",
+    "difficulty": "Medium",
+    "result": "failed: "
+  },
+  {
+    "dataset": "Algorithm",
+    "task_id": "biweekly-contest-115-last-visited-integers",
+    "file": "Algorithm/biweekly-contest-115-last-visited-integers.json",
+    "difficulty": "Easy",
+    "result": "failed: list index out of range"
+  },
+  {
+    "dataset": "Algorithm",
+    "task_id": "biweekly-contest-118-maximize-area-of-square-hole-in-grid",
+    "file": "Algorithm/biweekly-contest-118-maximize-area-of-square-hole-in-grid.json",
+    "difficulty": "Medium",
+    "result": "failed: "
+  },
+  {
+    "dataset": "Algorithm",
+    "task_id": "biweekly-contest-118-minimum-number-of-coins-for-fruits",
+    "file": "Algorithm/biweekly-contest-118-minimum-number-of-coins-for-fruits.json",
+    "difficulty": "Medium",
+    "result": "failed: list index out of range"
+  },
+  {
+    "dataset": "Algorithm",
+    "task_id": "biweekly-contest-120-count-the-number-of-incremovable-subarrays-i",
+    "file": "Algorithm/biweekly-contest-120-count-the-number-of-incremovable-subarrays-i.json",
+    "difficulty": "Easy",
+    "result": "failed: "
+  },
+  {
+    "dataset": "Algorithm",
+    "task_id": "biweekly-contest-122-divide-an-array-into-subarrays-with-minimum-cost-ii",
+    "file": "Algorithm/biweekly-contest-122-divide-an-array-into-subarrays-with-minimum-cost-ii.json",
+    "difficulty": "Hard",
+    "result": "failed: use ``sl.add(value)`` instead"
+  },
+  {
+    "dataset": "Algorithm",
+    "task_id": "weekly-contest-352-continuous-subarrays",
+    "file": "Algorithm/weekly-contest-352-continuous-subarrays.json",
+    "difficulty": "Medium",
+    "result": "failed: "
+  },
+  {
+    "dataset": "Algorithm",
+    "task_id": "weekly-contest-354-length-of-the-longest-valid-substring",
+    "file": "Algorithm/weekly-contest-354-length-of-the-longest-valid-substring.json",
+    "difficulty": "Hard",
+    "result": "failed: "
+  },
+  {
+    "dataset": "Algorithm",
+    "task_id": "weekly-contest-357-maximum-elegance-of-a-k-length-subsequence",
+    "file": "Algorithm/weekly-contest-357-maximum-elegance-of-a-k-length-subsequence.json",
+    "difficulty": "Hard",
+    "result": "failed: "
+  },
+  {
+    "dataset": "Algorithm",
+    "task_id": "weekly-contest-359-determine-the-minimum-sum-of-a-k-avoiding-array",
+    "file": "Algorithm/weekly-contest-359-determine-the-minimum-sum-of-a-k-avoiding-array.json",
+    "difficulty": "Medium",
+    "result": "failed: "
+  },
+  {
+    "dataset": "Algorithm",
+    "task_id": "weekly-contest-360-furthest-point-from-origin",
+    "file": "Algorithm/weekly-contest-360-furthest-point-from-origin.json",
+    "difficulty": "Easy",
+    "result": "failed: "
+  },
+  {
+    "dataset": "Algorithm",
+    "task_id": "weekly-contest-360-maximize-value-of-function-in-a-ball-passing-game",
+    "file": "Algorithm/weekly-contest-360-maximize-value-of-function-in-a-ball-passing-game.json",
+    "difficulty": "Hard",
+    "result": "failed: "
+  },
+  {
+    "dataset": "Algorithm",
+    "task_id": "weekly-contest-360-minimum-operations-to-form-subsequence-with-target-sum",
+    "file": "Algorithm/weekly-contest-360-minimum-operations-to-form-subsequence-with-target-sum.json",
+    "difficulty": "Hard",
+    "result": "failed: "
+  },
+  {
+    "dataset": "Algorithm",
+    "task_id": "weekly-contest-361-count-symmetric-integers",
+    "file": "Algorithm/weekly-contest-361-count-symmetric-integers.json",
+    "difficulty": "Easy",
+    "result": "failed: "
+  },
+  {
+    "dataset": "Algorithm",
+    "task_id": "weekly-contest-362-determine-if-a-cell-is-reachable-at-a-given-time",
+    "file": "Algorithm/weekly-contest-362-determine-if-a-cell-is-reachable-at-a-given-time.json",
+    "difficulty": "Medium",
+    "result": "failed: "
+  },
+  {
+    "dataset": "Algorithm",
+    "task_id": "weekly-contest-362-string-transformation",
+    "file": "Algorithm/weekly-contest-362-string-transformation.json",
+    "difficulty": "Hard",
+    "result": "failed: "
+  },
+  {
+    "dataset": "Algorithm",
+    "task_id": "weekly-contest-364-maximum-odd-binary-number",
+    "file": "Algorithm/weekly-contest-364-maximum-odd-binary-number.json",
+    "difficulty": "Easy",
+    "result": "failed: "
+  },
+  {
+    "dataset": "Algorithm",
+    "task_id": "weekly-contest-365-minimum-size-subarray-in-infinite-array",
+    "file": "Algorithm/weekly-contest-365-minimum-size-subarray-in-infinite-array.json",
+    "difficulty": "Medium",
+    "result": "failed: "
+  },
+  {
+    "dataset": "Algorithm",
+    "task_id": "weekly-contest-366-apply-operations-on-array-to-maximize-sum-of-squares",
+    "file": "Algorithm/weekly-contest-366-apply-operations-on-array-to-maximize-sum-of-squares.json",
+    "difficulty": "Hard",
+    "result": "failed: "
+  },
+  {
+    "dataset": "Algorithm",
+    "task_id": "weekly-contest-368-minimum-number-of-groups-to-create-a-valid-assignment",
+    "file": "Algorithm/weekly-contest-368-minimum-number-of-groups-to-create-a-valid-assignment.json",
+    "difficulty": "Medium",
+    "result": "failed: name 'vs' is not defined"
+  },
+  {
+    "dataset": "Algorithm",
+    "task_id": "weekly-contest-368-minimum-sum-of-mountain-triplets-ii",
+    "file": "Algorithm/weekly-contest-368-minimum-sum-of-mountain-triplets-ii.json",
+    "difficulty": "Medium",
+    "result": "failed: "
+  },
+  {
+    "dataset": "Algorithm",
+    "task_id": "weekly-contest-370-maximum-balanced-subsequence-sum",
+    "file": "Algorithm/weekly-contest-370-maximum-balanced-subsequence-sum.json",
+    "difficulty": "Hard",
+    "result": "failed: 0"
+  },
+  {
+    "dataset": "Algorithm",
+    "task_id": "weekly-contest-371-maximum-strong-pair-xor-ii",
+    "file": "Algorithm/weekly-contest-371-maximum-strong-pair-xor-ii.json",
+    "difficulty": "Hard",
+    "result": "failed: "
+  },
+  {
+    "dataset": "Algorithm",
+    "task_id": "weekly-contest-373-count-beautiful-substrings-ii",
+    "file": "Algorithm/weekly-contest-373-count-beautiful-substrings-ii.json",
+    "difficulty": "Hard",
+    "result": "failed: "
+  },
+  {
+    "dataset": "Algorithm",
+    "task_id": "weekly-contest-373-make-lexicographically-smallest-array-by-swapping-elements",
+    "file": "Algorithm/weekly-contest-373-make-lexicographically-smallest-array-by-swapping-elements.json",
+    "difficulty": "Medium",
+    "result": "failed: "
+  },
+  {
+    "dataset": "Algorithm",
+    "task_id": "weekly-contest-375-count-subarrays-where-max-element-appears-at-least-k-times",
+    "file": "Algorithm/weekly-contest-375-count-subarrays-where-max-element-appears-at-least-k-times.json",
+    "difficulty": "Medium",
+    "result": "failed: "
+  },
+  {
+    "dataset": "Algorithm",
+    "task_id": "weekly-contest-375-count-tested-devices-after-test-operations",
+    "file": "Algorithm/weekly-contest-375-count-tested-devices-after-test-operations.json",
+    "difficulty": "Easy",
+    "result": "failed: "
+  },
+  {
+    "dataset": "Algorithm",
+    "task_id": "weekly-contest-376-apply-operations-to-maximize-frequency-score",
+    "file": "Algorithm/weekly-contest-376-apply-operations-to-maximize-frequency-score.json",
+    "difficulty": "Hard",
+    "result": "failed: "
+  },
+  {
+    "dataset": "Algorithm",
+    "task_id": "weekly-contest-378-find-longest-special-substring-that-occurs-thrice-i",
+    "file": "Algorithm/weekly-contest-378-find-longest-special-substring-that-occurs-thrice-i.json",
+    "difficulty": "Medium",
+    "result": "failed: "
+  },
+  {
+    "dataset": "Algorithm",
+    "task_id": "weekly-contest-379-minimum-moves-to-capture-the-queen",
+    "file": "Algorithm/weekly-contest-379-minimum-moves-to-capture-the-queen.json",
+    "difficulty": "Medium",
+    "result": "failed: "
+  },
+  {
+    "dataset": "HumanEval-V",
+    "task_id": "HumanEval-12",
+    "file": "HumanEval-V/HumanEval-12.json",
+    "difficulty": null,
+    "result": "failed: "
+  },
+  {
+    "dataset": "HumanEval-V",
+    "task_id": "HumanEval-20",
+    "file": "HumanEval-V/HumanEval-20.json",
+    "difficulty": null,
+    "result": "failed: "
+  },
+  {
+    "dataset": "HumanEval-V",
+    "task_id": "HumanEval-37",
+    "file": "HumanEval-V/HumanEval-37.json",
+    "difficulty": null,
+    "result": "failed: list index out of range"
+  },
+  {
+    "dataset": "HumanEval-V",
+    "task_id": "HumanEval-39",
+    "file": "HumanEval-V/HumanEval-39.json",
+    "difficulty": null,
+    "result": "failed: name 'is_prime' is not defined"
+  },
+  {
+    "dataset": "HumanEval-V",
+    "task_id": "HumanEval-62",
+    "file": "HumanEval-V/HumanEval-62.json",
+    "difficulty": null,
+    "result": "failed: "
+  },
+  {
+    "dataset": "HumanEval-V",
+    "task_id": "HumanEval-91",
+    "file": "HumanEval-V/HumanEval-91.json",
+    "difficulty": null,
+    "result": "failed: Test 5"
+  },
+  {
+    "dataset": "HumanEval-V",
+    "task_id": "HumanEval-95",
+    "file": "HumanEval-V/HumanEval-95.json",
+    "difficulty": null,
+    "result": "failed: Fourth test error: True"
+  },
+  {
+    "dataset": "HumanEval-V",
+    "task_id": "HumanEval-99",
+    "file": "HumanEval-V/HumanEval-99.json",
+    "difficulty": null,
+    "result": "failed: Test 1"
+  },
+  {
+    "dataset": "HumanEval-V",
+    "task_id": "HumanEval-101",
+    "file": "HumanEval-V/HumanEval-101.json",
+    "difficulty": null,
+    "result": "failed: "
+  },
+  {
+    "dataset": "HumanEval-V",
+    "task_id": "HumanEval-103",
+    "file": "HumanEval-V/HumanEval-103.json",
+    "difficulty": null,
+    "result": "failed: "
+  },
+  {
+    "dataset": "HumanEval-V",
+    "task_id": "HumanEval-108",
+    "file": "HumanEval-V/HumanEval-108.json",
+    "difficulty": null,
+    "result": "failed: name 'digits_sum' is not defined"
+  },
+  {
+    "dataset": "HumanEval-V",
+    "task_id": "HumanEval-111",
+    "file": "HumanEval-V/HumanEval-111.json",
+    "difficulty": null,
+    "result": "failed: This prints if this assert fails 1 (good for debugging!)"
+  },
+  {
+    "dataset": "HumanEval-V",
+    "task_id": "HumanEval-114",
+    "file": "HumanEval-V/HumanEval-114.json",
+    "difficulty": null,
+    "result": "failed: This prints if this assert fails 1 (good for debugging!)"
+  },
+  {
+    "dataset": "HumanEval-V",
+    "task_id": "HumanEval-123",
+    "file": "HumanEval-V/HumanEval-123.json",
+    "difficulty": null,
+    "result": "failed: "
+  },
+  {
+    "dataset": "HumanEval-V",
+    "task_id": "HumanEval-124",
+    "file": "HumanEval-V/HumanEval-124.json",
+    "difficulty": null,
+    "result": "failed: not enough values to unpack (expected 3, got 1)"
+  },
+  {
+    "dataset": "HumanEval-V",
+    "task_id": "HumanEval-125",
+    "file": "HumanEval-V/HumanEval-125.json",
+    "difficulty": null,
+    "result": "failed: "
+  },
+  {
+    "dataset": "HumanEval-V",
+    "task_id": "HumanEval-132",
+    "file": "HumanEval-V/HumanEval-132.json",
+    "difficulty": null,
+    "result": "failed: "
+  },
+  {
+    "dataset": "HumanEval-V",
+    "task_id": "HumanEval-137",
+    "file": "HumanEval-V/HumanEval-137.json",
+    "difficulty": null,
+    "result": "failed: "
+  },
+  {
+    "dataset": "HumanEval-V",
+    "task_id": "HumanEval-140",
+    "file": "HumanEval-V/HumanEval-140.json",
+    "difficulty": null,
+    "result": "failed: This prints if this assert fails 2 (good for debugging!)"
+  },
+  {
+    "dataset": "HumanEval-V",
+    "task_id": "HumanEval-155",
+    "file": "HumanEval-V/HumanEval-155.json",
+    "difficulty": null,
+    "result": "failed: "
+  },
+  {
+    "dataset": "HumanEval-V",
+    "task_id": "HumanEval-156",
+    "file": "HumanEval-V/HumanEval-156.json",
+    "difficulty": null,
+    "result": "failed: "
+  },
+  {
+    "dataset": "MATH",
+    "task_id": "50. Pow(x, n)",
+    "file": "MATH/50. Pow(x, n).json",
+    "difficulty": "medium",
+    "result": "failed: maximum recursion depth exceeded in comparison"
+  },
+  {
+    "dataset": "MATH",
+    "task_id": "227. Basic Calculator II",
+    "file": "MATH/227. Basic Calculator II.json",
+    "difficulty": "medium",
+    "result": "failed: "
+  },
+  {
+    "dataset": "MATH",
+    "task_id": "233. Number of Digit One",
+    "file": "MATH/233. Number of Digit One.json",
+    "difficulty": "hard",
+    "result": "failed: "
+  },
+  {
+    "dataset": "MATH",
+    "task_id": "282. Expression Add Operators",
+    "file": "MATH/282. Expression Add Operators.json",
+    "difficulty": "hard",
+    "result": "failed: "
+  },
+  {
+    "dataset": "MATH",
+    "task_id": "368. Largest Divisible Subset",
+    "file": "MATH/368. Largest Divisible Subset.json",
+    "difficulty": "medium",
+    "result": "failed: "
+  },
+  {
+    "dataset": "MATH",
+    "task_id": "553. Optimal Division",
+    "file": "MATH/553. Optimal Division.json",
+    "difficulty": "medium",
+    "result": "failed: "
+  },
+  {
+    "dataset": "MATH",
+    "task_id": "780. Reaching Points",
+    "file": "MATH/780. Reaching Points.json",
+    "difficulty": "hard",
+    "result": "failed: "
+  },
+  {
+    "dataset": "MATH",
+    "task_id": "805. Split Array With Same Average",
+    "file": "MATH/805. Split Array With Same Average.json",
+    "difficulty": "hard",
+    "result": "failed: name 'possible_sums' is not defined"
+  },
+  {
+    "dataset": "MATH",
+    "task_id": "1330. Reverse Subarray To Maximize Array Value",
+    "file": "MATH/1330. Reverse Subarray To Maximize Array Value.json",
+    "difficulty": "hard",
+    "result": "failed: "
+  },
+  {
+    "dataset": "MATH",
+    "task_id": "1399. Count Largest Group",
+    "file": "MATH/1399. Count Largest Group.json",
+    "difficulty": "easy",
+    "result": "failed: list index out of range"
+  },
+  {
+    "dataset": "MATH",
+    "task_id": "1716. Calculate Money in Leetcode Bank",
+    "file": "MATH/1716. Calculate Money in Leetcode Bank.json",
+    "difficulty": "easy",
+    "result": "failed: "
+  },
+  {
+    "dataset": "MATH",
+    "task_id": "1994. The Number of Good Subsets",
+    "file": "MATH/1994. The Number of Good Subsets.json",
+    "difficulty": "hard",
+    "result": "failed: "
+  },
+  {
+    "dataset": "MATH",
+    "task_id": "2081. Sum of k-Mirror Numbers",
+    "file": "MATH/2081. Sum of k-Mirror Numbers.json",
+    "difficulty": "hard",
+    "result": "failed: "
+  },
+  {
+    "dataset": "MATH",
+    "task_id": "2117. Abbreviating the Product of a Range",
+    "file": "MATH/2117. Abbreviating the Product of a Range.json",
+    "difficulty": "hard",
+    "result": "failed: "
+  },
+  {
+    "dataset": "MATH",
+    "task_id": "2376. Count Special Integers",
+    "file": "MATH/2376. Count Special Integers.json",
+    "difficulty": "hard",
+    "result": "failed: "
+  },
+  {
+    "dataset": "MATH",
+    "task_id": "2709. Greatest Common Divisor Traversal",
+    "file": "MATH/2709. Greatest Common Divisor Traversal.json",
+    "difficulty": "hard",
+    "result": "failed: "
+  },
+  {
+    "dataset": "MATH",
+    "task_id": "2790. Maximum Number of Groups With Increasing Length",
+    "file": "MATH/2790. Maximum Number of Groups With Increasing Length.json",
+    "difficulty": "hard",
+    "result": "failed: "
+  },
+  {
+    "dataset": "MATH",
+    "task_id": "2818. Apply Operations to Maximize Score",
+    "file": "MATH/2818. Apply Operations to Maximize Score.json",
+    "difficulty": "hard",
+    "result": "failed: "
+  },
+  {
+    "dataset": "MATH",
+    "task_id": "2949. Count Beautiful Substrings II",
+    "file": "MATH/2949. Count Beautiful Substrings II.json",
+    "difficulty": "hard",
+    "result": "failed: "
+  },
+  {
+    "dataset": "MATH",
+    "task_id": "3102. Minimize Manhattan Distances",
+    "file": "MATH/3102. Minimize Manhattan Distances.json",
+    "difficulty": "hard",
+    "result": "failed: name 'get_max_i_j' is not defined"
+  },
+  {
+    "dataset": "MATH",
+    "task_id": "3116. Kth Smallest Amount With Single Denomination Combination",
+    "file": "MATH/3116. Kth Smallest Amount With Single Denomination Combination.json",
+    "difficulty": "hard",
+    "result": "failed: "
+  },
+  {
+    "dataset": "MATH",
+    "task_id": "3307. Find the K-th Character in String Game II",
+    "file": "MATH/3307. Find the K-th Character in String Game II.json",
+    "difficulty": "hard",
+    "result": "failed: negative shift count"
+  },
+  {
+    "dataset": "MATH",
+    "task_id": "3312. Sorted GCD Pair Queries",
+    "file": "MATH/3312. Sorted GCD Pair Queries.json",
+    "difficulty": "hard",
+    "result": "failed: list index out of range"
+  }
+]

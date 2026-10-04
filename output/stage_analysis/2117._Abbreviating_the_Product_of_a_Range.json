@@ -1,0 +1,175 @@
+{
+  "problem_id": "abbreviated_product",
+  "nodes": [
+    {
+      "id": 1,
+      "type": "start",
+      "label": "Start",
+      "next": 2
+    },
+    {
+      "id": 2,
+      "type": "process",
+      "label": "Input: left (integer), right (integer)",
+      "action": "ctx['left'] = ctx['arg0']; ctx['right'] = ctx['arg1']; ctx['c2'] = 0; ctx['c5'] = 0; ctx['top12'] = 1; ctx['tail5'] = 1",
+      "next": 3
+    },
+    {
+      "id": 3,
+      "type": "process",
+      "label": "For i in range(left, right + 1)",
+      "action": "ctx['i'] = ctx['left']; ctx['end_range'] = ctx['right'] + 1",
+      "next": 4
+    },
+    {
+      "id": 4,
+      "type": "decision",
+      "label": "Is i % 2 == 0?",
+      "logic": "ctx['i'] % 2 == 0",
+      "true_next": 5,
+      "false_next": 7
+    },
+    {
+      "id": 5,
+      "type": "process",
+      "label": "Divide i by 2, increment c2",
+      "action": "ctx['c2'] += 1; ctx['top12'] = int(str(ctx['top12'] * ctx['i'])[:12]); ctx['tail5'] = (ctx['tail5'] * ctx['i']) % 100000",
+      "next": 6
+    },
+    {
+      "id": 6,
+      "type": "decision",
+      "label": "Is i % 5 == 0?",
+      "logic": "ctx['i'] % 5 == 0",
+      "true_next": 8,
+      "false_next": 9
+    },
+    {
+      "id": 7,
+      "type": "process",
+      "label": "Update top12: top12 = int(str(top12 * i)[:12])",
+      "action": "ctx['top12'] = int(str(ctx['top12'] * ctx['i'])[:12])",
+      "next": 10
+    },
+    {
+      "id": 8,
+      "type": "process",
+      "label": "Divide i by 5, increment c5",
+      "action": "ctx['c5'] += 1; ctx['top12'] = int(str(ctx['top12'] * ctx['i'])[:12]); ctx['tail5'] = (ctx['tail5'] * ctx['i']) % 100000",
+      "next": 9
+    },
+    {
+      "id": 9,
+      "type": "process",
+      "label": "Update tail5: tail5 = tail5 * i % 100000",
+      "action": "ctx['tail5'] = (ctx['tail5'] * ctx['i']) % 100000",
+      "next": 10
+    },
+    {
+      "id": 10,
+      "type": "decision",
+      "label": "Is c2 > c5?",
+      "logic": "ctx['c2'] > ctx['c5']",
+      "true_next": 11,
+      "false_next": 14
+    },
+    {
+      "id": 11,
+      "type": "process",
+      "label": "For _ in range(c2 - c5)",
+      "action": "for _ in range(ctx['c2'] - ctx['c5']): ctx['top12'] = int(str(ctx['top12'] * 2)[:12]); ctx['tail5'] = (ctx['tail5'] * 2) % 100000",
+      "next": 12
+    },
+    {
+      "id": 12,
+      "type": "process",
+      "label": "Update top12: top12 = int(str(top12 * 2)[:12])",
+      "action": "ctx['top12'] = int(str(ctx['top12'] * 2)[:12])",
+      "next": 13
+    },
+    {
+      "id": 13,
+      "type": "process",
+      "label": "Update tail5: tail5 = tail5 * 2 % 100000",
+      "action": "ctx['tail5'] = (ctx['tail5'] * 2) % 100000",
+      "next": 11
+    },
+    {
+      "id": 14,
+      "type": "decision",
+      "label": "Is c2 < c5?",
+      "logic": "ctx['c2'] < ctx['c5']",
+      "true_next": 15,
+      "false_next": 17
+    },
+    {
+      "id": 15,
+      "type": "process",
+      "label": "For _ in range(c5 - c2)",
+      "action": "for _ in range(ctx['c5'] - ctx['c2']): ctx['top12'] = int(str(ctx['top12'] * 5)[:12]); ctx['tail5'] = (ctx['tail5'] * 5) % 100000",
+      "next": 16
+    },
+    {
+      "id": 16,
+      "type": "process",
+      "label": "Update top12: top12 = int(str(top12 * 5)[:12])",
+      "action": "ctx['top12'] = int(str(ctx['top12'] * 5)[:12])",
+      "next": 17
+    },
+    {
+      "id": 17,
+      "type": "process",
+      "label": "Update tail5: tail5 = tail5 * 5 % 100000",
+      "action": "ctx['tail5'] = (ctx['tail5'] * 5) % 100000",
+      "next": 18
+    },
+    {
+      "id": 18,
+      "type": "process",
+      "label": "Calculate zero = min(c2, c5)",
+      "action": "ctx['zero'] = min(ctx['c2'], ctx['c5'])",
+      "next": 19
+    },
+    {
+      "id": 19,
+      "type": "decision",
+      "label": "Is len(str(top12)) <= 10?",
+      "logic": "len(str(ctx['top12'])) <= 10",
+      "true_next": 20,
+      "false_next": 21
+    },
+    {
+      "id": 20,
+      "type": "process",
+      "label": "Output: str(top12) + 'e' + str(zero)",
+      "action": "ctx['output'] = str(ctx['top12']) + 'e' + str(ctx['zero'])",
+      "next": 22
+    },
+    {
+      "id": 21,
+      "type": "process",
+      "label": "Output: str(top12)[:5] + '...' + '0' * (5 - len(str(tail5))) + str(tail5) + 'e' + str(zero)",
+      "action": "ctx['output'] = str(ctx['top12'])[:5] + '...' + '0' * (5 - len(str(ctx['tail5']))) + str(ctx['tail5']) + 'e' + str(ctx['zero'])",
+      "next": 22
+    },
+    {
+      "id": 22,
+      "type": "end",
+      "label": "Return output",
+      "output": "ctx['output']"
+    }
+  ],
+  "task_id": "2117. Abbreviating the Product of a Range",
+  "dataset": "MATH",
+  "result": "failed: ",
+  "code": "def abbreviateProduct(left: int, right: int) -> str:\n    c2 = 0\n    c5 = 0\n    top12 = 1\n    tail5 = 1\n    \n    for i in range(left, right + 1):\n        if i % 2 == 0:\n            c2 += 1\n            top12 = int(str(top12 * i)[:12])\n            tail5 = (tail5 * i) % 100000\n        else:\n            top12 = int(str(top12 * i)[:12])\n            tail5 = (tail5 * i) % 100000\n            \n        if i % 5 == 0:\n            c5 += 1\n            top12 = int(str(top12 * i)[:12])\n            tail5 = (tail5 * i) % 100000\n    \n    if c2 > c5:\n        for _ in range(c2 - c5):\n            top12 = int(str(top12 * 2)[:12])\n            tail5 = (tail5 * 2) % 100000\n    elif c2 < c5:\n        for _ in range(c5 - c2):\n            top12 = int(str(top12 * 5)[:12])\n            tail5 = (tail5 * 5) % 100000\n    \n    zero = min(c2, c5)\n    \n    if len(str(top12)) <= 10:\n        output = str(top12) + 'e' + str(zero)\n    else:\n        output = str(top12)[:5] + '...' + '0' * (5 - len(str(tail5))) + str(tail5) + 'e' + str(zero)\n    \n    return output",
+  "verification": {
+    "md_verdict": "ILR Error",
+    "actual_error_source": "both",
+    "ilr_verdict": "incorrect",
+    "code_vs_ilr": "deviates",
+    "md_correct": "partial",
+    "note": "ILR 确实错误且是根因：算法把 c2/c5 当'是否被2/5整除'计数（8 只算 1 个 2），tail5 连 2/5 因子一起乘，末尾还有 range(c2-c5) 额外乘 2/5 的'补偿'循环，完全不是去除尾零的正确方法，忠实实现也无法通过。但生成代码还额外偏离 ILR：ILR 中奇数路径不更新 tail5、c5 只在偶数时检查，偶数 i 的 tail5 要乘两次，代码把这些全部规整成每个 i 各乘一次、c5 对所有 i 检查，两者输出不同，故 both。",
+    "evidence": "忠实转写 ILR：abbreviateProduct(1,4)='384e0'（期望 '24e0'）、(2,11)='10715...93600e1'（期望 '399168e2'）；生成代码：(1,4)='96e0'、(2,11)='15966...20000e2'，同样全错且与 ILR 结果不一致。"
+  }
+}

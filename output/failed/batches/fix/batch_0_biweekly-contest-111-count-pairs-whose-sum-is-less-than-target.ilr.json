@@ -1,0 +1,68 @@
+{
+  "problem_id": "count_pairs",
+  "nodes": [
+    {
+      "id": 1,
+      "type": "start",
+      "label": "Start",
+      "next": 2
+    },
+    {
+      "id": 2,
+      "type": "process",
+      "label": "Input: nums (list of integers), target (integer)",
+      "action": "ctx['nums'] = ctx['arg0']; ctx['target'] = ctx['arg1']; ctx['count'] = 0; ctx['left'] = 0; ctx['right'] = len(ctx['nums']) - 1",
+      "next": 3
+    },
+    {
+      "id": 3,
+      "type": "process",
+      "label": "Sort nums",
+      "action": "ctx['nums'] = sorted(ctx['nums'])",
+      "next": 4
+    },
+    {
+      "id": 4,
+      "type": "decision",
+      "label": "Is left < right?",
+      "logic": "ctx['left'] < ctx['right']",
+      "true_next": 5,
+      "false_next": 10
+    },
+    {
+      "id": 5,
+      "type": "decision",
+      "label": "Is nums[left] + nums[right] < target?",
+      "logic": "ctx['nums'][ctx['left']] + ctx['nums'][ctx['right']] < ctx['target']",
+      "true_next": 6,
+      "false_next": 8
+    },
+    {
+      "id": 6,
+      "type": "process",
+      "label": "All pairs (left, left+1..right) are valid: count += right - left",
+      "action": "ctx['count'] += ctx['right'] - ctx['left']",
+      "next": 7
+    },
+    {
+      "id": 7,
+      "type": "process",
+      "label": "Increment left by 1",
+      "action": "ctx['left'] += 1",
+      "next": 4
+    },
+    {
+      "id": 8,
+      "type": "process",
+      "label": "Sum too large: decrement right by 1",
+      "action": "ctx['right'] -= 1",
+      "next": 4
+    },
+    {
+      "id": 10,
+      "type": "end",
+      "label": "Output: count (number of pairs)",
+      "output": "ctx['count']"
+    }
+  ]
+}

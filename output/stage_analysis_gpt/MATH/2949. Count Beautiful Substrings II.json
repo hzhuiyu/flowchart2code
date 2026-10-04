@@ -1,0 +1,274 @@
+{
+  "task_id": "2949. Count Beautiful Substrings II",
+  "dataset": "MATH",
+  "difficulty": "hard",
+  "title": null,
+  "result": "failed: ",
+  "ilr": "{\n  \"problem_id\": \"beautiful_substrings\",\n  \"nodes\": [\n    {\"id\": 1, \"type\": \"start\", \"label\": \"Start\", \"next\": 2},\n    {\"id\": 2, \"type\": \"process\", \"label\": \"Input: s (string), k (integer)\", \"action\": \"ctx['s']=ctx['arg0']; ctx['k']=ctx['arg1']; ctx['p']=1; ctx['count']=0\", \"next\": 3},\n    {\"id\": 3, \"type\": \"decision\", \"label\": \"Loop i from 1 to k\", \"logic\": \"ctx['p'] <= ctx['k']\", \"true_next\": 4, \"false_next\": 8},\n    {\"id\": 4, \"type\": \"decision\", \"label\": \"Is i * j % k == 0?\", \"logic\": \"ctx['i'] * ctx['j'] % ctx['k'] == 0\", \"true_next\": 5, \"false_next\": 3},\n    {\"id\": 5, \"type\": \"process\", \"label\": \"Set p = i, break loop\", \"action\": \"ctx['p'] = ctx['i']; ctx['j'] = 0\", \"next\": 6},\n    {\"id\": 6, \"type\": \"process\", \"label\": \"Set p = 2 * p\", \"action\": \"ctx['p'] *= 2\", \"next\": 3},\n    {\"id\": 7, \"type\": \"process\", \"label\": \"Initialize sumdict = {0: {p - 1: 1}}, cursum = 0, vowels = {'a', 'e', 'i', 'o', 'u'}, count = 0\", \"action\": \"ctx['sumdict'] = {0: {ctx['p'] - 1: 1}}; ctx['cursum'] = 0; ctx['vowels'] = {'a', 'e', 'i', 'o', 'u'}; ctx['count'] = 0\", \"next\": 8},\n    {\"id\": 8, \"type\": \"process\", \"label\": \"Loop i from 0 to len(s) - 1\", \"action\": \"for ctx['i'] in range(len(ctx['s'])): ctx['cursum'] = 0; ctx['cate'] = ctx['i'] % ctx['p']\", \"next\": 9},\n    {\"id\": 9, \"type\": \"decision\", \"label\": \"Is s[i] in vowels?\", \"logic\": \"ctx['s'][ctx['i']] in ctx['vowels']\", \"true_next\": 10, \"false_next\": 11},\n    {\"id\": 10, \"type\": \"process\", \"label\": \"Update cursum: cursum += 1\", \"action\": \"ctx['cursum'] += 1\", \"next\": 12},\n    {\"id\": 11, \"type\": \"process\", \"label\": \"Update cursum: cursum -= 1\", \"action\": \"ctx['cursum'] -= 1\", \"next\": 12},\n    {\"id\": 12, \"type\": \"process\", \"label\": \"Set cate = i % p\", \"action\": \"ctx['cate'] = ctx['i'] % ctx['p']\", \"next\": 13},\n    {\"id\": 13, \"type\": \"decision\", \"label\": \"Is cursum in sumdict?\", \"logic\": \"ctx['cursum'] in ctx['sumdict']\", \"true_next\": 14, \"false_next\": 17},\n    {\"id\": 14, \"type\": \"decision\", \"label\": \"Is cate in sumdict[cursum]?\", \"logic\": \"ctx['cate'] in ctx['sumdict'][ctx['cursum']]\", \"true_next\": 15, \"false_next\": 18},\n    {\"id\": 15, \"type\": \"process\", \"label\": \"Update count: count += sumdict[cursum][cate]\", \"action\": \"ctx['count'] += ctx['sumdict'][ctx['cursum']][ctx['cate']]\", \"next\": 19},\n    {\"id\": 16, \"type\": \"process\", \"label\": \"Set sumdict[cursum] = {cate: 1}\", \"action\": \"ctx['sumdict'][ctx['cursum']] = {ctx['cate']: 1}\", \"next\": 19},\n    {\"id\": 17, \"type\": \"process\", \"label\": \"Set sumdict[cursum][cate] = 1\", \"action\": \"ctx['sumdict'][ctx['cursum']][ctx['cate']] = 1\", \"next\": 19},\n    {\"id\": 18, \"type\": \"process\", \"label\": \"Increment sumdict[cursum][cate] by 1\", \"action\": \"ctx['sumdict'][ctx['cursum']][ctx['cate']] += 1\", \"next\": 20},\n    {\"id\": 19, \"type\": \"process\", \"label\": \"End of loop\", \"action\": \"\", \"next\": 8},\n    {\"id\": 20, \"type\": \"end\", \"label\": \"Output: count\", \"output\": \"ctx['count']\"}\n  ]\n}",
+  "code": "def beautifulSubstrings(s: str, k: int) -> int:\n    p = 1\n    count = 0\n\n    while p <= k:\n        i = 1\n        while i * p % k != 0:\n            i += 1\n        p = i\n        p *= 2\n\n    sumdict = {0: {p - 1: 1}}\n    cursum = 0\n    vowels = {'a', 'e', 'i', 'o', 'u'}\n\n    for i in range(len(s)):\n        cursum = 0\n        cate = i % p\n\n        if s[i] in vowels:\n            cursum += 1\n        else:\n            cursum -= 1\n\n        cate = i % p\n\n        if cursum in sumdict:\n            if cate in sumdict[cursum]:\n                count += sumdict[cursum][cate]\n            else:\n                sumdict[cursum][cate] = 1\n        else:\n            sumdict[cursum] = {cate: 1}\n\n    return count",
+  "prompt": "You are given a string s and a positive integer k.\n\nLet vowels and consonants be the number of vowels and consonants in a string.\n\nA string is beautiful if:\n\nvowels == consonants.\n(vowels * consonants) % k == 0, in other terms the multiplication of vowels and consonants is divisible by k.\nReturn the number of non-empty beautiful substrings in the given string s.\n\nA substring is a contiguous sequence of characters in a string.\n\nVowel letters in English are 'a', 'e', 'i', 'o', and 'u'.\n\nConsonant letters in English are every letter except vowels.\n\n\n\nExample 1:\n\nInput: s = \"baeyh\", k = 2\nOutput: 2\nExplanation: There are 2 beautiful substrings in the given string.\n- Substring \"baeyh\", vowels = 2 ([\"a\",e\"]), consonants = 2 ([\"y\",\"h\"]).\nYou can see that string \"aeyh\" is beautiful as vowels == consonants and vowels * consonants % k == 0.\n- Substring \"baeyh\", vowels = 2 ([\"a\",e\"]), consonants = 2 ([\"b\",\"y\"]).\nYou can see that string \"baey\" is beautiful as vowels == consonants and vowels * consonants % k == 0.\nIt can be shown that there are only 2 beautiful substrings in the given string.\nExample 2:\n\nInput: s = \"abba\", k = 1\nOutput: 3\nExplanation: There are 3 beautiful substrings in the given string.\n- Substring \"abba\", vowels = 1 ([\"a\"]), consonants = 1 ([\"b\"]).\n- Substring \"abba\", vowels = 1 ([\"a\"]), consonants = 1 ([\"b\"]).\n- Substring \"abba\", vowels = 2 ([\"a\",\"a\"]), consonants = 2 ([\"b\",\"b\"]).\nIt can be shown that there are only 3 beautiful substrings in the given string.\nExample 3:\n\nInput: s = \"bcdf\", k = 1\nOutput: 0\nExplanation: There are no beautiful substrings in the given string.\n\n\nConstraints:\n\n1 <= s.length <= 5 * 104\n1 <= k <= 1000\ns consists of only English lowercase letters.",
+  "test": "assert beautifulSubstrings(\"baeyh\", 2) == 2  # Example 1\nassert beautifulSubstrings(\"abba\", 1) == 3  # Example 2\nassert beautifulSubstrings(\"bcdf\", 1) == 0  # Example 3\n\n# Boundary test cases\nassert beautifulSubstrings(\"a\", 1) == 0  # Single character, no beautiful substrings\nassert beautifulSubstrings(\"aeiou\", 1) == 0  # All vowels, no consonants\nassert beautifulSubstrings(\"bcdfghjklmnpqrstvwxyz\", 1) == 0  # All consonants, no vowels\n\n# Large number test cases\nassert beautifulSubstrings(\"a\" * 10000 + \"b\" * 10000, 2) == 5000  # Large input, no beautiful substrings\nassert beautifulSubstrings(\"ab\" * 10000, 1) == 100000000  # Large input, many beautiful substrings\nassert beautifulSubstrings(\"aeiou\" * 10000 + \"bcdfg\" * 10000, 5) == 10000  # Large input, no beautiful substrings",
+  "ocr_data": {
+    "nodes": [
+      {
+        "node_id": 1,
+        "shape_type": "rectangle",
+        "raw_text": "Start",
+        "position": "top"
+      },
+      {
+        "node_id": 2,
+        "shape_type": "rectangle",
+        "raw_text": "Input: s (string), k (integer)",
+        "position": "top"
+      },
+      {
+        "node_id": 3,
+        "shape_type": "rectangle",
+        "raw_text": "Initialize p",
+        "position": "top"
+      },
+      {
+        "node_id": 4,
+        "shape_type": "rectangle",
+        "raw_text": "Loop i from 1 to k",
+        "position": "top"
+      },
+      {
+        "node_id": 5,
+        "shape_type": "diamond",
+        "raw_text": "Is i * j % k == 0?",
+        "position": "top"
+      },
+      {
+        "node_id": 6,
+        "shape_type": "rectangle",
+        "raw_text": "Set p = i, break loop",
+        "position": "middle"
+      },
+      {
+        "node_id": 7,
+        "shape_type": "rectangle",
+        "raw_text": "Set p = 2 * p",
+        "position": "middle"
+      },
+      {
+        "node_id": 8,
+        "shape_type": "rectangle",
+        "raw_text": "Initialize sumdict = {0: {p - 1: 1}}, cursum = 0, vowels = {'a', 'e', 'i', 'o', 'u'}, count = 0",
+        "position": "middle"
+      },
+      {
+        "node_id": 9,
+        "shape_type": "rectangle",
+        "raw_text": "Loop i from 0 to len(s) - 1",
+        "position": "middle"
+      },
+      {
+        "node_id": 10,
+        "shape_type": "diamond",
+        "raw_text": "Is s[i] in vowels?",
+        "position": "middle"
+      },
+      {
+        "node_id": 11,
+        "shape_type": "rectangle",
+        "raw_text": "Update cursum: cursum += 1",
+        "position": "middle"
+      },
+      {
+        "node_id": 12,
+        "shape_type": "rectangle",
+        "raw_text": "Update cursum: cursum -= 1",
+        "position": "middle"
+      },
+      {
+        "node_id": 13,
+        "shape_type": "rectangle",
+        "raw_text": "Set cate = i % p",
+        "position": "middle"
+      },
+      {
+        "node_id": 14,
+        "shape_type": "diamond",
+        "raw_text": "Is cursum in sumdict?",
+        "position": "middle"
+      },
+      {
+        "node_id": 15,
+        "shape_type": "diamond",
+        "raw_text": "Is cate in sumdict[cursum]?",
+        "position": "middle"
+      },
+      {
+        "node_id": 16,
+        "shape_type": "rectangle",
+        "raw_text": "Update count: count += sumdict[cursum][cate]",
+        "position": "middle"
+      },
+      {
+        "node_id": 17,
+        "shape_type": "rectangle",
+        "raw_text": "Set sumdict[cursum] = {cate: 1}",
+        "position": "middle"
+      },
+      {
+        "node_id": 18,
+        "shape_type": "rectangle",
+        "raw_text": "Set sumdict[cursum][cate] = 1",
+        "position": "middle"
+      },
+      {
+        "node_id": 19,
+        "shape_type": "rectangle",
+        "raw_text": "Increment sumdict[cursum][cate] by 1",
+        "position": "bottom"
+      },
+      {
+        "node_id": 20,
+        "shape_type": "rectangle",
+        "raw_text": "End of loop",
+        "position": "bottom"
+      },
+      {
+        "node_id": 21,
+        "shape_type": "rectangle",
+        "raw_text": "Output: count",
+        "position": "bottom"
+      }
+    ],
+    "edges": [
+      {
+        "from_node": 1,
+        "to_node": 2,
+        "label": ""
+      },
+      {
+        "from_node": 2,
+        "to_node": 3,
+        "label": ""
+      },
+      {
+        "from_node": 3,
+        "to_node": 4,
+        "label": ""
+      },
+      {
+        "from_node": 4,
+        "to_node": 5,
+        "label": ""
+      },
+      {
+        "from_node": 5,
+        "to_node": 6,
+        "label": "Yes"
+      },
+      {
+        "from_node": 5,
+        "to_node": 4,
+        "label": "No"
+      },
+      {
+        "from_node": 6,
+        "to_node": 7,
+        "label": ""
+      },
+      {
+        "from_node": 7,
+        "to_node": 8,
+        "label": ""
+      },
+      {
+        "from_node": 8,
+        "to_node": 9,
+        "label": ""
+      },
+      {
+        "from_node": 9,
+        "to_node": 10,
+        "label": ""
+      },
+      {
+        "from_node": 10,
+        "to_node": 11,
+        "label": "Yes"
+      },
+      {
+        "from_node": 10,
+        "to_node": 12,
+        "label": "No"
+      },
+      {
+        "from_node": 11,
+        "to_node": 13,
+        "label": ""
+      },
+      {
+        "from_node": 12,
+        "to_node": 13,
+        "label": ""
+      },
+      {
+        "from_node": 13,
+        "to_node": 14,
+        "label": ""
+      },
+      {
+        "from_node": 14,
+        "to_node": 15,
+        "label": "Yes"
+      },
+      {
+        "from_node": 14,
+        "to_node": 17,
+        "label": "No"
+      },
+      {
+        "from_node": 15,
+        "to_node": 16,
+        "label": "Yes"
+      },
+      {
+        "from_node": 15,
+        "to_node": 18,
+        "label": "No"
+      },
+      {
+        "from_node": 16,
+        "to_node": 19,
+        "label": ""
+      },
+      {
+        "from_node": 18,
+        "to_node": 19,
+        "label": ""
+      },
+      {
+        "from_node": 19,
+        "to_node": 9,
+        "label": ""
+      },
+      {
+        "from_node": 9,
+        "to_node": 20,
+        "label": "No"
+      },
+      {
+        "from_node": 20,
+        "to_node": 21,
+        "label": ""
+      }
+    ],
+    "other_text": []
+  },
+  "analysis": {
+    "ilr_verdict": "incorrect",
+    "ilr_issues": "主循环节点8把'cursum=0'写进每轮循环体，前缀平衡永远无法累加（OCR流程图中并无此重置，属ILR凭空添加）；求p的循环用未定义的i、j且无任何自增/初始化节点（OCR流程图本身也缺自增，忠实执行在节点4即KeyError）；sumdict更新接线与流程图不符：节点13为假时执行sumdict[cursum][cate]=1会因sumdict[cursum]不存在而KeyError，节点14为假时对不存在的键+=1同样KeyError且直接跳到结束节点20，节点16不可达。",
+    "code_vs_ilr": "deviates",
+    "code_issues": "代码对ILR做了修复式偏离：把未定义的i*j%k改写成i*p%k（对测试中的k=1,2,5碰巧得到正确的p，k=4等会错），把sumdict混乱接线改写成正确的创建/赋值并继续循环；但忠实保留了致命的'每轮cursum=0'重置，统计必然错误。",
+    "error_source": "ilr",
+    "ocr_contribution": "no",
+    "root_cause": "ILR自身致命错误：主循环每轮把cursum重置为0使前缀平衡无法累积（OCR流程图并无此重置），且sumdict更新逻辑错乱；生成代码虽修复了p循环等其他缺陷，但如实保留了该致命bug，统计结果必然错误。",
+    "evidence": "beautifulSubstrings(\"baeyh\",2)实际运行返回1（期望2）；beautifulSubstrings(\"ab\"*10000,1)返回19998（期望100000000），因为cursum每轮被清零只在±1间跳动。"
+  }
+}

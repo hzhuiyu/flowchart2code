@@ -1,0 +1,1486 @@
+{
+ "task_id": "biweekly-contest-118-find-maximum-non-decreasing-array-length",
+ "dataset": "Algorithm",
+ "title": "find-maximum-non-decreasing-array-length",
+ "difficulty": "Hard",
+ "prompt": "\"\"\"\nYou are given a 0-indexed integer array nums.\nYou can perform any number of operations, where each operation involves selecting a subarray of the array and replacing it with the sum of its elements. For example, if the given array is [1,3,5,6] and you select subarray [3,5] the array will convert to [1,8,6].\nReturn the maximum length of a non-decreasing array that can be made after applying operations.\nA subarray is a contiguous non-empty sequence of elements within an array.\n\nExample 1:\n\nInput: nums = [5,2,2]\nOutput: 1\nExplanation: This array with length 3 is not non-decreasing.\nWe have two ways to make the array length two.\nFirst, choosing subarray [2,2] converts the array to [5,4].\nSecond, choosing subarray [5,2] converts the array to [7,2].\nIn these two ways the array is not non-decreasing.\nAnd if we choose subarray [5,2,2] and replace it with [9] it becomes non-decreasing. \nSo the answer is 1.\n\nExample 2:\n\nInput: nums = [1,2,3,4]\nOutput: 4\nExplanation: The array is non-decreasing. So the answer is 4.\n\nExample 3:\n\nInput: nums = [4,3,2,6]\nOutput: 3\nExplanation: Replacing [3,2] with [5] converts the given array to [4,5,6] that is non-decreasing.\nBecause the given array is not non-decreasing, the maximum possible answer is 3.\n\nConstraints:\n\n1 <= nums.length <= 105\n1 <= nums[i] <= 105\n\"\"\"\nclass Solution:\n    def findMaximumLength(self, nums: List[int]) -> int:\n        ",
+ "starter_code": "class Solution:\n    def findMaximumLength(self, nums: List[int]) -> int:\n        ",
+ "entry_point": "",
+ "test": "\nmy_solution = Solution()\n\ntest_input = { \"nums\": [5,2,2] }\nassert my_solution.findMaximumLength(**test_input) == 1\n\ntest_input = { \"nums\": [1,2,3,4] }\nassert my_solution.findMaximumLength(**test_input) == 4\n\ntest_input = { \"nums\": [4,3,2,6] }\nassert my_solution.findMaximumLength(**test_input) == 3\n\ntest_input = { \"nums\": [32] }\nassert my_solution.findMaximumLength(**test_input) == 1\n\ntest_input = { \"nums\": [38] }\nassert my_solution.findMaximumLength(**test_input) == 1\n\ntest_input = { \"nums\": [60] }\nassert my_solution.findMaximumLength(**test_input) == 1\n\ntest_input = { \"nums\": [79] }\nassert my_solution.findMaximumLength(**test_input) == 1\n\ntest_input = { \"nums\": [85] }\nassert my_solution.findMaximumLength(**test_input) == 1\n\ntest_input = { \"nums\": [170] }\nassert my_solution.findMaximumLength(**test_input) == 1\n\ntest_input = { \"nums\": [198] }\nassert my_solution.findMaximumLength(**test_input) == 1\n\ntest_input = { \"nums\": [220] }\nassert my_solution.findMaximumLength(**test_input) == 1\n\ntest_input = { \"nums\": [318] }\nassert my_solution.findMaximumLength(**test_input) == 1\n\ntest_input = { \"nums\": [350] }\nassert my_solution.findMaximumLength(**test_input) == 1\n\ntest_input = { \"nums\": [381] }\nassert my_solution.findMaximumLength(**test_input) == 1\n\ntest_input = { \"nums\": [413] }\nassert my_solution.findMaximumLength(**test_input) == 1\n\ntest_input = { \"nums\": [426] }\nassert my_solution.findMaximumLength(**test_input) == 1\n\ntest_input = { \"nums\": [429] }\nassert my_solution.findMaximumLength(**test_input) == 1\n\ntest_input = { \"nums\": [431] }\nassert my_solution.findMaximumLength(**test_input) == 1\n\ntest_input = { \"nums\": [445] }\nassert my_solution.findMaximumLength(**test_input) == 1\n\ntest_input = { \"nums\": [488] }\nassert my_solution.findMaximumLength(**test_input) == 1\n\ntest_input = { \"nums\": [492] }\nassert my_solution.findMaximumLength(**test_input) == 1\n\ntest_input = { \"nums\": [497] }\nassert my_solution.findMaximumLength(**test_input) == 1\n\ntest_input = { \"nums\": [515] }\nassert my_solution.findMaximumLength(**test_input) == 1\n\ntest_input = { \"nums\": [582] }\nassert my_solution.findMaximumLength(**test_input) == 1\n\ntest_input = { \"nums\": [589] }\nassert my_solution.findMaximumLength(**test_input) == 1\n\ntest_input = { \"nums\": [620] }\nassert my_solution.findMaximumLength(**test_input) == 1\n\ntest_input = { \"nums\": [632] }\nassert my_solution.findMaximumLength(**test_input) == 1\n\ntest_input = { \"nums\": [703] }\nassert my_solution.findMaximumLength(**test_input) == 1\n\ntest_input = { \"nums\": [748] }\nassert my_solution.findMaximumLength(**test_input) == 1\n\ntest_input = { \"nums\": [776] }\nassert my_solution.findMaximumLength(**test_input) == 1\n\ntest_input = { \"nums\": [977] }\nassert my_solution.findMaximumLength(**test_input) == 1\n\ntest_input = { \"nums\": [986] }\nassert my_solution.findMaximumLength(**test_input) == 1\n\ntest_input = { \"nums\": [990] }\nassert my_solution.findMaximumLength(**test_input) == 1\n\ntest_input = { \"nums\": [29,859] }\nassert my_solution.findMaximumLength(**test_input) == 2\n\ntest_input = { \"nums\": [48,612] }\nassert my_solution.findMaximumLength(**test_input) == 2\n\ntest_input = { \"nums\": [76,837] }\nassert my_solution.findMaximumLength(**test_input) == 2\n\ntest_input = { \"nums\": [103,341] }\nassert my_solution.findMaximumLength(**test_input) == 2\n\ntest_input = { \"nums\": [171,323] }\nassert my_solution.findMaximumLength(**test_input) == 2\n\ntest_input = { \"nums\": [248,719] }\nassert my_solution.findMaximumLength(**test_input) == 2\n\ntest_input = { \"nums\": [253,61] }\nassert my_solution.findMaximumLength(**test_input) == 1\n\ntest_input = { \"nums\": [274,467] }\nassert my_solution.findMaximumLength(**test_input) == 2\n\ntest_input = { \"nums\": [351,665] }\nassert my_solution.findMaximumLength(**test_input) == 2\n\ntest_input = { \"nums\": [372,382] }\nassert my_solution.findMaximumLength(**test_input) == 2\n\ntest_input = { \"nums\": [404,409] }\nassert my_solution.findMaximumLength(**test_input) == 2\n\ntest_input = { \"nums\": [455,40] }\nassert my_solution.findMaximumLength(**test_input) == 1\n\ntest_input = { \"nums\": [472,843] }\nassert my_solution.findMaximumLength(**test_input) == 2\n\ntest_input = { \"nums\": [504,838] }\nassert my_solution.findMaximumLength(**test_input) == 2\n\ntest_input = { \"nums\": [549,747] }\nassert my_solution.findMaximumLength(**test_input) == 2\n\ntest_input = { \"nums\": [570,810] }\nassert my_solution.findMaximumLength(**test_input) == 2\n\ntest_input = { \"nums\": [621,809] }\nassert my_solution.findMaximumLength(**test_input) == 2\n\ntest_input = { \"nums\": [643,802] }\nassert my_solution.findMaximumLength(**test_input) == 2\n\ntest_input = { \"nums\": [689,192] }\nassert my_solution.findMaximumLength(**test_input) == 1\n\ntest_input = { \"nums\": [709,481] }\nassert my_solution.findMaximumLength(**test_input) == 1\n\ntest_input = { \"nums\": [742,67] }\nassert my_solution.findMaximumLength(**test_input) == 1\n\ntest_input = { \"nums\": [745,725] }\nassert my_solution.findMaximumLength(**test_input) == 1\n\ntest_input = { \"nums\": [773,877] }\nassert my_solution.findMaximumLength(**test_input) == 2\n\ntest_input = { \"nums\": [776,962] }\nassert my_solution.findMaximumLength(**test_input) == 2\n\ntest_input = { \"nums\": [791,434] }\nassert my_solution.findMaximumLength(**test_input) == 1\n\ntest_input = { \"nums\": [824,783] }\nassert my_solution.findMaximumLength(**test_input) == 1\n\ntest_input = { \"nums\": [840,388] }\nassert my_solution.findMaximumLength(**test_input) == 1\n\ntest_input = { \"nums\": [876,264] }\nassert my_solution.findMaximumLength(**test_input) == 1\n\ntest_input = { \"nums\": [940,694] }\nassert my_solution.findMaximumLength(**test_input) == 1\n\ntest_input = { \"nums\": [959,372] }\nassert my_solution.findMaximumLength(**test_input) == 1\n\ntest_input = { \"nums\": [981,998] }\nassert my_solution.findMaximumLength(**test_input) == 2\n\ntest_input = { \"nums\": [41,340,784] }\nassert my_solution.findMaximumLength(**test_input) == 3\n\ntest_input = { \"nums\": [103,652,579] }\nassert my_solution.findMaximumLength(**test_input) == 2\n\ntest_input = { \"nums\": [116,635,966] }\nassert my_solution.findMaximumLength(**test_input) == 3\n\ntest_input = { \"nums\": [137,32,745] }\nassert my_solution.findMaximumLength(**test_input) == 2\n\ntest_input = { \"nums\": [247,173,316] }\nassert my_solution.findMaximumLength(**test_input) == 2\n\ntest_input = { \"nums\": [276,315,947] }\nassert my_solution.findMaximumLength(**test_input) == 3\n\ntest_input = { \"nums\": [278,754,912] }\nassert my_solution.findMaximumLength(**test_input) == 3\n\ntest_input = { \"nums\": [314,882,708] }\nassert my_solution.findMaximumLength(**test_input) == 2\n\ntest_input = { \"nums\": [371,101,367] }\nassert my_solution.findMaximumLength(**test_input) == 2\n\ntest_input = { \"nums\": [402,305,990] }\nassert my_solution.findMaximumLength(**test_input) == 2\n\ntest_input = { \"nums\": [403,553,697] }\nassert my_solution.findMaximumLength(**test_input) == 3\n\ntest_input = { \"nums\": [431,780,315] }\nassert my_solution.findMaximumLength(**test_input) == 2\n\ntest_input = { \"nums\": [479,322,44] }\nassert my_solution.findMaximumLength(**test_input) == 1\n\ntest_input = { \"nums\": [512,234,679] }\nassert my_solution.findMaximumLength(**test_input) == 2\n\ntest_input = { \"nums\": [513,847,778] }\nassert my_solution.findMaximumLength(**test_input) == 2\n\ntest_input = { \"nums\": [525,177,936] }\nassert my_solution.findMaximumLength(**test_input) == 2\n\ntest_input = { \"nums\": [588,42,18] }\nassert my_solution.findMaximumLength(**test_input) == 1\n\ntest_input = { \"nums\": [646,174,827] }\nassert my_solution.findMaximumLength(**test_input) == 2\n\ntest_input = { \"nums\": [680,242,726] }\nassert my_solution.findMaximumLength(**test_input) == 2\n\ntest_input = { \"nums\": [769,131,241] }\nassert my_solution.findMaximumLength(**test_input) == 1\n\ntest_input = { \"nums\": [780,591,213] }\nassert my_solution.findMaximumLength(**test_input) == 2\n\ntest_input = { \"nums\": [783,23,848] }\nassert my_solution.findMaximumLength(**test_input) == 2\n\ntest_input = { \"nums\": [787,201,30] }\nassert my_solution.findMaximumLength(**test_input) == 1\n\ntest_input = { \"nums\": [791,470,87] }\nassert my_solution.findMaximumLength(**test_input) == 1\n\ntest_input = { \"nums\": [797,181,492] }\nassert my_solution.findMaximumLength(**test_input) == 1\n\ntest_input = { \"nums\": [868,4,455] }\nassert my_solution.findMaximumLength(**test_input) == 1\n\ntest_input = { \"nums\": [881,306,316] }\nassert my_solution.findMaximumLength(**test_input) == 1\n\ntest_input = { \"nums\": [886,116,68] }\nassert my_solution.findMaximumLength(**test_input) == 1\n\ntest_input = { \"nums\": [893,531,805] }\nassert my_solution.findMaximumLength(**test_input) == 2\n\ntest_input = { \"nums\": [926,641,145] }\nassert my_solution.findMaximumLength(**test_input) == 1\n\ntest_input = { \"nums\": [964,624,279] }\nassert my_solution.findMaximumLength(**test_input) == 1\n\ntest_input = { \"nums\": [987,694,396] }\nassert my_solution.findMaximumLength(**test_input) == 2\n\ntest_input = { \"nums\": [38,986,134,156] }\nassert my_solution.findMaximumLength(**test_input) == 2\n\ntest_input = { \"nums\": [43,236,417,521] }\nassert my_solution.findMaximumLength(**test_input) == 4\n\ntest_input = { \"nums\": [58,890,892,52] }\nassert my_solution.findMaximumLength(**test_input) == 3\n\ntest_input = { \"nums\": [81,738,403,654] }\nassert my_solution.findMaximumLength(**test_input) == 3",
+ "test_cases": [
+  {
+   "input": {
+    "args": [
+     [
+      5,
+      2,
+      2
+     ]
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      1,
+      2,
+      3,
+      4
+     ]
+    ]
+   },
+   "output": 4,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      4,
+      3,
+      2,
+      6
+     ]
+    ]
+   },
+   "output": 3,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      32
+     ]
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      38
+     ]
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      60
+     ]
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      79
+     ]
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      85
+     ]
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      170
+     ]
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      198
+     ]
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      220
+     ]
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      318
+     ]
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      350
+     ]
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      381
+     ]
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      413
+     ]
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      426
+     ]
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      429
+     ]
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      431
+     ]
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      445
+     ]
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      488
+     ]
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      492
+     ]
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      497
+     ]
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      515
+     ]
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      582
+     ]
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      589
+     ]
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      620
+     ]
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      632
+     ]
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      703
+     ]
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      748
+     ]
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      776
+     ]
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      977
+     ]
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      986
+     ]
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      990
+     ]
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      29,
+      859
+     ]
+    ]
+   },
+   "output": 2,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      48,
+      612
+     ]
+    ]
+   },
+   "output": 2,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      76,
+      837
+     ]
+    ]
+   },
+   "output": 2,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      103,
+      341
+     ]
+    ]
+   },
+   "output": 2,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      171,
+      323
+     ]
+    ]
+   },
+   "output": 2,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      248,
+      719
+     ]
+    ]
+   },
+   "output": 2,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      253,
+      61
+     ]
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      274,
+      467
+     ]
+    ]
+   },
+   "output": 2,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      351,
+      665
+     ]
+    ]
+   },
+   "output": 2,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      372,
+      382
+     ]
+    ]
+   },
+   "output": 2,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      404,
+      409
+     ]
+    ]
+   },
+   "output": 2,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      455,
+      40
+     ]
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      472,
+      843
+     ]
+    ]
+   },
+   "output": 2,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      504,
+      838
+     ]
+    ]
+   },
+   "output": 2,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      549,
+      747
+     ]
+    ]
+   },
+   "output": 2,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      570,
+      810
+     ]
+    ]
+   },
+   "output": 2,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      621,
+      809
+     ]
+    ]
+   },
+   "output": 2,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      643,
+      802
+     ]
+    ]
+   },
+   "output": 2,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      689,
+      192
+     ]
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      709,
+      481
+     ]
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      742,
+      67
+     ]
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      745,
+      725
+     ]
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      773,
+      877
+     ]
+    ]
+   },
+   "output": 2,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      776,
+      962
+     ]
+    ]
+   },
+   "output": 2,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      791,
+      434
+     ]
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      824,
+      783
+     ]
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      840,
+      388
+     ]
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      876,
+      264
+     ]
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      940,
+      694
+     ]
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      959,
+      372
+     ]
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      981,
+      998
+     ]
+    ]
+   },
+   "output": 2,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      41,
+      340,
+      784
+     ]
+    ]
+   },
+   "output": 3,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      103,
+      652,
+      579
+     ]
+    ]
+   },
+   "output": 2,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      116,
+      635,
+      966
+     ]
+    ]
+   },
+   "output": 3,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      137,
+      32,
+      745
+     ]
+    ]
+   },
+   "output": 2,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      247,
+      173,
+      316
+     ]
+    ]
+   },
+   "output": 2,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      276,
+      315,
+      947
+     ]
+    ]
+   },
+   "output": 3,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      278,
+      754,
+      912
+     ]
+    ]
+   },
+   "output": 3,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      314,
+      882,
+      708
+     ]
+    ]
+   },
+   "output": 2,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      371,
+      101,
+      367
+     ]
+    ]
+   },
+   "output": 2,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      402,
+      305,
+      990
+     ]
+    ]
+   },
+   "output": 2,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      403,
+      553,
+      697
+     ]
+    ]
+   },
+   "output": 3,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      431,
+      780,
+      315
+     ]
+    ]
+   },
+   "output": 2,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      479,
+      322,
+      44
+     ]
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      512,
+      234,
+      679
+     ]
+    ]
+   },
+   "output": 2,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      513,
+      847,
+      778
+     ]
+    ]
+   },
+   "output": 2,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      525,
+      177,
+      936
+     ]
+    ]
+   },
+   "output": 2,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      588,
+      42,
+      18
+     ]
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      646,
+      174,
+      827
+     ]
+    ]
+   },
+   "output": 2,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      680,
+      242,
+      726
+     ]
+    ]
+   },
+   "output": 2,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      769,
+      131,
+      241
+     ]
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      780,
+      591,
+      213
+     ]
+    ]
+   },
+   "output": 2,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      783,
+      23,
+      848
+     ]
+    ]
+   },
+   "output": 2,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      787,
+      201,
+      30
+     ]
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      791,
+      470,
+      87
+     ]
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      797,
+      181,
+      492
+     ]
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      868,
+      4,
+      455
+     ]
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      881,
+      306,
+      316
+     ]
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      886,
+      116,
+      68
+     ]
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      893,
+      531,
+      805
+     ]
+    ]
+   },
+   "output": 2,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      926,
+      641,
+      145
+     ]
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      964,
+      624,
+      279
+     ]
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      987,
+      694,
+      396
+     ]
+    ]
+   },
+   "output": 2,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      38,
+      986,
+      134,
+      156
+     ]
+    ]
+   },
+   "output": 2,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      43,
+      236,
+      417,
+      521
+     ]
+    ]
+   },
+   "output": 4,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      58,
+      890,
+      892,
+      52
+     ]
+    ]
+   },
+   "output": 3,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      81,
+      738,
+      403,
+      654
+     ]
+    ]
+   },
+   "output": 3,
+   "explanation": ""
+  }
+ ],
+ "original_ilr": "```json\n{\n  \"problem_id\": \"findMaximumLength\",\n  \"nodes\": [\n    {\n      \"id\": 1,\n      \"type\": \"start\",\n      \"label\": \"Start\",\n      \"next\": 2\n    },\n    {\n      \"id\": 2,\n      \"type\": \"process\",\n      \"label\": \"Input: nums (list of integers)\",\n      \"action\": \"ctx['nums'] = ctx['arg0']; ctx['n'] = len(ctx['nums']); ctx['pre'] = [0]; ctx['dp'] = {}; ctx['i'] = 0; ctx['j'] = 0\",\n      \"next\": 3\n    },\n    {\n      \"id\": 3,\n      \"type\": \"process\",\n      \"label\": \"Extend pre with nums\",\n      \"action\": \"ctx['pre'].extend(ctx['nums'])\",\n      \"next\": 4\n    },\n    {\n      \"id\": 4,\n      \"type\": \"process\",\n      \"label\": \"Initialize dp = defaultdict(lambda: (0, 0))\",\n      \"action\": \"ctx['dp'] = {}\",\n      \"next\": 5\n    },\n    {\n      \"id\": 5,\n      \"type\": \"process\",\n      \"label\": \"Set dp[0] = (0, 0)\",\n      \"action\": \"ctx['dp'][0] = (0, 0)\",\n      \"next\": 6\n    },\n    {\n      \"id\": 6,\n      \"type\": \"decision\",\n      \"label\": \"Is i <= n?\",\n      \"logic\": \"ctx['i'] <= ctx['n']\",\n      \"true_next\": 7,\n      \"false_next\": 10\n    },\n    {\n      \"id\": 7,\n      \"type\": \"process\",\n      \"label\": \"Set length, x = dp[i - 1]\",\n      \"action\": \"ctx['length'], ctx['x'] = ctx['dp'].get(ctx['i'] - 1, (0, 0))\",\n      \"next\": 8\n    },\n    {\n      \"id\": 8,\n      \"type\": \"process\",\n      \"label\": \"Set x = -1 * x\",\n      \"action\": \"ctx['x'] = -1 * ctx['x']\",\n      \"next\": 9\n    },\n    {\n      \"id\": 9,\n      \"type\": \"decision\",\n      \"label\": \"Is x <= nums[i - 1]?\",\n      \"logic\": \"ctx['x'] <= ctx['nums'][ctx['i'] - 1]\",\n      \"true_next\": 11,\n      \"false_next\": 12\n    },\n    {\n      \"id\": 11,\n      \"type\": \"process\",\n      \"label\": \"Update dp[i] = max(dp[i], (length + 1, -1 * nums[i - 1]))\",\n      \"action\": \"ctx['dp'][ctx['i']] = max(ctx['dp'].get(ctx['i'], (0, 0)), (ctx['length'] + 1, -1 * ctx['nums'][ctx['i'] - 1]))\",\n      \"next\": 13\n    },\n    {\n      \"id\": 12,\n      \"type\": \"process\",\n      \"label\": \"Update dp[i] = max(dp[i], (length, -1 * (x + nums[i - 1])))\",\n      \"action\": \"ctx['dp'][ctx['i']] = max(ctx['dp'].get(ctx['i'], (0, 0)), (ctx['length'], -1 * (ctx['x'] + ctx['nums'][ctx['i'] - 1])))\",\n      \"next\": 13\n    },\n    {\n      \"id\": 13,\n      \"type\": \"process\",\n      \"label\": \"Calculate lb_need = pre[i] - nums[i - 1] + x\",\n      \"action\": \"ctx['lb_need'] = ctx['pre'][ctx['i']] - ctx['nums'][ctx['i'] - 1] + ctx['x']\",\n      \"next\": 14\n    },\n    {\n      \"id\": 14,\n      \"type\": \"process\",\n      \"label\": \"Find id = next index where pre[id] >= lb_need\",\n      \"action\": \"ctx['id'] = None\\nfor j in range(ctx['i'] + 1, ctx['n'] + 1):\\n    if ctx['pre'][j] >= ctx['lb_need']:\\n        ctx['id'] = j\\n        break\",\n      \"next\": 15\n    },\n    {\n      \"id\": 15,\n      \"type\": \"decision\",\n      \"label\": \"Is id <= N?\",\n      \"logic\": \"ctx['id'] is not None and ctx['id'] <= ctx['n']\",\n      \"true_next\": 16,\n      \"false_next\": 17\n    },\n    {\n      \"id\": 16,\n      \"type\": \"process\",\n      \"label\": \"Update dp[id] = max(dp[id], (length + 1, -1 * (x + pre[id] - lb_need)))\",\n      \"action\": \"ctx['dp'][ctx['id']] = max(ctx['dp'].get(ctx['id'], (0, 0)), (ctx['length'] + 1, -1 * (ctx['x'] + ctx['pre'][ctx['id']] - ctx['lb_need'])))\",\n      \"next\": 17\n    },\n    {\n      \"id\": 17,\n      \"type\": \"process\",\n      \"label\": \"Continue to next iteration\",\n      \"action\": \"ctx['i'] += 1\",\n      \"next\": 6\n    },\n    {\n      \"id\": 10,\n      \"type\": \"end\",\n      \"label\": \"Return dp[N][0] as output\",\n      \"output\": \"ctx['dp'][ctx['n']][0]\"\n    }\n  ]\n}\n```",
+ "original_code": "class Solution:\n    def findMaximumLength(self, nums: List[int]) -> int:\n        n = len(nums)\n        pre = [0]\n        pre.extend(nums)\n        dp = {}\n        dp[0] = (0, 0)\n        i = 0\n        \n        while i <= n:\n            length, x = dp.get(i - 1, (0, 0))\n            x = -x\n            \n            if x <= nums[i - 1]:\n                dp[i] = max(dp.get(i, (0, 0)), (length + 1, -nums[i - 1]))\n            else:\n                dp[i] = max(dp.get(i, (0, 0)), (length, -(x + nums[i - 1])))\n            \n            lb_need = pre[i] - nums[i - 1] + x\n            id_val = None\n            for j in range(i + 1, n + 1):\n                if pre[j] >= lb_need:\n                    id_val = j\n                    break\n            \n            if id_val is not None and id_val <= n:\n                dp[id_val] = max(dp.get(id_val, (0, 0)), (length + 1, -(x + pre[id_val] - lb_need)))\n            \n            i += 1\n        \n        return dp[n][0]",
+ "ocr_data": {
+  "nodes": [
+   {
+    "node_id": 1,
+    "shape_type": "rectangle",
+    "raw_text": "Start",
+    "position": "top"
+   },
+   {
+    "node_id": 2,
+    "shape_type": "rectangle",
+    "raw_text": "Input: nums (list of integers)",
+    "position": "top"
+   },
+   {
+    "node_id": 3,
+    "shape_type": "rectangle",
+    "raw_text": "Initialize N = length of nums",
+    "position": "middle"
+   },
+   {
+    "node_id": 4,
+    "shape_type": "rectangle",
+    "raw_text": "Initialize pre = [0]",
+    "position": "middle"
+   },
+   {
+    "node_id": 5,
+    "shape_type": "rectangle",
+    "raw_text": "Extend pre with nums",
+    "position": "middle"
+   },
+   {
+    "node_id": 6,
+    "shape_type": "rectangle",
+    "raw_text": "For i from 1 to N",
+    "position": "middle"
+   },
+   {
+    "node_id": 7,
+    "shape_type": "rectangle",
+    "raw_text": "Update pre[i] = pre[i] + pre[i - 1]",
+    "position": "middle"
+   },
+   {
+    "node_id": 8,
+    "shape_type": "rectangle",
+    "raw_text": "Initialize dp = defaultdict(lambda: (0, 0))",
+    "position": "middle"
+   },
+   {
+    "node_id": 9,
+    "shape_type": "rectangle",
+    "raw_text": "Set dp[0] = (0, 0)",
+    "position": "middle"
+   },
+   {
+    "node_id": 10,
+    "shape_type": "rectangle",
+    "raw_text": "For i from 1 to N",
+    "position": "middle"
+   },
+   {
+    "node_id": 11,
+    "shape_type": "rectangle",
+    "raw_text": "Set length, x = dp[i - 1]",
+    "position": "middle"
+   },
+   {
+    "node_id": 12,
+    "shape_type": "rectangle",
+    "raw_text": "Set x = -1 * x",
+    "position": "middle"
+   },
+   {
+    "node_id": 13,
+    "shape_type": "diamond",
+    "raw_text": "Is x <= nums[i - 1]?",
+    "position": "middle"
+   },
+   {
+    "node_id": 14,
+    "shape_type": "rectangle",
+    "raw_text": "Update dp[i] = max(dp[i], (length + 1, -1 * nums[i - 1]))",
+    "position": "middle"
+   },
+   {
+    "node_id": 15,
+    "shape_type": "rectangle",
+    "raw_text": "Update dp[i] = max(dp[i], (length, -1 * (x + nums[i - 1])))",
+    "position": "middle"
+   },
+   {
+    "node_id": 16,
+    "shape_type": "rectangle",
+    "raw_text": "Calculate lb_need = pre[i] - nums[i - 1] + x",
+    "position": "middle"
+   },
+   {
+    "node_id": 17,
+    "shape_type": "rectangle",
+    "raw_text": "Find id = next index where pre[id] >= lb_need",
+    "position": "middle"
+   },
+   {
+    "node_id": 18,
+    "shape_type": "diamond",
+    "raw_text": "Is id <= N?",
+    "position": "middle"
+   },
+   {
+    "node_id": 19,
+    "shape_type": "rectangle",
+    "raw_text": "Update dp[id] = max(dp[id], (length + 1, -1 * (x + pre[id] - lb_need)))",
+    "position": "middle"
+   },
+   {
+    "node_id": 20,
+    "shape_type": "rectangle",
+    "raw_text": "Continue to next iteration",
+    "position": "bottom"
+   },
+   {
+    "node_id": 21,
+    "shape_type": "rectangle",
+    "raw_text": "Return dp[N][0] as output",
+    "position": "bottom"
+   }
+  ],
+  "edges": [
+   {
+    "from_node": 1,
+    "to_node": 2,
+    "label": ""
+   },
+   {
+    "from_node": 2,
+    "to_node": 3,
+    "label": ""
+   },
+   {
+    "from_node": 3,
+    "to_node": 4,
+    "label": ""
+   },
+   {
+    "from_node": 4,
+    "to_node": 5,
+    "label": ""
+   },
+   {
+    "from_node": 5,
+    "to_node": 6,
+    "label": ""
+   },
+   {
+    "from_node": 6,
+    "to_node": 7,
+    "label": ""
+   },
+   {
+    "from_node": 6,
+    "to_node": 8,
+    "label": ""
+   },
+   {
+    "from_node": 8,
+    "to_node": 9,
+    "label": ""
+   },
+   {
+    "from_node": 9,
+    "to_node": 10,
+    "label": ""
+   },
+   {
+    "from_node": 10,
+    "to_node": 11,
+    "label": ""
+   },
+   {
+    "from_node": 11,
+    "to_node": 12,
+    "label": ""
+   },
+   {
+    "from_node": 12,
+    "to_node": 13,
+    "label": ""
+   },
+   {
+    "from_node": 13,
+    "to_node": 14,
+    "label": "Yes"
+   },
+   {
+    "from_node": 13,
+    "to_node": 15,
+    "label": "No"
+   },
+   {
+    "from_node": 14,
+    "to_node": 16,
+    "label": ""
+   },
+   {
+    "from_node": 15,
+    "to_node": 16,
+    "label": ""
+   },
+   {
+    "from_node": 16,
+    "to_node": 17,
+    "label": ""
+   },
+   {
+    "from_node": 17,
+    "to_node": 18,
+    "label": ""
+   },
+   {
+    "from_node": 18,
+    "to_node": 19,
+    "label": "Yes"
+   },
+   {
+    "from_node": 18,
+    "to_node": 20,
+    "label": "No"
+   },
+   {
+    "from_node": 19,
+    "to_node": 20,
+    "label": ""
+   },
+   {
+    "from_node": 20,
+    "to_node": 10,
+    "label": ""
+   },
+   {
+    "from_node": 10,
+    "to_node": 21,
+    "label": ""
+   }
+  ],
+  "other_text": [
+   "Yes",
+   "No"
+  ]
+ },
+ "test_result": {},
+ "status": "completed",
+ "fixed_ilr": null,
+ "modified_code": null,
+ "ilr_fix_log": "",
+ "bug_injected": ""
+}

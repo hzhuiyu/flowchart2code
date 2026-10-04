@@ -1,0 +1,8 @@
+CodeVision Combined Results
+Experiment: gpt-4o-mini-text
+
+Algorithm    : 76/149
+HumanEval-V  : 141/164
+MATH         : 59/125
+--------------------------------
+Total        : 276/438 = 0.6301369863013698

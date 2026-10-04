@@ -1,0 +1,102 @@
+{
+  "problem_id": "kth_permutation_sequence",
+  "nodes": [
+    {
+      "id": 1,
+      "type": "start",
+      "label": "Start",
+      "next": 2
+    },
+    {
+      "id": 2,
+      "type": "process",
+      "label": "Input: n (integer), k (integer)",
+      "action": "ctx['n'] = ctx['arg0']; ctx['k'] = ctx['arg1']; ctx['factorials'] = [1] * ctx['n']; ctx['numbers'] = list(range(1, ctx['n'] + 1)); ctx['permutation'] = []",
+      "next": 3
+    },
+    {
+      "id": 3,
+      "type": "decision",
+      "label": "For i in range(1, n):",
+      "logic": "ctx['i'] < ctx['n']",
+      "true_next": 4,
+      "false_next": 6
+    },
+    {
+      "id": 4,
+      "type": "process",
+      "label": "Update factorials[i] = factorials[i - 1] * i",
+      "action": "ctx['factorials'][ctx['i']] = ctx['factorials'][ctx['i'] - 1] * (ctx['i'] + 1)",
+      "next": 3
+    },
+    {
+      "id": 6,
+      "type": "process",
+      "label": "Decrement k by 1: k -= 1",
+      "action": "ctx['k'] -= 1",
+      "next": 7
+    },
+    {
+      "id": 7,
+      "type": "decision",
+      "label": "For i in range(n, 0, -1):",
+      "logic": "ctx['i'] > 0",
+      "true_next": 8,
+      "false_next": 14
+    },
+    {
+      "id": 8,
+      "type": "process",
+      "label": "Calculate index = k // factorials[i - 1]",
+      "action": "ctx['index'] = ctx['k'] // ctx['factorials'][ctx['i'] - 1]",
+      "next": 9
+    },
+    {
+      "id": 9,
+      "type": "process",
+      "label": "Update k = k % factorials[i - 1]",
+      "action": "ctx['k'] = ctx['k'] % ctx['factorials'][ctx['i'] - 1]",
+      "next": 10
+    },
+    {
+      "id": 10,
+      "type": "process",
+      "label": "Append numbers[index] to permutation",
+      "action": "ctx['permutation'].append(ctx['numbers'][ctx['index']])",
+      "next": 11
+    },
+    {
+      "id": 11,
+      "type": "process",
+      "label": "Remove numbers[index] from numbers",
+      "action": "ctx['numbers'].pop(ctx['index'])",
+      "next": 7
+    },
+    {
+      "id": 14,
+      "type": "process",
+      "label": "Join permutation into a string: \"\".join(map(str, permutation))",
+      "action": "ctx['result'] = ''.join(map(str, ctx['permutation']))",
+      "next": 15
+    },
+    {
+      "id": 15,
+      "type": "end",
+      "label": "Output: permutation",
+      "output": "ctx['result']"
+    }
+  ],
+  "task_id": "60. Permutation Sequence",
+  "dataset": "MATH",
+  "result": "failed: ",
+  "code": "def getPermutation(n: int, k: int) -> str:\n    factorials = [1] * n\n    numbers = list(range(1, n + 1))\n    permutation = []\n    \n    for i in range(1, n):\n        factorials[i] = factorials[i - 1] * (i + 1)\n    \n    k -= 1\n    \n    for i in range(n, 0, -1):\n        index = k // factorials[i - 1]\n        k = k % factorials[i - 1]\n        permutation.append(numbers[index])\n        numbers.pop(index)\n    \n    return ''.join(map(str, permutation))",
+  "verification": {
+    "md_verdict": "ILR Error",
+    "actual_error_source": "ilr",
+    "ilr_verdict": "incorrect",
+    "code_vs_ilr": "faithful",
+    "md_correct": "yes",
+    "note": "ILR的node4标签写factorials[i]=factorials[i-1]*i，但action实际是*(i+1)，阶乘表错成[1,2,6,24]（应为[1,1,2,6]）；且两个循环的i均未初始化也未递减/递增（node3无i+=1、node11无i-=1），字面执行直接KeyError 'i'。代码忠实按action实现并补全了循环，因此继承同一错误。",
+    "evidence": "生成代码（忠实于ILR action）：getPermutation(3,3)='132'(期望'213')、(4,9)='1342'(期望'2314')；ILR忠实执行node3即KeyError 'i'。"
+  }
+}

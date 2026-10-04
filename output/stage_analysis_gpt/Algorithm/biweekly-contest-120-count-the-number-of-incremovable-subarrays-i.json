@@ -1,0 +1,197 @@
+{
+  "task_id": "biweekly-contest-120-count-the-number-of-incremovable-subarrays-i",
+  "dataset": "Algorithm",
+  "difficulty": "Easy",
+  "title": "count-the-number-of-incremovable-subarrays-i",
+  "result": "failed: ",
+  "ilr": "{\n  \"problem_id\": \"incremovable_subarray_count\",\n  \"nodes\": [\n    {\"id\": 1, \"type\": \"start\", \"label\": \"Start\", \"next\": 2},\n    {\"id\": 2, \"type\": \"process\", \"label\": \"Input: nums (list of integers)\", \"action\": \"ctx['nums']=ctx['arg0']; ctx['ans']=0; ctx['n']=len(ctx['nums'])\", \"next\": 3},\n    {\"id\": 3, \"type\": \"decision\", \"label\": \"Loop: for i from 0 to n-1\", \"logic\": \"ctx['i'] < ctx['n']\", \"true_next\": 4, \"false_next\": 14},\n    {\"id\": 4, \"type\": \"decision\", \"label\": \"Loop: for j from i to n-1\", \"logic\": \"ctx['j'] < ctx['n']\", \"true_next\": 5, \"false_next\": 14},\n    {\"id\": 5, \"type\": \"process\", \"label\": \"Initialize ok = True, lst = -1\", \"action\": \"ctx['ok']=True; ctx['lst']=-1\", \"next\": 6},\n    {\"id\": 6, \"type\": \"decision\", \"label\": \"Loop: for k from 0 to n-1\", \"logic\": \"ctx['k'] < ctx['n']\", \"true_next\": 7, \"false_next\": 8},\n    {\"id\": 7, \"type\": \"decision\", \"label\": \"End Loop: Is ok True?\", \"logic\": \"ctx['ok']\", \"true_next\": 6, \"false_next\": 9},\n    {\"id\": 8, \"type\": \"decision\", \"label\": \"Is k between i and j?\", \"logic\": \"ctx['i'] <= ctx['k'] < ctx['j']\", \"true_next\": 10, \"false_next\": 6},\n    {\"id\": 9, \"type\": \"decision\", \"label\": \"Is lst < nums[k]?\", \"logic\": \"ctx['lst'] < ctx['nums'][ctx['k']]\", \"true_next\": 11, \"false_next\": 13},\n    {\"id\": 10, \"type\": \"process\", \"label\": \"Increment ans by 1\", \"action\": \"ctx['ans'] += 1\", \"next\": 12},\n    {\"id\": 11, \"type\": \"process\", \"label\": \"Update lst = nums[k]\", \"action\": \"ctx['lst'] = ctx['nums'][ctx['k']]\", \"next\": 6},\n    {\"id\": 12, \"type\": \"process\", \"label\": \"Set ok = False\", \"action\": \"ctx['ok'] = False\", \"next\": 6},\n    {\"id\": 13, \"type\": \"end\", \"label\": \"Output: ans\", \"output\": \"ctx['ans']\"}\n  ]\n}",
+  "code": "from typing import List\n\nclass Solution:\n    def incremovableSubarrayCount(self, nums: List[int]) -> int:\n        ans = 0\n        n = len(nums)\n        \n        for i in range(n):\n            for j in range(i, n):\n                ok = True\n                lst = -1\n                \n                for k in range(n):\n                    if ok:\n                        if i <= k < j:\n                            ans += 1\n                        elif lst < nums[k]:\n                            lst = nums[k]\n                        else:\n                            ok = False\n        \n        return ans",
+  "prompt": "\"\"\"\nYou are given a 0-indexed array of positive integers nums.\nA subarray of nums is called incremovable if nums becomes strictly increasing on removing the subarray. For example, the subarray [3, 4] is an incremovable subarray of [5, 3, 4, 6, 7] because removing this subarray changes the array [5, 3, 4, 6, 7] to [5, 6, 7] which is strictly increasing.\nReturn the total number of incremovable subarrays of nums.\nNote that an empty array is considered strictly increasing.\nA subarray is a contiguous non-empty sequence of elements within an array.\n\nExample 1:\n\nInput: nums = [1,2,3,4]\nOutput: 10\nExplanation: The 10 incremovable subarrays are: [1], [2], [3], [4], [1,2], [2,3], [3,4], [1,2,3], [2,3,4], and [1,2,3,4], because on removing any one of these subarrays nums becomes strictly increasing. Note that you cannot select an empty subarray.\n\nExample 2:\n\nInput: nums = [6,5,7,8]\nOutput: 7\nExplanation: The 7 incremovable subarrays are: [5], [6], [5,7], [6,5], [5,7,8], [6,5,7] and [6,5,7,8].\nIt can be shown that there are only 7 incremovable subarrays in nums.\n\nExample 3:\n\nInput: nums = [8,7,6,6]\nOutput: 3\nExplanation: The 3 incremovable subarrays are: [8,7,6], [7,6,6], and [8,7,6,6]. Note that [8,7] is not an incremovable subarray because after removing [8,7] nums becomes [6,6], which is sorted in ascending order but not strictly increasing.\n\n\nConstraints:\n\n1 <= nums.length <= 50\n1 <= nums[i] <= 50\n\"\"\"\nclass Solution:\n    def incremovableSubarrayCount(self, nums: List[int]) -> int:\n        ",
+  "test": "\nmy_solution = Solution()\n\ntest_input = { \"nums\": [1,2,3,4] }\nassert my_solution.incremovableSubarrayCount(**test_input) == 10\n\ntest_input = { \"nums\": [6,5,7,8] }\nassert my_solution.incremovableSubarrayCount(**test_input) == 7\n\ntest_input = { \"nums\": [8,7,6,6] }\nassert my_solution.incremovableSubarrayCount(**test_input) == 3\n\ntest_input = { \"nums\": [1] }\nassert my_solution.incremovableSubarrayCount(**test_input) == 1\n\ntest_input = { \"nums\": [2] }\nassert my_solution.incremovableSubarrayCount(**test_input) == 1\n\ntest_input = { \"nums\": [3] }\nassert my_solution.incremovableSubarrayCount(**test_input) == 1\n\ntest_input = { \"nums\": [4] }\nassert my_solution.incremovableSubarrayCount(**test_input) == 1\n\ntest_input = { \"nums\": [5] }\nassert my_solution.incremovableSubarrayCount(**test_input) == 1\n\ntest_input = { \"nums\": [6] }\nassert my_solution.incremovableSubarrayCount(**test_input) == 1\n\ntest_input = { \"nums\": [7] }\nassert my_solution.incremovableSubarrayCount(**test_input) == 1\n\ntest_input = { \"nums\": [8] }\nassert my_solution.incremovableSubarrayCount(**test_input) == 1\n\ntest_input = { \"nums\": [9] }\nassert my_solution.incremovableSubarrayCount(**test_input) == 1\n\ntest_input = { \"nums\": [10] }\nassert my_solution.incremovableSubarrayCount(**test_input) == 1\n\ntest_input = { \"nums\": [1,2] }\nassert my_solution.incremovableSubarrayCount(**test_input) == 3\n\ntest_input = { \"nums\": [1,4] }\nassert my_solution.incremovableSubarrayCount(**test_input) == 3\n\ntest_input = { \"nums\": [1,8] }\nassert my_solution.incremovableSubarrayCount(**test_input) == 3\n\ntest_input = { \"nums\": [2,10] }\nassert my_solution.incremovableSubarrayCount(**test_input) == 3\n\ntest_input = { \"nums\": [3,4] }\nassert my_solution.incremovableSubarrayCount(**test_input) == 3\n\ntest_input = { \"nums\": [3,8] }\nassert my_solution.incremovableSubarrayCount(**test_input) == 3\n\ntest_input = { \"nums\": [3,10] }\nassert my_solution.incremovableSubarrayCount(**test_input) == 3\n\ntest_input = { \"nums\": [4,2] }\nassert my_solution.incremovableSubarrayCount(**test_input) == 3\n\ntest_input = { \"nums\": [4,3] }\nassert my_solution.incremovableSubarrayCount(**test_input) == 3\n\ntest_input = { \"nums\": [4,5] }\nassert my_solution.incremovableSubarrayCount(**test_input) == 3\n\ntest_input = { \"nums\": [5,1] }\nassert my_solution.incremovableSubarrayCount(**test_input) == 3\n\ntest_input = { \"nums\": [5,4] }\nassert my_solution.incremovableSubarrayCount(**test_input) == 3\n\ntest_input = { \"nums\": [5,6] }\nassert my_solution.incremovableSubarrayCount(**test_input) == 3\n\ntest_input = { \"nums\": [5,7] }\nassert my_solution.incremovableSubarrayCount(**test_input) == 3\n\ntest_input = { \"nums\": [5,9] }\nassert my_solution.incremovableSubarrayCount(**test_input) == 3\n\ntest_input = { \"nums\": [6,4] }\nassert my_solution.incremovableSubarrayCount(**test_input) == 3\n\ntest_input = { \"nums\": [6,5] }\nassert my_solution.incremovableSubarrayCount(**test_input) == 3\n\ntest_input = { \"nums\": [6,9] }\nassert my_solution.incremovableSubarrayCount(**test_input) == 3\n\ntest_input = { \"nums\": [9,3] }\nassert my_solution.incremovableSubarrayCount(**test_input) == 3\n\ntest_input = { \"nums\": [9,4] }\nassert my_solution.incremovableSubarrayCount(**test_input) == 3\n\ntest_input = { \"nums\": [9,7] }\nassert my_solution.incremovableSubarrayCount(**test_input) == 3\n\ntest_input = { \"nums\": [9,8] }\nassert my_solution.incremovableSubarrayCount(**test_input) == 3\n\ntest_input = { \"nums\": [10,5] }\nassert my_solution.incremovableSubarrayCount(**test_input) == 3\n\ntest_input = { \"nums\": [10,10] }\nassert my_solution.incremovableSubarrayCount(**test_input) == 3\n\ntest_input = { \"nums\": [1,2,3] }\nassert my_solution.incremovableSubarrayCount(**test_input) == 6\n\ntest_input = { \"nums\": [1,2,6] }\nassert my_solution.incremovableSubarrayCount(**test_input) == 6\n\ntest_input = { \"nums\": [2,1,6] }\nassert my_solution.incremovableSubarrayCount(**test_input) == 5\n\ntest_input = { \"nums\": [2,4,5] }\nassert my_solution.incremovableSubarrayCount(**test_input) == 6\n\ntest_input = { \"nums\": [2,6,8] }\nassert my_solution.incremovableSubarrayCount(**test_input) == 6\n\ntest_input = { \"nums\": [2,6,9] }\nassert my_solution.incremovableSubarrayCount(**test_input) == 6\n\ntest_input = { \"nums\": [2,10,9] }\nassert my_solution.incremovableSubarrayCount(**test_input) == 5\n\ntest_input = { \"nums\": [3,1,9] }\nassert my_solution.incremovableSubarrayCount(**test_input) == 5\n\ntest_input = { \"nums\": [3,5,9] }\nassert my_solution.incremovableSubarrayCount(**test_input) == 6\n\ntest_input = { \"nums\": [3,7,2] }\nassert my_solution.incremovableSubarrayCount(**test_input) == 4\n\ntest_input = { \"nums\": [3,8,8] }\nassert my_solution.incremovableSubarrayCount(**test_input) == 5\n\ntest_input = { \"nums\": [3,10,10] }\nassert my_solution.incremovableSubarrayCount(**test_input) == 5\n\ntest_input = { \"nums\": [4,5,2] }\nassert my_solution.incremovableSubarrayCount(**test_input) == 4\n\ntest_input = { \"nums\": [5,8,4] }\nassert my_solution.incremovableSubarrayCount(**test_input) == 4\n\ntest_input = { \"nums\": [5,9,3] }\nassert my_solution.incremovableSubarrayCount(**test_input) == 4\n\ntest_input = { \"nums\": [5,9,7] }\nassert my_solution.incremovableSubarrayCount(**test_input) == 5\n\ntest_input = { \"nums\": [6,7,4] }\nassert my_solution.incremovableSubarrayCount(**test_input) == 4\n\ntest_input = { \"nums\": [8,7,4] }\nassert my_solution.incremovableSubarrayCount(**test_input) == 3\n\ntest_input = { \"nums\": [8,7,5] }\nassert my_solution.incremovableSubarrayCount(**test_input) == 3\n\ntest_input = { \"nums\": [8,9,5] }\nassert my_solution.incremovableSubarrayCount(**test_input) == 4\n\ntest_input = { \"nums\": [9,2,5] }\nassert my_solution.incremovableSubarrayCount(**test_input) == 4\n\ntest_input = { \"nums\": [9,5,2] }\nassert my_solution.incremovableSubarrayCount(**test_input) == 3\n\ntest_input = { \"nums\": [9,6,9] }\nassert my_solution.incremovableSubarrayCount(**test_input) == 4\n\ntest_input = { \"nums\": [9,9,4] }\nassert my_solution.incremovableSubarrayCount(**test_input) == 3\n\ntest_input = { \"nums\": [10,7,4] }\nassert my_solution.incremovableSubarrayCount(**test_input) == 3\n\ntest_input = { \"nums\": [10,10,6] }\nassert my_solution.incremovableSubarrayCount(**test_input) == 3\n\ntest_input = { \"nums\": [2,1,1,4] }\nassert my_solution.incremovableSubarrayCount(**test_input) == 5\n\ntest_input = { \"nums\": [2,5,7,9] }\nassert my_solution.incremovableSubarrayCount(**test_input) == 10\n\ntest_input = { \"nums\": [3,5,3,5] }\nassert my_solution.incremovableSubarrayCount(**test_input) == 6\n\ntest_input = { \"nums\": [3,7,10,6] }\nassert my_solution.incremovableSubarrayCount(**test_input) == 6\n\ntest_input = { \"nums\": [3,8,3,8] }\nassert my_solution.incremovableSubarrayCount(**test_input) == 6\n\ntest_input = { \"nums\": [4,1,3,7] }\nassert my_solution.incremovableSubarrayCount(**test_input) == 6\n\ntest_input = { \"nums\": [4,3,5,1] }\nassert my_solution.incremovableSubarrayCount(**test_input) == 3\n\ntest_input = { \"nums\": [4,3,7,5] }\nassert my_solution.incremovableSubarrayCount(**test_input) == 4\n\ntest_input = { \"nums\": [4,8,7,6] }\nassert my_solution.incremovableSubarrayCount(**test_input) == 5\n\ntest_input = { \"nums\": [4,9,10,6] }\nassert my_solution.incremovableSubarrayCount(**test_input) == 6\n\ntest_input = { \"nums\": [5,4,3,8] }\nassert my_solution.incremovableSubarrayCount(**test_input) == 5\n\ntest_input = { \"nums\": [5,5,9,5] }\nassert my_solution.incremovableSubarrayCount(**test_input) == 3\n\ntest_input = { \"nums\": [5,10,10,9] }\nassert my_solution.incremovableSubarrayCount(**test_input) == 5\n\ntest_input = { \"nums\": [6,4,4,9] }\nassert my_solution.incremovableSubarrayCount(**test_input) == 5\n\ntest_input = { \"nums\": [6,5,2,10] }\nassert my_solution.incremovableSubarrayCount(**test_input) == 5\n\ntest_input = { \"nums\": [7,3,2,3] }\nassert my_solution.incremovableSubarrayCount(**test_input) == 4\n\ntest_input = { \"nums\": [7,5,1,10] }\nassert my_solution.incremovableSubarrayCount(**test_input) == 5\n\ntest_input = { \"nums\": [7,9,7,2] }\nassert my_solution.incremovableSubarrayCount(**test_input) == 4\n\ntest_input = { \"nums\": [7,9,8,8] }\nassert my_solution.incremovableSubarrayCount(**test_input) == 5\n\ntest_input = { \"nums\": [7,10,4,3] }\nassert my_solution.incremovableSubarrayCount(**test_input) == 4\n\ntest_input = { \"nums\": [8,8,1,7] }\nassert my_solution.incremovableSubarrayCount(**test_input) == 4\n\ntest_input = { \"nums\": [9,2,8,7] }\nassert my_solution.incremovableSubarrayCount(**test_input) == 3\n\ntest_input = { \"nums\": [10,5,9,5] }\nassert my_solution.incremovableSubarrayCount(**test_input) == 3\n\ntest_input = { \"nums\": [10,7,2,8] }\nassert my_solution.incremovableSubarrayCount(**test_input) == 4\n\ntest_input = { \"nums\": [10,9,1,3] }\nassert my_solution.incremovableSubarrayCount(**test_input) == 4\n\ntest_input = { \"nums\": [1,1,4,4,7] }\nassert my_solution.incremovableSubarrayCount(**test_input) == 6\n\ntest_input = { \"nums\": [1,2,3,4,5] }\nassert my_solution.incremovableSubarrayCount(**test_input) == 15\n\ntest_input = { \"nums\": [1,2,8,9,2] }\nassert my_solution.incremovableSubarrayCount(**test_input) == 7\n\ntest_input = { \"nums\": [1,7,4,9,2] }\nassert my_solution.incremovableSubarrayCount(**test_input) == 5\n\ntest_input = { \"nums\": [2,2,4,6,3] }\nassert my_solution.incremovableSubarrayCount(**test_input) == 4\n\ntest_input = { \"nums\": [2,7,1,3,9] }\nassert my_solution.incremovableSubarrayCount(**test_input) == 9\n\ntest_input = { \"nums\": [3,1,9,6,5] }\nassert my_solution.incremovableSubarrayCount(**test_input) == 4\n\ntest_input = { \"nums\": [3,3,3,6,1] }\nassert my_solution.incremovableSubarrayCount(**test_input) == 3\n\ntest_input = { \"nums\": [3,7,1,8,1] }\nassert my_solution.incremovableSubarrayCount(**test_input) == 4\n\ntest_input = { \"nums\": [4,1,6,10,2] }\nassert my_solution.incremovableSubarrayCount(**test_input) == 3\n\ntest_input = { \"nums\": [5,4,8,4,2] }\nassert my_solution.incremovableSubarrayCount(**test_input) == 3\n\ntest_input = { \"nums\": [6,1,1,8,10] }\nassert my_solution.incremovableSubarrayCount(**test_input) == 7",
+  "ocr_data": {
+    "nodes": [
+      {
+        "node_id": 1,
+        "shape_type": "rectangle",
+        "raw_text": "Start",
+        "position": "top"
+      },
+      {
+        "node_id": 2,
+        "shape_type": "rectangle",
+        "raw_text": "Input: nums (list of integers)",
+        "position": "middle"
+      },
+      {
+        "node_id": 3,
+        "shape_type": "rectangle",
+        "raw_text": "Initialize ans = 0, n = length of nums",
+        "position": "middle"
+      },
+      {
+        "node_id": 4,
+        "shape_type": "diamond",
+        "raw_text": "Loop: for i from 0 to n-1",
+        "position": "middle"
+      },
+      {
+        "node_id": 5,
+        "shape_type": "diamond",
+        "raw_text": "Loop: for j from i to n-1",
+        "position": "middle"
+      },
+      {
+        "node_id": 6,
+        "shape_type": "rectangle",
+        "raw_text": "Initialize ok = True, lst = -1",
+        "position": "middle"
+      },
+      {
+        "node_id": 7,
+        "shape_type": "diamond",
+        "raw_text": "Loop: for k from 0 to n-1",
+        "position": "middle"
+      },
+      {
+        "node_id": 8,
+        "shape_type": "diamond",
+        "raw_text": "End Loop: Is ok True?",
+        "position": "middle"
+      },
+      {
+        "node_id": 9,
+        "shape_type": "diamond",
+        "raw_text": "Is k between i and j?",
+        "position": "middle"
+      },
+      {
+        "node_id": 10,
+        "shape_type": "diamond",
+        "raw_text": "Is lst < nums[k]?",
+        "position": "middle"
+      },
+      {
+        "node_id": 11,
+        "shape_type": "rectangle",
+        "raw_text": "Increment ans by 1",
+        "position": "middle"
+      },
+      {
+        "node_id": 12,
+        "shape_type": "rectangle",
+        "raw_text": "Update lst = nums[k]",
+        "position": "middle"
+      },
+      {
+        "node_id": 13,
+        "shape_type": "rectangle",
+        "raw_text": "Set ok = False",
+        "position": "middle"
+      },
+      {
+        "node_id": 14,
+        "shape_type": "rectangle",
+        "raw_text": "Output: ans",
+        "position": "bottom"
+      }
+    ],
+    "edges": [
+      {
+        "from_node": 1,
+        "to_node": 2,
+        "label": ""
+      },
+      {
+        "from_node": 2,
+        "to_node": 3,
+        "label": ""
+      },
+      {
+        "from_node": 3,
+        "to_node": 4,
+        "label": ""
+      },
+      {
+        "from_node": 3,
+        "to_node": 14,
+        "label": ""
+      },
+      {
+        "from_node": 4,
+        "to_node": 5,
+        "label": ""
+      },
+      {
+        "from_node": 5,
+        "to_node": 6,
+        "label": ""
+      },
+      {
+        "from_node": 6,
+        "to_node": 7,
+        "label": ""
+      },
+      {
+        "from_node": 7,
+        "to_node": 8,
+        "label": ""
+      },
+      {
+        "from_node": 7,
+        "to_node": 9,
+        "label": ""
+      },
+      {
+        "from_node": 9,
+        "to_node": 10,
+        "label": ""
+      },
+      {
+        "from_node": 10,
+        "to_node": 11,
+        "label": "Yes"
+      },
+      {
+        "from_node": 10,
+        "to_node": 13,
+        "label": "No"
+      },
+      {
+        "from_node": 11,
+        "to_node": 12,
+        "label": ""
+      },
+      {
+        "from_node": 12,
+        "to_node": 10,
+        "label": ""
+      },
+      {
+        "from_node": 13,
+        "to_node": 8,
+        "label": ""
+      },
+      {
+        "from_node": 8,
+        "to_node": 7,
+        "label": "Yes"
+      },
+      {
+        "from_node": 8,
+        "to_node": 5,
+        "label": "No"
+      }
+    ],
+    "other_text": []
+  },
+  "analysis": {
+    "ilr_verdict": "incorrect",
+    "ilr_issues": "ILR 连线与 OCR 边大面积冲突：节点7(Is ok True?) 的 true 分支指回节点6 重新执行 for k（ok 初始为 True，忠实执行立即死循环）；节点9(Is lst<nums[k]?) 的 false 分支直接接到输出节点13（应在循环后统计）；节点10(ans+=1) 后被接到节点12(ok=False)，把计数与失败标志耦合；节点3/4 的 false_next 指向不存在的节点14；j 循环退出直接输出。整个图无法按字面执行出正确结果。另流程图本身（OCR 边）也已残缺：'Increment ans by 1' 被放在 k 循环内且 8-Yes 回到 for 循环头、多个循环缺退出边。",
+    "code_vs_ilr": "deviates",
+    "code_issues": "代码没有按 ILR 图执行，而是重组成干净的三重循环，但语义自立门户且错误：k 落在被删窗口 [i,j) 内时逐个 ans+=1（把窗口长度当答案累加），窗口外元素只做 lst 比较置 ok，循环后没有 'ok 则 ans+=1' 的判定；正确算法应跳过窗口内元素、检查剩余序列严格递增后每个 (i,j) 只计 1 次。",
+    "error_source": "both",
+    "ocr_contribution": "no",
+    "root_cause": "ILR 把本已残缺的流程图进一步接乱（死循环、输出挂错分支、next 悬空），代码又抛开 ILR 自行重组出错误的计数语义，两层独立出错：ILR 忠实执行会死循环，代码对示例2 输出 9（期望 7）。",
+    "evidence": "实际运行：示例1 [1,2,3,4] 碰巧输出 10 通过，示例2 [6,5,7,8] 代码输出 9（期望 7）断言失败；其中 (i,j)=(1,3)（删 [5,7] 剩 [6,8] 严格递增应计 1）代码却累加窗口长度 2。ILR 按边执行在首个 (i,j) 即因 7-Yes→6 死循环。"
+  }
+}

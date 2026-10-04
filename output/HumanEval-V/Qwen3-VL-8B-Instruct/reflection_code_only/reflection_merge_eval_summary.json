@@ -1,0 +1,40 @@
+{
+  "samples_file": "output/HumanEval-V/Qwen-Qwen3-VL-8B-Instruct/samples.jsonl",
+  "reflection_dir": "output/HumanEval-V/Qwen-Qwen3-VL-8B-Instruct/reflection_code_only",
+  "output_file": "output/HumanEval-V/Qwen-Qwen3-VL-8B-Instruct/reflection_code_only/samples_reflection_merged.jsonl",
+  "merged_results_file": "output/HumanEval-V/Qwen-Qwen3-VL-8B-Instruct/reflection_code_only/samples_reflection_merged.jsonl_results.jsonl",
+  "results_txt": "output/HumanEval-V/Qwen-Qwen3-VL-8B-Instruct/reflection_code_only/results.txt",
+  "problem_file": "data/HumanEval-V/HumanEval.jsonl",
+  "merge_summary": {
+    "total_rows": 164,
+    "replaced_rows": 26,
+    "replaced_by_first_passed": 14,
+    "replaced_by_last_failed": 12,
+    "missing_generated_code": 0,
+    "selection_stats": {
+      "keep_original": 138,
+      "first_passed": 14,
+      "iter_3_failed": 12
+    }
+  },
+  "eval_result": {
+    "pass@1": 0.926829268292683
+  },
+  "difficulty_summary": {
+    "Easy": {
+      "passed": 0.0,
+      "total": 0.0,
+      "rate": 0.0
+    },
+    "Medium": {
+      "passed": 0.0,
+      "total": 0.0,
+      "rate": 0.0
+    },
+    "Hard": {
+      "passed": 0.0,
+      "total": 0.0,
+      "rate": 0.0
+    }
+  }
+}

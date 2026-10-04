@@ -1,0 +1,40 @@
+{
+  "samples_file": "output/HumanEval-V/gpt-4o-mini-gpt-4o-mini/samples.jsonl",
+  "reflection_dir": "output/HumanEval-V/gpt-4o-mini-gpt-4o-mini/reflection",
+  "output_file": "output/HumanEval-V/gpt-4o-mini-gpt-4o-mini/reflection/samples_reflection_merged.jsonl",
+  "merged_results_file": "output/HumanEval-V/gpt-4o-mini-gpt-4o-mini/reflection/samples_reflection_merged.jsonl_results.jsonl",
+  "results_txt": "output/HumanEval-V/gpt-4o-mini-gpt-4o-mini/reflection/results.txt",
+  "problem_file": "data/HumanEval-V/HumanEval.jsonl",
+  "merge_summary": {
+    "total_rows": 164,
+    "replaced_rows": 21,
+    "replaced_by_first_passed": 15,
+    "replaced_by_last_failed": 6,
+    "missing_generated_code": 0,
+    "selection_stats": {
+      "keep_original": 143,
+      "first_passed": 15,
+      "iter_3_failed": 6
+    }
+  },
+  "eval_result": {
+    "pass@1": 0.9634146341463414
+  },
+  "difficulty_summary": {
+    "Easy": {
+      "passed": 0.0,
+      "total": 0.0,
+      "rate": 0.0
+    },
+    "Medium": {
+      "passed": 0.0,
+      "total": 0.0,
+      "rate": 0.0
+    },
+    "Hard": {
+      "passed": 0.0,
+      "total": 0.0,
+      "rate": 0.0
+    }
+  }
+}

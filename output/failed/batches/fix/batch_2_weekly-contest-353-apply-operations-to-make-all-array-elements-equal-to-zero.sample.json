@@ -1,0 +1,2862 @@
+{
+ "task_id": "weekly-contest-353-apply-operations-to-make-all-array-elements-equal-to-zero",
+ "dataset": "Algorithm",
+ "title": "apply-operations-to-make-all-array-elements-equal-to-zero",
+ "difficulty": "Medium",
+ "prompt": "\"\"\"\nYou are given a 0-indexed integer array nums and a positive integer k.\n\nYou can apply the following operation on the array any number of times:\n\n * Choose any subarray of size k from the array and decrease all its elements by 1.\n\nReturn true if you can make all the array elements equal to 0, or false otherwise.\n\nA subarray is a contiguous non-empty part of an array.\n\nExample 1:\n\nInput: nums = [2,2,3,1,1,0], k = 3\nOutput: true\nExplanation: We can do the following operations:\n- Choose the subarray [2,2,3]. The resulting array will be nums = [1,1,2,1,1,0].\n- Choose the subarray [2,1,1]. The resulting array will be nums = [1,1,1,0,0,0].\n- Choose the subarray [1,1,1]. The resulting array will be nums = [0,0,0,0,0,0].\n\nExample 2:\n\nInput: nums = [1,3,1,1], k = 2\nOutput: false\nExplanation: It is not possible to make all the array elements equal to 0.\n\n\nConstraints:\n\n * 1 <= k <= nums.length <= 105\n * 0 <= nums[i] <= 106\n\"\"\"\nclass Solution:\n    def checkArray(self, nums: List[int], k: int) -> bool:\n        ",
+ "starter_code": "class Solution:\n    def checkArray(self, nums: List[int], k: int) -> bool:\n        ",
+ "entry_point": "",
+ "test": "\nmy_solution = Solution()\n\ntest_input = { \"nums\": [1,3,1,1], \"k\": 2 }\nassert my_solution.checkArray(**test_input) == False\n\ntest_input = { \"nums\": [2,2,3,1,1,0], \"k\": 3 }\nassert my_solution.checkArray(**test_input) == True\n\ntest_input = { \"nums\": [24,24,14,37,31,88,94,38,94,0,100,100,4,46,5,50,0,33,22,25,0], \"k\": 10 }\nassert my_solution.checkArray(**test_input) == False\n\ntest_input = { \"nums\": [60,72,87,89,63,52,64,62,31,37,57,83,98,94,92,77,94,91,87,100,91,91,50,26], \"k\": 4 }\nassert my_solution.checkArray(**test_input) == True\n\ntest_input = { \"nums\": [22,4,1,25,68,30,97,99,100,22,20,39,85,68,3,1,1,74], \"k\": 4 }\nassert my_solution.checkArray(**test_input) == False\n\ntest_input = { \"nums\": [63,40,30,0,72,53], \"k\": 1 }\nassert my_solution.checkArray(**test_input) == True\n\ntest_input = { \"nums\": [27,99,7,1,94,63,84,46,76,35,97,77,19,72,3], \"k\": 2 }\nassert my_solution.checkArray(**test_input) == False\n\ntest_input = { \"nums\": [60,78,96,97,97,97,49,7,97,97,97,99,97,97,97,97,85,97,97,97,37,5,1], \"k\": 20 }\nassert my_solution.checkArray(**test_input) == False\n\ntest_input = { \"nums\": [34,34,99,93,93,26,99,100,94,94,82,86,100,100,87,100,100,100,100,100,63,100,100,66,17,10,8,7,3,1], \"k\": 23 }\nassert my_solution.checkArray(**test_input) == False\n\ntest_input = { \"nums\": [67,98,97,99,98,97,97,96,99,99,99,42,68,18,99,44,95,79,1,16,49,1,2,2,0], \"k\": 16 }\nassert my_solution.checkArray(**test_input) == False\n\ntest_input = { \"nums\": [59,60,99,99,99,99,99,99,99,40,39,0], \"k\": 9 }\nassert my_solution.checkArray(**test_input) == True\n\ntest_input = { \"nums\": [12,87,91,18], \"k\": 3 }\nassert my_solution.checkArray(**test_input) == False\n\ntest_input = { \"nums\": [0,0,51,67,80,98,88,75,89,83,100,70,77,82,57,100,80,69,19,17], \"k\": 3 }\nassert my_solution.checkArray(**test_input) == True\n\ntest_input = { \"nums\": [22], \"k\": 1 }\nassert my_solution.checkArray(**test_input) == True\n\ntest_input = { \"nums\": [52,92,51,24,23,79,100,94,78,96,38,14,72,27,99,94,32,67,43,31,88,8], \"k\": 4 }\nassert my_solution.checkArray(**test_input) == False\n\ntest_input = { \"nums\": [8,51,51,51,51,51,51,51,51,51,51,51,51,51,51,51,51,51,51,51,51,51,51,51,51,43,0], \"k\": 25 }\nassert my_solution.checkArray(**test_input) == True\n\ntest_input = { \"nums\": [0,0,39,84,86,94,55,10,8,0], \"k\": 4 }\nassert my_solution.checkArray(**test_input) == True\n\ntest_input = { \"nums\": [12,79,95,95,95,95,95,95,95,95,95,95,95,95,95,95,95,95,95,95,95,95,95,95,83,16,0], \"k\": 24 }\nassert my_solution.checkArray(**test_input) == True\n\ntest_input = { \"nums\": [15,11,99,86,58,23,82,100,100,80,58,58,84,57,0,25,6], \"k\": 3 }\nassert my_solution.checkArray(**test_input) == False\n\ntest_input = { \"nums\": [99,0,82,66,3,25,92,41,3,0,46], \"k\": 7 }\nassert my_solution.checkArray(**test_input) == False\n\ntest_input = { \"nums\": [18,52,56,96,98,82,76,87,2,61,88,100], \"k\": 2 }\nassert my_solution.checkArray(**test_input) == False\n\ntest_input = { \"nums\": [0,6,100,74,4,50,100,92,18,70,15,88,0,24], \"k\": 9 }\nassert my_solution.checkArray(**test_input) == False\n\ntest_input = { \"nums\": [0,0,33,72,86,53,14], \"k\": 3 }\nassert my_solution.checkArray(**test_input) == True\n\ntest_input = { \"nums\": [67,0,68,97,94], \"k\": 3 }\nassert my_solution.checkArray(**test_input) == False\n\ntest_input = { \"nums\": [0,0,8,64,89,89,89,89,89,89,89,89,89,89,89,89,89,89,89,89,89,89,89,89,89,89,89,81,25], \"k\": 25 }\nassert my_solution.checkArray(**test_input) == True\n\ntest_input = { \"nums\": [84,0,68,95,95,0,25,0,7,71,4,68,23,97,80,0], \"k\": 1 }\nassert my_solution.checkArray(**test_input) == True\n\ntest_input = { \"nums\": [95,92,99,99,2,100,100,100,100,100,100,100,8,57,65,69,69,100,100,100,100,100,100,100,100,0,79,72,32], \"k\": 12 }\nassert my_solution.checkArray(**test_input) == False\n\ntest_input = { \"nums\": [7,33,97,98,100,100,74,98,95,13,39,31,82,51,28,68,37,59,21,5,66,77,89,6,0], \"k\": 6 }\nassert my_solution.checkArray(**test_input) == False\n\ntest_input = { \"nums\": [48,48,48,48,48], \"k\": 5 }\nassert my_solution.checkArray(**test_input) == True\n\ntest_input = { \"nums\": [42,60,56,99,72,2,100,51,65,14,13,51,1,55,56,61,99,49,96,2], \"k\": 3 }\nassert my_solution.checkArray(**test_input) == False\n\ntest_input = { \"nums\": [8,82,98,99,66,39,71,100,81,85,100,19,96,0,2,85,40,0,19,0], \"k\": 11 }\nassert my_solution.checkArray(**test_input) == False\n\ntest_input = { \"nums\": [92,96,96,96,97,99,99,99,99,99,99,99,99,22,18,18,18,17,15,15,15,15,15,15,15,15], \"k\": 13 }\nassert my_solution.checkArray(**test_input) == True\n\ntest_input = { \"nums\": [89,8,8,8,8,8,8,8,8,8,8,8], \"k\": 12 }\nassert my_solution.checkArray(**test_input) == False\n\ntest_input = { \"nums\": [4,19,0,74,0,26,94,25,99,35,0], \"k\": 10 }\nassert my_solution.checkArray(**test_input) == False\n\ntest_input = { \"nums\": [79,4,27,35,16,27,85,92,75,99,7,98,86,92,33,8,96,44,21,52,34], \"k\": 4 }\nassert my_solution.checkArray(**test_input) == False\n\ntest_input = { \"nums\": [75,18,0,81,18,16,51,0], \"k\": 1 }\nassert my_solution.checkArray(**test_input) == True\n\ntest_input = { \"nums\": [74,74,74,74,74,74,74,74,74], \"k\": 9 }\nassert my_solution.checkArray(**test_input) == True\n\ntest_input = { \"nums\": [5,5,5,9,37,81,95,95,95,98,98,99,100,100,97,99,100,96,68,24,10,10,10,7,7,6,5,5,3,1], \"k\": 14 }\nassert my_solution.checkArray(**test_input) == True\n\ntest_input = { \"nums\": [81,100,99,99,68,66,56,100,74,63,2,84,23,67,93,92,56,90,18,57,100,33,88,26,100,72,93,57,28,17], \"k\": 4 }\nassert my_solution.checkArray(**test_input) == False\n\ntest_input = { \"nums\": [62,76,96,12,0,20,63,29,96,97,8,18,56], \"k\": 1 }\nassert my_solution.checkArray(**test_input) == True\n\ntest_input = { \"nums\": [31,60,97,71,53,46,63,50,91,82,40,79,96,100,55,55,57,39,50,98,72,37,27,55], \"k\": 3 }\nassert my_solution.checkArray(**test_input) == False\n\ntest_input = { \"nums\": [100,65,78,59,17,17], \"k\": 1 }\nassert my_solution.checkArray(**test_input) == True\n\ntest_input = { \"nums\": [57,10,53,20,40,42,64,94,82,67,100,3,22,67,95,28,61,74,67,99,100,46,67,67,76,31,99,26,85], \"k\": 24 }\nassert my_solution.checkArray(**test_input) == False\n\ntest_input = { \"nums\": [34,76,66,48,13,89,22,24,70,17,17,42,100,2,96,8], \"k\": 3 }\nassert my_solution.checkArray(**test_input) == False\n\ntest_input = { \"nums\": [92,94,2,6,6], \"k\": 2 }\nassert my_solution.checkArray(**test_input) == True\n\ntest_input = { \"nums\": [100,17,95], \"k\": 3 }\nassert my_solution.checkArray(**test_input) == False\n\ntest_input = { \"nums\": [20,27,75,96,97,84,90,77,65,64,57,44,9,0], \"k\": 5 }\nassert my_solution.checkArray(**test_input) == True\n\ntest_input = { \"nums\": [41,39,98,99,100,100,100,100,100,100,100,100,100,100,100,37,5,2,1,0,0,92,0,0,0], \"k\": 15 }\nassert my_solution.checkArray(**test_input) == False\n\ntest_input = { \"nums\": [45,90,90,99,99,99,99,99,54,9,9,0], \"k\": 8 }\nassert my_solution.checkArray(**test_input) == True\n\ntest_input = { \"nums\": [41,18,59,3,52,59,59,55,1,34,67,1,2,13,60,40,5,0,4,47,73,96,33,59,98], \"k\": 24 }\nassert my_solution.checkArray(**test_input) == False\n\ntest_input = { \"nums\": [53,88,96,97,97,97,97,97,97,97,44,9,1,0], \"k\": 10 }\nassert my_solution.checkArray(**test_input) == True\n\ntest_input = { \"nums\": [90,74,13,81,34,10,29,18,61,94,43,99,86,0], \"k\": 11 }\nassert my_solution.checkArray(**test_input) == False\n\ntest_input = { \"nums\": [44,47,72,0,0,68,97,67], \"k\": 1 }\nassert my_solution.checkArray(**test_input) == True\n\ntest_input = { \"nums\": [77,78,19,97,79], \"k\": 2 }\nassert my_solution.checkArray(**test_input) == True\n\ntest_input = { \"nums\": [36,61,86,61,0,61,61,61,61,61,61,61,61,65,62,61,95,61,61,61,80,66,61,61,25], \"k\": 24 }\nassert my_solution.checkArray(**test_input) == False\n\ntest_input = { \"nums\": [0,44,92,94,94,50,95,98,98,99,6,1,54,58,94,94,41,36], \"k\": 4 }\nassert my_solution.checkArray(**test_input) == True\n\ntest_input = { \"nums\": [60,71,76,93,98,98,98,98,38,27,22,5], \"k\": 8 }\nassert my_solution.checkArray(**test_input) == True\n\ntest_input = { \"nums\": [94,94,99,94,86,100,32,96,59,69,99,95,75], \"k\": 3 }\nassert my_solution.checkArray(**test_input) == False\n\ntest_input = { \"nums\": [6,55,95,95,95,96,95,95,90,5,0], \"k\": 8 }\nassert my_solution.checkArray(**test_input) == False\n\ntest_input = { \"nums\": [62,90,90,90,99,57,61,96,96,97,99,78,84,0], \"k\": 5 }\nassert my_solution.checkArray(**test_input) == False\n\ntest_input = { \"nums\": [57,77,91,66,46,32], \"k\": 3 }\nassert my_solution.checkArray(**test_input) == True\n\ntest_input = { \"nums\": [86,87,92,20,42,99,100,97,17,18,48,11,60,98,96,28,59,5,18,56,62,35,100,87,51,54,77,98,61], \"k\": 7 }\nassert my_solution.checkArray(**test_input) == False\n\ntest_input = { \"nums\": [21,26,20,2,38,22,0,96,79,93,9,67,34], \"k\": 12 }\nassert my_solution.checkArray(**test_input) == False\n\ntest_input = { \"nums\": [92,14,95,100,53,99,100,100,50,99,99,99,93,99,100,15,71,100,7,5,48,65,6], \"k\": 18 }\nassert my_solution.checkArray(**test_input) == False\n\ntest_input = { \"nums\": [64,14,64,8,0,83,17,68,5,98,36], \"k\": 7 }\nassert my_solution.checkArray(**test_input) == False\n\ntest_input = { \"nums\": [50,50,50,50,93,92,84,96,96,96,96,96,96,96,96,46,46,46,46,33,4,1,0], \"k\": 15 }\nassert my_solution.checkArray(**test_input) == False\n\ntest_input = { \"nums\": [79,90,100,96,22,2,100,10,100,100,78,85,54,7,35,97,98,98,98,98,33,38,4,14,63,23], \"k\": 10 }\nassert my_solution.checkArray(**test_input) == False\n\ntest_input = { \"nums\": [49,74,96,93,93,99,100,95,73,100,41,95,99,22,13,52,19,13,11,80], \"k\": 7 }\nassert my_solution.checkArray(**test_input) == False\n\ntest_input = { \"nums\": [6,100,100,100,100,100,98,4,74,89,89,89,85,85,15], \"k\": 6 }\nassert my_solution.checkArray(**test_input) == True\n\ntest_input = { \"nums\": [69,48,8,3,82,10,88,76,32,95,68,30,97,64,32,62,86], \"k\": 1 }\nassert my_solution.checkArray(**test_input) == True\n\ntest_input = { \"nums\": [87,87,87], \"k\": 3 }\nassert my_solution.checkArray(**test_input) == True\n\ntest_input = { \"nums\": [88,98,99,99,100,100,58,82,85,87,86,86,40,6,2], \"k\": 6 }\nassert my_solution.checkArray(**test_input) == True\n\ntest_input = { \"nums\": [26,26,46,46,70,70,95,97,98,98,98,72,72,52,52,28,28,3,1], \"k\": 11 }\nassert my_solution.checkArray(**test_input) == True\n\ntest_input = { \"nums\": [25], \"k\": 1 }\nassert my_solution.checkArray(**test_input) == True\n\ntest_input = { \"nums\": [71,87,87,96,99,36,61,87,98,97,93,96,71,59,75,71,27,26,18], \"k\": 5 }\nassert my_solution.checkArray(**test_input) == True\n\ntest_input = { \"nums\": [39,90,15,100,52,27,100,67,99,79,4,78,95,84,2], \"k\": 4 }\nassert my_solution.checkArray(**test_input) == False\n\ntest_input = { \"nums\": [39,39,39,39,39,39,39,39,39,39], \"k\": 10 }\nassert my_solution.checkArray(**test_input) == True\n\ntest_input = { \"nums\": [58,72,93,99,99,64,50,29,23,23,0,0,0,0,0], \"k\": 5 }\nassert my_solution.checkArray(**test_input) == True\n\ntest_input = { \"nums\": [30,86,23], \"k\": 3 }\nassert my_solution.checkArray(**test_input) == False\n\ntest_input = { \"nums\": [65,69,74,79,90,95,98,99,99,99,100,100,100,100,100,100,35,31,26,21,10,5,2,1,1,1,0,0], \"k\": 16 }\nassert my_solution.checkArray(**test_input) == True\n\ntest_input = { \"nums\": [69,2,71,4,97,97,100,26,100,100,100,100,100,77,13,8,13,3,3,72,0,0,0], \"k\": 13 }\nassert my_solution.checkArray(**test_input) == False\n\ntest_input = { \"nums\": [77,90,94,94,98,98,28,29,36,91,91,94,87,73,80,81,77,74,74,74,56], \"k\": 6 }\nassert my_solution.checkArray(**test_input) == True\n\ntest_input = { \"nums\": [93], \"k\": 1 }\nassert my_solution.checkArray(**test_input) == True\n\ntest_input = { \"nums\": [70,91,100,17,80,94,35,83,33,0], \"k\": 4 }\nassert my_solution.checkArray(**test_input) == False\n\ntest_input = { \"nums\": [79,87,87,99,50,77,97,85,92,91,71,71,34], \"k\": 4 }\nassert my_solution.checkArray(**test_input) == True\n\ntest_input = { \"nums\": [75,9,96,100,100,77,7,99,100,99,94,71,5,78,3,8,8,7,59,8,6], \"k\": 10 }\nassert my_solution.checkArray(**test_input) == False\n\ntest_input = { \"nums\": [36,37,69,88,88,96,96,96,96,96,96,96,96,96,96,96,96,96,96,96,96,60,59,27,8,8,0], \"k\": 21 }\nassert my_solution.checkArray(**test_input) == True\n\ntest_input = { \"nums\": [94,94,96,97,98,11,64,85,84,87,98,45,65,83,79,63,74,79,61,61,59,48], \"k\": 5 }\nassert my_solution.checkArray(**test_input) == True\n\ntest_input = { \"nums\": [80,80,98,98,98,18,18,0,0], \"k\": 5 }\nassert my_solution.checkArray(**test_input) == True\n\ntest_input = { \"nums\": [14,100,17,100,13,85,100,100,14,100,100,1,83,0], \"k\": 11 }\nassert my_solution.checkArray(**test_input) == False\n\ntest_input = { \"nums\": [98,74,91,70], \"k\": 2 }\nassert my_solution.checkArray(**test_input) == False\n\ntest_input = { \"nums\": [0,29,29,93,93,93,93,93,93,93,93,93,64,64], \"k\": 11 }\nassert my_solution.checkArray(**test_input) == True\n\ntest_input = { \"nums\": [11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,0], \"k\": 15 }\nassert my_solution.checkArray(**test_input) == True\n\ntest_input = { \"nums\": [34,89,92,96,96,98,99,98,79,4,100,100,12,99,100,44,100,66,25,8,4,98,2,1,97,70,1,15,0,88], \"k\": 17 }\nassert my_solution.checkArray(**test_input) == False\n\ntest_input = { \"nums\": [95,95,98,99,99,99,100,100,100,100,100,100,100,5,5,2,1,1,1], \"k\": 13 }\nassert my_solution.checkArray(**test_input) == True\n\ntest_input = { \"nums\": [15,58,78,10,68,49,100,94,30,14,72], \"k\": 5 }\nassert my_solution.checkArray(**test_input) == False\n\ntest_input = { \"nums\": [9,44,70,75,28,23,11,37,69,34,61], \"k\": 10 }\nassert my_solution.checkArray(**test_input) == False\n\ntest_input = { \"nums\": [70,51,47,100,59,66,17,98,60], \"k\": 4 }\nassert my_solution.checkArray(**test_input) == False\n\ntest_input = { \"nums\": [92,33,58,88], \"k\": 2 }\nassert my_solution.checkArray(**test_input) == False\n\ntest_input = { \"nums\": [99,15,91,32,7,98], \"k\": 3 }\nassert my_solution.checkArray(**test_input) == False",
+ "test_cases": [
+  {
+   "input": {
+    "args": [
+     2,
+     [
+      1,
+      3,
+      1,
+      1
+     ]
+    ]
+   },
+   "output": false,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     3,
+     [
+      2,
+      2,
+      3,
+      1,
+      1,
+      0
+     ]
+    ]
+   },
+   "output": true,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     10,
+     [
+      24,
+      24,
+      14,
+      37,
+      31,
+      88,
+      94,
+      38,
+      94,
+      0,
+      100,
+      100,
+      4,
+      46,
+      5,
+      50,
+      0,
+      33,
+      22,
+      25,
+      0
+     ]
+    ]
+   },
+   "output": false,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     4,
+     [
+      60,
+      72,
+      87,
+      89,
+      63,
+      52,
+      64,
+      62,
+      31,
+      37,
+      57,
+      83,
+      98,
+      94,
+      92,
+      77,
+      94,
+      91,
+      87,
+      100,
+      91,
+      91,
+      50,
+      26
+     ]
+    ]
+   },
+   "output": true,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     4,
+     [
+      22,
+      4,
+      1,
+      25,
+      68,
+      30,
+      97,
+      99,
+      100,
+      22,
+      20,
+      39,
+      85,
+      68,
+      3,
+      1,
+      1,
+      74
+     ]
+    ]
+   },
+   "output": false,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     1,
+     [
+      63,
+      40,
+      30,
+      0,
+      72,
+      53
+     ]
+    ]
+   },
+   "output": true,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     2,
+     [
+      27,
+      99,
+      7,
+      1,
+      94,
+      63,
+      84,
+      46,
+      76,
+      35,
+      97,
+      77,
+      19,
+      72,
+      3
+     ]
+    ]
+   },
+   "output": false,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     20,
+     [
+      60,
+      78,
+      96,
+      97,
+      97,
+      97,
+      49,
+      7,
+      97,
+      97,
+      97,
+      99,
+      97,
+      97,
+      97,
+      97,
+      85,
+      97,
+      97,
+      97,
+      37,
+      5,
+      1
+     ]
+    ]
+   },
+   "output": false,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     23,
+     [
+      34,
+      34,
+      99,
+      93,
+      93,
+      26,
+      99,
+      100,
+      94,
+      94,
+      82,
+      86,
+      100,
+      100,
+      87,
+      100,
+      100,
+      100,
+      100,
+      100,
+      63,
+      100,
+      100,
+      66,
+      17,
+      10,
+      8,
+      7,
+      3,
+      1
+     ]
+    ]
+   },
+   "output": false,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     16,
+     [
+      67,
+      98,
+      97,
+      99,
+      98,
+      97,
+      97,
+      96,
+      99,
+      99,
+      99,
+      42,
+      68,
+      18,
+      99,
+      44,
+      95,
+      79,
+      1,
+      16,
+      49,
+      1,
+      2,
+      2,
+      0
+     ]
+    ]
+   },
+   "output": false,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     9,
+     [
+      59,
+      60,
+      99,
+      99,
+      99,
+      99,
+      99,
+      99,
+      99,
+      40,
+      39,
+      0
+     ]
+    ]
+   },
+   "output": true,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     3,
+     [
+      12,
+      87,
+      91,
+      18
+     ]
+    ]
+   },
+   "output": false,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     3,
+     [
+      0,
+      0,
+      51,
+      67,
+      80,
+      98,
+      88,
+      75,
+      89,
+      83,
+      100,
+      70,
+      77,
+      82,
+      57,
+      100,
+      80,
+      69,
+      19,
+      17
+     ]
+    ]
+   },
+   "output": true,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     1,
+     [
+      22
+     ]
+    ]
+   },
+   "output": true,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     4,
+     [
+      52,
+      92,
+      51,
+      24,
+      23,
+      79,
+      100,
+      94,
+      78,
+      96,
+      38,
+      14,
+      72,
+      27,
+      99,
+      94,
+      32,
+      67,
+      43,
+      31,
+      88,
+      8
+     ]
+    ]
+   },
+   "output": false,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     25,
+     [
+      8,
+      51,
+      51,
+      51,
+      51,
+      51,
+      51,
+      51,
+      51,
+      51,
+      51,
+      51,
+      51,
+      51,
+      51,
+      51,
+      51,
+      51,
+      51,
+      51,
+      51,
+      51,
+      51,
+      51,
+      51,
+      43,
+      0
+     ]
+    ]
+   },
+   "output": true,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     4,
+     [
+      0,
+      0,
+      39,
+      84,
+      86,
+      94,
+      55,
+      10,
+      8,
+      0
+     ]
+    ]
+   },
+   "output": true,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     24,
+     [
+      12,
+      79,
+      95,
+      95,
+      95,
+      95,
+      95,
+      95,
+      95,
+      95,
+      95,
+      95,
+      95,
+      95,
+      95,
+      95,
+      95,
+      95,
+      95,
+      95,
+      95,
+      95,
+      95,
+      95,
+      83,
+      16,
+      0
+     ]
+    ]
+   },
+   "output": true,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     3,
+     [
+      15,
+      11,
+      99,
+      86,
+      58,
+      23,
+      82,
+      100,
+      100,
+      80,
+      58,
+      58,
+      84,
+      57,
+      0,
+      25,
+      6
+     ]
+    ]
+   },
+   "output": false,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     7,
+     [
+      99,
+      0,
+      82,
+      66,
+      3,
+      25,
+      92,
+      41,
+      3,
+      0,
+      46
+     ]
+    ]
+   },
+   "output": false,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     2,
+     [
+      18,
+      52,
+      56,
+      96,
+      98,
+      82,
+      76,
+      87,
+      2,
+      61,
+      88,
+      100
+     ]
+    ]
+   },
+   "output": false,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     9,
+     [
+      0,
+      6,
+      100,
+      74,
+      4,
+      50,
+      100,
+      92,
+      18,
+      70,
+      15,
+      88,
+      0,
+      24
+     ]
+    ]
+   },
+   "output": false,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     3,
+     [
+      0,
+      0,
+      33,
+      72,
+      86,
+      53,
+      14
+     ]
+    ]
+   },
+   "output": true,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     3,
+     [
+      67,
+      0,
+      68,
+      97,
+      94
+     ]
+    ]
+   },
+   "output": false,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     25,
+     [
+      0,
+      0,
+      8,
+      64,
+      89,
+      89,
+      89,
+      89,
+      89,
+      89,
+      89,
+      89,
+      89,
+      89,
+      89,
+      89,
+      89,
+      89,
+      89,
+      89,
+      89,
+      89,
+      89,
+      89,
+      89,
+      89,
+      89,
+      81,
+      25
+     ]
+    ]
+   },
+   "output": true,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     1,
+     [
+      84,
+      0,
+      68,
+      95,
+      95,
+      0,
+      25,
+      0,
+      7,
+      71,
+      4,
+      68,
+      23,
+      97,
+      80,
+      0
+     ]
+    ]
+   },
+   "output": true,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     12,
+     [
+      95,
+      92,
+      99,
+      99,
+      2,
+      100,
+      100,
+      100,
+      100,
+      100,
+      100,
+      100,
+      8,
+      57,
+      65,
+      69,
+      69,
+      100,
+      100,
+      100,
+      100,
+      100,
+      100,
+      100,
+      100,
+      0,
+      79,
+      72,
+      32
+     ]
+    ]
+   },
+   "output": false,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     6,
+     [
+      7,
+      33,
+      97,
+      98,
+      100,
+      100,
+      74,
+      98,
+      95,
+      13,
+      39,
+      31,
+      82,
+      51,
+      28,
+      68,
+      37,
+      59,
+      21,
+      5,
+      66,
+      77,
+      89,
+      6,
+      0
+     ]
+    ]
+   },
+   "output": false,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     5,
+     [
+      48,
+      48,
+      48,
+      48,
+      48
+     ]
+    ]
+   },
+   "output": true,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     3,
+     [
+      42,
+      60,
+      56,
+      99,
+      72,
+      2,
+      100,
+      51,
+      65,
+      14,
+      13,
+      51,
+      1,
+      55,
+      56,
+      61,
+      99,
+      49,
+      96,
+      2
+     ]
+    ]
+   },
+   "output": false,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     11,
+     [
+      8,
+      82,
+      98,
+      99,
+      66,
+      39,
+      71,
+      100,
+      81,
+      85,
+      100,
+      19,
+      96,
+      0,
+      2,
+      85,
+      40,
+      0,
+      19,
+      0
+     ]
+    ]
+   },
+   "output": false,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     13,
+     [
+      92,
+      96,
+      96,
+      96,
+      97,
+      99,
+      99,
+      99,
+      99,
+      99,
+      99,
+      99,
+      99,
+      22,
+      18,
+      18,
+      18,
+      17,
+      15,
+      15,
+      15,
+      15,
+      15,
+      15,
+      15,
+      15
+     ]
+    ]
+   },
+   "output": true,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     12,
+     [
+      89,
+      8,
+      8,
+      8,
+      8,
+      8,
+      8,
+      8,
+      8,
+      8,
+      8,
+      8
+     ]
+    ]
+   },
+   "output": false,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     10,
+     [
+      4,
+      19,
+      0,
+      74,
+      0,
+      26,
+      94,
+      25,
+      99,
+      35,
+      0
+     ]
+    ]
+   },
+   "output": false,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     4,
+     [
+      79,
+      4,
+      27,
+      35,
+      16,
+      27,
+      85,
+      92,
+      75,
+      99,
+      7,
+      98,
+      86,
+      92,
+      33,
+      8,
+      96,
+      44,
+      21,
+      52,
+      34
+     ]
+    ]
+   },
+   "output": false,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     1,
+     [
+      75,
+      18,
+      0,
+      81,
+      18,
+      16,
+      51,
+      0
+     ]
+    ]
+   },
+   "output": true,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     9,
+     [
+      74,
+      74,
+      74,
+      74,
+      74,
+      74,
+      74,
+      74,
+      74
+     ]
+    ]
+   },
+   "output": true,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     14,
+     [
+      5,
+      5,
+      5,
+      9,
+      37,
+      81,
+      95,
+      95,
+      95,
+      98,
+      98,
+      99,
+      100,
+      100,
+      97,
+      99,
+      100,
+      96,
+      68,
+      24,
+      10,
+      10,
+      10,
+      7,
+      7,
+      6,
+      5,
+      5,
+      3,
+      1
+     ]
+    ]
+   },
+   "output": true,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     4,
+     [
+      81,
+      100,
+      99,
+      99,
+      68,
+      66,
+      56,
+      100,
+      74,
+      63,
+      2,
+      84,
+      23,
+      67,
+      93,
+      92,
+      56,
+      90,
+      18,
+      57,
+      100,
+      33,
+      88,
+      26,
+      100,
+      72,
+      93,
+      57,
+      28,
+      17
+     ]
+    ]
+   },
+   "output": false,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     1,
+     [
+      62,
+      76,
+      96,
+      12,
+      0,
+      20,
+      63,
+      29,
+      96,
+      97,
+      8,
+      18,
+      56
+     ]
+    ]
+   },
+   "output": true,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     3,
+     [
+      31,
+      60,
+      97,
+      71,
+      53,
+      46,
+      63,
+      50,
+      91,
+      82,
+      40,
+      79,
+      96,
+      100,
+      55,
+      55,
+      57,
+      39,
+      50,
+      98,
+      72,
+      37,
+      27,
+      55
+     ]
+    ]
+   },
+   "output": false,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     1,
+     [
+      100,
+      65,
+      78,
+      59,
+      17,
+      17
+     ]
+    ]
+   },
+   "output": true,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     24,
+     [
+      57,
+      10,
+      53,
+      20,
+      40,
+      42,
+      64,
+      94,
+      82,
+      67,
+      100,
+      3,
+      22,
+      67,
+      95,
+      28,
+      61,
+      74,
+      67,
+      99,
+      100,
+      46,
+      67,
+      67,
+      76,
+      31,
+      99,
+      26,
+      85
+     ]
+    ]
+   },
+   "output": false,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     3,
+     [
+      34,
+      76,
+      66,
+      48,
+      13,
+      89,
+      22,
+      24,
+      70,
+      17,
+      17,
+      42,
+      100,
+      2,
+      96,
+      8
+     ]
+    ]
+   },
+   "output": false,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     2,
+     [
+      92,
+      94,
+      2,
+      6,
+      6
+     ]
+    ]
+   },
+   "output": true,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     3,
+     [
+      100,
+      17,
+      95
+     ]
+    ]
+   },
+   "output": false,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     5,
+     [
+      20,
+      27,
+      75,
+      96,
+      97,
+      84,
+      90,
+      77,
+      65,
+      64,
+      57,
+      44,
+      9,
+      0
+     ]
+    ]
+   },
+   "output": true,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     15,
+     [
+      41,
+      39,
+      98,
+      99,
+      100,
+      100,
+      100,
+      100,
+      100,
+      100,
+      100,
+      100,
+      100,
+      100,
+      100,
+      37,
+      5,
+      2,
+      1,
+      0,
+      0,
+      92,
+      0,
+      0,
+      0
+     ]
+    ]
+   },
+   "output": false,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     8,
+     [
+      45,
+      90,
+      90,
+      99,
+      99,
+      99,
+      99,
+      99,
+      54,
+      9,
+      9,
+      0
+     ]
+    ]
+   },
+   "output": true,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     24,
+     [
+      41,
+      18,
+      59,
+      3,
+      52,
+      59,
+      59,
+      55,
+      1,
+      34,
+      67,
+      1,
+      2,
+      13,
+      60,
+      40,
+      5,
+      0,
+      4,
+      47,
+      73,
+      96,
+      33,
+      59,
+      98
+     ]
+    ]
+   },
+   "output": false,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     10,
+     [
+      53,
+      88,
+      96,
+      97,
+      97,
+      97,
+      97,
+      97,
+      97,
+      97,
+      44,
+      9,
+      1,
+      0
+     ]
+    ]
+   },
+   "output": true,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     11,
+     [
+      90,
+      74,
+      13,
+      81,
+      34,
+      10,
+      29,
+      18,
+      61,
+      94,
+      43,
+      99,
+      86,
+      0
+     ]
+    ]
+   },
+   "output": false,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     1,
+     [
+      44,
+      47,
+      72,
+      0,
+      0,
+      68,
+      97,
+      67
+     ]
+    ]
+   },
+   "output": true,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     2,
+     [
+      77,
+      78,
+      19,
+      97,
+      79
+     ]
+    ]
+   },
+   "output": true,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     24,
+     [
+      36,
+      61,
+      86,
+      61,
+      0,
+      61,
+      61,
+      61,
+      61,
+      61,
+      61,
+      61,
+      61,
+      65,
+      62,
+      61,
+      95,
+      61,
+      61,
+      61,
+      80,
+      66,
+      61,
+      61,
+      25
+     ]
+    ]
+   },
+   "output": false,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     4,
+     [
+      0,
+      44,
+      92,
+      94,
+      94,
+      50,
+      95,
+      98,
+      98,
+      99,
+      6,
+      1,
+      54,
+      58,
+      94,
+      94,
+      41,
+      36
+     ]
+    ]
+   },
+   "output": true,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     8,
+     [
+      60,
+      71,
+      76,
+      93,
+      98,
+      98,
+      98,
+      98,
+      38,
+      27,
+      22,
+      5
+     ]
+    ]
+   },
+   "output": true,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     3,
+     [
+      94,
+      94,
+      99,
+      94,
+      86,
+      100,
+      32,
+      96,
+      59,
+      69,
+      99,
+      95,
+      75
+     ]
+    ]
+   },
+   "output": false,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     8,
+     [
+      6,
+      55,
+      95,
+      95,
+      95,
+      96,
+      95,
+      95,
+      90,
+      5,
+      0
+     ]
+    ]
+   },
+   "output": false,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     5,
+     [
+      62,
+      90,
+      90,
+      90,
+      99,
+      57,
+      61,
+      96,
+      96,
+      97,
+      99,
+      78,
+      84,
+      0
+     ]
+    ]
+   },
+   "output": false,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     3,
+     [
+      57,
+      77,
+      91,
+      66,
+      46,
+      32
+     ]
+    ]
+   },
+   "output": true,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     7,
+     [
+      86,
+      87,
+      92,
+      20,
+      42,
+      99,
+      100,
+      97,
+      17,
+      18,
+      48,
+      11,
+      60,
+      98,
+      96,
+      28,
+      59,
+      5,
+      18,
+      56,
+      62,
+      35,
+      100,
+      87,
+      51,
+      54,
+      77,
+      98,
+      61
+     ]
+    ]
+   },
+   "output": false,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     12,
+     [
+      21,
+      26,
+      20,
+      2,
+      38,
+      22,
+      0,
+      96,
+      79,
+      93,
+      9,
+      67,
+      34
+     ]
+    ]
+   },
+   "output": false,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     18,
+     [
+      92,
+      14,
+      95,
+      100,
+      53,
+      99,
+      100,
+      100,
+      50,
+      99,
+      99,
+      99,
+      93,
+      99,
+      100,
+      15,
+      71,
+      100,
+      7,
+      5,
+      48,
+      65,
+      6
+     ]
+    ]
+   },
+   "output": false,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     7,
+     [
+      64,
+      14,
+      64,
+      8,
+      0,
+      83,
+      17,
+      68,
+      5,
+      98,
+      36
+     ]
+    ]
+   },
+   "output": false,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     15,
+     [
+      50,
+      50,
+      50,
+      50,
+      93,
+      92,
+      84,
+      96,
+      96,
+      96,
+      96,
+      96,
+      96,
+      96,
+      96,
+      46,
+      46,
+      46,
+      46,
+      33,
+      4,
+      1,
+      0
+     ]
+    ]
+   },
+   "output": false,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     10,
+     [
+      79,
+      90,
+      100,
+      96,
+      22,
+      2,
+      100,
+      10,
+      100,
+      100,
+      78,
+      85,
+      54,
+      7,
+      35,
+      97,
+      98,
+      98,
+      98,
+      98,
+      33,
+      38,
+      4,
+      14,
+      63,
+      23
+     ]
+    ]
+   },
+   "output": false,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     7,
+     [
+      49,
+      74,
+      96,
+      93,
+      93,
+      99,
+      100,
+      95,
+      73,
+      100,
+      41,
+      95,
+      99,
+      22,
+      13,
+      52,
+      19,
+      13,
+      11,
+      80
+     ]
+    ]
+   },
+   "output": false,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     6,
+     [
+      6,
+      100,
+      100,
+      100,
+      100,
+      100,
+      98,
+      4,
+      74,
+      89,
+      89,
+      89,
+      85,
+      85,
+      15
+     ]
+    ]
+   },
+   "output": true,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     1,
+     [
+      69,
+      48,
+      8,
+      3,
+      82,
+      10,
+      88,
+      76,
+      32,
+      95,
+      68,
+      30,
+      97,
+      64,
+      32,
+      62,
+      86
+     ]
+    ]
+   },
+   "output": true,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     3,
+     [
+      87,
+      87,
+      87
+     ]
+    ]
+   },
+   "output": true,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     6,
+     [
+      88,
+      98,
+      99,
+      99,
+      100,
+      100,
+      58,
+      82,
+      85,
+      87,
+      86,
+      86,
+      40,
+      6,
+      2
+     ]
+    ]
+   },
+   "output": true,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     11,
+     [
+      26,
+      26,
+      46,
+      46,
+      70,
+      70,
+      95,
+      97,
+      98,
+      98,
+      98,
+      72,
+      72,
+      52,
+      52,
+      28,
+      28,
+      3,
+      1
+     ]
+    ]
+   },
+   "output": true,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     1,
+     [
+      25
+     ]
+    ]
+   },
+   "output": true,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     5,
+     [
+      71,
+      87,
+      87,
+      96,
+      99,
+      36,
+      61,
+      87,
+      98,
+      97,
+      93,
+      96,
+      71,
+      59,
+      75,
+      71,
+      27,
+      26,
+      18
+     ]
+    ]
+   },
+   "output": true,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     4,
+     [
+      39,
+      90,
+      15,
+      100,
+      52,
+      27,
+      100,
+      67,
+      99,
+      79,
+      4,
+      78,
+      95,
+      84,
+      2
+     ]
+    ]
+   },
+   "output": false,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     10,
+     [
+      39,
+      39,
+      39,
+      39,
+      39,
+      39,
+      39,
+      39,
+      39,
+      39
+     ]
+    ]
+   },
+   "output": true,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     5,
+     [
+      58,
+      72,
+      93,
+      99,
+      99,
+      64,
+      50,
+      29,
+      23,
+      23,
+      0,
+      0,
+      0,
+      0,
+      0
+     ]
+    ]
+   },
+   "output": true,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     3,
+     [
+      30,
+      86,
+      23
+     ]
+    ]
+   },
+   "output": false,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     16,
+     [
+      65,
+      69,
+      74,
+      79,
+      90,
+      95,
+      98,
+      99,
+      99,
+      99,
+      100,
+      100,
+      100,
+      100,
+      100,
+      100,
+      35,
+      31,
+      26,
+      21,
+      10,
+      5,
+      2,
+      1,
+      1,
+      1,
+      0,
+      0
+     ]
+    ]
+   },
+   "output": true,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     13,
+     [
+      69,
+      2,
+      71,
+      4,
+      97,
+      97,
+      100,
+      26,
+      100,
+      100,
+      100,
+      100,
+      100,
+      77,
+      13,
+      8,
+      13,
+      3,
+      3,
+      72,
+      0,
+      0,
+      0
+     ]
+    ]
+   },
+   "output": false,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     6,
+     [
+      77,
+      90,
+      94,
+      94,
+      98,
+      98,
+      28,
+      29,
+      36,
+      91,
+      91,
+      94,
+      87,
+      73,
+      80,
+      81,
+      77,
+      74,
+      74,
+      74,
+      56
+     ]
+    ]
+   },
+   "output": true,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     1,
+     [
+      93
+     ]
+    ]
+   },
+   "output": true,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     4,
+     [
+      70,
+      91,
+      100,
+      17,
+      80,
+      94,
+      35,
+      83,
+      33,
+      0
+     ]
+    ]
+   },
+   "output": false,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     4,
+     [
+      79,
+      87,
+      87,
+      99,
+      50,
+      77,
+      97,
+      85,
+      92,
+      91,
+      71,
+      71,
+      34
+     ]
+    ]
+   },
+   "output": true,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     10,
+     [
+      75,
+      9,
+      96,
+      100,
+      100,
+      77,
+      7,
+      99,
+      100,
+      99,
+      94,
+      71,
+      5,
+      78,
+      3,
+      8,
+      8,
+      7,
+      59,
+      8,
+      6
+     ]
+    ]
+   },
+   "output": false,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     21,
+     [
+      36,
+      37,
+      69,
+      88,
+      88,
+      96,
+      96,
+      96,
+      96,
+      96,
+      96,
+      96,
+      96,
+      96,
+      96,
+      96,
+      96,
+      96,
+      96,
+      96,
+      96,
+      60,
+      59,
+      27,
+      8,
+      8,
+      0
+     ]
+    ]
+   },
+   "output": true,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     5,
+     [
+      94,
+      94,
+      96,
+      97,
+      98,
+      11,
+      64,
+      85,
+      84,
+      87,
+      98,
+      45,
+      65,
+      83,
+      79,
+      63,
+      74,
+      79,
+      61,
+      61,
+      59,
+      48
+     ]
+    ]
+   },
+   "output": true,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     5,
+     [
+      80,
+      80,
+      98,
+      98,
+      98,
+      18,
+      18,
+      0,
+      0
+     ]
+    ]
+   },
+   "output": true,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     11,
+     [
+      14,
+      100,
+      17,
+      100,
+      13,
+      85,
+      100,
+      100,
+      14,
+      100,
+      100,
+      1,
+      83,
+      0
+     ]
+    ]
+   },
+   "output": false,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     2,
+     [
+      98,
+      74,
+      91,
+      70
+     ]
+    ]
+   },
+   "output": false,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     11,
+     [
+      0,
+      29,
+      29,
+      93,
+      93,
+      93,
+      93,
+      93,
+      93,
+      93,
+      93,
+      93,
+      64,
+      64
+     ]
+    ]
+   },
+   "output": true,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     15,
+     [
+      11,
+      11,
+      11,
+      11,
+      11,
+      11,
+      11,
+      11,
+      11,
+      11,
+      11,
+      11,
+      11,
+      11,
+      11,
+      0
+     ]
+    ]
+   },
+   "output": true,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     17,
+     [
+      34,
+      89,
+      92,
+      96,
+      96,
+      98,
+      99,
+      98,
+      79,
+      4,
+      100,
+      100,
+      12,
+      99,
+      100,
+      44,
+      100,
+      66,
+      25,
+      8,
+      4,
+      98,
+      2,
+      1,
+      97,
+      70,
+      1,
+      15,
+      0,
+      88
+     ]
+    ]
+   },
+   "output": false,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     13,
+     [
+      95,
+      95,
+      98,
+      99,
+      99,
+      99,
+      100,
+      100,
+      100,
+      100,
+      100,
+      100,
+      100,
+      5,
+      5,
+      2,
+      1,
+      1,
+      1
+     ]
+    ]
+   },
+   "output": true,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     5,
+     [
+      15,
+      58,
+      78,
+      10,
+      68,
+      49,
+      100,
+      94,
+      30,
+      14,
+      72
+     ]
+    ]
+   },
+   "output": false,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     10,
+     [
+      9,
+      44,
+      70,
+      75,
+      28,
+      23,
+      11,
+      37,
+      69,
+      34,
+      61
+     ]
+    ]
+   },
+   "output": false,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     4,
+     [
+      70,
+      51,
+      47,
+      100,
+      59,
+      66,
+      17,
+      98,
+      60
+     ]
+    ]
+   },
+   "output": false,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     2,
+     [
+      92,
+      33,
+      58,
+      88
+     ]
+    ]
+   },
+   "output": false,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     3,
+     [
+      99,
+      15,
+      91,
+      32,
+      7,
+      98
+     ]
+    ]
+   },
+   "output": false,
+   "explanation": ""
+  }
+ ],
+ "original_ilr": "```json\n{\n  \"problem_id\": \"checkArray\",\n  \"nodes\": [\n    {\n      \"id\": 1,\n      \"type\": \"start\",\n      \"label\": \"Start\",\n      \"next\": 2\n    },\n    {\n      \"id\": 2,\n      \"type\": \"process\",\n      \"label\": \"Input: nums (List[int]), k (integer)\",\n      \"action\": \"ctx['nums'] = ctx['arg0']; ctx['k'] = ctx['arg1']; ctx['arr'] = [0] * (len(ctx['nums']) + 1); ctx['h'] = 0; ctx['i'] = 0\",\n      \"next\": 3\n    },\n    {\n      \"id\": 3,\n      \"type\": \"decision\",\n      \"label\": \"Is i < len(nums)?\",\n      \"logic\": \"ctx['i'] < len(ctx['nums'])\",\n      \"true_next\": 4,\n      \"false_next\": 16\n    },\n    {\n      \"id\": 4,\n      \"type\": \"process\",\n      \"label\": \"Extract current element: n = nums[i]\",\n      \"action\": \"ctx['n'] = ctx['nums'][ctx['i']]\",\n      \"next\": 5\n    },\n    {\n      \"id\": 5,\n      \"type\": \"process\",\n      \"label\": \"Update h: h -= arr[i]\",\n      \"action\": \"ctx['h'] -= ctx['arr'][ctx['i']]\",\n      \"next\": 6\n    },\n    {\n      \"id\": 6,\n      \"type\": \"decision\",\n      \"label\": \"Is n > h?\",\n      \"logic\": \"ctx['n'] > ctx['h']\",\n      \"true_next\": 7,\n      \"false_next\": 8\n    },\n    {\n      \"id\": 7,\n      \"type\": \"decision\",\n      \"label\": \"Is i + k > len(nums)?\",\n      \"logic\": \"ctx['i'] + ctx['k'] > len(ctx['nums'])\",\n      \"true_next\": 9,\n      \"false_next\": 11\n    },\n    {\n      \"id\": 8,\n      \"type\": \"decision\",\n      \"label\": \"Is n < h?\",\n      \"logic\": \"ctx['n'] < ctx['h']\",\n      \"true_next\": 10,\n      \"false_next\": 12\n    },\n    {\n      \"id\": 9,\n      \"type\": \"process\",\n      \"label\": \"Output: False (cannot apply operation)\",\n      \"action\": \"ctx['result'] = False\",\n      \"next\": 16\n    },\n    {\n      \"id\": 10,\n      \"type\": \"process\",\n      \"label\": \"Output: False (current element is less than h)\",\n      \"action\": \"ctx['result'] = False\",\n      \"next\": 16\n    },\n    {\n      \"id\": 11,\n      \"type\": \"process\",\n      \"label\": \"Update arr[i + k]: arr[i + k] = n - h\",\n      \"action\": \"ctx['arr'][ctx['i'] + ctx['k']] = ctx['n'] - ctx['h']\",\n      \"next\": 13\n    },\n    {\n      \"id\": 12,\n      \"type\": \"process\",\n      \"label\": \"Continue to next iteration\",\n      \"action\": \"ctx['i'] += 1\",\n      \"next\": 3\n    },\n    {\n      \"id\": 13,\n      \"type\": \"process\",\n      \"label\": \"Update h: h = n\",\n      \"action\": \"ctx['h'] = ctx['n']\",\n      \"next\": 12\n    },\n    {\n      \"id\": 14,\n      \"type\": \"process\",\n      \"label\": \"Output: True (all elements can be made zero)\",\n      \"action\": \"ctx['result'] = True\",\n      \"next\": 16\n    },\n    {\n      \"id\": 15,\n      \"type\": \"process\",\n      \"label\": \"Update h: h = n\",\n      \"action\": \"ctx['h'] = ctx['n']\",\n      \"next\": 12\n    },\n    {\n      \"id\": 16,\n      \"type\": \"end\",\n      \"label\": \"Return result\",\n      \"output\": \"ctx['result']\"\n    }\n  ]\n}\n```",
+ "original_code": "class Solution:\n    def checkArray(self, nums: List[int], k: int) -> bool:\n        arr = [0] * (len(nums) + 1)\n        h = 0\n        i = 0\n        \n        while i < len(nums):\n            n = nums[i]\n            h -= arr[i]\n            \n            if n > h:\n                if i + k > len(nums):\n                    return False\n                else:\n                    arr[i + k] = n - h\n            elif n < h:\n                return False\n            else:\n                h = n\n            i += 1\n        \n        return True",
+ "ocr_data": {
+  "nodes": [
+   {
+    "node_id": 1,
+    "shape_type": "rectangle",
+    "raw_text": "Start",
+    "position": "top"
+   },
+   {
+    "node_id": 2,
+    "shape_type": "rectangle",
+    "raw_text": "Input: nums (List[int]), k (integer)",
+    "position": "top"
+   },
+   {
+    "node_id": 3,
+    "shape_type": "rectangle",
+    "raw_text": "Initialize arr = [0] * (len(nums) + 1)",
+    "position": "top"
+   },
+   {
+    "node_id": 4,
+    "shape_type": "rectangle",
+    "raw_text": "Initialize h = 0",
+    "position": "top"
+   },
+   {
+    "node_id": 5,
+    "shape_type": "rectangle",
+    "raw_text": "Loop through each element in nums with index i",
+    "position": "middle"
+   },
+   {
+    "node_id": 6,
+    "shape_type": "rectangle",
+    "raw_text": "Extract current element: n = nums[i]",
+    "position": "middle"
+   },
+   {
+    "node_id": 7,
+    "shape_type": "rectangle",
+    "raw_text": "Update h: h -= arr[i]",
+    "position": "middle"
+   },
+   {
+    "node_id": 8,
+    "shape_type": "diamond",
+    "raw_text": "Is n > h?",
+    "position": "middle"
+   },
+   {
+    "node_id": 9,
+    "shape_type": "diamond",
+    "raw_text": "Is i + k > len(nums)?",
+    "position": "bottom"
+   },
+   {
+    "node_id": 10,
+    "shape_type": "rectangle",
+    "raw_text": "Output: False (cannot apply operation)",
+    "position": "bottom"
+   },
+   {
+    "node_id": 11,
+    "shape_type": "rectangle",
+    "raw_text": "Update arr[i + k]: arr[i + k] = n - h",
+    "position": "bottom"
+   },
+   {
+    "node_id": 12,
+    "shape_type": "diamond",
+    "raw_text": "Is n < h?",
+    "position": "bottom"
+   },
+   {
+    "node_id": 13,
+    "shape_type": "rectangle",
+    "raw_text": "Output: False (current element is less than h)",
+    "position": "bottom"
+   },
+   {
+    "node_id": 14,
+    "shape_type": "rectangle",
+    "raw_text": "Continue to next iteration",
+    "position": "bottom"
+   },
+   {
+    "node_id": 15,
+    "shape_type": "rectangle",
+    "raw_text": "Update h: h = n",
+    "position": "bottom"
+   },
+   {
+    "node_id": 16,
+    "shape_type": "rectangle",
+    "raw_text": "Output: True (all elements can be made zero)",
+    "position": "middle"
+   }
+  ],
+  "edges": [
+   {
+    "from_node": 1,
+    "to_node": 2,
+    "label": ""
+   },
+   {
+    "from_node": 2,
+    "to_node": 3,
+    "label": ""
+   },
+   {
+    "from_node": 3,
+    "to_node": 4,
+    "label": ""
+   },
+   {
+    "from_node": 4,
+    "to_node": 5,
+    "label": ""
+   },
+   {
+    "from_node": 5,
+    "to_node": 6,
+    "label": ""
+   },
+   {
+    "from_node": 6,
+    "to_node": 7,
+    "label": ""
+   },
+   {
+    "from_node": 7,
+    "to_node": 8,
+    "label": ""
+   },
+   {
+    "from_node": 8,
+    "to_node": 9,
+    "label": "Yes"
+   },
+   {
+    "from_node": 8,
+    "to_node": 12,
+    "label": "No"
+   },
+   {
+    "from_node": 9,
+    "to_node": 10,
+    "label": "Yes"
+   },
+   {
+    "from_node": 9,
+    "to_node": 11,
+    "label": "No"
+   },
+   {
+    "from_node": 11,
+    "to_node": 15,
+    "label": ""
+   },
+   {
+    "from_node": 12,
+    "to_node": 13,
+    "label": "Yes"
+   },
+   {
+    "from_node": 12,
+    "to_node": 14,
+    "label": "No"
+   },
+   {
+    "from_node": 14,
+    "to_node": 5,
+    "label": ""
+   },
+   {
+    "from_node": 15,
+    "to_node": 5,
+    "label": ""
+   },
+   {
+    "from_node": 5,
+    "to_node": 16,
+    "label": ""
+   }
+  ],
+  "other_text": []
+ },
+ "test_result": {},
+ "status": "completed",
+ "fixed_ilr": null,
+ "modified_code": null,
+ "ilr_fix_log": "",
+ "bug_injected": ""
+}

@@ -1,0 +1,76 @@
+{
+  "total": 65,
+  "processed": 60,
+  "success": 23,
+  "failed": 37,
+  "success_rate": 38.333333333333336,
+  "iteration_stats": {
+    "1": {
+      "count": 60,
+      "avg_duration": 12.377828268210093,
+      "avg_total_tokens": 38769.98333333333,
+      "avg_prompt_tokens": 38184.23333333333,
+      "avg_completion_tokens": 585.75
+    },
+    "2": {
+      "count": 43,
+      "avg_duration": 12.373548978982969,
+      "avg_total_tokens": 38278.976744186046,
+      "avg_prompt_tokens": 37701.976744186046,
+      "avg_completion_tokens": 577.0
+    },
+    "3": {
+      "count": 39,
+      "avg_duration": 13.12240725908524,
+      "avg_total_tokens": 38230.41025641026,
+      "avg_prompt_tokens": 37624.692307692305,
+      "avg_completion_tokens": 605.7179487179487
+    }
+  },
+  "avg_duration_by_iteration": {
+    "1": 12.377828268210093,
+    "2": 12.373548978982969,
+    "3": 13.12240725908524
+  },
+  "reflection_mode": "code_only",
+  "final_merge_eval": {
+    "samples_file": "output/Algorithm/gpt-4o-mini/samples.jsonl",
+    "reflection_dir": "output/Algorithm/gpt-4o-mini/reflection_code_only",
+    "output_file": "output/Algorithm/gpt-4o-mini/reflection_code_only/samples_reflection_merged.jsonl",
+    "merged_results_file": "output/Algorithm/gpt-4o-mini/reflection_code_only/samples_reflection_merged.jsonl_results.jsonl",
+    "results_txt": "output/Algorithm/gpt-4o-mini/reflection_code_only/results.txt",
+    "problem_file": "data/Algorithm/Algorithm.jsonl",
+    "merge_summary": {
+      "total_rows": 152,
+      "replaced_rows": 66,
+      "replaced_by_first_passed": 24,
+      "replaced_by_last_failed": 42,
+      "missing_generated_code": 0,
+      "selection_stats": {
+        "iter_3_failed": 42,
+        "keep_original": 86,
+        "first_passed": 24
+      }
+    },
+    "eval_result": {
+      "pass@1": 0.7248322147651006
+    },
+    "difficulty_summary": {
+      "Easy": {
+        "passed": 42.0,
+        "total": 48.0,
+        "rate": 0.875
+      },
+      "Medium": {
+        "passed": 54.0,
+        "total": 75.0,
+        "rate": 0.72
+      },
+      "Hard": {
+        "passed": 14.0,
+        "total": 29.0,
+        "rate": 0.4827586206896552
+      }
+    }
+  }
+}

@@ -1,0 +1,88 @@
+{
+  "problem_id": "good_subarray",
+  "nodes": [
+    {
+      "id": 1,
+      "type": "start",
+      "label": "Start",
+      "next": 2
+    },
+    {
+      "id": 2,
+      "type": "process",
+      "label": "Input: nums (list of integers), target (integer)",
+      "action": "ctx['nums'] = ctx['arg0']; ctx['target'] = ctx['arg1']; ctx['cumulativeSumMod'] = 0; ctx['modIndexMap'] = {0: -1}",
+      "next": 3
+    },
+    {
+      "id": 3,
+      "type": "decision",
+      "label": "For index in range(len(nums))",
+      "logic": "True",
+      "true_next": 4,
+      "false_next": 9
+    },
+    {
+      "id": 4,
+      "type": "process",
+      "label": "Update cumulativeSumMod: cumulativeSumMod = (cumulativeSumMod + nums[index]) % target",
+      "action": "ctx['cumulativeSumMod'] = (ctx['cumulativeSumMod'] + ctx['nums'][ctx['index']]) % ctx['target']",
+      "next": 5
+    },
+    {
+      "id": 5,
+      "type": "decision",
+      "label": "Is cumulativeSumMod in modIndexMap?",
+      "logic": "ctx['cumulativeSumMod'] in ctx['modIndexMap']",
+      "true_next": 6,
+      "false_next": 7
+    },
+    {
+      "id": 6,
+      "type": "decision",
+      "label": "Is index - modIndexMap[cumulativeSumMod] > 1?",
+      "logic": "ctx['index'] - ctx['modIndexMap'][ctx['cumulativeSumMod']] > 1",
+      "true_next": 8,
+      "false_next": 7
+    },
+    {
+      "id": 7,
+      "type": "process",
+      "label": "Update modIndexMap: modIndexMap[cumulativeSumMod] = index",
+      "action": "ctx['modIndexMap'][ctx['cumulativeSumMod']] = ctx['index']",
+      "next": 10
+    },
+    {
+      "id": 8,
+      "type": "return",
+      "label": "Output: True (found a good subarray)",
+      "value": "True"
+    },
+    {
+      "id": 9,
+      "type": "end",
+      "label": "Output: False (no good subarray found)",
+      "output": "False"
+    },
+    {
+      "id": 10,
+      "type": "process",
+      "label": "Continue Loop",
+      "action": "pass",
+      "next": 3
+    }
+  ],
+  "task_id": "523. Continuous Subarray Sum",
+  "dataset": "MATH",
+  "result": "failed: ",
+  "code": "def checkSubarraySum(nums: List[int], target: int) -> bool:\n    cumulativeSumMod = 0\n    modIndexMap = {0: -1}\n    \n    for index in range(len(nums)):\n        cumulativeSumMod = (cumulativeSumMod + nums[index]) % target\n        \n        if cumulativeSumMod in modIndexMap:\n            if index - modIndexMap[cumulativeSumMod] > 1:\n                return True\n        \n        modIndexMap[cumulativeSumMod] = index\n    \n    return False",
+  "verification": {
+    "md_verdict": "ILR Error",
+    "actual_error_source": "ilr",
+    "ilr_verdict": "incorrect",
+    "code_vs_ilr": "faithful",
+    "md_correct": "yes",
+    "note": "ILR把map更新节点(node7)同时挂在'不在map中'和'在map中但间隔<=1'两条路径上，导致同一余量的最早下标被覆盖，经典前缀和+余数算法被破坏；另外node3循环头logic恒为True且index从未赋值/递增，忠实按状态机执行会KeyError 'index'。代码忠实复刻了ILR语义（同样无条件覆盖map），因此同错。",
+    "evidence": "生成代码（与ILR语义一致）：checkSubarraySum([0,0],1)=False(期望True)、([7,7,7],7)=False(期望True)；正确算法在余数已存在且间隔不足时不更新map才能通过。"
+  }
+}

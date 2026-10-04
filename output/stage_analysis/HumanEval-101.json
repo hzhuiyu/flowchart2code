@@ -1,0 +1,101 @@
+{
+  "problem_id": "words_string",
+  "nodes": [
+    {
+      "id": 1,
+      "type": "start",
+      "label": "Start",
+      "next": 2
+    },
+    {
+      "id": 2,
+      "type": "process",
+      "label": "Input: s (string)",
+      "action": "ctx['s'] = ctx['arg0']; ctx['s_list'] = []",
+      "next": 3
+    },
+    {
+      "id": 3,
+      "type": "decision",
+      "label": "Is s empty?",
+      "logic": "len(ctx['s']) == 0",
+      "true_next": 4,
+      "false_next": 5
+    },
+    {
+      "id": 4,
+      "type": "end",
+      "label": "Output: [] (empty array)",
+      "output": "ctx['s_list']"
+    },
+    {
+      "id": 5,
+      "type": "process",
+      "label": "Initialize s_list = []",
+      "action": "ctx['s_list'] = []",
+      "next": 6
+    },
+    {
+      "id": 6,
+      "type": "process",
+      "label": "Iterate through each letter in s",
+      "action": "for letter in ctx['s']: ctx['s_list'].append(letter)",
+      "next": 7
+    },
+    {
+      "id": 7,
+      "type": "decision",
+      "label": "Is letter == ','?",
+      "logic": "ctx['letter'] == ','",
+      "true_next": 8,
+      "false_next": 9
+    },
+    {
+      "id": 8,
+      "type": "process",
+      "label": "Append ',' to s_list",
+      "action": "ctx['s_list'].append(',')",
+      "next": 6
+    },
+    {
+      "id": 9,
+      "type": "process",
+      "label": "Append letter to s_list",
+      "action": "ctx['s_list'].append(ctx['letter'])",
+      "next": 6
+    },
+    {
+      "id": 10,
+      "type": "process",
+      "label": "Join s_list into a single string",
+      "action": "ctx['joined_str'] = ''.join(ctx['s_list'])",
+      "next": 11
+    },
+    {
+      "id": 11,
+      "type": "process",
+      "label": "Split the string into words",
+      "action": "ctx['words'] = ctx['joined_str'].split(' ')",
+      "next": 12
+    },
+    {
+      "id": 12,
+      "type": "end",
+      "label": "Output: array of words",
+      "output": "ctx['words']"
+    }
+  ],
+  "task_id": "HumanEval-101",
+  "dataset": "HumanEval-V",
+  "result": "failed: ",
+  "code": "def words_string(s):\n    s_list = []\n    if len(s) == 0:\n        return s_list\n    \n    s_list = []\n    for letter in s:\n        if letter == ',':\n            s_list.append(',')\n        else:\n            s_list.append(letter)\n    \n    joined_str = ''.join(s_list)\n    words = joined_str.split(' ')\n    return words",
+  "verification": {
+    "md_verdict": "ILR Error",
+    "actual_error_source": "ilr",
+    "ilr_verdict": "incorrect",
+    "code_vs_ilr": "faithful",
+    "md_correct": "yes",
+    "note": "确认 ILR 错：流程图只在字符是 ',' 时原样 append(',')，否则 append(letter)，即整串原样保留后按空格 split，从未把逗号替换成空格。生成代码与 ILR 结构一一对应，属忠实转换。",
+    "evidence": "ILR 转写/生成代码对 \"Hi, my name is John\" 输出 ['Hi,', 'my', 'name', 'is', 'John']（逗号残留），对 'ahmed     , gamal' 输出含空串的 7 元素列表，均与期望不符。"
+  }
+}

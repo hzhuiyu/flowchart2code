@@ -1,0 +1,65 @@
+{
+  "problem_id": "sort_numbers",
+  "nodes": [
+    {
+      "id": 1,
+      "type": "start",
+      "label": "Start",
+      "next": 2
+    },
+    {
+      "id": 2,
+      "type": "process",
+      "label": "Input: numbers (string)",
+      "action": "ctx['numbers'] = ctx['arg0']; ctx['value_map'] = {'zero': 0, 'one': 1, 'two': 2, 'three': 3, 'four': 4, 'five': 5, 'six': 6, 'seven': 7, 'eight': 8, 'nine': 9}; ctx['number_list'] = []; ctx['filtered_list'] = []; ctx['sorted_list'] = []",
+      "next": 3
+    },
+    {
+      "id": 3,
+      "type": "process",
+      "label": "Split numbers into list: number_list = numbers.split(' ')",
+      "action": "ctx['number_list'] = ctx['numbers'].split(' ')",
+      "next": 4
+    },
+    {
+      "id": 4,
+      "type": "process",
+      "label": "Filter out empty strings: filtered_list = [x for x in number_list if x]",
+      "action": "ctx['filtered_list'] = [x for x in ctx['number_list'] if x]",
+      "next": 5
+    },
+    {
+      "id": 5,
+      "type": "process",
+      "label": "Sort filtered_list using value_map",
+      "action": "ctx['sorted_list'] = sorted(ctx['filtered_list'], key=lambda x: ctx['value_map'][x])",
+      "next": 6
+    },
+    {
+      "id": 6,
+      "type": "process",
+      "label": "Output: ''.join(sorted_list)",
+      "action": "ctx['output'] = ''.join(ctx['sorted_list'])",
+      "next": 7
+    },
+    {
+      "id": 7,
+      "type": "end",
+      "label": "End",
+      "output": "ctx['output']"
+    }
+  ],
+  "task_id": "HumanEval-19",
+  "dataset": "HumanEval-V",
+  "result": "failed: ",
+  "code": "from typing import List\n\n\ndef sort_numbers(numbers: str) -> str:\n    value_map = {'zero': 0, 'one': 1, 'two': 2, 'three': 3, 'four': 4, 'five': 5, 'six': 6, 'seven': 7, 'eight': 8, 'nine': 9}\n    number_list = numbers.split(' ')\n    filtered_list = [x for x in number_list if x]\n    sorted_list = sorted(filtered_list, key=lambda x: value_map[x])\n    return ''.join(sorted_list)",
+  "verification": {
+    "md_verdict": "ILR Error",
+    "actual_error_source": "ilr",
+    "ilr_verdict": "incorrect",
+    "code_vs_ilr": "faithful",
+    "md_correct": "yes",
+    "note": "确认 ILR 错：输出节点用 ''.join 丢失空格（疑为流程图/OCR 层面把 ' '.join 误成 ''.join），忠实实现无法通过任何含空格的断言；生成代码与 ILR 逻辑逐行一致并继承同一错误。",
+    "evidence": "candidate('three five nine')：ILR 与生成代码都返回 'threeninefive' ≠ 'three five nine'，第3条断言即挂（前两条 '' 和 'three' 因无空格巧合通过）"
+  }
+}

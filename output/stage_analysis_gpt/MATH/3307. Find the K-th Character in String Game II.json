@@ -1,0 +1,160 @@
+{
+  "task_id": "3307. Find the K-th Character in String Game II",
+  "dataset": "MATH",
+  "difficulty": "hard",
+  "title": null,
+  "result": "failed: negative shift count",
+  "ilr": "{\n  \"problem_id\": \"alice_bob_game\",\n  \"nodes\": [\n    {\"id\": 1, \"type\": \"start\", \"label\": \"Start\", \"next\": 2},\n    {\"id\": 2, \"type\": \"process\", \"label\": \"Input: k (integer), operations (list of integers)\", \"action\": \"ctx['k']=ctx['arg0']; ctx['operations']=ctx['arg1']; ctx['count']=0; ctx['i']=int((ctx['k'].bit_length() - 1))\", \"next\": 3},\n    {\"id\": 3, \"type\": \"decision\", \"label\": \"Is k > 1?\", \"logic\": \"ctx['k'] > 1\", \"true_next\": 5, \"false_next\": 6},\n    {\"id\": 4, \"type\": \"return\", \"label\": \"Return chr(97 + (count % 26))\", \"value\": \"chr(97 + (ctx['count'] % 26))\"},\n    {\"id\": 5, \"type\": \"decision\", \"label\": \"Is k > 1 << i?\", \"logic\": \"ctx['k'] > (1 << ctx['i'])\", \"true_next\": 7, \"false_next\": 11},\n    {\"id\": 6, \"type\": \"return\", \"label\": \"Return chr(97 + (count % 26))\", \"value\": \"chr(97 + (ctx['count'] % 26))\"},\n    {\"id\": 7, \"type\": \"decision\", \"label\": \"Is operations[i] == 1?\", \"logic\": \"ctx['operations'][ctx['i']] == 1\", \"true_next\": 9, \"false_next\": 10},\n    {\"id\": 8, \"type\": \"process\", \"label\": \"Increment count by 1\", \"action\": \"ctx['count'] += 1\", \"next\": 10},\n    {\"id\": 9, \"type\": \"process\", \"label\": \"Update k: k = k - (1 << i)\", \"action\": \"ctx['k'] = ctx['k'] - (1 << ctx['i'])\", \"next\": 11},\n    {\"id\": 10, \"type\": \"process\", \"label\": \"Decrement i by 1\", \"action\": \"ctx['i'] -= 1\", \"next\": 5}\n  ]\n}",
+  "code": "from typing import List\n\ndef kthCharacter(k: int, operations: List[int]) -> str:\n    count = 0\n    i = int((k).bit_length() - 1)\n\n    if k <= 1:\n        return chr(97 + (count % 26))\n\n    while True:\n        if k > (1 << i):\n            if operations[i] == 1:\n                count += 1\n                k -= (1 << i)\n        else:\n            return chr(97 + (count % 26))\n        \n        i -= 1",
+  "prompt": "Alice and Bob are playing a game. Initially, Alice has a string word = \"a\".\n\nYou are given a positive integer k. You are also given an integer array operations, where operations[i] represents the type of the ith operation.\n\nNow Bob will ask Alice to perform all operations in sequence:\n\nIf operations[i] == 0, append a copy of word to itself.\nIf operations[i] == 1, generate a new string by changing each character in word to its next character in the English alphabet, and append it to the original word. For example, performing the operation on \"c\" generates \"cd\" and performing the operation on \"zb\" generates \"zbac\".\nReturn the value of the kth character in word after performing all the operations.\n\nNote that the character 'z' can be changed to 'a' in the second type of operation.\n\n\n\nExample 1:\n\nInput: k = 5, operations = [0,0,0]\n\nOutput: \"a\"\n\nExplanation:\n\nInitially, word == \"a\". Alice performs the three operations as follows:\n\nAppends \"a\" to \"a\", word becomes \"aa\".\nAppends \"aa\" to \"aa\", word becomes \"aaaa\".\nAppends \"aaaa\" to \"aaaa\", word becomes \"aaaaaaaa\".\nExample 2:\n\nInput: k = 10, operations = [0,1,0,1]\n\nOutput: \"b\"\n\nExplanation:\n\nInitially, word == \"a\". Alice performs the four operations as follows:\n\nAppends \"a\" to \"a\", word becomes \"aa\".\nAppends \"bb\" to \"aa\", word becomes \"aabb\".\nAppends \"aabb\" to \"aabb\", word becomes \"aabbaabb\".\nAppends \"bbccbbcc\" to \"aabbaabb\", word becomes \"aabbaabbbbccbbcc\".\n\n\nConstraints:\n\n1 <= k <= 1014\n1 <= operations.length <= 100\noperations[i] is either 0 or 1.\nThe input is generated such that word has at least k characters after all operations.",
+  "test": "assert kthCharacter(5, [0, 0, 0]) == \"a\"  # simple case with only append operations\nassert kthCharacter(10, [0, 1, 0, 1]) == \"b\"  # mix of append and increment operations\nassert kthCharacter(1, [0, 1, 0, 1]) == \"a\"  # first character should be 'a'\n\n# Boundary test cases\nassert kthCharacter(1, [0]) == \"a\"  # smallest k, single operation\nassert kthCharacter(2, [1]) == \"b\"  # smallest k, single increment operation\nassert kthCharacter(1, [1, 1, 1, 1, 1]) == \"a\"  # multiple increment operations, smallest k\n\n",
+  "ocr_data": {
+    "nodes": [
+      {
+        "node_id": 1,
+        "shape_type": "rectangle",
+        "raw_text": "Start",
+        "position": "top"
+      },
+      {
+        "node_id": 2,
+        "shape_type": "rectangle",
+        "raw_text": "Input: k (integer), operations (list of integers)",
+        "position": "middle"
+      },
+      {
+        "node_id": 3,
+        "shape_type": "rectangle",
+        "raw_text": "Calculate i = ceil(log(k, 2)) - 1",
+        "position": "middle"
+      },
+      {
+        "node_id": 4,
+        "shape_type": "rectangle",
+        "raw_text": "Initialize count = 0",
+        "position": "middle"
+      },
+      {
+        "node_id": 5,
+        "shape_type": "diamond",
+        "raw_text": "Is k > 1?",
+        "position": "middle"
+      },
+      {
+        "node_id": 6,
+        "shape_type": "rectangle",
+        "raw_text": "Return chr(97 + (count % 26))",
+        "position": "middle"
+      },
+      {
+        "node_id": 7,
+        "shape_type": "diamond",
+        "raw_text": "Is k > 1 << i?",
+        "position": "middle"
+      },
+      {
+        "node_id": 8,
+        "shape_type": "diamond",
+        "raw_text": "Is operations[i] == 1?",
+        "position": "middle"
+      },
+      {
+        "node_id": 9,
+        "shape_type": "rectangle",
+        "raw_text": "Increment count by 1",
+        "position": "middle"
+      },
+      {
+        "node_id": 10,
+        "shape_type": "rectangle",
+        "raw_text": "Update k: k = k - (1 << i)",
+        "position": "middle"
+      },
+      {
+        "node_id": 11,
+        "shape_type": "rectangle",
+        "raw_text": "Decrement i by 1",
+        "position": "bottom"
+      }
+    ],
+    "edges": [
+      {
+        "from_node": 1,
+        "to_node": 2,
+        "label": ""
+      },
+      {
+        "from_node": 2,
+        "to_node": 3,
+        "label": ""
+      },
+      {
+        "from_node": 3,
+        "to_node": 4,
+        "label": ""
+      },
+      {
+        "from_node": 4,
+        "to_node": 5,
+        "label": ""
+      },
+      {
+        "from_node": 5,
+        "to_node": 6,
+        "label": "No"
+      },
+      {
+        "from_node": 5,
+        "to_node": 7,
+        "label": "Yes"
+      },
+      {
+        "from_node": 7,
+        "to_node": 8,
+        "label": ""
+      },
+      {
+        "from_node": 8,
+        "to_node": 9,
+        "label": "Yes"
+      },
+      {
+        "from_node": 8,
+        "to_node": 10,
+        "label": "No"
+      },
+      {
+        "from_node": 9,
+        "to_node": 10,
+        "label": ""
+      },
+      {
+        "from_node": 10,
+        "to_node": 11,
+        "label": ""
+      },
+      {
+        "from_node": 11,
+        "to_node": 5,
+        "label": ""
+      }
+    ],
+    "other_text": [
+      "No",
+      "Yes",
+      "Yes",
+      "No",
+      "No"
+    ]
+  },
+  "analysis": {
+    "ilr_verdict": "incorrect",
+    "ilr_issues": "节点11'i-=1'被接回节点5（k>1<<i?）而不是节点3（k>1?），k>1检查只在开头做一次，循环永不正常退出，i减到-1时1<<(-1)抛negative shift count；节点4不可达。OCR流程图边#11→#5（即'Is k>1?'菱形）本是对的，是ILR错映射了节点编号。",
+    "code_vs_ilr": "deviates",
+    "code_issues": "代码把k-=(1<<i)错误地嵌进if operations[i]==1之内（ILR节点10对两条路径都执行减法），且k<=2^i就return而非减到k<=1才结束；ops[i]==0时k不减半导致i最终减到-1崩溃，k=2,operations=[1]时更直接返回'a'（期望'b'）。",
+    "error_source": "both",
+    "ocr_contribution": "no",
+    "root_cause": "ILR把循环回边错接到内层判断节点，造成死循环/负移位；生成代码进一步偏离ILR（仅在ops[i]==1时减k、提前return），首个测试即崩溃。",
+    "evidence": "k=5,operations=[0,0,0]：忠实执行ILR在k减到1后i继续减到-1抛ValueError: negative shift count（实测复现）；生成代码因ops[i]==0不减k同样减到i=-1抛相同异常，与失败信息一致；代码对(2,[1])返回'a'而期望'b'。"
+  }
+}

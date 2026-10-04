@@ -1,0 +1,1457 @@
+{
+ "task_id": "biweekly-contest-120-find-polygon-with-the-largest-perimeter",
+ "dataset": "Algorithm",
+ "title": "find-polygon-with-the-largest-perimeter",
+ "difficulty": "Medium",
+ "prompt": "\"\"\"\nYou are given an array of positive integers nums of length n.\nA polygon is a closed plane figure that has at least 3 sides. The longest side of a polygon is smaller than the sum of its other sides.\nConversely, if you have k (k >= 3) positive real numbers a1, a2, a3, ..., ak where a1 <= a2 <= a3 <= ... <= ak and a1 + a2 + a3 + ... + ak-1 > ak, then there always exists a polygon with k sides whose lengths are a1, a2, a3, ..., ak.\nThe perimeter of a polygon is the sum of lengths of its sides.\nReturn the largest possible perimeter of a polygon whose sides can be formed from nums, or -1 if it is not possible to create a polygon.\n\nExample 1:\n\nInput: nums = [5,5,5]\nOutput: 15\nExplanation: The only possible polygon that can be made from nums has 3 sides: 5, 5, and 5. The perimeter is 5 + 5 + 5 = 15.\n\nExample 2:\n\nInput: nums = [1,12,1,2,5,50,3]\nOutput: 12\nExplanation: The polygon with the largest perimeter which can be made from nums has 5 sides: 1, 1, 2, 3, and 5. The perimeter is 1 + 1 + 2 + 3 + 5 = 12.\nWe cannot have a polygon with either 12 or 50 as the longest side because it is not possible to include 2 or more smaller sides that have a greater sum than either of them.\nIt can be shown that the largest possible perimeter is 12.\n\nExample 3:\n\nInput: nums = [5,5,50]\nOutput: -1\nExplanation: There is no possible way to form a polygon from nums, as a polygon has at least 3 sides and 50 > 5 + 5.\n\n\nConstraints:\n\n3 <= n <= 105\n1 <= nums[i] <= 109\n\"\"\"\nclass Solution:\n    def largestPerimeter(self, nums: List[int]) -> int:\n        ",
+ "starter_code": "class Solution:\n    def largestPerimeter(self, nums: List[int]) -> int:\n        ",
+ "entry_point": "",
+ "test": "\nmy_solution = Solution()\n\ntest_input = { \"nums\": [5,5,5] }\nassert my_solution.largestPerimeter(**test_input) == 15\n\ntest_input = { \"nums\": [1,12,1,2,5,50,3] }\nassert my_solution.largestPerimeter(**test_input) == 12\n\ntest_input = { \"nums\": [5,5,50] }\nassert my_solution.largestPerimeter(**test_input) == -1\n\ntest_input = { \"nums\": [1,1,1] }\nassert my_solution.largestPerimeter(**test_input) == 3\n\ntest_input = { \"nums\": [1,1,2] }\nassert my_solution.largestPerimeter(**test_input) == -1\n\ntest_input = { \"nums\": [1,1,3] }\nassert my_solution.largestPerimeter(**test_input) == -1\n\ntest_input = { \"nums\": [1,1,4] }\nassert my_solution.largestPerimeter(**test_input) == -1\n\ntest_input = { \"nums\": [1,1,5] }\nassert my_solution.largestPerimeter(**test_input) == -1\n\ntest_input = { \"nums\": [1,2,1] }\nassert my_solution.largestPerimeter(**test_input) == -1\n\ntest_input = { \"nums\": [1,2,2] }\nassert my_solution.largestPerimeter(**test_input) == 5\n\ntest_input = { \"nums\": [1,2,3] }\nassert my_solution.largestPerimeter(**test_input) == -1\n\ntest_input = { \"nums\": [1,2,4] }\nassert my_solution.largestPerimeter(**test_input) == -1\n\ntest_input = { \"nums\": [1,2,5] }\nassert my_solution.largestPerimeter(**test_input) == -1\n\ntest_input = { \"nums\": [1,3,1] }\nassert my_solution.largestPerimeter(**test_input) == -1\n\ntest_input = { \"nums\": [1,3,2] }\nassert my_solution.largestPerimeter(**test_input) == -1\n\ntest_input = { \"nums\": [1,3,3] }\nassert my_solution.largestPerimeter(**test_input) == 7\n\ntest_input = { \"nums\": [1,3,4] }\nassert my_solution.largestPerimeter(**test_input) == -1\n\ntest_input = { \"nums\": [1,3,5] }\nassert my_solution.largestPerimeter(**test_input) == -1\n\ntest_input = { \"nums\": [1,4,1] }\nassert my_solution.largestPerimeter(**test_input) == -1\n\ntest_input = { \"nums\": [1,4,2] }\nassert my_solution.largestPerimeter(**test_input) == -1\n\ntest_input = { \"nums\": [1,4,3] }\nassert my_solution.largestPerimeter(**test_input) == -1\n\ntest_input = { \"nums\": [1,4,4] }\nassert my_solution.largestPerimeter(**test_input) == 9\n\ntest_input = { \"nums\": [1,4,5] }\nassert my_solution.largestPerimeter(**test_input) == -1\n\ntest_input = { \"nums\": [1,5,1] }\nassert my_solution.largestPerimeter(**test_input) == -1\n\ntest_input = { \"nums\": [1,5,2] }\nassert my_solution.largestPerimeter(**test_input) == -1\n\ntest_input = { \"nums\": [1,5,3] }\nassert my_solution.largestPerimeter(**test_input) == -1\n\ntest_input = { \"nums\": [1,5,4] }\nassert my_solution.largestPerimeter(**test_input) == -1\n\ntest_input = { \"nums\": [1,5,5] }\nassert my_solution.largestPerimeter(**test_input) == 11\n\ntest_input = { \"nums\": [2,1,1] }\nassert my_solution.largestPerimeter(**test_input) == -1\n\ntest_input = { \"nums\": [2,1,2] }\nassert my_solution.largestPerimeter(**test_input) == 5\n\ntest_input = { \"nums\": [2,1,3] }\nassert my_solution.largestPerimeter(**test_input) == -1\n\ntest_input = { \"nums\": [2,1,4] }\nassert my_solution.largestPerimeter(**test_input) == -1\n\ntest_input = { \"nums\": [2,1,5] }\nassert my_solution.largestPerimeter(**test_input) == -1\n\ntest_input = { \"nums\": [2,2,1] }\nassert my_solution.largestPerimeter(**test_input) == 5\n\ntest_input = { \"nums\": [2,2,2] }\nassert my_solution.largestPerimeter(**test_input) == 6\n\ntest_input = { \"nums\": [2,2,3] }\nassert my_solution.largestPerimeter(**test_input) == 7\n\ntest_input = { \"nums\": [2,2,4] }\nassert my_solution.largestPerimeter(**test_input) == -1\n\ntest_input = { \"nums\": [2,2,5] }\nassert my_solution.largestPerimeter(**test_input) == -1\n\ntest_input = { \"nums\": [2,3,1] }\nassert my_solution.largestPerimeter(**test_input) == -1\n\ntest_input = { \"nums\": [2,3,2] }\nassert my_solution.largestPerimeter(**test_input) == 7\n\ntest_input = { \"nums\": [2,3,3] }\nassert my_solution.largestPerimeter(**test_input) == 8\n\ntest_input = { \"nums\": [2,3,4] }\nassert my_solution.largestPerimeter(**test_input) == 9\n\ntest_input = { \"nums\": [2,3,5] }\nassert my_solution.largestPerimeter(**test_input) == -1\n\ntest_input = { \"nums\": [2,4,1] }\nassert my_solution.largestPerimeter(**test_input) == -1\n\ntest_input = { \"nums\": [2,4,2] }\nassert my_solution.largestPerimeter(**test_input) == -1\n\ntest_input = { \"nums\": [2,4,3] }\nassert my_solution.largestPerimeter(**test_input) == 9\n\ntest_input = { \"nums\": [2,4,4] }\nassert my_solution.largestPerimeter(**test_input) == 10\n\ntest_input = { \"nums\": [2,4,5] }\nassert my_solution.largestPerimeter(**test_input) == 11\n\ntest_input = { \"nums\": [2,5,1] }\nassert my_solution.largestPerimeter(**test_input) == -1\n\ntest_input = { \"nums\": [2,5,2] }\nassert my_solution.largestPerimeter(**test_input) == -1\n\ntest_input = { \"nums\": [2,5,3] }\nassert my_solution.largestPerimeter(**test_input) == -1\n\ntest_input = { \"nums\": [2,5,4] }\nassert my_solution.largestPerimeter(**test_input) == 11\n\ntest_input = { \"nums\": [2,5,5] }\nassert my_solution.largestPerimeter(**test_input) == 12\n\ntest_input = { \"nums\": [3,1,1] }\nassert my_solution.largestPerimeter(**test_input) == -1\n\ntest_input = { \"nums\": [3,1,2] }\nassert my_solution.largestPerimeter(**test_input) == -1\n\ntest_input = { \"nums\": [3,1,3] }\nassert my_solution.largestPerimeter(**test_input) == 7\n\ntest_input = { \"nums\": [3,1,4] }\nassert my_solution.largestPerimeter(**test_input) == -1\n\ntest_input = { \"nums\": [3,1,5] }\nassert my_solution.largestPerimeter(**test_input) == -1\n\ntest_input = { \"nums\": [3,2,1] }\nassert my_solution.largestPerimeter(**test_input) == -1\n\ntest_input = { \"nums\": [3,2,2] }\nassert my_solution.largestPerimeter(**test_input) == 7\n\ntest_input = { \"nums\": [3,2,3] }\nassert my_solution.largestPerimeter(**test_input) == 8\n\ntest_input = { \"nums\": [3,2,4] }\nassert my_solution.largestPerimeter(**test_input) == 9\n\ntest_input = { \"nums\": [3,2,5] }\nassert my_solution.largestPerimeter(**test_input) == -1\n\ntest_input = { \"nums\": [3,3,1] }\nassert my_solution.largestPerimeter(**test_input) == 7\n\ntest_input = { \"nums\": [3,3,2] }\nassert my_solution.largestPerimeter(**test_input) == 8\n\ntest_input = { \"nums\": [3,3,3] }\nassert my_solution.largestPerimeter(**test_input) == 9\n\ntest_input = { \"nums\": [3,3,4] }\nassert my_solution.largestPerimeter(**test_input) == 10\n\ntest_input = { \"nums\": [3,3,5] }\nassert my_solution.largestPerimeter(**test_input) == 11\n\ntest_input = { \"nums\": [3,4,1] }\nassert my_solution.largestPerimeter(**test_input) == -1\n\ntest_input = { \"nums\": [3,4,2] }\nassert my_solution.largestPerimeter(**test_input) == 9\n\ntest_input = { \"nums\": [3,4,3] }\nassert my_solution.largestPerimeter(**test_input) == 10\n\ntest_input = { \"nums\": [3,4,4] }\nassert my_solution.largestPerimeter(**test_input) == 11\n\ntest_input = { \"nums\": [3,4,5] }\nassert my_solution.largestPerimeter(**test_input) == 12\n\ntest_input = { \"nums\": [3,5,1] }\nassert my_solution.largestPerimeter(**test_input) == -1\n\ntest_input = { \"nums\": [3,5,2] }\nassert my_solution.largestPerimeter(**test_input) == -1\n\ntest_input = { \"nums\": [3,5,3] }\nassert my_solution.largestPerimeter(**test_input) == 11\n\ntest_input = { \"nums\": [3,5,4] }\nassert my_solution.largestPerimeter(**test_input) == 12\n\ntest_input = { \"nums\": [3,5,5] }\nassert my_solution.largestPerimeter(**test_input) == 13\n\ntest_input = { \"nums\": [4,1,1] }\nassert my_solution.largestPerimeter(**test_input) == -1\n\ntest_input = { \"nums\": [4,1,2] }\nassert my_solution.largestPerimeter(**test_input) == -1\n\ntest_input = { \"nums\": [4,1,3] }\nassert my_solution.largestPerimeter(**test_input) == -1\n\ntest_input = { \"nums\": [4,1,4] }\nassert my_solution.largestPerimeter(**test_input) == 9\n\ntest_input = { \"nums\": [4,1,5] }\nassert my_solution.largestPerimeter(**test_input) == -1\n\ntest_input = { \"nums\": [4,2,1] }\nassert my_solution.largestPerimeter(**test_input) == -1\n\ntest_input = { \"nums\": [4,2,2] }\nassert my_solution.largestPerimeter(**test_input) == -1\n\ntest_input = { \"nums\": [4,2,3] }\nassert my_solution.largestPerimeter(**test_input) == 9\n\ntest_input = { \"nums\": [4,2,4] }\nassert my_solution.largestPerimeter(**test_input) == 10\n\ntest_input = { \"nums\": [4,2,5] }\nassert my_solution.largestPerimeter(**test_input) == 11\n\ntest_input = { \"nums\": [4,3,1] }\nassert my_solution.largestPerimeter(**test_input) == -1\n\ntest_input = { \"nums\": [4,3,2] }\nassert my_solution.largestPerimeter(**test_input) == 9\n\ntest_input = { \"nums\": [4,3,3] }\nassert my_solution.largestPerimeter(**test_input) == 10\n\ntest_input = { \"nums\": [4,3,4] }\nassert my_solution.largestPerimeter(**test_input) == 11\n\ntest_input = { \"nums\": [4,3,5] }\nassert my_solution.largestPerimeter(**test_input) == 12\n\ntest_input = { \"nums\": [4,4,1] }\nassert my_solution.largestPerimeter(**test_input) == 9\n\ntest_input = { \"nums\": [4,4,2] }\nassert my_solution.largestPerimeter(**test_input) == 10\n\ntest_input = { \"nums\": [4,4,3] }\nassert my_solution.largestPerimeter(**test_input) == 11\n\ntest_input = { \"nums\": [4,4,4] }\nassert my_solution.largestPerimeter(**test_input) == 12\n\ntest_input = { \"nums\": [4,4,5] }\nassert my_solution.largestPerimeter(**test_input) == 13\n\ntest_input = { \"nums\": [4,5,1] }\nassert my_solution.largestPerimeter(**test_input) == -1\n\ntest_input = { \"nums\": [4,5,2] }\nassert my_solution.largestPerimeter(**test_input) == 11",
+ "test_cases": [
+  {
+   "input": {
+    "args": [
+     [
+      5,
+      5,
+      5
+     ]
+    ]
+   },
+   "output": 15,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      1,
+      12,
+      1,
+      2,
+      5,
+      50,
+      3
+     ]
+    ]
+   },
+   "output": 12,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      5,
+      5,
+      50
+     ]
+    ]
+   },
+   "output": -1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      1,
+      1,
+      1
+     ]
+    ]
+   },
+   "output": 3,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      1,
+      1,
+      2
+     ]
+    ]
+   },
+   "output": -1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      1,
+      1,
+      3
+     ]
+    ]
+   },
+   "output": -1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      1,
+      1,
+      4
+     ]
+    ]
+   },
+   "output": -1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      1,
+      1,
+      5
+     ]
+    ]
+   },
+   "output": -1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      1,
+      2,
+      1
+     ]
+    ]
+   },
+   "output": -1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      1,
+      2,
+      2
+     ]
+    ]
+   },
+   "output": 5,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      1,
+      2,
+      3
+     ]
+    ]
+   },
+   "output": -1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      1,
+      2,
+      4
+     ]
+    ]
+   },
+   "output": -1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      1,
+      2,
+      5
+     ]
+    ]
+   },
+   "output": -1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      1,
+      3,
+      1
+     ]
+    ]
+   },
+   "output": -1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      1,
+      3,
+      2
+     ]
+    ]
+   },
+   "output": -1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      1,
+      3,
+      3
+     ]
+    ]
+   },
+   "output": 7,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      1,
+      3,
+      4
+     ]
+    ]
+   },
+   "output": -1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      1,
+      3,
+      5
+     ]
+    ]
+   },
+   "output": -1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      1,
+      4,
+      1
+     ]
+    ]
+   },
+   "output": -1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      1,
+      4,
+      2
+     ]
+    ]
+   },
+   "output": -1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      1,
+      4,
+      3
+     ]
+    ]
+   },
+   "output": -1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      1,
+      4,
+      4
+     ]
+    ]
+   },
+   "output": 9,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      1,
+      4,
+      5
+     ]
+    ]
+   },
+   "output": -1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      1,
+      5,
+      1
+     ]
+    ]
+   },
+   "output": -1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      1,
+      5,
+      2
+     ]
+    ]
+   },
+   "output": -1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      1,
+      5,
+      3
+     ]
+    ]
+   },
+   "output": -1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      1,
+      5,
+      4
+     ]
+    ]
+   },
+   "output": -1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      1,
+      5,
+      5
+     ]
+    ]
+   },
+   "output": 11,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      2,
+      1,
+      1
+     ]
+    ]
+   },
+   "output": -1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      2,
+      1,
+      2
+     ]
+    ]
+   },
+   "output": 5,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      2,
+      1,
+      3
+     ]
+    ]
+   },
+   "output": -1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      2,
+      1,
+      4
+     ]
+    ]
+   },
+   "output": -1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      2,
+      1,
+      5
+     ]
+    ]
+   },
+   "output": -1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      2,
+      2,
+      1
+     ]
+    ]
+   },
+   "output": 5,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      2,
+      2,
+      2
+     ]
+    ]
+   },
+   "output": 6,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      2,
+      2,
+      3
+     ]
+    ]
+   },
+   "output": 7,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      2,
+      2,
+      4
+     ]
+    ]
+   },
+   "output": -1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      2,
+      2,
+      5
+     ]
+    ]
+   },
+   "output": -1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      2,
+      3,
+      1
+     ]
+    ]
+   },
+   "output": -1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      2,
+      3,
+      2
+     ]
+    ]
+   },
+   "output": 7,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      2,
+      3,
+      3
+     ]
+    ]
+   },
+   "output": 8,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      2,
+      3,
+      4
+     ]
+    ]
+   },
+   "output": 9,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      2,
+      3,
+      5
+     ]
+    ]
+   },
+   "output": -1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      2,
+      4,
+      1
+     ]
+    ]
+   },
+   "output": -1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      2,
+      4,
+      2
+     ]
+    ]
+   },
+   "output": -1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      2,
+      4,
+      3
+     ]
+    ]
+   },
+   "output": 9,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      2,
+      4,
+      4
+     ]
+    ]
+   },
+   "output": 10,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      2,
+      4,
+      5
+     ]
+    ]
+   },
+   "output": 11,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      2,
+      5,
+      1
+     ]
+    ]
+   },
+   "output": -1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      2,
+      5,
+      2
+     ]
+    ]
+   },
+   "output": -1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      2,
+      5,
+      3
+     ]
+    ]
+   },
+   "output": -1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      2,
+      5,
+      4
+     ]
+    ]
+   },
+   "output": 11,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      2,
+      5,
+      5
+     ]
+    ]
+   },
+   "output": 12,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      3,
+      1,
+      1
+     ]
+    ]
+   },
+   "output": -1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      3,
+      1,
+      2
+     ]
+    ]
+   },
+   "output": -1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      3,
+      1,
+      3
+     ]
+    ]
+   },
+   "output": 7,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      3,
+      1,
+      4
+     ]
+    ]
+   },
+   "output": -1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      3,
+      1,
+      5
+     ]
+    ]
+   },
+   "output": -1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      3,
+      2,
+      1
+     ]
+    ]
+   },
+   "output": -1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      3,
+      2,
+      2
+     ]
+    ]
+   },
+   "output": 7,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      3,
+      2,
+      3
+     ]
+    ]
+   },
+   "output": 8,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      3,
+      2,
+      4
+     ]
+    ]
+   },
+   "output": 9,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      3,
+      2,
+      5
+     ]
+    ]
+   },
+   "output": -1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      3,
+      3,
+      1
+     ]
+    ]
+   },
+   "output": 7,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      3,
+      3,
+      2
+     ]
+    ]
+   },
+   "output": 8,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      3,
+      3,
+      3
+     ]
+    ]
+   },
+   "output": 9,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      3,
+      3,
+      4
+     ]
+    ]
+   },
+   "output": 10,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      3,
+      3,
+      5
+     ]
+    ]
+   },
+   "output": 11,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      3,
+      4,
+      1
+     ]
+    ]
+   },
+   "output": -1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      3,
+      4,
+      2
+     ]
+    ]
+   },
+   "output": 9,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      3,
+      4,
+      3
+     ]
+    ]
+   },
+   "output": 10,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      3,
+      4,
+      4
+     ]
+    ]
+   },
+   "output": 11,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      3,
+      4,
+      5
+     ]
+    ]
+   },
+   "output": 12,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      3,
+      5,
+      1
+     ]
+    ]
+   },
+   "output": -1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      3,
+      5,
+      2
+     ]
+    ]
+   },
+   "output": -1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      3,
+      5,
+      3
+     ]
+    ]
+   },
+   "output": 11,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      3,
+      5,
+      4
+     ]
+    ]
+   },
+   "output": 12,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      3,
+      5,
+      5
+     ]
+    ]
+   },
+   "output": 13,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      4,
+      1,
+      1
+     ]
+    ]
+   },
+   "output": -1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      4,
+      1,
+      2
+     ]
+    ]
+   },
+   "output": -1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      4,
+      1,
+      3
+     ]
+    ]
+   },
+   "output": -1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      4,
+      1,
+      4
+     ]
+    ]
+   },
+   "output": 9,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      4,
+      1,
+      5
+     ]
+    ]
+   },
+   "output": -1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      4,
+      2,
+      1
+     ]
+    ]
+   },
+   "output": -1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      4,
+      2,
+      2
+     ]
+    ]
+   },
+   "output": -1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      4,
+      2,
+      3
+     ]
+    ]
+   },
+   "output": 9,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      4,
+      2,
+      4
+     ]
+    ]
+   },
+   "output": 10,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      4,
+      2,
+      5
+     ]
+    ]
+   },
+   "output": 11,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      4,
+      3,
+      1
+     ]
+    ]
+   },
+   "output": -1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      4,
+      3,
+      2
+     ]
+    ]
+   },
+   "output": 9,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      4,
+      3,
+      3
+     ]
+    ]
+   },
+   "output": 10,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      4,
+      3,
+      4
+     ]
+    ]
+   },
+   "output": 11,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      4,
+      3,
+      5
+     ]
+    ]
+   },
+   "output": 12,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      4,
+      4,
+      1
+     ]
+    ]
+   },
+   "output": 9,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      4,
+      4,
+      2
+     ]
+    ]
+   },
+   "output": 10,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      4,
+      4,
+      3
+     ]
+    ]
+   },
+   "output": 11,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      4,
+      4,
+      4
+     ]
+    ]
+   },
+   "output": 12,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      4,
+      4,
+      5
+     ]
+    ]
+   },
+   "output": 13,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      4,
+      5,
+      1
+     ]
+    ]
+   },
+   "output": -1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      4,
+      5,
+      2
+     ]
+    ]
+   },
+   "output": 11,
+   "explanation": ""
+  }
+ ],
+ "original_ilr": "{\n  \"problem_id\": \"largestPerimeter\",\n  \"nodes\": [\n    {\n      \"id\": 1,\n      \"type\": \"start\",\n      \"label\": \"Start\",\n      \"next\": 2\n    },\n    {\n      \"id\": 2,\n      \"type\": \"process\",\n      \"label\": \"Input: nums (List[int])\",\n      \"action\": \"ctx['nums'] = ctx['arg0']; ctx['p'] = sum(ctx['nums']); ctx['found'] = False\",\n      \"next\": 3\n    },\n    {\n      \"id\": 3,\n      \"type\": \"process\",\n      \"label\": \"Sort nums in descending order\",\n      \"action\": \"ctx['nums'] = sorted(ctx['nums'], reverse=True)\",\n      \"next\": 4\n    },\n    {\n      \"id\": 4,\n      \"type\": \"process\",\n      \"label\": \"For each v in sorted(nums)\",\n      \"action\": \"for v in ctx['nums']: ctx['current_v'] = v\",\n      \"next\": 5\n    },\n    {\n      \"id\": 5,\n      \"type\": \"decision\",\n      \"label\": \"Is v < p - v?\",\n      \"logic\": \"ctx['current_v'] < ctx['p'] - ctx['current_v']\",\n      \"true_next\": 6,\n      \"false_next\": 7\n    },\n    {\n      \"id\": 6,\n      \"type\": \"process\",\n      \"label\": \"Do nothing (valid polygon side)\",\n      \"action\": \"ctx['found'] = True; ctx['p'] = ctx['p'] - ctx['current_v']\",\n      \"next\": 4\n    },\n    {\n      \"id\": 7,\n      \"type\": \"process\",\n      \"label\": \"Update p: p -= v\",\n      \"action\": \"ctx['p'] -= ctx['current_v']\",\n      \"next\": 4\n    },\n    {\n      \"id\": 8,\n      \"type\": \"decision\",\n      \"label\": \"Did we find a valid perimeter?\",\n      \"logic\": \"ctx['found']\",\n      \"true_next\": 9,\n      \"false_next\": 10\n    },\n    {\n      \"id\": 9,\n      \"type\": \"return\",\n      \"label\": \"Return p (largest valid perimeter)\",\n      \"value\": \"ctx['p']\"\n    },\n    {\n      \"id\": 10,\n      \"type\": \"return\",\n      \"label\": \"Return -1 (no valid polygon)\",\n      \"value\": \"-1\"\n    }\n  ]\n}",
+ "original_code": "class Solution:\n    def largestPerimeter(self, nums: List[int]) -> int:\n        p = sum(nums)\n        found = False\n        nums.sort(reverse=True)\n        \n        for v in nums:\n            if v < p - v:\n                found = True\n                p -= v\n                continue\n            p -= v\n        \n        return p if found else -1",
+ "ocr_data": {
+  "nodes": [
+   {
+    "node_id": 1,
+    "shape_type": "rectangle",
+    "raw_text": "Start",
+    "position": "top"
+   },
+   {
+    "node_id": 2,
+    "shape_type": "rectangle",
+    "raw_text": "Input: nums (List[int])",
+    "position": "middle"
+   },
+   {
+    "node_id": 3,
+    "shape_type": "rectangle",
+    "raw_text": "Calculate perimeter p = sum(nums)",
+    "position": "middle"
+   },
+   {
+    "node_id": 4,
+    "shape_type": "rectangle",
+    "raw_text": "Sort nums in descending order",
+    "position": "middle"
+   },
+   {
+    "node_id": 5,
+    "shape_type": "rectangle",
+    "raw_text": "For each v in sorted(nums)",
+    "position": "middle"
+   },
+   {
+    "node_id": 6,
+    "shape_type": "diamond",
+    "raw_text": "Is v < p - v?",
+    "position": "bottom"
+   },
+   {
+    "node_id": 7,
+    "shape_type": "rectangle",
+    "raw_text": "Do nothing (valid polygon side)",
+    "position": "bottom"
+   },
+   {
+    "node_id": 8,
+    "shape_type": "rectangle",
+    "raw_text": "Update p: p -= v",
+    "position": "bottom"
+   },
+   {
+    "node_id": 9,
+    "shape_type": "diamond",
+    "raw_text": "Did we find a valid perimeter?",
+    "position": "bottom"
+   },
+   {
+    "node_id": 10,
+    "shape_type": "rectangle",
+    "raw_text": "Return p (largest valid perimeter)",
+    "position": "bottom"
+   },
+   {
+    "node_id": 11,
+    "shape_type": "rectangle",
+    "raw_text": "Return -1 (no valid polygon)",
+    "position": "bottom"
+   }
+  ],
+  "edges": [
+   {
+    "from_node": 1,
+    "to_node": 2,
+    "label": ""
+   },
+   {
+    "from_node": 2,
+    "to_node": 3,
+    "label": ""
+   },
+   {
+    "from_node": 3,
+    "to_node": 4,
+    "label": ""
+   },
+   {
+    "from_node": 4,
+    "to_node": 5,
+    "label": ""
+   },
+   {
+    "from_node": 5,
+    "to_node": 6,
+    "label": ""
+   },
+   {
+    "from_node": 6,
+    "to_node": 7,
+    "label": "Yes"
+   },
+   {
+    "from_node": 6,
+    "to_node": 8,
+    "label": "No"
+   },
+   {
+    "from_node": 7,
+    "to_node": 5,
+    "label": ""
+   },
+   {
+    "from_node": 8,
+    "to_node": 5,
+    "label": ""
+   },
+   {
+    "from_node": 5,
+    "to_node": 9,
+    "label": ""
+   },
+   {
+    "from_node": 9,
+    "to_node": 10,
+    "label": "Yes"
+   },
+   {
+    "from_node": 9,
+    "to_node": 11,
+    "label": "No"
+   }
+  ],
+  "other_text": []
+ },
+ "test_result": {},
+ "status": "completed",
+ "fixed_ilr": null,
+ "modified_code": null,
+ "ilr_fix_log": "",
+ "bug_injected": ""
+}

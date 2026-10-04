@@ -1,0 +1,47 @@
+{
+  "dataset": "MATH",
+  "model": "Qwen-Qwen3-VL-8B-Instruct-Qwen-Qwen3-VL-8B-Instruct",
+  "total_samples": 125,
+  "use_reflection": false,
+  "max_iterations": 0,
+  "pass_rate": {
+    "iteration_0": {
+      "passed": 93,
+      "total": 125,
+      "rate": 0.744
+    }
+  },
+  "tokens": {
+    "total": {
+      "prompt_tokens": 1050642,
+      "completion_tokens": 127223,
+      "total_tokens": 1177865
+    },
+    "average_per_sample": {
+      "prompt_tokens": 8405.14,
+      "completion_tokens": 1017.78,
+      "total_tokens": 9422.92
+    }
+  },
+  "time": {
+    "total_time": 5403.62,
+    "average_per_sample": 43.23
+  },
+  "pass_rate_by_difficulty": {
+    "medium": {
+      "total": 40,
+      "passed": 31,
+      "rate": 0.775
+    },
+    "easy": {
+      "total": 45,
+      "passed": 42,
+      "rate": 0.9333
+    },
+    "hard": {
+      "total": 40,
+      "passed": 20,
+      "rate": 0.5
+    }
+  }
+}

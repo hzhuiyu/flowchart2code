@@ -1,0 +1,46 @@
+{
+  "problem_id": "max_balanced_subsequence_sum",
+  "nodes": [
+    {
+      "id": 1,
+      "type": "start",
+      "label": "Start",
+      "next": 2
+    },
+    {
+      "id": 2,
+      "type": "process",
+      "label": "Input: nums (List[int])",
+      "action": "ctx['nums'] = ctx['arg0']; ctx['n'] = len(ctx['nums']); ctx['dp'] = [0] * ctx['n']; ctx['i'] = 0",
+      "next": 3
+    },
+    {
+      "id": 3,
+      "type": "decision",
+      "label": "For i from 0 to n - 1",
+      "logic": "ctx['i'] < ctx['n']",
+      "true_next": 4,
+      "false_next": 6
+    },
+    {
+      "id": 4,
+      "type": "process",
+      "label": "dp[i] = nums[i] + max(0, max dp[j] over j < i with nums[j] - j <= nums[i] - i)",
+      "action": "ctx['dp'][ctx['i']] = ctx['nums'][ctx['i']]\nb = ctx['nums'][ctx['i']] - ctx['i']\nbest = 0\nj = 0\nwhile j < ctx['i']:\n    if ctx['nums'][j] - j <= b and ctx['dp'][j] > best:\n        best = ctx['dp'][j]\n    j += 1\nctx['dp'][ctx['i']] += best",
+      "next": 14
+    },
+    {
+      "id": 14,
+      "type": "process",
+      "label": "Continue to next iteration",
+      "action": "ctx['i'] += 1",
+      "next": 3
+    },
+    {
+      "id": 6,
+      "type": "end",
+      "label": "Output: max(dp)",
+      "output": "max(ctx['dp'])"
+    }
+  ]
+}

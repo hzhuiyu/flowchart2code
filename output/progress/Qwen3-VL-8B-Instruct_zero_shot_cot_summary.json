@@ -1,0 +1,27 @@
+{
+  "model_name": "Qwen3-VL-8B-Instruct_zero_shot_cot",
+  "datasets": {
+    "HumanEval-V": {
+      "status": "completed",
+      "message": "Evaluation completed"
+    },
+    "Algorithm": {
+      "status": "completed",
+      "message": "Evaluation completed"
+    },
+    "MATH": {
+      "status": "completed",
+      "message": "Evaluation completed"
+    },
+    "LiveCodeBench": {
+      "status": "completed",
+      "message": "Evaluation completed"
+    }
+  },
+  "summary": {
+    "total": 4,
+    "completed": 4,
+    "failed": 0,
+    "skipped": 0
+  }
+}

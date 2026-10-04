@@ -1,0 +1,345 @@
+{
+  "task_id": "3312. Sorted GCD Pair Queries",
+  "dataset": "MATH",
+  "difficulty": "hard",
+  "title": null,
+  "result": "failed: list index out of range",
+  "ilr": "{\n  \"problem_id\": \"gcd_pairs\",\n  \"nodes\": [\n    {\"id\": 1, \"type\": \"start\", \"label\": \"Start\", \"next\": 2},\n    {\"id\": 2, \"type\": \"process\", \"label\": \"Input: nums (List[int]), queries (List[int])\", \"action\": \"ctx['nums']=ctx['arg0']; ctx['queries']=ctx['arg1']; ctx['MX']=50001; ctx['divisors']=[[] for _ in range(ctx['MX'])]; ctx['countD']={}; ctx['countG']={}; ctx['ans']=[]; ctx['M']=max(ctx['nums'])\", \"next\": 3},\n    {\"id\": 3, \"type\": \"process\", \"label\": \"Loop x from 1 to MX-1\", \"action\": \"for ctx['x'] in range(1, ctx['MX']):\", \"next\": 4},\n    {\"id\": 4, \"type\": \"process\", \"label\": \"Loop y from x to MX-1 with step x\", \"action\": \"for ctx['y'] in range(ctx['x'], ctx['MX'], ctx['x']): ctx['divisors'][ctx['y']].append(ctx['x'])\", \"next\": 5},\n    {\"id\": 5, \"type\": \"process\", \"label\": \"Initialize countA as Counter(nums)\", \"action\": \"ctx['countA']={}; for num in ctx['nums']: ctx['countA'][num] = ctx['countA'].get(num, 0) + 1\", \"next\": 6},\n    {\"id\": 6, \"type\": \"process\", \"label\": \"Loop through countA items\", \"action\": \"for ctx['x'], ctx['freq'] in ctx['countA'].items():\", \"next\": 7},\n    {\"id\": 7, \"type\": \"process\", \"label\": \"Loop through divisors of x\", \"action\": \"for ctx['d'] in ctx['divisors'][ctx['x']]: ctx['countD'][ctx['d']] = ctx['countD'].get(ctx['d'], 0) + ctx['freq']\", \"next\": 8},\n    {\"id\": 8, \"type\": \"process\", \"label\": \"Initialize countG as Counter()\", \"action\": \"ctx['countG']={}\", \"next\": 9},\n    {\"id\": 9, \"type\": \"process\", \"label\": \"Loop g from M to 1 with step -1\", \"action\": \"for ctx['g'] in range(ctx['M'], 0, -1):\", \"next\": 10},\n    {\"id\": 10, \"type\": \"process\", \"label\": \"Set c as countD[g]\", \"action\": \"ctx['c'] = ctx['countD'].get(ctx['g'], 0)\", \"next\": 11},\n    {\"id\": 11, \"type\": \"decision\", \"label\": \"Is c <= 1?\", \"logic\": \"ctx['c'] <= 1\", \"true_next\": 12, \"false_next\": 13},\n    {\"id\": 12, \"type\": \"process\", \"label\": \"Set countG[g] as c * (c - 1) // 2\", \"action\": \"ctx['countG'][ctx['g']] = ctx['c'] * (ctx['c'] - 1) // 2\", \"next\": 13},\n    {\"id\": 13, \"type\": \"process\", \"label\": \"Subtract sum of countG[x] for x from 2g to M with step g\", \"action\": \"for ctx['x'] in range(2 * ctx['g'], ctx['M'] + 1, ctx['g']): ctx['countG'][ctx['g']] -= ctx['countG'].get(ctx['x'], 0)\", \"next\": 14},\n    {\"id\": 14, \"type\": \"process\", \"label\": \"Create glist from reversed countG keys\", \"action\": \"ctx['glist'] = list(reversed(sorted(ctx['countG'].keys())))\", \"next\": 15},\n    {\"id\": 15, \"type\": \"process\", \"label\": \"Create vlist from reversed countG values\", \"action\": \"ctx['vlist'] = list(reversed(ctx['countG'].values()))\", \"next\": 16},\n    {\"id\": 16, \"type\": \"process\", \"label\": \"Create Pvlist as accumulated vlist\", \"action\": \"ctx['Pvlist'] = []; ctx['acc'] = 0; for v in ctx['vlist']: ctx['acc'] += v; ctx['Pvlist'].append(ctx['acc'])\", \"next\": 17},\n    {\"id\": 17, \"type\": \"process\", \"label\": \"Loop through queries\", \"action\": \"for ctx['q'] in ctx['queries']:\", \"next\": 18},\n    {\"id\": 18, \"type\": \"process\", \"label\": \"Set i as bisect_left(Pvlist, q + 1)\", \"action\": \"ctx['i'] = bisect.bisect_left(ctx['Pvlist'], ctx['q'] + 1)\", \"next\": 19},\n    {\"id\": 19, \"type\": \"process\", \"label\": \"Append glist[i] to ans\", \"action\": \"ctx['ans'].append(ctx['glist'][ctx['i']])\", \"next\": 20},\n    {\"id\": 20, \"type\": \"end\", \"label\": \"Output: ans\", \"output\": \"ctx['ans']\"}\n  ]\n}",
+  "code": "from typing import List\nfrom collections import Counter\nimport bisect\n\ndef gcdValues(A: List[int], queries: List[int]) -> List[int]:\n    MX = 50001\n    divisors = [[] for _ in range(MX)]\n    countD = {}\n    countG = {}\n    ans = []\n    M = max(A)\n\n    for x in range(1, MX):\n        for y in range(x, MX, x):\n            divisors[y].append(x)\n\n    countA = {}\n    for num in A:\n        countA[num] = countA.get(num, 0) + 1\n\n    for x, freq in countA.items():\n        for d in divisors[x]:\n            countD[d] = countD.get(d, 0) + freq\n\n    countG = {}\n    for g in range(M, 0, -1):\n        c = countD.get(g, 0)\n        if c <= 1:\n            countG[g] = c * (c - 1) // 2\n        for x in range(2 * g, M + 1, g):\n            countG[g] = countG.get(g, 0) - countG.get(x, 0)\n\n    glist = list(reversed(sorted(countG.keys())))\n    vlist = list(reversed(countG.values()))\n    \n    Pvlist = []\n    acc = 0\n    for v in vlist:\n        acc += v\n        Pvlist.append(acc)\n\n    for q in queries:\n        i = bisect.bisect_left(Pvlist, q + 1)\n        ans.append(glist[i])\n\n    return ans",
+  "prompt": "You are given an integer array nums of length n and an integer array queries.\n\nLet gcdPairs denote an array obtained by calculating the\nGCD\n of all possible pairs (nums[i], nums[j]), where 0 <= i < j < n, and then sorting these values in ascending order.\n\nFor each query queries[i], you need to find the element at index queries[i] in gcdPairs.\n\nReturn an integer array answer, where answer[i] is the value at gcdPairs[queries[i]] for each query.\n\nThe term gcd(a, b) denotes the greatest common divisor of a and b.\n\n\n\nExample 1:\n\nInput: nums = [2,3,4], queries = [0,2,2]\n\nOutput: [1,2,2]\n\nExplanation:\n\ngcdPairs = [gcd(nums[0], nums[1]), gcd(nums[0], nums[2]), gcd(nums[1], nums[2])] = [1, 2, 1].\n\nAfter sorting in ascending order, gcdPairs = [1, 1, 2].\n\nSo, the answer is [gcdPairs[queries[0]], gcdPairs[queries[1]], gcdPairs[queries[2]]] = [1, 2, 2].\n\nExample 2:\n\nInput: nums = [4,4,2,1], queries = [5,3,1,0]\n\nOutput: [4,2,1,1]\n\nExplanation:\n\ngcdPairs sorted in ascending order is [1, 1, 1, 2, 2, 4].\n\nExample 3:\n\nInput: nums = [2,2], queries = [0,0]\n\nOutput: [2,2]\n\nExplanation:\n\ngcdPairs = [2].\n\n\n\nConstraints:\n\n2 <= n == nums.length <= 105\n1 <= nums[i] <= 5 * 104\n1 <= queries.length <= 105\n0 <= queries[i] < n * (n - 1) / 2",
+  "test": "assert gcdValues([2, 3, 4], [0, 2, 2]) == [1, 2, 2]  # Example 1\nassert gcdValues([4, 4, 2, 1], [5, 3, 1, 0]) == [4, 2, 1, 1]  # Example 2\nassert gcdValues([2, 2], [0, 0]) == [2, 2]  # Example 3\n\n# Boundary test cases\nassert gcdValues([1, 1], [0]) == [1]  # smallest non-trivial case\nassert gcdValues([50000, 50000], [0]) == [50000]  # largest possible values\nassert gcdValues([1, 50000], [0]) == [1]  # smallest and largest values\n\n# Large number test cases\nassert gcdValues([i for i in range(1, 101)], [0, 50, 99]) == [1, 1, 1]  # large range of numbers\nassert gcdValues([i for i in range(1, 1001)], [0, 500, 999]) == [1, 1, 1]  # larger range of numbers\nassert gcdValues([i for i in range(1, 10001)], [0, 5000, 9999]) == [1, 1, 1]  # even larger range of numbers",
+  "ocr_data": {
+    "nodes": [
+      {
+        "node_id": 1,
+        "shape_type": "rectangle",
+        "raw_text": "Start",
+        "position": "top"
+      },
+      {
+        "node_id": 2,
+        "shape_type": "rectangle",
+        "raw_text": "Input: nums (List[int]), queries (List[int])",
+        "position": "middle"
+      },
+      {
+        "node_id": 3,
+        "shape_type": "rectangle",
+        "raw_text": "Initialize MX = 50001",
+        "position": "middle"
+      },
+      {
+        "node_id": 4,
+        "shape_type": "rectangle",
+        "raw_text": "Initialize divisors as list of empty lists",
+        "position": "middle"
+      },
+      {
+        "node_id": 5,
+        "shape_type": "rectangle",
+        "raw_text": "Loop x from 1 to MX-1",
+        "position": "middle"
+      },
+      {
+        "node_id": 6,
+        "shape_type": "rectangle",
+        "raw_text": "Loop y from x to MX-1 with step x",
+        "position": "middle"
+      },
+      {
+        "node_id": 7,
+        "shape_type": "rectangle",
+        "raw_text": "Append x to divisors[y]",
+        "position": "middle"
+      },
+      {
+        "node_id": 8,
+        "shape_type": "rectangle",
+        "raw_text": "Initialize M as max(nums)",
+        "position": "middle"
+      },
+      {
+        "node_id": 9,
+        "shape_type": "rectangle",
+        "raw_text": "Initialize countA as Counter(nums)",
+        "position": "middle"
+      },
+      {
+        "node_id": 10,
+        "shape_type": "rectangle",
+        "raw_text": "Initialize countD as Counter()",
+        "position": "middle"
+      },
+      {
+        "node_id": 11,
+        "shape_type": "rectangle",
+        "raw_text": "Loop through countA items",
+        "position": "middle"
+      },
+      {
+        "node_id": 12,
+        "shape_type": "rectangle",
+        "raw_text": "Loop through divisors of x",
+        "position": "middle"
+      },
+      {
+        "node_id": 13,
+        "shape_type": "rectangle",
+        "raw_text": "Increment countD[d] by freq",
+        "position": "middle"
+      },
+      {
+        "node_id": 14,
+        "shape_type": "rectangle",
+        "raw_text": "Initialize countG as Counter()",
+        "position": "middle"
+      },
+      {
+        "node_id": 15,
+        "shape_type": "rectangle",
+        "raw_text": "Loop g from M to 1 with step -1",
+        "position": "middle"
+      },
+      {
+        "node_id": 16,
+        "shape_type": "rectangle",
+        "raw_text": "Set c as countD[g]",
+        "position": "middle"
+      },
+      {
+        "node_id": 17,
+        "shape_type": "diamond",
+        "raw_text": "Is c <= 1?",
+        "position": "middle"
+      },
+      {
+        "node_id": 18,
+        "shape_type": "rectangle",
+        "raw_text": "Set countG[g] as c * (c - 1) // 2",
+        "position": "middle"
+      },
+      {
+        "node_id": 19,
+        "shape_type": "rectangle",
+        "raw_text": "Subtract sum of countG[x] for x from 2g to M with step g",
+        "position": "middle"
+      },
+      {
+        "node_id": 20,
+        "shape_type": "rectangle",
+        "raw_text": "Create glist from reversed countG keys",
+        "position": "middle"
+      },
+      {
+        "node_id": 21,
+        "shape_type": "rectangle",
+        "raw_text": "Create vlist from reversed countG values",
+        "position": "middle"
+      },
+      {
+        "node_id": 22,
+        "shape_type": "rectangle",
+        "raw_text": "Create Pvlist as accumulated vlist",
+        "position": "middle"
+      },
+      {
+        "node_id": 23,
+        "shape_type": "rectangle",
+        "raw_text": "Initialize ans as empty list",
+        "position": "middle"
+      },
+      {
+        "node_id": 24,
+        "shape_type": "rectangle",
+        "raw_text": "Loop through queries",
+        "position": "middle"
+      },
+      {
+        "node_id": 25,
+        "shape_type": "rectangle",
+        "raw_text": "Set i as bisect_left(Pvlist, q + 1)",
+        "position": "middle"
+      },
+      {
+        "node_id": 26,
+        "shape_type": "rectangle",
+        "raw_text": "Output: ans",
+        "position": "middle"
+      },
+      {
+        "node_id": 27,
+        "shape_type": "rectangle",
+        "raw_text": "Append glist[i] to ans",
+        "position": "middle"
+      }
+    ],
+    "edges": [
+      {
+        "from_node": 1,
+        "to_node": 2,
+        "label": ""
+      },
+      {
+        "from_node": 2,
+        "to_node": 3,
+        "label": ""
+      },
+      {
+        "from_node": 3,
+        "to_node": 4,
+        "label": ""
+      },
+      {
+        "from_node": 4,
+        "to_node": 5,
+        "label": ""
+      },
+      {
+        "from_node": 5,
+        "to_node": 6,
+        "label": "Yes"
+      },
+      {
+        "from_node": 5,
+        "to_node": 8,
+        "label": "No"
+      },
+      {
+        "from_node": 6,
+        "to_node": 7,
+        "label": ""
+      },
+      {
+        "from_node": 7,
+        "to_node": 5,
+        "label": ""
+      },
+      {
+        "from_node": 8,
+        "to_node": 9,
+        "label": ""
+      },
+      {
+        "from_node": 9,
+        "to_node": 10,
+        "label": ""
+      },
+      {
+        "from_node": 10,
+        "to_node": 11,
+        "label": ""
+      },
+      {
+        "from_node": 11,
+        "to_node": 12,
+        "label": "Yes"
+      },
+      {
+        "from_node": 11,
+        "to_node": 14,
+        "label": "No"
+      },
+      {
+        "from_node": 12,
+        "to_node": 13,
+        "label": ""
+      },
+      {
+        "from_node": 13,
+        "to_node": 12,
+        "label": ""
+      },
+      {
+        "from_node": 14,
+        "to_node": 15,
+        "label": ""
+      },
+      {
+        "from_node": 15,
+        "to_node": 16,
+        "label": ""
+      },
+      {
+        "from_node": 16,
+        "to_node": 17,
+        "label": ""
+      },
+      {
+        "from_node": 17,
+        "to_node": 18,
+        "label": "No"
+      },
+      {
+        "from_node": 17,
+        "to_node": 19,
+        "label": "Yes"
+      },
+      {
+        "from_node": 18,
+        "to_node": 19,
+        "label": ""
+      },
+      {
+        "from_node": 19,
+        "to_node": 15,
+        "label": ""
+      },
+      {
+        "from_node": 15,
+        "to_node": 20,
+        "label": "No"
+      },
+      {
+        "from_node": 20,
+        "to_node": 21,
+        "label": ""
+      },
+      {
+        "from_node": 21,
+        "to_node": 22,
+        "label": ""
+      },
+      {
+        "from_node": 22,
+        "to_node": 23,
+        "label": ""
+      },
+      {
+        "from_node": 23,
+        "to_node": 24,
+        "label": ""
+      },
+      {
+        "from_node": 24,
+        "to_node": 25,
+        "label": "Yes"
+      },
+      {
+        "from_node": 24,
+        "to_node": 26,
+        "label": "No"
+      },
+      {
+        "from_node": 25,
+        "to_node": 27,
+        "label": ""
+      },
+      {
+        "from_node": 27,
+        "to_node": 24,
+        "label": ""
+      }
+    ],
+    "other_text": []
+  },
+  "analysis": {
+    "ilr_verdict": "incorrect",
+    "ilr_issues": "节点11'c<=1?'的分支与流程图OCR相反（流程图17-No即c>1时才执行#18赋C(c,2)，c<=1走#19依赖Counter缺省0），ILR改成c<=1才赋值、c>1跳过，导致c>1时countG[g]从未初始化，节点13对不存在的键做-=而KeyError；且把流程图的Counter()降级成普通dict，加剧了该问题。",
+    "code_vs_ilr": "faithful",
+    "code_issues": "代码如实实现了ILR的反向分支（仅用countG.get(g,0)避免KeyError，属等价翻译），于是c>1时countG[g]=0-Σ子倍数而非C(c,2)-Σ，所有countG全为0，查询时bisect越界。",
+    "error_source": "ilr",
+    "ocr_contribution": "no",
+    "root_cause": "OCR边（17-No→18赋值、17-Yes→19跳过）配合Counter语义的流程图本是对的，ILR反转了该分支并把Counter改为dict；生成代码忠实执行了这一错误逻辑，全部gcd计数为0导致下标越界。",
+    "evidence": "nums=[2,3,4]：c(countD[2])=2>1时代码countG[2]=0-countG[4]=0，最终Pvlist全0，bisect_left(Pvlist,1)=4越界，抛IndexError: list index out of range（实测复现，与失败信息一致）；正确应为countG[1]=2、countG[2]=1，答案[1,2,2]。"
+  }
+}

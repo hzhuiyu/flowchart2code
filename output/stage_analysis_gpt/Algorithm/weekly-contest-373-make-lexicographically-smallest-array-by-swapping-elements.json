@@ -1,0 +1,219 @@
+{
+  "task_id": "weekly-contest-373-make-lexicographically-smallest-array-by-swapping-elements",
+  "dataset": "Algorithm",
+  "difficulty": "Medium",
+  "title": "make-lexicographically-smallest-array-by-swapping-elements",
+  "result": "failed: ",
+  "ilr": "{\n  \"problem_id\": \"lexicographically_smallest_array\",\n  \"nodes\": [\n    {\"id\": 1, \"type\": \"start\", \"label\": \"Start\", \"next\": 2},\n    {\"id\": 2, \"type\": \"process\", \"label\": \"Input: nums (List[int]), limit (int)\", \"action\": \"ctx['nums']=ctx['arg0']; ctx['limit']=ctx['arg1']; ctx['n']=len(ctx['nums']); ctx['i']=0; ctx['result']=[0] * ctx['n']; ctx['indices']=[]\", \"next\": 3},\n    {\"id\": 3, \"type\": \"process\", \"label\": \"Initialize nums2 = sorted([(nums[i], i) for i in range(n)])\", \"action\": \"ctx['nums2'] = sorted([(ctx['nums'][i], i) for i in range(ctx['n'])])\", \"next\": 4},\n    {\"id\": 4, \"type\": \"decision\", \"label\": \"Is i < n?\", \"logic\": \"ctx['i'] < ctx['n']\", \"true_next\": 5, \"false_next\": 12},\n    {\"id\": 5, \"type\": \"decision\", \"label\": \"Is i == 0 or nums2[i][0] - nums2[i - 1][0] > limit?\", \"logic\": \"ctx['i'] == 0 or ctx['nums2'][ctx['i']][0] - ctx['nums2'][ctx['i'] - 1][0] > ctx['limit']\", \"true_next\": 9, \"false_next\": 8},\n    {\"id\": 6, \"type\": \"decision\", \"label\": \"Is index in indices?\", \"logic\": \"ctx['nums2'][ctx['i']][1] in ctx['indices']\", \"true_next\": 12, \"false_next\": 7},\n    {\"id\": 7, \"type\": \"process\", \"label\": \"Append empty list to indices\", \"action\": \"ctx['indices'].append([])\", \"next\": 10},\n    {\"id\": 8, \"type\": \"process\", \"label\": \"Append index i to the last list in indices\", \"action\": \"ctx['indices'][-1].append(ctx['nums2'][ctx['i']][1])\", \"next\": 11},\n    {\"id\": 9, \"type\": \"process\", \"label\": \"Increment i: i = i + 1\", \"action\": \"ctx['i'] += 1\", \"next\": 4},\n    {\"id\": 10, \"type\": \"process\", \"label\": \"Increment i: i = i + 1\", \"action\": \"ctx['i'] += 1\", \"next\": 4},\n    {\"id\": 11, \"type\": \"process\", \"label\": \"Increment i: i = i + 1\", \"action\": \"ctx['i'] += 1\", \"next\": 4},\n    {\"id\": 12, \"type\": \"process\", \"label\": \"Output: result (List[int])\", \"action\": \"ctx['sortedIndex'] = sorted(ctx['indices']); ctx['j'] = 0\", \"next\": 13},\n    {\"id\": 13, \"type\": \"decision\", \"label\": \"Is j < len(indices)?\", \"logic\": \"ctx['j'] < len(ctx['indices'])\", \"true_next\": 15, \"false_next\": 16},\n    {\"id\": 14, \"type\": \"process\", \"label\": \"Set result[sortedIndex[j]] = nums[index[j]]\", \"action\": \"ctx['result'][ctx['sortedIndex'][ctx['j']]] = ctx['nums'][ctx['indices'][ctx['j']][0]]\", \"next\": 16},\n    {\"id\": 15, \"type\": \"process\", \"label\": \"Increment j: j = j + 1\", \"action\": \"ctx['j'] += 1\", \"next\": 13},\n    {\"id\": 16, \"type\": \"end\", \"label\": \"Return result\", \"output\": \"ctx['result']\"}\n  ]\n}",
+  "code": "from typing import List\n\nclass Solution:\n    def lexicographicallySmallestArray(self, nums: List[int], limit: int) -> List[int]:\n        n = len(nums)\n        indices = []\n        nums2 = sorted([(nums[i], i) for i in range(n)])\n        i = 0\n        \n        while i < n:\n            if i == 0 or nums2[i][0] - nums2[i - 1][0] > limit:\n                indices.append([])\n            indices[-1].append(nums2[i][1])\n            i += 1\n        \n        sortedIndex = sorted(range(len(indices)), key=lambda j: indices[j][0])\n        result = [0] * n\n        j = 0\n        \n        while j < len(indices):\n            result[sortedIndex[j]] = nums[indices[j][0]]\n            j += 1\n        \n        return result",
+  "prompt": "\"\"\"\nYou are given a 0-indexed array of positive integers nums and a positive integer limit.\nIn one operation, you can choose any two indices i and j and swap nums[i] and nums[j] if |nums[i] - nums[j]| <= limit.\nReturn the lexicographically smallest array that can be obtained by performing the operation any number of times.\nAn array a is lexicographically smaller than an array b if in the first position where a and b differ, array a has an element that is less than the corresponding element in b. For example, the array [2,10,3] is lexicographically smaller than the array [10,2,3] because they differ at index 0 and 2 < 10.\n\nExample 1:\n\nInput: nums = [1,5,3,9,8], limit = 2\nOutput: [1,3,5,8,9]\nExplanation: Apply the operation 2 times:\n- Swap nums[1] with nums[2]. The array becomes [1,3,5,9,8]\n- Swap nums[3] with nums[4]. The array becomes [1,3,5,8,9]\nWe cannot obtain a lexicographically smaller array by applying any more operations.\nNote that it may be possible to get the same result by doing different operations.\n\nExample 2:\n\nInput: nums = [1,7,6,18,2,1], limit = 3\nOutput: [1,6,7,18,1,2]\nExplanation: Apply the operation 3 times:\n- Swap nums[1] with nums[2]. The array becomes [1,6,7,18,2,1]\n- Swap nums[0] with nums[4]. The array becomes [2,6,7,18,1,1]\n- Swap nums[0] with nums[5]. The array becomes [1,6,7,18,1,2]\nWe cannot obtain a lexicographically smaller array by applying any more operations.\n\nExample 3:\n\nInput: nums = [1,7,28,19,10], limit = 3\nOutput: [1,7,28,19,10]\nExplanation: [1,7,28,19,10] is the lexicographically smallest array we can obtain because we cannot apply the operation on any two indices.\n\n\nConstraints:\n\n1 <= nums.length <= 105\n1 <= nums[i] <= 109\n1 <= limit <= 109\n\"\"\"\nclass Solution:\n    def lexicographicallySmallestArray(self, nums: List[int], limit: int) -> List[int]:\n        ",
+  "test": "\nmy_solution = Solution()\n\ntest_input = { \"nums\": [1,5,3,9,8], \"limit\": 2 }\nassert my_solution.lexicographicallySmallestArray(**test_input) == [1,3,5,8,9]\n\ntest_input = { \"nums\": [1,7,6,18,2,1], \"limit\": 3 }\nassert my_solution.lexicographicallySmallestArray(**test_input) == [1,6,7,18,1,2]\n\ntest_input = { \"nums\": [1,7,28,19,10], \"limit\": 3 }\nassert my_solution.lexicographicallySmallestArray(**test_input) == [1,7,28,19,10]\n\ntest_input = { \"nums\": [1000000000], \"limit\": 1 }\nassert my_solution.lexicographicallySmallestArray(**test_input) == [1000000000]\n\ntest_input = { \"nums\": [1,60,34,84,62,56,39,76,49,38], \"limit\": 4 }\nassert my_solution.lexicographicallySmallestArray(**test_input) == [1,56,34,84,60,62,38,76,49,39]\n\ntest_input = { \"nums\": [1,81,10,79,36,2,87,12,20,77], \"limit\": 7 }\nassert my_solution.lexicographicallySmallestArray(**test_input) == [1,77,10,79,36,2,81,12,20,87]\n\ntest_input = { \"nums\": [2,71,5,87,11,15,70,70,14,38], \"limit\": 14 }\nassert my_solution.lexicographicallySmallestArray(**test_input) == [2,70,5,87,11,14,70,71,15,38]\n\ntest_input = { \"nums\": [4,3,23,84,34,88,44,44,18,15], \"limit\": 3 }\nassert my_solution.lexicographicallySmallestArray(**test_input) == [3,4,23,84,34,88,44,44,15,18]\n\ntest_input = { \"nums\": [4,34,29,73,51,11,8,53,98,47], \"limit\": 10 }\nassert my_solution.lexicographicallySmallestArray(**test_input) == [4,29,34,73,47,8,11,51,98,53]\n\ntest_input = { \"nums\": [4,52,38,59,71,27,31,83,88,10], \"limit\": 14 }\nassert my_solution.lexicographicallySmallestArray(**test_input) == [4,27,31,38,52,59,71,83,88,10]\n\ntest_input = { \"nums\": [4,68,8,10,70,62,27,5,42,61], \"limit\": 11 }\nassert my_solution.lexicographicallySmallestArray(**test_input) == [4,61,5,8,62,68,27,10,42,70]\n\ntest_input = { \"nums\": [5,9,35,60,73,91,61,57,87,76], \"limit\": 11 }\nassert my_solution.lexicographicallySmallestArray(**test_input) == [5,9,35,57,73,76,60,61,87,91]\n\ntest_input = { \"nums\": [5,15,68,47,49,67,9,6,35,14], \"limit\": 4 }\nassert my_solution.lexicographicallySmallestArray(**test_input) == [5,14,67,47,49,68,6,9,35,15]\n\ntest_input = { \"nums\": [5,16,43,15,66,21,58,74,55,66], \"limit\": 9 }\nassert my_solution.lexicographicallySmallestArray(**test_input) == [5,15,43,16,55,21,58,66,66,74]\n\ntest_input = { \"nums\": [5,30,92,4,31,2,17,39,15,7], \"limit\": 3 }\nassert my_solution.lexicographicallySmallestArray(**test_input) == [2,30,92,4,31,5,15,39,17,7]\n\ntest_input = { \"nums\": [5,38,68,80,64,79,50,5,8,95], \"limit\": 7 }\nassert my_solution.lexicographicallySmallestArray(**test_input) == [5,38,64,79,68,80,50,5,8,95]\n\ntest_input = { \"nums\": [5,100,44,45,16,30,14,65,83,64], \"limit\": 15 }\nassert my_solution.lexicographicallySmallestArray(**test_input) == [5,100,14,16,30,44,45,64,83,65]\n\ntest_input = { \"nums\": [6,57,100,67,4,63,47,59,21,66], \"limit\": 8 }\nassert my_solution.lexicographicallySmallestArray(**test_input) == [4,57,100,59,6,63,47,66,21,67]\n\ntest_input = { \"nums\": [6,70,90,1,33,81,60,80,68,44], \"limit\": 7 }\nassert my_solution.lexicographicallySmallestArray(**test_input) == [1,68,90,6,33,80,60,81,70,44]\n\ntest_input = { \"nums\": [6,74,74,74,30,70,91,74,76,41], \"limit\": 1 }\nassert my_solution.lexicographicallySmallestArray(**test_input) == [6,74,74,74,30,70,91,74,76,41]\n\ntest_input = { \"nums\": [6,77,68,15,3,98,56,22,81,72], \"limit\": 2 }\nassert my_solution.lexicographicallySmallestArray(**test_input) == [6,77,68,15,3,98,56,22,81,72]\n\ntest_input = { \"nums\": [7,17,79,29,29,83,21,12,5,1], \"limit\": 10 }\nassert my_solution.lexicographicallySmallestArray(**test_input) == [1,5,79,7,12,83,17,21,29,29]\n\ntest_input = { \"nums\": [7,66,85,9,29,1,25,69,57,95], \"limit\": 13 }\nassert my_solution.lexicographicallySmallestArray(**test_input) == [1,57,85,7,25,9,29,66,69,95]\n\ntest_input = { \"nums\": [7,73,1,97,13,55,74,29,76,19], \"limit\": 14 }\nassert my_solution.lexicographicallySmallestArray(**test_input) == [1,73,7,97,13,55,74,19,76,29]\n\ntest_input = { \"nums\": [8,4,47,23,73,79,63,62,35,51], \"limit\": 11 }\nassert my_solution.lexicographicallySmallestArray(**test_input) == [4,8,47,23,51,62,63,73,35,79]\n\ntest_input = { \"nums\": [8,17,20,100,59,98,64,78,64,53], \"limit\": 1 }\nassert my_solution.lexicographicallySmallestArray(**test_input) == [8,17,20,100,59,98,64,78,64,53]\n\ntest_input = { \"nums\": [8,70,99,5,49,27,79,2,57,49], \"limit\": 14 }\nassert my_solution.lexicographicallySmallestArray(**test_input) == [2,49,99,5,49,27,57,8,70,79]\n\ntest_input = { \"nums\": [9,67,94,37,5,90,43,13,27,21], \"limit\": 11 }\nassert my_solution.lexicographicallySmallestArray(**test_input) == [5,67,90,9,13,94,21,27,37,43]\n\ntest_input = { \"nums\": [10,22,17,76,6,64,51,60,65,37], \"limit\": 9 }\nassert my_solution.lexicographicallySmallestArray(**test_input) == [6,10,17,76,22,51,60,64,65,37]\n\ntest_input = { \"nums\": [10,34,63,88,76,30,70,80,52,13], \"limit\": 7 }\nassert my_solution.lexicographicallySmallestArray(**test_input) == [10,30,63,88,70,34,76,80,52,13]\n\ntest_input = { \"nums\": [10,69,4,28,15,30,23,53,41,93], \"limit\": 9 }\nassert my_solution.lexicographicallySmallestArray(**test_input) == [4,69,10,15,23,28,30,53,41,93]\n\ntest_input = { \"nums\": [12,86,98,73,64,77,30,76,46,69], \"limit\": 4 }\nassert my_solution.lexicographicallySmallestArray(**test_input) == [12,86,98,69,64,73,30,76,46,77]\n\ntest_input = { \"nums\": [13,43,32,15,45,69,58,89,64,76], \"limit\": 12 }\nassert my_solution.lexicographicallySmallestArray(**test_input) == [13,32,43,15,45,58,64,89,69,76]\n\ntest_input = { \"nums\": [13,70,11,74,73,21,4,45,95,38], \"limit\": 9 }\nassert my_solution.lexicographicallySmallestArray(**test_input) == [4,70,11,73,74,13,21,38,95,45]\n\ntest_input = { \"nums\": [14,15,53,11,38,18,27,69,55,2], \"limit\": 13 }\nassert my_solution.lexicographicallySmallestArray(**test_input) == [2,11,53,14,15,18,27,69,55,38]\n\ntest_input = { \"nums\": [14,28,61,49,10,25,80,83,42,100], \"limit\": 3 }\nassert my_solution.lexicographicallySmallestArray(**test_input) == [14,25,61,49,10,28,80,83,42,100]\n\ntest_input = { \"nums\": [14,71,7,77,99,90,20,81,100,65], \"limit\": 7 }\nassert my_solution.lexicographicallySmallestArray(**test_input) == [7,65,14,71,99,90,20,77,100,81]\n\ntest_input = { \"nums\": [14,95,75,100,33,98,88,2,74,26], \"limit\": 1 }\nassert my_solution.lexicographicallySmallestArray(**test_input) == [14,95,74,100,33,98,88,2,75,26]\n\ntest_input = { \"nums\": [15,29,16,37,10,70,58,5,33,76], \"limit\": 8 }\nassert my_solution.lexicographicallySmallestArray(**test_input) == [5,29,10,33,15,70,58,16,37,76]\n\ntest_input = { \"nums\": [15,33,1,74,47,6,60,95,78,72], \"limit\": 7 }\nassert my_solution.lexicographicallySmallestArray(**test_input) == [15,33,1,72,47,6,60,95,74,78]\n\ntest_input = { \"nums\": [16,20,79,92,17,7,70,41,54,18], \"limit\": 6 }\nassert my_solution.lexicographicallySmallestArray(**test_input) == [16,17,79,92,18,7,70,41,54,20]\n\ntest_input = { \"nums\": [16,43,19,36,99,15,70,89,45,71], \"limit\": 4 }\nassert my_solution.lexicographicallySmallestArray(**test_input) == [15,43,16,36,99,19,70,89,45,71]\n\ntest_input = { \"nums\": [17,99,88,73,13,1,3,5,55,4], \"limit\": 15 }\nassert my_solution.lexicographicallySmallestArray(**test_input) == [1,73,88,99,3,4,5,13,55,17]\n\ntest_input = { \"nums\": [18,97,57,1,23,36,77,80,47,91], \"limit\": 10 }\nassert my_solution.lexicographicallySmallestArray(**test_input) == [18,91,47,1,23,36,77,80,57,97]\n\ntest_input = { \"nums\": [19,25,49,96,35,69,81,81,51,50], \"limit\": 12 }\nassert my_solution.lexicographicallySmallestArray(**test_input) == [19,25,49,96,35,69,81,81,50,51]\n\ntest_input = { \"nums\": [19,37,12,11,70,99,88,36,64,9], \"limit\": 3 }\nassert my_solution.lexicographicallySmallestArray(**test_input) == [19,36,9,11,70,99,88,37,64,12]\n\ntest_input = { \"nums\": [19,64,26,5,70,10,17,66,51,36], \"limit\": 13 }\nassert my_solution.lexicographicallySmallestArray(**test_input) == [5,51,10,17,64,19,26,66,70,36]\n\ntest_input = { \"nums\": [21,14,21,34,4,88,39,62,30,20], \"limit\": 12 }\nassert my_solution.lexicographicallySmallestArray(**test_input) == [4,14,20,21,21,88,30,62,34,39]\n\ntest_input = { \"nums\": [22,94,100,54,97,14,100,48,41,35], \"limit\": 6 }\nassert my_solution.lexicographicallySmallestArray(**test_input) == [22,94,97,48,100,14,100,54,35,41]\n\ntest_input = { \"nums\": [23,50,8,48,62,26,92,5,96,9], \"limit\": 13 }\nassert my_solution.lexicographicallySmallestArray(**test_input) == [23,48,5,50,62,26,92,8,96,9]\n\ntest_input = { \"nums\": [25,47,34,69,36,91,14,44,37,2], \"limit\": 1 }\nassert my_solution.lexicographicallySmallestArray(**test_input) == [25,47,34,69,36,91,14,44,37,2]\n\ntest_input = { \"nums\": [25,58,36,16,42,57,17,96,10,2], \"limit\": 13 }\nassert my_solution.lexicographicallySmallestArray(**test_input) == [2,57,10,16,17,58,25,96,36,42]\n\ntest_input = { \"nums\": [26,21,9,15,94,47,52,86,89,7], \"limit\": 9 }\nassert my_solution.lexicographicallySmallestArray(**test_input) == [7,9,15,21,86,47,52,89,94,26]\n\ntest_input = { \"nums\": [27,26,24,2,95,90,41,14,20,35], \"limit\": 2 }\nassert my_solution.lexicographicallySmallestArray(**test_input) == [24,26,27,2,95,90,41,14,20,35]\n\ntest_input = { \"nums\": [27,56,68,41,39,80,60,36,24,5], \"limit\": 13 }\nassert my_solution.lexicographicallySmallestArray(**test_input) == [24,56,60,27,36,68,80,39,41,5]\n\ntest_input = { \"nums\": [27,71,52,71,68,2,49,37,34,97], \"limit\": 8 }\nassert my_solution.lexicographicallySmallestArray(**test_input) == [27,68,49,71,71,2,52,34,37,97]\n\ntest_input = { \"nums\": [29,82,25,91,17,9,38,25,29,68], \"limit\": 7 }\nassert my_solution.lexicographicallySmallestArray(**test_input) == [25,82,25,91,17,9,38,29,29,68]\n\ntest_input = { \"nums\": [30,48,76,86,21,1,55,49,90,9], \"limit\": 2 }\nassert my_solution.lexicographicallySmallestArray(**test_input) == [30,48,76,86,21,1,55,49,90,9]\n\ntest_input = { \"nums\": [31,10,64,15,60,32,88,79,79,33], \"limit\": 2 }\nassert my_solution.lexicographicallySmallestArray(**test_input) == [31,10,64,15,60,32,88,79,79,33]\n\ntest_input = { \"nums\": [32,70,43,51,40,73,56,39,75,45], \"limit\": 8 }\nassert my_solution.lexicographicallySmallestArray(**test_input) == [32,70,39,40,43,73,45,51,75,56]\n\ntest_input = { \"nums\": [32,95,51,87,29,43,21,55,45,84], \"limit\": 2 }\nassert my_solution.lexicographicallySmallestArray(**test_input) == [32,95,51,87,29,43,21,55,45,84]\n\ntest_input = { \"nums\": [33,25,25,65,82,71,56,82,13,46], \"limit\": 14 }\nassert my_solution.lexicographicallySmallestArray(**test_input) == [13,25,25,33,46,56,65,71,82,82]\n\ntest_input = { \"nums\": [33,37,77,41,83,75,96,97,4,60], \"limit\": 15 }\nassert my_solution.lexicographicallySmallestArray(**test_input) == [33,37,60,41,75,77,83,96,4,97]\n\ntest_input = { \"nums\": [35,81,18,79,47,53,20,2,98,22], \"limit\": 2 }\nassert my_solution.lexicographicallySmallestArray(**test_input) == [35,79,18,81,47,53,20,2,98,22]\n\ntest_input = { \"nums\": [36,39,100,4,44,33,65,11,15,35], \"limit\": 10 }\nassert my_solution.lexicographicallySmallestArray(**test_input) == [33,35,100,4,36,39,65,11,15,44]\n\ntest_input = { \"nums\": [38,56,60,98,21,15,70,37,24,61], \"limit\": 15 }\nassert my_solution.lexicographicallySmallestArray(**test_input) == [15,56,60,98,21,24,61,37,38,70]\n\ntest_input = { \"nums\": [39,36,18,39,99,51,68,92,5,38], \"limit\": 4 }\nassert my_solution.lexicographicallySmallestArray(**test_input) == [36,38,18,39,99,51,68,92,5,39]\n\ntest_input = { \"nums\": [39,89,81,37,67,37,98,89,49,47], \"limit\": 12 }\nassert my_solution.lexicographicallySmallestArray(**test_input) == [37,81,89,37,67,39,89,98,47,49]\n\ntest_input = { \"nums\": [40,67,99,53,95,47,59,99,64,44], \"limit\": 7 }\nassert my_solution.lexicographicallySmallestArray(**test_input) == [40,44,95,47,99,53,59,99,64,67]\n\ntest_input = { \"nums\": [40,97,72,48,55,91,83,82,91,63], \"limit\": 11 }\nassert my_solution.lexicographicallySmallestArray(**test_input) == [40,48,55,63,72,82,83,91,91,97]\n\ntest_input = { \"nums\": [41,10,22,43,17,38,67,7,68,70], \"limit\": 7 }\nassert my_solution.lexicographicallySmallestArray(**test_input) == [38,7,10,41,17,43,67,22,68,70]\n\ntest_input = { \"nums\": [41,25,83,44,39,37,67,33,58,5], \"limit\": 1 }\nassert my_solution.lexicographicallySmallestArray(**test_input) == [41,25,83,44,39,37,67,33,58,5]\n\ntest_input = { \"nums\": [41,87,34,74,77,62,18,28,5,8], \"limit\": 1 }\nassert my_solution.lexicographicallySmallestArray(**test_input) == [41,87,34,74,77,62,18,28,5,8]\n\ntest_input = { \"nums\": [45,1,66,44,45,74,75,96,31,47], \"limit\": 2 }\nassert my_solution.lexicographicallySmallestArray(**test_input) == [44,1,66,45,45,74,75,96,31,47]\n\ntest_input = { \"nums\": [45,64,77,71,73,6,24,55,82,25], \"limit\": 3 }\nassert my_solution.lexicographicallySmallestArray(**test_input) == [45,64,77,71,73,6,24,55,82,25]\n\ntest_input = { \"nums\": [46,72,1,33,1,51,78,96,44,20], \"limit\": 1 }\nassert my_solution.lexicographicallySmallestArray(**test_input) == [46,72,1,33,1,51,78,96,44,20]\n\ntest_input = { \"nums\": [47,32,72,79,16,69,85,70,87,73], \"limit\": 2 }\nassert my_solution.lexicographicallySmallestArray(**test_input) == [47,32,69,79,16,70,85,72,87,73]\n\ntest_input = { \"nums\": [47,94,72,49,50,62,17,22,85,86], \"limit\": 7 }\nassert my_solution.lexicographicallySmallestArray(**test_input) == [47,94,72,49,50,62,17,22,85,86]\n\ntest_input = { \"nums\": [48,39,45,58,26,57,38,63,82,80], \"limit\": 2 }\nassert my_solution.lexicographicallySmallestArray(**test_input) == [48,38,45,57,26,58,39,63,80,82]\n\ntest_input = { \"nums\": [48,51,51,39,54,56,57,6,1,40], \"limit\": 2 }\nassert my_solution.lexicographicallySmallestArray(**test_input) == [48,51,51,39,54,56,57,6,1,40]\n\ntest_input = { \"nums\": [49,4,95,24,20,12,70,60,82,62], \"limit\": 11 }\nassert my_solution.lexicographicallySmallestArray(**test_input) == [49,4,95,12,20,24,60,62,82,70]\n\ntest_input = { \"nums\": [49,7,92,79,43,88,31,89,36,97], \"limit\": 8 }\nassert my_solution.lexicographicallySmallestArray(**test_input) == [31,7,88,79,36,89,43,92,49,97]\n\ntest_input = { \"nums\": [49,16,32,11,7,57,69,41,52,23], \"limit\": 15 }\nassert my_solution.lexicographicallySmallestArray(**test_input) == [7,11,16,23,32,41,49,52,57,69]\n\ntest_input = { \"nums\": [49,26,82,77,52,76,90,23,64,42], \"limit\": 12 }\nassert my_solution.lexicographicallySmallestArray(**test_input) == [42,23,49,52,64,76,77,26,82,90]\n\ntest_input = { \"nums\": [49,62,63,32,57,22,74,87,42,19], \"limit\": 13 }\nassert my_solution.lexicographicallySmallestArray(**test_input) == [19,22,32,42,49,57,62,63,74,87]\n\ntest_input = { \"nums\": [49,93,5,15,56,2,65,74,82,42], \"limit\": 13 }\nassert my_solution.lexicographicallySmallestArray(**test_input) == [42,49,2,5,56,15,65,74,82,93]\n\ntest_input = { \"nums\": [49,93,100,79,76,14,90,32,4,5], \"limit\": 10 }\nassert my_solution.lexicographicallySmallestArray(**test_input) == [49,90,93,76,79,4,100,32,5,14]\n\ntest_input = { \"nums\": [49,96,75,44,74,78,82,40,43,68], \"limit\": 4 }\nassert my_solution.lexicographicallySmallestArray(**test_input) == [49,96,74,40,75,78,82,43,44,68]\n\ntest_input = { \"nums\": [51,61,49,11,69,78,40,98,68,36], \"limit\": 10 }\nassert my_solution.lexicographicallySmallestArray(**test_input) == [36,40,49,11,51,61,68,98,69,78]\n\ntest_input = { \"nums\": [51,99,52,80,83,69,18,49,71,13], \"limit\": 14 }\nassert my_solution.lexicographicallySmallestArray(**test_input) == [49,99,51,69,71,80,13,52,83,18]\n\ntest_input = { \"nums\": [52,28,93,16,33,37,37,21,47,64], \"limit\": 12 }\nassert my_solution.lexicographicallySmallestArray(**test_input) == [16,21,93,28,33,37,37,47,52,64]\n\ntest_input = { \"nums\": [53,7,99,22,3,50,62,70,56,40], \"limit\": 2 }\nassert my_solution.lexicographicallySmallestArray(**test_input) == [53,7,99,22,3,50,62,70,56,40]\n\ntest_input = { \"nums\": [53,17,39,72,5,78,40,3,84,20], \"limit\": 5 }\nassert my_solution.lexicographicallySmallestArray(**test_input) == [53,17,39,72,3,78,40,5,84,20]\n\ntest_input = { \"nums\": [53,71,55,38,26,89,20,98,55,21], \"limit\": 4 }\nassert my_solution.lexicographicallySmallestArray(**test_input) == [53,71,55,38,26,89,20,98,55,21]\n\ntest_input = { \"nums\": [53,71,74,7,99,64,95,99,90,22], \"limit\": 9 }\nassert my_solution.lexicographicallySmallestArray(**test_input) == [53,64,71,7,90,74,95,99,99,22]\n\ntest_input = { \"nums\": [55,19,82,86,12,64,44,76,88,31], \"limit\": 4 }\nassert my_solution.lexicographicallySmallestArray(**test_input) == [55,19,82,86,12,64,44,76,88,31]\n\ntest_input = { \"nums\": [56,13,55,1,18,36,45,25,20,52], \"limit\": 14 }\nassert my_solution.lexicographicallySmallestArray(**test_input) == [1,13,18,20,25,36,45,52,55,56]\n\ntest_input = { \"nums\": [56,28,50,100,56,99,80,71,6,5], \"limit\": 7 }\nassert my_solution.lexicographicallySmallestArray(**test_input) == [50,28,56,99,56,100,80,71,5,6]\n\ntest_input = { \"nums\": [56,35,19,2,83,20,96,42,33,68], \"limit\": 3 }\nassert my_solution.lexicographicallySmallestArray(**test_input) == [56,33,19,2,83,20,96,42,35,68]\n\ntest_input = { \"nums\": [56,69,94,21,65,46,64,91,75,25], \"limit\": 5 }\nassert my_solution.lexicographicallySmallestArray(**test_input) == [56,64,91,21,65,46,69,94,75,25]",
+  "ocr_data": {
+    "nodes": [
+      {
+        "node_id": 1,
+        "shape_type": "rectangle",
+        "raw_text": "Start",
+        "position": "top"
+      },
+      {
+        "node_id": 2,
+        "shape_type": "rectangle",
+        "raw_text": "Input: nums (List[int]), limit (int)",
+        "position": "middle"
+      },
+      {
+        "node_id": 3,
+        "shape_type": "rectangle",
+        "raw_text": "Initialize n = len(nums)",
+        "position": "middle"
+      },
+      {
+        "node_id": 4,
+        "shape_type": "rectangle",
+        "raw_text": "Initialize nums2 = sorted([(nums[i], i) for i in range(n)])",
+        "position": "middle"
+      },
+      {
+        "node_id": 5,
+        "shape_type": "rectangle",
+        "raw_text": "Initialize indices = [], result = [0] * n",
+        "position": "middle"
+      },
+      {
+        "node_id": 6,
+        "shape_type": "diamond",
+        "raw_text": "Is i < n?",
+        "position": "middle"
+      },
+      {
+        "node_id": 7,
+        "shape_type": "diamond",
+        "raw_text": "Is i == 0 or nums2[i][0] - nums2[i - 1][0] > limit?",
+        "position": "middle"
+      },
+      {
+        "node_id": 8,
+        "shape_type": "diamond",
+        "raw_text": "Is index in indices?",
+        "position": "middle"
+      },
+      {
+        "node_id": 9,
+        "shape_type": "rectangle",
+        "raw_text": "Append empty list to indices",
+        "position": "middle"
+      },
+      {
+        "node_id": 10,
+        "shape_type": "rectangle",
+        "raw_text": "Append index i to the last list in indices",
+        "position": "middle"
+      },
+      {
+        "node_id": 11,
+        "shape_type": "rectangle",
+        "raw_text": "Increment i: i = i + 1",
+        "position": "middle"
+      },
+      {
+        "node_id": 12,
+        "shape_type": "rectangle",
+        "raw_text": "Output: result (List[int])",
+        "position": "middle"
+      },
+      {
+        "node_id": 13,
+        "shape_type": "rectangle",
+        "raw_text": "Set sortedIndex = sorted(index)",
+        "position": "bottom"
+      },
+      {
+        "node_id": 14,
+        "shape_type": "diamond",
+        "raw_text": "Is j < len(index)?",
+        "position": "bottom"
+      },
+      {
+        "node_id": 15,
+        "shape_type": "rectangle",
+        "raw_text": "Set result[sortedIndex[j]] = nums[index[j]]",
+        "position": "bottom"
+      },
+      {
+        "node_id": 16,
+        "shape_type": "rectangle",
+        "raw_text": "Increment j: j = j + 1",
+        "position": "bottom"
+      }
+    ],
+    "edges": [
+      {
+        "from_node": 1,
+        "to_node": 2,
+        "label": ""
+      },
+      {
+        "from_node": 2,
+        "to_node": 3,
+        "label": ""
+      },
+      {
+        "from_node": 3,
+        "to_node": 4,
+        "label": ""
+      },
+      {
+        "from_node": 4,
+        "to_node": 5,
+        "label": ""
+      },
+      {
+        "from_node": 5,
+        "to_node": 6,
+        "label": ""
+      },
+      {
+        "from_node": 6,
+        "to_node": 7,
+        "label": "Yes"
+      },
+      {
+        "from_node": 6,
+        "to_node": 8,
+        "label": "No"
+      },
+      {
+        "from_node": 7,
+        "to_node": 9,
+        "label": "Yes"
+      },
+      {
+        "from_node": 7,
+        "to_node": 10,
+        "label": "No"
+      },
+      {
+        "from_node": 9,
+        "to_node": 10,
+        "label": ""
+      },
+      {
+        "from_node": 10,
+        "to_node": 11,
+        "label": ""
+      },
+      {
+        "from_node": 11,
+        "to_node": 6,
+        "label": ""
+      },
+      {
+        "from_node": 8,
+        "to_node": 12,
+        "label": "No"
+      },
+      {
+        "from_node": 8,
+        "to_node": 13,
+        "label": "Yes"
+      },
+      {
+        "from_node": 13,
+        "to_node": 14,
+        "label": ""
+      },
+      {
+        "from_node": 14,
+        "to_node": 15,
+        "label": "Yes"
+      },
+      {
+        "from_node": 14,
+        "to_node": 16,
+        "label": "No"
+      },
+      {
+        "from_node": 15,
+        "to_node": 16,
+        "label": ""
+      },
+      {
+        "from_node": 16,
+        "to_node": 14,
+        "label": ""
+      }
+    ],
+    "other_text": []
+  },
+  "analysis": {
+    "ilr_verdict": "incorrect",
+    "ilr_issues": "两处致命问题：(1) 分组循环接线错误——节点5(gap判定)的 true 分支（本应 append 空组再追加索引，OCR 边为 7-Yes→9→10→11→6）被接到节点9(仅 i+=1)，导致建新组时什么都不加入，且按字面执行在 i=1 时 indices[-1] 对空列表 IndexError，节点6/7 成孤岛；(2) 赋值阶段节点13的 true 接到节点15(j+=1)，赋值节点14永远不可达，循环只是空转；且其描述的算法本身就是残缺的——每组只赋第一个元素（result[sortedIndex[j]] = nums[indices[j][0]]，j 只遍历组数），其余位置保持 0。",
+    "code_vs_ilr": "deviates",
+    "code_issues": "代码修复了 ILR 的两处接线错误（分组循环写成正确结构、赋值循环让节点14真正执行），但忠实实现了 ILR 描述的残缺算法：每组只把第一个元素放到组内最小下标处，未把组内其余排序值填回其余位置。",
+    "error_source": "ilr",
+    "ocr_contribution": "no",
+    "root_cause": "ILR 环节出错：分组阶段在 OCR 边正确的情况下仍把建组逻辑接丢，赋值阶段循环空转且算法描述本身残缺（每组只赋一个元素）；代码修复接线后实现的仍是这个残缺算法。另注：按 OCR 看，流程图赋值阶段本身就不完整（无外层组循环、14-No 回到自身、输出节点悬在赋值之前），但分组阶段的错接与 OCR 无关，属 ILR 自身错误。",
+    "evidence": "运行生成代码：nums=[1,5,3,9,8],limit=2 输出 [1,8,0,0,0]，期望 [1,3,5,8,9]（groups=[[0,2,1],[4,3]]，每组只赋首元素，其余位置为0）；ILR 按字面执行则在 i=1 时因 indices 为空对 indices[-1].append 抛 IndexError。"
+  }
+}

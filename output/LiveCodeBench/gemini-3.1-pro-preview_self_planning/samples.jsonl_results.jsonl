@@ -1,0 +1,148 @@
+{"task_id": "v1_2757", "passed": false, "error_code": -1, "error_message": "Missing problem or completion"}
+{"task_id": "v1_2784", "passed": true, "test_results": [true, true], "metadata": {"execution time": 0.014057397842407227}, "difficulty": "hard"}
+{"task_id": "v1_2808", "passed": true, "test_results": [true, true], "metadata": {"execution time": 0.008522272109985352}, "difficulty": "hard"}
+{"task_id": "v1_2827", "passed": true, "test_results": [true, true, true], "metadata": {"execution time": 0.01126408576965332}, "difficulty": "hard"}
+{"task_id": "v1_2839", "passed": false, "error_code": -1, "error_message": "Missing problem or completion"}
+{"task_id": "v1_2849", "passed": true, "test_results": [true, true], "metadata": {"execution time": 0.006000041961669922}, "difficulty": "hard"}
+{"task_id": "v1_2879", "passed": true, "test_results": [true, true, true], "metadata": {"execution time": 0.009972810745239258}, "difficulty": "hard"}
+{"task_id": "v1_2884", "passed": false, "error_code": -1, "error_message": "Missing problem or completion"}
+{"task_id": "v1_2921", "passed": false, "error_code": -1, "error_message": "Missing problem or completion"}
+{"task_id": "v1_2952", "passed": true, "test_results": [true, true], "metadata": {"execution time": 0.005937099456787109}, "difficulty": "hard"}
+{"task_id": "v1_3017", "passed": true, "test_results": [true, true, true], "metadata": {"execution time": 0.011000633239746094}, "difficulty": "hard"}
+{"task_id": "v1_3024", "passed": true, "test_results": [true, true], "metadata": {"execution time": 0.007997989654541016}, "difficulty": "hard"}
+{"task_id": "v1_3025", "passed": true, "test_results": [true, true, true], "metadata": {"execution time": 0.008998870849609375}, "difficulty": "hard"}
+{"task_id": "v1_3032", "passed": false, "error_code": -1, "error_message": "Missing problem or completion"}
+{"task_id": "v1_3091", "passed": false, "error_code": -1, "error_message": "Missing problem or completion"}
+{"task_id": "v1_3153", "passed": false, "error_code": -1, "error_message": "Missing problem or completion"}
+{"task_id": "v1_3184", "passed": false, "error_code": -1, "error_message": "Missing problem or completion"}
+{"task_id": "v1_3196", "passed": false, "error_code": -1, "error_message": "Missing problem or completion"}
+{"task_id": "v1_3203", "passed": false, "error_code": -1, "error_message": "Missing problem or completion"}
+{"task_id": "v1_3211", "passed": false, "error_code": -1, "error_message": "Missing problem or completion"}
+{"task_id": "v1_3212", "passed": false, "error_code": -1, "error_message": "Missing problem or completion"}
+{"task_id": "v1_3223", "passed": false, "error_code": -1, "error_message": "Missing problem or completion"}
+{"task_id": "v1_3224", "passed": true, "test_results": [true, true], "metadata": {"execution time": 0.0070037841796875}, "difficulty": "hard"}
+{"task_id": "v1_3233", "passed": false, "error_code": -1, "error_message": "Missing problem or completion"}
+{"task_id": "v1_3243", "passed": true, "test_results": [true, true, true], "metadata": {"execution time": 0.006999492645263672}, "difficulty": "hard"}
+{"task_id": "v1_3298", "passed": true, "test_results": [true, true], "metadata": {"execution time": 0.005986928939819336}, "difficulty": "hard"}
+{"task_id": "v1_abc301_f", "passed": true, "test_results": [true, true, true], "metadata": {"execution time": 0.01200556755065918}, "difficulty": "hard"}
+{"task_id": "v1_abc307_e", "passed": true, "test_results": [true, true, true], "metadata": {"execution time": 0.41613316535949707}, "difficulty": "hard"}
+{"task_id": "v1_abc308_e", "passed": true, "test_results": [true, true, true], "metadata": {"execution time": 0.011003732681274414}, "difficulty": "hard"}
+{"task_id": "v1_abc308_f", "passed": true, "test_results": [true, true], "metadata": {"execution time": 0.0049991607666015625}, "difficulty": "hard"}
+{"task_id": "v1_abc310_e", "passed": true, "test_results": [true, true], "metadata": {"execution time": 0.006514549255371094}, "difficulty": "hard"}
+{"task_id": "v1_abc310_f", "passed": true, "test_results": [true, true], "metadata": {"execution time": 0.007006645202636719}, "difficulty": "hard"}
+{"task_id": "v1_abc318_e", "passed": true, "test_results": [true, true, true], "metadata": {"execution time": 0.006998300552368164}, "difficulty": "hard"}
+{"task_id": "v1_abc323_e", "passed": false, "error_code": -1, "error_message": "Missing problem or completion"}
+{"task_id": "v1_abc324_d", "passed": false, "error_code": -1, "error_message": "Missing problem or completion"}
+{"task_id": "v1_abc325_f", "passed": false, "error_code": -1, "error_message": "Missing problem or completion"}
+{"task_id": "v1_abc327_e", "passed": false, "error_code": -1, "error_message": "Missing problem or completion"}
+{"task_id": "v1_abc328_d", "passed": false, "error_code": -1, "error_message": "Missing problem or completion"}
+{"task_id": "v1_abc329_e", "passed": false, "error_code": -1, "error_message": "Missing problem or completion"}
+{"task_id": "v1_abc340_e", "passed": false, "error_code": -1, "error_message": "Missing problem or completion"}
+{"task_id": "v1_abc343_e", "passed": false, "error_code": -1, "error_message": "Missing problem or completion"}
+{"task_id": "v2_3313", "passed": false, "error_code": -1, "error_message": "Missing problem or completion"}
+{"task_id": "v2_3327", "passed": true, "test_results": [true, true], "metadata": {"execution time": 0.006514310836791992}, "difficulty": "hard"}
+{"task_id": "v2_3376", "passed": false, "error_code": -1, "error_message": "Missing problem or completion"}
+{"task_id": "v2_3344", "passed": true, "test_results": [true, true], "metadata": {"execution time": 0.005188465118408203}, "difficulty": "hard"}
+{"task_id": "v2_3375", "passed": false, "error_code": -1, "error_message": "Missing problem or completion"}
+{"task_id": "v2_3364", "passed": false, "error_code": -1, "error_message": "Missing problem or completion"}
+{"task_id": "v2_3345", "passed": false, "error_code": -1, "error_message": "Missing problem or completion"}
+{"task_id": "v2_3316", "passed": false, "error_code": -1, "error_message": "Missing problem or completion"}
+{"task_id": "v2_3382", "passed": true, "test_results": [true, true, true], "metadata": {"execution time": 0.008003473281860352}, "difficulty": "hard"}
+{"task_id": "v2_3362", "passed": false, "error_code": -1, "error_message": "Missing problem or completion"}
+{"task_id": "v2_3402", "passed": false, "error_code": -1, "error_message": "Missing problem or completion"}
+{"task_id": "v2_3414", "passed": false, "error_code": -1, "error_message": "Missing problem or completion"}
+{"task_id": "v2_3423", "passed": true, "test_results": [true, true], "metadata": {"execution time": 0.005999088287353516}, "difficulty": "hard"}
+{"task_id": "v2_3411", "passed": true, "test_results": [true, true], "metadata": {"execution time": 0.00500035285949707}, "difficulty": "hard"}
+{"task_id": "v2_abc347_e", "passed": false, "error_code": -1, "error_message": "Missing problem or completion"}
+{"task_id": "v2_abc349_e", "passed": false, "error_code": -1, "error_message": "Missing problem or completion"}
+{"task_id": "v2_abc350_e", "passed": false, "error_code": -1, "error_message": "Missing problem or completion"}
+{"task_id": "v2_abc351_f", "passed": true, "test_results": [true, true], "metadata": {"execution time": 0.005002498626708984}, "difficulty": "hard"}
+{"task_id": "v2_abc351_d", "passed": true, "test_results": [true, true], "metadata": {"execution time": 0.005460023880004883}, "difficulty": "hard"}
+{"task_id": "v2_abc352_d", "passed": true, "test_results": [true, true, true], "metadata": {"execution time": 0.007000446319580078}, "difficulty": "hard"}
+{"task_id": "v2_abc354_d", "passed": true, "test_results": [true, true, true], "metadata": {"execution time": 0.008999347686767578}, "difficulty": "hard"}
+{"task_id": "v2_abc355_e", "passed": false, "error_code": -1, "error_message": "Missing problem or completion"}
+{"task_id": "v3_3436", "passed": false, "error_code": -1, "error_message": "Missing problem or completion"}
+{"task_id": "v3_3438", "passed": false, "error_code": -1, "error_message": "Missing problem or completion"}
+{"task_id": "v3_3439", "passed": false, "error_code": -1, "error_message": "Missing problem or completion"}
+{"task_id": "v3_3482", "passed": false, "error_code": -1, "error_message": "Missing problem or completion"}
+{"task_id": "v3_3454", "passed": false, "error_code": -1, "error_message": "Missing problem or completion"}
+{"task_id": "v3_3478", "passed": false, "error_code": -1, "error_message": "Missing problem or completion"}
+{"task_id": "v3_3535", "passed": false, "error_code": -1, "error_message": "Missing problem or completion"}
+{"task_id": "v3_3460", "passed": true, "test_results": [true, true, true], "metadata": {"execution time": 0.008999109268188477}, "difficulty": "hard"}
+{"task_id": "v3_3466", "passed": false, "error_code": -1, "error_message": "Missing problem or completion"}
+{"task_id": "v3_3532", "passed": false, "error_code": -1, "error_message": "Missing problem or completion"}
+{"task_id": "v3_abc357_e", "passed": false, "error_code": -1, "error_message": "Missing problem or completion"}
+{"task_id": "v3_abc359_d", "passed": false, "error_code": -1, "error_message": "Missing problem or completion"}
+{"task_id": "v3_abc360_e", "passed": true, "test_results": [true, true, true], "metadata": {"execution time": 0.007999897003173828}, "difficulty": ""}
+{"task_id": "v3_abc361_d", "passed": false, "error_code": -1, "error_message": "Missing problem or completion"}
+{"task_id": "v3_abc361_f", "passed": false, "error_code": -1, "error_message": "Missing problem or completion"}
+{"task_id": "v3_abc362_e", "passed": false, "error_code": -1, "error_message": "Missing problem or completion"}
+{"task_id": "v3_abc363_f", "passed": false, "error_code": -1, "error_message": "Missing problem or completion"}
+{"task_id": "v3_abc365_e", "passed": false, "error_code": -1, "error_message": "Missing problem or completion"}
+{"task_id": "v4_3552", "passed": true, "test_results": [true, true, true], "metadata": {"execution time": 0.007007122039794922}, "difficulty": "hard"}
+{"task_id": "v4_3563", "passed": true, "test_results": [true, true], "metadata": {"execution time": 0.007000446319580078}, "difficulty": "hard"}
+{"task_id": "v4_3551", "passed": true, "test_results": [true, true], "metadata": {"execution time": 0.006008625030517578}, "difficulty": "hard"}
+{"task_id": "v4_3560", "passed": true, "test_results": [true, true, true], "metadata": {"execution time": 0.06789541244506836}, "difficulty": "hard"}
+{"task_id": "v4_3550", "passed": true, "test_results": [true, true, true], "metadata": {"execution time": 0.007992267608642578}, "difficulty": "hard"}
+{"task_id": "v4_3548", "passed": false, "error_code": -1, "error_message": "Missing problem or completion"}
+{"task_id": "v4_3531", "passed": false, "error_code": -1, "error_message": "Missing problem or completion"}
+{"task_id": "v4_3575", "passed": false, "error_code": -1, "error_message": "Missing problem or completion"}
+{"task_id": "v4_3571", "passed": false, "error_code": -1, "error_message": "Missing problem or completion"}
+{"task_id": "v4_3583", "passed": false, "error_code": -1, "error_message": "Missing problem or completion"}
+{"task_id": "v4_3580", "passed": false, "error_code": -1, "error_message": "Missing problem or completion"}
+{"task_id": "v4_abc367_e", "passed": true, "test_results": [true, true, true], "metadata": {"execution time": 0.008506298065185547}, "difficulty": ""}
+{"task_id": "v4_abc368_f", "passed": false, "error_code": -1, "error_message": "Missing problem or completion"}
+{"task_id": "v4_abc370_g", "passed": false, "error_code": -1, "error_message": "Missing problem or completion"}
+{"task_id": "v4_abc370_e", "passed": false, "error_code": -1, "error_message": "Missing problem or completion"}
+{"task_id": "v4_abc370_f", "passed": false, "error_code": -1, "error_message": "Missing problem or completion"}
+{"task_id": "v4_abc371_e", "passed": false, "error_code": -1, "error_message": "Missing problem or completion"}
+{"task_id": "v4_abc373_e", "passed": true, "test_results": [true, true], "metadata": {"execution time": 0.0064504146575927734}, "difficulty": ""}
+{"task_id": "v4_arc182_e", "passed": false, "error_code": -1, "error_message": "Missing problem or completion"}
+{"task_id": "v4_arc182_c", "passed": false, "error_code": -1, "error_message": "Missing problem or completion"}
+{"task_id": "v5_3588", "passed": false, "error_code": -1, "error_message": "Missing problem or completion"}
+{"task_id": "v5_3603", "passed": false, "error_code": -1, "error_message": "Missing problem or completion"}
+{"task_id": "v5_3608", "passed": true, "test_results": [true, true, true], "metadata": {"execution time": 0.057885169982910156}, "difficulty": "hard"}
+{"task_id": "v5_3637", "passed": false, "error_code": -1, "error_message": "Missing problem or completion"}
+{"task_id": "v5_3646", "passed": true, "test_results": [true, true], "metadata": {"execution time": 0.006999492645263672}, "difficulty": "hard"}
+{"task_id": "v5_3631", "passed": true, "test_results": [true, true, true], "metadata": {"execution time": 0.010025739669799805}, "difficulty": "hard"}
+{"task_id": "v5_3658", "passed": true, "test_results": [true, true, true], "metadata": {"execution time": 0.011008501052856445}, "difficulty": "hard"}
+{"task_id": "v5_3675", "passed": true, "test_results": [true, true], "metadata": {"execution time": 0.008092641830444336}, "difficulty": "hard"}
+{"task_id": "v5_3604", "passed": true, "test_results": [true, true, true], "metadata": {"execution time": 0.01258397102355957}, "difficulty": "hard"}
+{"task_id": "v5_3648", "passed": true, "test_results": [true, true], "metadata": {"execution time": 0.005998134613037109}, "difficulty": "hard"}
+{"task_id": "v5_3680", "passed": true, "test_results": [true, true], "metadata": {"execution time": 0.007008552551269531}, "difficulty": "hard"}
+{"task_id": "v5_abc378_e", "passed": true, "test_results": [true, true], "metadata": {"execution time": 0.0060024261474609375}, "difficulty": ""}
+{"task_id": "v5_abc378_g", "passed": true, "test_results": [true, true], "metadata": {"execution time": 2.418210506439209}, "difficulty": ""}
+{"task_id": "v5_abc379_e", "passed": false, "test_results": [-4], "metadata": {"error_code": -4, "error_message": "Error during testing: module 'sys' has no attribute 'set_int_max_str_digits'"}, "difficulty": ""}
+{"task_id": "v5_abc380_f", "passed": false, "error_code": -1, "error_message": "Missing problem or completion"}
+{"task_id": "v5_abc380_g", "passed": false, "error_code": -1, "error_message": "Missing problem or completion"}
+{"task_id": "v5_abc381_d", "passed": false, "error_code": -1, "error_message": "Missing problem or completion"}
+{"task_id": "v5_abc386_f", "passed": true, "test_results": [true, true, true], "metadata": {"execution time": 0.007999658584594727}, "difficulty": ""}
+{"task_id": "v5_arc184_c", "passed": false, "error_code": -1, "error_message": "Missing problem or completion"}
+{"task_id": "v5_arc185_d", "passed": false, "error_code": -1, "error_message": "Missing problem or completion"}
+{"task_id": "v5_arc186_e", "passed": false, "error_code": -1, "error_message": "Missing problem or completion"}
+{"task_id": "v5_arc187_b", "passed": false, "error_code": -1, "error_message": "Missing problem or completion"}
+{"task_id": "v5_arc189_c", "passed": true, "test_results": [true, true, true, true], "metadata": {"execution time": 0.007998228073120117}, "difficulty": ""}
+{"task_id": "v5_arc189_d", "passed": true, "test_results": [true, true], "metadata": {"execution time": 0.004005908966064453}, "difficulty": ""}
+{"task_id": "v5_arc189_b", "passed": true, "test_results": [true, true], "metadata": {"execution time": 0.0060002803802490234}, "difficulty": ""}
+{"task_id": "v6_abc387_f", "passed": true, "test_results": [true, true, true], "metadata": {"execution time": 0.006297111511230469}, "difficulty": ""}
+{"task_id": "v6_abc389_g", "passed": true, "test_results": [true, true, true], "metadata": {"execution time": 0.009998559951782227}, "difficulty": ""}
+{"task_id": "v6_abc389_e", "passed": true, "test_results": [true, true], "metadata": {"execution time": 0.0060007572174072266}, "difficulty": ""}
+{"task_id": "v6_abc390_g", "passed": false, "error_code": -1, "error_message": "Missing problem or completion"}
+{"task_id": "v6_abc390_f", "passed": true, "test_results": [true, true, true], "metadata": {"execution time": 0.009005069732666016}, "difficulty": ""}
+{"task_id": "v6_abc391_e", "passed": true, "test_results": [true, true], "metadata": {"execution time": 0.0048787593841552734}, "difficulty": ""}
+{"task_id": "v6_abc391_g", "passed": false, "error_code": -1, "error_message": "Missing problem or completion"}
+{"task_id": "v6_abc392_f", "passed": false, "error_code": -1, "error_message": "Missing problem or completion"}
+{"task_id": "v6_abc393_d", "passed": false, "error_code": -1, "error_message": "Missing problem or completion"}
+{"task_id": "v6_abc397_d", "passed": false, "error_code": -1, "error_message": "Missing problem or completion"}
+{"task_id": "v6_abc397_f", "passed": true, "test_results": [true, true], "metadata": {"execution time": 0.007000923156738281}, "difficulty": ""}
+{"task_id": "v6_abc398_f", "passed": true, "test_results": [true, true, true], "metadata": {"execution time": 0.00800013542175293}, "difficulty": ""}
+{"task_id": "v6_abc398_d", "passed": true, "test_results": [true, true, true], "metadata": {"execution time": 0.006012916564941406}, "difficulty": ""}
+{"task_id": "v6_abc399_e", "passed": true, "test_results": [true, true, true, true], "metadata": {"execution time": 0.009001016616821289}, "difficulty": ""}
+{"task_id": "v6_abc399_f", "passed": false, "error_code": -1, "error_message": "Missing problem or completion"}
+{"task_id": "v6_arc192_e", "passed": true, "test_results": [true, true, true], "metadata": {"execution time": 4.619524717330933}, "difficulty": ""}
+{"task_id": "v6_arc192_b", "passed": true, "test_results": [true, true, true], "metadata": {"execution time": 0.009002208709716797}, "difficulty": ""}
+{"task_id": "v6_arc193_b", "passed": false, "test_results": [false], "metadata": {"output": "10", "inputs": "[3, '010']", "expected": "14", "error_code": -2, "error_message": "Wrong Answer"}, "difficulty": ""}
+{"task_id": "v6_arc194_b", "passed": true, "test_results": [true, true, true], "metadata": {"execution time": 0.009004831314086914}, "difficulty": ""}
+{"task_id": "v6_arc194_d", "passed": true, "test_results": [true, true], "metadata": {"execution time": 0.004000663757324219}, "difficulty": ""}
+{"task_id": "v6_arc195_b", "passed": true, "test_results": [true, true, true], "metadata": {"execution time": 0.006009340286254883}, "difficulty": ""}
+{"task_id": "v6_arc196_a", "passed": false, "error_code": -1, "error_message": "Missing problem or completion"}

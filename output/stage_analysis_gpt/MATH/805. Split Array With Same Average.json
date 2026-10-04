@@ -1,0 +1,240 @@
+{
+  "task_id": "805. Split Array With Same Average",
+  "dataset": "MATH",
+  "difficulty": "hard",
+  "title": null,
+  "result": "failed: name 'possible_sums' is not defined",
+  "ilr": "{\n  \"problem_id\": \"average_split\",\n  \"functions\": [\n    {\n      \"name\": \"possible_sums\",\n      \"parameters\": [\"arr\"],\n      \"entry_node\": 1,\n      \"nodes\": [\n        {\"id\": 1, \"type\": \"start\", \"label\": \"Start\", \"next\": 2},\n        {\"id\": 2, \"type\": \"process\", \"label\": \"Initialize subset_sums = 1\", \"action\": \"ctx['subset_sums'] = 1\", \"next\": 3},\n        {\"id\": 3, \"type\": \"decision\", \"label\": \"For each a in arr\", \"logic\": \"ctx['i'] < len(ctx['arr'])\", \"true_next\": 4, \"false_next\": 6},\n        {\"id\": 4, \"type\": \"process\", \"label\": \"Update subset_sums |= (subset_sums << a)\", \"action\": \"ctx['subset_sums'] |= (ctx['subset_sums'] << ctx['arr'][ctx['i']])\", \"next\": 5},\n        {\"id\": 5, \"type\": \"process\", \"label\": \"i += 1\", \"action\": \"ctx['i'] += 1\", \"next\": 3},\n        {\"id\": 6, \"type\": \"return\", \"label\": \"Return (subset_sums - 1) ^ (1 << sum(arr))\", \"value\": \"(ctx['subset_sums'] - 1) ^ (1 << sum(ctx['arr']))\"}\n      ]\n    }\n  ],\n  \"nodes\": [\n    {\"id\": 1, \"type\": \"start\", \"label\": \"Start\", \"next\": 2},\n    {\"id\": 2, \"type\": \"process\", \"label\": \"Input: nums (List[int])\", \"action\": \"ctx['nums'] = ctx['arg0']; ctx['total_sum'] = 0; ctx['n'] = 0; ctx['i'] = 0\", \"next\": 3},\n    {\"id\": 3, \"type\": \"process\", \"label\": \"Calculate total_sum = sum(nums)\", \"action\": \"ctx['total_sum'] = sum(ctx['nums'])\", \"next\": 4},\n    {\"id\": 4, \"type\": \"process\", \"label\": \"Calculate n = len(nums)\", \"action\": \"ctx['n'] = len(ctx['nums'])\", \"next\": 5},\n    {\"id\": 5, \"type\": \"decision\", \"label\": \"Is n == 1?\", \"logic\": \"ctx['n'] == 1\", \"true_next\": 6, \"false_next\": 7},\n    {\"id\": 6, \"type\": \"return\", \"label\": \"Output: False (cannot split a single element)\", \"value\": \"False\"},\n    {\"id\": 7, \"type\": \"process\", \"label\": \"Transform nums to transformed_nums = [n * num - total_sum for num in nums]\", \"action\": \"ctx['transformed_nums'] = [ctx['n'] * num - ctx['total_sum'] for num in ctx['nums']]\", \"next\": 8},\n    {\"id\": 8, \"type\": \"decision\", \"label\": \"Is 0 in transformed_nums?\", \"logic\": \"0 in ctx['transformed_nums']\", \"true_next\": 9, \"false_next\": 10},\n    {\"id\": 9, \"type\": \"return\", \"label\": \"Output: True (can split directly)\", \"value\": \"True\"},\n    {\"id\": 10, \"type\": \"process\", \"label\": \"Split transformed_nums into positives and negatives\", \"action\": \"ctx['positives'] = [num for num in ctx['transformed_nums'] if num > 0]; ctx['negatives'] = [-num for num in ctx['transformed_nums'] if num < 0]\", \"next\": 11},\n    {\"id\": 11, \"type\": \"process\", \"label\": \"Check overlap in achievable sums\", \"action\": \"ctx['possible_pos'] = possible_sums(ctx['positives']); ctx['possible_neg'] = possible_sums(ctx['negatives'])\", \"next\": 12},\n    {\"id\": 12, \"type\": \"return\", \"label\": \"Return bool(possible_sums(positives) & possible_sums(negatives))\", \"value\": \"bool(ctx['possible_pos'] & ctx['possible_neg'])\"},\n    {\"id\": 13, \"type\": \"end\", \"label\": \"Output: Result\", \"output\": \"ctx['result']\"}\n  ]\n}",
+  "code": "from typing import List\n\ndef splitArraySameAverage(arr):\n    subset_sums = 1\n    for a in arr:\n        subset_sums |= (subset_sums << a)\n    return (subset_sums - 1) ^ (1 << sum(arr))\n\ndef splitArraySameAverage(nums: List[int]) -> bool:\n    total_sum = sum(nums)\n    n = len(nums)\n    \n    if n == 1:\n        return False\n    \n    transformed_nums = [n * num - total_sum for num in nums]\n    \n    if 0 in transformed_nums:\n        return True\n    \n    positives = [num for num in transformed_nums if num > 0]\n    negatives = [-num for num in transformed_nums if num < 0]\n    \n    possible_pos = possible_sums(positives)\n    possible_neg = possible_sums(negatives)\n    \n    return bool(possible_pos & possible_neg)",
+  "prompt": "You are given an integer array nums.\n\nYou should move each element of nums into one of the two arrays A and B such that A and B are non-empty, and average(A) == average(B).\n\nReturn true if it is possible to achieve that and false otherwise.\n\nNote that for an array arr, average(arr) is the sum of all the elements of arr over the length of arr.\n\n\n\nExample 1:\n\nInput: nums = [1,2,3,4,5,6,7,8]\nOutput: true\nExplanation: We can split the array into [1,4,5,8] and [2,3,6,7], and both of them have an average of 4.5.\nExample 2:\n\nInput: nums = [3,1]\nOutput: false\n\n\nConstraints:\n\n1 <= nums.length <= 30\n0 <= nums[i] <= 104",
+  "test": "assert splitArraySameAverage([1, 2, 3, 4, 5, 6, 7, 8]) == True  # can be split into [1,4,5,8] and [2,3,6,7]\nassert splitArraySameAverage([3, 1]) == False  # cannot be split into two non-empty subsets with the same average\nassert splitArraySameAverage([1, 2, 3, 4, 5, 6]) == True  # can be split into [1, 6] and [2, 3, 4, 5]\n\n# Boundary test cases\nassert splitArraySameAverage([0]) == False  # single element, cannot split\nassert splitArraySameAverage([0, 0]) == True  # two zeros, can be split into [0] and [0]\nassert splitArraySameAverage([1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]) == True  # all elements are the same\n\n# Large number test cases\nassert splitArraySameAverage([10000, 9999, 9998, 9997, 9996, 9995, 9994, 9993, 9992, 9991, 9990, 9989, 9988, 9987, 9986, 9985, 9984, 9983, 9982, 9981, 9980, 9979, 9978, 9977, 9976, 9975, 9974, 9973, 9972, 9971]) == True  # large numbers\nassert splitArraySameAverage([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30]) == True  # sequence of numbers\nassert splitArraySameAverage([10000, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29]) == False  # large number with small numbers",
+  "ocr_data": {
+    "nodes": [
+      {
+        "node_id": 1,
+        "shape_type": "rectangle",
+        "raw_text": "Start",
+        "position": "top"
+      },
+      {
+        "node_id": 2,
+        "shape_type": "rectangle",
+        "raw_text": "Input: nums (List[int])",
+        "position": "middle"
+      },
+      {
+        "node_id": 3,
+        "shape_type": "rectangle",
+        "raw_text": "Calculate total_sum = sum(nums)",
+        "position": "middle"
+      },
+      {
+        "node_id": 4,
+        "shape_type": "rectangle",
+        "raw_text": "Calculate n = len(nums)",
+        "position": "middle"
+      },
+      {
+        "node_id": 5,
+        "shape_type": "diamond",
+        "raw_text": "Is n == 1?",
+        "position": "middle"
+      },
+      {
+        "node_id": 6,
+        "shape_type": "rectangle",
+        "raw_text": "Output: False (cannot split a single element)",
+        "position": "middle"
+      },
+      {
+        "node_id": 7,
+        "shape_type": "rectangle",
+        "raw_text": "Transform nums to transformed_nums = [n * num - total_sum for num in nums]",
+        "position": "middle"
+      },
+      {
+        "node_id": 8,
+        "shape_type": "diamond",
+        "raw_text": "Is 0 in transformed_nums?",
+        "position": "middle"
+      },
+      {
+        "node_id": 9,
+        "shape_type": "rectangle",
+        "raw_text": "Output: True (can split directly)",
+        "position": "middle"
+      },
+      {
+        "node_id": 10,
+        "shape_type": "rectangle",
+        "raw_text": "Split transformed_nums into positives and negatives",
+        "position": "middle"
+      },
+      {
+        "node_id": 11,
+        "shape_type": "rectangle",
+        "raw_text": "positives = [num for num in transformed_nums if num > 0]",
+        "position": "middle"
+      },
+      {
+        "node_id": 12,
+        "shape_type": "rectangle",
+        "raw_text": "negatives = [-num for num in transformed_nums if num < 0]",
+        "position": "middle"
+      },
+      {
+        "node_id": 13,
+        "shape_type": "rectangle",
+        "raw_text": "Check overlap in achievable sums",
+        "position": "middle"
+      },
+      {
+        "node_id": 14,
+        "shape_type": "rectangle",
+        "raw_text": "Return bool(possible_sums(positives) & possible_sums(negatives))",
+        "position": "middle"
+      },
+      {
+        "node_id": 15,
+        "shape_type": "rectangle",
+        "raw_text": "Output: Result",
+        "position": "bottom"
+      },
+      {
+        "node_id": 16,
+        "shape_type": "rectangle",
+        "raw_text": "Define function possible_sums(arr)",
+        "position": "top"
+      },
+      {
+        "node_id": 17,
+        "shape_type": "rectangle",
+        "raw_text": "Initialize subset_sums = 1",
+        "position": "top"
+      },
+      {
+        "node_id": 18,
+        "shape_type": "rectangle",
+        "raw_text": "For each a in arr",
+        "position": "top"
+      },
+      {
+        "node_id": 19,
+        "shape_type": "rectangle",
+        "raw_text": "Update subset_sums |= (subset_sums << a)",
+        "position": "top"
+      },
+      {
+        "node_id": 20,
+        "shape_type": "rectangle",
+        "raw_text": "Return (subset_sums - 1) ^ (1 << sum(arr))",
+        "position": "top"
+      }
+    ],
+    "edges": [
+      {
+        "from_node": 1,
+        "to_node": 2,
+        "label": ""
+      },
+      {
+        "from_node": 2,
+        "to_node": 3,
+        "label": ""
+      },
+      {
+        "from_node": 3,
+        "to_node": 4,
+        "label": ""
+      },
+      {
+        "from_node": 4,
+        "to_node": 5,
+        "label": ""
+      },
+      {
+        "from_node": 5,
+        "to_node": 6,
+        "label": "Yes"
+      },
+      {
+        "from_node": 5,
+        "to_node": 7,
+        "label": "No"
+      },
+      {
+        "from_node": 7,
+        "to_node": 8,
+        "label": ""
+      },
+      {
+        "from_node": 8,
+        "to_node": 9,
+        "label": "Yes"
+      },
+      {
+        "from_node": 8,
+        "to_node": 10,
+        "label": "No"
+      },
+      {
+        "from_node": 10,
+        "to_node": 11,
+        "label": ""
+      },
+      {
+        "from_node": 11,
+        "to_node": 12,
+        "label": ""
+      },
+      {
+        "from_node": 12,
+        "to_node": 13,
+        "label": ""
+      },
+      {
+        "from_node": 13,
+        "to_node": 14,
+        "label": ""
+      },
+      {
+        "from_node": 14,
+        "to_node": 15,
+        "label": ""
+      },
+      {
+        "from_node": 16,
+        "to_node": 17,
+        "label": ""
+      },
+      {
+        "from_node": 17,
+        "to_node": 18,
+        "label": ""
+      },
+      {
+        "from_node": 18,
+        "to_node": 19,
+        "label": "Yes"
+      },
+      {
+        "from_node": 18,
+        "to_node": 20,
+        "label": "No"
+      }
+    ],
+    "other_text": [
+      "possible_sums(arr: List[int])"
+    ]
+  },
+  "analysis": {
+    "ilr_verdict": "incorrect",
+    "ilr_issues": "辅助函数possible_sums的循环下标i从未在函数内初始化（仅主流程节点2设过一次i=0）：若每次调用用新ctx，首次评估ctx['i']即KeyError；若共享ctx，第二次调用时i未复位（等于len(positives)），negatives的子集和被整体跳过，possible_neg只剩sum(negatives)一位，与possible_pos（已排除全选值）必不相交，恒返回False。",
+    "code_vs_ilr": "deviates",
+    "code_issues": "代码把辅助函数定义成与入口同名的splitArraySameAverage（第二次定义覆盖第一次），却调用不存在的possible_sums，直接NameError崩溃；完全未按ILR实现。",
+    "error_source": "both",
+    "ocr_contribution": "no",
+    "root_cause": "OCR流程图算法本身正确（For each a in arr的位掩码子集和+正负分组求交），ILR在转写为索引循环时丢掉了i的初始化；生成代码又把辅助函数错误命名导致possible_sums未定义而崩溃。",
+    "evidence": "共享ctx忠实模拟ILR对[1..8]与[1,2,3,4,5,6]都返回False（期望True，实测复现）；新ctx语义则首次调用即KeyError；生成代码报\"name 'possible_sums' is not defined\"，与失败信息一致。"
+  }
+}

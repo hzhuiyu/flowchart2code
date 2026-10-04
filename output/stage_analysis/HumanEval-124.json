@@ -1,0 +1,145 @@
+{
+  "problem_id": "valid_date",
+  "nodes": [
+    {
+      "id": 1,
+      "type": "start",
+      "label": "Start",
+      "next": 2
+    },
+    {
+      "id": 2,
+      "type": "process",
+      "label": "Input: date (string)",
+      "action": "ctx['date'] = ctx['arg0']; ctx['month'] = 0; ctx['day'] = 0; ctx['year'] = 0",
+      "next": 3
+    },
+    {
+      "id": 3,
+      "type": "decision",
+      "label": "Is date not empty?",
+      "logic": "len(ctx['date']) > 0",
+      "true_next": 5,
+      "false_next": 4
+    },
+    {
+      "id": 4,
+      "type": "return",
+      "label": "Output: False (date is empty)",
+      "value": "False"
+    },
+    {
+      "id": 5,
+      "type": "process",
+      "label": "Split date into month, day, year by '.'",
+      "action": "parts = ctx['date'].split('.'); ctx['month'] = int(parts[0]); ctx['day'] = int(parts[1]); ctx['year'] = int(parts[2])",
+      "next": 6
+    },
+    {
+      "id": 6,
+      "type": "process",
+      "label": "Convert month, day, year to integers",
+      "action": "ctx['month'] = int(ctx['month']); ctx['day'] = int(ctx['day']); ctx['year'] = int(ctx['year'])",
+      "next": 7
+    },
+    {
+      "id": 7,
+      "type": "decision",
+      "label": "Is month < 1 or month > 12?",
+      "logic": "ctx['month'] < 1 or ctx['month'] > 12",
+      "true_next": 8,
+      "false_next": 9
+    },
+    {
+      "id": 8,
+      "type": "return",
+      "label": "Output: False (invalid month)",
+      "value": "False"
+    },
+    {
+      "id": 9,
+      "type": "decision",
+      "label": "Is month in [1, 3, 5, 7, 8, 10, 12]?",
+      "logic": "ctx['month'] in [1, 3, 5, 7, 8, 10, 12]",
+      "true_next": 10,
+      "false_next": 18
+    },
+    {
+      "id": 10,
+      "type": "decision",
+      "label": "Is day < 1 or day > 31?",
+      "logic": "ctx['day'] < 1 or ctx['day'] > 31",
+      "true_next": 11,
+      "false_next": 12
+    },
+    {
+      "id": 11,
+      "type": "return",
+      "label": "Output: False (invalid day for month with 31 days)",
+      "value": "False"
+    },
+    {
+      "id": 12,
+      "type": "decision",
+      "label": "Is month in [4, 6, 9, 11]?",
+      "logic": "ctx['month'] in [4, 6, 9, 11]",
+      "true_next": 13,
+      "false_next": 18
+    },
+    {
+      "id": 13,
+      "type": "decision",
+      "label": "Is day < 1 or day > 30?",
+      "logic": "ctx['day'] < 1 or ctx['day'] > 30",
+      "true_next": 14,
+      "false_next": 18
+    },
+    {
+      "id": 14,
+      "type": "return",
+      "label": "Output: False (invalid day for month with 30 days)",
+      "value": "False"
+    },
+    {
+      "id": 15,
+      "type": "decision",
+      "label": "Is month == 2?",
+      "logic": "ctx['month'] == 2",
+      "true_next": 16,
+      "false_next": 18
+    },
+    {
+      "id": 16,
+      "type": "decision",
+      "label": "Is day < 1 or day > 29?",
+      "logic": "ctx['day'] < 1 or ctx['day'] > 29",
+      "true_next": 17,
+      "false_next": 18
+    },
+    {
+      "id": 17,
+      "type": "return",
+      "label": "Output: False (invalid day for February)",
+      "value": "False"
+    },
+    {
+      "id": 18,
+      "type": "return",
+      "label": "Output: True (valid date)",
+      "value": "True"
+    }
+  ],
+  "task_id": "HumanEval-124",
+  "dataset": "HumanEval-V",
+  "result": "failed: invalid literal for int() with base 10: '03-11-2000'",
+  "code": "def valid_date(date):\n    if len(date) == 0:\n        return False\n    \n    parts = date.split('.')\n    month = int(parts[0])\n    day = int(parts[1])\n    year = int(parts[2])\n    \n    if month < 1 or month > 12:\n        return False\n    \n    if month in [1, 3, 5, 7, 8, 10, 12]:\n        if day < 1 or day > 31:\n            return False\n    elif month in [4, 6, 9, 11]:\n        if day < 1 or day > 30:\n            return False\n    elif month == 2:\n        if day < 1 or day > 29:\n            return False\n    \n    return True",
+  "verification": {
+    "md_verdict": "ILR Error",
+    "actual_error_source": "ilr",
+    "ilr_verdict": "incorrect",
+    "code_vs_ilr": "faithful",
+    "md_correct": "yes",
+    "note": "确认 ILR 错：node5 按 '.' 分割日期（题目格式是 mm-dd-yyyy 应按 '-' 分割），忠实实现对所有含 '-' 的输入抛 ValueError（与 FAILURE RESULT 报错完全一致）；且 ILR 缺少规则4的格式校验，node12 false 直达 node18 使二月天数检查不可达。代码逐句复刻 ILR（仅 elif 链使二月检查可达，不影响结果），属忠实转换。",
+    "evidence": "ILR 转写与生成代码对 '03-11-2000' 均抛 ValueError: invalid literal for int() with base 10: '03-11-2000'（期望 True），16 个测试仅 '' 通过；'04122003' 抛 IndexError（期望 False）。"
+  }
+}

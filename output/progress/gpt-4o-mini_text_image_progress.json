@@ -1,0 +1,22 @@
+{
+  "model_name": "gpt-4o-mini_text_image",
+  "datasets": {
+    "LiveCodeBench": {
+      "hash": "4167ce9be5abf7ad521b98a477a687b2:0b096d41fa35d090ff28bb086d0fc596",
+      "status": "completed",
+      "completed": true,
+      "messages": [
+        {
+          "time": "2026-09-06 20:32:20",
+          "message": "Code generation completed"
+        },
+        {
+          "time": "2026-09-06 20:32:35",
+          "message": "Evaluation completed: Pass@1 = 0.2703"
+        }
+      ],
+      "last_update": "2026-09-06 20:32:35"
+    }
+  },
+  "last_update": "2026-09-06 20:32:35"
+}

@@ -1,0 +1,1196 @@
+{
+ "task_id": "weekly-contest-359-determine-the-minimum-sum-of-a-k-avoiding-array",
+ "dataset": "Algorithm",
+ "title": "determine-the-minimum-sum-of-a-k-avoiding-array",
+ "difficulty": "Medium",
+ "prompt": "\"\"\"\nYou are given two integers, n and k.\n\nAn array of distinct positive integers is called a k-avoiding array if there does not exist any pair of distinct elements that sum to k.\n\nReturn the minimum possible sum of a k-avoiding array of length n.\n\nExample 1:\n\nInput: n = 5, k = 4\nOutput: 18\nExplanation: Consider the k-avoiding array [1,2,4,5,6], which has a sum of 18.\nIt can be proven that there is no k-avoiding array with a sum less than 18.\n\nExample 2:\n\nInput: n = 2, k = 6\nOutput: 3\nExplanation: We can construct the array [1,2], which has a sum of 3.\nIt can be proven that there is no k-avoiding array with a sum less than 3.\n\n\nConstraints:\n\n * 1 <= n, k <= 50\n\"\"\"\nclass Solution:\n    def minimumSum(self, n: int, k: int) -> int:\n        ",
+ "starter_code": "class Solution:\n    def minimumSum(self, n: int, k: int) -> int:\n        ",
+ "entry_point": "",
+ "test": "\nmy_solution = Solution()\n\ntest_input = { \"n\": 5, \"k\": 4 }\nassert my_solution.minimumSum(**test_input) == 18\n\ntest_input = { \"n\": 2, \"k\": 6 }\nassert my_solution.minimumSum(**test_input) == 3\n\ntest_input = { \"n\": 1, \"k\": 1 }\nassert my_solution.minimumSum(**test_input) == 1\n\ntest_input = { \"n\": 1, \"k\": 2 }\nassert my_solution.minimumSum(**test_input) == 1\n\ntest_input = { \"n\": 1, \"k\": 3 }\nassert my_solution.minimumSum(**test_input) == 1\n\ntest_input = { \"n\": 1, \"k\": 4 }\nassert my_solution.minimumSum(**test_input) == 1\n\ntest_input = { \"n\": 1, \"k\": 5 }\nassert my_solution.minimumSum(**test_input) == 1\n\ntest_input = { \"n\": 1, \"k\": 6 }\nassert my_solution.minimumSum(**test_input) == 1\n\ntest_input = { \"n\": 1, \"k\": 7 }\nassert my_solution.minimumSum(**test_input) == 1\n\ntest_input = { \"n\": 1, \"k\": 8 }\nassert my_solution.minimumSum(**test_input) == 1\n\ntest_input = { \"n\": 1, \"k\": 9 }\nassert my_solution.minimumSum(**test_input) == 1\n\ntest_input = { \"n\": 1, \"k\": 10 }\nassert my_solution.minimumSum(**test_input) == 1\n\ntest_input = { \"n\": 1, \"k\": 11 }\nassert my_solution.minimumSum(**test_input) == 1\n\ntest_input = { \"n\": 1, \"k\": 12 }\nassert my_solution.minimumSum(**test_input) == 1\n\ntest_input = { \"n\": 1, \"k\": 13 }\nassert my_solution.minimumSum(**test_input) == 1\n\ntest_input = { \"n\": 1, \"k\": 14 }\nassert my_solution.minimumSum(**test_input) == 1\n\ntest_input = { \"n\": 1, \"k\": 15 }\nassert my_solution.minimumSum(**test_input) == 1\n\ntest_input = { \"n\": 1, \"k\": 16 }\nassert my_solution.minimumSum(**test_input) == 1\n\ntest_input = { \"n\": 1, \"k\": 17 }\nassert my_solution.minimumSum(**test_input) == 1\n\ntest_input = { \"n\": 1, \"k\": 18 }\nassert my_solution.minimumSum(**test_input) == 1\n\ntest_input = { \"n\": 1, \"k\": 19 }\nassert my_solution.minimumSum(**test_input) == 1\n\ntest_input = { \"n\": 1, \"k\": 20 }\nassert my_solution.minimumSum(**test_input) == 1\n\ntest_input = { \"n\": 1, \"k\": 21 }\nassert my_solution.minimumSum(**test_input) == 1\n\ntest_input = { \"n\": 1, \"k\": 22 }\nassert my_solution.minimumSum(**test_input) == 1\n\ntest_input = { \"n\": 1, \"k\": 23 }\nassert my_solution.minimumSum(**test_input) == 1\n\ntest_input = { \"n\": 1, \"k\": 24 }\nassert my_solution.minimumSum(**test_input) == 1\n\ntest_input = { \"n\": 1, \"k\": 25 }\nassert my_solution.minimumSum(**test_input) == 1\n\ntest_input = { \"n\": 1, \"k\": 26 }\nassert my_solution.minimumSum(**test_input) == 1\n\ntest_input = { \"n\": 1, \"k\": 27 }\nassert my_solution.minimumSum(**test_input) == 1\n\ntest_input = { \"n\": 1, \"k\": 28 }\nassert my_solution.minimumSum(**test_input) == 1\n\ntest_input = { \"n\": 1, \"k\": 29 }\nassert my_solution.minimumSum(**test_input) == 1\n\ntest_input = { \"n\": 1, \"k\": 30 }\nassert my_solution.minimumSum(**test_input) == 1\n\ntest_input = { \"n\": 1, \"k\": 31 }\nassert my_solution.minimumSum(**test_input) == 1\n\ntest_input = { \"n\": 1, \"k\": 32 }\nassert my_solution.minimumSum(**test_input) == 1\n\ntest_input = { \"n\": 1, \"k\": 33 }\nassert my_solution.minimumSum(**test_input) == 1\n\ntest_input = { \"n\": 1, \"k\": 34 }\nassert my_solution.minimumSum(**test_input) == 1\n\ntest_input = { \"n\": 1, \"k\": 35 }\nassert my_solution.minimumSum(**test_input) == 1\n\ntest_input = { \"n\": 1, \"k\": 36 }\nassert my_solution.minimumSum(**test_input) == 1\n\ntest_input = { \"n\": 1, \"k\": 37 }\nassert my_solution.minimumSum(**test_input) == 1\n\ntest_input = { \"n\": 1, \"k\": 38 }\nassert my_solution.minimumSum(**test_input) == 1\n\ntest_input = { \"n\": 1, \"k\": 39 }\nassert my_solution.minimumSum(**test_input) == 1\n\ntest_input = { \"n\": 1, \"k\": 40 }\nassert my_solution.minimumSum(**test_input) == 1\n\ntest_input = { \"n\": 1, \"k\": 41 }\nassert my_solution.minimumSum(**test_input) == 1\n\ntest_input = { \"n\": 1, \"k\": 42 }\nassert my_solution.minimumSum(**test_input) == 1\n\ntest_input = { \"n\": 1, \"k\": 43 }\nassert my_solution.minimumSum(**test_input) == 1\n\ntest_input = { \"n\": 1, \"k\": 44 }\nassert my_solution.minimumSum(**test_input) == 1\n\ntest_input = { \"n\": 1, \"k\": 45 }\nassert my_solution.minimumSum(**test_input) == 1\n\ntest_input = { \"n\": 1, \"k\": 46 }\nassert my_solution.minimumSum(**test_input) == 1\n\ntest_input = { \"n\": 1, \"k\": 47 }\nassert my_solution.minimumSum(**test_input) == 1\n\ntest_input = { \"n\": 1, \"k\": 48 }\nassert my_solution.minimumSum(**test_input) == 1\n\ntest_input = { \"n\": 1, \"k\": 49 }\nassert my_solution.minimumSum(**test_input) == 1\n\ntest_input = { \"n\": 1, \"k\": 50 }\nassert my_solution.minimumSum(**test_input) == 1\n\ntest_input = { \"n\": 2, \"k\": 1 }\nassert my_solution.minimumSum(**test_input) == 3\n\ntest_input = { \"n\": 2, \"k\": 2 }\nassert my_solution.minimumSum(**test_input) == 3\n\ntest_input = { \"n\": 2, \"k\": 3 }\nassert my_solution.minimumSum(**test_input) == 4\n\ntest_input = { \"n\": 2, \"k\": 4 }\nassert my_solution.minimumSum(**test_input) == 3\n\ntest_input = { \"n\": 2, \"k\": 5 }\nassert my_solution.minimumSum(**test_input) == 3\n\ntest_input = { \"n\": 2, \"k\": 7 }\nassert my_solution.minimumSum(**test_input) == 3\n\ntest_input = { \"n\": 2, \"k\": 8 }\nassert my_solution.minimumSum(**test_input) == 3\n\ntest_input = { \"n\": 2, \"k\": 9 }\nassert my_solution.minimumSum(**test_input) == 3\n\ntest_input = { \"n\": 2, \"k\": 10 }\nassert my_solution.minimumSum(**test_input) == 3\n\ntest_input = { \"n\": 2, \"k\": 11 }\nassert my_solution.minimumSum(**test_input) == 3\n\ntest_input = { \"n\": 2, \"k\": 12 }\nassert my_solution.minimumSum(**test_input) == 3\n\ntest_input = { \"n\": 2, \"k\": 13 }\nassert my_solution.minimumSum(**test_input) == 3\n\ntest_input = { \"n\": 2, \"k\": 14 }\nassert my_solution.minimumSum(**test_input) == 3\n\ntest_input = { \"n\": 2, \"k\": 15 }\nassert my_solution.minimumSum(**test_input) == 3\n\ntest_input = { \"n\": 2, \"k\": 16 }\nassert my_solution.minimumSum(**test_input) == 3\n\ntest_input = { \"n\": 2, \"k\": 17 }\nassert my_solution.minimumSum(**test_input) == 3\n\ntest_input = { \"n\": 2, \"k\": 18 }\nassert my_solution.minimumSum(**test_input) == 3\n\ntest_input = { \"n\": 2, \"k\": 19 }\nassert my_solution.minimumSum(**test_input) == 3\n\ntest_input = { \"n\": 2, \"k\": 20 }\nassert my_solution.minimumSum(**test_input) == 3\n\ntest_input = { \"n\": 2, \"k\": 21 }\nassert my_solution.minimumSum(**test_input) == 3\n\ntest_input = { \"n\": 2, \"k\": 22 }\nassert my_solution.minimumSum(**test_input) == 3\n\ntest_input = { \"n\": 2, \"k\": 23 }\nassert my_solution.minimumSum(**test_input) == 3\n\ntest_input = { \"n\": 2, \"k\": 24 }\nassert my_solution.minimumSum(**test_input) == 3\n\ntest_input = { \"n\": 2, \"k\": 25 }\nassert my_solution.minimumSum(**test_input) == 3\n\ntest_input = { \"n\": 2, \"k\": 26 }\nassert my_solution.minimumSum(**test_input) == 3\n\ntest_input = { \"n\": 2, \"k\": 27 }\nassert my_solution.minimumSum(**test_input) == 3\n\ntest_input = { \"n\": 2, \"k\": 28 }\nassert my_solution.minimumSum(**test_input) == 3\n\ntest_input = { \"n\": 2, \"k\": 29 }\nassert my_solution.minimumSum(**test_input) == 3\n\ntest_input = { \"n\": 2, \"k\": 30 }\nassert my_solution.minimumSum(**test_input) == 3\n\ntest_input = { \"n\": 2, \"k\": 31 }\nassert my_solution.minimumSum(**test_input) == 3\n\ntest_input = { \"n\": 2, \"k\": 32 }\nassert my_solution.minimumSum(**test_input) == 3\n\ntest_input = { \"n\": 2, \"k\": 33 }\nassert my_solution.minimumSum(**test_input) == 3\n\ntest_input = { \"n\": 2, \"k\": 34 }\nassert my_solution.minimumSum(**test_input) == 3\n\ntest_input = { \"n\": 2, \"k\": 35 }\nassert my_solution.minimumSum(**test_input) == 3\n\ntest_input = { \"n\": 2, \"k\": 36 }\nassert my_solution.minimumSum(**test_input) == 3\n\ntest_input = { \"n\": 2, \"k\": 37 }\nassert my_solution.minimumSum(**test_input) == 3\n\ntest_input = { \"n\": 2, \"k\": 38 }\nassert my_solution.minimumSum(**test_input) == 3\n\ntest_input = { \"n\": 2, \"k\": 39 }\nassert my_solution.minimumSum(**test_input) == 3\n\ntest_input = { \"n\": 2, \"k\": 40 }\nassert my_solution.minimumSum(**test_input) == 3\n\ntest_input = { \"n\": 2, \"k\": 41 }\nassert my_solution.minimumSum(**test_input) == 3\n\ntest_input = { \"n\": 2, \"k\": 42 }\nassert my_solution.minimumSum(**test_input) == 3\n\ntest_input = { \"n\": 2, \"k\": 43 }\nassert my_solution.minimumSum(**test_input) == 3\n\ntest_input = { \"n\": 2, \"k\": 44 }\nassert my_solution.minimumSum(**test_input) == 3\n\ntest_input = { \"n\": 2, \"k\": 45 }\nassert my_solution.minimumSum(**test_input) == 3\n\ntest_input = { \"n\": 2, \"k\": 46 }\nassert my_solution.minimumSum(**test_input) == 3\n\ntest_input = { \"n\": 2, \"k\": 47 }\nassert my_solution.minimumSum(**test_input) == 3\n\ntest_input = { \"n\": 2, \"k\": 48 }\nassert my_solution.minimumSum(**test_input) == 3\n\ntest_input = { \"n\": 2, \"k\": 49 }\nassert my_solution.minimumSum(**test_input) == 3",
+ "test_cases": [
+  {
+   "input": {
+    "args": [
+     4,
+     5
+    ]
+   },
+   "output": 18,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     6,
+     2
+    ]
+   },
+   "output": 3,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     1,
+     1
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     2,
+     1
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     3,
+     1
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     4,
+     1
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     5,
+     1
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     6,
+     1
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     7,
+     1
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     8,
+     1
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     9,
+     1
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     10,
+     1
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     11,
+     1
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     12,
+     1
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     13,
+     1
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     14,
+     1
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     15,
+     1
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     16,
+     1
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     17,
+     1
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     18,
+     1
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     19,
+     1
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     20,
+     1
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     21,
+     1
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     22,
+     1
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     23,
+     1
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     24,
+     1
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     25,
+     1
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     26,
+     1
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     27,
+     1
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     28,
+     1
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     29,
+     1
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     30,
+     1
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     31,
+     1
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     32,
+     1
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     33,
+     1
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     34,
+     1
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     35,
+     1
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     36,
+     1
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     37,
+     1
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     38,
+     1
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     39,
+     1
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     40,
+     1
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     41,
+     1
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     42,
+     1
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     43,
+     1
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     44,
+     1
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     45,
+     1
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     46,
+     1
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     47,
+     1
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     48,
+     1
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     49,
+     1
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     50,
+     1
+    ]
+   },
+   "output": 1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     1,
+     2
+    ]
+   },
+   "output": 3,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     2,
+     2
+    ]
+   },
+   "output": 3,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     3,
+     2
+    ]
+   },
+   "output": 4,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     4,
+     2
+    ]
+   },
+   "output": 3,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     5,
+     2
+    ]
+   },
+   "output": 3,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     7,
+     2
+    ]
+   },
+   "output": 3,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     8,
+     2
+    ]
+   },
+   "output": 3,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     9,
+     2
+    ]
+   },
+   "output": 3,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     10,
+     2
+    ]
+   },
+   "output": 3,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     11,
+     2
+    ]
+   },
+   "output": 3,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     12,
+     2
+    ]
+   },
+   "output": 3,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     13,
+     2
+    ]
+   },
+   "output": 3,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     14,
+     2
+    ]
+   },
+   "output": 3,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     15,
+     2
+    ]
+   },
+   "output": 3,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     16,
+     2
+    ]
+   },
+   "output": 3,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     17,
+     2
+    ]
+   },
+   "output": 3,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     18,
+     2
+    ]
+   },
+   "output": 3,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     19,
+     2
+    ]
+   },
+   "output": 3,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     20,
+     2
+    ]
+   },
+   "output": 3,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     21,
+     2
+    ]
+   },
+   "output": 3,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     22,
+     2
+    ]
+   },
+   "output": 3,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     23,
+     2
+    ]
+   },
+   "output": 3,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     24,
+     2
+    ]
+   },
+   "output": 3,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     25,
+     2
+    ]
+   },
+   "output": 3,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     26,
+     2
+    ]
+   },
+   "output": 3,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     27,
+     2
+    ]
+   },
+   "output": 3,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     28,
+     2
+    ]
+   },
+   "output": 3,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     29,
+     2
+    ]
+   },
+   "output": 3,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     30,
+     2
+    ]
+   },
+   "output": 3,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     31,
+     2
+    ]
+   },
+   "output": 3,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     32,
+     2
+    ]
+   },
+   "output": 3,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     33,
+     2
+    ]
+   },
+   "output": 3,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     34,
+     2
+    ]
+   },
+   "output": 3,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     35,
+     2
+    ]
+   },
+   "output": 3,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     36,
+     2
+    ]
+   },
+   "output": 3,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     37,
+     2
+    ]
+   },
+   "output": 3,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     38,
+     2
+    ]
+   },
+   "output": 3,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     39,
+     2
+    ]
+   },
+   "output": 3,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     40,
+     2
+    ]
+   },
+   "output": 3,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     41,
+     2
+    ]
+   },
+   "output": 3,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     42,
+     2
+    ]
+   },
+   "output": 3,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     43,
+     2
+    ]
+   },
+   "output": 3,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     44,
+     2
+    ]
+   },
+   "output": 3,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     45,
+     2
+    ]
+   },
+   "output": 3,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     46,
+     2
+    ]
+   },
+   "output": 3,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     47,
+     2
+    ]
+   },
+   "output": 3,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     48,
+     2
+    ]
+   },
+   "output": 3,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     49,
+     2
+    ]
+   },
+   "output": 3,
+   "explanation": ""
+  }
+ ],
+ "original_ilr": "{\n  \"problem_id\": \"minimumSum\",\n  \"nodes\": [\n    {\n      \"id\": 1,\n      \"type\": \"start\",\n      \"label\": \"Start\",\n      \"next\": 2\n    },\n    {\n      \"id\": 2,\n      \"type\": \"process\",\n      \"label\": \"Input: n (integer), k (integer)\",\n      \"action\": \"ctx['n'] = ctx['arg0']; ctx['k'] = ctx['arg1']; ctx['ans'] = 0; ctx['i'] = 0\",\n      \"next\": 3\n    },\n    {\n      \"id\": 3,\n      \"type\": \"decision\",\n      \"label\": \"Is n > k // 2?\",\n      \"logic\": \"ctx['n'] > ctx['k'] // 2\",\n      \"true_next\": 5,\n      \"false_next\": 11\n    },\n    {\n      \"id\": 5,\n      \"type\": \"process\",\n      \"label\": \"Loop: i from 1 to k // 2\",\n      \"action\": \"ctx['i'] = 1; ctx['loop_end'] = ctx['k'] // 2\",\n      \"next\": 6\n    },\n    {\n      \"id\": 6,\n      \"type\": \"decision\",\n      \"label\": \"Is i <= k // 2?\",\n      \"logic\": \"ctx['i'] <= ctx['loop_end']\",\n      \"true_next\": 7,\n      \"false_next\": 8\n    },\n    {\n      \"id\": 7,\n      \"type\": \"process\",\n      \"label\": \"Add i to ans\",\n      \"action\": \"ctx['ans'] += ctx['i']; ctx['i'] += 1\",\n      \"next\": 9\n    },\n    {\n      \"id\": 9,\n      \"type\": \"process\",\n      \"label\": \"Print i\",\n      \"action\": \"pass\",\n      \"next\": 6\n    },\n    {\n      \"id\": 8,\n      \"type\": \"process\",\n      \"label\": \"Loop: i from 1 to n - (k // 2) - 1\",\n      \"action\": \"ctx['i'] = 1; ctx['loop_end'] = ctx['n'] - (ctx['k'] // 2) - 1\",\n      \"next\": 10\n    },\n    {\n      \"id\": 10,\n      \"type\": \"decision\",\n      \"label\": \"Is i <= n - (k // 2) - 1?\",\n      \"logic\": \"ctx['i'] <= ctx['loop_end']\",\n      \"true_next\": 11,\n      \"false_next\": 12\n    },\n    {\n      \"id\": 11,\n      \"type\": \"process\",\n      \"label\": \"Add (i + k) to ans\",\n      \"action\": \"ctx['ans'] += ctx['i'] + ctx['k']; ctx['i'] += 1\",\n      \"next\": 13\n    },\n    {\n      \"id\": 13,\n      \"type\": \"process\",\n      \"label\": \"Print (i + k)\",\n      \"action\": \"pass\",\n      \"next\": 10\n    },\n    {\n      \"id\": 12,\n      \"type\": \"process\",\n      \"label\": \"Loop: i from 1 to n\",\n      \"action\": \"ctx['i'] = 1; ctx['loop_end'] = ctx['n']\",\n      \"next\": 14\n    },\n    {\n      \"id\": 14,\n      \"type\": \"decision\",\n      \"label\": \"Is i <= n?\",\n      \"logic\": \"ctx['i'] <= ctx['loop_end']\",\n      \"true_next\": 15,\n      \"false_next\": 16\n    },\n    {\n      \"id\": 15,\n      \"type\": \"process\",\n      \"label\": \"Add i to ans\",\n      \"action\": \"ctx['ans'] += ctx['i']; ctx['i'] += 1\",\n      \"next\": 17\n    },\n    {\n      \"id\": 17,\n      \"type\": \"process\",\n      \"label\": \"Print i\",\n      \"action\": \"pass\",\n      \"next\": 14\n    },\n    {\n      \"id\": 16,\n      \"type\": \"end\",\n      \"label\": \"Output: ans\",\n      \"output\": \"ctx['ans']\"\n    }\n  ]\n}",
+ "original_code": "class Solution:\n    def minimumSum(self, n: int, k: int) -> int:\n        ans = 0\n        i = 0\n        \n        if n > k // 2:\n            i = 1\n            loop_end = k // 2\n            while i <= loop_end:\n                ans += i\n                i += 1\n            \n            i = 1\n            loop_end = n - (k // 2) - 1\n            while i <= loop_end:\n                ans += i + k\n                i += 1\n                \n            i = 1\n            loop_end = n\n            while i <= loop_end:\n                ans += i\n                i += 1\n                \n        else:\n            i = 1\n            loop_end = n\n            while i <= loop_end:\n                ans += i\n                i += 1\n                \n        return ans",
+ "ocr_data": {
+  "nodes": [
+   {
+    "node_id": 1,
+    "shape_type": "rectangle",
+    "raw_text": "Start",
+    "position": "top"
+   },
+   {
+    "node_id": 2,
+    "shape_type": "rectangle",
+    "raw_text": "Input: n (integer), k (integer)",
+    "position": "middle"
+   },
+   {
+    "node_id": 3,
+    "shape_type": "rectangle",
+    "raw_text": "Initialize ans = 0",
+    "position": "middle"
+   },
+   {
+    "node_id": 4,
+    "shape_type": "diamond",
+    "raw_text": "Is n > k // 2?",
+    "position": "middle"
+   },
+   {
+    "node_id": 5,
+    "shape_type": "rectangle",
+    "raw_text": "Loop: i from 1 to k // 2",
+    "position": "bottom"
+   },
+   {
+    "node_id": 6,
+    "shape_type": "rectangle",
+    "raw_text": "Add i to ans",
+    "position": "bottom"
+   },
+   {
+    "node_id": 7,
+    "shape_type": "rectangle",
+    "raw_text": "Print i",
+    "position": "bottom"
+   },
+   {
+    "node_id": 8,
+    "shape_type": "rectangle",
+    "raw_text": "Loop: i from 1 to n - (k // 2) - 1",
+    "position": "bottom"
+   },
+   {
+    "node_id": 9,
+    "shape_type": "rectangle",
+    "raw_text": "Add (i + k) to ans",
+    "position": "bottom"
+   },
+   {
+    "node_id": 10,
+    "shape_type": "rectangle",
+    "raw_text": "Output: ans",
+    "position": "bottom"
+   },
+   {
+    "node_id": 11,
+    "shape_type": "rectangle",
+    "raw_text": "Loop: i from 1 to n",
+    "position": "bottom"
+   },
+   {
+    "node_id": 12,
+    "shape_type": "rectangle",
+    "raw_text": "Add i to ans",
+    "position": "bottom"
+   },
+   {
+    "node_id": 13,
+    "shape_type": "rectangle",
+    "raw_text": "Print i",
+    "position": "bottom"
+   },
+   {
+    "node_id": 14,
+    "shape_type": "rectangle",
+    "raw_text": "Print (i + k)",
+    "position": "bottom"
+   }
+  ],
+  "edges": [
+   {
+    "from_node": 1,
+    "to_node": 2,
+    "label": ""
+   },
+   {
+    "from_node": 2,
+    "to_node": 3,
+    "label": ""
+   },
+   {
+    "from_node": 3,
+    "to_node": 4,
+    "label": ""
+   },
+   {
+    "from_node": 4,
+    "to_node": 5,
+    "label": "Yes"
+   },
+   {
+    "from_node": 4,
+    "to_node": 11,
+    "label": "No"
+   },
+   {
+    "from_node": 5,
+    "to_node": 6,
+    "label": "Yes"
+   },
+   {
+    "from_node": 5,
+    "to_node": 8,
+    "label": "No"
+   },
+   {
+    "from_node": 6,
+    "to_node": 7,
+    "label": ""
+   },
+   {
+    "from_node": 7,
+    "to_node": 5,
+    "label": ""
+   },
+   {
+    "from_node": 8,
+    "to_node": 9,
+    "label": "Yes"
+   },
+   {
+    "from_node": 8,
+    "to_node": 10,
+    "label": "No"
+   },
+   {
+    "from_node": 9,
+    "to_node": 14,
+    "label": ""
+   },
+   {
+    "from_node": 10,
+    "to_node": 14,
+    "label": ""
+   },
+   {
+    "from_node": 11,
+    "to_node": 12,
+    "label": "Yes"
+   },
+   {
+    "from_node": 11,
+    "to_node": 13,
+    "label": "No"
+   },
+   {
+    "from_node": 12,
+    "to_node": 13,
+    "label": ""
+   },
+   {
+    "from_node": 13,
+    "to_node": 14,
+    "label": ""
+   }
+  ],
+  "other_text": []
+ },
+ "test_result": {},
+ "status": "completed",
+ "fixed_ilr": null,
+ "modified_code": null,
+ "ilr_fix_log": "",
+ "bug_injected": ""
+}

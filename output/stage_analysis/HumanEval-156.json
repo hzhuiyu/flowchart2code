@@ -1,0 +1,130 @@
+{
+  "problem_id": "int_to_mini_roman",
+  "nodes": [
+    {
+      "id": 1,
+      "type": "start",
+      "label": "Start",
+      "next": 2
+    },
+    {
+      "id": 2,
+      "type": "process",
+      "label": "Input: number (integer)",
+      "action": "ctx['number'] = ctx['arg0']; ctx['num'] = [1, 4, 5, 9, 10, 40, 50, 90, 100, 400, 500, 900, 1000]; ctx['sym'] = ['I', 'IV', 'V', 'IX', 'X', 'XL', 'L', 'XC', 'C', 'CD', 'D', 'CM', 'M']; ctx['res'] = ''",
+      "next": 3
+    },
+    {
+      "id": 3,
+      "type": "decision",
+      "label": "Is number < 1?",
+      "logic": "ctx['number'] < 1",
+      "true_next": 4,
+      "false_next": 5
+    },
+    {
+      "id": 4,
+      "type": "end",
+      "label": "Output: Error (number must be >= 1)",
+      "output": "ctx['res'] = 'Error (number must be >= 1)'"
+    },
+    {
+      "id": 5,
+      "type": "decision",
+      "label": "Is number > 1000?",
+      "logic": "ctx['number'] > 1000",
+      "true_next": 6,
+      "false_next": 7
+    },
+    {
+      "id": 6,
+      "type": "end",
+      "label": "Output: Error (number must be <= 1000)",
+      "output": "ctx['res'] = 'Error (number must be <= 1000)'"
+    },
+    {
+      "id": 7,
+      "type": "process",
+      "label": "Initialize i = 12, res = empty string",
+      "action": "ctx['i'] = 12; ctx['res'] = ''",
+      "next": 8
+    },
+    {
+      "id": 8,
+      "type": "decision",
+      "label": "Is number > 0?",
+      "logic": "ctx['number'] > 0",
+      "true_next": 9,
+      "false_next": 16
+    },
+    {
+      "id": 9,
+      "type": "process",
+      "label": "Calculate div: div = number // num[i]",
+      "action": "ctx['div'] = ctx['number'] // ctx['num'][ctx['i']]",
+      "next": 10
+    },
+    {
+      "id": 10,
+      "type": "process",
+      "label": "Update number: number %= num[i]",
+      "action": "ctx['number'] %= ctx['num'][ctx['i']]",
+      "next": 11
+    },
+    {
+      "id": 11,
+      "type": "decision",
+      "label": "Is div > 0?",
+      "logic": "ctx['div'] > 0",
+      "true_next": 12,
+      "false_next": 14
+    },
+    {
+      "id": 12,
+      "type": "process",
+      "label": "Append sym[i] to res",
+      "action": "ctx['res'] += ctx['sym'][ctx['i']]",
+      "next": 13
+    },
+    {
+      "id": 13,
+      "type": "process",
+      "label": "Decrement i",
+      "action": "ctx['i'] -= 1",
+      "next": 15
+    },
+    {
+      "id": 14,
+      "type": "process",
+      "label": "Decrement div",
+      "action": "ctx['div'] -= 1",
+      "next": 8
+    },
+    {
+      "id": 15,
+      "type": "process",
+      "label": "Decrement div",
+      "action": "ctx['div'] -= 1",
+      "next": 8
+    },
+    {
+      "id": 16,
+      "type": "end",
+      "label": "Output: res.lower()",
+      "output": "ctx['res'].lower()"
+    }
+  ],
+  "task_id": "HumanEval-156",
+  "dataset": "HumanEval-V",
+  "result": "failed: ",
+  "code": "def int_to_mini_roman(number):\n    num = [1, 4, 5, 9, 10, 40, 50, 90, 100, 400, 500, 900, 1000]\n    sym = ['I', 'IV', 'V', 'IX', 'X', 'XL', 'L', 'XC', 'C', 'CD', 'D', 'CM', 'M']\n    res = ''\n    \n    if number < 1:\n        res = 'Error (number must be >= 1)'\n    elif number > 1000:\n        res = 'Error (number must be <= 1000)'\n    else:\n        i = 12\n        while number > 0:\n            div = number // num[i]\n            number %= num[i]\n            if div > 0:\n                res += sym[i]\n                i -= 1\n            else:\n                div -= 1\n                i -= 1\n                continue\n        res = res.lower()\n    \n    return res",
+  "verification": {
+    "md_verdict": "ILR Error",
+    "actual_error_source": "ilr",
+    "ilr_verdict": "incorrect",
+    "code_vs_ilr": "deviates",
+    "md_correct": "yes",
+    "note": "确认 ILR 错：div==0 分支（节点14）不减 i，忠实执行对 19/1/4/500 均死循环，且'追加 sym[i] 后即减 i'的结构使 3/20 等需重复数字的输入只输出一个字符；生成代码在 else 分支自行补 i-=1 才免于死循环（偏离 ILR），但 3→'i'、152→'cli' 等失败全部源于 ILR 的循环结构。",
+    "evidence": "忠实 ILR: candidate(19) 不终止(步数超限)，仅 1000→'m' 等巧合可用；生成代码 gen(3)='i'(期望'iii')、gen(152)='cli'(期望'clii')、gen(426)='cdxvi'(期望'cdxxvi')、gen(20)='x'(期望'xx')"
+  }
+}

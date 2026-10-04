@@ -1,0 +1,98 @@
+{
+  "problem_id": "minimum_coins",
+  "nodes": [
+    {
+      "id": 1,
+      "type": "start",
+      "label": "Start",
+      "next": 2
+    },
+    {
+      "id": 2,
+      "type": "process",
+      "label": "Input: prices (List[int])",
+      "action": "ctx['prices'] = ctx['arg0']; ctx['temp'] = [(0, 0)]; ctx['i'] = 0",
+      "next": 3
+    },
+    {
+      "id": 3,
+      "type": "decision",
+      "label": "For i in range(len(prices))",
+      "logic": "ctx['i'] < len(ctx['prices'])",
+      "true_next": 4,
+      "false_next": 15
+    },
+    {
+      "id": 4,
+      "type": "process",
+      "label": "Calculate pos = 2 * i + 2",
+      "action": "ctx['pos'] = 2 * ctx['i'] + 2",
+      "next": 5
+    },
+    {
+      "id": 5,
+      "type": "process",
+      "label": "Calculate new = temp[0][1] + prices[i]",
+      "action": "ctx['new'] = ctx['temp'][0][1] + ctx['prices'][ctx['i']]",
+      "next": 6
+    },
+    {
+      "id": 6,
+      "type": "decision",
+      "label": "Is i == temp[0][0]?",
+      "logic": "ctx['i'] == ctx['temp'][0][0]",
+      "true_next": 7,
+      "false_next": 8
+    },
+    {
+      "id": 7,
+      "type": "process",
+      "label": "Remove first element from temp",
+      "action": "ctx['temp'].pop(0)",
+      "next": 9
+    },
+    {
+      "id": 8,
+      "type": "process",
+      "label": "Continue",
+      "action": "pass",
+      "next": 9
+    },
+    {
+      "id": 9,
+      "type": "decision",
+      "label": "Is temp not empty?",
+      "logic": "len(ctx['temp']) > 0",
+      "true_next": 10,
+      "false_next": 14
+    },
+    {
+      "id": 10,
+      "type": "decision",
+      "label": "Is temp[-1][1] >= new?",
+      "logic": "ctx['temp'][-1][1] >= ctx['new']",
+      "true_next": 11,
+      "false_next": 14
+    },
+    {
+      "id": 11,
+      "type": "process",
+      "label": "Remove last element from temp",
+      "action": "ctx['temp'].pop()",
+      "next": 9
+    },
+    {
+      "id": 14,
+      "type": "process",
+      "label": "Append (pos, new) to temp, advance i",
+      "action": "ctx['temp'].append((ctx['pos'], ctx['new'])); ctx['i'] += 1",
+      "next": 3
+    },
+    {
+      "id": 15,
+      "type": "end",
+      "label": "Return temp[0][1]",
+      "output": "ctx['temp'][0][1]"
+    }
+  ]
+}

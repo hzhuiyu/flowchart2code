@@ -1,0 +1,61 @@
+{
+  "total": 2,
+  "processed": 2,
+  "success": 2,
+  "failed": 0,
+  "success_rate": 100.0,
+  "iteration_stats": {
+    "1": {
+      "count": 2,
+      "avg_duration": 40.30337584018707,
+      "avg_total_tokens": 9568.0,
+      "avg_prompt_tokens": 3801.0,
+      "avg_completion_tokens": 5767.0
+    }
+  },
+  "avg_duration_by_iteration": {
+    "1": 40.30337584018707,
+    "2": 0.0,
+    "3": 0.0
+  },
+  "reflection_mode": "code_only",
+  "final_merge_eval": {
+    "samples_file": "output/HumanEval-V/gpt-5-nano_text_image/samples.jsonl",
+    "reflection_dir": "output/HumanEval-V/gpt-5-nano_text_image/reflection_code_only",
+    "output_file": "output/HumanEval-V/gpt-5-nano_text_image/reflection_code_only/samples_reflection_merged.jsonl",
+    "merged_results_file": "output/HumanEval-V/gpt-5-nano_text_image/reflection_code_only/samples_reflection_merged.jsonl_results.jsonl",
+    "results_txt": "output/HumanEval-V/gpt-5-nano_text_image/reflection_code_only/results.txt",
+    "problem_file": "data/HumanEval-V/HumanEval.jsonl",
+    "merge_summary": {
+      "total_rows": 164,
+      "replaced_rows": 2,
+      "replaced_by_first_passed": 2,
+      "replaced_by_last_failed": 0,
+      "missing_generated_code": 0,
+      "selection_stats": {
+        "keep_original": 162,
+        "first_passed": 2
+      }
+    },
+    "eval_result": {
+      "pass@1": 1.0
+    },
+    "difficulty_summary": {
+      "Easy": {
+        "passed": 0.0,
+        "total": 0.0,
+        "rate": 0.0
+      },
+      "Medium": {
+        "passed": 0.0,
+        "total": 0.0,
+        "rate": 0.0
+      },
+      "Hard": {
+        "passed": 0.0,
+        "total": 0.0,
+        "rate": 0.0
+      }
+    }
+  }
+}

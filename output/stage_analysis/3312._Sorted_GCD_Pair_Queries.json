@@ -1,0 +1,152 @@
+{
+  "problem_id": "gcd_pairs_queries",
+  "nodes": [
+    {
+      "id": 1,
+      "type": "start",
+      "label": "Start",
+      "next": 2
+    },
+    {
+      "id": 2,
+      "type": "process",
+      "label": "Input: nums (List[int]), queries (List[int])",
+      "action": "ctx['nums'] = ctx['arg0']; ctx['queries'] = ctx['arg1']; ctx['MX'] = 50001; ctx['divisors'] = [[] for _ in range(ctx['MX'])]; ctx['M'] = max(ctx['nums']); ctx['countA'] = {}; ctx['countD'] = {}; ctx['countG'] = {}; ctx['glist'] = []; ctx['vlist'] = []; ctx['Pvlist'] = []; ctx['ans'] = []",
+      "next": 3
+    },
+    {
+      "id": 3,
+      "type": "process",
+      "label": "Initialize countA as Counter(nums)",
+      "action": "from collections import Counter; ctx['countA'] = Counter(ctx['nums'])",
+      "next": 4
+    },
+    {
+      "id": 4,
+      "type": "process",
+      "label": "Initialize countD as Counter()",
+      "action": "from collections import Counter; ctx['countD'] = Counter()",
+      "next": 5
+    },
+    {
+      "id": 5,
+      "type": "decision",
+      "label": "Loop through countA items",
+      "logic": "True",
+      "true_next": 6,
+      "false_next": 7
+    },
+    {
+      "id": 6,
+      "type": "process",
+      "label": "Loop through divisors of x",
+      "action": "for d in ctx['divisors'][ctx['x']]: ctx['countD'][d] += ctx['countA'][ctx['x']]",
+      "next": 8
+    },
+    {
+      "id": 7,
+      "type": "process",
+      "label": "Initialize countG as Counter()",
+      "action": "from collections import Counter; ctx['countG'] = Counter()",
+      "next": 9
+    },
+    {
+      "id": 8,
+      "type": "decision",
+      "label": "Is c <= 1?",
+      "logic": "ctx['c'] <= 1",
+      "true_next": 10,
+      "false_next": 11
+    },
+    {
+      "id": 9,
+      "type": "process",
+      "label": "Set c as countD[g]",
+      "action": "ctx['c'] = ctx['countD'][ctx['g']]",
+      "next": 12
+    },
+    {
+      "id": 10,
+      "type": "process",
+      "label": "Set countG[g] as c * (c - 1) // 2",
+      "action": "ctx['countG'][ctx['g']] = ctx['c'] * (ctx['c'] - 1) // 2",
+      "next": 13
+    },
+    {
+      "id": 11,
+      "type": "process",
+      "label": "Subtract sum of countG[x] for x from 2g to M with step g",
+      "action": "sum_val = 0; for x in range(2 * ctx['g'], ctx['M'] + 1, ctx['g']): sum_val += ctx['countG'].get(x, 0); ctx['countG'][ctx['g']] -= sum_val",
+      "next": 13
+    },
+    {
+      "id": 12,
+      "type": "process",
+      "label": "Create glist from reversed countG keys",
+      "action": "ctx['glist'] = list(reversed(ctx['countG'].keys()))",
+      "next": 14
+    },
+    {
+      "id": 13,
+      "type": "process",
+      "label": "Create vlist from reversed countG values",
+      "action": "ctx['vlist'] = list(reversed(ctx['countG'].values()))",
+      "next": 15
+    },
+    {
+      "id": 14,
+      "type": "process",
+      "label": "Create Pvlist as accumulated vlist",
+      "action": "ctx['Pvlist'] = []; cum_sum = 0; for val in ctx['vlist']: cum_sum += val; ctx['Pvlist'].append(cum_sum)",
+      "next": 16
+    },
+    {
+      "id": 15,
+      "type": "process",
+      "label": "Initialize ans as empty list",
+      "action": "ctx['ans'] = []",
+      "next": 17
+    },
+    {
+      "id": 16,
+      "type": "decision",
+      "label": "Loop through queries",
+      "logic": "True",
+      "true_next": 18,
+      "false_next": 19
+    },
+    {
+      "id": 17,
+      "type": "process",
+      "label": "Set i as bisect_left(Pvlist, q + 1)",
+      "action": "import bisect; ctx['i'] = bisect.bisect_left(ctx['Pvlist'], ctx['q'] + 1)",
+      "next": 20
+    },
+    {
+      "id": 18,
+      "type": "process",
+      "label": "Append glist[i] to ans",
+      "action": "ctx['ans'].append(ctx['glist'][ctx['i']])",
+      "next": 16
+    },
+    {
+      "id": 19,
+      "type": "end",
+      "label": "Output: ans",
+      "output": "ctx['ans']"
+    }
+  ],
+  "task_id": "3312. Sorted GCD Pair Queries",
+  "dataset": "MATH",
+  "result": "failed: list index out of range",
+  "code": "def gcdValues(A: List[int], queries: List[int]) -> List[int]:\n    from collections import Counter\n    import bisect\n    \n    nums = A\n    queries = queries\n    MX = 50001\n    divisors = [[] for _ in range(MX)]\n    M = max(nums)\n    countA = Counter(nums)\n    countD = Counter()\n    countG = Counter()\n    glist = []\n    vlist = []\n    Pvlist = []\n    ans = []\n    \n    # Initialize divisors for each number up to MX\n    for x in range(1, MX):\n        for d in range(1, int(x**0.5) + 1):\n            if x % d == 0:\n                divisors[x].append(d)\n                if d * d != x:\n                    divisors[x].append(x // d)\n    \n    # Process each unique number in countA\n    for x in countA:\n        for d in divisors[x]:\n            countD[d] += countA[x]\n    \n    # Calculate countG for each divisor\n    for g in countD:\n        c = countD[g]\n        if c <= 1:\n            countG[g] = c * (c - 1) // 2\n        else:\n            sum_val = 0\n            for x in range(2 * g, M + 1, g):\n                sum_val += countG.get(x, 0)\n            countG[g] -= sum_val\n    \n    # Prepare glist and vlist\n    glist = list(reversed(countG.keys()))\n    vlist = list(reversed(countG.values()))\n    \n    # Create accumulated Pvlist\n    Pvlist = []\n    cum_sum = 0\n    for val in vlist:\n        cum_sum += val\n        Pvlist.append(cum_sum)\n    \n    # Process queries\n    for q in queries:\n        i = bisect.bisect_left(Pvlist, q + 1)\n        ans.append(glist[i])\n    \n    return ans",
+  "verification": {
+    "md_verdict": "ILR Error",
+    "actual_error_source": "both",
+    "ilr_verdict": "incorrect",
+    "code_vs_ilr": "deviates",
+    "md_correct": "partial",
+    "note": "ILR完全错乱不可执行：循环头被写成logic恒真的decision、循环变量x/c/g/q从未赋值（node6即KeyError 'x'）、node17的next指向不存在的node20、end节点node19不可达(16->18->16死循环)、divisors始终为空表。代码自行重构了算法但仍有错：else分支漏加c*(c-1)//2项、筛减和glist/vlist/bisect均未按大小排序，两个示例都抛 IndexError: list index out of range，与FAILURE RESULT一致。",
+    "evidence": "ILR忠实执行node6即KeyError 'x'；生成代码 gcdValues([2,3,4],[0,2,2]) -> IndexError（期望[1,2,2]）、gcdValues([4,4,2,1],[5,3,1,0]) -> IndexError（期望[4,2,1,1]）。"
+  }
+}

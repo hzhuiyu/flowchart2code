@@ -1,0 +1,176 @@
+{
+  "task_id": "weekly-contest-376-apply-operations-to-maximize-frequency-score",
+  "dataset": "Algorithm",
+  "difficulty": "Hard",
+  "title": "apply-operations-to-maximize-frequency-score",
+  "result": "failed: ",
+  "ilr": "{\n  \"problem_id\": \"max_frequency_score\",\n  \"nodes\": [\n    {\"id\": 1, \"type\": \"start\", \"label\": \"Start\", \"next\": 2},\n    {\"id\": 2, \"type\": \"process\", \"label\": \"Input: nums (List[int]), k (integer)\", \"action\": \"ctx['nums']=ctx['arg0']; ctx['k']=ctx['arg1']; ctx['sum_vals']=[0]+list(accumulate(sorted(ctx['nums']))); ctx['left']=0\", \"next\": 3},\n    {\"id\": 3, \"type\": \"process\", \"label\": \"Sort nums\", \"action\": \"ctx['nums'] = sorted(ctx['nums'])\", \"next\": 4},\n    {\"id\": 4, \"type\": \"process\", \"label\": \"Initialize sum_vals = [0]+list(accumulate(nums))\", \"action\": \"ctx['sum_vals'] = [0]+list(accumulate(ctx['nums']))\", \"next\": 5},\n    {\"id\": 5, \"type\": \"process\", \"label\": \"Initialize left = 0\", \"action\": \"ctx['left'] = 0\", \"next\": 6},\n    {\"id\": 6, \"type\": \"decision\", \"label\": \"Loop: For right from 1 to len(sum_vals) - 1\", \"logic\": \"ctx['right'] < len(ctx['sum_vals']) - 1\", \"true_next\": 7, \"false_next\": 12},\n    {\"id\": 7, \"type\": \"process\", \"label\": \"Calculate mid = (right + left) // 2\", \"action\": \"ctx['mid'] = (ctx['right'] + ctx['left']) // 2\", \"next\": 8},\n    {\"id\": 8, \"type\": \"process\", \"label\": \"Calculate val = (sum_vals[right] - sum_vals[mid]) - (right - mid) * nums[mid]\", \"action\": \"ctx['val'] = (ctx['sum_vals'][ctx['right']] - ctx['sum_vals'][ctx['mid']]) - (ctx['right'] - ctx['mid']) * ctx['nums'][ctx['mid']]\", \"next\": 9},\n    {\"id\": 9, \"type\": \"process\", \"label\": \"Update val += (mid - left) * nums[mid] - (sum_vals[mid] - sum_vals[left])\", \"action\": \"ctx['val'] += (ctx['mid'] - ctx['left']) * ctx['nums'][ctx['mid']] - (ctx['sum_vals'][ctx['mid']] - ctx['sum_vals'][ctx['left']])\", \"next\": 10},\n    {\"id\": 10, \"type\": \"decision\", \"label\": \"Is val > k?\", \"logic\": \"ctx['val'] > ctx['k']\", \"true_next\": 11, \"false_next\": 13},\n    {\"id\": 11, \"type\": \"process\", \"label\": \"Update left += 1\", \"action\": \"ctx['left'] += 1\", \"next\": 13},\n    {\"id\": 12, \"type\": \"process\", \"label\": \"Return right - left\", \"action\": \"return ctx['right'] - ctx['left']\", \"next\": null},\n    {\"id\": 13, \"type\": \"process\", \"label\": \"Continue loop\", \"action\": \"ctx['right'] += 1\", \"next\": 6}\n  ]\n}",
+  "code": "from typing import List\nfrom itertools import accumulate\n\nclass Solution:\n    def maxFrequencyScore(self, nums: List[int], k: int) -> int:\n        nums = sorted(nums)\n        sum_vals = [0] + list(accumulate(nums))\n        left = 0\n        right = 1\n        \n        while right < len(sum_vals) - 1:\n            mid = (right + left) // 2\n            val = (sum_vals[right] - sum_vals[mid]) - (right - mid) * nums[mid]\n            val += (mid - left) * nums[mid] - (sum_vals[mid] - sum_vals[left])\n            \n            if val > k:\n                left += 1\n            else:\n                right += 1\n        \n        return right - left",
+  "prompt": "\"\"\"\nYou are given a 0-indexed integer array nums and an integer k.\nYou can perform the following operation on the array at most k times:\n\nChoose any index i from the array and increase or decrease nums[i] by 1.\n\nThe score of the final array is the frequency of the most frequent element in the array.\nReturn the maximum score you can achieve.\nThe frequency of an element is the number of occurences of that element in the array.\n\nExample 1:\n\nInput: nums = [1,2,6,4], k = 3\nOutput: 3\nExplanation: We can do the following operations on the array:\n- Choose i = 0, and increase the value of nums[0] by 1. The resulting array is [2,2,6,4].\n- Choose i = 3, and decrease the value of nums[3] by 1. The resulting array is [2,2,6,3].\n- Choose i = 3, and decrease the value of nums[3] by 1. The resulting array is [2,2,6,2].\nThe element 2 is the most frequent in the final array so our score is 3.\nIt can be shown that we cannot achieve a better score.\n\nExample 2:\n\nInput: nums = [1,4,4,2,4], k = 0\nOutput: 3\nExplanation: We cannot apply any operations so our score will be the frequency of the most frequent element in the original array, which is 3.\n\n\nConstraints:\n\n1 <= nums.length <= 105\n1 <= nums[i] <= 109\n0 <= k <= 1014\n\"\"\"\nclass Solution:\n    def maxFrequencyScore(self, nums: List[int], k: int) -> int:\n        ",
+  "test": "\nmy_solution = Solution()\n\ntest_input = { \"nums\": [1,2,6,4], \"k\": 3 }\nassert my_solution.maxFrequencyScore(**test_input) == 3\n\ntest_input = { \"nums\": [1,4,4,2,4], \"k\": 0 }\nassert my_solution.maxFrequencyScore(**test_input) == 3\n\ntest_input = { \"nums\": [3,20,13,2,3,15,24,19,8,13,19,20,21], \"k\": 45 }\nassert my_solution.maxFrequencyScore(**test_input) == 10\n\ntest_input = { \"nums\": [13,22,29,21,13,17,5,2,27,6,10,4,23,29,27], \"k\": 117 }\nassert my_solution.maxFrequencyScore(**test_input) == 14\n\ntest_input = { \"nums\": [27,8,30,3,13,28,7,14,21,19,24,28,29,1,14,22,6], \"k\": 23 }\nassert my_solution.maxFrequencyScore(**test_input) == 8\n\ntest_input = { \"nums\": [10,11,3], \"k\": 1 }\nassert my_solution.maxFrequencyScore(**test_input) == 2\n\ntest_input = { \"nums\": [10,19,26,18,27,18], \"k\": 9 }\nassert my_solution.maxFrequencyScore(**test_input) == 4\n\ntest_input = { \"nums\": [17,24,10,23,22,15,25,2,13,24,22,25,25,21], \"k\": 52 }\nassert my_solution.maxFrequencyScore(**test_input) == 13\n\ntest_input = { \"nums\": [28,6,22,10], \"k\": 12 }\nassert my_solution.maxFrequencyScore(**test_input) == 2\n\ntest_input = { \"nums\": [17,17,25,14,29,28,20,14,16,22,4,28,2,5,3,11,6,20,17], \"k\": 76 }\nassert my_solution.maxFrequencyScore(**test_input) == 14\n\ntest_input = { \"nums\": [23,10,18,21,16,23,14], \"k\": 2 }\nassert my_solution.maxFrequencyScore(**test_input) == 3\n\ntest_input = { \"nums\": [5,13,7], \"k\": 8 }\nassert my_solution.maxFrequencyScore(**test_input) == 3\n\ntest_input = { \"nums\": [6,29,3,19,10,6,20,26,1,30,11,25,29,12,29,14,15,16,5], \"k\": 64 }\nassert my_solution.maxFrequencyScore(**test_input) == 12\n\ntest_input = { \"nums\": [10,26,21,18,30,25,1], \"k\": 8 }\nassert my_solution.maxFrequencyScore(**test_input) == 3\n\ntest_input = { \"nums\": [29,10,26,1,2,2,17,7,5,16,24,27,7,7,26,26,24], \"k\": 3 }\nassert my_solution.maxFrequencyScore(**test_input) == 5\n\ntest_input = { \"nums\": [11,16,6,12,3,8,5,29,9,15,7,9,14,6,11,14,12,23,22,14], \"k\": 79 }\nassert my_solution.maxFrequencyScore(**test_input) == 19\n\ntest_input = { \"nums\": [5,17,15,14,27,11,22,6,4], \"k\": 26 }\nassert my_solution.maxFrequencyScore(**test_input) == 6\n\ntest_input = { \"nums\": [13,22,17], \"k\": 4 }\nassert my_solution.maxFrequencyScore(**test_input) == 2\n\ntest_input = { \"nums\": [24,6,14,6,30,9,6,11,21,10,12,27,1], \"k\": 90 }\nassert my_solution.maxFrequencyScore(**test_input) == 13\n\ntest_input = { \"nums\": [19,5,2,23,16,22,3,2,5,20,17,3,22,1], \"k\": 15 }\nassert my_solution.maxFrequencyScore(**test_input) == 7\n\ntest_input = { \"nums\": [15,20], \"k\": 5 }\nassert my_solution.maxFrequencyScore(**test_input) == 2\n\ntest_input = { \"nums\": [9,2,5,14,19,5,10,10,2,25,1,1,1,14,9,13,5,6,10,1], \"k\": 80 }\nassert my_solution.maxFrequencyScore(**test_input) == 18\n\ntest_input = { \"nums\": [2,29,24,19,5], \"k\": 24 }\nassert my_solution.maxFrequencyScore(**test_input) == 3\n\ntest_input = { \"nums\": [4,10,5], \"k\": 6 }\nassert my_solution.maxFrequencyScore(**test_input) == 3\n\ntest_input = { \"nums\": [5,2,22,7,18,26,15,4,24,26,24], \"k\": 19 }\nassert my_solution.maxFrequencyScore(**test_input) == 6\n\ntest_input = { \"nums\": [23,21,10], \"k\": 13 }\nassert my_solution.maxFrequencyScore(**test_input) == 3\n\ntest_input = { \"nums\": [5,23,7,2,1,5,12,2,20,24,5,4], \"k\": 71 }\nassert my_solution.maxFrequencyScore(**test_input) == 11\n\ntest_input = { \"nums\": [22,13,30], \"k\": 17 }\nassert my_solution.maxFrequencyScore(**test_input) == 3\n\ntest_input = { \"nums\": [7,23,29,8,9,3,4,16,24,6,18,20,19,14,5], \"k\": 55 }\nassert my_solution.maxFrequencyScore(**test_input) == 11\n\ntest_input = { \"nums\": [3,11,24,27,10], \"k\": 24 }\nassert my_solution.maxFrequencyScore(**test_input) == 4\n\ntest_input = { \"nums\": [12,11,21,6,13,27,11,2,27,26,24,13], \"k\": 0 }\nassert my_solution.maxFrequencyScore(**test_input) == 2\n\ntest_input = { \"nums\": [4,10,26,16,21,26,11,26,30,24,18,30,23,26,24], \"k\": 50 }\nassert my_solution.maxFrequencyScore(**test_input) == 12\n\ntest_input = { \"nums\": [4,2,18,14,9,29], \"k\": 4 }\nassert my_solution.maxFrequencyScore(**test_input) == 2\n\ntest_input = { \"nums\": [9,27,19,18], \"k\": 9 }\nassert my_solution.maxFrequencyScore(**test_input) == 3\n\ntest_input = { \"nums\": [11,17,29,9,22,7,13,14,12,24,9], \"k\": 47 }\nassert my_solution.maxFrequencyScore(**test_input) == 10\n\ntest_input = { \"nums\": [20,10,15,16], \"k\": 10 }\nassert my_solution.maxFrequencyScore(**test_input) == 3\n\ntest_input = { \"nums\": [16,2,6,20,2,18,16,8,15,19,22,29,24,2,26,19], \"k\": 40 }\nassert my_solution.maxFrequencyScore(**test_input) == 11\n\ntest_input = { \"nums\": [17,13,19,28,6,8,5,25,2,3,9,4,21,6,13,10,5,3], \"k\": 113 }\nassert my_solution.maxFrequencyScore(**test_input) == 18\n\ntest_input = { \"nums\": [16,5,10,15], \"k\": 5 }\nassert my_solution.maxFrequencyScore(**test_input) == 2\n\ntest_input = { \"nums\": [23,2,23,27,21], \"k\": 2 }\nassert my_solution.maxFrequencyScore(**test_input) == 3\n\ntest_input = { \"nums\": [15,26,3,14,3,18,16,19,11,9,2,18,14,8,20,9], \"k\": 75 }\nassert my_solution.maxFrequencyScore(**test_input) == 15\n\ntest_input = { \"nums\": [13,23,4,5,2], \"k\": 3 }\nassert my_solution.maxFrequencyScore(**test_input) == 3\n\ntest_input = { \"nums\": [3,1,9,12], \"k\": 8 }\nassert my_solution.maxFrequencyScore(**test_input) == 3\n\ntest_input = { \"nums\": [4,27,21,16,11,5,5,1,5,10], \"k\": 18 }\nassert my_solution.maxFrequencyScore(**test_input) == 7\n\ntest_input = { \"nums\": [14,4,23,27,8,25,7,12,12,21,21,11,20,23,30,11,12,29,22], \"k\": 77 }\nassert my_solution.maxFrequencyScore(**test_input) == 15\n\ntest_input = { \"nums\": [10,30,25], \"k\": 20 }\nassert my_solution.maxFrequencyScore(**test_input) == 3\n\ntest_input = { \"nums\": [4,8,22,25,27,26,18,14,18], \"k\": 56 }\nassert my_solution.maxFrequencyScore(**test_input) == 9\n\ntest_input = { \"nums\": [2,19,27,25,23,17,8,16,28,10,6,24,6], \"k\": 28 }\nassert my_solution.maxFrequencyScore(**test_input) == 7\n\ntest_input = { \"nums\": [27,25,27,10,23,14,24,17,12,22,14,11,19,16,7,15], \"k\": 21 }\nassert my_solution.maxFrequencyScore(**test_input) == 9\n\ntest_input = { \"nums\": [23,11], \"k\": 12 }\nassert my_solution.maxFrequencyScore(**test_input) == 2\n\ntest_input = { \"nums\": [20,28,15,11,22,26,29,2,16,9], \"k\": 61 }\nassert my_solution.maxFrequencyScore(**test_input) == 9\n\ntest_input = { \"nums\": [21,11,1,17,20,19,24,10,1,4,10,30,11,29,20,12,18,5,4,27], \"k\": 110 }\nassert my_solution.maxFrequencyScore(**test_input) == 17\n\ntest_input = { \"nums\": [22,29,7,1,26,22,27,1,16,25,25], \"k\": 26 }\nassert my_solution.maxFrequencyScore(**test_input) == 8\n\ntest_input = { \"nums\": [26,6,24], \"k\": 20 }\nassert my_solution.maxFrequencyScore(**test_input) == 3\n\ntest_input = { \"nums\": [29,24,9,4,2,9,28,1,25,25,13,22,27,26,15,18], \"k\": 2 }\nassert my_solution.maxFrequencyScore(**test_input) == 4\n\ntest_input = { \"nums\": [9,19,1,24,15,19,22,13,10,8,4,10,26,23,11,8], \"k\": 89 }\nassert my_solution.maxFrequencyScore(**test_input) == 15\n\ntest_input = { \"nums\": [18,6,20,22,25,21,19,19,15,5,7,29,28,7,17,4], \"k\": 104 }\nassert my_solution.maxFrequencyScore(**test_input) == 16\n\ntest_input = { \"nums\": [9,11,28,24,30,6,1,30,22,16,20,19,21,17], \"k\": 62 }\nassert my_solution.maxFrequencyScore(**test_input) == 11\n\ntest_input = { \"nums\": [15,13,29,28], \"k\": 15 }\nassert my_solution.maxFrequencyScore(**test_input) == 3\n\ntest_input = { \"nums\": [28,26,8], \"k\": 18 }\nassert my_solution.maxFrequencyScore(**test_input) == 2\n\ntest_input = { \"nums\": [6,12,24,4,25,23,5,13,7,5], \"k\": 12 }\nassert my_solution.maxFrequencyScore(**test_input) == 6\n\ntest_input = { \"nums\": [8,23,15,15,3,19,6,20,12,18,7,8,18,19,11,20,4,18], \"k\": 54 }\nassert my_solution.maxFrequencyScore(**test_input) == 14\n\ntest_input = { \"nums\": [30,2,4,7,19,3,3,14,24,4,26,17,1,12,4,11], \"k\": 36 }\nassert my_solution.maxFrequencyScore(**test_input) == 11\n\ntest_input = { \"nums\": [12,15,21,17,7,20,16,30,8,6,28,28,23,6,12,14,19,26,27,5], \"k\": 87 }\nassert my_solution.maxFrequencyScore(**test_input) == 16\n\ntest_input = { \"nums\": [15,1,27,4,5,20,5,26,28], \"k\": 38 }\nassert my_solution.maxFrequencyScore(**test_input) == 6\n\ntest_input = { \"nums\": [27,14,30,6,14,29,5,8], \"k\": 51 }\nassert my_solution.maxFrequencyScore(**test_input) == 7\n\ntest_input = { \"nums\": [18,22], \"k\": 4 }\nassert my_solution.maxFrequencyScore(**test_input) == 2\n\ntest_input = { \"nums\": [17,28,16,24,29], \"k\": 5 }\nassert my_solution.maxFrequencyScore(**test_input) == 3\n\ntest_input = { \"nums\": [2,22,27,12,30,9,27,3,26,23,25,30,20,19,9,1,23,14,18,26], \"k\": 30 }\nassert my_solution.maxFrequencyScore(**test_input) == 11\n\ntest_input = { \"nums\": [26,16,9,7,10,16,26,22,24,1,30,8,15,5,28,16,13,12], \"k\": 84 }\nassert my_solution.maxFrequencyScore(**test_input) == 15\n\ntest_input = { \"nums\": [26,8,27,27,22,28,8,26,24,15,6,13,20,12], \"k\": 55 }\nassert my_solution.maxFrequencyScore(**test_input) == 11\n\ntest_input = { \"nums\": [19,19,20,14,19,20,5,4,14,26,12,17,14,29,3,9], \"k\": 94 }\nassert my_solution.maxFrequencyScore(**test_input) == 16\n\ntest_input = { \"nums\": [9,19,14,17,14,20,27,9,22,29,15,20,6,25,8,17,18,24,23], \"k\": 44 }\nassert my_solution.maxFrequencyScore(**test_input) == 13\n\ntest_input = { \"nums\": [2,10], \"k\": 8 }\nassert my_solution.maxFrequencyScore(**test_input) == 2\n\ntest_input = { \"nums\": [20,2,27,27,19,20,8,21,15,20,14,18,25], \"k\": 17 }\nassert my_solution.maxFrequencyScore(**test_input) == 8\n\ntest_input = { \"nums\": [6,27,6,30,2,1,7,24,18,4,2,18,17], \"k\": 56 }\nassert my_solution.maxFrequencyScore(**test_input) == 10\n\ntest_input = { \"nums\": [23,18,30,24,5,21], \"k\": 33 }\nassert my_solution.maxFrequencyScore(**test_input) == 6\n\ntest_input = { \"nums\": [12,16,24,18,12,20,26,15,11,23,4,25], \"k\": 35 }\nassert my_solution.maxFrequencyScore(**test_input) == 9\n\ntest_input = { \"nums\": [9,9,11,18], \"k\": 11 }\nassert my_solution.maxFrequencyScore(**test_input) == 4\n\ntest_input = { \"nums\": [19,21,7,15,21,10,5,27,2,27,14], \"k\": 63 }\nassert my_solution.maxFrequencyScore(**test_input) == 9\n\ntest_input = { \"nums\": [25,17,13,6,3,19,21,12,29,1,16,14,24,27,25,13,1,5,17], \"k\": 136 }\nassert my_solution.maxFrequencyScore(**test_input) == 19\n\ntest_input = { \"nums\": [4,4,8,9,14,7,27,8,2,29,1,28,23,13], \"k\": 109 }\nassert my_solution.maxFrequencyScore(**test_input) == 14\n\ntest_input = { \"nums\": [14,2,18,30,28,17,25,10,7,10,19,3,26,22,12,17,8,4], \"k\": 24 }\nassert my_solution.maxFrequencyScore(**test_input) == 8\n\ntest_input = { \"nums\": [27,17,12,19,25,1,9,4,9,20,2,5], \"k\": 70 }\nassert my_solution.maxFrequencyScore(**test_input) == 10\n\ntest_input = { \"nums\": [18,25,12,20,19,26,2,15,3,6,29,29,2,24,4,9], \"k\": 106 }\nassert my_solution.maxFrequencyScore(**test_input) == 14\n\ntest_input = { \"nums\": [17,18,14,1,28,15,14,13,9,16,28,9,21,23,2,11], \"k\": 65 }\nassert my_solution.maxFrequencyScore(**test_input) == 14\n\ntest_input = { \"nums\": [17,15,29,30,12,13,10], \"k\": 37 }\nassert my_solution.maxFrequencyScore(**test_input) == 6\n\ntest_input = { \"nums\": [15,4,11,1,18,29,9,23,14,25,15,12,15,6,30,28], \"k\": 60 }\nassert my_solution.maxFrequencyScore(**test_input) == 12\n\ntest_input = { \"nums\": [20,6,8,15,12,8,26,7,27,8,5,25,17,12,7,1,23,24,8], \"k\": 62 }\nassert my_solution.maxFrequencyScore(**test_input) == 14\n\ntest_input = { \"nums\": [22,21,30,16,23,24,2,2,24], \"k\": 39 }\nassert my_solution.maxFrequencyScore(**test_input) == 7\n\ntest_input = { \"nums\": [8,9,6,30,28,2,1,3,14,8,21,26,13,29,23,3,14,9,6,25], \"k\": 91 }\nassert my_solution.maxFrequencyScore(**test_input) == 16\n\ntest_input = { \"nums\": [7,10,16,23,17,22,28,7,4,21,25,21,19,30,13,19,15,21,23], \"k\": 53 }\nassert my_solution.maxFrequencyScore(**test_input) == 15\n\ntest_input = { \"nums\": [25,17,1,24,3,6,8,29,19,4,16,12,9,28,1,21,13,29], \"k\": 151 }\nassert my_solution.maxFrequencyScore(**test_input) == 18\n\ntest_input = { \"nums\": [1,6,14,9], \"k\": 8 }\nassert my_solution.maxFrequencyScore(**test_input) == 3\n\ntest_input = { \"nums\": [5,7,17,2,23,6,3,13,2,11,10,8,18,16,3,11,26], \"k\": 30 }\nassert my_solution.maxFrequencyScore(**test_input) == 10\n\ntest_input = { \"nums\": [27,27,16,18,24,7,26,30,21,25,28,28,29,27,28,6], \"k\": 0 }\nassert my_solution.maxFrequencyScore(**test_input) == 3\n\ntest_input = { \"nums\": [29,16,9,21,2,16,4,17,22,11,20,23,5,22,7,27,20], \"k\": 85 }\nassert my_solution.maxFrequencyScore(**test_input) == 15\n\ntest_input = { \"nums\": [25,5,24,2,30,15,17,27,15,15,27], \"k\": 69 }\nassert my_solution.maxFrequencyScore(**test_input) == 10\n\ntest_input = { \"nums\": [6,29,24,14,9,14,1,1,28,20,19,21,13,25,17,24,30,14], \"k\": 107 }\nassert my_solution.maxFrequencyScore(**test_input) == 16\n\ntest_input = { \"nums\": [17,20,2,11,5,7,28], \"k\": 36 }\nassert my_solution.maxFrequencyScore(**test_input) == 6",
+  "ocr_data": {
+    "nodes": [
+      {
+        "node_id": 1,
+        "shape_type": "rectangle",
+        "raw_text": "Start",
+        "position": "top"
+      },
+      {
+        "node_id": 2,
+        "shape_type": "rectangle",
+        "raw_text": "Input: nums (List[int]), k (integer)",
+        "position": "middle"
+      },
+      {
+        "node_id": 3,
+        "shape_type": "rectangle",
+        "raw_text": "Sort nums",
+        "position": "middle"
+      },
+      {
+        "node_id": 4,
+        "shape_type": "rectangle",
+        "raw_text": "Initialize sum_vals = [0]+list(accumulate(nums))",
+        "position": "middle"
+      },
+      {
+        "node_id": 5,
+        "shape_type": "rectangle",
+        "raw_text": "Initialize left = 0",
+        "position": "middle"
+      },
+      {
+        "node_id": 6,
+        "shape_type": "diamond",
+        "raw_text": "Loop: For right from 1 to len(sum_vals) - 1",
+        "position": "middle"
+      },
+      {
+        "node_id": 7,
+        "shape_type": "rectangle",
+        "raw_text": "Calculate mid = (right + left) // 2",
+        "position": "middle"
+      },
+      {
+        "node_id": 8,
+        "shape_type": "rectangle",
+        "raw_text": "Calculate val = (sum_vals[right] - sum_vals[mid]) - (right - mid) * nums[mid]",
+        "position": "middle"
+      },
+      {
+        "node_id": 9,
+        "shape_type": "rectangle",
+        "raw_text": "Update val += (mid - left) * nums[mid] - (sum_vals[mid] - sum_vals[left])",
+        "position": "middle"
+      },
+      {
+        "node_id": 10,
+        "shape_type": "diamond",
+        "raw_text": "Is val > k?",
+        "position": "middle"
+      },
+      {
+        "node_id": 11,
+        "shape_type": "rectangle",
+        "raw_text": "Update left += 1",
+        "position": "bottom"
+      },
+      {
+        "node_id": 12,
+        "shape_type": "rectangle",
+        "raw_text": "Return right - left",
+        "position": "middle"
+      },
+      {
+        "node_id": 13,
+        "shape_type": "rectangle",
+        "raw_text": "Continue loop",
+        "position": "bottom"
+      }
+    ],
+    "edges": [
+      {
+        "from_node": 1,
+        "to_node": 2,
+        "label": ""
+      },
+      {
+        "from_node": 2,
+        "to_node": 3,
+        "label": ""
+      },
+      {
+        "from_node": 3,
+        "to_node": 4,
+        "label": ""
+      },
+      {
+        "from_node": 4,
+        "to_node": 5,
+        "label": ""
+      },
+      {
+        "from_node": 5,
+        "to_node": 6,
+        "label": ""
+      },
+      {
+        "from_node": 6,
+        "to_node": 7,
+        "label": ""
+      },
+      {
+        "from_node": 7,
+        "to_node": 8,
+        "label": ""
+      },
+      {
+        "from_node": 8,
+        "to_node": 9,
+        "label": ""
+      },
+      {
+        "from_node": 9,
+        "to_node": 10,
+        "label": ""
+      },
+      {
+        "from_node": 10,
+        "to_node": 11,
+        "label": "Yes"
+      },
+      {
+        "from_node": 10,
+        "to_node": 13,
+        "label": "No"
+      },
+      {
+        "from_node": 11,
+        "to_node": 13,
+        "label": ""
+      },
+      {
+        "from_node": 13,
+        "to_node": 6,
+        "label": ""
+      },
+      {
+        "from_node": 6,
+        "to_node": 12,
+        "label": ""
+      }
+    ],
+    "other_text": []
+  },
+  "analysis": {
+    "ilr_verdict": "incorrect",
+    "ilr_issues": "三处缺陷：(1) right从未初始化（节点2-5均未赋值，节点6即用ctx['right']）；(2) 节点10为真时经节点11(left+=1)继续流入节点13(right+=1)，即val>k时left与right同时自增，滑窗语义错误；(3) 循环条件right<len(sum_vals)-1漏掉最后一轮right=n（完整窗口[left,n)）的代价校验，但退出时仍return right-left，返回了从未验证过的窗口大小。",
+    "code_vs_ilr": "deviates",
+    "code_issues": "代码修正了缺陷(2)（val>k时只left+=1不再right+=1）并补上right=1，但忠实保留了缺陷(3)的循环上界off-by-one与'退出即返回right-left'，返回了未校验的窗口大小。",
+    "error_source": "ilr",
+    "ocr_contribution": "no",
+    "root_cause": "流程图循环文本'For right from 1 to len(sum_vals)-1'本应包含right=n的一轮（参考解为range(1,len(sum_vals))），ILR把它错编码为right<len-1的while且漏掉right初始化并让left/right同时自增；代码修复了部分缺陷但保留了关键的off-by-one。",
+    "evidence": "nums=[1,2,6,4],k=3：代码在right=3时val=3<=k后right增至4即退出，返回4-0=4（实测运行复现），期望3；正确算法在right=4时val=7>k会把left推到1得3。若按ILR原样（val>k也right+=1）执行，[1,4,4,2,4],k=0返回2（期望3）。"
+  }
+}

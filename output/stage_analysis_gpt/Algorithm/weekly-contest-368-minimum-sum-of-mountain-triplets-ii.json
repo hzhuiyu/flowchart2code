@@ -1,0 +1,268 @@
+{
+  "task_id": "weekly-contest-368-minimum-sum-of-mountain-triplets-ii",
+  "dataset": "Algorithm",
+  "difficulty": "Medium",
+  "title": "minimum-sum-of-mountain-triplets-ii",
+  "result": "failed: ",
+  "ilr": "{\n  \"problem_id\": \"minimum_sum_mountain_triplet\",\n  \"nodes\": [\n    {\"id\": 1, \"type\": \"start\", \"label\": \"Start\", \"next\": 2},\n    {\"id\": 2, \"type\": \"process\", \"label\": \"Input: nums (List[int])\", \"action\": \"ctx['nums']=ctx['arg0']\", \"next\": 3},\n    {\"id\": 3, \"type\": \"process\", \"label\": \"Initialize min_left = [], min_right = []\", \"action\": \"ctx['min_left'] = []; ctx['min_right'] = []\", \"next\": 4},\n    {\"id\": 4, \"type\": \"process\", \"label\": \"Initialize ml = inf, mr = inf, ans = inf\", \"action\": \"ctx['ml'] = float('inf'); ctx['mr'] = float('inf'); ctx['ans'] = float('inf')\", \"next\": 5},\n    {\"id\": 5, \"type\": \"process\", \"label\": \"Loop i from 0 to len(nums) - 2\", \"action\": \"ctx['i'] = 0\", \"next\": 6},\n    {\"id\": 6, \"type\": \"decision\", \"label\": \"Is nums[i] < ml?\", \"logic\": \"ctx['nums'][ctx['i']] < ctx['ml']\", \"true_next\": 7, \"false_next\": 8},\n    {\"id\": 7, \"type\": \"process\", \"label\": \"Update ml: ml = nums[i]\", \"action\": \"ctx['ml'] = ctx['nums'][ctx['i']]\", \"next\": 8},\n    {\"id\": 8, \"type\": \"process\", \"label\": \"Append ml to min_left\", \"action\": \"ctx['min_left'].append(ctx['ml'])\", \"next\": 5},\n    {\"id\": 9, \"type\": \"process\", \"label\": \"Loop i from len(nums) - 1 to 1\", \"action\": \"ctx['i'] = len(ctx['nums']) - 1\", \"next\": 10},\n    {\"id\": 10, \"type\": \"decision\", \"label\": \"Is nums[i] < mr?\", \"logic\": \"ctx['nums'][ctx['i']] < ctx['mr']\", \"true_next\": 11, \"false_next\": 12},\n    {\"id\": 11, \"type\": \"process\", \"label\": \"Update mr: mr = nums[i]\", \"action\": \"ctx['mr'] = ctx['nums'][ctx['i']]\", \"next\": 12},\n    {\"id\": 12, \"type\": \"process\", \"label\": \"Append mr to min_right\", \"action\": \"ctx['min_right'].append(ctx['mr'])\", \"next\": 13},\n    {\"id\": 13, \"type\": \"process\", \"label\": \"Reverse min_right\", \"action\": \"ctx['min_right'] = ctx['min_right'][::-1]\", \"next\": 14},\n    {\"id\": 14, \"type\": \"process\", \"label\": \"Loop i from 1 to len(nums) - 1\", \"action\": \"ctx['i'] = 1\", \"next\": 15},\n    {\"id\": 15, \"type\": \"decision\", \"label\": \"Is ans == inf?\", \"logic\": \"ctx['ans'] == float('inf')\", \"true_next\": 16, \"false_next\": 17},\n    {\"id\": 16, \"type\": \"end\", \"label\": \"Output: -1 (no mountain triplet exists)\", \"output\": \"-1\"},\n    {\"id\": 17, \"type\": \"end\", \"label\": \"Output: ans (minimum sum of mountain triplet)\", \"output\": \"ctx['ans']\"},\n    {\"id\": 18, \"type\": \"process\", \"label\": \"Set ml = min_left[i-1], mr = min_right[i-1]\", \"action\": \"ctx['ml'] = ctx['min_left'][ctx['i'] - 1]; ctx['mr'] = ctx['min_right'][ctx['i'] - 1]\", \"next\": 19},\n    {\"id\": 19, \"type\": \"decision\", \"label\": \"Is ml < nums[i] and nums[i] > mr?\", \"logic\": \"ctx['ml'] < ctx['nums'][ctx['i']] and ctx['nums'][ctx['i']] > ctx['mr']\", \"true_next\": 20, \"false_next\": 14},\n    {\"id\": 20, \"type\": \"process\", \"label\": \"Update ans: ans = min(ans, nums[i] + ml + mr)\", \"action\": \"ctx['ans'] = min(ctx['ans'], ctx['nums'][ctx['i']] + ctx['ml'] + ctx['mr'])\", \"next\": 14}\n  ]\n}",
+  "code": "from typing import List\n\nclass Solution:\n    def minimumSum(self, nums: List[int]) -> int:\n        min_left = []\n        min_right = []\n        ml = float('inf')\n        mr = float('inf')\n        ans = float('inf')\n\n        for i in range(len(nums) - 1):\n            if nums[i] < ml:\n                ml = nums[i]\n            min_left.append(ml)\n\n        for i in range(len(nums) - 1, 0, -1):\n            if nums[i] < mr:\n                mr = nums[i]\n            min_right.append(mr)\n\n        min_right.reverse()\n\n        for i in range(1, len(nums) - 1):\n            if ans == float('inf'):\n                return -1\n            \n            ml = min_left[i - 1]\n            mr = min_right[i - 1]\n\n            if ml < nums[i] and nums[i] > mr:\n                ans = min(ans, nums[i] + ml + mr)\n\n        return ans if ans != float('inf') else -1",
+  "prompt": "\"\"\"\nYou are given a 0-indexed array nums of integers.\n\nA triplet of indices (i, j, k) is a mountain if:\n\n * i < j < k\n * nums[i] < nums[j] and nums[k] < nums[j]\n\nReturn the minimum possible sum of a mountain triplet of nums. If no such triplet exists, return -1.\n\nExample 1:\n\nInput: nums = [8,6,1,5,3]\nOutput: 9\nExplanation: Triplet (2, 3, 4) is a mountain triplet of sum 9 since:\n- 2 < 3 < 4\n- nums[2] < nums[3] and nums[4] < nums[3]\nAnd the sum of this triplet is nums[2] + nums[3] + nums[4] = 9. It can be shown that there are no mountain triplets with a sum of less than 9.\n\nExample 2:\n\nInput: nums = [5,4,8,7,10,2]\nOutput: 13\nExplanation: Triplet (1, 3, 5) is a mountain triplet of sum 13 since:\n- 1 < 3 < 5\n- nums[1] < nums[3] and nums[5] < nums[3]\nAnd the sum of this triplet is nums[1] + nums[3] + nums[5] = 13. It can be shown that there are no mountain triplets with a sum of less than 13.\n\nExample 3:\n\nInput: nums = [6,5,4,3,4,5]\nOutput: -1\nExplanation: It can be shown that there are no mountain triplets in nums.\n\n\nConstraints:\n\n * 3 <= nums.length <= 105\n * 1 <= nums[i] <= 108\n\"\"\"\nclass Solution:\n    def minimumSum(self, nums: List[int]) -> int:\n        ",
+  "test": "\nmy_solution = Solution()\n\ntest_input = { \"nums\": [8,6,1,5,3] }\nassert my_solution.minimumSum(**test_input) == 9\n\ntest_input = { \"nums\": [5,4,8,7,10,2] }\nassert my_solution.minimumSum(**test_input) == 13\n\ntest_input = { \"nums\": [6,5,4,3,4,5] }\nassert my_solution.minimumSum(**test_input) == -1\n\ntest_input = { \"nums\": [50,50,50] }\nassert my_solution.minimumSum(**test_input) == -1\n\ntest_input = { \"nums\": [49,50,48] }\nassert my_solution.minimumSum(**test_input) == 147\n\ntest_input = { \"nums\": [48,50,49] }\nassert my_solution.minimumSum(**test_input) == 147\n\ntest_input = { \"nums\": [99999999,100000000,99999999] }\nassert my_solution.minimumSum(**test_input) == 299999998\n\ntest_input = { \"nums\": [1,1,1] }\nassert my_solution.minimumSum(**test_input) == -1\n\ntest_input = { \"nums\": [1,1,2] }\nassert my_solution.minimumSum(**test_input) == -1\n\ntest_input = { \"nums\": [1,1,3] }\nassert my_solution.minimumSum(**test_input) == -1\n\ntest_input = { \"nums\": [1,2,1] }\nassert my_solution.minimumSum(**test_input) == 4\n\ntest_input = { \"nums\": [1,2,2] }\nassert my_solution.minimumSum(**test_input) == -1\n\ntest_input = { \"nums\": [1,2,3] }\nassert my_solution.minimumSum(**test_input) == -1\n\ntest_input = { \"nums\": [1,3,1] }\nassert my_solution.minimumSum(**test_input) == 5\n\ntest_input = { \"nums\": [1,3,2] }\nassert my_solution.minimumSum(**test_input) == 6\n\ntest_input = { \"nums\": [1,3,3] }\nassert my_solution.minimumSum(**test_input) == -1\n\ntest_input = { \"nums\": [2,1,1] }\nassert my_solution.minimumSum(**test_input) == -1\n\ntest_input = { \"nums\": [2,1,2] }\nassert my_solution.minimumSum(**test_input) == -1\n\ntest_input = { \"nums\": [2,1,3] }\nassert my_solution.minimumSum(**test_input) == -1\n\ntest_input = { \"nums\": [2,2,1] }\nassert my_solution.minimumSum(**test_input) == -1\n\ntest_input = { \"nums\": [2,2,2] }\nassert my_solution.minimumSum(**test_input) == -1\n\ntest_input = { \"nums\": [2,2,3] }\nassert my_solution.minimumSum(**test_input) == -1\n\ntest_input = { \"nums\": [2,3,1] }\nassert my_solution.minimumSum(**test_input) == 6\n\ntest_input = { \"nums\": [2,3,2] }\nassert my_solution.minimumSum(**test_input) == 7\n\ntest_input = { \"nums\": [2,3,3] }\nassert my_solution.minimumSum(**test_input) == -1\n\ntest_input = { \"nums\": [3,1,1] }\nassert my_solution.minimumSum(**test_input) == -1\n\ntest_input = { \"nums\": [3,1,2] }\nassert my_solution.minimumSum(**test_input) == -1\n\ntest_input = { \"nums\": [3,1,3] }\nassert my_solution.minimumSum(**test_input) == -1\n\ntest_input = { \"nums\": [3,2,1] }\nassert my_solution.minimumSum(**test_input) == -1\n\ntest_input = { \"nums\": [3,2,2] }\nassert my_solution.minimumSum(**test_input) == -1\n\ntest_input = { \"nums\": [3,2,3] }\nassert my_solution.minimumSum(**test_input) == -1\n\ntest_input = { \"nums\": [3,3,1] }\nassert my_solution.minimumSum(**test_input) == -1\n\ntest_input = { \"nums\": [3,3,2] }\nassert my_solution.minimumSum(**test_input) == -1\n\ntest_input = { \"nums\": [3,3,3] }\nassert my_solution.minimumSum(**test_input) == -1\n\ntest_input = { \"nums\": [1,1,1,1] }\nassert my_solution.minimumSum(**test_input) == -1\n\ntest_input = { \"nums\": [1,1,1,2] }\nassert my_solution.minimumSum(**test_input) == -1\n\ntest_input = { \"nums\": [1,1,1,3] }\nassert my_solution.minimumSum(**test_input) == -1\n\ntest_input = { \"nums\": [1,1,1,4] }\nassert my_solution.minimumSum(**test_input) == -1\n\ntest_input = { \"nums\": [1,1,2,1] }\nassert my_solution.minimumSum(**test_input) == 4\n\ntest_input = { \"nums\": [1,1,2,2] }\nassert my_solution.minimumSum(**test_input) == -1\n\ntest_input = { \"nums\": [1,1,2,3] }\nassert my_solution.minimumSum(**test_input) == -1\n\ntest_input = { \"nums\": [1,1,2,4] }\nassert my_solution.minimumSum(**test_input) == -1\n\ntest_input = { \"nums\": [1,1,3,1] }\nassert my_solution.minimumSum(**test_input) == 5\n\ntest_input = { \"nums\": [1,1,3,2] }\nassert my_solution.minimumSum(**test_input) == 6\n\ntest_input = { \"nums\": [1,1,3,3] }\nassert my_solution.minimumSum(**test_input) == -1\n\ntest_input = { \"nums\": [1,1,3,4] }\nassert my_solution.minimumSum(**test_input) == -1\n\ntest_input = { \"nums\": [1,1,4,1] }\nassert my_solution.minimumSum(**test_input) == 6\n\ntest_input = { \"nums\": [1,1,4,2] }\nassert my_solution.minimumSum(**test_input) == 7\n\ntest_input = { \"nums\": [1,1,4,3] }\nassert my_solution.minimumSum(**test_input) == 8\n\ntest_input = { \"nums\": [1,1,4,4] }\nassert my_solution.minimumSum(**test_input) == -1\n\ntest_input = { \"nums\": [1,2,3,2] }\nassert my_solution.minimumSum(**test_input) == 6\n\ntest_input = { \"nums\": [1,2,1,1] }\nassert my_solution.minimumSum(**test_input) == 4\n\ntest_input = { \"nums\": [1,2,1,2] }\nassert my_solution.minimumSum(**test_input) == 4\n\ntest_input = { \"nums\": [1,2,1,3] }\nassert my_solution.minimumSum(**test_input) == 4\n\ntest_input = { \"nums\": [1,2,1,4] }\nassert my_solution.minimumSum(**test_input) == 4\n\ntest_input = { \"nums\": [1,2,2,1] }\nassert my_solution.minimumSum(**test_input) == 4\n\ntest_input = { \"nums\": [1,2,2,2] }\nassert my_solution.minimumSum(**test_input) == -1\n\ntest_input = { \"nums\": [1,2,2,3] }\nassert my_solution.minimumSum(**test_input) == -1\n\ntest_input = { \"nums\": [1,2,2,4] }\nassert my_solution.minimumSum(**test_input) == -1\n\ntest_input = { \"nums\": [1,2,3,1] }\nassert my_solution.minimumSum(**test_input) == 4\n\ntest_input = { \"nums\": [1,2,3,3] }\nassert my_solution.minimumSum(**test_input) == -1\n\ntest_input = { \"nums\": [1,2,3,4] }\nassert my_solution.minimumSum(**test_input) == -1\n\ntest_input = { \"nums\": [1,2,4,1] }\nassert my_solution.minimumSum(**test_input) == 4\n\ntest_input = { \"nums\": [1,2,4,2] }\nassert my_solution.minimumSum(**test_input) == 7\n\ntest_input = { \"nums\": [1,2,4,3] }\nassert my_solution.minimumSum(**test_input) == 8\n\ntest_input = { \"nums\": [1,2,4,4] }\nassert my_solution.minimumSum(**test_input) == -1\n\ntest_input = { \"nums\": [1,3,1,1] }\nassert my_solution.minimumSum(**test_input) == 5\n\ntest_input = { \"nums\": [1,3,1,2] }\nassert my_solution.minimumSum(**test_input) == 5\n\ntest_input = { \"nums\": [1,3,1,3] }\nassert my_solution.minimumSum(**test_input) == 5\n\ntest_input = { \"nums\": [1,3,1,4] }\nassert my_solution.minimumSum(**test_input) == 5\n\ntest_input = { \"nums\": [1,3,2,1] }\nassert my_solution.minimumSum(**test_input) == 4\n\ntest_input = { \"nums\": [1,3,2,2] }\nassert my_solution.minimumSum(**test_input) == 6\n\ntest_input = { \"nums\": [1,3,2,3] }\nassert my_solution.minimumSum(**test_input) == 6\n\ntest_input = { \"nums\": [1,3,2,4] }\nassert my_solution.minimumSum(**test_input) == 6\n\ntest_input = { \"nums\": [1,3,3,1] }\nassert my_solution.minimumSum(**test_input) == 5\n\ntest_input = { \"nums\": [1,3,3,2] }\nassert my_solution.minimumSum(**test_input) == 6\n\ntest_input = { \"nums\": [1,3,3,3] }\nassert my_solution.minimumSum(**test_input) == -1\n\ntest_input = { \"nums\": [1,3,3,4] }\nassert my_solution.minimumSum(**test_input) == -1\n\ntest_input = { \"nums\": [1,3,4,1] }\nassert my_solution.minimumSum(**test_input) == 5\n\ntest_input = { \"nums\": [1,3,4,2] }\nassert my_solution.minimumSum(**test_input) == 6\n\ntest_input = { \"nums\": [1,3,4,3] }\nassert my_solution.minimumSum(**test_input) == 8\n\ntest_input = { \"nums\": [1,3,4,4] }\nassert my_solution.minimumSum(**test_input) == -1\n\ntest_input = { \"nums\": [1,4,1,1] }\nassert my_solution.minimumSum(**test_input) == 6\n\ntest_input = { \"nums\": [1,4,1,2] }\nassert my_solution.minimumSum(**test_input) == 6\n\ntest_input = { \"nums\": [1,4,1,3] }\nassert my_solution.minimumSum(**test_input) == 6\n\ntest_input = { \"nums\": [1,4,1,4] }\nassert my_solution.minimumSum(**test_input) == 6\n\ntest_input = { \"nums\": [1,4,2,1] }\nassert my_solution.minimumSum(**test_input) == 4\n\ntest_input = { \"nums\": [1,4,2,2] }\nassert my_solution.minimumSum(**test_input) == 7\n\ntest_input = { \"nums\": [1,4,2,3] }\nassert my_solution.minimumSum(**test_input) == 7\n\ntest_input = { \"nums\": [1,4,2,4] }\nassert my_solution.minimumSum(**test_input) == 7\n\ntest_input = { \"nums\": [1,4,3,1] }\nassert my_solution.minimumSum(**test_input) == 5\n\ntest_input = { \"nums\": [1,4,3,2] }\nassert my_solution.minimumSum(**test_input) == 6\n\ntest_input = { \"nums\": [1,4,3,3] }\nassert my_solution.minimumSum(**test_input) == 8\n\ntest_input = { \"nums\": [1,4,3,4] }\nassert my_solution.minimumSum(**test_input) == 8\n\ntest_input = { \"nums\": [1,4,4,1] }\nassert my_solution.minimumSum(**test_input) == 6\n\ntest_input = { \"nums\": [1,4,4,2] }\nassert my_solution.minimumSum(**test_input) == 7\n\ntest_input = { \"nums\": [1,4,4,3] }\nassert my_solution.minimumSum(**test_input) == 8\n\ntest_input = { \"nums\": [1,4,4,4] }\nassert my_solution.minimumSum(**test_input) == -1\n\ntest_input = { \"nums\": [2,1,1,1] }\nassert my_solution.minimumSum(**test_input) == -1\n\ntest_input = { \"nums\": [2,1,1,2] }\nassert my_solution.minimumSum(**test_input) == -1",
+  "ocr_data": {
+    "nodes": [
+      {
+        "node_id": 1,
+        "shape_type": "rectangle",
+        "raw_text": "Start",
+        "position": "top"
+      },
+      {
+        "node_id": 2,
+        "shape_type": "rectangle",
+        "raw_text": "Input: nums (List[int])",
+        "position": "top"
+      },
+      {
+        "node_id": 3,
+        "shape_type": "rectangle",
+        "raw_text": "Initialize min_left = [], min_right = []",
+        "position": "middle"
+      },
+      {
+        "node_id": 4,
+        "shape_type": "rectangle",
+        "raw_text": "Initialize ml = inf, mr = inf, ans = inf",
+        "position": "middle"
+      },
+      {
+        "node_id": 5,
+        "shape_type": "rectangle",
+        "raw_text": "Loop i from 0 to len(nums) - 2",
+        "position": "middle"
+      },
+      {
+        "node_id": 6,
+        "shape_type": "diamond",
+        "raw_text": "Is nums[i] < ml?",
+        "position": "middle"
+      },
+      {
+        "node_id": 7,
+        "shape_type": "rectangle",
+        "raw_text": "Update ml: ml = nums[i]",
+        "position": "middle"
+      },
+      {
+        "node_id": 8,
+        "shape_type": "rectangle",
+        "raw_text": "Append ml to min_left",
+        "position": "middle"
+      },
+      {
+        "node_id": 9,
+        "shape_type": "rectangle",
+        "raw_text": "Loop i from len(nums) - 1 to 1",
+        "position": "middle"
+      },
+      {
+        "node_id": 10,
+        "shape_type": "diamond",
+        "raw_text": "Is nums[i] < mr?",
+        "position": "middle"
+      },
+      {
+        "node_id": 11,
+        "shape_type": "rectangle",
+        "raw_text": "Update mr: mr = nums[i]",
+        "position": "middle"
+      },
+      {
+        "node_id": 12,
+        "shape_type": "rectangle",
+        "raw_text": "Append mr to min_right",
+        "position": "middle"
+      },
+      {
+        "node_id": 13,
+        "shape_type": "rectangle",
+        "raw_text": "Reverse min_right",
+        "position": "middle"
+      },
+      {
+        "node_id": 14,
+        "shape_type": "rectangle",
+        "raw_text": "Loop i from 1 to len(nums) - 1",
+        "position": "bottom"
+      },
+      {
+        "node_id": 15,
+        "shape_type": "diamond",
+        "raw_text": "Is ans == inf?",
+        "position": "bottom"
+      },
+      {
+        "node_id": 16,
+        "shape_type": "rectangle",
+        "raw_text": "Output: -1 (no mountain triplet exists)",
+        "position": "bottom"
+      },
+      {
+        "node_id": 17,
+        "shape_type": "rectangle",
+        "raw_text": "Output: ans (minimum sum of mountain triplet)",
+        "position": "bottom"
+      },
+      {
+        "node_id": 18,
+        "shape_type": "rectangle",
+        "raw_text": "Set ml = min_left[i-1], mr = min_right[i-1]",
+        "position": "bottom"
+      },
+      {
+        "node_id": 19,
+        "shape_type": "diamond",
+        "raw_text": "Is ml < nums[i] and nums[i] > mr?",
+        "position": "bottom"
+      },
+      {
+        "node_id": 20,
+        "shape_type": "rectangle",
+        "raw_text": "Update ans: ans = min(ans, nums[i] + ml + mr)",
+        "position": "bottom"
+      }
+    ],
+    "edges": [
+      {
+        "from_node": 1,
+        "to_node": 2,
+        "label": ""
+      },
+      {
+        "from_node": 2,
+        "to_node": 3,
+        "label": ""
+      },
+      {
+        "from_node": 3,
+        "to_node": 4,
+        "label": ""
+      },
+      {
+        "from_node": 4,
+        "to_node": 5,
+        "label": ""
+      },
+      {
+        "from_node": 5,
+        "to_node": 6,
+        "label": ""
+      },
+      {
+        "from_node": 6,
+        "to_node": 7,
+        "label": "Yes"
+      },
+      {
+        "from_node": 6,
+        "to_node": 8,
+        "label": "No"
+      },
+      {
+        "from_node": 7,
+        "to_node": 8,
+        "label": ""
+      },
+      {
+        "from_node": 8,
+        "to_node": 5,
+        "label": ""
+      },
+      {
+        "from_node": 5,
+        "to_node": 9,
+        "label": ""
+      },
+      {
+        "from_node": 9,
+        "to_node": 10,
+        "label": ""
+      },
+      {
+        "from_node": 10,
+        "to_node": 11,
+        "label": "Yes"
+      },
+      {
+        "from_node": 10,
+        "to_node": 12,
+        "label": "No"
+      },
+      {
+        "from_node": 11,
+        "to_node": 12,
+        "label": ""
+      },
+      {
+        "from_node": 12,
+        "to_node": 13,
+        "label": ""
+      },
+      {
+        "from_node": 13,
+        "to_node": 14,
+        "label": ""
+      },
+      {
+        "from_node": 14,
+        "to_node": 15,
+        "label": ""
+      },
+      {
+        "from_node": 15,
+        "to_node": 16,
+        "label": "Yes"
+      },
+      {
+        "from_node": 15,
+        "to_node": 17,
+        "label": "No"
+      },
+      {
+        "from_node": 14,
+        "to_node": 18,
+        "label": ""
+      },
+      {
+        "from_node": 18,
+        "to_node": 19,
+        "label": ""
+      },
+      {
+        "from_node": 19,
+        "to_node": 20,
+        "label": "Yes"
+      },
+      {
+        "from_node": 19,
+        "to_node": 14,
+        "label": "No"
+      },
+      {
+        "from_node": 20,
+        "to_node": 14,
+        "label": ""
+      }
+    ],
+    "other_text": []
+  },
+  "analysis": {
+    "ilr_verdict": "correct",
+    "ilr_issues": "",
+    "code_vs_ilr": "deviates",
+    "code_issues": "ILR 节点15的 'Is ans == inf?' 是循环结束后的出口判断（其 Yes/No 分支直接连两个输出节点），但生成代码把它放进主循环体开头作为提前返回：首轮 ans 必为 inf，任何输入都在第一次迭代就 return -1。前缀/后缀最小值循环、reverse、峰值判定等其余部分翻译正确。",
+    "error_source": "code",
+    "ocr_contribution": "no",
+    "root_cause": "ILR 算法正确（前缀最小+翻转后缀最小+枚举峰值），代码生成阶段错误地把循环后的出口判断移入循环体开头，导致所有输入返回 -1。",
+    "evidence": "将 ILR 按自然循环语义转写后运行：[8,6,1,5,3]→9、[5,4,8,7,10,2]→13、[6,5,4,3,4,5]→-1，全部正确；生成代码实际运行三个示例均输出 -1（ans 初值 inf，首轮即触发循环体内的 return -1），与期望 9/13/-1 不符。"
+  }
+}

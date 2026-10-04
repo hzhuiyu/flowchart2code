@@ -1,0 +1,102 @@
+{
+  "problem_id": "minimumRightShifts",
+  "nodes": [
+    {
+      "id": 1,
+      "type": "start",
+      "label": "Start",
+      "next": 2
+    },
+    {
+      "id": 2,
+      "type": "process",
+      "label": "Input: nums (list of distinct positive integers)",
+      "action": "ctx['nums'] = ctx['arg0']; ctx['n'] = len(ctx['nums']); ctx['broken'] = 0; ctx['i'] = ctx['n'] - 1",
+      "next": 3
+    },
+    {
+      "id": 3,
+      "type": "decision",
+      "label": "Is nums[-1] >= nums[0]?",
+      "logic": "ctx['nums'][-1] >= ctx['nums'][0]",
+      "true_next": 4,
+      "false_next": 5
+    },
+    {
+      "id": 4,
+      "type": "process",
+      "label": "Set broken = n",
+      "action": "ctx['broken'] = ctx['n']",
+      "next": 6
+    },
+    {
+      "id": 5,
+      "type": "process",
+      "label": "Set broken = 0",
+      "action": "ctx['broken'] = 0",
+      "next": 6
+    },
+    {
+      "id": 6,
+      "type": "process",
+      "label": "iterate i from n-1 to 1",
+      "action": "while ctx['i'] >= 1:",
+      "next": 7
+    },
+    {
+      "id": 7,
+      "type": "decision",
+      "label": "Is nums[i] < nums[i-1]?",
+      "logic": "ctx['nums'][ctx['i']] < ctx['nums'][ctx['i'] - 1]",
+      "true_next": 8,
+      "false_next": 9
+    },
+    {
+      "id": 8,
+      "type": "decision",
+      "label": "Is broken != 0?",
+      "logic": "ctx['broken'] != 0",
+      "true_next": 10,
+      "false_next": 12
+    },
+    {
+      "id": 9,
+      "type": "process",
+      "label": "Set broken = i",
+      "action": "ctx['broken'] = ctx['i']",
+      "next": 6
+    },
+    {
+      "id": 10,
+      "type": "end",
+      "label": "Output: -1 (more than one break in ordering)",
+      "output": "-1"
+    },
+    {
+      "id": 11,
+      "type": "end",
+      "label": "Output: n - broken (minimum right shifts required)",
+      "output": "ctx['n'] - ctx['broken']"
+    },
+    {
+      "id": 12,
+      "type": "process",
+      "label": "Set broken = i",
+      "action": "ctx['broken'] = ctx['i']",
+      "next": 6
+    }
+  ],
+  "task_id": "biweekly-contest-113-minimum-right-shifts-to-sort-the-array",
+  "dataset": "Algorithm",
+  "result": "failed: ",
+  "code": "class Solution:\n    def minimumRightShifts(self, nums: List[int]) -> int:\n        n = len(nums)\n        broken = 0\n        i = n - 1\n        \n        # Check if the array is already sorted or can be sorted by right shifts\n        if nums[-1] >= nums[0]:\n            broken = n\n        else:\n            broken = 0\n            \n        # Iterate from the end to the beginning (excluding index 0)\n        while i >= 1:\n            if nums[i] < nums[i - 1]:\n                if broken != 0:\n                    return -1\n                broken = i\n            else:\n                broken = i\n            i -= 1\n            \n        return n - broken",
+  "verification": {
+    "md_verdict": "ILR Error",
+    "actual_error_source": "ilr",
+    "ilr_verdict": "incorrect",
+    "code_vs_ilr": "faithful",
+    "md_correct": "yes",
+    "note": "ILR 算法错误：node 9 在『无下降』分支也执行 broken=i，污染了用 broken 作哨兵检测多下降点的逻辑，导致几乎任何输入都误判（示例1 [3,4,5,1,2] 输出 -1 而期望 2，示例2 [1,3,5] 输出 2 而期望 0）。生成代码与 ILR 逐节点对应，100 组测试输出零差异，属忠实转换。",
+    "evidence": "100 组测试：忠实转写与生成代码均错 71 组、二者输出完全一致；与暴力旋转真值比忠实转写错 58 组。"
+  }
+}

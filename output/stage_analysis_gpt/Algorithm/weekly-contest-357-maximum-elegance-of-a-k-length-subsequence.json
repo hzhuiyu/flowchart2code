@@ -1,0 +1,302 @@
+{
+  "task_id": "weekly-contest-357-maximum-elegance-of-a-k-length-subsequence",
+  "dataset": "Algorithm",
+  "difficulty": "Hard",
+  "title": "maximum-elegance-of-a-k-length-subsequence",
+  "result": "failed: ",
+  "ilr": "{\n  \"problem_id\": \"maximum_elegance\",\n  \"nodes\": [\n    {\"id\": 1, \"type\": \"start\", \"label\": \"Start\", \"next\": 2},\n    {\"id\": 2, \"type\": \"process\", \"label\": \"Input: items (2D array), k (integer)\", \"action\": \"ctx['items']=ctx['arg0']; ctx['k']=ctx['arg1']; ctx['sm']=0; ctx['seenCats']={}; ctx['dups']=deque()\", \"next\": 3},\n    {\"id\": 3, \"type\": \"process\", \"label\": \"Sort items in descending order of profit\", \"action\": \"ctx['items'] = sorted(ctx['items'], key=lambda x: x[0], reverse=True)\", \"next\": 4},\n    {\"id\": 4, \"type\": \"process\", \"label\": \"Initialize sm = 0, seenCats = {}, dups = deque()\", \"action\": \"\", \"next\": 5},\n    {\"id\": 5, \"type\": \"process\", \"label\": \"Loop through first k items\", \"action\": \"for i in range(ctx['k']):\", \"next\": 6},\n    {\"id\": 6, \"type\": \"process\", \"label\": \"Extract headPrf, headCat from items[i]\", \"action\": \"ctx['headPrf'], ctx['headCat'] = ctx['items'][i]\", \"next\": 7},\n    {\"id\": 7, \"type\": \"process\", \"label\": \"Update sm: sm += headPrf\", \"action\": \"ctx['sm'] += ctx['headPrf']\", \"next\": 8},\n    {\"id\": 8, \"type\": \"decision\", \"label\": \"Is headCat in seenCats?\", \"logic\": \"ctx['headCat'] in ctx['seenCats']\", \"true_next\": 9, \"false_next\": 10},\n    {\"id\": 9, \"type\": \"process\", \"label\": \"Add headCat to seenCats\", \"action\": \"ctx['seenCats'][ctx['headCat']] = True\", \"next\": 11},\n    {\"id\": 10, \"type\": \"process\", \"label\": \"Append headPrf to dups\", \"action\": \"ctx['dups'].append(ctx['headPrf'])\", \"next\": 11},\n    {\"id\": 11, \"type\": \"process\", \"label\": \"Continue to next item\", \"action\": \"\", \"next\": 12},\n    {\"id\": 12, \"type\": \"process\", \"label\": \"End Loop\", \"action\": \"\", \"next\": 13},\n    {\"id\": 13, \"type\": \"process\", \"label\": \"Calculate numCats: numCats = length of seenCats\", \"action\": \"ctx['numCats'] = len(ctx['seenCats'])\", \"next\": 14},\n    {\"id\": 14, \"type\": \"process\", \"label\": \"Calculate ans,sm: ans = sm + numCats * numCats\", \"action\": \"ctx['ans'] = ctx['sm'] + ctx['numCats'] * ctx['numCats']\", \"next\": 15},\n    {\"id\": 15, \"type\": \"process\", \"label\": \"Loop through remaining items\", \"action\": \"for i in range(ctx['k'], len(ctx['items'])):\", \"next\": 16},\n    {\"id\": 16, \"type\": \"process\", \"label\": \"Extract tailPrf, tailCat from items[i]\", \"action\": \"ctx['tailPrf'], ctx['tailCat'] = ctx['items'][i]\", \"next\": 17},\n    {\"id\": 17, \"type\": \"decision\", \"label\": \"Is dups empty or tailCat in seenCats?\", \"logic\": \"not ctx['dups'] or ctx['tailCat'] in ctx['seenCats']\", \"true_next\": 18, \"false_next\": 19},\n    {\"id\": 18, \"type\": \"process\", \"label\": \"Update numCats: numCats += 1\", \"action\": \"ctx['numCats'] += 1\", \"next\": 20},\n    {\"id\": 19, \"type\": \"process\", \"label\": \"Calculate diff: diff = tailPrf - dups.pop() + 2 * numCats - 1\", \"action\": \"ctx['diff'] = ctx['tailPrf'] - ctx['dups'].pop() + 2 * ctx['numCats'] - 1\", \"next\": 21},\n    {\"id\": 20, \"type\": \"process\", \"label\": \"Update sm: sm += diff\", \"action\": \"ctx['sm'] += ctx['diff']\", \"next\": 22},\n    {\"id\": 21, \"type\": \"decision\", \"label\": \"Is diff > 0?\", \"logic\": \"ctx['diff'] > 0\", \"true_next\": 23, \"false_next\": 24},\n    {\"id\": 22, \"type\": \"process\", \"label\": \"Update ans: ans = sm\", \"action\": \"ctx['ans'] = ctx['sm']\", \"next\": 24},\n    {\"id\": 23, \"type\": \"process\", \"label\": \"Add tailCat to seenCats\", \"action\": \"ctx['seenCats'][ctx['tailCat']] = True\", \"next\": 15},\n    {\"id\": 24, \"type\": \"end\", \"label\": \"Return ans\", \"output\": \"ctx['ans']\"}\n  ]\n}",
+  "code": "from typing import List\nfrom collections import deque\n\nclass Solution:\n    def findMaximumElegance(self, items: List[List[int]], k: int) -> int:\n        items = sorted(items, key=lambda x: x[0], reverse=True)\n        sm = 0\n        seenCats = {}\n        dups = deque()\n        \n        for i in range(k):\n            headPrf, headCat = items[i]\n            sm += headPrf\n            if headCat in seenCats:\n                seenCats[headCat] = True\n            else:\n                dups.append(headPrf)\n\n        numCats = len(seenCats)\n        ans = sm + numCats * numCats\n        \n        for i in range(k, len(items)):\n            tailPrf, tailCat = items[i]\n            if not dups or tailCat in seenCats:\n                numCats += 1\n            else:\n                diff = tailPrf - dups.pop() + 2 * numCats - 1\n                sm += diff\n                if diff > 0:\n                    seenCats[tailCat] = True\n            \n            ans = sm\n        \n        return ans",
+  "prompt": "\"\"\"\nYou are given a 0-indexed 2D integer array items of length n and an integer k.\n\nitems[i] = [profiti, categoryi], where profiti and categoryi denote the profit and category of the ith item respectively.\n\nLet's define the elegance of a subsequence of items as total_profit + distinct_categories2, where total_profit is the sum of all profits in the subsequence, and distinct_categories is the number of distinct categories from all the categories in the selected subsequence.\n\nYour task is to find the maximum elegance from all subsequences of size k in items.\n\nReturn an integer denoting the maximum elegance of a subsequence of items with size exactly k.\n\nNote: A subsequence of an array is a new array generated from the original array by deleting some elements (possibly none) without changing the remaining elements' relative order.\n\nExample 1:\n\nInput: items = [[3,2],[5,1],[10,1]], k = 2\nOutput: 17\nExplanation: In this example, we have to select a subsequence of size 2.\nWe can select items[0] = [3,2] and items[2] = [10,1].\nThe total profit in this subsequence is 3 + 10 = 13, and the subsequence contains 2 distinct categories [2,1].\nHence, the elegance is 13 + 22 = 17, and we can show that it is the maximum achievable elegance.\n\nExample 2:\n\nInput: items = [[3,1],[3,1],[2,2],[5,3]], k = 3\nOutput: 19\nExplanation: In this example, we have to select a subsequence of size 3.\nWe can select items[0] = [3,1], items[2] = [2,2], and items[3] = [5,3].\nThe total profit in this subsequence is 3 + 2 + 5 = 10, and the subsequence contains 3 distinct categories [1,2,3].\nHence, the elegance is 10 + 32 = 19, and we can show that it is the maximum achievable elegance.\n\nExample 3:\n\nInput: items = [[1,1],[2,1],[3,1]], k = 3\nOutput: 7\nExplanation: In this example, we have to select a subsequence of size 3.\nWe should select all the items.\nThe total profit will be 1 + 2 + 3 = 6, and the subsequence contains 1 distinct category [1].\nHence, the maximum elegance is 6 + 12 = 7.\n\nConstraints:\n\n * 1 <= items.length == n <= 105\n * items[i].length == 2\n * items[i][0] == profiti\n * items[i][1] == categoryi\n * 1 <= profiti <= 109\n * 1 <= categoryi <= n\n * 1 <= k <= n\n\"\"\"\nclass Solution:\n    def findMaximumElegance(self, items: List[List[int]], k: int) -> int:\n        ",
+  "test": "\nmy_solution = Solution()\n\ntest_input = { \"items\": [[3,2],[5,1],[10,1]], \"k\": 2 }\nassert my_solution.findMaximumElegance(**test_input) == 17\n\ntest_input = { \"items\": [[3,1],[3,1],[2,2],[5,3]], \"k\": 3 }\nassert my_solution.findMaximumElegance(**test_input) == 19\n\ntest_input = { \"items\": [[1,1],[2,1],[3,1]], \"k\": 3 }\nassert my_solution.findMaximumElegance(**test_input) == 7\n\ntest_input = { \"items\": [[1,1],[1,2]], \"k\": 2 }\nassert my_solution.findMaximumElegance(**test_input) == 6\n\ntest_input = { \"items\": [[1,1],[4,1]], \"k\": 1 }\nassert my_solution.findMaximumElegance(**test_input) == 5\n\ntest_input = { \"items\": [[1,1],[4,1]], \"k\": 2 }\nassert my_solution.findMaximumElegance(**test_input) == 6\n\ntest_input = { \"items\": [[1,1],[6,1]], \"k\": 1 }\nassert my_solution.findMaximumElegance(**test_input) == 7\n\ntest_input = { \"items\": [[1,1],[6,1]], \"k\": 2 }\nassert my_solution.findMaximumElegance(**test_input) == 8\n\ntest_input = { \"items\": [[1,1],[8,2]], \"k\": 2 }\nassert my_solution.findMaximumElegance(**test_input) == 13\n\ntest_input = { \"items\": [[1,2],[6,2]], \"k\": 1 }\nassert my_solution.findMaximumElegance(**test_input) == 7\n\ntest_input = { \"items\": [[1,2],[10,1]], \"k\": 1 }\nassert my_solution.findMaximumElegance(**test_input) == 11\n\ntest_input = { \"items\": [[2,1],[6,1]], \"k\": 2 }\nassert my_solution.findMaximumElegance(**test_input) == 9\n\ntest_input = { \"items\": [[2,1],[7,1]], \"k\": 2 }\nassert my_solution.findMaximumElegance(**test_input) == 10\n\ntest_input = { \"items\": [[2,1],[9,2]], \"k\": 1 }\nassert my_solution.findMaximumElegance(**test_input) == 10\n\ntest_input = { \"items\": [[2,2],[2,2]], \"k\": 1 }\nassert my_solution.findMaximumElegance(**test_input) == 3\n\ntest_input = { \"items\": [[2,2],[2,2]], \"k\": 2 }\nassert my_solution.findMaximumElegance(**test_input) == 5\n\ntest_input = { \"items\": [[2,2],[3,1]], \"k\": 2 }\nassert my_solution.findMaximumElegance(**test_input) == 9\n\ntest_input = { \"items\": [[2,2],[6,1]], \"k\": 2 }\nassert my_solution.findMaximumElegance(**test_input) == 12\n\ntest_input = { \"items\": [[3,1],[1,2]], \"k\": 2 }\nassert my_solution.findMaximumElegance(**test_input) == 8\n\ntest_input = { \"items\": [[3,1],[9,1]], \"k\": 2 }\nassert my_solution.findMaximumElegance(**test_input) == 13\n\ntest_input = { \"items\": [[3,1],[9,2]], \"k\": 1 }\nassert my_solution.findMaximumElegance(**test_input) == 10\n\ntest_input = { \"items\": [[3,1],[10,2]], \"k\": 2 }\nassert my_solution.findMaximumElegance(**test_input) == 17\n\ntest_input = { \"items\": [[3,2],[3,1]], \"k\": 1 }\nassert my_solution.findMaximumElegance(**test_input) == 4\n\ntest_input = { \"items\": [[3,2],[5,2]], \"k\": 1 }\nassert my_solution.findMaximumElegance(**test_input) == 6\n\ntest_input = { \"items\": [[3,2],[10,1]], \"k\": 2 }\nassert my_solution.findMaximumElegance(**test_input) == 17\n\ntest_input = { \"items\": [[3,2],[10,2]], \"k\": 2 }\nassert my_solution.findMaximumElegance(**test_input) == 14\n\ntest_input = { \"items\": [[4,1],[7,2]], \"k\": 2 }\nassert my_solution.findMaximumElegance(**test_input) == 15\n\ntest_input = { \"items\": [[4,1],[9,2]], \"k\": 1 }\nassert my_solution.findMaximumElegance(**test_input) == 10\n\ntest_input = { \"items\": [[4,2],[2,1]], \"k\": 2 }\nassert my_solution.findMaximumElegance(**test_input) == 10\n\ntest_input = { \"items\": [[4,2],[3,1]], \"k\": 2 }\nassert my_solution.findMaximumElegance(**test_input) == 11\n\ntest_input = { \"items\": [[4,2],[5,2]], \"k\": 1 }\nassert my_solution.findMaximumElegance(**test_input) == 6\n\ntest_input = { \"items\": [[4,2],[7,2]], \"k\": 1 }\nassert my_solution.findMaximumElegance(**test_input) == 8\n\ntest_input = { \"items\": [[4,2],[8,1]], \"k\": 2 }\nassert my_solution.findMaximumElegance(**test_input) == 16\n\ntest_input = { \"items\": [[4,2],[10,1]], \"k\": 2 }\nassert my_solution.findMaximumElegance(**test_input) == 18\n\ntest_input = { \"items\": [[5,1],[4,2]], \"k\": 1 }\nassert my_solution.findMaximumElegance(**test_input) == 6\n\ntest_input = { \"items\": [[5,1],[8,1]], \"k\": 2 }\nassert my_solution.findMaximumElegance(**test_input) == 14\n\ntest_input = { \"items\": [[5,1],[8,2]], \"k\": 1 }\nassert my_solution.findMaximumElegance(**test_input) == 9\n\ntest_input = { \"items\": [[5,1],[9,1]], \"k\": 1 }\nassert my_solution.findMaximumElegance(**test_input) == 10\n\ntest_input = { \"items\": [[5,2],[2,1]], \"k\": 1 }\nassert my_solution.findMaximumElegance(**test_input) == 6\n\ntest_input = { \"items\": [[5,2],[4,2]], \"k\": 2 }\nassert my_solution.findMaximumElegance(**test_input) == 10\n\ntest_input = { \"items\": [[5,2],[5,1]], \"k\": 2 }\nassert my_solution.findMaximumElegance(**test_input) == 14\n\ntest_input = { \"items\": [[6,1],[1,1]], \"k\": 1 }\nassert my_solution.findMaximumElegance(**test_input) == 7\n\ntest_input = { \"items\": [[6,1],[4,1]], \"k\": 1 }\nassert my_solution.findMaximumElegance(**test_input) == 7\n\ntest_input = { \"items\": [[6,1],[7,1]], \"k\": 1 }\nassert my_solution.findMaximumElegance(**test_input) == 8\n\ntest_input = { \"items\": [[6,1],[7,2]], \"k\": 2 }\nassert my_solution.findMaximumElegance(**test_input) == 17\n\ntest_input = { \"items\": [[6,1],[8,1]], \"k\": 2 }\nassert my_solution.findMaximumElegance(**test_input) == 15\n\ntest_input = { \"items\": [[6,1],[8,2]], \"k\": 2 }\nassert my_solution.findMaximumElegance(**test_input) == 18\n\ntest_input = { \"items\": [[6,1],[9,1]], \"k\": 1 }\nassert my_solution.findMaximumElegance(**test_input) == 10\n\ntest_input = { \"items\": [[6,2],[2,1]], \"k\": 1 }\nassert my_solution.findMaximumElegance(**test_input) == 7\n\ntest_input = { \"items\": [[6,2],[4,2]], \"k\": 1 }\nassert my_solution.findMaximumElegance(**test_input) == 7\n\ntest_input = { \"items\": [[6,2],[5,1]], \"k\": 1 }\nassert my_solution.findMaximumElegance(**test_input) == 7\n\ntest_input = { \"items\": [[6,2],[6,2]], \"k\": 1 }\nassert my_solution.findMaximumElegance(**test_input) == 7\n\ntest_input = { \"items\": [[6,2],[6,2]], \"k\": 2 }\nassert my_solution.findMaximumElegance(**test_input) == 13\n\ntest_input = { \"items\": [[6,2],[7,1]], \"k\": 1 }\nassert my_solution.findMaximumElegance(**test_input) == 8\n\ntest_input = { \"items\": [[6,2],[7,1]], \"k\": 2 }\nassert my_solution.findMaximumElegance(**test_input) == 17\n\ntest_input = { \"items\": [[6,2],[8,2]], \"k\": 2 }\nassert my_solution.findMaximumElegance(**test_input) == 15\n\ntest_input = { \"items\": [[6,2],[10,2]], \"k\": 2 }\nassert my_solution.findMaximumElegance(**test_input) == 17\n\ntest_input = { \"items\": [[7,1],[1,1]], \"k\": 1 }\nassert my_solution.findMaximumElegance(**test_input) == 8\n\ntest_input = { \"items\": [[7,1],[3,2]], \"k\": 1 }\nassert my_solution.findMaximumElegance(**test_input) == 8\n\ntest_input = { \"items\": [[7,1],[6,1]], \"k\": 2 }\nassert my_solution.findMaximumElegance(**test_input) == 14\n\ntest_input = { \"items\": [[7,2],[5,1]], \"k\": 2 }\nassert my_solution.findMaximumElegance(**test_input) == 16\n\ntest_input = { \"items\": [[7,2],[5,2]], \"k\": 1 }\nassert my_solution.findMaximumElegance(**test_input) == 8\n\ntest_input = { \"items\": [[7,2],[7,2]], \"k\": 2 }\nassert my_solution.findMaximumElegance(**test_input) == 15\n\ntest_input = { \"items\": [[7,2],[10,2]], \"k\": 2 }\nassert my_solution.findMaximumElegance(**test_input) == 18\n\ntest_input = { \"items\": [[8,1],[2,1]], \"k\": 1 }\nassert my_solution.findMaximumElegance(**test_input) == 9\n\ntest_input = { \"items\": [[8,1],[2,2]], \"k\": 1 }\nassert my_solution.findMaximumElegance(**test_input) == 9\n\ntest_input = { \"items\": [[8,1],[4,2]], \"k\": 1 }\nassert my_solution.findMaximumElegance(**test_input) == 9\n\ntest_input = { \"items\": [[8,1],[5,1]], \"k\": 1 }\nassert my_solution.findMaximumElegance(**test_input) == 9\n\ntest_input = { \"items\": [[8,1],[6,2]], \"k\": 1 }\nassert my_solution.findMaximumElegance(**test_input) == 9\n\ntest_input = { \"items\": [[8,1],[8,1]], \"k\": 2 }\nassert my_solution.findMaximumElegance(**test_input) == 17\n\ntest_input = { \"items\": [[8,1],[9,1]], \"k\": 1 }\nassert my_solution.findMaximumElegance(**test_input) == 10\n\ntest_input = { \"items\": [[8,1],[9,2]], \"k\": 2 }\nassert my_solution.findMaximumElegance(**test_input) == 21\n\ntest_input = { \"items\": [[8,2],[1,1]], \"k\": 1 }\nassert my_solution.findMaximumElegance(**test_input) == 9\n\ntest_input = { \"items\": [[8,2],[1,2]], \"k\": 1 }\nassert my_solution.findMaximumElegance(**test_input) == 9\n\ntest_input = { \"items\": [[8,2],[2,1]], \"k\": 1 }\nassert my_solution.findMaximumElegance(**test_input) == 9\n\ntest_input = { \"items\": [[8,2],[8,2]], \"k\": 1 }\nassert my_solution.findMaximumElegance(**test_input) == 9\n\ntest_input = { \"items\": [[8,2],[9,1]], \"k\": 2 }\nassert my_solution.findMaximumElegance(**test_input) == 21\n\ntest_input = { \"items\": [[8,2],[9,2]], \"k\": 2 }\nassert my_solution.findMaximumElegance(**test_input) == 18\n\ntest_input = { \"items\": [[8,2],[10,1]], \"k\": 2 }\nassert my_solution.findMaximumElegance(**test_input) == 22\n\ntest_input = { \"items\": [[9,1],[1,1]], \"k\": 1 }\nassert my_solution.findMaximumElegance(**test_input) == 10\n\ntest_input = { \"items\": [[9,1],[3,2]], \"k\": 2 }\nassert my_solution.findMaximumElegance(**test_input) == 16\n\ntest_input = { \"items\": [[9,1],[4,2]], \"k\": 2 }\nassert my_solution.findMaximumElegance(**test_input) == 17\n\ntest_input = { \"items\": [[9,1],[6,2]], \"k\": 1 }\nassert my_solution.findMaximumElegance(**test_input) == 10\n\ntest_input = { \"items\": [[9,1],[9,2]], \"k\": 1 }\nassert my_solution.findMaximumElegance(**test_input) == 10\n\ntest_input = { \"items\": [[9,1],[10,2]], \"k\": 1 }\nassert my_solution.findMaximumElegance(**test_input) == 11\n\ntest_input = { \"items\": [[9,2],[1,2]], \"k\": 1 }\nassert my_solution.findMaximumElegance(**test_input) == 10\n\ntest_input = { \"items\": [[9,2],[2,1]], \"k\": 2 }\nassert my_solution.findMaximumElegance(**test_input) == 15\n\ntest_input = { \"items\": [[9,2],[6,1]], \"k\": 2 }\nassert my_solution.findMaximumElegance(**test_input) == 19\n\ntest_input = { \"items\": [[9,2],[6,2]], \"k\": 2 }\nassert my_solution.findMaximumElegance(**test_input) == 16\n\ntest_input = { \"items\": [[9,2],[8,2]], \"k\": 1 }\nassert my_solution.findMaximumElegance(**test_input) == 10\n\ntest_input = { \"items\": [[10,1],[2,2]], \"k\": 1 }\nassert my_solution.findMaximumElegance(**test_input) == 11\n\ntest_input = { \"items\": [[10,1],[4,2]], \"k\": 1 }\nassert my_solution.findMaximumElegance(**test_input) == 11\n\ntest_input = { \"items\": [[10,1],[5,1]], \"k\": 2 }\nassert my_solution.findMaximumElegance(**test_input) == 16\n\ntest_input = { \"items\": [[10,1],[5,2]], \"k\": 2 }\nassert my_solution.findMaximumElegance(**test_input) == 19\n\ntest_input = { \"items\": [[10,1],[7,1]], \"k\": 1 }\nassert my_solution.findMaximumElegance(**test_input) == 11\n\ntest_input = { \"items\": [[10,2],[1,2]], \"k\": 1 }\nassert my_solution.findMaximumElegance(**test_input) == 11\n\ntest_input = { \"items\": [[10,2],[4,1]], \"k\": 1 }\nassert my_solution.findMaximumElegance(**test_input) == 11\n\ntest_input = { \"items\": [[10,2],[5,1]], \"k\": 1 }\nassert my_solution.findMaximumElegance(**test_input) == 11\n\ntest_input = { \"items\": [[10,2],[7,1]], \"k\": 1 }\nassert my_solution.findMaximumElegance(**test_input) == 11\n\ntest_input = { \"items\": [[10,2],[8,2]], \"k\": 2 }\nassert my_solution.findMaximumElegance(**test_input) == 19",
+  "ocr_data": {
+    "nodes": [
+      {
+        "node_id": 1,
+        "shape_type": "rectangle",
+        "raw_text": "Start",
+        "position": "top"
+      },
+      {
+        "node_id": 2,
+        "shape_type": "rectangle",
+        "raw_text": "Input: items (2D array), k (integer)",
+        "position": "middle"
+      },
+      {
+        "node_id": 3,
+        "shape_type": "rectangle",
+        "raw_text": "Sort items in descending order of profit",
+        "position": "middle"
+      },
+      {
+        "node_id": 4,
+        "shape_type": "rectangle",
+        "raw_text": "Initialize sm = 0, seenCats = {}, dups = deque()",
+        "position": "middle"
+      },
+      {
+        "node_id": 5,
+        "shape_type": "rectangle",
+        "raw_text": "Loop through first k items",
+        "position": "middle"
+      },
+      {
+        "node_id": 6,
+        "shape_type": "rectangle",
+        "raw_text": "Extract headPrf, headCat from items[i]",
+        "position": "middle"
+      },
+      {
+        "node_id": 7,
+        "shape_type": "rectangle",
+        "raw_text": "Update sm: sm += headPrf",
+        "position": "middle"
+      },
+      {
+        "node_id": 8,
+        "shape_type": "diamond",
+        "raw_text": "Is headCat in seenCats?",
+        "position": "middle"
+      },
+      {
+        "node_id": 9,
+        "shape_type": "rectangle",
+        "raw_text": "Add headCat to seenCats",
+        "position": "middle"
+      },
+      {
+        "node_id": 10,
+        "shape_type": "rectangle",
+        "raw_text": "Append headPrf to dups",
+        "position": "middle"
+      },
+      {
+        "node_id": 11,
+        "shape_type": "rectangle",
+        "raw_text": "Continue to next item",
+        "position": "middle"
+      },
+      {
+        "node_id": 12,
+        "shape_type": "rectangle",
+        "raw_text": "End Loop",
+        "position": "middle"
+      },
+      {
+        "node_id": 13,
+        "shape_type": "rectangle",
+        "raw_text": "Calculate numCats: numCats = length of seenCats",
+        "position": "middle"
+      },
+      {
+        "node_id": 14,
+        "shape_type": "rectangle",
+        "raw_text": "Calculate ans,sm: ans = sm + numCats * numCats",
+        "position": "middle"
+      },
+      {
+        "node_id": 15,
+        "shape_type": "rectangle",
+        "raw_text": "Loop through remaining items",
+        "position": "middle"
+      },
+      {
+        "node_id": 16,
+        "shape_type": "rectangle",
+        "raw_text": "Extract tailPrf, tailCat from items[i]",
+        "position": "middle"
+      },
+      {
+        "node_id": 17,
+        "shape_type": "rectangle",
+        "raw_text": "Return ans",
+        "position": "middle"
+      },
+      {
+        "node_id": 18,
+        "shape_type": "diamond",
+        "raw_text": "Is dups empty or tailCat in seenCats?",
+        "position": "middle"
+      },
+      {
+        "node_id": 19,
+        "shape_type": "rectangle",
+        "raw_text": "Update numCats: numCats += 1",
+        "position": "middle"
+      },
+      {
+        "node_id": 20,
+        "shape_type": "rectangle",
+        "raw_text": "Calculate diff: diff = tailPrf - dups.pop() + 2 * numCats - 1",
+        "position": "middle"
+      },
+      {
+        "node_id": 21,
+        "shape_type": "rectangle",
+        "raw_text": "Update sm: sm += diff",
+        "position": "middle"
+      },
+      {
+        "node_id": 22,
+        "shape_type": "diamond",
+        "raw_text": "Is diff > 0?",
+        "position": "middle"
+      },
+      {
+        "node_id": 23,
+        "shape_type": "rectangle",
+        "raw_text": "Update ans: ans = sm",
+        "position": "middle"
+      },
+      {
+        "node_id": 24,
+        "shape_type": "rectangle",
+        "raw_text": "Add tailCat to seenCats",
+        "position": "middle"
+      }
+    ],
+    "edges": [
+      {
+        "from_node": 1,
+        "to_node": 2,
+        "label": ""
+      },
+      {
+        "from_node": 2,
+        "to_node": 3,
+        "label": ""
+      },
+      {
+        "from_node": 3,
+        "to_node": 4,
+        "label": ""
+      },
+      {
+        "from_node": 4,
+        "to_node": 5,
+        "label": ""
+      },
+      {
+        "from_node": 5,
+        "to_node": 6,
+        "label": ""
+      },
+      {
+        "from_node": 6,
+        "to_node": 7,
+        "label": ""
+      },
+      {
+        "from_node": 7,
+        "to_node": 8,
+        "label": ""
+      },
+      {
+        "from_node": 8,
+        "to_node": 9,
+        "label": "No"
+      },
+      {
+        "from_node": 8,
+        "to_node": 10,
+        "label": "Yes"
+      },
+      {
+        "from_node": 9,
+        "to_node": 11,
+        "label": ""
+      },
+      {
+        "from_node": 10,
+        "to_node": 11,
+        "label": ""
+      },
+      {
+        "from_node": 11,
+        "to_node": 12,
+        "label": ""
+      },
+      {
+        "from_node": 12,
+        "to_node": 13,
+        "label": ""
+      },
+      {
+        "from_node": 13,
+        "to_node": 14,
+        "label": ""
+      },
+      {
+        "from_node": 14,
+        "to_node": 15,
+        "label": ""
+      },
+      {
+        "from_node": 15,
+        "to_node": 16,
+        "label": "Yes"
+      },
+      {
+        "from_node": 15,
+        "to_node": 17,
+        "label": "No"
+      },
+      {
+        "from_node": 16,
+        "to_node": 18,
+        "label": ""
+      },
+      {
+        "from_node": 18,
+        "to_node": 19,
+        "label": "No"
+      },
+      {
+        "from_node": 19,
+        "to_node": 20,
+        "label": ""
+      },
+      {
+        "from_node": 20,
+        "to_node": 21,
+        "label": ""
+      },
+      {
+        "from_node": 21,
+        "to_node": 22,
+        "label": ""
+      },
+      {
+        "from_node": 22,
+        "to_node": 23,
+        "label": "Yes"
+      },
+      {
+        "from_node": 22,
+        "to_node": 24,
+        "label": "No"
+      },
+      {
+        "from_node": 23,
+        "to_node": 24,
+        "label": ""
+      },
+      {
+        "from_node": 24,
+        "to_node": 15,
+        "label": ""
+      }
+    ],
+    "other_text": []
+  },
+  "analysis": {
+    "ilr_verdict": "incorrect",
+    "ilr_issues": "节点8把OCR边标签接反了：OCR明确是8-No->9(加入seenCats)、8-Yes->10(压入dups)，ILR却写成true_next=9(加入seenCats)、false_next=10(压dups)，导致首轮seenCats永远为空、numCats=0、新类目利润被当重复压栈。此外节点21 false直达节点24(提前返回)、节点22把ans=sm丢掉numCats^2项、节点18 true分支走节点20时diff未定义，均继承自原流程图自身的缺陷。",
+    "code_vs_ilr": "faithful",
+    "code_issues": "代码逐条忠实实现了ILR（包括接反的节点8分支：if headCat in seenCats 重写seenCats、else 压入dups），numCats恒为0、ans每轮被覆盖为sm丢失类别平方项，仅省略了ILR中diff<=0提前返回和diff未定义两个自身缺陷。",
+    "error_source": "ilr",
+    "ocr_contribution": "no",
+    "root_cause": "ILR阶段把流程图菱形8的Yes/No分支接反（OCR标签本身正确），使seenCats/dups语义完全颠倒；代码忠实执行了这套错误ILR，答案必然错误。",
+    "evidence": "items=[[3,2],[5,1],[10,1]],k=2期望17：排序后[[10,1],[5,1],[3,2]]，代码首轮把10、5都压入dups、seenCats为空，numCats=0，ans=15；第二阶段diff=3-5+0-1=-3，sm=12，返回12。items=[[1,1],[6,1]],k=1期望7实得0。100个测试全错。"
+  }
+}

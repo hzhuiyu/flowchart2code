@@ -1,0 +1,148 @@
+{"task_id": "v1_2757", "passed": true, "test_results": [true, true], "metadata": {"execution time": 0.0034780502319335938}, "difficulty": "hard"}
+{"task_id": "v1_2784", "passed": true, "test_results": [true, true], "metadata": {"execution time": 0.0019276142120361328}, "difficulty": "hard"}
+{"task_id": "v1_2808", "passed": true, "test_results": [true, true], "metadata": {"execution time": 0.002114534378051758}, "difficulty": "hard"}
+{"task_id": "v1_2827", "passed": true, "test_results": [true, true, true], "metadata": {"execution time": 0.0025482177734375}, "difficulty": "hard"}
+{"task_id": "v1_2839", "passed": true, "test_results": [true, true, true], "metadata": {"execution time": 0.0029981136322021484}, "difficulty": "hard"}
+{"task_id": "v1_2849", "passed": true, "test_results": [true, true], "metadata": {"execution time": 0.0016856193542480469}, "difficulty": "hard"}
+{"task_id": "v1_2879", "passed": true, "test_results": [true, true, true], "metadata": {"execution time": 0.0025777816772460938}, "difficulty": "hard"}
+{"task_id": "v1_2884", "passed": true, "test_results": [true, true], "metadata": {"execution time": 0.0020546913146972656}, "difficulty": "hard"}
+{"task_id": "v1_2921", "passed": true, "test_results": [true, true], "metadata": {"execution time": 0.001695871353149414}, "difficulty": "hard"}
+{"task_id": "v1_2952", "passed": true, "test_results": [true, true], "metadata": {"execution time": 0.0017375946044921875}, "difficulty": "hard"}
+{"task_id": "v1_3017", "passed": true, "test_results": [true, true, true], "metadata": {"execution time": 0.002907276153564453}, "difficulty": "hard"}
+{"task_id": "v1_3024", "passed": true, "test_results": [true, true], "metadata": {"execution time": 0.001684427261352539}, "difficulty": "hard"}
+{"task_id": "v1_3025", "passed": true, "test_results": [true, true, true], "metadata": {"execution time": 0.0028946399688720703}, "difficulty": "hard"}
+{"task_id": "v1_3032", "passed": true, "test_results": [true, true], "metadata": {"execution time": 0.0016796588897705078}, "difficulty": "hard"}
+{"task_id": "v1_3091", "passed": true, "test_results": [true, true, true], "metadata": {"execution time": 0.0029501914978027344}, "difficulty": "hard"}
+{"task_id": "v1_3153", "passed": true, "test_results": [true, true], "metadata": {"execution time": 0.0016880035400390625}, "difficulty": "hard"}
+{"task_id": "v1_3184", "passed": true, "test_results": [true, true, true], "metadata": {"execution time": 0.002520322799682617}, "difficulty": "hard"}
+{"task_id": "v1_3196", "passed": true, "test_results": [true, true], "metadata": {"execution time": 0.002048015594482422}, "difficulty": "hard"}
+{"task_id": "v1_3203", "passed": true, "test_results": [true, true, true], "metadata": {"execution time": 0.0026161670684814453}, "difficulty": "hard"}
+{"task_id": "v1_3211", "passed": true, "test_results": [true, true, true], "metadata": {"execution time": 0.0029175281524658203}, "difficulty": "hard"}
+{"task_id": "v1_3212", "passed": true, "test_results": [true, true, true], "metadata": {"execution time": 0.0024695396423339844}, "difficulty": "hard"}
+{"task_id": "v1_3223", "passed": true, "test_results": [true, true], "metadata": {"execution time": 0.0021440982818603516}, "difficulty": "hard"}
+{"task_id": "v1_3224", "passed": true, "test_results": [true, true], "metadata": {"execution time": 0.0016944408416748047}, "difficulty": "hard"}
+{"task_id": "v1_3233", "passed": true, "test_results": [true, true, true], "metadata": {"execution time": 0.0027420520782470703}, "difficulty": "hard"}
+{"task_id": "v1_3243", "passed": true, "test_results": [true, true, true], "metadata": {"execution time": 0.0028526782989501953}, "difficulty": "hard"}
+{"task_id": "v1_3298", "passed": true, "test_results": [true, true], "metadata": {"execution time": 0.0016548633575439453}, "difficulty": "hard"}
+{"task_id": "v1_abc301_f", "passed": true, "test_results": [true, true, true], "metadata": {"execution time": 0.003117799758911133}, "difficulty": "hard"}
+{"task_id": "v1_abc307_e", "passed": true, "test_results": [true, true, true], "metadata": {"execution time": 0.0024454593658447266}, "difficulty": "hard"}
+{"task_id": "v1_abc308_e", "passed": true, "test_results": [true, true, true], "metadata": {"execution time": 0.0029010772705078125}, "difficulty": "hard"}
+{"task_id": "v1_abc308_f", "passed": true, "test_results": [true, true], "metadata": {"execution time": 0.0016756057739257812}, "difficulty": "hard"}
+{"task_id": "v1_abc310_e", "passed": true, "test_results": [true, true], "metadata": {"execution time": 0.0016868114471435547}, "difficulty": "hard"}
+{"task_id": "v1_abc310_f", "passed": true, "test_results": [true, true], "metadata": {"execution time": 0.003162384033203125}, "difficulty": "hard"}
+{"task_id": "v1_abc318_e", "passed": true, "test_results": [true, true, true], "metadata": {"execution time": 0.002569437026977539}, "difficulty": "hard"}
+{"task_id": "v1_abc323_e", "passed": true, "test_results": [true, true, true], "metadata": {"execution time": 0.00725865364074707}, "difficulty": "hard"}
+{"task_id": "v1_abc324_d", "passed": true, "test_results": [true, true, true], "metadata": {"execution time": 0.4092593193054199}, "difficulty": "hard"}
+{"task_id": "v1_abc325_f", "passed": true, "test_results": [true, true, true], "metadata": {"execution time": 0.0035932064056396484}, "difficulty": "hard"}
+{"task_id": "v1_abc327_e", "passed": true, "test_results": [true, true, true], "metadata": {"execution time": 0.0026085376739501953}, "difficulty": "hard"}
+{"task_id": "v1_abc328_d", "passed": true, "test_results": [true, true, true], "metadata": {"execution time": 0.0030083656311035156}, "difficulty": "hard"}
+{"task_id": "v1_abc329_e", "passed": true, "test_results": [true, true, true], "metadata": {"execution time": 0.002606630325317383}, "difficulty": "hard"}
+{"task_id": "v1_abc340_e", "passed": true, "test_results": [true, true, true], "metadata": {"execution time": 0.0030219554901123047}, "difficulty": "hard"}
+{"task_id": "v1_abc343_e", "passed": true, "test_results": [true, true], "metadata": {"execution time": 0.0016858577728271484}, "difficulty": "hard"}
+{"task_id": "v2_3313", "passed": true, "test_results": [true, true, true], "metadata": {"execution time": 0.00299835205078125}, "difficulty": "hard"}
+{"task_id": "v2_3327", "passed": true, "test_results": [true, true], "metadata": {"execution time": 0.0017058849334716797}, "difficulty": "hard"}
+{"task_id": "v2_3376", "passed": true, "test_results": [true, true], "metadata": {"execution time": 0.0017201900482177734}, "difficulty": "hard"}
+{"task_id": "v2_3344", "passed": true, "test_results": [true, true], "metadata": {"execution time": 0.0021288394927978516}, "difficulty": "hard"}
+{"task_id": "v2_3375", "passed": true, "test_results": [true, true], "metadata": {"execution time": 0.001703500747680664}, "difficulty": "hard"}
+{"task_id": "v2_3364", "passed": true, "test_results": [true, true, true], "metadata": {"execution time": 0.0025780200958251953}, "difficulty": "hard"}
+{"task_id": "v2_3345", "passed": true, "test_results": [true, true, true], "metadata": {"execution time": 0.0028488636016845703}, "difficulty": "hard"}
+{"task_id": "v2_3316", "passed": true, "test_results": [true, true, true], "metadata": {"execution time": 0.002557039260864258}, "difficulty": "hard"}
+{"task_id": "v2_3382", "passed": true, "test_results": [true, true, true], "metadata": {"execution time": 0.002905130386352539}, "difficulty": "hard"}
+{"task_id": "v2_3362", "passed": true, "test_results": [true, true, true], "metadata": {"execution time": 0.0026416778564453125}, "difficulty": "hard"}
+{"task_id": "v2_3402", "passed": true, "test_results": [true, true, true], "metadata": {"execution time": 0.0029413700103759766}, "difficulty": "hard"}
+{"task_id": "v2_3414", "passed": true, "test_results": [true, true], "metadata": {"execution time": 0.0017387866973876953}, "difficulty": "hard"}
+{"task_id": "v2_3423", "passed": true, "test_results": [true, true], "metadata": {"execution time": 0.0022935867309570312}, "difficulty": "hard"}
+{"task_id": "v2_3411", "passed": true, "test_results": [true, true], "metadata": {"execution time": 0.0038416385650634766}, "difficulty": "hard"}
+{"task_id": "v2_abc347_e", "passed": true, "test_results": [true, true], "metadata": {"execution time": 0.0017642974853515625}, "difficulty": "hard"}
+{"task_id": "v2_abc349_e", "passed": true, "test_results": [true, true], "metadata": {"execution time": 0.006201982498168945}, "difficulty": "hard"}
+{"task_id": "v2_abc350_e", "passed": true, "test_results": [true, true, true], "metadata": {"execution time": 0.008525848388671875}, "difficulty": "hard"}
+{"task_id": "v2_abc351_f", "passed": true, "test_results": [true, true], "metadata": {"execution time": 0.0024552345275878906}, "difficulty": "hard"}
+{"task_id": "v2_abc351_d", "passed": true, "test_results": [true, true], "metadata": {"execution time": 0.0017657279968261719}, "difficulty": "hard"}
+{"task_id": "v2_abc352_d", "passed": true, "test_results": [true, true, true], "metadata": {"execution time": 0.003035306930541992}, "difficulty": "hard"}
+{"task_id": "v2_abc354_d", "passed": true, "test_results": [true, true, true], "metadata": {"execution time": 0.0025854110717773438}, "difficulty": "hard"}
+{"task_id": "v2_abc355_e", "passed": true, "test_results": [true], "metadata": {"execution time": 0.0008962154388427734}, "difficulty": "hard"}
+{"task_id": "v3_3436", "passed": true, "test_results": [true, true, true], "metadata": {"execution time": 0.0030088424682617188}, "difficulty": "hard"}
+{"task_id": "v3_3438", "passed": true, "test_results": [true, true], "metadata": {"execution time": 0.0017666816711425781}, "difficulty": "hard"}
+{"task_id": "v3_3439", "passed": true, "test_results": [true, true], "metadata": {"execution time": 0.0017654895782470703}, "difficulty": "hard"}
+{"task_id": "v3_3482", "passed": true, "test_results": [true, true], "metadata": {"execution time": 0.002218484878540039}, "difficulty": "hard"}
+{"task_id": "v3_3454", "passed": true, "test_results": [true, true], "metadata": {"execution time": 0.0017426013946533203}, "difficulty": "hard"}
+{"task_id": "v3_3478", "passed": true, "test_results": [true, true, true, true], "metadata": {"execution time": 0.06410050392150879}, "difficulty": "hard"}
+{"task_id": "v3_3535", "passed": true, "test_results": [true, true], "metadata": {"execution time": 0.0019404888153076172}, "difficulty": "hard"}
+{"task_id": "v3_3460", "passed": true, "test_results": [true, true, true], "metadata": {"execution time": 0.003087282180786133}, "difficulty": "hard"}
+{"task_id": "v3_3466", "passed": true, "test_results": [true, true, true], "metadata": {"execution time": 0.003391742706298828}, "difficulty": "hard"}
+{"task_id": "v3_3532", "passed": true, "test_results": [true, true, true], "metadata": {"execution time": 0.0027124881744384766}, "difficulty": "hard"}
+{"task_id": "v3_abc357_e", "passed": true, "test_results": [true, true, true], "metadata": {"execution time": 0.003272533416748047}, "difficulty": ""}
+{"task_id": "v3_abc359_d", "passed": true, "test_results": [true, true, true, true], "metadata": {"execution time": 0.004720211029052734}, "difficulty": ""}
+{"task_id": "v3_abc360_e", "passed": true, "test_results": [true, true, true], "metadata": {"execution time": 0.003354310989379883}, "difficulty": ""}
+{"task_id": "v3_abc361_d", "passed": true, "test_results": [true, true, true], "metadata": {"execution time": 0.18512701988220215}, "difficulty": ""}
+{"task_id": "v3_abc361_f", "passed": true, "test_results": [true, true], "metadata": {"execution time": 0.40849804878234863}, "difficulty": ""}
+{"task_id": "v3_abc362_e", "passed": true, "test_results": [true, true, true], "metadata": {"execution time": 0.002991199493408203}, "difficulty": ""}
+{"task_id": "v3_abc363_f", "passed": true, "test_results": [true, true, true], "metadata": {"execution time": 0.005048036575317383}, "difficulty": ""}
+{"task_id": "v3_abc365_e", "passed": true, "test_results": [true, true], "metadata": {"execution time": 0.0017654895782470703}, "difficulty": ""}
+{"task_id": "v4_3552", "passed": true, "test_results": [true, true, true], "metadata": {"execution time": 0.002945423126220703}, "difficulty": "hard"}
+{"task_id": "v4_3563", "passed": true, "test_results": [true, true], "metadata": {"execution time": 0.001705169677734375}, "difficulty": "hard"}
+{"task_id": "v4_3551", "passed": true, "test_results": [true, true], "metadata": {"execution time": 0.001689910888671875}, "difficulty": "hard"}
+{"task_id": "v4_3560", "passed": true, "test_results": [true, true, true], "metadata": {"execution time": 0.01946854591369629}, "difficulty": "hard"}
+{"task_id": "v4_3550", "passed": true, "test_results": [true, true, true], "metadata": {"execution time": 0.002557516098022461}, "difficulty": "hard"}
+{"task_id": "v4_3548", "passed": true, "test_results": [true, true, true], "metadata": {"execution time": 0.003370046615600586}, "difficulty": "hard"}
+{"task_id": "v4_3531", "passed": true, "test_results": [true, true, true], "metadata": {"execution time": 0.0025184154510498047}, "difficulty": "hard"}
+{"task_id": "v4_3575", "passed": true, "test_results": [true, true], "metadata": {"execution time": 0.0021085739135742188}, "difficulty": "hard"}
+{"task_id": "v4_3571", "passed": true, "test_results": [true, true], "metadata": {"execution time": 0.0016849040985107422}, "difficulty": "hard"}
+{"task_id": "v4_3583", "passed": true, "test_results": [true, true, true], "metadata": {"execution time": 0.002500295639038086}, "difficulty": "hard"}
+{"task_id": "v4_3580", "passed": true, "test_results": [true, true, true, true], "metadata": {"execution time": 0.003707408905029297}, "difficulty": "hard"}
+{"task_id": "v4_abc367_e", "passed": true, "test_results": [true, true, true], "metadata": {"execution time": 0.0029592514038085938}, "difficulty": ""}
+{"task_id": "v4_abc368_f", "passed": true, "test_results": [true, true], "metadata": {"execution time": 0.0016753673553466797}, "difficulty": ""}
+{"task_id": "v4_abc370_g", "passed": false, "test_results": [true, true, true, -3], "metadata": {"error": "TimeoutException()", "error_code": -3, "error_message": "Time Limit Exceeded", "inputs": "[[10000000000, 100000]]", "expected": "447456146"}, "difficulty": ""}
+{"task_id": "v4_abc370_e", "passed": true, "test_results": [true, true, true], "metadata": {"execution time": 0.0030031204223632812}, "difficulty": ""}
+{"task_id": "v4_abc370_f", "passed": true, "test_results": [true, true, true], "metadata": {"execution time": 0.0031387805938720703}, "difficulty": ""}
+{"task_id": "v4_abc371_e", "passed": true, "test_results": [true, true], "metadata": {"execution time": 0.0017216205596923828}, "difficulty": ""}
+{"task_id": "v4_abc373_e", "passed": true, "test_results": [true, true], "metadata": {"execution time": 0.0017616748809814453}, "difficulty": ""}
+{"task_id": "v4_arc182_e", "passed": true, "test_results": [true, true, true], "metadata": {"execution time": 0.003062725067138672}, "difficulty": ""}
+{"task_id": "v4_arc182_c", "passed": true, "test_results": [true, true, true], "metadata": {"execution time": 0.07950687408447266}, "difficulty": ""}
+{"task_id": "v5_3588", "passed": true, "test_results": [true, true], "metadata": {"execution time": 0.002290964126586914}, "difficulty": "hard"}
+{"task_id": "v5_3603", "passed": true, "test_results": [true, true], "metadata": {"execution time": 0.001772165298461914}, "difficulty": "hard"}
+{"task_id": "v5_3608", "passed": true, "test_results": [true, true, true], "metadata": {"execution time": 0.002676725387573242}, "difficulty": "hard"}
+{"task_id": "v5_3637", "passed": true, "test_results": [true, true, true], "metadata": {"execution time": 0.003159046173095703}, "difficulty": "hard"}
+{"task_id": "v5_3646", "passed": true, "test_results": [true, true], "metadata": {"execution time": 0.0017528533935546875}, "difficulty": "hard"}
+{"task_id": "v5_3631", "passed": true, "test_results": [true, true, true], "metadata": {"execution time": 0.0030541419982910156}, "difficulty": "hard"}
+{"task_id": "v5_3658", "passed": true, "test_results": [true, true, true], "metadata": {"execution time": 0.0026285648345947266}, "difficulty": "hard"}
+{"task_id": "v5_3675", "passed": true, "test_results": [true, true], "metadata": {"execution time": 0.0022258758544921875}, "difficulty": "hard"}
+{"task_id": "v5_3604", "passed": true, "test_results": [true, true, true], "metadata": {"execution time": 0.002573251724243164}, "difficulty": "hard"}
+{"task_id": "v5_3648", "passed": true, "test_results": [true, true], "metadata": {"execution time": 0.0017859935760498047}, "difficulty": "hard"}
+{"task_id": "v5_3680", "passed": true, "test_results": [true, true], "metadata": {"execution time": 0.0021772384643554688}, "difficulty": "hard"}
+{"task_id": "v5_abc378_e", "passed": true, "test_results": [true, true], "metadata": {"execution time": 0.0017576217651367188}, "difficulty": ""}
+{"task_id": "v5_abc378_g", "passed": true, "test_results": [true, true], "metadata": {"execution time": 0.8658113479614258}, "difficulty": ""}
+{"task_id": "v5_abc379_e", "passed": true, "test_results": [true, true], "metadata": {"execution time": 0.012272834777832031}, "difficulty": ""}
+{"task_id": "v5_abc380_f", "passed": true, "test_results": [true, true, true], "metadata": {"execution time": 0.031941890716552734}, "difficulty": ""}
+{"task_id": "v5_abc380_g", "passed": true, "test_results": [true, true, true], "metadata": {"execution time": 0.003370046615600586}, "difficulty": ""}
+{"task_id": "v5_abc381_d", "passed": true, "test_results": [true, true, true], "metadata": {"execution time": 0.0025658607482910156}, "difficulty": ""}
+{"task_id": "v5_abc386_f", "passed": true, "test_results": [true, true, true], "metadata": {"execution time": 0.0031499862670898438}, "difficulty": ""}
+{"task_id": "v5_arc184_c", "passed": true, "test_results": [true, true], "metadata": {"execution time": 0.002065420150756836}, "difficulty": ""}
+{"task_id": "v5_arc185_d", "passed": true, "test_results": [true, true], "metadata": {"execution time": 0.08377790451049805}, "difficulty": ""}
+{"task_id": "v5_arc186_e", "passed": true, "test_results": [true, true, true, true], "metadata": {"execution time": 0.02309560775756836}, "difficulty": ""}
+{"task_id": "v5_arc187_b", "passed": true, "test_results": [true, true, true], "metadata": {"execution time": 0.0032286643981933594}, "difficulty": ""}
+{"task_id": "v5_arc189_c", "passed": true, "test_results": [true, true, true, true], "metadata": {"execution time": 0.0034551620483398438}, "difficulty": ""}
+{"task_id": "v5_arc189_d", "passed": true, "test_results": [true, true], "metadata": {"execution time": 0.0022385120391845703}, "difficulty": ""}
+{"task_id": "v5_arc189_b", "passed": true, "test_results": [true, true], "metadata": {"execution time": 0.0017428398132324219}, "difficulty": ""}
+{"task_id": "v6_abc387_f", "passed": true, "test_results": [true, true, true], "metadata": {"execution time": 0.0025892257690429688}, "difficulty": ""}
+{"task_id": "v6_abc389_g", "passed": true, "test_results": [true, true, true], "metadata": {"execution time": 0.004325151443481445}, "difficulty": ""}
+{"task_id": "v6_abc389_e", "passed": true, "test_results": [true, true], "metadata": {"execution time": 0.0017833709716796875}, "difficulty": ""}
+{"task_id": "v6_abc390_g", "passed": true, "test_results": [true, true, true], "metadata": {"execution time": 0.2590830326080322}, "difficulty": ""}
+{"task_id": "v6_abc390_f", "passed": true, "test_results": [true, true, true], "metadata": {"execution time": 0.002682209014892578}, "difficulty": ""}
+{"task_id": "v6_abc391_e", "passed": true, "test_results": [true, true], "metadata": {"execution time": 0.0021631717681884766}, "difficulty": ""}
+{"task_id": "v6_abc391_g", "passed": true, "test_results": [true, true, true], "metadata": {"execution time": 0.00919198989868164}, "difficulty": ""}
+{"task_id": "v6_abc392_f", "passed": true, "test_results": [true, true], "metadata": {"execution time": 0.002117156982421875}, "difficulty": ""}
+{"task_id": "v6_abc393_d", "passed": true, "test_results": [true, true, true], "metadata": {"execution time": 0.0025403499603271484}, "difficulty": ""}
+{"task_id": "v6_abc397_d", "passed": true, "test_results": [true, true, true], "metadata": {"execution time": 0.012125253677368164}, "difficulty": ""}
+{"task_id": "v6_abc397_f", "passed": true, "test_results": [true, true], "metadata": {"execution time": 0.0022346973419189453}, "difficulty": ""}
+{"task_id": "v6_abc398_f", "passed": true, "test_results": [true, true, true], "metadata": {"execution time": 0.002574443817138672}, "difficulty": ""}
+{"task_id": "v6_abc398_d", "passed": true, "test_results": [true, true, true], "metadata": {"execution time": 0.003005504608154297}, "difficulty": ""}
+{"task_id": "v6_abc399_e", "passed": true, "test_results": [true, true, true, true], "metadata": {"execution time": 0.003385782241821289}, "difficulty": ""}
+{"task_id": "v6_abc399_f", "passed": true, "test_results": [true, true, true], "metadata": {"execution time": 0.003031015396118164}, "difficulty": ""}
+{"task_id": "v6_arc192_e", "passed": true, "test_results": [true, true, true], "metadata": {"execution time": 0.0026154518127441406}, "difficulty": ""}
+{"task_id": "v6_arc192_b", "passed": true, "test_results": [true, true, true], "metadata": {"execution time": 0.0029740333557128906}, "difficulty": ""}
+{"task_id": "v6_arc193_b", "passed": true, "test_results": [true, true], "metadata": {"execution time": 0.0020639896392822266}, "difficulty": ""}
+{"task_id": "v6_arc194_b", "passed": true, "test_results": [true, true, true], "metadata": {"execution time": 0.002952098846435547}, "difficulty": ""}
+{"task_id": "v6_arc194_d", "passed": true, "test_results": [true, true], "metadata": {"execution time": 0.0017337799072265625}, "difficulty": ""}
+{"task_id": "v6_arc195_b", "passed": true, "test_results": [true, true, true], "metadata": {"execution time": 0.002985239028930664}, "difficulty": ""}
+{"task_id": "v6_arc196_a", "passed": true, "test_results": [true, true, true], "metadata": {"execution time": 0.0025572776794433594}, "difficulty": ""}

@@ -1,0 +1,121 @@
+{
+  "task_id": "weekly-contest-362-determine-if-a-cell-is-reachable-at-a-given-time",
+  "dataset": "Algorithm",
+  "difficulty": "Medium",
+  "title": "determine-if-a-cell-is-reachable-at-a-given-time",
+  "result": "failed: ",
+  "ilr": "{\n  \"problem_id\": \"reachability_in_grid\",\n  \"nodes\": [\n    {\"id\": 1, \"type\": \"start\", \"label\": \"Start\", \"next\": 2},\n    {\"id\": 2, \"type\": \"process\", \"label\": \"Input: sx (int), sy (int), fx (int), fy (int), t (int)\", \"action\": \"ctx['sx'] = ctx['arg0']; ctx['sy'] = ctx['arg1']; ctx['fx'] = ctx['arg2']; ctx['fy'] = ctx['arg3']; ctx['t'] = ctx['arg4']\", \"next\": 3},\n    {\"id\": 3, \"type\": \"process\", \"label\": \"Calculate ans: ans = max(abs(sx - fx), abs(sy - fy))\", \"action\": \"ctx['ans'] = max(abs(ctx['sx'] - ctx['fx']), abs(ctx['sy'] - ctx['fy']))\", \"next\": 4},\n    {\"id\": 4, \"type\": \"decision\", \"label\": \"Is ans > 0?\", \"logic\": \"ctx['ans'] > 0\", \"true_next\": 5, \"false_next\": 8},\n    {\"id\": 5, \"type\": \"decision\", \"label\": \"Is t >= ans?\", \"logic\": \"ctx['t'] >= ctx['ans']\", \"true_next\": 6, \"false_next\": 7},\n    {\"id\": 6, \"type\": \"end\", \"label\": \"Output: True (reachable in t seconds)\", \"output\": \"True\"},\n    {\"id\": 7, \"type\": \"decision\", \"label\": \"Is t != 1?\", \"logic\": \"ctx['t'] != 1\", \"true_next\": 6, \"false_next\": 8},\n    {\"id\": 8, \"type\": \"end\", \"label\": \"Output: False (not reachable in t seconds)\", \"output\": \"False\"}\n  ]\n}",
+  "code": "class Solution:\n    def isReachableAtTime(self, sx: int, sy: int, fx: int, fy: int, t: int) -> bool:\n        ans = max(abs(sx - fx), abs(sy - fy))\n        if ans > 0:\n            if t >= ans:\n                return True\n            else:\n                if t != 1:\n                    return True\n        return False",
+  "prompt": "\"\"\"\nYou are given four integers sx, sy, fx, fy, and a non-negative integer t.\n\nIn an infinite 2D grid, you start at the cell (sx, sy). Each second, you must move to any of its adjacent cells.\n\nReturn true if you can reach cell (fx, fy) after exactly t seconds, or false otherwise.\n\nA cell's adjacent cells are the 8 cells around it that share at least one corner with it. You can visit the same cell several times.\n\nExample 1:\n\n[https://assets.leetcode.com/uploads/2023/08/05/example2.svg]\n\nInput: sx = 2, sy = 4, fx = 7, fy = 7, t = 6\nOutput: true\nExplanation: Starting at cell (2, 4), we can reach cell (7, 7) in exactly 6 seconds by going through the cells depicted in the picture above.\n\nExample 2:\n\n[https://assets.leetcode.com/uploads/2023/08/05/example1.svg]\n\nInput: sx = 3, sy = 1, fx = 7, fy = 3, t = 3\nOutput: false\nExplanation: Starting at cell (3, 1), it takes at least 4 seconds to reach cell (7, 3) by going through the cells depicted in the picture above. Hence, we cannot reach cell (7, 3) at the third second.\n\n\nConstraints:\n\n * 1 <= sx, sy, fx, fy <= 109\n * 0 <= t <= 109\n\"\"\"\nclass Solution:\n    def isReachableAtTime(self, sx: int, sy: int, fx: int, fy: int, t: int) -> bool:\n        ",
+  "test": "\nmy_solution = Solution()\n\ntest_input = { \"sx\": 3, \"sy\": 1, \"fx\": 7, \"fy\": 3, \"t\": 3 }\nassert my_solution.isReachableAtTime(**test_input) == False\n\ntest_input = { \"sx\": 2, \"sy\": 4, \"fx\": 7, \"fy\": 7, \"t\": 6 }\nassert my_solution.isReachableAtTime(**test_input) == True\n\ntest_input = { \"sx\": 1, \"sy\": 1, \"fx\": 1, \"fy\": 2, \"t\": 0 }\nassert my_solution.isReachableAtTime(**test_input) == False\n\ntest_input = { \"sx\": 1, \"sy\": 1, \"fx\": 2, \"fy\": 4, \"t\": 0 }\nassert my_solution.isReachableAtTime(**test_input) == False\n\ntest_input = { \"sx\": 1, \"sy\": 1, \"fx\": 3, \"fy\": 4, \"t\": 1 }\nassert my_solution.isReachableAtTime(**test_input) == False\n\ntest_input = { \"sx\": 1, \"sy\": 1, \"fx\": 3, \"fy\": 5, \"t\": 1 }\nassert my_solution.isReachableAtTime(**test_input) == False\n\ntest_input = { \"sx\": 1, \"sy\": 1, \"fx\": 1, \"fy\": 1, \"t\": 3 }\nassert my_solution.isReachableAtTime(**test_input) == True\n\ntest_input = { \"sx\": 1, \"sy\": 1, \"fx\": 1, \"fy\": 3, \"t\": 2 }\nassert my_solution.isReachableAtTime(**test_input) == True\n\ntest_input = { \"sx\": 1, \"sy\": 1, \"fx\": 4, \"fy\": 1, \"t\": 0 }\nassert my_solution.isReachableAtTime(**test_input) == False\n\ntest_input = { \"sx\": 1, \"sy\": 1, \"fx\": 4, \"fy\": 2, \"t\": 1 }\nassert my_solution.isReachableAtTime(**test_input) == False\n\ntest_input = { \"sx\": 1, \"sy\": 1, \"fx\": 1, \"fy\": 4, \"t\": 3 }\nassert my_solution.isReachableAtTime(**test_input) == True\n\ntest_input = { \"sx\": 1, \"sy\": 1, \"fx\": 1, \"fy\": 5, \"t\": 8 }\nassert my_solution.isReachableAtTime(**test_input) == True\n\ntest_input = { \"sx\": 1, \"sy\": 1, \"fx\": 2, \"fy\": 1, \"t\": 2 }\nassert my_solution.isReachableAtTime(**test_input) == True\n\ntest_input = { \"sx\": 1, \"sy\": 1, \"fx\": 4, \"fy\": 3, \"t\": 2 }\nassert my_solution.isReachableAtTime(**test_input) == False\n\ntest_input = { \"sx\": 1, \"sy\": 1, \"fx\": 2, \"fy\": 2, \"t\": 1 }\nassert my_solution.isReachableAtTime(**test_input) == True\n\ntest_input = { \"sx\": 1, \"sy\": 1, \"fx\": 4, \"fy\": 4, \"t\": 0 }\nassert my_solution.isReachableAtTime(**test_input) == False\n\ntest_input = { \"sx\": 1, \"sy\": 1, \"fx\": 5, \"fy\": 1, \"t\": 0 }\nassert my_solution.isReachableAtTime(**test_input) == False\n\ntest_input = { \"sx\": 1, \"sy\": 1, \"fx\": 2, \"fy\": 3, \"t\": 2 }\nassert my_solution.isReachableAtTime(**test_input) == True\n\ntest_input = { \"sx\": 1, \"sy\": 1, \"fx\": 5, \"fy\": 2, \"t\": 0 }\nassert my_solution.isReachableAtTime(**test_input) == False\n\ntest_input = { \"sx\": 1, \"sy\": 1, \"fx\": 2, \"fy\": 5, \"t\": 6 }\nassert my_solution.isReachableAtTime(**test_input) == True\n\ntest_input = { \"sx\": 1, \"sy\": 1, \"fx\": 3, \"fy\": 1, \"t\": 3 }\nassert my_solution.isReachableAtTime(**test_input) == True\n\ntest_input = { \"sx\": 1, \"sy\": 1, \"fx\": 3, \"fy\": 2, \"t\": 4 }\nassert my_solution.isReachableAtTime(**test_input) == True\n\ntest_input = { \"sx\": 1, \"sy\": 1, \"fx\": 3, \"fy\": 3, \"t\": 9 }\nassert my_solution.isReachableAtTime(**test_input) == True\n\ntest_input = { \"sx\": 1, \"sy\": 1, \"fx\": 4, \"fy\": 5, \"t\": 9 }\nassert my_solution.isReachableAtTime(**test_input) == True\n\ntest_input = { \"sx\": 1, \"sy\": 1, \"fx\": 5, \"fy\": 3, \"t\": 9 }\nassert my_solution.isReachableAtTime(**test_input) == True\n\ntest_input = { \"sx\": 1, \"sy\": 1, \"fx\": 5, \"fy\": 4, \"t\": 0 }\nassert my_solution.isReachableAtTime(**test_input) == False\n\ntest_input = { \"sx\": 1, \"sy\": 2, \"fx\": 1, \"fy\": 1, \"t\": 2 }\nassert my_solution.isReachableAtTime(**test_input) == True\n\ntest_input = { \"sx\": 1, \"sy\": 1, \"fx\": 5, \"fy\": 5, \"t\": 0 }\nassert my_solution.isReachableAtTime(**test_input) == False\n\ntest_input = { \"sx\": 1, \"sy\": 2, \"fx\": 1, \"fy\": 2, \"t\": 1 }\nassert my_solution.isReachableAtTime(**test_input) == False\n\ntest_input = { \"sx\": 1, \"sy\": 2, \"fx\": 1, \"fy\": 3, \"t\": 6 }\nassert my_solution.isReachableAtTime(**test_input) == True\n\ntest_input = { \"sx\": 1, \"sy\": 2, \"fx\": 1, \"fy\": 4, \"t\": 4 }\nassert my_solution.isReachableAtTime(**test_input) == True\n\ntest_input = { \"sx\": 1, \"sy\": 2, \"fx\": 2, \"fy\": 5, \"t\": 0 }\nassert my_solution.isReachableAtTime(**test_input) == False\n\ntest_input = { \"sx\": 1, \"sy\": 2, \"fx\": 3, \"fy\": 4, \"t\": 0 }\nassert my_solution.isReachableAtTime(**test_input) == False\n\ntest_input = { \"sx\": 1, \"sy\": 2, \"fx\": 1, \"fy\": 5, \"t\": 5 }\nassert my_solution.isReachableAtTime(**test_input) == True\n\ntest_input = { \"sx\": 1, \"sy\": 2, \"fx\": 3, \"fy\": 5, \"t\": 0 }\nassert my_solution.isReachableAtTime(**test_input) == False\n\ntest_input = { \"sx\": 1, \"sy\": 2, \"fx\": 4, \"fy\": 1, \"t\": 0 }\nassert my_solution.isReachableAtTime(**test_input) == False\n\ntest_input = { \"sx\": 1, \"sy\": 2, \"fx\": 2, \"fy\": 1, \"t\": 10 }\nassert my_solution.isReachableAtTime(**test_input) == True\n\ntest_input = { \"sx\": 1, \"sy\": 2, \"fx\": 2, \"fy\": 2, \"t\": 9 }\nassert my_solution.isReachableAtTime(**test_input) == True\n\ntest_input = { \"sx\": 1, \"sy\": 2, \"fx\": 2, \"fy\": 3, \"t\": 1 }\nassert my_solution.isReachableAtTime(**test_input) == True\n\ntest_input = { \"sx\": 1, \"sy\": 2, \"fx\": 4, \"fy\": 2, \"t\": 1 }\nassert my_solution.isReachableAtTime(**test_input) == False\n\ntest_input = { \"sx\": 1, \"sy\": 2, \"fx\": 2, \"fy\": 4, \"t\": 2 }\nassert my_solution.isReachableAtTime(**test_input) == True\n\ntest_input = { \"sx\": 1, \"sy\": 2, \"fx\": 4, \"fy\": 3, \"t\": 1 }\nassert my_solution.isReachableAtTime(**test_input) == False\n\ntest_input = { \"sx\": 1, \"sy\": 2, \"fx\": 4, \"fy\": 4, \"t\": 0 }\nassert my_solution.isReachableAtTime(**test_input) == False\n\ntest_input = { \"sx\": 1, \"sy\": 2, \"fx\": 3, \"fy\": 1, \"t\": 2 }\nassert my_solution.isReachableAtTime(**test_input) == True\n\ntest_input = { \"sx\": 1, \"sy\": 2, \"fx\": 3, \"fy\": 2, \"t\": 2 }\nassert my_solution.isReachableAtTime(**test_input) == True\n\ntest_input = { \"sx\": 1, \"sy\": 2, \"fx\": 4, \"fy\": 5, \"t\": 2 }\nassert my_solution.isReachableAtTime(**test_input) == False\n\ntest_input = { \"sx\": 1, \"sy\": 2, \"fx\": 3, \"fy\": 3, \"t\": 4 }\nassert my_solution.isReachableAtTime(**test_input) == True\n\ntest_input = { \"sx\": 1, \"sy\": 2, \"fx\": 5, \"fy\": 1, \"t\": 0 }\nassert my_solution.isReachableAtTime(**test_input) == False\n\ntest_input = { \"sx\": 1, \"sy\": 2, \"fx\": 5, \"fy\": 3, \"t\": 0 }\nassert my_solution.isReachableAtTime(**test_input) == False\n\ntest_input = { \"sx\": 1, \"sy\": 2, \"fx\": 5, \"fy\": 2, \"t\": 4 }\nassert my_solution.isReachableAtTime(**test_input) == True\n\ntest_input = { \"sx\": 1, \"sy\": 2, \"fx\": 5, \"fy\": 4, \"t\": 0 }\nassert my_solution.isReachableAtTime(**test_input) == False\n\ntest_input = { \"sx\": 1, \"sy\": 3, \"fx\": 1, \"fy\": 1, \"t\": 2 }\nassert my_solution.isReachableAtTime(**test_input) == True\n\ntest_input = { \"sx\": 1, \"sy\": 3, \"fx\": 1, \"fy\": 2, \"t\": 3 }\nassert my_solution.isReachableAtTime(**test_input) == True\n\ntest_input = { \"sx\": 1, \"sy\": 2, \"fx\": 5, \"fy\": 5, \"t\": 2 }\nassert my_solution.isReachableAtTime(**test_input) == False\n\ntest_input = { \"sx\": 1, \"sy\": 3, \"fx\": 2, \"fy\": 1, \"t\": 0 }\nassert my_solution.isReachableAtTime(**test_input) == False\n\ntest_input = { \"sx\": 1, \"sy\": 3, \"fx\": 2, \"fy\": 4, \"t\": 0 }\nassert my_solution.isReachableAtTime(**test_input) == False\n\ntest_input = { \"sx\": 1, \"sy\": 3, \"fx\": 1, \"fy\": 3, \"t\": 0 }\nassert my_solution.isReachableAtTime(**test_input) == True\n\ntest_input = { \"sx\": 1, \"sy\": 3, \"fx\": 1, \"fy\": 4, \"t\": 4 }\nassert my_solution.isReachableAtTime(**test_input) == True\n\ntest_input = { \"sx\": 1, \"sy\": 3, \"fx\": 1, \"fy\": 5, \"t\": 4 }\nassert my_solution.isReachableAtTime(**test_input) == True\n\ntest_input = { \"sx\": 1, \"sy\": 3, \"fx\": 2, \"fy\": 2, \"t\": 2 }\nassert my_solution.isReachableAtTime(**test_input) == True\n\ntest_input = { \"sx\": 1, \"sy\": 3, \"fx\": 2, \"fy\": 3, \"t\": 3 }\nassert my_solution.isReachableAtTime(**test_input) == True\n\ntest_input = { \"sx\": 1, \"sy\": 3, \"fx\": 3, \"fy\": 1, \"t\": 3 }\nassert my_solution.isReachableAtTime(**test_input) == True\n\ntest_input = { \"sx\": 1, \"sy\": 3, \"fx\": 2, \"fy\": 5, \"t\": 0 }\nassert my_solution.isReachableAtTime(**test_input) == False\n\ntest_input = { \"sx\": 1, \"sy\": 3, \"fx\": 4, \"fy\": 1, \"t\": 1 }\nassert my_solution.isReachableAtTime(**test_input) == False\n\ntest_input = { \"sx\": 1, \"sy\": 3, \"fx\": 3, \"fy\": 2, \"t\": 2 }\nassert my_solution.isReachableAtTime(**test_input) == True\n\ntest_input = { \"sx\": 1, \"sy\": 3, \"fx\": 3, \"fy\": 3, \"t\": 8 }\nassert my_solution.isReachableAtTime(**test_input) == True\n\ntest_input = { \"sx\": 1, \"sy\": 3, \"fx\": 4, \"fy\": 5, \"t\": 1 }\nassert my_solution.isReachableAtTime(**test_input) == False\n\ntest_input = { \"sx\": 1, \"sy\": 3, \"fx\": 5, \"fy\": 1, \"t\": 3 }\nassert my_solution.isReachableAtTime(**test_input) == False\n\ntest_input = { \"sx\": 1, \"sy\": 3, \"fx\": 5, \"fy\": 2, \"t\": 2 }\nassert my_solution.isReachableAtTime(**test_input) == False\n\ntest_input = { \"sx\": 1, \"sy\": 3, \"fx\": 5, \"fy\": 3, \"t\": 3 }\nassert my_solution.isReachableAtTime(**test_input) == False\n\ntest_input = { \"sx\": 1, \"sy\": 3, \"fx\": 5, \"fy\": 4, \"t\": 3 }\nassert my_solution.isReachableAtTime(**test_input) == False\n\ntest_input = { \"sx\": 1, \"sy\": 3, \"fx\": 5, \"fy\": 5, \"t\": 1 }\nassert my_solution.isReachableAtTime(**test_input) == False\n\ntest_input = { \"sx\": 1, \"sy\": 3, \"fx\": 3, \"fy\": 4, \"t\": 4 }\nassert my_solution.isReachableAtTime(**test_input) == True\n\ntest_input = { \"sx\": 1, \"sy\": 3, \"fx\": 3, \"fy\": 5, \"t\": 2 }\nassert my_solution.isReachableAtTime(**test_input) == True\n\ntest_input = { \"sx\": 1, \"sy\": 4, \"fx\": 1, \"fy\": 2, \"t\": 1 }\nassert my_solution.isReachableAtTime(**test_input) == False\n\ntest_input = { \"sx\": 1, \"sy\": 3, \"fx\": 4, \"fy\": 2, \"t\": 3 }\nassert my_solution.isReachableAtTime(**test_input) == True\n\ntest_input = { \"sx\": 1, \"sy\": 3, \"fx\": 4, \"fy\": 3, \"t\": 10 }\nassert my_solution.isReachableAtTime(**test_input) == True\n\ntest_input = { \"sx\": 1, \"sy\": 3, \"fx\": 4, \"fy\": 4, \"t\": 10 }\nassert my_solution.isReachableAtTime(**test_input) == True\n\ntest_input = { \"sx\": 1, \"sy\": 4, \"fx\": 1, \"fy\": 1, \"t\": 4 }\nassert my_solution.isReachableAtTime(**test_input) == True\n\ntest_input = { \"sx\": 1, \"sy\": 4, \"fx\": 1, \"fy\": 3, \"t\": 1 }\nassert my_solution.isReachableAtTime(**test_input) == True\n\ntest_input = { \"sx\": 1, \"sy\": 4, \"fx\": 1, \"fy\": 4, \"t\": 6 }\nassert my_solution.isReachableAtTime(**test_input) == True\n\ntest_input = { \"sx\": 1, \"sy\": 4, \"fx\": 2, \"fy\": 2, \"t\": 0 }\nassert my_solution.isReachableAtTime(**test_input) == False\n\ntest_input = { \"sx\": 1, \"sy\": 4, \"fx\": 1, \"fy\": 5, \"t\": 6 }\nassert my_solution.isReachableAtTime(**test_input) == True\n\ntest_input = { \"sx\": 1, \"sy\": 4, \"fx\": 2, \"fy\": 4, \"t\": 0 }\nassert my_solution.isReachableAtTime(**test_input) == False\n\ntest_input = { \"sx\": 1, \"sy\": 4, \"fx\": 2, \"fy\": 1, \"t\": 4 }\nassert my_solution.isReachableAtTime(**test_input) == True\n\ntest_input = { \"sx\": 1, \"sy\": 4, \"fx\": 3, \"fy\": 3, \"t\": 0 }\nassert my_solution.isReachableAtTime(**test_input) == False\n\ntest_input = { \"sx\": 1, \"sy\": 4, \"fx\": 2, \"fy\": 3, \"t\": 3 }\nassert my_solution.isReachableAtTime(**test_input) == True\n\ntest_input = { \"sx\": 1, \"sy\": 4, \"fx\": 2, \"fy\": 5, \"t\": 3 }\nassert my_solution.isReachableAtTime(**test_input) == True\n\ntest_input = { \"sx\": 1, \"sy\": 4, \"fx\": 3, \"fy\": 1, \"t\": 4 }\nassert my_solution.isReachableAtTime(**test_input) == True\n\ntest_input = { \"sx\": 1, \"sy\": 4, \"fx\": 3, \"fy\": 2, \"t\": 5 }\nassert my_solution.isReachableAtTime(**test_input) == True\n\ntest_input = { \"sx\": 1, \"sy\": 4, \"fx\": 4, \"fy\": 1, \"t\": 7 }\nassert my_solution.isReachableAtTime(**test_input) == True\n\ntest_input = { \"sx\": 1, \"sy\": 4, \"fx\": 3, \"fy\": 4, \"t\": 1 }\nassert my_solution.isReachableAtTime(**test_input) == False\n\ntest_input = { \"sx\": 1, \"sy\": 4, \"fx\": 4, \"fy\": 4, \"t\": 10 }\nassert my_solution.isReachableAtTime(**test_input) == True\n\ntest_input = { \"sx\": 1, \"sy\": 4, \"fx\": 4, \"fy\": 5, \"t\": 3 }\nassert my_solution.isReachableAtTime(**test_input) == True\n\ntest_input = { \"sx\": 1, \"sy\": 4, \"fx\": 3, \"fy\": 5, \"t\": 0 }\nassert my_solution.isReachableAtTime(**test_input) == False\n\ntest_input = { \"sx\": 1, \"sy\": 4, \"fx\": 4, \"fy\": 2, \"t\": 0 }\nassert my_solution.isReachableAtTime(**test_input) == False\n\ntest_input = { \"sx\": 1, \"sy\": 4, \"fx\": 4, \"fy\": 3, \"t\": 1 }\nassert my_solution.isReachableAtTime(**test_input) == False\n\ntest_input = { \"sx\": 1, \"sy\": 4, \"fx\": 5, \"fy\": 2, \"t\": 1 }\nassert my_solution.isReachableAtTime(**test_input) == False\n\ntest_input = { \"sx\": 1, \"sy\": 4, \"fx\": 5, \"fy\": 4, \"t\": 3 }\nassert my_solution.isReachableAtTime(**test_input) == False\n\ntest_input = { \"sx\": 1, \"sy\": 4, \"fx\": 5, \"fy\": 5, \"t\": 0 }\nassert my_solution.isReachableAtTime(**test_input) == False",
+  "ocr_data": {
+    "nodes": [
+      {
+        "node_id": 1,
+        "shape_type": "rectangle",
+        "raw_text": "Start",
+        "position": "top"
+      },
+      {
+        "node_id": 2,
+        "shape_type": "rectangle",
+        "raw_text": "Input: sx (int), sy (int), fx (int), fy (int), t (int)",
+        "position": "middle"
+      },
+      {
+        "node_id": 3,
+        "shape_type": "rectangle",
+        "raw_text": "Calculate ans: ans = max(abs(sx - fx), abs(sy - fy))",
+        "position": "middle"
+      },
+      {
+        "node_id": 4,
+        "shape_type": "diamond",
+        "raw_text": "Is ans > 0?",
+        "position": "middle"
+      },
+      {
+        "node_id": 5,
+        "shape_type": "diamond",
+        "raw_text": "Is t >= ans?",
+        "position": "bottom"
+      },
+      {
+        "node_id": 6,
+        "shape_type": "diamond",
+        "raw_text": "Is t != 1?",
+        "position": "bottom"
+      },
+      {
+        "node_id": 7,
+        "shape_type": "rectangle",
+        "raw_text": "Output: True (reachable in t seconds)",
+        "position": "bottom"
+      },
+      {
+        "node_id": 8,
+        "shape_type": "rectangle",
+        "raw_text": "Output: False (not reachable in t seconds)",
+        "position": "bottom"
+      }
+    ],
+    "edges": [
+      {
+        "from_node": 1,
+        "to_node": 2,
+        "label": ""
+      },
+      {
+        "from_node": 2,
+        "to_node": 3,
+        "label": ""
+      },
+      {
+        "from_node": 3,
+        "to_node": 4,
+        "label": ""
+      },
+      {
+        "from_node": 4,
+        "to_node": 5,
+        "label": "Yes"
+      },
+      {
+        "from_node": 4,
+        "to_node": 6,
+        "label": "No"
+      },
+      {
+        "from_node": 5,
+        "to_node": 7,
+        "label": "Yes"
+      },
+      {
+        "from_node": 5,
+        "to_node": 8,
+        "label": "No"
+      },
+      {
+        "from_node": 6,
+        "to_node": 7,
+        "label": "Yes"
+      },
+      {
+        "from_node": 6,
+        "to_node": 8,
+        "label": "No"
+      }
+    ],
+    "other_text": []
+  },
+  "analysis": {
+    "ilr_verdict": "incorrect",
+    "ilr_issues": "把OCR流程图的分支接错了：OCR正确结构是节点4(ans>0?)的No分支走向节点6(t!=1?)用于处理起点==终点，而ILR把4的false_next直接接到输出False的节点8，又把t!=1判断复制成新节点7挂在节点5(t>=ans?)的false分支上并令其true输出True。导致两处逻辑颠倒：起终点相同时恒返回False（应返回t!=1），而t<ans且t!=1时反而返回True（应返回False）。",
+    "code_vs_ilr": "faithful",
+    "code_issues": "代码逐条忠实实现了错误的ILR（if ans>0 / if t>=ans return True / elif t!=1 return True / 其余False），忠实复刻了分支错乱，无自身额外错误。",
+    "error_source": "ilr",
+    "ocr_contribution": "no",
+    "root_cause": "ILR阶段把流程图菱形分支的Yes/No出边接错（OCR边标签本身正确），使d==0与t<ans两个分支的语义互换，代码忠实执行后大量测试真假颠倒。",
+    "evidence": "OCR边为4-No->6、5-Yes->7、6-Yes->7、6-No->8（正确算法），ILR却是4-false->8、5-false->7(true->True)。生成代码100个测试错37个：(3,1)->(7,3),t=3期望False实得True；(1,1)->(1,1),t=3期望True实得False；(1,1)->(1,2),t=0期望False实得True。"
+  }
+}

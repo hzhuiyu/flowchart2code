@@ -1,0 +1,95 @@
+{
+  "problem_id": "minimum_beautiful_substrings",
+  "nodes": [
+    {
+      "id": 1,
+      "type": "start",
+      "label": "Start",
+      "next": 2
+    },
+    {
+      "id": 2,
+      "type": "process",
+      "label": "Input: s (binary string)",
+      "action": "ctx['s'] = ctx['arg0']; ctx['pow_bank'] = set(); ctx['dp'] = [float('inf')] * (len(ctx['s']) + 1); ctx['dp'][len(ctx['s'])] = 0; ctx['i'] = 0",
+      "next": 3
+    },
+    {
+      "id": 3,
+      "type": "decision",
+      "label": "Is s[i] == '0'?",
+      "logic": "ctx['s'][ctx['i']] == '0'",
+      "true_next": 9,
+      "false_next": 10
+    },
+    {
+      "id": 9,
+      "type": "process",
+      "label": "Continue to next iteration",
+      "action": "ctx['i'] += 1",
+      "next": 3
+    },
+    {
+      "id": 10,
+      "type": "process",
+      "label": "Loop: for j from i to length of s - 1",
+      "action": "ctx['j'] = ctx['i']; while ctx['j'] < len(ctx['s']):",
+      "next": 11
+    },
+    {
+      "id": 11,
+      "type": "process",
+      "label": "Convert substring s[i:j+1] to decimal: dec = int(s[i:j+1], 2)",
+      "action": "ctx['dec'] = int(ctx['s'][ctx['i']:ctx['j']+1], 2)",
+      "next": 12
+    },
+    {
+      "id": 12,
+      "type": "decision",
+      "label": "s dec in pow_bank?",
+      "logic": "ctx['dec'] in ctx['pow_bank']",
+      "true_next": 13,
+      "false_next": 10
+    },
+    {
+      "id": 13,
+      "type": "process",
+      "label": "Update dp[j]: dp[j] = min(dp[j + 1] + 1, dp[j])",
+      "action": "ctx['dp'][ctx['i']] = min(ctx['dp'][ctx['i'] + 1] + 1, ctx['dp'][ctx['i']])",
+      "next": 7
+    },
+    {
+      "id": 7,
+      "type": "decision",
+      "label": "Is dp[0] == inf?",
+      "logic": "ctx['dp'][0] == float('inf')",
+      "true_next": 15,
+      "false_next": 16
+    },
+    {
+      "id": 15,
+      "type": "end",
+      "label": "Output: -1 (impossible to partition)",
+      "output": "-1"
+    },
+    {
+      "id": 16,
+      "type": "end",
+      "label": "Output: dp[0] (minimum number of beautiful substrings)",
+      "output": "ctx['dp'][0]"
+    }
+  ],
+  "task_id": "biweekly-contest-108-partition-string-into-minimum-beautiful-substrings",
+  "dataset": "Algorithm",
+  "result": "failed: ",
+  "code": "class Solution:\n    def minimumBeautifulSubstrings(self, s: str) -> int:\n        # Initialize variables as per node 2\n        pow_bank = set()\n        dp = [float('inf')] * (len(s) + 1)\n        dp[len(s)] = 0\n        i = 0\n        \n        # Decision node 3: Is s[i] == '0'?\n        if s[i] == '0':\n            # True branch: continue to next iteration (node 9)\n            i += 1\n            # Go back to decision node 3\n            while i < len(s):\n                if s[i] == '0':\n                    i += 1\n                    continue\n                else:\n                    break\n            # Now process from the point where we have a non-zero character\n            j = i\n            while j < len(s):\n                # Process substring s[i:j+1]\n                dec = int(s[i:j+1], 2)\n                # Check if dec is in pow_bank\n                if dec in pow_bank:\n                    # Update dp[i]\n                    dp[i] = min(dp[i + 1] + 1, dp[i])\n                    j += 1\n                else:\n                    j += 1\n            # After processing all possible substrings starting at i\n            # Move to decision node 7\n            if dp[0] == float('inf'):\n                return -1\n            else:\n                return dp[0]\n        else:\n            # False branch: loop through j from i to end of string (node 10)\n            j = i\n            while j < len(s):\n                # Convert substring s[i:j+1] to decimal\n                dec = int(s[i:j+1], 2)\n                # Check if dec is in pow_bank\n                if dec in pow_bank:\n                    # Update dp[i]\n                    dp[i] = min(dp[i + 1] + 1, dp[i])\n                    j += 1\n                else:\n                    j += 1\n            # After processing all possible substrings starting at i\n            # Move to decision node 7\n            if dp[0] == float('inf'):\n                return -1\n            else:\n                return dp[0]",
+  "verification": {
+    "md_verdict": "ILR Error",
+    "actual_error_source": "ilr",
+    "ilr_verdict": "incorrect",
+    "code_vs_ilr": "faithful",
+    "md_correct": "yes",
+    "note": "ILR 中 pow_bank 被初始化为空集后再无任何节点往里添加 5 的幂（OCR 节点4/5 丢失），dec in pow_bank 永远为假，dp[0] 恒为 inf，忠实实现也只能输出 -1；生成代码与该残缺 ILR 结构一致，属忠实转换。",
+    "evidence": "s='1011' 期望 2，生成代码输出 -1；s='111' 期望 3，输出 -1。因 pow_bank 恒为空集，任何子串十进制值都不可能在其中。"
+  }
+}

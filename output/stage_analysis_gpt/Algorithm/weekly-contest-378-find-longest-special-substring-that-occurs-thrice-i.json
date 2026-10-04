@@ -1,0 +1,241 @@
+{
+  "task_id": "weekly-contest-378-find-longest-special-substring-that-occurs-thrice-i",
+  "dataset": "Algorithm",
+  "difficulty": "Medium",
+  "title": "find-longest-special-substring-that-occurs-thrice-i",
+  "result": "failed: ",
+  "ilr": "{\n  \"problem_id\": \"maximum_length_special_substring\",\n  \"nodes\": [\n    {\"id\": 1, \"type\": \"start\", \"label\": \"Start\", \"next\": 2},\n    {\"id\": 2, \"type\": \"process\", \"label\": \"Input: s (string)\", \"action\": \"ctx['s'] = ctx['arg0']\", \"next\": 3},\n    {\"id\": 3, \"type\": \"decision\", \"label\": \"Is the length of unique characters in s equal to the length of s?\", \"logic\": \"len(set(ctx['s'])) == len(ctx['s'])\", \"true_next\": 4, \"false_next\": 5},\n    {\"id\": 4, \"type\": \"end\", \"label\": \"Output: -1 (no special substring occurs at least thrice)\", \"output\": \"-1\"},\n    {\"id\": 5, \"type\": \"process\", \"label\": \"Initialize i = len(s) - 3\", \"action\": \"ctx['i'] = len(ctx['s']) - 3\", \"next\": 6},\n    {\"id\": 6, \"type\": \"decision\", \"label\": \"Is i >= 0?\", \"logic\": \"ctx['i'] >= 0\", \"true_next\": 7, \"false_next\": 8},\n    {\"id\": 7, \"type\": \"end\", \"label\": \"Output: -1 (no special substring occurs at least thrice)\", \"output\": \"-1\"},\n    {\"id\": 8, \"type\": \"process\", \"label\": \"Initialize d = {}, count = 0\", \"action\": \"ctx['d'] = {}; ctx['count'] = 0\", \"next\": 9},\n    {\"id\": 9, \"type\": \"process\", \"label\": \"Initialize j = i\", \"action\": \"ctx['j'] = ctx['i']\", \"next\": 10},\n    {\"id\": 10, \"type\": \"decision\", \"label\": \"Is j < len(s)?\", \"logic\": \"ctx['j'] < len(ctx['s'])\", \"true_next\": 11, \"false_next\": 18},\n    {\"id\": 11, \"type\": \"decision\", \"label\": \"Is the set of characters in s[count] + 1] of length 1?\", \"logic\": \"len(set(ctx['s'][ctx['count']:ctx['count'] + 1])) == 1\", \"true_next\": 12, \"false_next\": 13},\n    {\"id\": 12, \"type\": \"decision\", \"label\": \"Is s[count] + 1] in d?\", \"logic\": \"ctx['s'][ctx['count'] + 1] in ctx['d']\", \"true_next\": 14, \"false_next\": 13},\n    {\"id\": 13, \"type\": \"process\", \"label\": \"d[s[count] + 1]] += 1\", \"action\": \"ctx['d'][ctx['s'][ctx['count'] + 1]] = ctx['d'].get(ctx['s'][ctx['count'] + 1], 0) + 1\", \"next\": 15},\n    {\"id\": 14, \"type\": \"process\", \"label\": \"d[s[count] + 1]] += 1\", \"action\": \"ctx['d'][ctx['s'][ctx['count'] + 1]] += 1\", \"next\": 15},\n    {\"id\": 15, \"type\": \"decision\", \"label\": \"Is d[s[count] + 1]] == 3?\", \"logic\": \"ctx['d'][ctx['s'][ctx['count'] + 1]] == 3\", \"true_next\": 16, \"false_next\": 17},\n    {\"id\": 16, \"type\": \"end\", \"label\": \"Output: length of s[count] + 1] (special substring found)\", \"output\": \"ctx['count'] + 1\"},\n    {\"id\": 17, \"type\": \"process\", \"label\": \"Increment count: count += 1\", \"action\": \"ctx['count'] += 1\", \"next\": 18},\n    {\"id\": 18, \"type\": \"process\", \"label\": \"Increment j: j += 1\", \"action\": \"ctx['j'] += 1\", \"next\": 10}\n  ]\n}",
+  "code": "class Solution:\n    def maximumLength(self, s: str) -> int:\n        if len(set(s)) == len(s):\n            return -1\n        \n        i = len(s) - 3\n        if i < 0:\n            return -1\n        \n        d = {}\n        count = 0\n        j = i\n        \n        while j < len(s):\n            if len(set(s[count:count + 1])) == 1:\n                if s[count + 1] in d:\n                    d[s[count + 1]] += 1\n                else:\n                    d[s[count + 1]] = 1\n                \n                if d[s[count + 1]] == 3:\n                    return count + 1\n                \n            count += 1\n            j += 1\n        \n        return -1",
+  "prompt": "\"\"\"\nYou are given a string s that consists of lowercase English letters.\nA string is called special if it is made up of only a single character. For example, the string \"abc\" is not special, whereas the strings \"ddd\", \"zz\", and \"f\" are special.\nReturn the length of the longest special substring of s which occurs at least thrice, or -1 if no special substring occurs at least thrice.\nA substring is a contiguous non-empty sequence of characters within a string.\n\nExample 1:\n\nInput: s = \"aaaa\"\nOutput: 2\nExplanation: The longest special substring which occurs thrice is \"aa\": substrings \"aaaa\", \"aaaa\", and \"aaaa\".\nIt can be shown that the maximum length achievable is 2.\n\nExample 2:\n\nInput: s = \"abcdef\"\nOutput: -1\nExplanation: There exists no special substring which occurs at least thrice. Hence return -1.\n\nExample 3:\n\nInput: s = \"abcaba\"\nOutput: 1\nExplanation: The longest special substring which occurs thrice is \"a\": substrings \"abcaba\", \"abcaba\", and \"abcaba\".\nIt can be shown that the maximum length achievable is 1.\n\n\nConstraints:\n\n3 <= s.length <= 50\ns consists of only lowercase English letters.\n\"\"\"\nclass Solution:\n    def maximumLength(self, s: str) -> int:\n        ",
+  "test": "\nmy_solution = Solution()\n\ntest_input = { \"s\": \"aaaa\" }\nassert my_solution.maximumLength(**test_input) == 2\n\ntest_input = { \"s\": \"abcdef\" }\nassert my_solution.maximumLength(**test_input) == -1\n\ntest_input = { \"s\": \"abcaba\" }\nassert my_solution.maximumLength(**test_input) == 1\n\ntest_input = { \"s\": \"abcccccdddd\" }\nassert my_solution.maximumLength(**test_input) == 3\n\ntest_input = { \"s\": \"aaa\" }\nassert my_solution.maximumLength(**test_input) == 1\n\ntest_input = { \"s\": \"acc\" }\nassert my_solution.maximumLength(**test_input) == -1\n\ntest_input = { \"s\": \"cab\" }\nassert my_solution.maximumLength(**test_input) == -1\n\ntest_input = { \"s\": \"cad\" }\nassert my_solution.maximumLength(**test_input) == -1\n\ntest_input = { \"s\": \"cbc\" }\nassert my_solution.maximumLength(**test_input) == -1\n\ntest_input = { \"s\": \"ccc\" }\nassert my_solution.maximumLength(**test_input) == 1\n\ntest_input = { \"s\": \"dca\" }\nassert my_solution.maximumLength(**test_input) == -1\n\ntest_input = { \"s\": \"ddd\" }\nassert my_solution.maximumLength(**test_input) == 1\n\ntest_input = { \"s\": \"fff\" }\nassert my_solution.maximumLength(**test_input) == 1\n\ntest_input = { \"s\": \"ggg\" }\nassert my_solution.maximumLength(**test_input) == 1\n\ntest_input = { \"s\": \"hhh\" }\nassert my_solution.maximumLength(**test_input) == 1\n\ntest_input = { \"s\": \"kkk\" }\nassert my_solution.maximumLength(**test_input) == 1\n\ntest_input = { \"s\": \"lll\" }\nassert my_solution.maximumLength(**test_input) == 1\n\ntest_input = { \"s\": \"ooo\" }\nassert my_solution.maximumLength(**test_input) == 1\n\ntest_input = { \"s\": \"ppp\" }\nassert my_solution.maximumLength(**test_input) == 1\n\ntest_input = { \"s\": \"qqq\" }\nassert my_solution.maximumLength(**test_input) == 1\n\ntest_input = { \"s\": \"rrr\" }\nassert my_solution.maximumLength(**test_input) == 1\n\ntest_input = { \"s\": \"xxx\" }\nassert my_solution.maximumLength(**test_input) == 1\n\ntest_input = { \"s\": \"yyy\" }\nassert my_solution.maximumLength(**test_input) == 1\n\ntest_input = { \"s\": \"aaau\" }\nassert my_solution.maximumLength(**test_input) == 1\n\ntest_input = { \"s\": \"affe\" }\nassert my_solution.maximumLength(**test_input) == -1\n\ntest_input = { \"s\": \"agae\" }\nassert my_solution.maximumLength(**test_input) == -1\n\ntest_input = { \"s\": \"aiii\" }\nassert my_solution.maximumLength(**test_input) == 1\n\ntest_input = { \"s\": \"bbbb\" }\nassert my_solution.maximumLength(**test_input) == 2\n\ntest_input = { \"s\": \"bbbz\" }\nassert my_solution.maximumLength(**test_input) == 1\n\ntest_input = { \"s\": \"bddd\" }\nassert my_solution.maximumLength(**test_input) == 1\n\ntest_input = { \"s\": \"beee\" }\nassert my_solution.maximumLength(**test_input) == 1\n\ntest_input = { \"s\": \"bnnn\" }\nassert my_solution.maximumLength(**test_input) == 1\n\ntest_input = { \"s\": \"bsss\" }\nassert my_solution.maximumLength(**test_input) == 1\n\ntest_input = { \"s\": \"bxxx\" }\nassert my_solution.maximumLength(**test_input) == 1\n\ntest_input = { \"s\": \"cafc\" }\nassert my_solution.maximumLength(**test_input) == -1\n\ntest_input = { \"s\": \"ccag\" }\nassert my_solution.maximumLength(**test_input) == -1\n\ntest_input = { \"s\": \"cfff\" }\nassert my_solution.maximumLength(**test_input) == 1\n\ntest_input = { \"s\": \"dddd\" }\nassert my_solution.maximumLength(**test_input) == 2\n\ntest_input = { \"s\": \"dsss\" }\nassert my_solution.maximumLength(**test_input) == 1\n\ntest_input = { \"s\": \"eccc\" }\nassert my_solution.maximumLength(**test_input) == 1\n\ntest_input = { \"s\": \"eeew\" }\nassert my_solution.maximumLength(**test_input) == 1\n\ntest_input = { \"s\": \"gfdc\" }\nassert my_solution.maximumLength(**test_input) == -1\n\ntest_input = { \"s\": \"giii\" }\nassert my_solution.maximumLength(**test_input) == 1\n\ntest_input = { \"s\": \"hhhn\" }\nassert my_solution.maximumLength(**test_input) == 1\n\ntest_input = { \"s\": \"hyyy\" }\nassert my_solution.maximumLength(**test_input) == 1\n\ntest_input = { \"s\": \"iiii\" }\nassert my_solution.maximumLength(**test_input) == 2\n\ntest_input = { \"s\": \"jiii\" }\nassert my_solution.maximumLength(**test_input) == 1\n\ntest_input = { \"s\": \"jjjj\" }\nassert my_solution.maximumLength(**test_input) == 2\n\ntest_input = { \"s\": \"kbbb\" }\nassert my_solution.maximumLength(**test_input) == 1\n\ntest_input = { \"s\": \"kddd\" }\nassert my_solution.maximumLength(**test_input) == 1\n\ntest_input = { \"s\": \"looo\" }\nassert my_solution.maximumLength(**test_input) == 1\n\ntest_input = { \"s\": \"nnnn\" }\nassert my_solution.maximumLength(**test_input) == 2\n\ntest_input = { \"s\": \"oaaa\" }\nassert my_solution.maximumLength(**test_input) == 1\n\ntest_input = { \"s\": \"osss\" }\nassert my_solution.maximumLength(**test_input) == 1\n\ntest_input = { \"s\": \"pppp\" }\nassert my_solution.maximumLength(**test_input) == 2\n\ntest_input = { \"s\": \"pppw\" }\nassert my_solution.maximumLength(**test_input) == 1\n\ntest_input = { \"s\": \"qqqc\" }\nassert my_solution.maximumLength(**test_input) == 1\n\ntest_input = { \"s\": \"qqqo\" }\nassert my_solution.maximumLength(**test_input) == 1\n\ntest_input = { \"s\": \"qqqq\" }\nassert my_solution.maximumLength(**test_input) == 2\n\ntest_input = { \"s\": \"reee\" }\nassert my_solution.maximumLength(**test_input) == 1\n\ntest_input = { \"s\": \"rzzz\" }\nassert my_solution.maximumLength(**test_input) == 1\n\ntest_input = { \"s\": \"thhh\" }\nassert my_solution.maximumLength(**test_input) == 1\n\ntest_input = { \"s\": \"tttt\" }\nassert my_solution.maximumLength(**test_input) == 2\n\ntest_input = { \"s\": \"unnn\" }\nassert my_solution.maximumLength(**test_input) == 1\n\ntest_input = { \"s\": \"uuuu\" }\nassert my_solution.maximumLength(**test_input) == 2\n\ntest_input = { \"s\": \"uyyy\" }\nassert my_solution.maximumLength(**test_input) == 1\n\ntest_input = { \"s\": \"vddd\" }\nassert my_solution.maximumLength(**test_input) == 1\n\ntest_input = { \"s\": \"vfff\" }\nassert my_solution.maximumLength(**test_input) == 1\n\ntest_input = { \"s\": \"vvvv\" }\nassert my_solution.maximumLength(**test_input) == 2\n\ntest_input = { \"s\": \"wbbb\" }\nassert my_solution.maximumLength(**test_input) == 1\n\ntest_input = { \"s\": \"wqqq\" }\nassert my_solution.maximumLength(**test_input) == 1\n\ntest_input = { \"s\": \"wwwg\" }\nassert my_solution.maximumLength(**test_input) == 1\n\ntest_input = { \"s\": \"xxxk\" }\nassert my_solution.maximumLength(**test_input) == 1\n\ntest_input = { \"s\": \"xxxx\" }\nassert my_solution.maximumLength(**test_input) == 2\n\ntest_input = { \"s\": \"zfff\" }\nassert my_solution.maximumLength(**test_input) == 1\n\ntest_input = { \"s\": \"ammmm\" }\nassert my_solution.maximumLength(**test_input) == 2\n\ntest_input = { \"s\": \"aqqqu\" }\nassert my_solution.maximumLength(**test_input) == 1\n\ntest_input = { \"s\": \"axxxx\" }\nassert my_solution.maximumLength(**test_input) == 2\n\ntest_input = { \"s\": \"bahhh\" }\nassert my_solution.maximumLength(**test_input) == 1\n\ntest_input = { \"s\": \"bbbbz\" }\nassert my_solution.maximumLength(**test_input) == 2\n\ntest_input = { \"s\": \"bbccc\" }\nassert my_solution.maximumLength(**test_input) == 1\n\ntest_input = { \"s\": \"biaei\" }\nassert my_solution.maximumLength(**test_input) == -1\n\ntest_input = { \"s\": \"bjjjj\" }\nassert my_solution.maximumLength(**test_input) == 2\n\ntest_input = { \"s\": \"cccll\" }\nassert my_solution.maximumLength(**test_input) == 1\n\ntest_input = { \"s\": \"ceaaa\" }\nassert my_solution.maximumLength(**test_input) == 1\n\ntest_input = { \"s\": \"cjlll\" }\nassert my_solution.maximumLength(**test_input) == 1\n\ntest_input = { \"s\": \"crqqq\" }\nassert my_solution.maximumLength(**test_input) == 1\n\ntest_input = { \"s\": \"cyyyy\" }\nassert my_solution.maximumLength(**test_input) == 2\n\ntest_input = { \"s\": \"ddddj\" }\nassert my_solution.maximumLength(**test_input) == 2\n\ntest_input = { \"s\": \"ddddt\" }\nassert my_solution.maximumLength(**test_input) == 2\n\ntest_input = { \"s\": \"dkkkk\" }\nassert my_solution.maximumLength(**test_input) == 2\n\ntest_input = { \"s\": \"eefff\" }\nassert my_solution.maximumLength(**test_input) == 1\n\ntest_input = { \"s\": \"efage\" }\nassert my_solution.maximumLength(**test_input) == -1\n\ntest_input = { \"s\": \"epppp\" }\nassert my_solution.maximumLength(**test_input) == 2\n\ntest_input = { \"s\": \"fafff\" }\nassert my_solution.maximumLength(**test_input) == 1\n\ntest_input = { \"s\": \"ffbbb\" }\nassert my_solution.maximumLength(**test_input) == 1\n\ntest_input = { \"s\": \"ffffr\" }\nassert my_solution.maximumLength(**test_input) == 2\n\ntest_input = { \"s\": \"gcgbf\" }\nassert my_solution.maximumLength(**test_input) == -1\n\ntest_input = { \"s\": \"gcooo\" }\nassert my_solution.maximumLength(**test_input) == 1\n\ntest_input = { \"s\": \"gfgec\" }\nassert my_solution.maximumLength(**test_input) == -1",
+  "ocr_data": {
+    "nodes": [
+      {
+        "node_id": 1,
+        "shape_type": "rectangle",
+        "raw_text": "Start",
+        "position": "top"
+      },
+      {
+        "node_id": 2,
+        "shape_type": "rectangle",
+        "raw_text": "Input: s (string)",
+        "position": "top"
+      },
+      {
+        "node_id": 3,
+        "shape_type": "diamond",
+        "raw_text": "Is the length of unique characters in s equal to the length of s?",
+        "position": "middle"
+      },
+      {
+        "node_id": 4,
+        "shape_type": "rectangle",
+        "raw_text": "Output: -1 (no special substring occurs at least thrice)",
+        "position": "middle"
+      },
+      {
+        "node_id": 5,
+        "shape_type": "rectangle",
+        "raw_text": "Initialize i = len(s) - 3",
+        "position": "middle"
+      },
+      {
+        "node_id": 6,
+        "shape_type": "diamond",
+        "raw_text": "Is i >= 0?",
+        "position": "middle"
+      },
+      {
+        "node_id": 7,
+        "shape_type": "rectangle",
+        "raw_text": "Output: -1 (no special substring occurs at least thrice)",
+        "position": "middle"
+      },
+      {
+        "node_id": 8,
+        "shape_type": "rectangle",
+        "raw_text": "Initialize d = {}, count = 0",
+        "position": "middle"
+      },
+      {
+        "node_id": 9,
+        "shape_type": "rectangle",
+        "raw_text": "Initialize j = i",
+        "position": "middle"
+      },
+      {
+        "node_id": 10,
+        "shape_type": "diamond",
+        "raw_text": "Is j < len(s)?",
+        "position": "middle"
+      },
+      {
+        "node_id": 11,
+        "shape_type": "diamond",
+        "raw_text": "Is the set of characters in s[count] + 1] of length 1?",
+        "position": "middle"
+      },
+      {
+        "node_id": 12,
+        "shape_type": "diamond",
+        "raw_text": "Is s[count] + 1] in d?",
+        "position": "middle"
+      },
+      {
+        "node_id": 13,
+        "shape_type": "rectangle",
+        "raw_text": "d[s[count] + 1]] += 1",
+        "position": "middle"
+      },
+      {
+        "node_id": 14,
+        "shape_type": "rectangle",
+        "raw_text": "d[s[count] + 1]] += 1",
+        "position": "middle"
+      },
+      {
+        "node_id": 15,
+        "shape_type": "diamond",
+        "raw_text": "Is d[s[count] + 1]] == 3?",
+        "position": "middle"
+      },
+      {
+        "node_id": 16,
+        "shape_type": "rectangle",
+        "raw_text": "Output: length of s[count] + 1] (special substring found)",
+        "position": "middle"
+      },
+      {
+        "node_id": 17,
+        "shape_type": "rectangle",
+        "raw_text": "Increment count: count += 1",
+        "position": "middle"
+      },
+      {
+        "node_id": 18,
+        "shape_type": "rectangle",
+        "raw_text": "Increment j: j += 1",
+        "position": "bottom"
+      }
+    ],
+    "edges": [
+      {
+        "from_node": 1,
+        "to_node": 2,
+        "label": ""
+      },
+      {
+        "from_node": 2,
+        "to_node": 3,
+        "label": ""
+      },
+      {
+        "from_node": 3,
+        "to_node": 4,
+        "label": "Yes"
+      },
+      {
+        "from_node": 3,
+        "to_node": 5,
+        "label": "No"
+      },
+      {
+        "from_node": 5,
+        "to_node": 6,
+        "label": ""
+      },
+      {
+        "from_node": 6,
+        "to_node": 7,
+        "label": "No"
+      },
+      {
+        "from_node": 6,
+        "to_node": 8,
+        "label": "Yes"
+      },
+      {
+        "from_node": 8,
+        "to_node": 9,
+        "label": ""
+      },
+      {
+        "from_node": 9,
+        "to_node": 10,
+        "label": ""
+      },
+      {
+        "from_node": 10,
+        "to_node": 11,
+        "label": "Yes"
+      },
+      {
+        "from_node": 10,
+        "to_node": 13,
+        "label": "No"
+      },
+      {
+        "from_node": 11,
+        "to_node": 12,
+        "label": ""
+      },
+      {
+        "from_node": 12,
+        "to_node": 13,
+        "label": "No"
+      },
+      {
+        "from_node": 13,
+        "to_node": 14,
+        "label": ""
+      },
+      {
+        "from_node": 14,
+        "to_node": 15,
+        "label": ""
+      },
+      {
+        "from_node": 15,
+        "to_node": 16,
+        "label": "Yes"
+      },
+      {
+        "from_node": 15,
+        "to_node": 17,
+        "label": "No"
+      },
+      {
+        "from_node": 17,
+        "to_node": 18,
+        "label": ""
+      },
+      {
+        "from_node": 18,
+        "to_node": 10,
+        "label": ""
+      },
+      {
+        "from_node": 13,
+        "to_node": 10,
+        "label": ""
+      },
+      {
+        "from_node": 14,
+        "to_node": 10,
+        "label": ""
+      }
+    ],
+    "other_text": []
+  },
+  "analysis": {
+    "ilr_verdict": "incorrect",
+    "ilr_issues": "按OCR文本实现的逻辑完全不是本题算法：子串表达式被误成s[count+1]单字符（len(set(s[count:count+1]))==1恒真），对单字符出现次数计数，命中3时返回count+1（下标而非长度）；节点10为假（j循环结束）被接回节点18(j+=1)形成死循环，永远无法返回-1；i=len(s)-3仅作一次单一候选。忠实执行要么IndexError（如'aaa'访问s[3]越界）要么输出错误值。",
+    "code_vs_ilr": "deviates",
+    "code_issues": "代码对ILR做了两处无害修复（循环退出后return -1而非死循环；节点11为假时跳过自增——该判断恒真故行为等价），致命的计数与返回逻辑与ILR一致：'aaaa'同样错误返回3，'aaa'同样IndexError。",
+    "error_source": "ilr",
+    "ocr_contribution": "unclear",
+    "root_cause": "OCR文本呈明显乱码（'s[count] + 1]'疑为切片表达式s[count:count+…]的误读，且节点15/16无入边、13/14有双重出边），流程图原貌无法还原；ILR按乱码实现出错误逻辑，代码保留该致命逻辑故同样失败。",
+    "evidence": "maximumLength('aaaa')实际运行返回3（期望2）；maximumLength('abcaba')返回-1（期望1）；maximumLength('aaa')抛IndexError: string index out of range。"
+  }
+}

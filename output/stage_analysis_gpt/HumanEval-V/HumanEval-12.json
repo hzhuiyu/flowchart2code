@@ -1,0 +1,116 @@
+{
+  "task_id": "HumanEval-12",
+  "dataset": "HumanEval-V",
+  "difficulty": null,
+  "title": null,
+  "result": "failed: ",
+  "ilr": "{\n  \"problem_id\": \"longest_string_example\",\n  \"nodes\": [\n    {\"id\": 1, \"type\": \"start\", \"label\": \"Start\", \"next\": 2},\n    {\"id\": 2, \"type\": \"process\", \"label\": \"Input: strings (List of strings)\", \"action\": \"ctx['strings']=ctx['arg0']; ctx['maxlen']=0; ctx['longest_string']=None; ctx['i']=0\", \"next\": 3},\n    {\"id\": 3, \"type\": \"decision\", \"label\": \"Is strings empty?\", \"logic\": \"len(ctx['strings']) == 0\", \"true_next\": 4, \"false_next\": 5},\n    {\"id\": 4, \"type\": \"end\", \"label\": \"Output: None (no strings to evaluate)\", \"output\": \"None\"},\n    {\"id\": 5, \"type\": \"process\", \"label\": \"Calculate maxlen = max(length of strings)\", \"action\": \"ctx['maxlen'] = max(len(s) for s in ctx['strings'])\", \"next\": 6},\n    {\"id\": 6, \"type\": \"process\", \"label\": \"Iterate over each string in strings\", \"action\": \"for ctx['i'] in range(len(ctx['strings'])): ctx['current_string'] = ctx['strings'][ctx['i']]\", \"next\": 7},\n    {\"id\": 7, \"type\": \"decision\", \"label\": \"Is length of current string equal to maxlen?\", \"logic\": \"len(ctx['current_string']) == ctx['maxlen']\", \"true_next\": 8, \"false_next\": 6},\n    {\"id\": 8, \"type\": \"end\", \"label\": \"Output: current string (longest string found)\", \"output\": \"ctx['current_string']\"}\n  ]\n}",
+  "code": "from typing import List, Optional\n\n\ndef longest(strings: List[str]) -> Optional[str]:\n    maxlen = 0\n    longest_string = None\n    \n    if len(strings) == 0:\n        return None\n    \n    maxlen = max(len(s) for s in strings)\n    \n    for i in range(len(strings)):\n        current_string = strings[i]\n        if len(current_string) == maxlen:\n            longest_string = current_string\n            \n    return longest_string",
+  "prompt": "from typing import List, Optional\n\n\ndef longest(strings: List[str]) -> Optional[str]:\n    \"\"\" Out of list of strings, return the longest one. Return the first one in case of multiple\n    strings of the same length. Return None in case the input list is empty.\n    >>> longest([])\n\n    >>> longest(['a', 'b', 'c'])\n    'a'\n    >>> longest(['a', 'bb', 'ccc'])\n    'ccc'\n    \"\"\"\n",
+  "test": "\n\nMETADATA = {\n    'author': 'jt',\n    'dataset': 'test'\n}\n\n\ndef check(candidate):\n    assert candidate([]) == None\n    assert candidate(['x', 'y', 'z']) == 'x'\n    assert candidate(['x', 'yyy', 'zzzz', 'www', 'kkkk', 'abc']) == 'zzzz'\n",
+  "ocr_data": {
+    "nodes": [
+      {
+        "node_id": 1,
+        "shape_type": "rectangle",
+        "raw_text": "Start",
+        "position": "top"
+      },
+      {
+        "node_id": 2,
+        "shape_type": "rectangle",
+        "raw_text": "Input: strings (List of strings)",
+        "position": "middle"
+      },
+      {
+        "node_id": 3,
+        "shape_type": "diamond",
+        "raw_text": "Is strings empty?",
+        "position": "middle"
+      },
+      {
+        "node_id": 4,
+        "shape_type": "rectangle",
+        "raw_text": "Output: None (no strings to evaluate)",
+        "position": "middle"
+      },
+      {
+        "node_id": 5,
+        "shape_type": "rectangle",
+        "raw_text": "Calculate maxlen = max(length of strings)",
+        "position": "middle"
+      },
+      {
+        "node_id": 6,
+        "shape_type": "rectangle",
+        "raw_text": "Iterate over each string in strings",
+        "position": "middle"
+      },
+      {
+        "node_id": 7,
+        "shape_type": "diamond",
+        "raw_text": "Is length of current string equal to maxlen?",
+        "position": "bottom"
+      },
+      {
+        "node_id": 8,
+        "shape_type": "rectangle",
+        "raw_text": "Output: current string (longest string found)",
+        "position": "bottom"
+      }
+    ],
+    "edges": [
+      {
+        "from_node": 1,
+        "to_node": 2,
+        "label": ""
+      },
+      {
+        "from_node": 2,
+        "to_node": 3,
+        "label": ""
+      },
+      {
+        "from_node": 3,
+        "to_node": 4,
+        "label": "Yes"
+      },
+      {
+        "from_node": 3,
+        "to_node": 5,
+        "label": "No"
+      },
+      {
+        "from_node": 5,
+        "to_node": 6,
+        "label": ""
+      },
+      {
+        "from_node": 6,
+        "to_node": 7,
+        "label": ""
+      },
+      {
+        "from_node": 7,
+        "to_node": 8,
+        "label": "Yes"
+      },
+      {
+        "from_node": 7,
+        "to_node": 6,
+        "label": "No"
+      }
+    ],
+    "other_text": []
+  },
+  "analysis": {
+    "ilr_verdict": "correct",
+    "ilr_issues": "",
+    "code_vs_ilr": "deviates",
+    "code_issues": "ILR节点8是end节点：循环中第一次遇到长度==maxlen的字符串就立即输出返回（即返回并列最长中的第一个）；代码却改成 longest_string = current_string 后继续循环，返回的是最后一个匹配项，把'立即返回'翻译成了'持续覆盖到最后'。",
+    "error_source": "code",
+    "ocr_contribution": "no",
+    "root_cause": "ILR正确（首个最长字符串即返回），代码生成把end节点的立即返回改写为循环结束后的最后匹配返回，违反题目'并列时返回第一个'的要求。",
+    "evidence": "longest(['x','y','z']) 代码返回 'z'，期望 'x'；longest(['x','yyy','zzzz','www','kkkk','abc']) 返回 'kkkk'，期望 'zzzz'。忠实执行ILR在首次匹配即走节点8(end)返回第一个最长串，可通过全部测试。"
+  }
+}

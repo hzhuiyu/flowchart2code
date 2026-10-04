@@ -1,0 +1,40 @@
+{
+  "samples_file": "../output/Algorithm/gemini-3-1-flash-lite-preview-gemini-3-1-flash-lite-preview/samples.jsonl",
+  "reflection_dir": "../output/Algorithm/gemini-3-1-flash-lite-preview-gemini-3-1-flash-lite-preview/reflection",
+  "output_file": "../output/Algorithm/gemini-3-1-flash-lite-preview-gemini-3-1-flash-lite-preview/reflection/samples_reflection_merged.jsonl",
+  "merged_results_file": "../output/Algorithm/gemini-3-1-flash-lite-preview-gemini-3-1-flash-lite-preview/reflection/samples_reflection_merged.jsonl_results.jsonl",
+  "results_txt": "../output/Algorithm/gemini-3-1-flash-lite-preview-gemini-3-1-flash-lite-preview/reflection/results.txt",
+  "problem_file": "../data/Algorithm/Algorithm.jsonl",
+  "merge_summary": {
+    "total_rows": 149,
+    "replaced_rows": 18,
+    "replaced_by_first_passed": 15,
+    "replaced_by_last_failed": 3,
+    "missing_generated_code": 0,
+    "selection_stats": {
+      "keep_original": 131,
+      "first_passed": 15,
+      "iter_3_failed": 3
+    }
+  },
+  "eval_result": {
+    "pass@1": 0.9798657718120806
+  },
+  "difficulty_summary": {
+    "Easy": {
+      "passed": 45.0,
+      "total": 45.0,
+      "rate": 1.0
+    },
+    "Medium": {
+      "passed": 75.0,
+      "total": 75.0,
+      "rate": 1.0
+    },
+    "Hard": {
+      "passed": 26.0,
+      "total": 29.0,
+      "rate": 0.896551724137931
+    }
+  }
+}

@@ -1,0 +1,68 @@
+{
+  "problem_id": "sumCounts",
+  "nodes": [
+    {
+      "id": 1,
+      "type": "start",
+      "label": "Start",
+      "next": 2
+    },
+    {
+      "id": 2,
+      "type": "process",
+      "label": "Input: nums (List[int])",
+      "action": "ctx['nums'] = ctx['arg0']; ctx['n'] = len(ctx['nums']); ctx['result'] = 0; ctx['i'] = 0",
+      "next": 3
+    },
+    {
+      "id": 3,
+      "type": "decision",
+      "label": "For i in range(0, n)",
+      "logic": "ctx['i'] < ctx['n']",
+      "true_next": 4,
+      "false_next": 6
+    },
+    {
+      "id": 4,
+      "type": "process",
+      "label": "Initialize set s = {}",
+      "action": "ctx['s'] = set(); ctx['j'] = ctx['i']",
+      "next": 5
+    },
+    {
+      "id": 5,
+      "type": "decision",
+      "label": "For j in range(i, n)",
+      "logic": "ctx['j'] < ctx['n']",
+      "true_next": 7,
+      "false_next": 8
+    },
+    {
+      "id": 7,
+      "type": "process",
+      "label": "Add nums[j] to set s",
+      "action": "ctx['s'].add(ctx['nums'][ctx['j']]); ctx['j'] += 1",
+      "next": 9
+    },
+    {
+      "id": 9,
+      "type": "process",
+      "label": "Update result: result += len(s) ** 2",
+      "action": "ctx['result'] += len(ctx['s']) ** 2",
+      "next": 5
+    },
+    {
+      "id": 8,
+      "type": "process",
+      "label": "Advance outer index: i += 1",
+      "action": "ctx['i'] += 1",
+      "next": 3
+    },
+    {
+      "id": 6,
+      "type": "end",
+      "label": "End: return result",
+      "output": "ctx['result']"
+    }
+  ]
+}

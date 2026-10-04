@@ -1,0 +1,10 @@
+{
+    "api_key": "YOUR_API_KEY_HERE",
+    "base_url": "YOUR_BASE_URL_HERE",
+    "model": "gpt-4o-mini",
+    "max_tokens": 16384,
+    "timeout_sec": 600,
+    "temperature": 0.2,
+    "top_p": 0.95,
+    "n": 1
+}

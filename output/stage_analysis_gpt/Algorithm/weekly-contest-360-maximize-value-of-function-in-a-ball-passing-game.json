@@ -1,0 +1,328 @@
+{
+  "task_id": "weekly-contest-360-maximize-value-of-function-in-a-ball-passing-game",
+  "dataset": "Algorithm",
+  "difficulty": "Hard",
+  "title": "maximize-value-of-function-in-a-ball-passing-game",
+  "result": "failed: ",
+  "ilr": "{\n  \"problem_id\": \"max_function_value\",\n  \"nodes\": [\n    {\"id\": 1, \"type\": \"start\", \"label\": \"Start\", \"next\": 2},\n    {\"id\": 2, \"type\": \"process\", \"label\": \"Input: receiver (list of integers), k (integer)\", \"action\": \"ctx['receiver']=ctx['arg0']; ctx['k']=ctx['arg1']; ctx['n']=len(ctx['receiver']); ctx['i']=0; ctx['ans']=0\", \"next\": 3},\n    {\"id\": 3, \"type\": \"process\", \"label\": \"Initialize up as a 2D list of size n x 40 with 0\", \"action\": \"ctx['up'] = [[0] * 40 for _ in range(ctx['n'])]\", \"next\": 4},\n    {\"id\": 4, \"type\": \"process\", \"label\": \"Initialize dp as a 2D list of size n x 40 with 0\", \"action\": \"ctx['dp'] = [[0] * 40 for _ in range(ctx['n'])]\", \"next\": 5},\n    {\"id\": 5, \"type\": \"process\", \"label\": \"For i from 0 to n-1\", \"action\": \"for ctx['i'] in range(ctx['n']):\", \"next\": 6},\n    {\"id\": 6, \"type\": \"process\", \"label\": \"Set j = receiver[i]\", \"action\": \"ctx['j'] = ctx['receiver'][ctx['i']]\", \"next\": 7},\n    {\"id\": 7, \"type\": \"process\", \"label\": \"Set up[i][0] = j\", \"action\": \"ctx['up'][ctx['i']][0] = ctx['j']\", \"next\": 8},\n    {\"id\": 8, \"type\": \"process\", \"label\": \"Set dp[i][0] = j\", \"action\": \"ctx['dp'][ctx['i']][0] = ctx['j']\", \"next\": 9},\n    {\"id\": 9, \"type\": \"process\", \"label\": \"For j from 1 to 39\", \"action\": \"for ctx['j'] in range(1, 40):\", \"next\": 10},\n    {\"id\": 10, \"type\": \"process\", \"label\": \"For i from 0 to n-1\", \"action\": \"for ctx['i'] in range(ctx['n']):\", \"next\": 11},\n    {\"id\": 11, \"type\": \"process\", \"label\": \"Set j1 = up[i][j - 1]\", \"action\": \"ctx['j1'] = ctx['up'][ctx['i']][ctx['j'] - 1]\", \"next\": 12},\n    {\"id\": 12, \"type\": \"process\", \"label\": \"Set j2 = up[i][j - 1]\", \"action\": \"ctx['j2'] = ctx['up'][ctx['i']][ctx['j'] - 1]\", \"next\": 13},\n    {\"id\": 13, \"type\": \"process\", \"label\": \"Set up[i][j] = j1\", \"action\": \"ctx['up'][ctx['i']][ctx['j']] = ctx['j1']\", \"next\": 14},\n    {\"id\": 14, \"type\": \"process\", \"label\": \"Set dp[i][j] = dp[i][j - 1] + dp[j2][j - 1]\", \"action\": \"ctx['dp'][ctx['i']][ctx['j']] = ctx['dp'][ctx['i']][ctx['j'] - 1] + ctx['dp'][ctx['j2']][ctx['j'] - 1]\", \"next\": 10},\n    {\"id\": 15, \"type\": \"process\", \"label\": \"Initialize ans = 0\", \"action\": \"ctx['ans'] = 0\", \"next\": 16},\n    {\"id\": 16, \"type\": \"process\", \"label\": \"For i from 0 to n-1\", \"action\": \"for ctx['i'] in range(ctx['n']):\", \"next\": 17},\n    {\"id\": 17, \"type\": \"process\", \"label\": \"Set tot = i\", \"action\": \"ctx['tot'] = ctx['i']\", \"next\": 18},\n    {\"id\": 18, \"type\": \"process\", \"label\": \"Set u = i\", \"action\": \"ctx['u'] = ctx['i']\", \"next\": 19},\n    {\"id\": 19, \"type\": \"process\", \"label\": \"For j from 0 to 39\", \"action\": \"for ctx['j'] in range(40):\", \"next\": 20},\n    {\"id\": 20, \"type\": \"decision\", \"label\": \"Is k & (1 << j) != 0?\", \"logic\": \"ctx['k'] & (1 << ctx['j']) != 0\", \"true_next\": 21, \"false_next\": 23},\n    {\"id\": 21, \"type\": \"process\", \"label\": \"Set tot += dp[u][j]\", \"action\": \"ctx['tot'] += ctx['dp'][ctx['u']][ctx['j']]\", \"next\": 22},\n    {\"id\": 22, \"type\": \"process\", \"label\": \"Set u = up[u][j]\", \"action\": \"ctx['u'] = ctx['up'][ctx['u']][ctx['j']]\", \"next\": 19},\n    {\"id\": 23, \"type\": \"process\", \"label\": \"End Loop: Set ans = max(ans, tot)\", \"action\": \"ctx['ans'] = max(ctx['ans'], ctx['tot'])\", \"next\": 16},\n    {\"id\": 24, \"type\": \"end\", \"label\": \"Output: ans (maximum value of the function)\", \"output\": \"ctx['ans']\"}\n  ]\n}",
+  "code": "from typing import List\n\nclass Solution:\n    def getMaxFunctionValue(self, receiver: List[int], k: int) -> int:\n        n = len(receiver)\n        up = [[0] * 40 for _ in range(n)]\n        dp = [[0] * 40 for _ in range(n)]\n        \n        for i in range(n):\n            j = receiver[i]\n            up[i][0] = j\n            dp[i][0] = j\n        \n        for j in range(1, 40):\n            for i in range(n):\n                j1 = up[i][j - 1]\n                j2 = up[i][j - 1]\n                up[i][j] = j1\n                dp[i][j] = dp[i][j - 1] + dp[j2][j - 1]\n        \n        ans = 0\n        \n        for i in range(n):\n            tot = i\n            u = i\n            for j in range(40):\n                if k & (1 << j) != 0:\n                    tot += dp[u][j]\n                    u = up[u][j]\n            ans = max(ans, tot)\n        \n        return ans",
+  "prompt": "\"\"\"\nYou are given a 0-indexed integer array receiver of length n and an integer k.\n\nThere are n players having a unique id in the range [0, n - 1] who will play a ball passing game, and receiver[i] is the id of the player who receives passes from the player with id i. Players can pass to themselves, i.e. receiver[i] may be equal to i.\n\nYou must choose one of the n players as the starting player for the game, and the ball will be passed exactly k times starting from the chosen player.\n\nFor a chosen starting player having id x, we define a function f(x) that denotes the sum of x and the ids of all players who receive the ball during the k passes, including repetitions. In other words, f(x) = x + receiver[x] + receiver[receiver[x]] + ... + receiver(k)[x].\n\nYour task is to choose a starting player having id x that maximizes the value of f(x).\n\nReturn an integer denoting the maximum value of the function.\n\nNote: receiver may contain duplicates.\n\nExample 1:\n\nPass Number Sender ID Receiver ID x + Receiver IDs       2 1 2 1 3 2 1 0 3 3 0 2 5 4 2 1 6\n\nInput: receiver = [2,0,1], k = 4\nOutput: 6\nExplanation: The table above shows a simulation of the game starting with the player having id x = 2.\nFrom the table, f(2) is equal to 6.\nIt can be shown that 6 is the maximum achievable value of the function.\nHence, the output is 6.\n\nExample 2:\n\nPass Number Sender ID Receiver ID x + Receiver IDs       4 1 4 3 7 2 3 2 9 3 2 1 10\n\nInput: receiver = [1,1,1,2,3], k = 3\nOutput: 10\nExplanation: The table above shows a simulation of the game starting with the player having id x = 4.\nFrom the table, f(4) is equal to 10.\nIt can be shown that 10 is the maximum achievable value of the function.\nHence, the output is 10.\n\n\nConstraints:\n\n * 1 <= receiver.length == n <= 105\n * 0 <= receiver[i] <= n - 1\n * 1 <= k <= 1010\n\"\"\"\nclass Solution:\n    def getMaxFunctionValue(self, receiver: List[int], k: int) -> int:\n        ",
+  "test": "\nmy_solution = Solution()\n\ntest_input = { \"receiver\": [2,0,1], \"k\": 4 }\nassert my_solution.getMaxFunctionValue(**test_input) == 6\n\ntest_input = { \"receiver\": [1,1,1,2,3], \"k\": 3 }\nassert my_solution.getMaxFunctionValue(**test_input) == 10\n\ntest_input = { \"receiver\": [0], \"k\": 1 }\nassert my_solution.getMaxFunctionValue(**test_input) == 0\n\ntest_input = { \"receiver\": [0], \"k\": 2 }\nassert my_solution.getMaxFunctionValue(**test_input) == 0\n\ntest_input = { \"receiver\": [0], \"k\": 3 }\nassert my_solution.getMaxFunctionValue(**test_input) == 0\n\ntest_input = { \"receiver\": [0], \"k\": 100 }\nassert my_solution.getMaxFunctionValue(**test_input) == 0\n\ntest_input = { \"receiver\": [0,0], \"k\": 1 }\nassert my_solution.getMaxFunctionValue(**test_input) == 1\n\ntest_input = { \"receiver\": [0,0], \"k\": 7 }\nassert my_solution.getMaxFunctionValue(**test_input) == 1\n\ntest_input = { \"receiver\": [0,0], \"k\": 10 }\nassert my_solution.getMaxFunctionValue(**test_input) == 1\n\ntest_input = { \"receiver\": [0,0], \"k\": 13 }\nassert my_solution.getMaxFunctionValue(**test_input) == 1\n\ntest_input = { \"receiver\": [0,0], \"k\": 16 }\nassert my_solution.getMaxFunctionValue(**test_input) == 1\n\ntest_input = { \"receiver\": [0,1], \"k\": 1 }\nassert my_solution.getMaxFunctionValue(**test_input) == 2\n\ntest_input = { \"receiver\": [0,1], \"k\": 3 }\nassert my_solution.getMaxFunctionValue(**test_input) == 4\n\ntest_input = { \"receiver\": [0,1], \"k\": 5 }\nassert my_solution.getMaxFunctionValue(**test_input) == 6\n\ntest_input = { \"receiver\": [0,1], \"k\": 8 }\nassert my_solution.getMaxFunctionValue(**test_input) == 9\n\ntest_input = { \"receiver\": [0,1], \"k\": 13 }\nassert my_solution.getMaxFunctionValue(**test_input) == 14\n\ntest_input = { \"receiver\": [0,1], \"k\": 14 }\nassert my_solution.getMaxFunctionValue(**test_input) == 15\n\ntest_input = { \"receiver\": [0,1], \"k\": 15 }\nassert my_solution.getMaxFunctionValue(**test_input) == 16\n\ntest_input = { \"receiver\": [1,0], \"k\": 5 }\nassert my_solution.getMaxFunctionValue(**test_input) == 3\n\ntest_input = { \"receiver\": [1,0], \"k\": 6 }\nassert my_solution.getMaxFunctionValue(**test_input) == 4\n\ntest_input = { \"receiver\": [1,0], \"k\": 7 }\nassert my_solution.getMaxFunctionValue(**test_input) == 4\n\ntest_input = { \"receiver\": [1,0], \"k\": 10 }\nassert my_solution.getMaxFunctionValue(**test_input) == 6\n\ntest_input = { \"receiver\": [1,0], \"k\": 12 }\nassert my_solution.getMaxFunctionValue(**test_input) == 7\n\ntest_input = { \"receiver\": [1,0], \"k\": 14 }\nassert my_solution.getMaxFunctionValue(**test_input) == 8\n\ntest_input = { \"receiver\": [1,0], \"k\": 57 }\nassert my_solution.getMaxFunctionValue(**test_input) == 29\n\ntest_input = { \"receiver\": [1,1], \"k\": 1 }\nassert my_solution.getMaxFunctionValue(**test_input) == 2\n\ntest_input = { \"receiver\": [1,1], \"k\": 2 }\nassert my_solution.getMaxFunctionValue(**test_input) == 3\n\ntest_input = { \"receiver\": [1,1], \"k\": 7 }\nassert my_solution.getMaxFunctionValue(**test_input) == 8\n\ntest_input = { \"receiver\": [0,0,0], \"k\": 1 }\nassert my_solution.getMaxFunctionValue(**test_input) == 2\n\ntest_input = { \"receiver\": [0,0,0], \"k\": 4 }\nassert my_solution.getMaxFunctionValue(**test_input) == 2\n\ntest_input = { \"receiver\": [0,0,0], \"k\": 6 }\nassert my_solution.getMaxFunctionValue(**test_input) == 2\n\ntest_input = { \"receiver\": [0,0,0], \"k\": 10 }\nassert my_solution.getMaxFunctionValue(**test_input) == 2\n\ntest_input = { \"receiver\": [0,0,1], \"k\": 3 }\nassert my_solution.getMaxFunctionValue(**test_input) == 3\n\ntest_input = { \"receiver\": [0,0,1], \"k\": 9 }\nassert my_solution.getMaxFunctionValue(**test_input) == 3\n\ntest_input = { \"receiver\": [0,0,2], \"k\": 11 }\nassert my_solution.getMaxFunctionValue(**test_input) == 24\n\ntest_input = { \"receiver\": [0,0,2], \"k\": 14 }\nassert my_solution.getMaxFunctionValue(**test_input) == 30\n\ntest_input = { \"receiver\": [0,0,2], \"k\": 82 }\nassert my_solution.getMaxFunctionValue(**test_input) == 166\n\ntest_input = { \"receiver\": [0,1,0], \"k\": 5 }\nassert my_solution.getMaxFunctionValue(**test_input) == 6\n\ntest_input = { \"receiver\": [0,1,1], \"k\": 2 }\nassert my_solution.getMaxFunctionValue(**test_input) == 4\n\ntest_input = { \"receiver\": [0,1,2], \"k\": 3 }\nassert my_solution.getMaxFunctionValue(**test_input) == 8\n\ntest_input = { \"receiver\": [0,1,2], \"k\": 6 }\nassert my_solution.getMaxFunctionValue(**test_input) == 14\n\ntest_input = { \"receiver\": [1,0,0], \"k\": 6 }\nassert my_solution.getMaxFunctionValue(**test_input) == 5\n\ntest_input = { \"receiver\": [1,0,1], \"k\": 2 }\nassert my_solution.getMaxFunctionValue(**test_input) == 3\n\ntest_input = { \"receiver\": [1,0,2], \"k\": 10 }\nassert my_solution.getMaxFunctionValue(**test_input) == 22\n\ntest_input = { \"receiver\": [1,1,1], \"k\": 4 }\nassert my_solution.getMaxFunctionValue(**test_input) == 6\n\ntest_input = { \"receiver\": [1,1,1], \"k\": 6 }\nassert my_solution.getMaxFunctionValue(**test_input) == 8\n\ntest_input = { \"receiver\": [1,1,2], \"k\": 8 }\nassert my_solution.getMaxFunctionValue(**test_input) == 18\n\ntest_input = { \"receiver\": [1,2,0], \"k\": 3 }\nassert my_solution.getMaxFunctionValue(**test_input) == 5\n\ntest_input = { \"receiver\": [1,2,0], \"k\": 8 }\nassert my_solution.getMaxFunctionValue(**test_input) == 9\n\ntest_input = { \"receiver\": [1,2,1], \"k\": 6 }\nassert my_solution.getMaxFunctionValue(**test_input) == 11\n\ntest_input = { \"receiver\": [1,2,2], \"k\": 7 }\nassert my_solution.getMaxFunctionValue(**test_input) == 16\n\ntest_input = { \"receiver\": [2,0,2], \"k\": 6 }\nassert my_solution.getMaxFunctionValue(**test_input) == 14\n\ntest_input = { \"receiver\": [2,1,0], \"k\": 3 }\nassert my_solution.getMaxFunctionValue(**test_input) == 4\n\ntest_input = { \"receiver\": [2,1,0], \"k\": 8 }\nassert my_solution.getMaxFunctionValue(**test_input) == 10\n\ntest_input = { \"receiver\": [2,1,0], \"k\": 10 }\nassert my_solution.getMaxFunctionValue(**test_input) == 12\n\ntest_input = { \"receiver\": [2,1,1], \"k\": 4 }\nassert my_solution.getMaxFunctionValue(**test_input) == 6\n\ntest_input = { \"receiver\": [2,1,2], \"k\": 2 }\nassert my_solution.getMaxFunctionValue(**test_input) == 6\n\ntest_input = { \"receiver\": [2,1,2], \"k\": 15 }\nassert my_solution.getMaxFunctionValue(**test_input) == 32\n\ntest_input = { \"receiver\": [2,2,0], \"k\": 4 }\nassert my_solution.getMaxFunctionValue(**test_input) == 6\n\ntest_input = { \"receiver\": [2,2,0], \"k\": 9 }\nassert my_solution.getMaxFunctionValue(**test_input) == 11\n\ntest_input = { \"receiver\": [2,2,1], \"k\": 1 }\nassert my_solution.getMaxFunctionValue(**test_input) == 3\n\ntest_input = { \"receiver\": [2,2,1], \"k\": 10 }\nassert my_solution.getMaxFunctionValue(**test_input) == 17\n\ntest_input = { \"receiver\": [2,2,2], \"k\": 15 }\nassert my_solution.getMaxFunctionValue(**test_input) == 32\n\ntest_input = { \"receiver\": [0,0,3,0], \"k\": 4 }\nassert my_solution.getMaxFunctionValue(**test_input) == 5\n\ntest_input = { \"receiver\": [0,1,0,1], \"k\": 11 }\nassert my_solution.getMaxFunctionValue(**test_input) == 14\n\ntest_input = { \"receiver\": [0,1,1,3], \"k\": 5 }\nassert my_solution.getMaxFunctionValue(**test_input) == 18\n\ntest_input = { \"receiver\": [0,2,1,3], \"k\": 5 }\nassert my_solution.getMaxFunctionValue(**test_input) == 18\n\ntest_input = { \"receiver\": [0,2,3,1], \"k\": 6 }\nassert my_solution.getMaxFunctionValue(**test_input) == 15\n\ntest_input = { \"receiver\": [0,2,3,3], \"k\": 8 }\nassert my_solution.getMaxFunctionValue(**test_input) == 27\n\ntest_input = { \"receiver\": [0,2,3,3], \"k\": 15 }\nassert my_solution.getMaxFunctionValue(**test_input) == 48\n\ntest_input = { \"receiver\": [0,3,3,0], \"k\": 10 }\nassert my_solution.getMaxFunctionValue(**test_input) == 5\n\ntest_input = { \"receiver\": [1,0,0,2], \"k\": 9 }\nassert my_solution.getMaxFunctionValue(**test_input) == 9\n\ntest_input = { \"receiver\": [1,0,1,2], \"k\": 15 }\nassert my_solution.getMaxFunctionValue(**test_input) == 12\n\ntest_input = { \"receiver\": [1,0,3,1], \"k\": 6 }\nassert my_solution.getMaxFunctionValue(**test_input) == 8\n\ntest_input = { \"receiver\": [1,0,3,2], \"k\": 2 }\nassert my_solution.getMaxFunctionValue(**test_input) == 8\n\ntest_input = { \"receiver\": [1,1,0,0], \"k\": 2 }\nassert my_solution.getMaxFunctionValue(**test_input) == 4\n\ntest_input = { \"receiver\": [1,1,0,3], \"k\": 3 }\nassert my_solution.getMaxFunctionValue(**test_input) == 12\n\ntest_input = { \"receiver\": [1,1,1,3], \"k\": 7 }\nassert my_solution.getMaxFunctionValue(**test_input) == 24\n\ntest_input = { \"receiver\": [1,2,0,0], \"k\": 14 }\nassert my_solution.getMaxFunctionValue(**test_input) == 16\n\ntest_input = { \"receiver\": [1,2,0,1], \"k\": 5 }\nassert my_solution.getMaxFunctionValue(**test_input) == 9\n\ntest_input = { \"receiver\": [1,2,3,1], \"k\": 47 }\nassert my_solution.getMaxFunctionValue(**test_input) == 96\n\ntest_input = { \"receiver\": [1,3,0,1], \"k\": 2 }\nassert my_solution.getMaxFunctionValue(**test_input) == 7\n\ntest_input = { \"receiver\": [1,3,3,0], \"k\": 7 }\nassert my_solution.getMaxFunctionValue(**test_input) == 13\n\ntest_input = { \"receiver\": [2,0,0,1], \"k\": 9 }\nassert my_solution.getMaxFunctionValue(**test_input) == 12\n\ntest_input = { \"receiver\": [2,0,0,2], \"k\": 12 }\nassert my_solution.getMaxFunctionValue(**test_input) == 15\n\ntest_input = { \"receiver\": [2,0,2,0], \"k\": 5 }\nassert my_solution.getMaxFunctionValue(**test_input) == 12\n\ntest_input = { \"receiver\": [2,1,0,0], \"k\": 8 }\nassert my_solution.getMaxFunctionValue(**test_input) == 11\n\ntest_input = { \"receiver\": [2,1,0,1], \"k\": 97 }\nassert my_solution.getMaxFunctionValue(**test_input) == 100\n\ntest_input = { \"receiver\": [2,2,2,0], \"k\": 1 }\nassert my_solution.getMaxFunctionValue(**test_input) == 4\n\ntest_input = { \"receiver\": [2,2,3,2], \"k\": 8 }\nassert my_solution.getMaxFunctionValue(**test_input) == 23\n\ntest_input = { \"receiver\": [2,3,2,1], \"k\": 56 }\nassert my_solution.getMaxFunctionValue(**test_input) == 115\n\ntest_input = { \"receiver\": [2,3,3,1], \"k\": 15 }\nassert my_solution.getMaxFunctionValue(**test_input) == 33\n\ntest_input = { \"receiver\": [2,3,3,3], \"k\": 2 }\nassert my_solution.getMaxFunctionValue(**test_input) == 9\n\ntest_input = { \"receiver\": [3,0,0,1], \"k\": 4 }\nassert my_solution.getMaxFunctionValue(**test_input) == 8\n\ntest_input = { \"receiver\": [3,0,0,2], \"k\": 85 }\nassert my_solution.getMaxFunctionValue(**test_input) == 145\n\ntest_input = { \"receiver\": [3,0,1,3], \"k\": 9 }\nassert my_solution.getMaxFunctionValue(**test_input) == 30\n\ntest_input = { \"receiver\": [3,1,1,2], \"k\": 7 }\nassert my_solution.getMaxFunctionValue(**test_input) == 11\n\ntest_input = { \"receiver\": [3,1,2,0], \"k\": 60 }\nassert my_solution.getMaxFunctionValue(**test_input) == 122\n\ntest_input = { \"receiver\": [3,2,0,3], \"k\": 12 }\nassert my_solution.getMaxFunctionValue(**test_input) == 39\n\ntest_input = { \"receiver\": [3,3,0,1], \"k\": 1 }\nassert my_solution.getMaxFunctionValue(**test_input) == 4",
+  "ocr_data": {
+    "nodes": [
+      {
+        "node_id": 1,
+        "shape_type": "rectangle",
+        "raw_text": "Start",
+        "position": "top"
+      },
+      {
+        "node_id": 2,
+        "shape_type": "rectangle",
+        "raw_text": "Input: receiver (list of integers), k (integer)",
+        "position": "middle"
+      },
+      {
+        "node_id": 3,
+        "shape_type": "rectangle",
+        "raw_text": "Initialize n = length of receiver",
+        "position": "middle"
+      },
+      {
+        "node_id": 4,
+        "shape_type": "rectangle",
+        "raw_text": "Initialize up as a 2D list of size n x 40 with 0",
+        "position": "middle"
+      },
+      {
+        "node_id": 5,
+        "shape_type": "rectangle",
+        "raw_text": "Initialize dp as a 2D list of size n x 40 with 0",
+        "position": "middle"
+      },
+      {
+        "node_id": 6,
+        "shape_type": "rectangle",
+        "raw_text": "For i from 0 to n-1",
+        "position": "middle"
+      },
+      {
+        "node_id": 7,
+        "shape_type": "rectangle",
+        "raw_text": "Set j = receiver[i]",
+        "position": "middle"
+      },
+      {
+        "node_id": 8,
+        "shape_type": "rectangle",
+        "raw_text": "Set up[i][0] = j",
+        "position": "middle"
+      },
+      {
+        "node_id": 9,
+        "shape_type": "rectangle",
+        "raw_text": "Set dp[i][0] = j",
+        "position": "middle"
+      },
+      {
+        "node_id": 10,
+        "shape_type": "rectangle",
+        "raw_text": "For j from 1 to 39",
+        "position": "middle"
+      },
+      {
+        "node_id": 11,
+        "shape_type": "rectangle",
+        "raw_text": "For i from 0 to n-1",
+        "position": "middle"
+      },
+      {
+        "node_id": 12,
+        "shape_type": "rectangle",
+        "raw_text": "Set j1 = up[i][j - 1]",
+        "position": "middle"
+      },
+      {
+        "node_id": 13,
+        "shape_type": "rectangle",
+        "raw_text": "Set j2 = up[i][j - 1]",
+        "position": "middle"
+      },
+      {
+        "node_id": 14,
+        "shape_type": "rectangle",
+        "raw_text": "Set up[i][j] = j1",
+        "position": "middle"
+      },
+      {
+        "node_id": 15,
+        "shape_type": "rectangle",
+        "raw_text": "Set dp[i][j] = dp[i][j - 1] + dp[j2][j - 1]",
+        "position": "middle"
+      },
+      {
+        "node_id": 16,
+        "shape_type": "rectangle",
+        "raw_text": "Initialize ans = 0",
+        "position": "middle"
+      },
+      {
+        "node_id": 17,
+        "shape_type": "rectangle",
+        "raw_text": "For i from 0 to n-1",
+        "position": "middle"
+      },
+      {
+        "node_id": 18,
+        "shape_type": "rectangle",
+        "raw_text": "Set tot = i",
+        "position": "middle"
+      },
+      {
+        "node_id": 19,
+        "shape_type": "rectangle",
+        "raw_text": "Set u = i",
+        "position": "middle"
+      },
+      {
+        "node_id": 20,
+        "shape_type": "rectangle",
+        "raw_text": "For j from 0 to 39",
+        "position": "middle"
+      },
+      {
+        "node_id": 21,
+        "shape_type": "diamond",
+        "raw_text": "Is k & (1 << j) != 0?",
+        "position": "middle"
+      },
+      {
+        "node_id": 22,
+        "shape_type": "rectangle",
+        "raw_text": "Set tot += dp[u][j]",
+        "position": "middle"
+      },
+      {
+        "node_id": 23,
+        "shape_type": "rectangle",
+        "raw_text": "Set u = up[u][j]",
+        "position": "middle"
+      },
+      {
+        "node_id": 24,
+        "shape_type": "rectangle",
+        "raw_text": "End Loop: Set ans = max(ans, tot)",
+        "position": "middle"
+      },
+      {
+        "node_id": 25,
+        "shape_type": "rectangle",
+        "raw_text": "Output: ans (maximum value of the function)",
+        "position": "bottom"
+      }
+    ],
+    "edges": [
+      {
+        "from_node": 1,
+        "to_node": 2,
+        "label": ""
+      },
+      {
+        "from_node": 2,
+        "to_node": 3,
+        "label": ""
+      },
+      {
+        "from_node": 3,
+        "to_node": 4,
+        "label": ""
+      },
+      {
+        "from_node": 4,
+        "to_node": 5,
+        "label": ""
+      },
+      {
+        "from_node": 5,
+        "to_node": 6,
+        "label": ""
+      },
+      {
+        "from_node": 6,
+        "to_node": 7,
+        "label": ""
+      },
+      {
+        "from_node": 7,
+        "to_node": 8,
+        "label": ""
+      },
+      {
+        "from_node": 8,
+        "to_node": 9,
+        "label": ""
+      },
+      {
+        "from_node": 9,
+        "to_node": 6,
+        "label": ""
+      },
+      {
+        "from_node": 6,
+        "to_node": 10,
+        "label": ""
+      },
+      {
+        "from_node": 10,
+        "to_node": 11,
+        "label": ""
+      },
+      {
+        "from_node": 11,
+        "to_node": 12,
+        "label": ""
+      },
+      {
+        "from_node": 12,
+        "to_node": 13,
+        "label": ""
+      },
+      {
+        "from_node": 13,
+        "to_node": 14,
+        "label": ""
+      },
+      {
+        "from_node": 14,
+        "to_node": 15,
+        "label": ""
+      },
+      {
+        "from_node": 15,
+        "to_node": 11,
+        "label": ""
+      },
+      {
+        "from_node": 10,
+        "to_node": 16,
+        "label": ""
+      },
+      {
+        "from_node": 16,
+        "to_node": 17,
+        "label": ""
+      },
+      {
+        "from_node": 17,
+        "to_node": 18,
+        "label": ""
+      },
+      {
+        "from_node": 18,
+        "to_node": 19,
+        "label": ""
+      },
+      {
+        "from_node": 19,
+        "to_node": 20,
+        "label": ""
+      },
+      {
+        "from_node": 20,
+        "to_node": 21,
+        "label": ""
+      },
+      {
+        "from_node": 21,
+        "to_node": 22,
+        "label": "Yes"
+      },
+      {
+        "from_node": 21,
+        "to_node": 23,
+        "label": "No"
+      },
+      {
+        "from_node": 22,
+        "to_node": 23,
+        "label": ""
+      },
+      {
+        "from_node": 23,
+        "to_node": 20,
+        "label": ""
+      },
+      {
+        "from_node": 20,
+        "to_node": 24,
+        "label": ""
+      },
+      {
+        "from_node": 24,
+        "to_node": 17,
+        "label": ""
+      },
+      {
+        "from_node": 17,
+        "to_node": 16,
+        "label": ""
+      },
+      {
+        "from_node": 16,
+        "to_node": 25,
+        "label": ""
+      }
+    ],
+    "other_text": []
+  },
+  "analysis": {
+    "ilr_verdict": "incorrect",
+    "ilr_issues": "两处错误：(1) 节点13的up倍增递推写成up[i][j]=j1=up[i][j-1]（与节点12的j2完全相同），丢失了up[j1][j-1]的跳转，up恒等于receiver[i]，dp随之算错——此缺陷源自OCR流程图节点文本本身（#14 'Set up[i][j] = j1'）；(2) 查询段接线错误：节点20 false接节点23后节点23 next=16直接回到外层i循环（OCR原图是23->20继续j循环、20->24退出后ans=max），导致字面执行在k含0位时永不终止，终点节点24无人指向。",
+    "code_vs_ilr": "deviates",
+    "code_issues": "代码逐条忠实照抄了ILR的up/dp递推（含无倍增的up[i][j]=up[i][j-1]缺陷），仅把误接的'End Loop: ans=max'修复到j循环之后、补上return（修复性偏离，否则按ILR字面控制流无法终止）。失败根因正是继承的无倍增缺陷。",
+    "error_source": "ilr",
+    "ocr_contribution": "no",
+    "root_cause": "ILR/流程图算法本身错误：up倍增递推丢字（up[i][j]=up[i][j-1]），导致dp与查询结果错误；ILR还把查询循环出口接错（字面执行死循环）。代码忠实继承递推缺陷并修复控制流后仍因递推错误而答案错误。",
+    "evidence": "生成代码100个测试错3个：receiver=[1,2,0],k=8期望9实得11；receiver=[1,2,0,1],k=5期望9实得7；receiver=[3,0,0,1],k=4期望8实得9。手算receiver=[1,2,0]:代码的dp[0][2]=4而真实2步和应为r+2r+3r=1+2+0+1... 具体地up[0][2]应为0（8步回到0）而代码up恒=receiver[i]=2。OCR边显示查询段原图接线正确（21-No->23->20、20->24->17），ILR接线错误是其自身问题。"
+  }
+}

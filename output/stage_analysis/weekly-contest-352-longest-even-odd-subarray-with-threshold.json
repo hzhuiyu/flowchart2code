@@ -1,0 +1,88 @@
+{
+  "problem_id": "longestAlternatingSubarray",
+  "nodes": [
+    {
+      "id": 1,
+      "type": "start",
+      "label": "Start",
+      "next": 2
+    },
+    {
+      "id": 2,
+      "type": "process",
+      "label": "Input: nums (list of integers), threshold (integer)",
+      "action": "ctx['nums'] = ctx['arg0']; ctx['threshold'] = ctx['arg1']; ctx['left'] = 0; ctx['ans'] = 0",
+      "next": 3
+    },
+    {
+      "id": 3,
+      "type": "process",
+      "label": "Set n = length of nums",
+      "action": "ctx['n'] = len(ctx['nums'])",
+      "next": 4
+    },
+    {
+      "id": 4,
+      "type": "process",
+      "label": "Loop: for right from 0 to n-1",
+      "action": "for ctx['right'] in range(ctx['n']):",
+      "next": 5
+    },
+    {
+      "id": 5,
+      "type": "decision",
+      "label": "Is nums[left] % 2 != 0 OR nums[left] > threshold OR nums[right] > threshold OR (right > 0 AND nums[right] % 2 == nums[right - 1] % 2)?",
+      "logic": "ctx['nums'][ctx['left']] % 2 != 0 or ctx['nums'][ctx['left']] > ctx['threshold'] or ctx['nums'][ctx['right']] > ctx['threshold'] or (ctx['right'] > 0 and ctx['nums'][ctx['right']] % 2 == ctx['nums'][ctx['right'] - 1] % 2)",
+      "true_next": 6,
+      "false_next": 7
+    },
+    {
+      "id": 6,
+      "type": "process",
+      "label": "Update left = right",
+      "action": "ctx['left'] = ctx['right']",
+      "next": 8
+    },
+    {
+      "id": 7,
+      "type": "decision",
+      "label": "Is nums[left] % 2 == 0 AND nums[left] <= threshold?",
+      "logic": "ctx['nums'][ctx['left']] % 2 == 0 and ctx['nums'][ctx['left']] <= ctx['threshold']",
+      "true_next": 9,
+      "false_next": 10
+    },
+    {
+      "id": 8,
+      "type": "process",
+      "label": "Update ans = max(ans, right - left + 1)",
+      "action": "ctx['ans'] = max(ctx['ans'], ctx['right'] - ctx['left'] + 1)",
+      "next": 10
+    },
+    {
+      "id": 9,
+      "type": "process",
+      "label": "Continue to next iteration",
+      "action": "continue",
+      "next": 4
+    },
+    {
+      "id": 10,
+      "type": "end",
+      "label": "Return ans",
+      "output": "ctx['ans']"
+    }
+  ],
+  "task_id": "weekly-contest-352-longest-even-odd-subarray-with-threshold",
+  "dataset": "Algorithm",
+  "result": "failed: ",
+  "code": "class Solution:\n    def longestAlternatingSubarray(self, nums: List[int], threshold: int) -> int:\n        left = 0\n        ans = 0\n        n = len(nums)\n        \n        for right in range(n):\n            # Check conditions: \n            # nums[left] % 2 != 0 OR nums[left] > threshold OR nums[right] > threshold OR (right > 0 AND nums[right] % 2 == nums[right - 1] % 2)\n            if nums[left] % 2 != 0 or nums[left] > threshold or nums[right] > threshold or (right > 0 and nums[right] % 2 == nums[right - 1] % 2):\n                left = right\n            else:\n                # Check if nums[left] % 2 == 0 AND nums[left] <= threshold\n                if nums[left] % 2 == 0 and nums[left] <= threshold:\n                    ans = max(ans, right - left + 1)\n                else:\n                    left = right\n        \n        return ans",
+  "verification": {
+    "md_verdict": "ILR Error",
+    "actual_error_source": "both",
+    "ilr_verdict": "incorrect",
+    "code_vs_ilr": "deviates",
+    "md_correct": "partial",
+    "note": "MD 只说对一半。ILR 确实错得严重：节点4 的 action 是悬空的 'for ...:'（无循环体，语法错误），节点9 的 action 是裸 continue（语句环境中不可执行），ans 更新节点8 只挂在违规路径 6→8 上且其后直接进 END（节点10），节点7-false 也直达 END，结构无法表达正确算法。代码额外偏离：它把 ans 更新挪到 else 分支（仅在窗口当前合法时更新），left 刚跳到新起点的那次迭代不更新 ans，与 ILR 字面结构（true 分支更新 ans）和正确解法（无条件更新）都不同。",
+    "evidence": "修补不可执行语句后模拟 ILR：[3,2,5,4] 返回 1（期望 3）、[3] 返回 1（期望 0），[2,3,4,5] 死循环；生成代码实跑 100 条测试失败 18 条，如 [1,2],threshold=2 得 0（期望 1）。"
+  }
+}

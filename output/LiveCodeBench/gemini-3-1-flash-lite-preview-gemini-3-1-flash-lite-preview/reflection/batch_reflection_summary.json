@@ -1,0 +1,59 @@
+{
+  "total": 58,
+  "processed": 39,
+  "success": 13,
+  "failed": 26,
+  "success_rate": 33.33333333333333,
+  "iteration_stats": {
+    "1": {
+      "count": 39,
+      "avg_duration": 28.655985966706886,
+      "avg_total_tokens": 17160.897435897437,
+      "avg_prompt_tokens": 14590.538461538461,
+      "avg_completion_tokens": 2570.358974358974
+    },
+    "2": {
+      "count": 33,
+      "avg_duration": 15.290482224840106,
+      "avg_total_tokens": 9982.363636363636,
+      "avg_prompt_tokens": 8710.90909090909,
+      "avg_completion_tokens": 1271.4545454545455
+    },
+    "3": {
+      "count": 26,
+      "avg_duration": 13.321147671112648,
+      "avg_total_tokens": 12863.115384615385,
+      "avg_prompt_tokens": 11560.538461538461,
+      "avg_completion_tokens": 1302.576923076923
+    }
+  },
+  "avg_duration_by_iteration": {
+    "1": 28.655985966706886,
+    "2": 15.290482224840106,
+    "3": 13.321147671112648
+  },
+  "reflection_mode": "full",
+  "final_merge_eval": {
+    "samples_file": "../output/LiveCodeBench/gemini-3-1-flash-lite-preview-gemini-3-1-flash-lite-preview/samples.jsonl",
+    "reflection_dir": "../output/LiveCodeBench/gemini-3-1-flash-lite-preview-gemini-3-1-flash-lite-preview/reflection",
+    "output_file": "../output/LiveCodeBench/gemini-3-1-flash-lite-preview-gemini-3-1-flash-lite-preview/reflection/samples_reflection_merged.jsonl",
+    "merged_results_file": "../output/LiveCodeBench/gemini-3-1-flash-lite-preview-gemini-3-1-flash-lite-preview/reflection/samples_reflection_merged.jsonl_results.jsonl",
+    "results_txt": "../output/LiveCodeBench/gemini-3-1-flash-lite-preview-gemini-3-1-flash-lite-preview/reflection/results.txt",
+    "problem_file": "../data/LiveCodeBench/LiveCodeBench_merged.jsonl",
+    "merge_summary": {
+      "total_rows": 148,
+      "replaced_rows": 58,
+      "replaced_by_first_passed": 23,
+      "replaced_by_last_failed": 35,
+      "missing_generated_code": 0,
+      "selection_stats": {
+        "keep_original": 90,
+        "iter_3_failed": 35,
+        "first_passed": 23
+      }
+    },
+    "eval_result": {
+      "pass@1": 0.7635135135135135
+    }
+  }
+}

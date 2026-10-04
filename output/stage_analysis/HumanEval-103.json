@@ -1,0 +1,94 @@
+{
+  "problem_id": "rounded_avg",
+  "nodes": [
+    {
+      "id": 1,
+      "type": "start",
+      "label": "Start",
+      "next": 2
+    },
+    {
+      "id": 2,
+      "type": "decision",
+      "label": "Check if m < n",
+      "logic": "ctx['m'] < ctx['n']",
+      "true_next": 9,
+      "false_next": 3
+    },
+    {
+      "id": 3,
+      "type": "process",
+      "label": "Initialize summation = 0",
+      "action": "ctx['summation'] = 0",
+      "next": 4
+    },
+    {
+      "id": 4,
+      "type": "process",
+      "label": "For i from n to m",
+      "action": "ctx['i'] = ctx['n']; ctx['limit'] = ctx['m']; ctx['step'] = 1 if ctx['n'] <= ctx['m'] else -1",
+      "next": 5
+    },
+    {
+      "id": 5,
+      "type": "decision",
+      "label": "For i from n to m",
+      "logic": "ctx['i'] >= ctx['limit'] if ctx['step'] == 1 else ctx['i'] <= ctx['limit']",
+      "true_next": 6,
+      "false_next": 7
+    },
+    {
+      "id": 6,
+      "type": "process",
+      "label": "Add i to summation",
+      "action": "ctx['summation'] += ctx['i']; ctx['i'] += ctx['step']",
+      "next": 5
+    },
+    {
+      "id": 7,
+      "type": "process",
+      "label": "End For Loop",
+      "action": "",
+      "next": 8
+    },
+    {
+      "id": 8,
+      "type": "process",
+      "label": "Calculate average: round(summation / (m - n + 1))",
+      "action": "ctx['average'] = round(ctx['summation'] / (ctx['m'] - ctx['n'] + 1))",
+      "next": 9
+    },
+    {
+      "id": 9,
+      "type": "process",
+      "label": "Convert average to binary",
+      "action": "ctx['binary_result'] = bin(ctx['average'])",
+      "next": 10
+    },
+    {
+      "id": 10,
+      "type": "return",
+      "label": "Return binary result",
+      "value": "ctx['binary_result']"
+    },
+    {
+      "id": 11,
+      "type": "end",
+      "label": "End",
+      "output": "ctx['binary_result']"
+    }
+  ],
+  "task_id": "HumanEval-103",
+  "dataset": "HumanEval-V",
+  "result": "failed: ",
+  "code": "def rounded_avg(n, m):\n    if m < n:\n        return -1\n    \n    summation = 0\n    i = n\n    limit = m\n    step = 1 if n <= m else -1\n    \n    while (i >= limit if step == 1 else i <= limit):\n        summation += i\n        i += step\n    \n    average = round(summation / (m - n + 1))\n    binary_result = bin(average)\n    return binary_result",
+  "verification": {
+    "md_verdict": "ILR Error",
+    "actual_error_source": "ilr",
+    "ilr_verdict": "incorrect",
+    "code_vs_ilr": "deviates",
+    "md_correct": "yes",
+    "note": "确认 ILR 错（双重错误）：node5 循环条件对 step==1 写成 i>=limit（应为 i<=limit），求和恒为 0；且 m<n 分支丢失 OCR 中的 'Return -1' 节点，true_next 指向 bin(未定义的 average)。代码在 m<n 分支自行补了 return -1（属偏离 ILR 的修复），但致命的循环条件 bug 是从 ILR 原样抄来的，根因在 ILR。",
+    "evidence": "生成代码对 (1,5) 输出 '0b0'（期望 '0b11'），全部 n<m 用例均 '0b0'；(5,5) 时 while i>=limit 恒真死循环（仿真 10 万次不退出）；(7,5) 返回 -1 正确。"
+  }
+}

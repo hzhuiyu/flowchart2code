@@ -1,0 +1,1584 @@
+{
+ "task_id": "weekly-contest-354-minimum-index-of-a-valid-split",
+ "dataset": "Algorithm",
+ "title": "minimum-index-of-a-valid-split",
+ "difficulty": "Medium",
+ "prompt": "\"\"\"\nAn element x of an integer array arr of length m is dominant if freq(x) * 2 > m, where freq(x) is the number of occurrences of x in arr. Note that this definition implies that arr can have at most one dominant element.\n\nYou are given a 0-indexed integer array nums of length n with one dominant element.\n\nYou can split nums at an index i into two arrays nums[0, ..., i] and nums[i + 1, ..., n - 1], but the split is only valid if:\n\n * 0 <= i < n - 1\n * nums[0, ..., i], and nums[i + 1, ..., n - 1] have the same dominant element.\n\nHere, nums[i, ..., j] denotes the subarray of nums starting at index i and ending at index j, both ends being inclusive. Particularly, if j < i then nums[i, ..., j] denotes an empty subarray.\n\nReturn the minimum index of a valid split. If no valid split exists, return -1.\n\nExample 1:\n\nInput: nums = [1,2,2,2]\nOutput: 2\nExplanation: We can split the array at index 2 to obtain arrays [1,2,2] and [2].\nIn array [1,2,2], element 2 is dominant since it occurs twice in the array and 2 * 2 > 3.\nIn array [2], element 2 is dominant since it occurs once in the array and 1 * 2 > 1.\nBoth [1,2,2] and [2] have the same dominant element as nums, so this is a valid split.\nIt can be shown that index 2 is the minimum index of a valid split.\n\nExample 2:\n\nInput: nums = [2,1,3,1,1,1,7,1,2,1]\nOutput: 4\nExplanation: We can split the array at index 4 to obtain arrays [2,1,3,1,1] and [1,7,1,2,1].\nIn array [2,1,3,1,1], element 1 is dominant since it occurs thrice in the array and 3 * 2 > 5.\nIn array [1,7,1,2,1], element 1 is dominant since it occurs thrice in the array and 3 * 2 > 5.\nBoth [2,1,3,1,1] and [1,7,1,2,1] have the same dominant element as nums, so this is a valid split.\nIt can be shown that index 4 is the minimum index of a valid split.\n\nExample 3:\n\nInput: nums = [3,3,3,3,7,2,2]\nOutput: -1\nExplanation: It can be shown that there is no valid split.\n\n\nConstraints:\n\n * 1 <= nums.length <= 105\n * 1 <= nums[i] <= 109\n * nums has exactly one dominant element.\n\"\"\"\nclass Solution:\n    def minimumIndex(self, nums: List[int]) -> int:\n        ",
+ "starter_code": "class Solution:\n    def minimumIndex(self, nums: List[int]) -> int:\n        ",
+ "entry_point": "",
+ "test": "\nmy_solution = Solution()\n\ntest_input = { \"nums\": [1,2,2,2] }\nassert my_solution.minimumIndex(**test_input) == 2\n\ntest_input = { \"nums\": [2,1,3,1,1,1,7,1,2,1] }\nassert my_solution.minimumIndex(**test_input) == 4\n\ntest_input = { \"nums\": [3,3,3,3,7,2,2] }\nassert my_solution.minimumIndex(**test_input) == -1\n\ntest_input = { \"nums\": [1] }\nassert my_solution.minimumIndex(**test_input) == -1\n\ntest_input = { \"nums\": [1,1] }\nassert my_solution.minimumIndex(**test_input) == 0\n\ntest_input = { \"nums\": [1,1,1] }\nassert my_solution.minimumIndex(**test_input) == 0\n\ntest_input = { \"nums\": [1,1,1,1] }\nassert my_solution.minimumIndex(**test_input) == 0\n\ntest_input = { \"nums\": [1,1,1,2] }\nassert my_solution.minimumIndex(**test_input) == 0\n\ntest_input = { \"nums\": [1,1,1,3] }\nassert my_solution.minimumIndex(**test_input) == 0\n\ntest_input = { \"nums\": [1,1,1,4] }\nassert my_solution.minimumIndex(**test_input) == 0\n\ntest_input = { \"nums\": [1,1,2] }\nassert my_solution.minimumIndex(**test_input) == -1\n\ntest_input = { \"nums\": [1,1,2,1] }\nassert my_solution.minimumIndex(**test_input) == 0\n\ntest_input = { \"nums\": [1,1,3] }\nassert my_solution.minimumIndex(**test_input) == -1\n\ntest_input = { \"nums\": [1,1,3,1] }\nassert my_solution.minimumIndex(**test_input) == 0\n\ntest_input = { \"nums\": [1,1,4] }\nassert my_solution.minimumIndex(**test_input) == -1\n\ntest_input = { \"nums\": [1,1,4,1] }\nassert my_solution.minimumIndex(**test_input) == 0\n\ntest_input = { \"nums\": [1,2,1] }\nassert my_solution.minimumIndex(**test_input) == -1\n\ntest_input = { \"nums\": [1,2,1,1] }\nassert my_solution.minimumIndex(**test_input) == 0\n\ntest_input = { \"nums\": [1,2,2] }\nassert my_solution.minimumIndex(**test_input) == -1\n\ntest_input = { \"nums\": [1,3,1] }\nassert my_solution.minimumIndex(**test_input) == -1\n\ntest_input = { \"nums\": [1,3,1,1] }\nassert my_solution.minimumIndex(**test_input) == 0\n\ntest_input = { \"nums\": [1,3,3] }\nassert my_solution.minimumIndex(**test_input) == -1\n\ntest_input = { \"nums\": [1,3,3,3] }\nassert my_solution.minimumIndex(**test_input) == 2\n\ntest_input = { \"nums\": [1,4,1] }\nassert my_solution.minimumIndex(**test_input) == -1\n\ntest_input = { \"nums\": [1,4,1,1] }\nassert my_solution.minimumIndex(**test_input) == 0\n\ntest_input = { \"nums\": [1,4,4] }\nassert my_solution.minimumIndex(**test_input) == -1\n\ntest_input = { \"nums\": [1,4,4,4] }\nassert my_solution.minimumIndex(**test_input) == 2\n\ntest_input = { \"nums\": [2] }\nassert my_solution.minimumIndex(**test_input) == -1\n\ntest_input = { \"nums\": [2,1,1] }\nassert my_solution.minimumIndex(**test_input) == -1\n\ntest_input = { \"nums\": [2,1,1,1] }\nassert my_solution.minimumIndex(**test_input) == 2\n\ntest_input = { \"nums\": [2,1,2] }\nassert my_solution.minimumIndex(**test_input) == -1\n\ntest_input = { \"nums\": [2,1,2,2] }\nassert my_solution.minimumIndex(**test_input) == 0\n\ntest_input = { \"nums\": [2,2] }\nassert my_solution.minimumIndex(**test_input) == 0\n\ntest_input = { \"nums\": [2,2,1] }\nassert my_solution.minimumIndex(**test_input) == -1\n\ntest_input = { \"nums\": [2,2,1,2] }\nassert my_solution.minimumIndex(**test_input) == 0\n\ntest_input = { \"nums\": [2,2,2] }\nassert my_solution.minimumIndex(**test_input) == 0\n\ntest_input = { \"nums\": [2,2,2,1] }\nassert my_solution.minimumIndex(**test_input) == 0\n\ntest_input = { \"nums\": [2,2,2,2] }\nassert my_solution.minimumIndex(**test_input) == 0\n\ntest_input = { \"nums\": [2,2,2,3] }\nassert my_solution.minimumIndex(**test_input) == 0\n\ntest_input = { \"nums\": [2,2,2,4] }\nassert my_solution.minimumIndex(**test_input) == 0\n\ntest_input = { \"nums\": [2,2,3] }\nassert my_solution.minimumIndex(**test_input) == -1\n\ntest_input = { \"nums\": [2,2,3,2] }\nassert my_solution.minimumIndex(**test_input) == 0\n\ntest_input = { \"nums\": [2,2,4] }\nassert my_solution.minimumIndex(**test_input) == -1\n\ntest_input = { \"nums\": [2,2,4,2] }\nassert my_solution.minimumIndex(**test_input) == 0\n\ntest_input = { \"nums\": [2,3,2] }\nassert my_solution.minimumIndex(**test_input) == -1\n\ntest_input = { \"nums\": [2,3,2,2] }\nassert my_solution.minimumIndex(**test_input) == 0\n\ntest_input = { \"nums\": [2,3,3] }\nassert my_solution.minimumIndex(**test_input) == -1\n\ntest_input = { \"nums\": [2,3,3,3] }\nassert my_solution.minimumIndex(**test_input) == 2\n\ntest_input = { \"nums\": [2,4,2] }\nassert my_solution.minimumIndex(**test_input) == -1\n\ntest_input = { \"nums\": [2,4,2,2] }\nassert my_solution.minimumIndex(**test_input) == 0\n\ntest_input = { \"nums\": [2,4,4] }\nassert my_solution.minimumIndex(**test_input) == -1\n\ntest_input = { \"nums\": [2,4,4,4] }\nassert my_solution.minimumIndex(**test_input) == 2\n\ntest_input = { \"nums\": [3] }\nassert my_solution.minimumIndex(**test_input) == -1\n\ntest_input = { \"nums\": [3,1,1] }\nassert my_solution.minimumIndex(**test_input) == -1\n\ntest_input = { \"nums\": [3,1,1,1] }\nassert my_solution.minimumIndex(**test_input) == 2\n\ntest_input = { \"nums\": [3,1,3] }\nassert my_solution.minimumIndex(**test_input) == -1\n\ntest_input = { \"nums\": [3,1,3,3] }\nassert my_solution.minimumIndex(**test_input) == 0\n\ntest_input = { \"nums\": [3,2,2] }\nassert my_solution.minimumIndex(**test_input) == -1\n\ntest_input = { \"nums\": [3,2,2,2] }\nassert my_solution.minimumIndex(**test_input) == 2\n\ntest_input = { \"nums\": [3,2,3] }\nassert my_solution.minimumIndex(**test_input) == -1\n\ntest_input = { \"nums\": [3,2,3,3] }\nassert my_solution.minimumIndex(**test_input) == 0\n\ntest_input = { \"nums\": [3,3] }\nassert my_solution.minimumIndex(**test_input) == 0\n\ntest_input = { \"nums\": [3,3,1] }\nassert my_solution.minimumIndex(**test_input) == -1\n\ntest_input = { \"nums\": [3,3,1,3] }\nassert my_solution.minimumIndex(**test_input) == 0\n\ntest_input = { \"nums\": [3,3,2] }\nassert my_solution.minimumIndex(**test_input) == -1\n\ntest_input = { \"nums\": [3,3,2,3] }\nassert my_solution.minimumIndex(**test_input) == 0\n\ntest_input = { \"nums\": [3,3,3] }\nassert my_solution.minimumIndex(**test_input) == 0\n\ntest_input = { \"nums\": [3,3,3,1] }\nassert my_solution.minimumIndex(**test_input) == 0\n\ntest_input = { \"nums\": [3,3,3,2] }\nassert my_solution.minimumIndex(**test_input) == 0\n\ntest_input = { \"nums\": [3,3,3,3] }\nassert my_solution.minimumIndex(**test_input) == 0\n\ntest_input = { \"nums\": [3,3,3,4] }\nassert my_solution.minimumIndex(**test_input) == 0\n\ntest_input = { \"nums\": [3,3,4] }\nassert my_solution.minimumIndex(**test_input) == -1\n\ntest_input = { \"nums\": [3,3,4,3] }\nassert my_solution.minimumIndex(**test_input) == 0\n\ntest_input = { \"nums\": [3,4,3] }\nassert my_solution.minimumIndex(**test_input) == -1\n\ntest_input = { \"nums\": [3,4,3,3] }\nassert my_solution.minimumIndex(**test_input) == 0\n\ntest_input = { \"nums\": [3,4,4] }\nassert my_solution.minimumIndex(**test_input) == -1\n\ntest_input = { \"nums\": [3,4,4,4] }\nassert my_solution.minimumIndex(**test_input) == 2\n\ntest_input = { \"nums\": [4] }\nassert my_solution.minimumIndex(**test_input) == -1\n\ntest_input = { \"nums\": [4,1,1] }\nassert my_solution.minimumIndex(**test_input) == -1\n\ntest_input = { \"nums\": [4,1,1,1] }\nassert my_solution.minimumIndex(**test_input) == 2\n\ntest_input = { \"nums\": [4,1,4] }\nassert my_solution.minimumIndex(**test_input) == -1\n\ntest_input = { \"nums\": [4,1,4,4] }\nassert my_solution.minimumIndex(**test_input) == 0\n\ntest_input = { \"nums\": [4,2,2] }\nassert my_solution.minimumIndex(**test_input) == -1\n\ntest_input = { \"nums\": [4,2,2,2] }\nassert my_solution.minimumIndex(**test_input) == 2\n\ntest_input = { \"nums\": [4,2,4] }\nassert my_solution.minimumIndex(**test_input) == -1\n\ntest_input = { \"nums\": [4,2,4,4] }\nassert my_solution.minimumIndex(**test_input) == 0\n\ntest_input = { \"nums\": [4,3,3] }\nassert my_solution.minimumIndex(**test_input) == -1\n\ntest_input = { \"nums\": [4,3,3,3] }\nassert my_solution.minimumIndex(**test_input) == 2\n\ntest_input = { \"nums\": [4,3,4] }\nassert my_solution.minimumIndex(**test_input) == -1\n\ntest_input = { \"nums\": [4,3,4,4] }\nassert my_solution.minimumIndex(**test_input) == 0\n\ntest_input = { \"nums\": [4,4] }\nassert my_solution.minimumIndex(**test_input) == 0\n\ntest_input = { \"nums\": [4,4,1] }\nassert my_solution.minimumIndex(**test_input) == -1\n\ntest_input = { \"nums\": [4,4,1,4] }\nassert my_solution.minimumIndex(**test_input) == 0\n\ntest_input = { \"nums\": [4,4,2] }\nassert my_solution.minimumIndex(**test_input) == -1\n\ntest_input = { \"nums\": [4,4,2,4] }\nassert my_solution.minimumIndex(**test_input) == 0\n\ntest_input = { \"nums\": [4,4,3] }\nassert my_solution.minimumIndex(**test_input) == -1\n\ntest_input = { \"nums\": [4,4,3,4] }\nassert my_solution.minimumIndex(**test_input) == 0\n\ntest_input = { \"nums\": [4,4,4] }\nassert my_solution.minimumIndex(**test_input) == 0\n\ntest_input = { \"nums\": [4,4,4,1] }\nassert my_solution.minimumIndex(**test_input) == 0\n\ntest_input = { \"nums\": [4,4,4,2] }\nassert my_solution.minimumIndex(**test_input) == 0",
+ "test_cases": [
+  {
+   "input": {
+    "args": [
+     [
+      1,
+      2,
+      2,
+      2
+     ]
+    ]
+   },
+   "output": 2,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      2,
+      1,
+      3,
+      1,
+      1,
+      1,
+      7,
+      1,
+      2,
+      1
+     ]
+    ]
+   },
+   "output": 4,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      3,
+      3,
+      3,
+      3,
+      7,
+      2,
+      2
+     ]
+    ]
+   },
+   "output": -1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      1
+     ]
+    ]
+   },
+   "output": -1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      1,
+      1
+     ]
+    ]
+   },
+   "output": 0,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      1,
+      1,
+      1
+     ]
+    ]
+   },
+   "output": 0,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      1,
+      1,
+      1,
+      1
+     ]
+    ]
+   },
+   "output": 0,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      1,
+      1,
+      1,
+      2
+     ]
+    ]
+   },
+   "output": 0,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      1,
+      1,
+      1,
+      3
+     ]
+    ]
+   },
+   "output": 0,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      1,
+      1,
+      1,
+      4
+     ]
+    ]
+   },
+   "output": 0,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      1,
+      1,
+      2
+     ]
+    ]
+   },
+   "output": -1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      1,
+      1,
+      2,
+      1
+     ]
+    ]
+   },
+   "output": 0,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      1,
+      1,
+      3
+     ]
+    ]
+   },
+   "output": -1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      1,
+      1,
+      3,
+      1
+     ]
+    ]
+   },
+   "output": 0,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      1,
+      1,
+      4
+     ]
+    ]
+   },
+   "output": -1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      1,
+      1,
+      4,
+      1
+     ]
+    ]
+   },
+   "output": 0,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      1,
+      2,
+      1
+     ]
+    ]
+   },
+   "output": -1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      1,
+      2,
+      1,
+      1
+     ]
+    ]
+   },
+   "output": 0,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      1,
+      2,
+      2
+     ]
+    ]
+   },
+   "output": -1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      1,
+      3,
+      1
+     ]
+    ]
+   },
+   "output": -1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      1,
+      3,
+      1,
+      1
+     ]
+    ]
+   },
+   "output": 0,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      1,
+      3,
+      3
+     ]
+    ]
+   },
+   "output": -1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      1,
+      3,
+      3,
+      3
+     ]
+    ]
+   },
+   "output": 2,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      1,
+      4,
+      1
+     ]
+    ]
+   },
+   "output": -1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      1,
+      4,
+      1,
+      1
+     ]
+    ]
+   },
+   "output": 0,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      1,
+      4,
+      4
+     ]
+    ]
+   },
+   "output": -1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      1,
+      4,
+      4,
+      4
+     ]
+    ]
+   },
+   "output": 2,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      2
+     ]
+    ]
+   },
+   "output": -1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      2,
+      1,
+      1
+     ]
+    ]
+   },
+   "output": -1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      2,
+      1,
+      1,
+      1
+     ]
+    ]
+   },
+   "output": 2,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      2,
+      1,
+      2
+     ]
+    ]
+   },
+   "output": -1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      2,
+      1,
+      2,
+      2
+     ]
+    ]
+   },
+   "output": 0,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      2,
+      2
+     ]
+    ]
+   },
+   "output": 0,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      2,
+      2,
+      1
+     ]
+    ]
+   },
+   "output": -1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      2,
+      2,
+      1,
+      2
+     ]
+    ]
+   },
+   "output": 0,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      2,
+      2,
+      2
+     ]
+    ]
+   },
+   "output": 0,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      2,
+      2,
+      2,
+      1
+     ]
+    ]
+   },
+   "output": 0,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      2,
+      2,
+      2,
+      2
+     ]
+    ]
+   },
+   "output": 0,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      2,
+      2,
+      2,
+      3
+     ]
+    ]
+   },
+   "output": 0,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      2,
+      2,
+      2,
+      4
+     ]
+    ]
+   },
+   "output": 0,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      2,
+      2,
+      3
+     ]
+    ]
+   },
+   "output": -1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      2,
+      2,
+      3,
+      2
+     ]
+    ]
+   },
+   "output": 0,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      2,
+      2,
+      4
+     ]
+    ]
+   },
+   "output": -1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      2,
+      2,
+      4,
+      2
+     ]
+    ]
+   },
+   "output": 0,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      2,
+      3,
+      2
+     ]
+    ]
+   },
+   "output": -1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      2,
+      3,
+      2,
+      2
+     ]
+    ]
+   },
+   "output": 0,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      2,
+      3,
+      3
+     ]
+    ]
+   },
+   "output": -1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      2,
+      3,
+      3,
+      3
+     ]
+    ]
+   },
+   "output": 2,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      2,
+      4,
+      2
+     ]
+    ]
+   },
+   "output": -1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      2,
+      4,
+      2,
+      2
+     ]
+    ]
+   },
+   "output": 0,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      2,
+      4,
+      4
+     ]
+    ]
+   },
+   "output": -1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      2,
+      4,
+      4,
+      4
+     ]
+    ]
+   },
+   "output": 2,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      3
+     ]
+    ]
+   },
+   "output": -1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      3,
+      1,
+      1
+     ]
+    ]
+   },
+   "output": -1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      3,
+      1,
+      1,
+      1
+     ]
+    ]
+   },
+   "output": 2,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      3,
+      1,
+      3
+     ]
+    ]
+   },
+   "output": -1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      3,
+      1,
+      3,
+      3
+     ]
+    ]
+   },
+   "output": 0,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      3,
+      2,
+      2
+     ]
+    ]
+   },
+   "output": -1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      3,
+      2,
+      2,
+      2
+     ]
+    ]
+   },
+   "output": 2,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      3,
+      2,
+      3
+     ]
+    ]
+   },
+   "output": -1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      3,
+      2,
+      3,
+      3
+     ]
+    ]
+   },
+   "output": 0,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      3,
+      3
+     ]
+    ]
+   },
+   "output": 0,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      3,
+      3,
+      1
+     ]
+    ]
+   },
+   "output": -1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      3,
+      3,
+      1,
+      3
+     ]
+    ]
+   },
+   "output": 0,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      3,
+      3,
+      2
+     ]
+    ]
+   },
+   "output": -1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      3,
+      3,
+      2,
+      3
+     ]
+    ]
+   },
+   "output": 0,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      3,
+      3,
+      3
+     ]
+    ]
+   },
+   "output": 0,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      3,
+      3,
+      3,
+      1
+     ]
+    ]
+   },
+   "output": 0,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      3,
+      3,
+      3,
+      2
+     ]
+    ]
+   },
+   "output": 0,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      3,
+      3,
+      3,
+      3
+     ]
+    ]
+   },
+   "output": 0,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      3,
+      3,
+      3,
+      4
+     ]
+    ]
+   },
+   "output": 0,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      3,
+      3,
+      4
+     ]
+    ]
+   },
+   "output": -1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      3,
+      3,
+      4,
+      3
+     ]
+    ]
+   },
+   "output": 0,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      3,
+      4,
+      3
+     ]
+    ]
+   },
+   "output": -1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      3,
+      4,
+      3,
+      3
+     ]
+    ]
+   },
+   "output": 0,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      3,
+      4,
+      4
+     ]
+    ]
+   },
+   "output": -1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      3,
+      4,
+      4,
+      4
+     ]
+    ]
+   },
+   "output": 2,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      4
+     ]
+    ]
+   },
+   "output": -1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      4,
+      1,
+      1
+     ]
+    ]
+   },
+   "output": -1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      4,
+      1,
+      1,
+      1
+     ]
+    ]
+   },
+   "output": 2,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      4,
+      1,
+      4
+     ]
+    ]
+   },
+   "output": -1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      4,
+      1,
+      4,
+      4
+     ]
+    ]
+   },
+   "output": 0,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      4,
+      2,
+      2
+     ]
+    ]
+   },
+   "output": -1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      4,
+      2,
+      2,
+      2
+     ]
+    ]
+   },
+   "output": 2,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      4,
+      2,
+      4
+     ]
+    ]
+   },
+   "output": -1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      4,
+      2,
+      4,
+      4
+     ]
+    ]
+   },
+   "output": 0,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      4,
+      3,
+      3
+     ]
+    ]
+   },
+   "output": -1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      4,
+      3,
+      3,
+      3
+     ]
+    ]
+   },
+   "output": 2,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      4,
+      3,
+      4
+     ]
+    ]
+   },
+   "output": -1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      4,
+      3,
+      4,
+      4
+     ]
+    ]
+   },
+   "output": 0,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      4,
+      4
+     ]
+    ]
+   },
+   "output": 0,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      4,
+      4,
+      1
+     ]
+    ]
+   },
+   "output": -1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      4,
+      4,
+      1,
+      4
+     ]
+    ]
+   },
+   "output": 0,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      4,
+      4,
+      2
+     ]
+    ]
+   },
+   "output": -1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      4,
+      4,
+      2,
+      4
+     ]
+    ]
+   },
+   "output": 0,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      4,
+      4,
+      3
+     ]
+    ]
+   },
+   "output": -1,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      4,
+      4,
+      3,
+      4
+     ]
+    ]
+   },
+   "output": 0,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      4,
+      4,
+      4
+     ]
+    ]
+   },
+   "output": 0,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      4,
+      4,
+      4,
+      1
+     ]
+    ]
+   },
+   "output": 0,
+   "explanation": ""
+  },
+  {
+   "input": {
+    "args": [
+     [
+      4,
+      4,
+      4,
+      2
+     ]
+    ]
+   },
+   "output": 0,
+   "explanation": ""
+  }
+ ],
+ "original_ilr": "```json\n{\n  \"problem_id\": \"minimumIndex\",\n  \"nodes\": [\n    {\n      \"id\": 1,\n      \"type\": \"start\",\n      \"label\": \"Start\",\n      \"next\": 2\n    },\n    {\n      \"id\": 2,\n      \"type\": \"process\",\n      \"label\": \"Input: nums (List[int])\",\n      \"action\": \"ctx['nums'] = ctx['arg0']; ctx['dic'] = {}; ctx['dom'] = -1; ctx['left'] = 0; ctx['right'] = 0; ctx['i'] = 0\",\n      \"next\": 3\n    },\n    {\n      \"id\": 3,\n      \"type\": \"decision\",\n      \"label\": \"For each element i in nums\",\n      \"logic\": \"ctx['i'] < len(ctx['nums'])\",\n      \"true_next\": 4,\n      \"false_next\": 17\n    },\n    {\n      \"id\": 4,\n      \"type\": \"decision\",\n      \"label\": \"Is i in dic?\",\n      \"logic\": \"ctx['i'] in ctx['dic']\",\n      \"true_next\": 5,\n      \"false_next\": 6\n    },\n    {\n      \"id\": 5,\n      \"type\": \"process\",\n      \"label\": \"Update dic[i]: dic[i] += 1\",\n      \"action\": \"ctx['dic'][ctx['i']] += 1\",\n      \"next\": 7\n    },\n    {\n      \"id\": 6,\n      \"type\": \"process\",\n      \"label\": \"Initialize dic[i]: dic[i] = 1\",\n      \"action\": \"ctx['dic'][ctx['i']] = 1\",\n      \"next\": 7\n    },\n    {\n      \"id\": 7,\n      \"type\": \"decision\",\n      \"label\": \"Is dic[i] * 2 > len(nums)?\",\n      \"logic\": \"ctx['dic'][ctx['i']] * 2 > len(ctx['nums'])\",\n      \"true_next\": 8,\n      \"false_next\": 9\n    },\n    {\n      \"id\": 8,\n      \"type\": \"process\",\n      \"label\": \"Set dom = i\",\n      \"action\": \"ctx['dom'] = ctx['i']\",\n      \"next\": 9\n    },\n    {\n      \"id\": 9,\n      \"type\": \"process\",\n      \"label\": \"Initialize left = 0, right = dic[dom]\",\n      \"action\": \"ctx['left'] = 0; ctx['right'] = ctx['dic'][ctx['dom']]\",\n      \"next\": 10\n    },\n    {\n      \"id\": 10,\n      \"type\": \"decision\",\n      \"label\": \"For i from 0 to len(nums) - 1\",\n      \"logic\": \"ctx['i'] < len(ctx['nums'])\",\n      \"true_next\": 11,\n      \"false_next\": 16\n    },\n    {\n      \"id\": 11,\n      \"type\": \"decision\",\n      \"label\": \"Is nums[i] == dom?\",\n      \"logic\": \"ctx['nums'][ctx['i']] == ctx['dom']\",\n      \"true_next\": 12,\n      \"false_next\": 14\n    },\n    {\n      \"id\": 12,\n      \"type\": \"process\",\n      \"label\": \"Increment left: left += 1\",\n      \"action\": \"ctx['left'] += 1\",\n      \"next\": 13\n    },\n    {\n      \"id\": 13,\n      \"type\": \"process\",\n      \"label\": \"Decrement right: right -= 1\",\n      \"action\": \"ctx['right'] -= 1\",\n      \"next\": 15\n    },\n    {\n      \"id\": 14,\n      \"type\": \"process\",\n      \"label\": \"Continue\",\n      \"action\": \"pass\",\n      \"next\": 15\n    },\n    {\n      \"id\": 15,\n      \"type\": \"decision\",\n      \"label\": \"Is (left * 2) > (i + 1) and (right * 2) > (len(nums) - i - 1)?\",\n      \"logic\": \"(ctx['left'] * 2) > (ctx['i'] + 1) and (ctx['right'] * 2) > (len(ctx['nums']) - ctx['i'] - 1)\",\n      \"true_next\": 16,\n      \"false_next\": 14\n    },\n    {\n      \"id\": 16,\n      \"type\": \"process\",\n      \"label\": \"Output: i (valid split index)\",\n      \"action\": \"return ctx['i']\",\n      \"next\": 17\n    },\n    {\n      \"id\": 17,\n      \"type\": \"end\",\n      \"label\": \"Output: -1 (no valid split)\",\n      \"output\": \"-1\"\n    }\n  ]\n}\n```",
+ "original_code": "class Solution:\n    def minimumIndex(self, nums: List[int]) -> int:\n        dic = {}\n        dom = -1\n        left = 0\n        right = 0\n        i = 0\n        \n        for i in range(len(nums)):\n            if i in dic:\n                dic[i] += 1\n            else:\n                dic[i] = 1\n            \n            if dic[i] * 2 > len(nums):\n                dom = i\n                left = 0\n                right = dic[dom]\n                break\n        \n        for i in range(len(nums)):\n            if nums[i] == dom:\n                left += 1\n                right -= 1\n            if (left * 2) > (i + 1) and (right * 2) > (len(nums) - i - 1):\n                return i\n        \n        return -1",
+ "ocr_data": {
+  "nodes": [
+   {
+    "node_id": 1,
+    "shape_type": "rectangle",
+    "raw_text": "Start",
+    "position": "top"
+   },
+   {
+    "node_id": 2,
+    "shape_type": "rectangle",
+    "raw_text": "Input: nums (List[int])",
+    "position": "top"
+   },
+   {
+    "node_id": 3,
+    "shape_type": "rectangle",
+    "raw_text": "Initialize dic = {}",
+    "position": "top"
+   },
+   {
+    "node_id": 4,
+    "shape_type": "diamond",
+    "raw_text": "For each element i in nums",
+    "position": "middle"
+   },
+   {
+    "node_id": 5,
+    "shape_type": "diamond",
+    "raw_text": "Is i in dic?",
+    "position": "middle"
+   },
+   {
+    "node_id": 6,
+    "shape_type": "rectangle",
+    "raw_text": "Update dic[i]: dic[i] += 1",
+    "position": "middle"
+   },
+   {
+    "node_id": 7,
+    "shape_type": "rectangle",
+    "raw_text": "Initialize dic[i]: dic[i] = 1",
+    "position": "middle"
+   },
+   {
+    "node_id": 8,
+    "shape_type": "diamond",
+    "raw_text": "Is dic[i] * 2 > len(nums)?",
+    "position": "middle"
+   },
+   {
+    "node_id": 9,
+    "shape_type": "rectangle",
+    "raw_text": "Set dom = i",
+    "position": "middle"
+   },
+   {
+    "node_id": 10,
+    "shape_type": "rectangle",
+    "raw_text": "Initialize left = 0, right = dic[dom]",
+    "position": "middle"
+   },
+   {
+    "node_id": 11,
+    "shape_type": "diamond",
+    "raw_text": "For i from 0 to len(nums) - 1",
+    "position": "middle"
+   },
+   {
+    "node_id": 12,
+    "shape_type": "rectangle",
+    "raw_text": "Output: -1 (no valid split)",
+    "position": "middle"
+   },
+   {
+    "node_id": 13,
+    "shape_type": "diamond",
+    "raw_text": "Is nums[i] == dom?",
+    "position": "middle"
+   },
+   {
+    "node_id": 14,
+    "shape_type": "rectangle",
+    "raw_text": "Increment left: left += 1",
+    "position": "middle"
+   },
+   {
+    "node_id": 15,
+    "shape_type": "rectangle",
+    "raw_text": "Decrement right: right -= 1",
+    "position": "middle"
+   },
+   {
+    "node_id": 16,
+    "shape_type": "rectangle",
+    "raw_text": "Continue",
+    "position": "middle"
+   },
+   {
+    "node_id": 17,
+    "shape_type": "diamond",
+    "raw_text": "Is (left * 2) > (i + 1) and (right * 2) > (len(nums) - i - 1)?",
+    "position": "bottom"
+   },
+   {
+    "node_id": 18,
+    "shape_type": "rectangle",
+    "raw_text": "Output: i (valid split index)",
+    "position": "bottom"
+   }
+  ],
+  "edges": [
+   {
+    "from_node": 1,
+    "to_node": 2,
+    "label": ""
+   },
+   {
+    "from_node": 2,
+    "to_node": 3,
+    "label": ""
+   },
+   {
+    "from_node": 3,
+    "to_node": 4,
+    "label": ""
+   },
+   {
+    "from_node": 4,
+    "to_node": 5,
+    "label": ""
+   },
+   {
+    "from_node": 5,
+    "to_node": 6,
+    "label": "Yes"
+   },
+   {
+    "from_node": 5,
+    "to_node": 7,
+    "label": "No"
+   },
+   {
+    "from_node": 6,
+    "to_node": 8,
+    "label": ""
+   },
+   {
+    "from_node": 7,
+    "to_node": 8,
+    "label": ""
+   },
+   {
+    "from_node": 8,
+    "to_node": 9,
+    "label": "Yes"
+   },
+   {
+    "from_node": 8,
+    "to_node": 4,
+    "label": "No"
+   },
+   {
+    "from_node": 4,
+    "to_node": 10,
+    "label": "No"
+   },
+   {
+    "from_node": 10,
+    "to_node": 11,
+    "label": ""
+   },
+   {
+    "from_node": 11,
+    "to_node": 12,
+    "label": ""
+   },
+   {
+    "from_node": 11,
+    "to_node": 13,
+    "label": ""
+   },
+   {
+    "from_node": 13,
+    "to_node": 14,
+    "label": "Yes"
+   },
+   {
+    "from_node": 13,
+    "to_node": 16,
+    "label": "No"
+   },
+   {
+    "from_node": 14,
+    "to_node": 15,
+    "label": ""
+   },
+   {
+    "from_node": 15,
+    "to_node": 17,
+    "label": ""
+   },
+   {
+    "from_node": 16,
+    "to_node": 17,
+    "label": ""
+   },
+   {
+    "from_node": 17,
+    "to_node": 18,
+    "label": "Yes"
+   }
+  ],
+  "other_text": []
+ },
+ "test_result": {},
+ "status": "completed",
+ "fixed_ilr": null,
+ "modified_code": null,
+ "ilr_fix_log": "",
+ "bug_injected": ""
+}

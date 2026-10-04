@@ -1,0 +1,8 @@
+CodeVision Combined Results
+Experiment: Qwen-Qwen3-VL-30B-A3B-Instruct_self_planning
+
+Algorithm    : 119/149
+HumanEval-V  : 160/164
+MATH         : 109/125
+--------------------------------
+Total        : 388/438 = 0.8858447488584474

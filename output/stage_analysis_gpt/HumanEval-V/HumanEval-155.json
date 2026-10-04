@@ -1,0 +1,146 @@
+{
+  "task_id": "HumanEval-155",
+  "dataset": "HumanEval-V",
+  "difficulty": null,
+  "title": null,
+  "result": "failed: ",
+  "ilr": "{\n  \"problem_id\": \"even_odd_count_example\",\n  \"nodes\": [\n    {\"id\": 1, \"type\": \"start\", \"label\": \"Start\", \"next\": 2},\n    {\"id\": 2, \"type\": \"process\", \"label\": \"Input: num (integer)\", \"action\": \"ctx['num']=ctx['arg0']; ctx['even_count']=0; ctx['odd_count']=0; ctx['abs_num']=abs(ctx['num'])\", \"next\": 3},\n    {\"id\": 3, \"type\": \"decision\", \"label\": \"for each digit in abs(num)\", \"logic\": \"ctx['abs_num'] > 0\", \"true_next\": 4, \"false_next\": 10},\n    {\"id\": 4, \"type\": \"process\", \"label\": \"Extract digit: i = each digit\", \"action\": \"ctx['i'] = ctx['abs_num'] % 10; ctx['abs_num'] //= 10\", \"next\": 5},\n    {\"id\": 5, \"type\": \"decision\", \"label\": \"Is i % 2 == 0?\", \"logic\": \"ctx['i'] % 2 == 0\", \"true_next\": 6, \"false_next\": 7},\n    {\"id\": 6, \"type\": \"process\", \"label\": \"Increment even_count by 1\", \"action\": \"ctx['even_count'] += 1\", \"next\": 3},\n    {\"id\": 7, \"type\": \"process\", \"label\": \"Increment odd_count by 1\", \"action\": \"ctx['odd_count'] += 1\", \"next\": 3},\n    {\"id\": 10, \"type\": \"end\", \"label\": \"Output: (even_count, odd_count)\", \"output\": \"(ctx['even_count'], ctx['odd_count'])\"}\n  ]\n}",
+  "code": "def even_odd_count(num):\n    even_count = 0\n    odd_count = 0\n    abs_num = abs(num)\n    \n    while abs_num > 0:\n        i = abs_num % 10\n        abs_num //= 10\n        \n        if i % 2 == 0:\n            even_count += 1\n        else:\n            odd_count += 1\n            \n    return (even_count, odd_count)",
+  "prompt": "\ndef even_odd_count(num):\n    \"\"\"Given an integer. return a tuple that has the number of even and odd digits respectively.\n\n     Example:\n        even_odd_count(-12) ==> (1, 1)\n        even_odd_count(123) ==> (1, 2)\n    \"\"\"\n",
+  "test": "def check(candidate):\n\n    # Check some simple cases\n    assert candidate(7) == (0, 1)\n    assert candidate(-78) == (1, 1)\n    assert candidate(3452) == (2, 2)\n    assert candidate(346211) == (3, 3)\n    assert candidate(-345821) == (3, 3)\n    assert candidate(-2) == (1, 0)\n    assert candidate(-45347) == (2, 3)\n    assert candidate(0) == (1, 0)\n\n\n    # Check some edge cases that are easy to work out by hand.\n    assert True\n\n",
+  "ocr_data": {
+    "nodes": [
+      {
+        "node_id": 1,
+        "shape_type": "rectangle",
+        "raw_text": "Start",
+        "position": "top"
+      },
+      {
+        "node_id": 2,
+        "shape_type": "rectangle",
+        "raw_text": "Input: num (integer)",
+        "position": "middle"
+      },
+      {
+        "node_id": 3,
+        "shape_type": "rectangle",
+        "raw_text": "Convert num to absolute value: abs(num)",
+        "position": "middle"
+      },
+      {
+        "node_id": 4,
+        "shape_type": "rectangle",
+        "raw_text": "Initialize even_count = 0, odd_count = 0",
+        "position": "middle"
+      },
+      {
+        "node_id": 5,
+        "shape_type": "diamond",
+        "raw_text": "for each digit in abs(num)",
+        "position": "middle"
+      },
+      {
+        "node_id": 6,
+        "shape_type": "rectangle",
+        "raw_text": "Extract digit: i = each digit",
+        "position": "bottom"
+      },
+      {
+        "node_id": 7,
+        "shape_type": "diamond",
+        "raw_text": "Is i % 2 == 0?",
+        "position": "bottom"
+      },
+      {
+        "node_id": 8,
+        "shape_type": "rectangle",
+        "raw_text": "Increment even_count by 1",
+        "position": "bottom"
+      },
+      {
+        "node_id": 9,
+        "shape_type": "rectangle",
+        "raw_text": "Increment odd_count by 1",
+        "position": "bottom"
+      },
+      {
+        "node_id": 10,
+        "shape_type": "rectangle",
+        "raw_text": "Output: (even_count, odd_count)",
+        "position": "bottom"
+      }
+    ],
+    "edges": [
+      {
+        "from_node": 1,
+        "to_node": 2,
+        "label": ""
+      },
+      {
+        "from_node": 2,
+        "to_node": 3,
+        "label": ""
+      },
+      {
+        "from_node": 3,
+        "to_node": 4,
+        "label": ""
+      },
+      {
+        "from_node": 4,
+        "to_node": 5,
+        "label": ""
+      },
+      {
+        "from_node": 5,
+        "to_node": 6,
+        "label": ""
+      },
+      {
+        "from_node": 6,
+        "to_node": 7,
+        "label": ""
+      },
+      {
+        "from_node": 7,
+        "to_node": 8,
+        "label": "Yes"
+      },
+      {
+        "from_node": 7,
+        "to_node": 9,
+        "label": "No"
+      },
+      {
+        "from_node": 8,
+        "to_node": 5,
+        "label": ""
+      },
+      {
+        "from_node": 9,
+        "to_node": 5,
+        "label": ""
+      },
+      {
+        "from_node": 5,
+        "to_node": 10,
+        "label": "No"
+      }
+    ],
+    "other_text": [
+      "Yes",
+      "No"
+    ]
+  },
+  "analysis": {
+    "ilr_verdict": "incorrect",
+    "ilr_issues": "ILR用 while abs_num>0 逐位取余提取数字，num=0时循环体一次都不执行，返回(0,0)，而测试要求candidate(0)==(1,0)（0应按1个偶数数字计）。其余输入逻辑正确。",
+    "code_vs_ilr": "faithful",
+    "code_issues": "代码逐句忠实翻译了ILR（包括while abs_num>0这一缺陷），未做任何修正或补全。",
+    "error_source": "ilr",
+    "ocr_contribution": "no",
+    "root_cause": "ILR生成阶段把'for each digit in abs(num)'实现为while abs_num>0的数值循环，天然遗漏num=0的情形；代码忠实实现该ILR后在candidate(0)处失败。",
+    "evidence": "运行生成代码even_odd_count(0)返回(0,0)，期望(1,0)；其余用例如-12→(1,1)、7→(0,1)均正确，与首个失败断言candidate(0)一致。"
+  }
+}

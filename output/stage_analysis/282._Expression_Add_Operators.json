@@ -1,0 +1,262 @@
+{
+  "problem_id": "insert_binary_operators",
+  "nodes": [
+    {
+      "id": 1,
+      "type": "start",
+      "label": "Start",
+      "next": 2
+    },
+    {
+      "id": 2,
+      "type": "process",
+      "label": "Input: num (string), target (integer)",
+      "action": "ctx['num'] = ctx['arg0']; ctx['target'] = ctx['arg1'];",
+      "next": 3
+    },
+    {
+      "id": 3,
+      "type": "process",
+      "label": "Initialize n = len(num), results = []",
+      "action": "ctx['n'] = len(ctx['num']); ctx['results'] = [];",
+      "next": 4
+    },
+    {
+      "id": 4,
+      "type": "call",
+      "label": "Call dfs(0, 0, 0, 0, [])",
+      "function_name": "dfs",
+      "arguments": [
+        0,
+        0,
+        0,
+        0,
+        ""
+      ],
+      "return_var": "result",
+      "next": 5
+    },
+    {
+      "id": 5,
+      "type": "process",
+      "label": "Return results",
+      "action": "ctx['results'] = result;",
+      "next": 6
+    },
+    {
+      "id": 6,
+      "type": "end",
+      "label": "Output: results (list of strings)",
+      "output": "ctx['results']"
+    }
+  ],
+  "functions": [
+    {
+      "name": "dfs",
+      "parameters": [
+        "index",
+        "prev_operand",
+        "current_operand",
+        "value",
+        "expression"
+      ],
+      "entry_node": 7,
+      "nodes": [
+        {
+          "id": 7,
+          "type": "decision",
+          "label": "index == n?",
+          "logic": "ctx['index'] == ctx['n']",
+          "true_next": 8,
+          "false_next": 11
+        },
+        {
+          "id": 8,
+          "type": "decision",
+          "label": "value == target and current_operand == 0?",
+          "logic": "ctx['value'] == ctx['target'] and ctx['current_operand'] == 0",
+          "true_next": 9,
+          "false_next": 10
+        },
+        {
+          "id": 9,
+          "type": "process",
+          "label": "Append \".join(expression) to results",
+          "action": "ctx['results'].append(''.join(ctx['expression']));",
+          "next": 10
+        },
+        {
+          "id": 10,
+          "type": "return",
+          "label": "Return",
+          "value": "None"
+        },
+        {
+          "id": 11,
+          "type": "process",
+          "label": "Update current_operand = current_operand * 10 + int(num[index])",
+          "action": "ctx['current_operand'] = ctx['current_operand'] * 10 + int(ctx['num'][ctx['index']]);",
+          "next": 12
+        },
+        {
+          "id": 12,
+          "type": "process",
+          "label": "Convert current_operand to string: str_op = str(current_operand)",
+          "action": "ctx['str_op'] = str(ctx['current_operand']);",
+          "next": 13
+        },
+        {
+          "id": 13,
+          "type": "decision",
+          "label": "current_operand > 0?",
+          "logic": "ctx['current_operand'] > 0",
+          "true_next": 14,
+          "false_next": 15
+        },
+        {
+          "id": 14,
+          "type": "call",
+          "label": "Call dfs(index + 1, prev_operand, current_operand, value, expression)",
+          "function_name": "dfs",
+          "arguments": "[ctx['index'] + 1,\n            ctx['prev_operand'],\n            ctx['current_operand'],\n            ctx['value'],\n            ctx['expression']]",
+          "return_var": "result",
+          "next": 15
+        },
+        {
+          "id": 15,
+          "type": "process",
+          "label": "Check if expression is not empty",
+          "action": "if ctx['expression']:",
+          "next": 16
+        },
+        {
+          "id": 16,
+          "type": "decision",
+          "label": "expression is not empty?",
+          "logic": "len(ctx['expression']) > 0",
+          "true_next": 17,
+          "false_next": 29
+        },
+        {
+          "id": 17,
+          "type": "process",
+          "label": "Append '+' to expression",
+          "action": "ctx['expression'].append('+');",
+          "next": 18
+        },
+        {
+          "id": 18,
+          "type": "process",
+          "label": "Append str_op to expression",
+          "action": "ctx['expression'].append(ctx['str_op']);",
+          "next": 19
+        },
+        {
+          "id": 19,
+          "type": "call",
+          "label": "Call dfs(index + 1, current_operand, 0, value + current_operand, expression)",
+          "function_name": "dfs",
+          "arguments": "[ctx['index'] + 1,\n            ctx['current_operand'],\n            0,\n            ctx['value'] + ctx['current_operand'],\n            ctx['expression']]",
+          "return_var": "result",
+          "next": 20
+        },
+        {
+          "id": 20,
+          "type": "process",
+          "label": "Pop last two elements from expression",
+          "action": "ctx['expression'].pop(); ctx['expression'].pop();",
+          "next": 21
+        },
+        {
+          "id": 21,
+          "type": "process",
+          "label": "Append '-' to expression",
+          "action": "ctx['expression'].append('-');",
+          "next": 22
+        },
+        {
+          "id": 22,
+          "type": "process",
+          "label": "Append str_op to expression",
+          "action": "ctx['expression'].append(ctx['str_op']);",
+          "next": 23
+        },
+        {
+          "id": 23,
+          "type": "call",
+          "label": "Call dfs(index + 1, -current_operand, 0, value - current_operand, expression)",
+          "function_name": "dfs",
+          "arguments": "[ctx['index'] + 1,\n            -ctx['current_operand'],\n            0,\n            ctx['value'] - ctx['current_operand'],\n            ctx['expression']]",
+          "return_var": "result",
+          "next": 24
+        },
+        {
+          "id": 24,
+          "type": "process",
+          "label": "Pop last two elements from expression",
+          "action": "ctx['expression'].pop(); ctx['expression'].pop();",
+          "next": 25
+        },
+        {
+          "id": 25,
+          "type": "process",
+          "label": "Append '*' to expression",
+          "action": "ctx['expression'].append('*');",
+          "next": 26
+        },
+        {
+          "id": 26,
+          "type": "process",
+          "label": "Append str_op to expression",
+          "action": "ctx['expression'].append(ctx['str_op']);",
+          "next": 27
+        },
+        {
+          "id": 27,
+          "type": "call",
+          "label": "Call dfs(index + 1, current_operand * prev_operand, 0, value - prev_operand + (current_operand * prev_operand), expression)",
+          "function_name": "dfs",
+          "arguments": "[ctx['index'] + 1,\n            ctx['current_operand'] * ctx['prev_operand'],\n            0,\n            ctx['value'] - ctx['prev_operand'] + (ctx['current_operand'] * ctx['prev_operand']),\n            ctx['expression']]",
+          "return_var": "result",
+          "next": 28
+        },
+        {
+          "id": 28,
+          "type": "process",
+          "label": "Pop last two elements from expression",
+          "action": "ctx['expression'].pop(); ctx['expression'].pop();",
+          "next": 29
+        },
+        {
+          "id": 29,
+          "type": "process",
+          "label": "Append str_op to expression",
+          "action": "ctx['expression'].append(ctx['str_op']);",
+          "next": 30
+        },
+        {
+          "id": 30,
+          "type": "call",
+          "label": "Call dfs(index + 1, prev_operand, current_operand, value, expression)",
+          "function_name": "dfs",
+          "arguments": "[ctx['index'] + 1,\n            ctx['prev_operand'],\n            ctx['current_operand'],\n            ctx['value'],\n            ctx['expression']]",
+          "return_var": "result",
+          "next": 15
+        }
+      ]
+    }
+  ],
+  "task_id": "282. Expression Add Operators",
+  "dataset": "MATH",
+  "result": "failed: ",
+  "code": "def addOperators(num: str, target: int) -> List[str]:\n    n = len(num)\n    results = []\n    \n    def dfs(index, prev_operand, current_operand, value, expression):\n        if index == n:\n            if value == target and current_operand == 0:\n                results.append(''.join(expression))\n            return\n        \n        # Update current_operand\n        current_operand = current_operand * 10 + int(num[index])\n        str_op = str(current_operand)\n        \n        # Check for leading zeros\n        if current_operand > 0:\n            # No operator before current_operand (it's the first operand)\n            dfs(index + 1, prev_operand, current_operand, value, expression)\n        \n        # If expression is not empty, we can append operators\n        if expression:\n            # Append '+'\n            expression.append('+')\n            expression.append(str_op)\n            dfs(index + 1, current_operand, 0, value + current_operand, expression)\n            expression.pop()\n            expression.pop()\n            \n            # Append '-'\n            expression.append('-')\n            expression.append(str_op)\n            dfs(index + 1, -current_operand, 0, value - current_operand, expression)\n            expression.pop()\n            expression.pop()\n            \n            # Append '*'\n            expression.append('*')\n            expression.append(str_op)\n            dfs(index + 1, current_operand * prev_operand, 0, value - prev_operand + (current_operand * prev_operand), expression)\n            expression.pop()\n            expression.pop()\n        \n        # Append current_operand without any operator (as continuation of previous operand)\n        expression.append(str_op)\n        dfs(index + 1, prev_operand, current_operand, value, expression)\n        expression.pop()\n    \n    dfs(0, 0, 0, 0, [])\n    return results",
+  "verification": {
+    "md_verdict": "ILR Error",
+    "actual_error_source": "ilr",
+    "ilr_verdict": "incorrect",
+    "code_vs_ilr": "deviates",
+    "md_correct": "yes",
+    "note": "ILR本身不可执行：node30的next指回node15形成死循环（忠实转写直接超时/无限循环），且node14扩展操作数时不append str_op、操作数按累积值记录，算法结构性错误。代码靠补pop()绕开死循环，但继承了ILR的核心错误，失败根因在ILR。",
+    "evidence": "ILR忠实转写运行addOperators('123',6)超时死循环；生成代码：('123',6)->[](期望['1+2+3','1*2*3'])，('105',5)->['1+10-5','1*10+5'](期望['10-5','1*0+5'])，('00',0)多出非法'00'。"
+  }
+}
